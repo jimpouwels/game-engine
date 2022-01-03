@@ -1,0 +1,332 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		23D5C7C527832B5600C6C916 /* GameEngine.h in Sources */ = {isa = PBXBuildFile; fileRef = 23D5C7C427832B5600C6C916 /* GameEngine.h */; };
+		23D5C7DD27833CFD00C6C916 /* libsfml-audio.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7D827833CFD00C6C916 /* libsfml-audio.2.5.1.dylib */; };
+		23D5C7DE27833CFD00C6C916 /* libsfml-graphics.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7D927833CFD00C6C916 /* libsfml-graphics.2.5.1.dylib */; };
+		23D5C7DF27833CFD00C6C916 /* libsfml-network.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7DA27833CFD00C6C916 /* libsfml-network.2.5.1.dylib */; };
+		23D5C7E027833CFD00C6C916 /* libsfml-system.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7DB27833CFD00C6C916 /* libsfml-system.2.5.1.dylib */; };
+		23D5C7E127833CFD00C6C916 /* libsfml-window.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7DC27833CFD00C6C916 /* libsfml-window.2.5.1.dylib */; };
+		23D5C7E32783432F00C6C916 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23D5C7E22783432F00C6C916 /* Game.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		23D5C7BF27832B5600C6C916 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		23D5C7C127832B5600C6C916 /* game-engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "game-engine"; sourceTree = BUILT_PRODUCTS_DIR; };
+		23D5C7C427832B5600C6C916 /* GameEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameEngine.h; sourceTree = "<group>"; };
+		23D5C7D827833CFD00C6C916 /* libsfml-audio.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.5.1.dylib"; path = "External Libraries/SFML/lib/libsfml-audio.2.5.1.dylib"; sourceTree = "<group>"; };
+		23D5C7D927833CFD00C6C916 /* libsfml-graphics.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-graphics.2.5.1.dylib"; path = "External Libraries/SFML/lib/libsfml-graphics.2.5.1.dylib"; sourceTree = "<group>"; };
+		23D5C7DA27833CFD00C6C916 /* libsfml-network.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-network.2.5.1.dylib"; path = "External Libraries/SFML/lib/libsfml-network.2.5.1.dylib"; sourceTree = "<group>"; };
+		23D5C7DB27833CFD00C6C916 /* libsfml-system.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-system.2.5.1.dylib"; path = "External Libraries/SFML/lib/libsfml-system.2.5.1.dylib"; sourceTree = "<group>"; };
+		23D5C7DC27833CFD00C6C916 /* libsfml-window.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-window.2.5.1.dylib"; path = "External Libraries/SFML/lib/libsfml-window.2.5.1.dylib"; sourceTree = "<group>"; };
+		23D5C7E22783432F00C6C916 /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		23D5C7BE27832B5600C6C916 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23D5C7DD27833CFD00C6C916 /* libsfml-audio.2.5.1.dylib in Frameworks */,
+				23D5C7DE27833CFD00C6C916 /* libsfml-graphics.2.5.1.dylib in Frameworks */,
+				23D5C7DF27833CFD00C6C916 /* libsfml-network.2.5.1.dylib in Frameworks */,
+				23D5C7E027833CFD00C6C916 /* libsfml-system.2.5.1.dylib in Frameworks */,
+				23D5C7E127833CFD00C6C916 /* libsfml-window.2.5.1.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		23D5C7B827832B5600C6C916 = {
+			isa = PBXGroup;
+			children = (
+				23D5C7C327832B5600C6C916 /* game-engine */,
+				23D5C7C227832B5600C6C916 /* Products */,
+				23D5C7CB27832BE500C6C916 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		23D5C7C227832B5600C6C916 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				23D5C7C127832B5600C6C916 /* game-engine */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		23D5C7C327832B5600C6C916 /* game-engine */ = {
+			isa = PBXGroup;
+			children = (
+				23D5C7C427832B5600C6C916 /* GameEngine.h */,
+				23D5C7E22783432F00C6C916 /* Game.cpp */,
+			);
+			path = "game-engine";
+			sourceTree = "<group>";
+		};
+		23D5C7CB27832BE500C6C916 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				23D5C7D827833CFD00C6C916 /* libsfml-audio.2.5.1.dylib */,
+				23D5C7D927833CFD00C6C916 /* libsfml-graphics.2.5.1.dylib */,
+				23D5C7DA27833CFD00C6C916 /* libsfml-network.2.5.1.dylib */,
+				23D5C7DB27833CFD00C6C916 /* libsfml-system.2.5.1.dylib */,
+				23D5C7DC27833CFD00C6C916 /* libsfml-window.2.5.1.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		23D5C7C027832B5600C6C916 /* game-engine */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23D5C7C827832B5600C6C916 /* Build configuration list for PBXNativeTarget "game-engine" */;
+			buildPhases = (
+				23D5C7BD27832B5600C6C916 /* Sources */,
+				23D5C7BE27832B5600C6C916 /* Frameworks */,
+				23D5C7BF27832B5600C6C916 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "game-engine";
+			productName = "game-engine";
+			productReference = 23D5C7C127832B5600C6C916 /* game-engine */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		23D5C7B927832B5600C6C916 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					23D5C7C027832B5600C6C916 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 23D5C7BC27832B5600C6C916 /* Build configuration list for PBXProject "game-engine" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 23D5C7B827832B5600C6C916;
+			productRefGroup = 23D5C7C227832B5600C6C916 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				23D5C7C027832B5600C6C916 /* game-engine */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		23D5C7BD27832B5600C6C916 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23D5C7C527832B5600C6C916 /* GameEngine.h in Sources */,
+				23D5C7E32783432F00C6C916 /* Game.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		23D5C7C627832B5600C6C916 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		23D5C7C727832B5600C6C916 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		23D5C7C927832B5600C6C916 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = "\"${SRCROOT}/External Libraries/SFML/include\"";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${SRCROOT}/External Libraries/SFML/lib\"",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		23D5C7CA27832B5600C6C916 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = "\"${SRCROOT}/External Libraries/SFML/include\"";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${SRCROOT}/External Libraries/SFML/lib\"",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		23D5C7BC27832B5600C6C916 /* Build configuration list for PBXProject "game-engine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23D5C7C627832B5600C6C916 /* Debug */,
+				23D5C7C727832B5600C6C916 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		23D5C7C827832B5600C6C916 /* Build configuration list for PBXNativeTarget "game-engine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23D5C7C927832B5600C6C916 /* Debug */,
+				23D5C7CA27832B5600C6C916 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 23D5C7B927832B5600C6C916 /* Project object */;
+}
