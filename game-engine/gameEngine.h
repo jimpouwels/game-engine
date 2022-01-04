@@ -8,37 +8,57 @@ namespace jimp {
     private:
         int screenWidth;
         int screenHeight;
+        sf::RenderWindow* window;
         
     public:
-        GameEngine(int screenWidth, int screenHeight);
+        GameEngine(int screenWidth, int screenHeight, std::string windowTitle);
         void start();
+        void renderSprite(int x, int y, std::string filePath);
+        int getScreenWidth();
+        int getScreenHeight();
         virtual void onFrame() = 0;
         
     };
 
-    GameEngine::GameEngine(int screenWidth, int screenHeight) {
+    GameEngine::GameEngine(int screenWidth, int screenHeight, std::string windowTitle) {
         this->screenWidth = screenWidth;
         this->screenHeight = screenHeight;
+        window = new sf::RenderWindow(sf::VideoMode(screenWidth, screenHeight), windowTitle);
     }
 
     void GameEngine::start() {
-        sf::RenderWindow window(sf::VideoMode(screenWidth, screenHeight), "Test");
-        
-        while (window.isOpen()) {
+        while (window->isOpen()) {
             sf::Event event;
             
-            while (window.pollEvent(event)) {
+            while (window->pollEvent(event)) {
                 switch (event.type) {
                     case sf::Event::Closed:
-                        window.close();
+                        window->close();
                         break;
                 }
             }
             
+            window->clear();
             onFrame();
-            
-            window.clear();
-            window.display();
+            window->display();
         }
-    };
+    }
+
+    void GameEngine::renderSprite(int x, int y, std::string filePath) {
+        sf::Texture texture;
+        texture.loadFromFile(filePath);
+        sf::Sprite sprite;
+        sprite.setTexture(texture);
+        sprite.setPosition(x, y);
+        window->draw(sprite);
+    }
+
+    int GameEngine::getScreenWidth() {
+        return this->screenWidth;
+    }
+
+    int GameEngine::getScreenHeight() {
+        return this->screenHeight;
+    }
+
 }

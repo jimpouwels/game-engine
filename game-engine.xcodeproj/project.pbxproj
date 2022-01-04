@@ -14,17 +14,19 @@
 		23D5C7E027833CFD00C6C916 /* libsfml-system.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7DB27833CFD00C6C916 /* libsfml-system.2.5.1.dylib */; };
 		23D5C7E127833CFD00C6C916 /* libsfml-window.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7DC27833CFD00C6C916 /* libsfml-window.2.5.1.dylib */; };
 		23D5C7E32783432F00C6C916 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23D5C7E22783432F00C6C916 /* game.cpp */; };
+		23D5C7E627843C5200C6C916 /* fango.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23D5C7E52783583600C6C916 /* fango.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		23D5C7BF27832B5600C6C916 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 7;
 			files = (
+				23D5C7E627843C5200C6C916 /* fango.png in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -37,6 +39,7 @@
 		23D5C7DB27833CFD00C6C916 /* libsfml-system.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-system.2.5.1.dylib"; path = "External Libraries/SFML/lib/libsfml-system.2.5.1.dylib"; sourceTree = "<group>"; };
 		23D5C7DC27833CFD00C6C916 /* libsfml-window.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-window.2.5.1.dylib"; path = "External Libraries/SFML/lib/libsfml-window.2.5.1.dylib"; sourceTree = "<group>"; };
 		23D5C7E22783432F00C6C916 /* game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
+		23D5C7E52783583600C6C916 /* fango.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fango.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,7 @@
 		23D5C7B827832B5600C6C916 = {
 			isa = PBXGroup;
 			children = (
+				23D5C7E4278357D400C6C916 /* assets */,
 				23D5C7C327832B5600C6C916 /* game-engine */,
 				23D5C7C227832B5600C6C916 /* Products */,
 				23D5C7CB27832BE500C6C916 /* Frameworks */,
@@ -91,6 +95,14 @@
 				23D5C7DC27833CFD00C6C916 /* libsfml-window.2.5.1.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		23D5C7E4278357D400C6C916 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				23D5C7E52783583600C6C916 /* fango.png */,
+			);
+			path = assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
