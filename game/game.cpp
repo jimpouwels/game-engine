@@ -6,7 +6,7 @@
 class Game : public jimp::GameEngine {
     
 public:
-    Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60) {
+    Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60, 4) {
     }
     
     void onFrame(int elapsedTime) {
@@ -14,12 +14,12 @@ public:
     }
     
     void renderImage() {
-        renderSprite(jimp::Sprite(50, 50, "fango.png"));
+        renderSprite(jimp::Sprite(0, 00, "fango.png"));
     }
 };
 
 int main() {
-    Game game(1024, 720, "Fango");
+    Game game(640, 480, "Fango");
     game.start();
     return 0;
 }

@@ -11,12 +11,13 @@ namespace jimp {
         int screenWidth;
         int screenHeight;
         int frameRate;
+        float pixelSize;
         float timePerFrame;
         std::chrono::time_point<std::chrono::system_clock> previousFrameTime;
         sf::RenderWindow* window;
         
     public:
-        GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate);
+        GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate, float pixelSize);
         void start();
         void renderSprite(Sprite sprite);
         int getScreenWidth();
@@ -24,12 +25,13 @@ namespace jimp {
         virtual void onFrame(int elapsedTime) = 0;
     };
 
-    GameEngine::GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate) {
-        this->screenWidth = screenWidth;
-        this->screenHeight = screenHeight;
+    GameEngine::GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate, float pixelSize) {
+        this->screenWidth = screenWidth * pixelSize;
+        this->screenHeight = screenHeight * pixelSize;
         this->frameRate = desiredFrameRate;
         this->timePerFrame = 1.0 / desiredFrameRate;
-        window = new sf::RenderWindow(sf::VideoMode(screenWidth, screenHeight), windowTitle);
+        this->pixelSize = pixelSize;
+        window = new sf::RenderWindow(sf::VideoMode(this->getScreenWidth(), this->getScreenHeight()), windowTitle);
     }
 
     void GameEngine::start() {
@@ -40,7 +42,6 @@ namespace jimp {
                 switch (event.type) {
                     case sf::Event::Closed:
                         window->close();
-                        delete window;
                         break;
                 }
             }
@@ -63,6 +64,7 @@ namespace jimp {
         sf::Sprite sfmlSprite;
         sfmlSprite.setTexture(sfmlTexture);
         sfmlSprite.setPosition(sprite.getX(), sprite.getY());
+        sfmlSprite.setScale(this->pixelSize, this->pixelSize);
         window->draw(sfmlSprite);
     }
 
