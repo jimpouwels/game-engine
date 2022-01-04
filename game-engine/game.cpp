@@ -1,12 +1,14 @@
 #include "gameEngine.h"
 #include <iostream>
+#include <chrono>
 
 class Game : public jimp::GameEngine {
+    
 public:
-    Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name) {
+    Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60) {
     }
     
-    void onFrame() {
+    void onFrame(int elapsedTime) {
         renderImage();
     }
     

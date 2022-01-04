@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <chrono>
 
 namespace jimp {
 
@@ -8,21 +9,26 @@ namespace jimp {
     private:
         int screenWidth;
         int screenHeight;
+        int frameRate;
+        float timePerFrame;
+        std::chrono::time_point<std::chrono::system_clock> previousFrameTime;
         sf::RenderWindow* window;
         
     public:
-        GameEngine(int screenWidth, int screenHeight, std::string windowTitle);
+        GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate);
         void start();
         void renderSprite(int x, int y, std::string filePath);
         int getScreenWidth();
         int getScreenHeight();
-        virtual void onFrame() = 0;
+        virtual void onFrame(int elapsedTime) = 0;
         
     };
 
-    GameEngine::GameEngine(int screenWidth, int screenHeight, std::string windowTitle) {
+    GameEngine::GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate) {
         this->screenWidth = screenWidth;
         this->screenHeight = screenHeight;
+        this->frameRate = desiredFrameRate;
+        this->timePerFrame = 1.0 / desiredFrameRate;
         window = new sf::RenderWindow(sf::VideoMode(screenWidth, screenHeight), windowTitle);
     }
 
@@ -38,9 +44,15 @@ namespace jimp {
                 }
             }
             
-            window->clear();
-            onFrame();
-            window->display();
+            std::chrono::time_point<std::chrono::system_clock> currentTime = std::chrono::system_clock::now();
+            std::chrono::duration<float> elapsedTime = (currentTime - previousFrameTime);
+            
+            if (elapsedTime.count() > timePerFrame) {
+                window->clear();
+                onFrame(elapsedTime.count());
+                window->display();
+                previousFrameTime = currentTime;
+            }
         }
     }
 
