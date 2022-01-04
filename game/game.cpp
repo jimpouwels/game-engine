@@ -1,4 +1,5 @@
 #include "gameEngine.h"
+#include "sprite.h"
 #include <iostream>
 #include <chrono>
 
@@ -13,7 +14,7 @@ public:
     }
     
     void renderImage() {
-        renderSprite(50, 50, "fango.png");
+        renderSprite(jimp::Sprite(50, 50, "fango.png"));
     }
 };
 

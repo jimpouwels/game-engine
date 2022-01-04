@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <chrono>
+#include "sprite.h"
 
 namespace jimp {
 
@@ -17,11 +18,10 @@ namespace jimp {
     public:
         GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate);
         void start();
-        void renderSprite(int x, int y, std::string filePath);
+        void renderSprite(Sprite sprite);
         int getScreenWidth();
         int getScreenHeight();
         virtual void onFrame(int elapsedTime) = 0;
-        
     };
 
     GameEngine::GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate) {
@@ -40,6 +40,7 @@ namespace jimp {
                 switch (event.type) {
                     case sf::Event::Closed:
                         window->close();
+                        delete window;
                         break;
                 }
             }
@@ -56,13 +57,13 @@ namespace jimp {
         }
     }
 
-    void GameEngine::renderSprite(int x, int y, std::string filePath) {
-        sf::Texture texture;
-        texture.loadFromFile(filePath);
-        sf::Sprite sprite;
-        sprite.setTexture(texture);
-        sprite.setPosition(x, y);
-        window->draw(sprite);
+    void GameEngine::renderSprite(Sprite sprite) {
+        sf::Texture sfmlTexture;
+        sfmlTexture.loadFromFile(sprite.getFilePath());
+        sf::Sprite sfmlSprite;
+        sfmlSprite.setTexture(sfmlTexture);
+        sfmlSprite.setPosition(sprite.getX(), sprite.getY());
+        window->draw(sfmlSprite);
     }
 
     int GameEngine::getScreenWidth() {

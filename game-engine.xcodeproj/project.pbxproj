@@ -40,6 +40,7 @@
 		23D5C7DC27833CFD00C6C916 /* libsfml-window.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-window.2.5.1.dylib"; path = "External Libraries/SFML/lib/libsfml-window.2.5.1.dylib"; sourceTree = "<group>"; };
 		23D5C7E22783432F00C6C916 /* game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
 		23D5C7E52783583600C6C916 /* fango.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fango.png; sourceTree = "<group>"; };
+		23D5C7E827847B6200C6C916 /* sprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sprite.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +62,7 @@
 		23D5C7B827832B5600C6C916 = {
 			isa = PBXGroup;
 			children = (
+				23D5C7E727847B3000C6C916 /* game */,
 				23D5C7E4278357D400C6C916 /* assets */,
 				23D5C7C327832B5600C6C916 /* game-engine */,
 				23D5C7C227832B5600C6C916 /* Products */,
@@ -80,7 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				23D5C7C427832B5600C6C916 /* gameEngine.h */,
-				23D5C7E22783432F00C6C916 /* game.cpp */,
+				23D5C7E827847B6200C6C916 /* sprite.h */,
 			);
 			path = "game-engine";
 			sourceTree = "<group>";
@@ -103,6 +105,14 @@
 				23D5C7E52783583600C6C916 /* fango.png */,
 			);
 			path = assets;
+			sourceTree = "<group>";
+		};
+		23D5C7E727847B3000C6C916 /* game */ = {
+			isa = PBXGroup;
+			children = (
+				23D5C7E22783432F00C6C916 /* game.cpp */,
+			);
+			path = game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
