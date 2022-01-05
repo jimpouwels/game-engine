@@ -1,5 +1,6 @@
 #include "gameEngine.h"
 #include "sprite.h"
+#include "animatedCharacter.h"
 #include <iostream>
 #include <chrono>
 
@@ -14,7 +15,7 @@ public:
     }
     
     void renderImage() {
-        renderSprite(jimp::Sprite(0, 00, "fango.png"));
+        draw(new jimp::AnimatedCharacter(new jimp::Sprite(0, 00, "fango.png")));
     }
 };
 
