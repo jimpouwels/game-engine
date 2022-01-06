@@ -41,15 +41,14 @@ void GameEngine::start() {
     }
 }
 
-void GameEngine::draw(jimp::Sprite* sprite) {
+void GameEngine::draw(jimp::Sprite sprite) {
     sf::Texture sfmlTexture;
-    sfmlTexture.loadFromFile(sprite->getFilePath());
+    sfmlTexture.loadFromFile(sprite.getFilePath());
     sf::Sprite sfmlSprite;
     sfmlSprite.setTexture(sfmlTexture);
-    sfmlSprite.setPosition(sprite->getX(), sprite->getY());
+    sfmlSprite.setPosition(sprite.getX(), sprite.getY());
     sfmlSprite.setScale(this->pixelSize, this->pixelSize);
     window->draw(sfmlSprite);
-    delete sprite;
 }
 
 int GameEngine::getScreenWidth() {

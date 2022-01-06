@@ -15,7 +15,7 @@ public:
     }
     
     void renderImage() {
-        draw(new jimp::AnimatedCharacter(new jimp::Sprite(0, 00, "fango.png")));
+        draw(jimp::AnimatedCharacter(new jimp::Sprite(0, 00, "fango.png")));
     }
 };
 
