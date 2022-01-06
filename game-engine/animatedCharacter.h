@@ -3,12 +3,10 @@
 
 #include <stdio.h>
 #include "sprite.h"
-#include "animatedCharacter.h"
-#include "drawable.h"
 
 namespace jimp {
 
-class AnimatedCharacter : public jimp::Drawable {
+class AnimatedCharacter : public jimp::Sprite {
 
 private:
     Sprite *sprite;

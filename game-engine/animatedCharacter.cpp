@@ -1,8 +1,9 @@
 #include "animatedCharacter.h"
+#include "sprite.h"
 
 namespace jimp {
 
-AnimatedCharacter::AnimatedCharacter(Sprite* sprite) {
+AnimatedCharacter::AnimatedCharacter(Sprite* sprite) : jimp::Sprite(sprite->getX(), sprite->getY(), sprite->getFilePath()) {
     this->sprite = sprite;
 }
 

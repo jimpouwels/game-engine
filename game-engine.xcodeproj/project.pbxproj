@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		23A933B227864EA800769F69 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AD27864EA700769F69 /* sprite.cpp */; };
 		23A933B327864EA800769F69 /* animatedCharacter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AE27864EA700769F69 /* animatedCharacter.cpp */; };
-		23A933B427864EA800769F69 /* drawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933B027864EA700769F69 /* drawable.cpp */; };
 		23A933B527864EA800769F69 /* gameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933B127864EA700769F69 /* gameEngine.cpp */; };
 		23D5C7C527832B5600C6C916 /* gameEngine.h in Sources */ = {isa = PBXBuildFile; fileRef = 23D5C7C427832B5600C6C916 /* gameEngine.h */; };
 		23D5C7DD27833CFD00C6C916 /* libsfml-audio.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7D827833CFD00C6C916 /* libsfml-audio.2.5.1.dylib */; };
@@ -38,8 +37,6 @@
 		23A933AC27864EA700769F69 /* animatedCharacter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = animatedCharacter.h; sourceTree = "<group>"; };
 		23A933AD27864EA700769F69 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		23A933AE27864EA700769F69 /* animatedCharacter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = animatedCharacter.cpp; sourceTree = "<group>"; };
-		23A933AF27864EA700769F69 /* drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drawable.h; sourceTree = "<group>"; };
-		23A933B027864EA700769F69 /* drawable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = drawable.cpp; sourceTree = "<group>"; };
 		23A933B127864EA700769F69 /* gameEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gameEngine.cpp; sourceTree = "<group>"; };
 		23D5C7C127832B5600C6C916 /* game-engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "game-engine"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23D5C7C427832B5600C6C916 /* gameEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gameEngine.h; sourceTree = "<group>"; };
@@ -93,8 +90,6 @@
 			children = (
 				23A933AE27864EA700769F69 /* animatedCharacter.cpp */,
 				23A933AC27864EA700769F69 /* animatedCharacter.h */,
-				23A933B027864EA700769F69 /* drawable.cpp */,
-				23A933AF27864EA700769F69 /* drawable.h */,
 				23A933B127864EA700769F69 /* gameEngine.cpp */,
 				23D5C7C427832B5600C6C916 /* gameEngine.h */,
 				23A933AD27864EA700769F69 /* sprite.cpp */,
@@ -190,7 +185,6 @@
 			files = (
 				23D5C7C527832B5600C6C916 /* gameEngine.h in Sources */,
 				23D5C7E32783432F00C6C916 /* game.cpp in Sources */,
-				23A933B427864EA800769F69 /* drawable.cpp in Sources */,
 				23A933B327864EA800769F69 /* animatedCharacter.cpp in Sources */,
 				23A933B227864EA800769F69 /* sprite.cpp in Sources */,
 				23A933B527864EA800769F69 /* gameEngine.cpp in Sources */,

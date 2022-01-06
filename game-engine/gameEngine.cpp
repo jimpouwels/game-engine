@@ -1,5 +1,4 @@
 #include "gameEngine.h"
-#include "drawable.h"
 #include <SFML/Graphics.hpp>
 #include <chrono>
 
@@ -42,15 +41,15 @@ void GameEngine::start() {
     }
 }
 
-void GameEngine::draw(jimp::Drawable* drawable) {
+void GameEngine::draw(jimp::Sprite* sprite) {
     sf::Texture sfmlTexture;
-    sfmlTexture.loadFromFile(drawable->getFilePath());
+    sfmlTexture.loadFromFile(sprite->getFilePath());
     sf::Sprite sfmlSprite;
     sfmlSprite.setTexture(sfmlTexture);
-    sfmlSprite.setPosition(drawable->getX(), drawable->getY());
+    sfmlSprite.setPosition(sprite->getX(), sprite->getY());
     sfmlSprite.setScale(this->pixelSize, this->pixelSize);
     window->draw(sfmlSprite);
-    delete drawable;
+    delete sprite;
 }
 
 int GameEngine::getScreenWidth() {

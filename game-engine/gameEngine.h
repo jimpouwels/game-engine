@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "drawable.h"
+#include "sprite.h"
 
 namespace jimp {
 
@@ -22,7 +22,7 @@ public:
     GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate, float pixelSize);
     ~GameEngine();
     void start();
-    void draw(jimp::Drawable* drawable);
+    void draw(jimp::Sprite* sprite);
     int getScreenWidth();
     int getScreenHeight();
     virtual void onFrame(int elapsedTime) = 0;
