@@ -28,6 +28,7 @@ public:
     void draw(jimp::Sprite sprite);
     int getScreenWidth();
     int getScreenHeight();
+    void addKeyListener(jimp::KeyListener* keyListener);
     virtual void onFrame(int elapsedTime) = 0;
     
 };

@@ -14,9 +14,9 @@ private:
 public:
     AnimatedCharacter(Sprite* sprite);
     ~AnimatedCharacter();
-    std::string getFilePath();
-    int getX();
-    int getY();
+    std::string getFilePath() override;
+    int getX() override;
+    int getY() override;
 };
 }
 

@@ -12,6 +12,11 @@ class KeyboardHandler {
     
 private:
     std::list<jimp::KeyListener*>* keyListeners;
+    void handleKeyboardLeft(KeyState keyState);
+    void handleKeyboardRight(KeyState keyState);
+    void handleKeyboardUp(KeyState keyState);
+    void handleKeyboardDown(KeyState keyState);
+    KeyState keyStateFor(sf::Event);
     
 public:
     KeyboardHandler();

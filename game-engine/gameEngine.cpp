@@ -32,6 +32,9 @@ void GameEngine::start() {
                 case sf::Event::KeyPressed:
                     keyboardHandler->handleEvent(event);
                     break;
+                case sf::Event::KeyReleased:
+                    keyboardHandler->handleEvent(event);
+                    break;
             }
         }
         
@@ -55,6 +58,10 @@ void GameEngine::draw(jimp::Sprite sprite) {
     sfmlSprite.setPosition(sprite.getX(), sprite.getY());
     sfmlSprite.setScale(this->pixelSize, this->pixelSize);
     window->draw(sfmlSprite);
+}
+
+void GameEngine::addKeyListener(KeyListener* keyListener) {
+    keyboardHandler->addKeyListener(keyListener);
 }
 
 int GameEngine::getScreenWidth() {

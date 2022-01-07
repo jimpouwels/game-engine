@@ -5,13 +5,15 @@
 
 namespace jimp {
 
+enum KeyState { PRESSED, RELEASED };
+
 class KeyListener {
     
 public:
-    virtual void onLeftButtonPressed() { };
-    virtual void onRightButtonPressed() { };
-    virtual void onUpButtonPressed() { };
-    virtual void onBottomButtonPressed() { };
+    virtual void onKeyboardLeft(KeyState keyState) { };
+    virtual void onKeyboardRight(KeyState keyState) { };
+    virtual void onKeyboardUp(KeyState keyState) { };
+    virtual void onKeyboardDown(KeyState keyState) { };
     
 };
 
