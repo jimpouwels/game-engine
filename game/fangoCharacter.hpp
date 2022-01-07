@@ -13,7 +13,7 @@ class FangoCharacter : public jimp::AnimatedCharacter, public jimp::KeyListener 
 private:
     enum MoveDirection { NORTH, SOUTH, WEST, EAST } moveDirection;
     bool isMoving;
-    void setMoving(bool isMoving, KeyState keyState, MoveDirection moveDirection);
+    void setMoving(KeyState keyState, MoveDirection moveDirection);
     int speedInPixelsPerSecond;
     
 public:

@@ -32,22 +32,22 @@ void FangoCharacter::updatePosition(float elapsedTime) {
 }
 
 void FangoCharacter::onKeyboardLeft(KeyState keyState) {
-    setMoving(true, keyState, WEST);
+    setMoving(keyState, WEST);
 }
 
 void FangoCharacter::onKeyboardRight(KeyState keyState) {
-    setMoving(true, keyState, EAST);
+    setMoving(keyState, EAST);
 }
 
 void FangoCharacter::onKeyboardUp(KeyState keyState) {
-    setMoving(true, keyState, NORTH);
+    setMoving(keyState, NORTH);
 }
 
 void FangoCharacter::onKeyboardDown(KeyState keyState) {
-    setMoving(true, keyState, SOUTH);
+    setMoving(keyState, SOUTH);
 }
 
-void FangoCharacter::setMoving(bool isMoving, KeyState keyState, MoveDirection moveDirection) {
+void FangoCharacter::setMoving(KeyState keyState, MoveDirection moveDirection) {
     if (keyState == PRESSED) {
         this->isMoving = true;
         this->moveDirection = moveDirection;

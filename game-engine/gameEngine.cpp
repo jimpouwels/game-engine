@@ -57,7 +57,6 @@ void GameEngine::draw(jimp::Sprite& sprite) {
     sfmlSprite.setTexture(sfmlTexture);
     sfmlSprite.setPosition(sprite.getX(), sprite.getY());
     sfmlSprite.setScale(this->pixelSize, this->pixelSize);
-    std::cout << "drawing to x: " << sprite.getX() << ", y: " << sprite.getY() << std::endl;
     window->draw(sfmlSprite);
 }
 
