@@ -10,8 +10,15 @@ namespace jimp {
 
 class FangoCharacter : public jimp::AnimatedCharacter, public jimp::KeyListener {
     
+private:
+    enum MoveDirection { NORTH, SOUTH, WEST, EAST } moveDirection;
+    bool isMoving;
+    void setMoving(bool isMoving, KeyState keyState, MoveDirection moveDirection);
+    int speedInPixelsPerSecond;
+    
 public:
     FangoCharacter();
+    void updatePosition(float elapsedTime);
     void onKeyboardLeft(KeyState keyState) override;
     void onKeyboardRight(KeyState keyState) override;
     void onKeyboardUp(KeyState keyState) override;

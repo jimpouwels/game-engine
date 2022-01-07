@@ -8,7 +8,7 @@ namespace jimp {
 
 class AnimatedCharacter : public jimp::Sprite {
 
-private:
+protected:
     Sprite *sprite;
     
 public:

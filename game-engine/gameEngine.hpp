@@ -25,11 +25,11 @@ public:
     GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate, float pixelSize);
     ~GameEngine();
     void start();
-    void draw(jimp::Sprite sprite);
+    void draw(jimp::Sprite& sprite);
     int getScreenWidth();
     int getScreenHeight();
     void addKeyListener(jimp::KeyListener* keyListener);
-    virtual void onFrame(int elapsedTime) = 0;
+    virtual void onFrame(float elapsedTime) = 0;
     
 };
 }

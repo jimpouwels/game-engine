@@ -15,7 +15,9 @@ private:
 public:
     Sprite(int x, int y, std::string filePath);
     virtual int getX();
+    virtual void setX(int x);
     virtual int getY();
+    virtual void setY(int y);
     virtual std::string getFilePath();
     
 };

@@ -11,15 +11,16 @@ private:
     
 public:
     Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60, 1) {
-        this->fango = new jimp::FangoCharacter();
+        fango = new jimp::FangoCharacter();
         addKeyListener(fango);
     }
     
-    void onFrame(int elapsedTime) {
-        renderImage();
+    void onFrame(float elapsedTime) {
+        fango->updatePosition(elapsedTime);
+        renderFango();
     }
     
-    void renderImage() {
+    void renderFango() {
         draw(*fango);
     }
 };
