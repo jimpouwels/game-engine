@@ -1,8 +1,8 @@
-#ifndef animatedCharacter_h
-#define animatedCharacter_h
+#ifndef animatedCharacter_hpp
+#define animatedCharacter_hpp
 
 #include <stdio.h>
-#include "sprite.h"
+#include "sprite.hpp"
 
 namespace jimp {
 
@@ -12,7 +12,7 @@ private:
     Sprite *sprite;
     
 public:
-    AnimatedCharacter(Sprite *sprite);
+    AnimatedCharacter(Sprite* sprite);
     ~AnimatedCharacter();
     std::string getFilePath();
     int getX();

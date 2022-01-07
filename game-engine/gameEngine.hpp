@@ -1,9 +1,11 @@
-#ifndef gameEngine_h
-#define gameEngine_h
+#ifndef gameEngine_hpp
+#define gameEngine_hpp
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "sprite.h"
+#include "sprite.hpp"
+#include "keyListener.hpp"
+#include "keyboardHandler.hpp"
 
 namespace jimp {
 
@@ -15,6 +17,7 @@ private:
     int frameRate;
     float pixelSize;
     float timePerFrame;
+    jimp::KeyboardHandler* keyboardHandler;
     std::chrono::time_point<std::chrono::system_clock> previousFrameTime;
     sf::RenderWindow* window;
     
@@ -26,6 +29,7 @@ public:
     int getScreenWidth();
     int getScreenHeight();
     virtual void onFrame(int elapsedTime) = 0;
+    
 };
 }
 

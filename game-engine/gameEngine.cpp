@@ -1,6 +1,8 @@
-#include "gameEngine.h"
 #include <SFML/Graphics.hpp>
 #include <chrono>
+
+#include "gameEngine.hpp"
+#include "keyboardHandler.hpp"
 
 namespace jimp {
 
@@ -11,6 +13,7 @@ GameEngine::GameEngine(int screenWidth, int screenHeight, std::string windowTitl
     this->timePerFrame = 1.0 / desiredFrameRate;
     this->pixelSize = pixelSize;
     window = new sf::RenderWindow(sf::VideoMode(this->getScreenWidth(), this->getScreenHeight()), windowTitle);
+    keyboardHandler = new jimp::KeyboardHandler();
 }
 
 GameEngine::~GameEngine() {
@@ -25,6 +28,9 @@ void GameEngine::start() {
             switch (event.type) {
                 case sf::Event::Closed:
                     window->close();
+                    break;
+                case sf::Event::KeyPressed:
+                    keyboardHandler->handleEvent(event);
                     break;
             }
         }

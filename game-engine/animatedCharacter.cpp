@@ -1,5 +1,5 @@
-#include "animatedCharacter.h"
-#include "sprite.h"
+#include "animatedCharacter.hpp"
+#include "sprite.hpp"
 
 namespace jimp {
 

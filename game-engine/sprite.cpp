@@ -1,4 +1,4 @@
-#include "sprite.h"
+#include "sprite.hpp"
 #include <iostream>
 #include <stdio.h>
 

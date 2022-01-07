@@ -1,13 +1,17 @@
-#include "gameEngine.h"
-#include "sprite.h"
-#include "animatedCharacter.h"
+#include "gameEngine.hpp"
+#include "sprite.hpp"
+#include "animatedCharacter.hpp"
 #include <iostream>
 #include <chrono>
 
 class Game : public jimp::GameEngine {
     
+private:
+    jimp::AnimatedCharacter* fango;
+    
 public:
     Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60, 4) {
+        this->fango = new jimp::AnimatedCharacter(new jimp::Sprite(0, 0, "fango.png"));
     }
     
     void onFrame(int elapsedTime) {
@@ -15,7 +19,7 @@ public:
     }
     
     void renderImage() {
-        draw(jimp::AnimatedCharacter(new jimp::Sprite(0, 00, "fango.png")));
+        draw(*fango);
     }
 };
 
