@@ -9,14 +9,10 @@ namespace jimp {
 class AnimatedCharacter : public jimp::Sprite {
 
 protected:
-    Sprite *sprite;
     
 public:
-    AnimatedCharacter(Sprite* sprite);
+    AnimatedCharacter(int x, int y, std::string filePath);
     ~AnimatedCharacter();
-    std::string getFilePath() override;
-    int getX() override;
-    int getY() override;
 };
 }
 

@@ -2,6 +2,7 @@
 #define sprite_hpp
 
 #include <string>
+#include <SFML/Graphics.hpp>
 
 namespace jimp {
 
@@ -10,7 +11,7 @@ class Sprite {
 private:
     int x;
     int y;
-    std::string filePath;
+    sf::Image* image;
     
 public:
     Sprite(int x, int y, std::string filePath);
@@ -18,8 +19,7 @@ public:
     virtual void setX(int x);
     virtual int getY();
     virtual void setY(int y);
-    virtual std::string getFilePath();
-    
+    sf::Image& getImage();
 };
 }
 

@@ -5,7 +5,7 @@
 
 namespace jimp {
 
-FangoCharacter::FangoCharacter() : jimp::AnimatedCharacter(new jimp::Sprite(0, 0, "fango.png")) {
+FangoCharacter::FangoCharacter() : jimp::AnimatedCharacter(0, 0, "fango.png") {
     speedInPixelsPerSecond = 200;
 }
 
@@ -17,16 +17,16 @@ void FangoCharacter::updatePosition(float elapsedTime) {
     int delta = speedInPixelsPerSecond / (1 / elapsedTime);
     switch (moveDirection) {
         case NORTH:
-            sprite->setY(sprite->getY() - delta);
+            setY(getY() - delta);
             break;
         case SOUTH:
-            sprite->setY(sprite->getY() + delta);
+            setY(getY() + delta);
             break;
         case WEST:
-            sprite->setX(sprite->getX() - delta);
+            setX(getX() - delta);
             break;
         case EAST:
-            sprite->setX(sprite->getX() + delta);
+            setX(getX() + delta);
             break;
     }
 }
