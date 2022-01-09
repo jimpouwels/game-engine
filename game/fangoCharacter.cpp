@@ -5,28 +5,34 @@
 
 namespace jimp {
 
-FangoCharacter::FangoCharacter() : jimp::AnimatedCharacter(0, 0, "fango.png") {
-    speedInPixelsPerSecond = 200;
+FangoCharacter::FangoCharacter() : jimp::AnimatedCharacter(0, 0, IMAGE_SWAP_INTERVAL_IN_SECONDS) {
+    setCurrentSprite(loadSprite("right", "fango-right1.png"));
+    loadSprite("right", "fango-right2.png");
 }
+
+const int FangoCharacter::SPEED_IN_PIXELS_PER_SECOND = 200;
+const float FangoCharacter::IMAGE_SWAP_INTERVAL_IN_SECONDS = 0.1F;
 
 void FangoCharacter::updatePosition(float elapsedTime) {
     if (!isMoving) {
         return;
     }
-
-    int delta = speedInPixelsPerSecond / (1 / elapsedTime);
+    
+    setNextSpriteInCollection("right", elapsedTime);
+    
+    int delta = SPEED_IN_PIXELS_PER_SECOND / (1 / elapsedTime);
     switch (moveDirection) {
         case NORTH:
-            setY(getY() - delta);
+            this->getCurrentSprite()->setY(this->getCurrentSprite()->getY() - delta);
             break;
         case SOUTH:
-            setY(getY() + delta);
+            this->getCurrentSprite()->setY(this->getCurrentSprite()->getY() + delta);
             break;
         case WEST:
-            setX(getX() - delta);
+            this->getCurrentSprite()->setX(this->getCurrentSprite()->getX() - delta);
             break;
         case EAST:
-            setX(getX() + delta);
+            this->getCurrentSprite()->setX(this->getCurrentSprite()->getX() + delta);
             break;
     }
 }

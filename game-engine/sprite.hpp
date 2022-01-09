@@ -11,7 +11,12 @@ class Sprite {
 private:
     int x;
     int y;
+    std::string filePath;
     sf::Image* image;
+    
+protected:
+    void loadImage(std::string filePath);
+    std::string getFilePath();
     
 public:
     Sprite(int x, int y, std::string filePath);
