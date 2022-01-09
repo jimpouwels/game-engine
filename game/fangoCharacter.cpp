@@ -18,8 +18,6 @@ void FangoCharacter::updatePosition(float elapsedTime) {
         return;
     }
     
-    setNextSpriteInCollection("right", elapsedTime);
-    
     int delta = SPEED_IN_PIXELS_PER_SECOND / (1 / elapsedTime);
     switch (moveDirection) {
         case NORTH:
@@ -35,6 +33,8 @@ void FangoCharacter::updatePosition(float elapsedTime) {
             this->getCurrentSprite()->setX(this->getCurrentSprite()->getX() + delta);
             break;
     }
+    
+    setNextSpriteInCollection("right", elapsedTime);
 }
 
 void FangoCharacter::onKeyboardLeft(KeyState keyState) {

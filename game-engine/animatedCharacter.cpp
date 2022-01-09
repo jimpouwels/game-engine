@@ -41,13 +41,11 @@ void AnimatedCharacter::setNextSpriteInCollection(std::string collection, float 
             currentSpriteIndex = 0;
         }
         
-        int x = this->getCurrentSprite()->getX();
-        int y = this->getCurrentSprite()->getY();
+        jimp::Sprite* nextSprite = spriteList->at(currentSpriteIndex);
+        nextSprite->setX(getCurrentSprite()->getX());
+        nextSprite->setY(getCurrentSprite()->getY());
         
-        setCurrentSprite(spriteList->at(currentSpriteIndex));
-        
-        this->getCurrentSprite()->setX(x);
-        this->getCurrentSprite()->setY(y);
+        setCurrentSprite(nextSprite);
         
         elapsedTimeSinceLastSwap = 0;
     }
