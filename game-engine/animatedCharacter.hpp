@@ -20,7 +20,7 @@ private:
     
 protected:
     void setCurrentSprite(jimp::Sprite* sprite);
-    jimp::Sprite* loadSprite(std::string collection, std::string filePath);
+    void addSprite(std::string collection, std::string filePath);
     void setNextSpriteInCollection(std::string collection, float elapsedTime);
     
 public:

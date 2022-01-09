@@ -6,8 +6,8 @@
 namespace jimp {
 
 FangoCharacter::FangoCharacter() : jimp::AnimatedCharacter(0, 0, IMAGE_SWAP_INTERVAL_IN_SECONDS) {
-    setCurrentSprite(loadSprite("right", "fango-right1.png"));
-    loadSprite("right", "fango-right2.png");
+    addSprite("right", "fango-right1.png");
+    addSprite("right", "fango-right2.png");
 }
 
 const int FangoCharacter::SPEED_IN_PIXELS_PER_SECOND = 200;

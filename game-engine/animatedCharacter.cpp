@@ -51,13 +51,15 @@ void AnimatedCharacter::setNextSpriteInCollection(std::string collection, float 
     }
 }
 
-jimp::Sprite* AnimatedCharacter::loadSprite(std::string collection, std::string filePath) {
+void AnimatedCharacter::addSprite(std::string collection, std::string filePath) {
     if (spriteMap->find(collection) == spriteMap->end()) {
         spriteMap->insert({collection, new std::vector<jimp::Sprite*>});
     }
     jimp::Sprite* sprite = new jimp::Sprite(0, 0, filePath);
     spriteMap->find(collection)->second->push_back(sprite);
-    return sprite;
+    if (!currentSprite) {
+        currentSprite = sprite;
+    }
 }
 
 }
