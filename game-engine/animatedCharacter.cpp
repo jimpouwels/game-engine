@@ -57,7 +57,7 @@ void AnimatedCharacter::addSprite(std::string collection, std::string filePath) 
     }
     jimp::Sprite* sprite = new jimp::Sprite(0, 0, filePath);
     spriteMap->find(collection)->second->push_back(sprite);
-    if (!currentSprite) {
+    if (currentSprite == nullptr) {
         currentSprite = sprite;
     }
 }
