@@ -26,7 +26,7 @@ protected:
 public:
     AnimatedCharacter(int x, int y, float imageSwapIntervalInSeconds);
     ~AnimatedCharacter();
-    jimp::Sprite* getCurrentSprite();
+    jimp::Sprite& getCurrentSprite();
 };
 }
 

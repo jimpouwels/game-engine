@@ -24,8 +24,8 @@ void AnimatedCharacter::setCurrentSprite(jimp::Sprite* sprite) {
     this->currentSprite = sprite;
 }
 
-jimp::Sprite* AnimatedCharacter::getCurrentSprite() {
-    return this->currentSprite;
+jimp::Sprite& AnimatedCharacter::getCurrentSprite() {
+    return *this->currentSprite;
 }
 
 void AnimatedCharacter::setNextSpriteInCollection(std::string collection, float elapsedTime) {
@@ -42,8 +42,8 @@ void AnimatedCharacter::setNextSpriteInCollection(std::string collection, float 
         }
         
         jimp::Sprite* nextSprite = spriteList->at(currentSpriteIndex);
-        nextSprite->setX(getCurrentSprite()->getX());
-        nextSprite->setY(getCurrentSprite()->getY());
+        nextSprite->setX(getCurrentSprite().getX());
+        nextSprite->setY(getCurrentSprite().getY());
         
         setCurrentSprite(nextSprite);
         
