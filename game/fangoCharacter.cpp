@@ -21,16 +21,16 @@ void FangoCharacter::updatePosition(float elapsedTime) {
     int delta = SPEED_IN_PIXELS_PER_SECOND / (1 / elapsedTime);
     switch (moveDirection) {
         case NORTH:
-            this->getCurrentSprite().setY(this->getCurrentSprite().getY() - delta);
+            setY(getY() - delta);
             break;
         case SOUTH:
-            this->getCurrentSprite().setY(this->getCurrentSprite().getY() + delta);
+            setY(getY() + delta);
             break;
         case WEST:
-            this->getCurrentSprite().setX(this->getCurrentSprite().getX() - delta);
+            setX(getX() - delta);
             break;
         case EAST:
-            this->getCurrentSprite().setX(this->getCurrentSprite().getX() + delta);
+            setX(getX() + delta);
             break;
     }
     

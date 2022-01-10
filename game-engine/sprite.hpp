@@ -24,6 +24,7 @@ public:
     virtual void setX(int x);
     virtual int getY();
     virtual void setY(int y);
+    void setPosition(int x, int y);
     sf::Image& getImage();
 };
 }

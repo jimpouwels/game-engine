@@ -27,6 +27,11 @@ void Sprite::setY(int y) {
     this->y = y;
 }
 
+void Sprite::setPosition(int x, int y) {
+    setX(x);
+    setY(y);
+}
+
 void Sprite::loadImage(std::string filePath) {
     this->filePath = filePath;
     this->image = new sf::Image();

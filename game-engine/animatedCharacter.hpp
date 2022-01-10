@@ -11,6 +11,8 @@ namespace jimp {
 class AnimatedCharacter {
 
 private:
+    int x;
+    int y;
     std::map<std::string, std::vector<jimp::Sprite*>*>* spriteMap;
     jimp::Sprite* currentSprite;
     std::string currentSpriteCollection;
@@ -19,6 +21,10 @@ private:
     float imageSwapIntervalInSeconds;
     
 protected:
+    int getX();
+    void setX(int x);
+    int getY();
+    void setY(int y);
     void setCurrentSprite(jimp::Sprite* sprite);
     void addSprite(std::string collection, std::string filePath);
     void setNextSpriteInCollection(std::string collection, float elapsedTime);

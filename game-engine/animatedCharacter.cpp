@@ -7,6 +7,8 @@
 namespace jimp {
 
 AnimatedCharacter::AnimatedCharacter(int x, int y, float imageSwapIntervalInSeconds) {
+    this->x = x;
+    this->y = y;
     spriteMap = new std::map<std::string, std::vector<jimp::Sprite*>*>;
     this->imageSwapIntervalInSeconds = imageSwapIntervalInSeconds;
 }
@@ -25,6 +27,7 @@ void AnimatedCharacter::setCurrentSprite(jimp::Sprite* sprite) {
 }
 
 jimp::Sprite& AnimatedCharacter::getCurrentSprite() {
+    currentSprite->setPosition(x, y);
     return *this->currentSprite;
 }
 
@@ -42,8 +45,6 @@ void AnimatedCharacter::setNextSpriteInCollection(std::string collection, float 
         }
         
         jimp::Sprite* nextSprite = spriteList->at(currentSpriteIndex);
-        nextSprite->setX(getCurrentSprite().getX());
-        nextSprite->setY(getCurrentSprite().getY());
         
         setCurrentSprite(nextSprite);
         
@@ -60,6 +61,22 @@ void AnimatedCharacter::addSprite(std::string collection, std::string filePath) 
     if (currentSprite == nullptr) {
         currentSprite = sprite;
     }
+}
+
+int AnimatedCharacter::getX() {
+    return x;
+}
+
+void AnimatedCharacter::setX(int x) {
+    this->x = x;
+}
+
+int AnimatedCharacter::getY() {
+    return y;
+}
+
+void AnimatedCharacter::setY(int y) {
+    this->y = y;
 }
 
 }
