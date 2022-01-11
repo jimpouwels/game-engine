@@ -22,10 +22,6 @@ AnimatedCharacter::~AnimatedCharacter() {
     delete spriteMap;
 }
 
-void AnimatedCharacter::setCurrentSprite(jimp::Sprite* sprite) {
-    this->currentSprite = sprite;
-}
-
 jimp::Sprite& AnimatedCharacter::getCurrentSprite() {
     currentSprite->setPosition(x, y);
     return *this->currentSprite;
@@ -78,6 +74,10 @@ float AnimatedCharacter::getY() {
 
 void AnimatedCharacter::setY(float y) {
     this->y = y;
+}
+
+void AnimatedCharacter::setCurrentSprite(jimp::Sprite* sprite) {
+    this->currentSprite = sprite;
 }
 
 }

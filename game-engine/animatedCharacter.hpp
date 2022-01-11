@@ -19,13 +19,13 @@ private:
     int currentSpriteIndex = 0;
     float elapsedTimeSinceLastSwap;
     float imageSwapIntervalInSeconds;
+    void setCurrentSprite(jimp::Sprite* sprite);
     
 protected:
     float getX();
     void setX(float x);
     float getY();
     void setY(float y);
-    void setCurrentSprite(jimp::Sprite* sprite);
     void addSprite(std::string collection, std::string filePath);
     void setNextSpriteInCollection(std::string collection, float elapsedTime);
     
