@@ -9,8 +9,8 @@ namespace jimp {
 class Sprite {
     
 private:
-    int x;
-    int y;
+    float x;
+    float y;
     std::string filePath;
     sf::Image* image;
     
@@ -19,12 +19,12 @@ protected:
     std::string getFilePath();
     
 public:
-    Sprite(int x, int y, std::string filePath);
-    virtual int getX();
-    virtual void setX(int x);
-    virtual int getY();
-    virtual void setY(int y);
-    void setPosition(int x, int y);
+    Sprite(float x, float y, std::string filePath);
+    virtual float getX();
+    virtual void setX(float x);
+    virtual float getY();
+    virtual void setY(float y);
+    void setPosition(float x, float y);
     sf::Image& getImage();
 };
 }

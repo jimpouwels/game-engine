@@ -6,7 +6,7 @@
 
 namespace jimp {
 
-AnimatedCharacter::AnimatedCharacter(int x, int y, float imageSwapIntervalInSeconds) {
+AnimatedCharacter::AnimatedCharacter(float x, float y, float imageSwapIntervalInSeconds) {
     this->x = x;
     this->y = y;
     spriteMap = new std::map<std::string, std::vector<jimp::Sprite*>*>;
@@ -63,19 +63,19 @@ void AnimatedCharacter::addSprite(std::string collection, std::string filePath) 
     }
 }
 
-int AnimatedCharacter::getX() {
+float AnimatedCharacter::getX() {
     return x;
 }
 
-void AnimatedCharacter::setX(int x) {
+void AnimatedCharacter::setX(float x) {
     this->x = x;
 }
 
-int AnimatedCharacter::getY() {
+float AnimatedCharacter::getY() {
     return y;
 }
 
-void AnimatedCharacter::setY(int y) {
+void AnimatedCharacter::setY(float y) {
     this->y = y;
 }
 

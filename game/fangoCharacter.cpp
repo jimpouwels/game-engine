@@ -18,7 +18,7 @@ void FangoCharacter::updatePosition(float elapsedTime) {
         return;
     }
     
-    int delta = SPEED_IN_PIXELS_PER_SECOND / (1 / elapsedTime);
+    float delta = SPEED_IN_PIXELS_PER_SECOND / (1.0F / elapsedTime);
     switch (moveDirection) {
         case NORTH:
             setY(getY() - delta);

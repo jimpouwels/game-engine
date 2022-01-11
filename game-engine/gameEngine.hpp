@@ -15,10 +15,13 @@ private:
     int screenWidth;
     int screenHeight;
     int frameRate;
+    std::string windowTitle;
     float pixelSize;
     float timePerFrame;
     jimp::KeyboardHandler* keyboardHandler = nullptr;
     std::chrono::time_point<std::chrono::system_clock> previousFrameTime;
+    std::chrono::time_point<std::chrono::system_clock> previousFpsMeasurementTime;
+    int totalFrames;
     sf::RenderWindow* window;
     
 public:
