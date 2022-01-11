@@ -17,7 +17,8 @@ GameEngine::GameEngine(int screenWidth, int screenHeight, std::string windowTitl
 }
 
 GameEngine::~GameEngine() {
-    delete this->window;
+    delete window;
+    delete keyboardHandler;
 }
 
 void GameEngine::start() {

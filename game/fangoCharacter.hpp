@@ -16,7 +16,7 @@ private:
     static const float IMAGE_SWAP_INTERVAL_IN_SECONDS;
     
     enum MoveDirection { NORTH, SOUTH, WEST, EAST } moveDirection;
-    bool isMoving;
+    bool isMoving = false;
     void setMoving(KeyState keyState, MoveDirection moveDirection);
     int speedInPixelsPerSecond;
     
