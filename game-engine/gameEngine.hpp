@@ -23,7 +23,9 @@ private:
     std::chrono::time_point<std::chrono::system_clock> previousFpsMeasurementTime;
     int totalFrames;
     sf::RenderWindow* window;
-    float measureFps(std::chrono::time_point<std::chrono::system_clock> currentTime);
+    float measureFps(std::chrono::time_point<std::chrono::system_clock>& currentTime);
+    void drawFrame(std::chrono::duration<float>& elapsedTimeSincePreviousFrame, std::chrono::time_point<std::chrono::system_clock>& currentTime);
+    void handleEvents();
     
 public:
     GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate, float pixelSize);

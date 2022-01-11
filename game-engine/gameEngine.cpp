@@ -24,32 +24,14 @@ GameEngine::~GameEngine() {
 
 void GameEngine::start() {
     while (window->isOpen()) {
-        sf::Event event;
-        
-        while (window->pollEvent(event)) {
-            switch (event.type) {
-                case sf::Event::Closed:
-                    window->close();
-                    break;
-                case sf::Event::KeyPressed:
-                    keyboardHandler->handleEvent(event);
-                    break;
-                case sf::Event::KeyReleased:
-                    keyboardHandler->handleEvent(event);
-                    break;
-            }
-        }
+        handleEvents();
         
         std::chrono::time_point<std::chrono::system_clock> currentTime = std::chrono::system_clock::now();
         std::chrono::duration<float> elapsedTimeSincePreviousFrame = (currentTime - previousFrameTime);
         
         if (elapsedTimeSincePreviousFrame.count() > timePerFrame || frameRate == -1) {
             totalFrames++;
-            
-            window->clear();
-            onFrame(elapsedTimeSincePreviousFrame.count());
-            window->display();
-            previousFrameTime = currentTime;
+            drawFrame(elapsedTimeSincePreviousFrame, currentTime);
         }
         
         window->setTitle(windowTitle + " FPS: " + std::to_string(measureFps(currentTime)));
@@ -78,13 +60,38 @@ int GameEngine::getScreenHeight() {
     return this->screenHeight;
 }
 
-float GameEngine::measureFps(std::chrono::time_point<std::chrono::system_clock> currentTime) {
+float GameEngine::measureFps(std::chrono::time_point<std::chrono::system_clock>& currentTime) {
     std::chrono::duration<float> elapsedTimeSincePreviousMeasurement = (currentTime - previousFpsMeasurementTime);
     if (elapsedTimeSincePreviousMeasurement.count() > 5) {
         previousFpsMeasurementTime = currentTime;
         totalFrames = 0;
     }
     return totalFrames / elapsedTimeSincePreviousMeasurement.count();
+}
+
+void GameEngine::drawFrame(std::chrono::duration<float>& elapsedTimeSincePreviousFrame, std::chrono::time_point<std::chrono::system_clock>& currentTime) {
+    window->clear();
+    onFrame(elapsedTimeSincePreviousFrame.count());
+    window->display();
+    previousFrameTime = currentTime;
+}
+
+void GameEngine::handleEvents() {
+    sf::Event event;
+    
+    while (window->pollEvent(event)) {
+        switch (event.type) {
+            case sf::Event::Closed:
+                window->close();
+                break;
+            case sf::Event::KeyPressed:
+                keyboardHandler->handleEvent(event);
+                break;
+            case sf::Event::KeyReleased:
+                keyboardHandler->handleEvent(event);
+                break;
+        }
+    }
 }
 
 }
