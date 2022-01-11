@@ -34,12 +34,12 @@ jimp::Sprite& AnimatedCharacter::getCurrentSprite() {
 void AnimatedCharacter::setNextSpriteInCollection(std::string collection, float elapsedTime) {
     elapsedTimeSinceLastSwap += elapsedTime;
     if (elapsedTimeSinceLastSwap >= imageSwapIntervalInSeconds) {
+        currentSpriteIndex++;
         if (collection.compare(currentSpriteCollection) != 0) {
             currentSpriteIndex = 0;
             currentSpriteCollection = collection;
         }
         std::vector<jimp::Sprite*>* spriteList = spriteMap->find(collection)->second;
-        currentSpriteIndex++;
         if (currentSpriteIndex == spriteList->size()) {
             currentSpriteIndex = 0;
         }
@@ -59,6 +59,7 @@ void AnimatedCharacter::addSprite(std::string collection, std::string filePath) 
     jimp::Sprite* sprite = new jimp::Sprite(0, 0, filePath);
     spriteMap->find(collection)->second->push_back(sprite);
     if (currentSprite == nullptr) {
+        currentSpriteCollection = collection;
         currentSprite = sprite;
     }
 }

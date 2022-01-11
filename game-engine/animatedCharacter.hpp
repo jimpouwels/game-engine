@@ -16,7 +16,7 @@ private:
     std::map<std::string, std::vector<jimp::Sprite*>*>* spriteMap;
     jimp::Sprite* currentSprite = nullptr;
     std::string currentSpriteCollection;
-    int currentSpriteIndex;
+    int currentSpriteIndex = 0;
     float elapsedTimeSinceLastSwap;
     float imageSwapIntervalInSeconds;
     
