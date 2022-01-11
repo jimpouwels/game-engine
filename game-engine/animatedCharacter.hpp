@@ -14,7 +14,7 @@ private:
     int x;
     int y;
     std::map<std::string, std::vector<jimp::Sprite*>*>* spriteMap;
-    jimp::Sprite* currentSprite;
+    jimp::Sprite* currentSprite = nullptr;
     std::string currentSpriteCollection;
     int currentSpriteIndex;
     float elapsedTimeSinceLastSwap;

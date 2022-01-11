@@ -17,7 +17,7 @@ private:
     int frameRate;
     float pixelSize;
     float timePerFrame;
-    jimp::KeyboardHandler* keyboardHandler;
+    jimp::KeyboardHandler* keyboardHandler = nullptr;
     std::chrono::time_point<std::chrono::system_clock> previousFrameTime;
     sf::RenderWindow* window;
     
