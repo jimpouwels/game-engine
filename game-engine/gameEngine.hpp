@@ -24,7 +24,7 @@ private:
     int totalFrames;
     sf::RenderWindow* window;
     float measureFps(std::chrono::time_point<std::chrono::system_clock>& currentTime);
-    void drawFrame(std::chrono::duration<float>& elapsedTimeSincePreviousFrame, std::chrono::time_point<std::chrono::system_clock>& currentTime);
+    void drawFrame(std::chrono::duration<float>& elapsedTimeSincePreviousFrame);
     void handleEvents();
     
 public:

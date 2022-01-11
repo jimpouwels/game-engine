@@ -31,7 +31,8 @@ void GameEngine::start() {
         
         if (elapsedTimeSincePreviousFrame.count() > timePerFrame || frameRate == -1) {
             totalFrames++;
-            drawFrame(elapsedTimeSincePreviousFrame, currentTime);
+            drawFrame(elapsedTimeSincePreviousFrame);
+            previousFrameTime = currentTime;
         }
         
         window->setTitle(windowTitle + " FPS: " + std::to_string(measureFps(currentTime)));
@@ -69,11 +70,10 @@ float GameEngine::measureFps(std::chrono::time_point<std::chrono::system_clock>&
     return totalFrames / elapsedTimeSincePreviousMeasurement.count();
 }
 
-void GameEngine::drawFrame(std::chrono::duration<float>& elapsedTimeSincePreviousFrame, std::chrono::time_point<std::chrono::system_clock>& currentTime) {
+void GameEngine::drawFrame(std::chrono::duration<float>& elapsedTimeSincePreviousFrame) {
     window->clear();
     onFrame(elapsedTimeSincePreviousFrame.count());
     window->display();
-    previousFrameTime = currentTime;
 }
 
 void GameEngine::handleEvents() {
