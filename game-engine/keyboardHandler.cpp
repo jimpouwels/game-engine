@@ -7,6 +7,7 @@ namespace jimp {
 
 KeyboardHandler::KeyboardHandler() {
     keyListeners = new std::list<jimp::KeyListener*>();
+    pressedKeys = new std::list<sf::Keyboard::Key>();
 }
 
 KeyboardHandler::~KeyboardHandler() {
@@ -14,23 +15,24 @@ KeyboardHandler::~KeyboardHandler() {
         delete keyListener;
     }
     delete keyListeners;
+    delete pressedKeys;
 }
 
 void KeyboardHandler::handleEvent(sf::Event event) {
     KeyState keyState = keyStateFor(event);
-    switch (event.key.code) {
-        case sf::Keyboard::Left:
-            handleKeyboardLeft(keyState);
-            break;
-        case sf::Keyboard::Right:
-            handleKeyboardRight(keyState);
-            break;
-        case sf::Keyboard::Up:
-            handleKeyboardUp(keyState);
-            break;
-        case sf::Keyboard::Down:
-            handleKeyboardDown(keyState);
-            break;
+    
+    if (keyState == KeyState::PRESSED) {
+        if (pressedKeys->front() == event.key.code) {
+            return;
+        }
+        pressedKeys->push_front(event.key.code);
+        handleKeyEvent(event.key.code, KeyState::PRESSED);
+    } else {
+        pressedKeys->remove(event.key.code);
+        handleKeyEvent(event.key.code, KeyState::RELEASED);
+        if (pressedKeys->size() > 0) {
+            handleKeyEvent(pressedKeys->front(), KeyState::PRESSED);
+        }
     }
 }
 
@@ -67,6 +69,23 @@ KeyState KeyboardHandler::keyStateFor(sf::Event event) {
         return PRESSED;
     } else {
         return RELEASED;
+    }
+}
+
+void KeyboardHandler::handleKeyEvent(sf::Keyboard::Key key, KeyState keyState) {
+    switch (key) {
+        case sf::Keyboard::Left:
+            handleKeyboardLeft(keyState);
+            break;
+        case sf::Keyboard::Right:
+            handleKeyboardRight(keyState);
+            break;
+        case sf::Keyboard::Up:
+            handleKeyboardUp(keyState);
+            break;
+        case sf::Keyboard::Down:
+            handleKeyboardDown(keyState);
+            break;
     }
 }
 
