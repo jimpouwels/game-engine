@@ -42,22 +42,17 @@ void GameEngine::start() {
         
         std::chrono::time_point<std::chrono::system_clock> currentTime = std::chrono::system_clock::now();
         std::chrono::duration<float> elapsedTimeSincePreviousFrame = (currentTime - previousFrameTime);
-        std::chrono::duration<float> elapsedTimeSincePreviousFpsMeasurement = (currentTime - previousFpsMeasurementTime);
         
         if (elapsedTimeSincePreviousFrame.count() > timePerFrame || frameRate == -1) {
+            totalFrames++;
+            
             window->clear();
             onFrame(elapsedTimeSincePreviousFrame.count());
             window->display();
             previousFrameTime = currentTime;
-            
-            totalFrames++;
-            if (elapsedTimeSincePreviousFpsMeasurement.count() > 5) {
-                previousFpsMeasurementTime = currentTime;
-                totalFrames = 0;
-            }
         }
         
-        window->setTitle(windowTitle + " FPS: " + std::to_string(totalFrames / elapsedTimeSincePreviousFpsMeasurement.count()));
+        window->setTitle(windowTitle + " FPS: " + std::to_string(measureFps(currentTime)));
     }
 }
 
@@ -81,6 +76,15 @@ int GameEngine::getScreenWidth() {
 
 int GameEngine::getScreenHeight() {
     return this->screenHeight;
+}
+
+float GameEngine::measureFps(std::chrono::time_point<std::chrono::system_clock> currentTime) {
+    std::chrono::duration<float> elapsedTimeSincePreviousMeasurement = (currentTime - previousFpsMeasurementTime);
+    if (elapsedTimeSincePreviousMeasurement.count() > 5) {
+        previousFpsMeasurementTime = currentTime;
+        totalFrames = 0;
+    }
+    return totalFrames / elapsedTimeSincePreviousMeasurement.count();
 }
 
 }
