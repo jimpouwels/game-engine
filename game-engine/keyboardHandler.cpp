@@ -30,7 +30,7 @@ void KeyboardHandler::handleEvent(sf::Event event) {
     } else {
         pressedKeys->remove(event.key.code);
         handleKeyEvent(event.key.code, KeyState::RELEASED);
-        if (pressedKeys->size() > 0) {
+        if (!pressedKeys->empty()) {
             handleKeyEvent(pressedKeys->front(), KeyState::PRESSED);
         }
     }
