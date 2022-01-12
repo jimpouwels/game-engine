@@ -2,6 +2,7 @@
 #include "animatedCharacter.hpp"
 #include "sprite.hpp"
 #include <iostream>
+#include <math.h>
 
 namespace jimp {
 
@@ -19,46 +20,74 @@ void FangoCharacter::updatePosition(float elapsedTime) {
     }
     
     float delta = SPEED_IN_PIXELS_PER_SECOND / (1.0F / elapsedTime);
-    switch (moveDirection) {
-        case NORTH:
-            setY(getY() - delta);
+    float deltaX = 0;
+    float deltaY = 0;
+    if (moveDirectionX != MoveDirection::IDLE && moveDirectionY != MoveDirection::IDLE) {
+        delta = sqrt((delta * delta) / 2);
+    }
+    switch (moveDirectionX) {
+        case MIN:
+            deltaX = -delta;
             break;
-        case SOUTH:
-            setY(getY() + delta);
-            break;
-        case WEST:
-            setX(getX() - delta);
-            break;
-        case EAST:
-            setX(getX() + delta);
+        case PLUS:
+            deltaX = delta;
             break;
     }
+    switch (moveDirectionY) {
+        case MIN:
+            deltaY = -delta;
+            break;
+        case PLUS:
+            deltaY = delta;
+            break;
+    }
+    setX(getX() + deltaX);
+    setY(getY() + deltaY);
     
     setNextSpriteInCollection("right", elapsedTime);
 }
 
 void FangoCharacter::onKeyboardLeft(KeyState keyState) {
-    setMoving(keyState, WEST);
+    setMoving(keyState);
+    if (isMoving) {
+        moveDirectionX = MoveDirection::MIN;
+    } else {
+        moveDirectionX = MoveDirection::IDLE;
+    }
 }
 
 void FangoCharacter::onKeyboardRight(KeyState keyState) {
-    setMoving(keyState, EAST);
+    setMoving(keyState);
+    if (isMoving) {
+        moveDirectionX = MoveDirection::PLUS;
+    } else {
+        moveDirectionX = MoveDirection::IDLE;
+    }
 }
 
 void FangoCharacter::onKeyboardUp(KeyState keyState) {
-    setMoving(keyState, NORTH);
+    setMoving(keyState);
+    if (isMoving) {
+        moveDirectionY = MoveDirection::MIN;
+    } else {
+        moveDirectionY = MoveDirection::IDLE;
+    }
 }
 
 void FangoCharacter::onKeyboardDown(KeyState keyState) {
-    setMoving(keyState, SOUTH);
+    setMoving(keyState);
+    if (isMoving) {
+        moveDirectionY = MoveDirection::PLUS;
+    } else {
+        moveDirectionY = MoveDirection::IDLE;
+    }
 }
 
-void FangoCharacter::setMoving(KeyState keyState, MoveDirection moveDirection) {
+void FangoCharacter::setMoving(KeyState keyState) {
     if (keyState == PRESSED) {
-        this->isMoving = true;
-        this->moveDirection = moveDirection;
+        isMoving = true;
     } else {
-        this->isMoving = false;
+        isMoving = false;
     }
 }
 

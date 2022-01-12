@@ -12,12 +12,13 @@ namespace jimp {
 class FangoCharacter : public jimp::AnimatedCharacter, public jimp::KeyListener {
     
 private:
+    enum MoveDirection { MIN, PLUS, IDLE };
     static const int SPEED_IN_PIXELS_PER_SECOND;
     static const float IMAGE_SWAP_INTERVAL_IN_SECONDS;
-    
-    enum MoveDirection { NORTH, SOUTH, WEST, EAST } moveDirection;
+    MoveDirection moveDirectionX = MoveDirection::IDLE;
+    MoveDirection moveDirectionY = MoveDirection::IDLE;
     bool isMoving = false;
-    void setMoving(KeyState keyState, MoveDirection moveDirection);
+    void setMoving(KeyState keyState);
     int speedInPixelsPerSecond;
     
 public:

@@ -13,7 +13,7 @@ AnimatedCharacter::AnimatedCharacter(float x, float y, float imageSwapIntervalIn
     this->imageSwapIntervalInSeconds = imageSwapIntervalInSeconds;
 }
 AnimatedCharacter::~AnimatedCharacter() {
-    for (const auto &[collection, imageList]: *spriteMap) {
+    for (const auto& [collection, imageList]: *spriteMap) {
         for (auto const& image : *imageList) {
             delete image;
         }
