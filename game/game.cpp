@@ -10,7 +10,7 @@ private:
     jimp::FangoCharacter* fango;
     
 public:
-    Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60, 1) {
+    Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60, 4) {
         fango = new jimp::FangoCharacter();
         addKeyListener(fango);
     }

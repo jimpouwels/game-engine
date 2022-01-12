@@ -6,7 +6,7 @@
 
 namespace jimp {
 
-FangoCharacter::FangoCharacter() : jimp::AnimatedCharacter(0, 0, IMAGE_SWAP_INTERVAL_IN_SECONDS) {
+FangoCharacter::FangoCharacter() : jimp::AnimatedCharacter(0, 0, 15, 30, IMAGE_SWAP_INTERVAL_IN_SECONDS) {
     addSprite("right", "fango-right1.png");
     addSprite("right", "fango-right2.png");
     addSprite("right", "fango-right3.png");

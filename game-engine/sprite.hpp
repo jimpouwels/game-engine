@@ -11,6 +11,8 @@ class Sprite {
 private:
     float x;
     float y;
+    int width;
+    int height;
     std::string filePath;
     sf::Image* image;
     
@@ -19,11 +21,13 @@ protected:
     std::string getFilePath();
     
 public:
-    Sprite(float x, float y, std::string filePath);
-    virtual float getX();
-    virtual void setX(float x);
-    virtual float getY();
-    virtual void setY(float y);
+    Sprite(float x, float y, int width, int height, std::string filePath);
+    float getX();
+    void setX(float x);
+    float getY();
+    void setY(float y);
+    int getWidth();
+    int getHeight();
     void setPosition(float x, float y);
     sf::Image& getImage();
 };

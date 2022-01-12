@@ -13,6 +13,8 @@ class AnimatedCharacter {
 private:
     float x;
     float y;
+    int width;
+    int height;
     std::map<std::string, std::vector<jimp::Sprite*>*>* spriteMap;
     jimp::Sprite* activeSprite = nullptr;
     std::string activeCollection;
@@ -31,7 +33,7 @@ protected:
     void switchToNextSprite(std::string collection, float elapsedTime);
     
 public:
-    AnimatedCharacter(float x, float y, float imageSwapIntervalInSeconds);
+    AnimatedCharacter(float x, float y, int width, int height, float imageSwapIntervalInSeconds);
     ~AnimatedCharacter();
     jimp::Sprite& getActiveSprite();
 };

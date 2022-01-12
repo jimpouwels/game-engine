@@ -44,7 +44,7 @@ void GameEngine::draw(jimp::Sprite& sprite) {
     sfmlTexture.loadFromImage(sprite.getImage());
     sf::Sprite sfmlSprite;
     sfmlSprite.setTexture(sfmlTexture);
-    sfmlSprite.setPosition(sprite.getX(), sprite.getY());
+    sfmlSprite.setPosition(sprite.getX() * pixelSize, sprite.getY() * pixelSize);
     sfmlSprite.setScale(pixelSize, pixelSize);
     window->draw(sfmlSprite);
 }

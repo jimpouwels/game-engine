@@ -7,7 +7,7 @@
 
 namespace jimp {
 
-AnimatedCharacter::AnimatedCharacter(float x, float y, float imageSwapIntervalInSeconds) {
+AnimatedCharacter::AnimatedCharacter(float x, float y, int width, int height, float imageSwapIntervalInSeconds) {
     this->x = x;
     this->y = y;
     spriteMap = new std::map<std::string, std::vector<jimp::Sprite*>*>;
@@ -47,7 +47,7 @@ void AnimatedCharacter::addSprite(std::string collection, std::string filePath) 
     if (spriteMap->find(collection) == spriteMap->end()) {
         spriteMap->insert({collection, new std::vector<jimp::Sprite*>});
     }
-    jimp::Sprite* sprite = new jimp::Sprite(0, 0, filePath);
+    jimp::Sprite* sprite = new jimp::Sprite(0, 0, width, height, filePath);
     spriteMap->find(collection)->second->push_back(sprite);
     if (activeSprite == nullptr) {
         activeCollection = collection;
