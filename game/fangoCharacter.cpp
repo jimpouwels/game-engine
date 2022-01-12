@@ -9,6 +9,20 @@ namespace jimp {
 FangoCharacter::FangoCharacter() : jimp::AnimatedCharacter(0, 0, IMAGE_SWAP_INTERVAL_IN_SECONDS) {
     addSprite("right", "fango-right1.png");
     addSprite("right", "fango-right2.png");
+    addSprite("right", "fango-right3.png");
+    addSprite("right", "fango-right4.png");
+    addSprite("left", "fango-left1.png");
+    addSprite("left", "fango-left2.png");
+    addSprite("left", "fango-left3.png");
+    addSprite("left", "fango-left4.png");
+    addSprite("down", "fango-down1.png");
+    addSprite("down", "fango-down2.png");
+    addSprite("down", "fango-down3.png");
+    addSprite("down", "fango-down4.png");
+    addSprite("up", "fango-up1.png");
+    addSprite("up", "fango-up2.png");
+    addSprite("up", "fango-up3.png");
+    addSprite("up", "fango-up4.png");
 }
 
 const int FangoCharacter::SPEED_IN_PIXELS_PER_SECOND = 200;
@@ -25,26 +39,31 @@ void FangoCharacter::update(float elapsedTime) {
     if (moveDirectionX != MoveDirection::IDLE && moveDirectionY != MoveDirection::IDLE) {
         delta = sqrt((delta * delta) / 2);
     }
-    switch (moveDirectionX) {
-        case MIN:
-            deltaX = -delta;
-            break;
-        case PLUS:
-            deltaX = delta;
-            break;
-    }
+    std::string nextCollection;
     switch (moveDirectionY) {
         case MIN:
+            nextCollection = "up";
             deltaY = -delta;
             break;
         case PLUS:
+            nextCollection = "down";
             deltaY = delta;
+            break;
+    }
+    switch (moveDirectionX) {
+        case MIN:
+            nextCollection = "left";
+            deltaX = -delta;
+            break;
+        case PLUS:
+            nextCollection = "right";
+            deltaX = delta;
             break;
     }
     setX(getX() + deltaX);
     setY(getY() + deltaY);
     
-    setNextSpriteInCollection("right", elapsedTime);
+    switchToNextSprite(nextCollection, elapsedTime);
 }
 
 void FangoCharacter::onKeyboardLeft(KeyState keyState) {

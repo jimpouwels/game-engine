@@ -2,6 +2,7 @@
 #include "sprite.hpp"
 #include <vector>
 #include <map>
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 namespace jimp {
@@ -12,6 +13,7 @@ AnimatedCharacter::AnimatedCharacter(float x, float y, float imageSwapIntervalIn
     spriteMap = new std::map<std::string, std::vector<jimp::Sprite*>*>;
     this->imageSwapIntervalInSeconds = imageSwapIntervalInSeconds;
 }
+
 AnimatedCharacter::~AnimatedCharacter() {
     for (const auto& [collection, imageList]: *spriteMap) {
         for (auto const& image : *imageList) {
@@ -22,28 +24,21 @@ AnimatedCharacter::~AnimatedCharacter() {
     delete spriteMap;
 }
 
-jimp::Sprite& AnimatedCharacter::getCurrentSprite() {
-    currentSprite->setPosition(x, y);
-    return *this->currentSprite;
+jimp::Sprite& AnimatedCharacter::getActiveSprite() {
+    activeSprite->setPosition(x, y);
+    return *this->activeSprite;
 }
 
-void AnimatedCharacter::setNextSpriteInCollection(std::string collection, float elapsedTime) {
+void AnimatedCharacter::switchToNextSprite(std::string collection, float elapsedTime) {
     elapsedTimeSinceLastSwap += elapsedTime;
+    if (activeCollection.compare(collection) != 0) {
+        activeCollection = collection;
+        activeSpriteIndex = 0;
+        updateActiveSprite();
+    }
     if (elapsedTimeSinceLastSwap >= imageSwapIntervalInSeconds) {
-        currentSpriteIndex++;
-        if (collection.compare(currentSpriteCollection) != 0) {
-            currentSpriteIndex = 0;
-            currentSpriteCollection = collection;
-        }
-        std::vector<jimp::Sprite*>* spriteList = spriteMap->find(collection)->second;
-        if (currentSpriteIndex == spriteList->size()) {
-            currentSpriteIndex = 0;
-        }
-        
-        jimp::Sprite* nextSprite = spriteList->at(currentSpriteIndex);
-        
-        setCurrentSprite(nextSprite);
-        
+        activeSpriteIndex++;
+        updateActiveSprite();
         elapsedTimeSinceLastSwap = 0;
     }
 }
@@ -54,9 +49,9 @@ void AnimatedCharacter::addSprite(std::string collection, std::string filePath) 
     }
     jimp::Sprite* sprite = new jimp::Sprite(0, 0, filePath);
     spriteMap->find(collection)->second->push_back(sprite);
-    if (currentSprite == nullptr) {
-        currentSpriteCollection = collection;
-        currentSprite = sprite;
+    if (activeSprite == nullptr) {
+        activeCollection = collection;
+        activeSprite = sprite;
     }
 }
 
@@ -76,8 +71,19 @@ void AnimatedCharacter::setY(float y) {
     this->y = y;
 }
 
-void AnimatedCharacter::setCurrentSprite(jimp::Sprite* sprite) {
-    this->currentSprite = sprite;
+void AnimatedCharacter::setActiveSprite(jimp::Sprite* sprite) {
+    this->activeSprite = sprite;
+}
+
+void AnimatedCharacter::updateActiveSprite() {
+    std::vector<jimp::Sprite*>* spriteList = spriteMap->find(activeCollection)->second;
+    if (activeSpriteIndex == spriteList->size()) {
+        activeSpriteIndex = 0;
+    }
+    
+    jimp::Sprite* nextSprite = spriteList->at(activeSpriteIndex);
+    
+    setActiveSprite(nextSprite);
 }
 
 }

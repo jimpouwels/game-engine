@@ -21,7 +21,7 @@ public:
     }
     
     void renderFango() {
-        draw(fango->getCurrentSprite());
+        draw(fango->getActiveSprite());
     }
 };
 

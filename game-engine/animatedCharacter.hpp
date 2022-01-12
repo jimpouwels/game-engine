@@ -14,12 +14,13 @@ private:
     float x;
     float y;
     std::map<std::string, std::vector<jimp::Sprite*>*>* spriteMap;
-    jimp::Sprite* currentSprite = nullptr;
-    std::string currentSpriteCollection;
-    int currentSpriteIndex = 0;
+    jimp::Sprite* activeSprite = nullptr;
+    std::string activeCollection;
+    int activeSpriteIndex = 0;
     float elapsedTimeSinceLastSwap;
     float imageSwapIntervalInSeconds;
-    void setCurrentSprite(jimp::Sprite* sprite);
+    void setActiveSprite(jimp::Sprite* sprite);
+    void updateActiveSprite();
     
 protected:
     float getX();
@@ -27,12 +28,12 @@ protected:
     float getY();
     void setY(float y);
     void addSprite(std::string collection, std::string filePath);
-    void setNextSpriteInCollection(std::string collection, float elapsedTime);
+    void switchToNextSprite(std::string collection, float elapsedTime);
     
 public:
     AnimatedCharacter(float x, float y, float imageSwapIntervalInSeconds);
     ~AnimatedCharacter();
-    jimp::Sprite& getCurrentSprite();
+    jimp::Sprite& getActiveSprite();
 };
 }
 
