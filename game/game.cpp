@@ -16,7 +16,7 @@ public:
     }
     
     void onFrame(float elapsedTime) {
-        fango->updatePosition(elapsedTime);
+        fango->update(elapsedTime);
         renderFango();
     }
     

@@ -23,7 +23,7 @@ private:
     
 public:
     FangoCharacter();
-    void updatePosition(float elapsedTime);
+    void update(float elapsedTime);
     void onKeyboardLeft(KeyState keyState) override;
     void onKeyboardRight(KeyState keyState) override;
     void onKeyboardUp(KeyState keyState) override;

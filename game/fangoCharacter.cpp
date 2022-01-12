@@ -14,7 +14,7 @@ FangoCharacter::FangoCharacter() : jimp::AnimatedCharacter(0, 0, IMAGE_SWAP_INTE
 const int FangoCharacter::SPEED_IN_PIXELS_PER_SECOND = 200;
 const float FangoCharacter::IMAGE_SWAP_INTERVAL_IN_SECONDS = 0.1F;
 
-void FangoCharacter::updatePosition(float elapsedTime) {
+void FangoCharacter::update(float elapsedTime) {
     if (!isMoving) {
         return;
     }
