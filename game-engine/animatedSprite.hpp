@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include "sprite.hpp"
+#include "animation.hpp"
 
 namespace jimp {
 
@@ -15,7 +16,7 @@ private:
     float y;
     int width;
     int height;
-    std::map<std::string, std::vector<jimp::Sprite*>*>* spriteMap;
+    std::map<std::string, jimp::Animation*>* animationMap;
     jimp::Sprite* activeSprite = nullptr;
     std::string activeAnimationId;
     int activeSpriteIndex = 0;

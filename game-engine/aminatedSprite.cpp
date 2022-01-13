@@ -1,27 +1,25 @@
-#include "animatedSprite.hpp"
-#include "sprite.hpp"
 #include <vector>
 #include <map>
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "animatedSprite.hpp"
+#include "sprite.hpp"
+#include "animation.hpp"
 
 namespace jimp {
 
 AnimatedSprite::AnimatedSprite(float x, float y, int width, int height, float imageSwapIntervalInSeconds) {
     this->x = x;
     this->y = y;
-    spriteMap = new std::map<std::string, std::vector<jimp::Sprite*>*>;
+    animationMap = new std::map<std::string, jimp::Animation*>;
     this->imageSwapIntervalInSeconds = imageSwapIntervalInSeconds;
 }
 
 AnimatedSprite::~AnimatedSprite() {
-    for (const auto& [animationId, imageList]: *spriteMap) {
-        for (auto const& image : *imageList) {
-            delete image;
-        }
-        delete imageList;
+    for (const auto& [animationId, animation]: *animationMap) {
+        delete animation;
     }
-    delete spriteMap;
+    delete animationMap;
 }
 
 jimp::Sprite& AnimatedSprite::getActiveSprite() {
@@ -47,11 +45,11 @@ void AnimatedSprite::switchToNextSprite(float elapsedTime) {
 }
 
 void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {
-    if (spriteMap->find(animationId) == spriteMap->end()) {
-        spriteMap->insert({animationId, new std::vector<jimp::Sprite*>});
+    if (animationMap->find(animationId) == animationMap->end()) {
+        animationMap->insert({animationId, new jimp::Animation(animationId)});
     }
-    jimp::Sprite* sprite = new jimp::Sprite(0, 0, width, height, filePath);
-    spriteMap->find(animationId)->second->push_back(sprite);
+    jimp::Sprite* sprite = new jimp::Sprite(0, 0, filePath);
+    animationMap->find(animationId)->second->addSprite(sprite);
     if (activeSprite == nullptr) {
         activeAnimationId = animationId;
         activeSprite = sprite;
@@ -79,13 +77,11 @@ void AnimatedSprite::setActiveSprite(jimp::Sprite* sprite) {
 }
 
 void AnimatedSprite::updateActiveSprite() {
-    std::vector<jimp::Sprite*>* spriteList = spriteMap->find(activeAnimationId)->second;
-    if (activeSpriteIndex == spriteList->size()) {
+    jimp::Animation* animation = animationMap->find(activeAnimationId)->second;
+    if (activeSpriteIndex == animation->getNumberOfSprites()) {
         activeSpriteIndex = 0;
     }
-    
-    jimp::Sprite* nextSprite = spriteList->at(activeSpriteIndex);
-    
+    jimp::Sprite* nextSprite = animation->getSpriteAt(activeSpriteIndex);
     setActiveSprite(nextSprite);
 }
 
