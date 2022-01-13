@@ -43,14 +43,17 @@ void AnimatedSprite::switchToNextSprite(float elapsedTime) {
 }
 
 void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {
-    jimp::Animation* newAnimation = new jimp::Animation(animationId);
+    jimp::Animation* animation = nullptr;
     if (animationMap->find(animationId) == animationMap->end()) {
-        animationMap->insert({animationId, newAnimation});
+        animation = new jimp::Animation(animationId);
+        animationMap->insert({animationId, animation});
+    } else {
+        animation = animationMap->find(animationId)->second;
     }
     jimp::Sprite* sprite = new jimp::Sprite(0, 0, filePath);
     animationMap->find(animationId)->second->addSprite(sprite);
     if (activeAnimation == nullptr) {
-        activeAnimation = newAnimation;
+        activeAnimation = animation;
     }
 }
 
