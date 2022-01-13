@@ -39,31 +39,32 @@ void FangoCharacter::update(float elapsedTime) {
     if (moveDirectionX != MoveDirection::IDLE && moveDirectionY != MoveDirection::IDLE) {
         delta = sqrt((delta * delta) / 2);
     }
-    std::string nextCollection;
+    std::string nextAnimation;
     switch (moveDirectionY) {
         case MIN:
-            nextCollection = "up";
+            nextAnimation = "up";
             deltaY = -delta;
             break;
         case PLUS:
-            nextCollection = "down";
+            nextAnimation = "down";
             deltaY = delta;
             break;
     }
     switch (moveDirectionX) {
         case MIN:
-            nextCollection = "left";
+            nextAnimation = "left";
             deltaX = -delta;
             break;
         case PLUS:
-            nextCollection = "right";
+            nextAnimation = "right";
             deltaX = delta;
             break;
     }
     setX(getX() + deltaX);
     setY(getY() + deltaY);
     
-    switchToNextSprite(nextCollection, elapsedTime);
+    setCurrentAnimation(nextAnimation);
+    switchToNextSprite(elapsedTime);
 }
 
 void FangoCharacter::onKeyboardLeft(KeyState keyState) {

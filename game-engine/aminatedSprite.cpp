@@ -15,7 +15,7 @@ AnimatedSprite::AnimatedSprite(float x, float y, int width, int height, float im
 }
 
 AnimatedSprite::~AnimatedSprite() {
-    for (const auto& [collection, imageList]: *spriteMap) {
+    for (const auto& [animationId, imageList]: *spriteMap) {
         for (auto const& image : *imageList) {
             delete image;
         }
@@ -29,13 +29,16 @@ jimp::Sprite& AnimatedSprite::getActiveSprite() {
     return *this->activeSprite;
 }
 
-void AnimatedSprite::switchToNextSprite(std::string collection, float elapsedTime) {
-    elapsedTimeSinceLastSwap += elapsedTime;
-    if (activeCollection.compare(collection) != 0) {
-        activeCollection = collection;
+void AnimatedSprite::setCurrentAnimation(std::string animationId) {
+    if (activeAnimationId.compare(animationId) != 0) {
+        activeAnimationId = animationId;
         activeSpriteIndex = 0;
         updateActiveSprite();
     }
+}
+
+void AnimatedSprite::switchToNextSprite(float elapsedTime) {
+    elapsedTimeSinceLastSwap += elapsedTime;
     if (elapsedTimeSinceLastSwap >= imageSwapIntervalInSeconds) {
         activeSpriteIndex++;
         updateActiveSprite();
@@ -43,14 +46,14 @@ void AnimatedSprite::switchToNextSprite(std::string collection, float elapsedTim
     }
 }
 
-void AnimatedSprite::addSprite(std::string collection, std::string filePath) {
-    if (spriteMap->find(collection) == spriteMap->end()) {
-        spriteMap->insert({collection, new std::vector<jimp::Sprite*>});
+void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {
+    if (spriteMap->find(animationId) == spriteMap->end()) {
+        spriteMap->insert({animationId, new std::vector<jimp::Sprite*>});
     }
     jimp::Sprite* sprite = new jimp::Sprite(0, 0, width, height, filePath);
-    spriteMap->find(collection)->second->push_back(sprite);
+    spriteMap->find(animationId)->second->push_back(sprite);
     if (activeSprite == nullptr) {
-        activeCollection = collection;
+        activeAnimationId = animationId;
         activeSprite = sprite;
     }
 }
@@ -76,7 +79,7 @@ void AnimatedSprite::setActiveSprite(jimp::Sprite* sprite) {
 }
 
 void AnimatedSprite::updateActiveSprite() {
-    std::vector<jimp::Sprite*>* spriteList = spriteMap->find(activeCollection)->second;
+    std::vector<jimp::Sprite*>* spriteList = spriteMap->find(activeAnimationId)->second;
     if (activeSpriteIndex == spriteList->size()) {
         activeSpriteIndex = 0;
     }
