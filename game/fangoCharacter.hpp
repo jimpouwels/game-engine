@@ -4,12 +4,12 @@
 #include <stdio.h>
 #include <list>
 
-#include "animatedCharacter.hpp"
+#include "animatedSprite.hpp"
 #include "keyListener.hpp"
 
 namespace jimp {
 
-class FangoCharacter : public jimp::AnimatedCharacter, public jimp::KeyListener {
+class FangoCharacter : public jimp::AnimatedSprite, public jimp::KeyListener {
     
 private:
     enum MoveDirection { MIN, PLUS, IDLE };

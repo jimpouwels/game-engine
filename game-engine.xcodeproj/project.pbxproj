@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		23A933B227864EA800769F69 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AD27864EA700769F69 /* sprite.cpp */; };
-		23A933B327864EA800769F69 /* animatedCharacter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AE27864EA700769F69 /* animatedCharacter.cpp */; };
+		23A933B327864EA800769F69 /* aminatedSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AE27864EA700769F69 /* aminatedSprite.cpp */; };
 		23A933B527864EA800769F69 /* gameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933B127864EA700769F69 /* gameEngine.cpp */; };
 		23A933BB2788407F00769F69 /* keyboardHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933B92788407F00769F69 /* keyboardHandler.cpp */; };
 		23A933BE2788B4EC00769F69 /* fangoCharacter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933BC2788B4EC00769F69 /* fangoCharacter.cpp */; };
@@ -66,9 +66,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		23A933AC27864EA700769F69 /* animatedCharacter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animatedCharacter.hpp; sourceTree = "<group>"; };
+		23A933AC27864EA700769F69 /* animatedSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animatedSprite.hpp; sourceTree = "<group>"; };
 		23A933AD27864EA700769F69 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
-		23A933AE27864EA700769F69 /* animatedCharacter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = animatedCharacter.cpp; sourceTree = "<group>"; };
+		23A933AE27864EA700769F69 /* aminatedSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aminatedSprite.cpp; sourceTree = "<group>"; };
 		23A933B127864EA700769F69 /* gameEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gameEngine.cpp; sourceTree = "<group>"; };
 		23A933B72787617D00769F69 /* keyListener.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = keyListener.hpp; sourceTree = "<group>"; };
 		23A933B92788407F00769F69 /* keyboardHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = keyboardHandler.cpp; sourceTree = "<group>"; };
@@ -140,8 +140,8 @@
 		23D5C7C327832B5600C6C916 /* game-engine */ = {
 			isa = PBXGroup;
 			children = (
-				23A933AE27864EA700769F69 /* animatedCharacter.cpp */,
-				23A933AC27864EA700769F69 /* animatedCharacter.hpp */,
+				23A933AE27864EA700769F69 /* aminatedSprite.cpp */,
+				23A933AC27864EA700769F69 /* animatedSprite.hpp */,
 				23A933B127864EA700769F69 /* gameEngine.cpp */,
 				23D5C7C427832B5600C6C916 /* gameEngine.hpp */,
 				23A933AD27864EA700769F69 /* sprite.cpp */,
@@ -258,7 +258,7 @@
 				23A933BE2788B4EC00769F69 /* fangoCharacter.cpp in Sources */,
 				23D5C7C527832B5600C6C916 /* gameEngine.hpp in Sources */,
 				23D5C7E32783432F00C6C916 /* game.cpp in Sources */,
-				23A933B327864EA800769F69 /* animatedCharacter.cpp in Sources */,
+				23A933B327864EA800769F69 /* aminatedSprite.cpp in Sources */,
 				23A933BB2788407F00769F69 /* keyboardHandler.cpp in Sources */,
 				23A933B227864EA800769F69 /* sprite.cpp in Sources */,
 				23A933B527864EA800769F69 /* gameEngine.cpp in Sources */,

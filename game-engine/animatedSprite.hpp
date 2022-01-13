@@ -8,7 +8,7 @@
 
 namespace jimp {
 
-class AnimatedCharacter {
+class AnimatedSprite {
 
 private:
     float x;
@@ -33,8 +33,8 @@ protected:
     void switchToNextSprite(std::string collection, float elapsedTime);
     
 public:
-    AnimatedCharacter(float x, float y, int width, int height, float imageSwapIntervalInSeconds);
-    ~AnimatedCharacter();
+    AnimatedSprite(float x, float y, int width, int height, float imageSwapIntervalInSeconds);
+    ~AnimatedSprite();
     jimp::Sprite& getActiveSprite();
 };
 }

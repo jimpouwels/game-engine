@@ -1,12 +1,12 @@
 #include "fangoCharacter.hpp"
-#include "animatedCharacter.hpp"
+#include "animatedSPrite.hpp"
 #include "sprite.hpp"
 #include <iostream>
 #include <math.h>
 
 namespace jimp {
 
-FangoCharacter::FangoCharacter() : jimp::AnimatedCharacter(0, 0, 15, 30, IMAGE_SWAP_INTERVAL_IN_SECONDS) {
+FangoCharacter::FangoCharacter() : jimp::AnimatedSprite(0, 0, 15, 30, IMAGE_SWAP_INTERVAL_IN_SECONDS) {
     addSprite("right", "fango-right1.png");
     addSprite("right", "fango-right2.png");
     addSprite("right", "fango-right3.png");
