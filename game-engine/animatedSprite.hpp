@@ -17,13 +17,9 @@ private:
     int width;
     int height;
     std::map<std::string, jimp::Animation*>* animationMap;
-    jimp::Sprite* activeSprite = nullptr;
-    std::string activeAnimationId;
-    int activeSpriteIndex = 0;
+    jimp::Animation* activeAnimation = nullptr;
     float elapsedTimeSinceLastSwap;
     float imageSwapIntervalInSeconds;
-    void setActiveSprite(jimp::Sprite* sprite);
-    void updateActiveSprite();
     
 protected:
     float getX();

@@ -23,36 +23,34 @@ AnimatedSprite::~AnimatedSprite() {
 }
 
 jimp::Sprite& AnimatedSprite::getActiveSprite() {
+    jimp::Sprite* activeSprite = activeAnimation->getActiveSprite();
     activeSprite->setPosition(x, y);
-    return *this->activeSprite;
+    return *activeSprite;
 }
 
 void AnimatedSprite::setCurrentAnimation(std::string animationId) {
-    if (activeAnimationId.compare(animationId) != 0) {
-        activeAnimationId = animationId;
-        activeSpriteIndex = 0;
-        updateActiveSprite();
+    if (activeAnimation->getId().compare(animationId) != 0) {
+        activeAnimation = animationMap->find(animationId)->second;
     }
 }
 
 void AnimatedSprite::switchToNextSprite(float elapsedTime) {
     elapsedTimeSinceLastSwap += elapsedTime;
     if (elapsedTimeSinceLastSwap >= imageSwapIntervalInSeconds) {
-        activeSpriteIndex++;
-        updateActiveSprite();
+        activeAnimation->switchToNextSprite();
         elapsedTimeSinceLastSwap = 0;
     }
 }
 
 void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {
+    jimp::Animation* newAnimation = new jimp::Animation(animationId);
     if (animationMap->find(animationId) == animationMap->end()) {
-        animationMap->insert({animationId, new jimp::Animation(animationId)});
+        animationMap->insert({animationId, newAnimation});
     }
     jimp::Sprite* sprite = new jimp::Sprite(0, 0, filePath);
     animationMap->find(animationId)->second->addSprite(sprite);
-    if (activeSprite == nullptr) {
-        activeAnimationId = animationId;
-        activeSprite = sprite;
+    if (activeAnimation == nullptr) {
+        activeAnimation = newAnimation;
     }
 }
 
@@ -70,19 +68,6 @@ float AnimatedSprite::getY() {
 
 void AnimatedSprite::setY(float y) {
     this->y = y;
-}
-
-void AnimatedSprite::setActiveSprite(jimp::Sprite* sprite) {
-    this->activeSprite = sprite;
-}
-
-void AnimatedSprite::updateActiveSprite() {
-    jimp::Animation* animation = animationMap->find(activeAnimationId)->second;
-    if (activeSpriteIndex == animation->getNumberOfSprites()) {
-        activeSpriteIndex = 0;
-    }
-    jimp::Sprite* nextSprite = animation->getSpriteAt(activeSpriteIndex);
-    setActiveSprite(nextSprite);
 }
 
 }

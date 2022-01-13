@@ -17,12 +17,23 @@ void Animation::addSprite(Sprite *sprite) {
     sprites->push_back(sprite);
 }
 
+std::string Animation::getId() {
+    return id;
+}
+
 long Animation::getNumberOfSprites() {
     return sprites->size();
 }
 
-Sprite* Animation::getSpriteAt(int index) {
-    return sprites->at(index);
+Sprite* Animation::getActiveSprite() {
+    return sprites->at(activeSpriteIndex);
+}
+
+void Animation::switchToNextSprite() {
+    activeSpriteIndex++;
+    if (activeSpriteIndex == getNumberOfSprites()) {
+        activeSpriteIndex = 0;
+    }
 }
 
 }
