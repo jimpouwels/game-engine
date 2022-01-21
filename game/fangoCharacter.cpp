@@ -68,20 +68,20 @@ void FangoCharacter::onKeyboardDown(jimp::KeyState keyState) {
 }
 
 void FangoCharacter::onKeyboardSpaceBar(jimp::KeyState keyState) {
-    if (!isFiring) {
-        firstShot = true;
+    if (keyState == jimp::KeyState::PRESSED) {
+        hasFired = keyState == jimp::KeyState::PRESSED;
     }
-    isFiring = keyState == jimp::PRESSED;
+    isFiring = keyState == jimp::KeyState::PRESSED;
 }
 
 void FangoCharacter::handleFiring(float elapsedTime) {
-    if (!isFiring) {
+    elapsedTimeSinceLastShot += elapsedTime;
+    if (!isFiring && !hasFired) {
         return;
     }
-    elapsedTimeSinceLastShot += elapsedTime;
     float timeBetweenShots = 1.0F / SHOTS_PER_SECOND;
-    if (elapsedTimeSinceLastShot >= timeBetweenShots || firstShot) {
-        firstShot = false;
+    if (elapsedTimeSinceLastShot >= timeBetweenShots && (hasFired || isFiring)) {
+        hasFired = false;
         Bullet* bullet = new Bullet(&getGameEngine(), getX() + (getWidth() / 2), getY() + (getHeight() / 2), facingDirection);
         eventListener->onWeaponFired(bullet);
         elapsedTimeSinceLastShot = 0;
