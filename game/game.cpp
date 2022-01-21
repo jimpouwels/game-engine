@@ -1,5 +1,6 @@
 #include "gameEngine.hpp"
 #include "sprite.hpp"
+#include "bullet.hpp"
 #include "fangoCharacter.hpp"
 #include "fangoEventListener.hpp"
 #include <iostream>
@@ -28,7 +29,7 @@ public:
     
     void onFrame(float elapsedTime) {
         std::cout << "bullet count: " << bullets->size() << std::endl;
-        // TODO CLEANUP BULLETS WHEN LEAVING SCREEN
+        cleanupBullets();
         for (const auto& bullet: *bullets) {
             bullet->update(elapsedTime);
             draw(bullet->getActiveSprite());
@@ -39,6 +40,18 @@ public:
     
     void renderFango() {
         draw(fango->getActiveSprite());
+    }
+    
+    void cleanupBullets() {
+        std::list<jimp::AnimatedSprite*> bulletsToRemove;
+        for (const auto& bullet: *bullets) {
+            if (!isPositionWithinScreen(bullet->getX(), bullet->getY())) {
+                bulletsToRemove.push_back(bullet);
+            }
+        }
+        for (const auto& bulletToRemove: bulletsToRemove) {
+            bullets->remove(bulletToRemove);
+        }
     }
 };
 

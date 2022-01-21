@@ -61,6 +61,10 @@ int GameEngine::getScreenHeight() {
     return this->screenHeight;
 }
 
+bool GameEngine::isPositionWithinScreen(float x, float y) {
+    return x <= getScreenWidth() && x >= 0 && y <= getScreenHeight() && y > 0;
+}
+
 float GameEngine::measureFps(std::chrono::time_point<std::chrono::system_clock>& currentTime) {
     std::chrono::duration<float> elapsedTimeSincePreviousMeasurement = (currentTime - previousFpsMeasurementTime);
     if (elapsedTimeSincePreviousMeasurement.count() > 5) {

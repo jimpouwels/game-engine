@@ -33,6 +33,7 @@ public:
     void draw(jimp::Sprite& sprite);
     int getScreenWidth();
     int getScreenHeight();
+    bool isPositionWithinScreen(float x, float y);
     void addKeyListener(jimp::KeyListener* keyListener);
     virtual void onFrame(float elapsedTime) = 0;
     
