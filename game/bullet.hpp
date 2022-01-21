@@ -8,7 +8,7 @@ class Bullet : public jimp::AnimatedSprite {
 private:
 
 public:
-    Bullet(float x, float y, float scale);
+    Bullet(float x, float y);
     void update(float elapsedTime);
 
 };

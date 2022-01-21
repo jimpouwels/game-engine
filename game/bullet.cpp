@@ -1,12 +1,12 @@
 #include "bullet.hpp"
 #include "animatedSprite.hpp"
 
-Bullet::Bullet(float x, float y, float scale) : jimp::AnimatedSprite(x, y, scale, 0.0F) {
+Bullet::Bullet(float x, float y) : jimp::AnimatedSprite(x, y, 0.3, 0.0F) {
     addSprite("default", "bullet.png");
 }
 
 void Bullet::update(float elapsedTime) {
-    float delta = 400 / (1.0F / elapsedTime);
+    float delta = 1200 / (1.0F / elapsedTime);
     setX(getX() + delta);
     this->updateAnimation(elapsedTime);
 }

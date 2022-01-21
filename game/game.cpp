@@ -43,7 +43,7 @@ public:
 };
 
 int main() {
-    Game game(640, 480, "Fango");
+    Game game(1500, 900, "Fango");
     game.start();
     return 0;
 }
