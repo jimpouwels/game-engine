@@ -16,6 +16,11 @@ AnimatedSprite::AnimatedSprite(float x, float y, float scale, float imageSwapInt
     this->imageSwapIntervalInSeconds = imageSwapIntervalInSeconds;
 }
 
+AnimatedSprite::AnimatedSprite(float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
+    AnimatedSprite(x, y, scale, 0, imageSwapIntervalInSeconds);
+    this->rotationAngle = rotationAngle;
+}
+
 AnimatedSprite::~AnimatedSprite() {
     for (const auto& [animationId, animation]: *animationMap) {
         delete animation;
