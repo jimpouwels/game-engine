@@ -39,7 +39,6 @@ void GameEngine::start() {
 }
 
 void GameEngine::draw(jimp::Sprite& sprite) {
-    std::cout << "drawing: " << sprite.getFilePath() << std::endl;
     sf::Texture sfmlTexture;
     sfmlTexture.loadFromImage(sprite.getImage());
     sf::Sprite sfmlSprite;

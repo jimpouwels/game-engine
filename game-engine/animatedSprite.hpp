@@ -21,14 +21,14 @@ private:
     float imageSwapIntervalInSeconds;
     
 protected:
-    float getX();
     void setX(float x);
-    float getY();
     void setY(float y);
     void updateAnimation(float elapsedTime);
     void setCurrentAnimation(std::string animationId);
     
 public:
+    float getX();
+    float getY();
     AnimatedSprite(float x, float y, float scale, float imageSwapIntervalInSeconds);
     ~AnimatedSprite();
     jimp::Sprite& getActiveSprite();

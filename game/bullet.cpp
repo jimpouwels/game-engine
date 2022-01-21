@@ -6,6 +6,7 @@ Bullet::Bullet(float x, float y, float scale) : jimp::AnimatedSprite(x, y, scale
 }
 
 void Bullet::update(float elapsedTime) {
-    // update position
+    float delta = 400 / (1.0F / elapsedTime);
+    setX(getX() + delta);
     this->updateAnimation(elapsedTime);
 }
