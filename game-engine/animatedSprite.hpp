@@ -15,6 +15,7 @@ private:
     float x;
     float y;
     float scale;
+    int rotationAngle;
     std::map<std::string, jimp::Animation*>* animationMap;
     jimp::Animation* activeAnimation = nullptr;
     float elapsedTimeSinceLastSwap;
@@ -31,6 +32,7 @@ public:
     float getY();
     int getWidth();
     int getHeight();
+    void setRotationAngle(int rotationAngle);
     AnimatedSprite(float x, float y, float scale, float imageSwapIntervalInSeconds);
     ~AnimatedSprite();
     jimp::Sprite& getActiveSprite();

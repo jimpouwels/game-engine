@@ -13,16 +13,20 @@ Bullet::Bullet(float x, float y, Direction direction) : jimp::AnimatedSprite(x, 
 void Bullet::update(float elapsedTime) {
     float delta = SPEED_IN_PIXELS_PER_SECOND / (1.0F / elapsedTime);
     switch (direction) {
-        case EAST:
+        case RIGHT:
+            setRotationAngle(0);
             setX(getX() + delta);
             break;
-        case WEST:
+        case LEFT:
+            setRotationAngle(180);
             setX(getX() - delta);
             break;
-        case NORTH:
+        case UP:
+            setRotationAngle(270);
             setY(getY() - delta);
             break;
-        case SOUTH:
+        case DOWN:
+            setRotationAngle(90);
             setY(getY() + delta);
             break;
     }

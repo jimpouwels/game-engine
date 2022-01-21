@@ -19,10 +19,10 @@ private:
     bool firstShot = false;
     Direction directionX = Direction::IDLE;
     Direction directionY = Direction::IDLE;
+    Direction facingDirection = Direction::RIGHT;
     int speedInPixelsPerSecond;
     float elapsedTimeSinceLastShot = 0;
     FangoEventListener* eventListener = nullptr;
-    bool isMoving = false;
     bool isFiring = false;
     void handleMovement(float elapsedTime);
     void handleFiring(float elapsedTime);

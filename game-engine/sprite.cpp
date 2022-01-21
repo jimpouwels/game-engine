@@ -5,6 +5,11 @@
 
 namespace jimp {
 
+Sprite::Sprite(float x, float y, float scale, int rotationAngle, std::string filePath) {
+    Sprite(x, y, scale, filePath);
+    this->rotationAngle = rotationAngle;
+}
+
 Sprite::Sprite(float x, float y, float scale, std::string filePath) {
     this->x = x;
     this->y = y;
@@ -38,6 +43,14 @@ int Sprite::getWidth() {
 
 int Sprite::getHeight() {
     return image->getSize().y * scale;
+}
+
+int Sprite::getRotationAngle() {
+    return rotationAngle;
+}
+
+void Sprite::setRotationAngle(int rotationAngle) {
+    this->rotationAngle = rotationAngle;
 }
 
 std::string Sprite::getFilePath() {

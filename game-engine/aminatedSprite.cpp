@@ -40,6 +40,7 @@ void AnimatedSprite::updateAnimation(float elapsedTime) {
         elapsedTimeSinceLastSwap = 0;
     }
     activeAnimation->getActiveSprite()->setPosition(x, y);
+    activeAnimation->getActiveSprite()->setRotationAngle(rotationAngle);
 }
 
 float AnimatedSprite::getX() {
@@ -64,6 +65,10 @@ int AnimatedSprite::getWidth() {
 
 int AnimatedSprite::getHeight() {
     return activeAnimation->getActiveSprite()->getHeight();
+}
+
+void AnimatedSprite::setRotationAngle(int rotationAngle) {
+    this->rotationAngle = rotationAngle;
 }
 
 void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {

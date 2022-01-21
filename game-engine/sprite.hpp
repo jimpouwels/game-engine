@@ -12,6 +12,7 @@ private:
     float x;
     float y;
     float scale = 1.0F;
+    int rotationAngle = 0;
     std::string filePath;
     sf::Image* image;
     
@@ -20,12 +21,15 @@ protected:
     
 public:
     Sprite(float x, float y, float scale, std::string filePath);
+    Sprite(float x, float y, float scale, int rotationAngle, std::string filePath);
     ~Sprite();
     float getX();
     void setX(float x);
     float getY();
     void setY(float y);
     float getScale();
+    int getRotationAngle();
+    void setRotationAngle(int rotationAngle);
     int getWidth();
     int getHeight();
     void setPosition(float x, float y);
