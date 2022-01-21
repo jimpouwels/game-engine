@@ -7,18 +7,18 @@
 #include "animatedSprite.hpp"
 #include "keyListener.hpp"
 #include "fangoEventListener.hpp"
+#include "direction.hpp"
 
 class FangoCharacter : public jimp::AnimatedSprite, public jimp::KeyListener {
     
 private:
     static const float SCALE;
-    enum MoveDirection { MIN, PLUS, IDLE };
     static const int SPEED_IN_PIXELS_PER_SECOND;
     static const float IMAGE_SWAP_INTERVAL_IN_SECONDS;
     static const int SHOTS_PER_SECOND;
     bool firstShot = false;
-    MoveDirection moveDirectionX = MoveDirection::IDLE;
-    MoveDirection moveDirectionY = MoveDirection::IDLE;
+    Direction directionX = Direction::IDLE;
+    Direction directionY = Direction::IDLE;
     int speedInPixelsPerSecond;
     float elapsedTimeSinceLastShot = 0;
     FangoEventListener* eventListener = nullptr;

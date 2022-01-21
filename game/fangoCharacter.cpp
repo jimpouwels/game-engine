@@ -3,6 +3,7 @@
 #include "fangoCharacter.hpp"
 #include "fangoEventListener.hpp"
 #include "bullet.hpp"
+#include "direction.hpp"
 
 const int FangoCharacter::SPEED_IN_PIXELS_PER_SECOND = 200;
 const float FangoCharacter::IMAGE_SWAP_INTERVAL_IN_SECONDS = 0.1F;
@@ -37,27 +38,35 @@ void FangoCharacter::update(float elapsedTime) {
 void FangoCharacter::onKeyboardLeft(jimp::KeyState keyState) {
     setMoving(keyState);
     if (isMoving) {
-        moveDirectionX = MoveDirection::MIN;
+        directionX = Direction::WEST;
     } else {
-        moveDirectionX = MoveDirection::IDLE;
+        directionX = Direction::IDLE;
     }
 }
 
 void FangoCharacter::onKeyboardRight(jimp::KeyState keyState) {
     setMoving(keyState);
     if (isMoving) {
-        moveDirectionX = MoveDirection::PLUS;
+        directionX = Direction::EAST;
     } else {
-        moveDirectionX = MoveDirection::IDLE;
+        directionX = Direction::IDLE;
     }
 }
 
 void FangoCharacter::onKeyboardUp(jimp::KeyState keyState) {
     setMoving(keyState);
     if (isMoving) {
-        moveDirectionY = MoveDirection::MIN;
+        directionY = Direction::NORTH;
     } else {
-        moveDirectionY = MoveDirection::IDLE;
+        directionY = Direction::IDLE;
+    }
+}
+void FangoCharacter::onKeyboardDown(jimp::KeyState keyState) {
+    setMoving(keyState);
+    if (isMoving) {
+        directionY = Direction::SOUTH;
+    } else {
+        directionY = Direction::IDLE;
     }
 }
 
@@ -72,15 +81,6 @@ void FangoCharacter::setMoving(jimp::KeyState keyState) {
     isMoving = keyState == jimp::PRESSED;
 }
 
-void FangoCharacter::onKeyboardDown(jimp::KeyState keyState) {
-    setMoving(keyState);
-    if (isMoving) {
-        moveDirectionY = MoveDirection::PLUS;
-    } else {
-        moveDirectionY = MoveDirection::IDLE;
-    }
-}
-
 void FangoCharacter::handleFiring(float elapsedTime) {
     if (!isFiring) {
         return;
@@ -89,7 +89,13 @@ void FangoCharacter::handleFiring(float elapsedTime) {
     float timeBetweenShots = 1.0F / SHOTS_PER_SECOND;
     if (elapsedTimeSinceLastShot >= timeBetweenShots || firstShot) {
         firstShot = false;
-        Bullet* bullet = new Bullet(getX(), getY() + (getHeight() / 2));
+        Direction bulletDirection = Direction::EAST;
+        if (directionX != Direction::IDLE) {
+            bulletDirection = directionX;
+        } else if (directionY != Direction::IDLE) {
+            bulletDirection = directionY;
+        }
+        Bullet* bullet = new Bullet(getX(), getY() + (getHeight() / 2), bulletDirection);
         eventListener->onWeaponFired(bullet);
         elapsedTimeSinceLastShot = 0;
     }
@@ -102,26 +108,26 @@ void FangoCharacter::handleMovement(float elapsedTime) {
     float delta = SPEED_IN_PIXELS_PER_SECOND / (1.0F / elapsedTime);
     float deltaX = 0;
     float deltaY = 0;
-    if (moveDirectionX != MoveDirection::IDLE && moveDirectionY != MoveDirection::IDLE) {
+    if (directionX != Direction::IDLE && directionY != Direction::IDLE) {
         delta = sqrt((delta * delta) / 2);
     }
     std::string nextAnimation;
-    switch (moveDirectionY) {
-        case MIN:
+    switch (directionY) {
+        case NORTH:
             nextAnimation = "up";
             deltaY = -delta;
             break;
-        case PLUS:
+        case SOUTH:
             nextAnimation = "down";
             deltaY = delta;
             break;
     }
-    switch (moveDirectionX) {
-        case MIN:
+    switch (directionX) {
+        case WEST:
             nextAnimation = "left";
             deltaX = -delta;
             break;
-        case PLUS:
+        case EAST:
             nextAnimation = "right";
             deltaX = delta;
             break;

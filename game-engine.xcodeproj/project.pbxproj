@@ -110,6 +110,7 @@
 		23E5E2F3279A979100B62583 /* bullet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = bullet.cpp; sourceTree = "<group>"; };
 		23E5E2F4279A979100B62583 /* bullet.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = bullet.hpp; sourceTree = "<group>"; };
 		23E5E2F6279A9C1E00B62583 /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
+		23E5E2F8279ABCF900B62583 /* direction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = direction.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +211,7 @@
 				2350E82D279976840017F7C3 /* fangoEventListener.hpp */,
 				23E5E2F3279A979100B62583 /* bullet.cpp */,
 				23E5E2F4279A979100B62583 /* bullet.hpp */,
+				23E5E2F8279ABCF900B62583 /* direction.hpp */,
 			);
 			path = game;
 			sourceTree = "<group>";
