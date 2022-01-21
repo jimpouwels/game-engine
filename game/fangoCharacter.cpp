@@ -10,7 +10,8 @@ const float FangoCharacter::IMAGE_SWAP_INTERVAL_IN_SECONDS = 0.1F;
 const int FangoCharacter::SHOTS_PER_SECOND = 5;
 const float FangoCharacter::SCALE = 0.6F;
 
-FangoCharacter::FangoCharacter(FangoEventListener* eventListener) : jimp::AnimatedSprite(0, 0, SCALE, IMAGE_SWAP_INTERVAL_IN_SECONDS) {
+FangoCharacter::FangoCharacter(jimp::GameEngine* gameEngine, FangoEventListener* eventListener) : jimp::AnimatedSprite(gameEngine, 0, 0, SCALE, IMAGE_SWAP_INTERVAL_IN_SECONDS) {
+    getGameEngine().addKeyListener(this);
     this->eventListener = eventListener;
     addSprite("right", "fango-right1.png");
     addSprite("right", "fango-right2.png");
@@ -81,7 +82,7 @@ void FangoCharacter::handleFiring(float elapsedTime) {
     float timeBetweenShots = 1.0F / SHOTS_PER_SECOND;
     if (elapsedTimeSinceLastShot >= timeBetweenShots || firstShot) {
         firstShot = false;
-        Bullet* bullet = new Bullet(getX() + (getWidth() / 2), getY() + (getHeight() / 2), facingDirection);
+        Bullet* bullet = new Bullet(&getGameEngine(), getX() + (getWidth() / 2), getY() + (getHeight() / 2), facingDirection);
         eventListener->onWeaponFired(bullet);
         elapsedTimeSinceLastShot = 0;
     }

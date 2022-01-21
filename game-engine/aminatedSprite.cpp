@@ -8,16 +8,17 @@
 
 namespace jimp {
 
-AnimatedSprite::AnimatedSprite(float x, float y, float scale, float imageSwapIntervalInSeconds) {
+AnimatedSprite::AnimatedSprite(jimp::GameEngine* gameEngine, float x, float y, float scale, float imageSwapIntervalInSeconds) {
     this->x = x;
     this->y = y;
     this->scale = scale;
+    this->gameEngine = gameEngine;
     animationMap = new std::map<std::string, jimp::Animation*>;
     this->imageSwapIntervalInSeconds = imageSwapIntervalInSeconds;
 }
 
-AnimatedSprite::AnimatedSprite(float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
-    AnimatedSprite(x, y, scale, 0, imageSwapIntervalInSeconds);
+AnimatedSprite::AnimatedSprite(jimp::GameEngine* gameEngine, float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
+    AnimatedSprite(gameEngine, x, y, scale, 0, imageSwapIntervalInSeconds);
     this->rotationAngle = rotationAngle;
 }
 
@@ -72,8 +73,16 @@ int AnimatedSprite::getHeight() {
     return activeAnimation->getActiveSprite()->getHeight();
 }
 
+bool AnimatedSprite::isPositionedWithinScreen() {
+    return gameEngine->isPositionWithinScreen(getX(), getY());
+}
+
 void AnimatedSprite::setRotationAngle(int rotationAngle) {
     this->rotationAngle = rotationAngle;
+}
+
+GameEngine& AnimatedSprite::getGameEngine() {
+    return *gameEngine;
 }
 
 void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {

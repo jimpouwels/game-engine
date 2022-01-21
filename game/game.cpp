@@ -14,13 +14,16 @@ private:
     
 public:
     Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60) {
-        fango = new FangoCharacter(this);
+        fango = new FangoCharacter(this, this);
         bullets = new std::list<jimp::AnimatedSprite*>;
-        addKeyListener(fango);
     }
     
     ~Game() {
         delete fango;
+        for (const auto& bullet: *bullets) {
+            delete bullet;
+        }
+        delete bullets;
     }
     
     void onWeaponFired(jimp::AnimatedSprite* projectile) {
@@ -45,12 +48,13 @@ public:
     void cleanupBullets() {
         std::list<jimp::AnimatedSprite*> bulletsToRemove;
         for (const auto& bullet: *bullets) {
-            if (!isPositionWithinScreen(bullet->getX(), bullet->getY())) {
+            if (!bullet->isPositionedWithinScreen()) {
                 bulletsToRemove.push_back(bullet);
             }
         }
         for (const auto& bulletToRemove: bulletsToRemove) {
             bullets->remove(bulletToRemove);
+            delete bulletToRemove;
         }
     }
 };

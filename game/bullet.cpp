@@ -5,7 +5,7 @@
 const int Bullet::SPEED_IN_PIXELS_PER_SECOND = 1200;
 const float Bullet::SCALE = 0.3F;
 
-Bullet::Bullet(float x, float y, Direction direction) : jimp::AnimatedSprite(x, y, SCALE, 0.0F) {
+Bullet::Bullet(jimp::GameEngine* gameEngine, float x, float y, Direction direction) : jimp::AnimatedSprite(gameEngine, x, y, SCALE, 0.0F) {
     this->direction = direction;
     addSprite("default", "bullet.png");
 }

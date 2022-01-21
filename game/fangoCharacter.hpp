@@ -8,6 +8,7 @@
 #include "keyListener.hpp"
 #include "fangoEventListener.hpp"
 #include "direction.hpp"
+#include "gameEngine.hpp"
 
 class FangoCharacter : public jimp::AnimatedSprite, public jimp::KeyListener {
     
@@ -29,7 +30,7 @@ private:
     void setMoving(jimp::KeyState keyState);
 
 public:
-    FangoCharacter(FangoEventListener* fangoEventListener);
+    FangoCharacter(jimp::GameEngine* gameEngine, FangoEventListener* fangoEventListener);
     void update(float elapsedTime);
     void onKeyboardLeft(jimp::KeyState keyState) override;
     void onKeyboardRight(jimp::KeyState keyState) override;

@@ -54,11 +54,11 @@ void GameEngine::addKeyListener(KeyListener* keyListener) {
 }
 
 int GameEngine::getScreenWidth() {
-    return this->screenWidth;
+    return screenWidth;
 }
 
 int GameEngine::getScreenHeight() {
-    return this->screenHeight;
+    return screenHeight;
 }
 
 bool GameEngine::isPositionWithinScreen(float x, float y) {
