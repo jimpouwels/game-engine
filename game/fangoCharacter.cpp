@@ -7,7 +7,7 @@
 
 const int FangoCharacter::SPEED_IN_PIXELS_PER_SECOND = 200;
 const float FangoCharacter::IMAGE_SWAP_INTERVAL_IN_SECONDS = 0.1F;
-const int FangoCharacter::SHOTS_PER_SECOND = 5;
+const int FangoCharacter::SHOTS_PER_SECOND = 3;
 const float FangoCharacter::SCALE = 0.6F;
 
 FangoCharacter::FangoCharacter(jimp::GameEngine* gameEngine, FangoEventListener* eventListener) : jimp::AnimatedSprite(gameEngine, 0, 0, SCALE, IMAGE_SWAP_INTERVAL_IN_SECONDS) {
