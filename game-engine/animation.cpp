@@ -26,16 +26,15 @@ long Animation::getNumberOfSprites() {
 }
 
 Sprite* Animation::getActiveSprite() {
-    return sprites->at(activeSpriteIndex);
+    return sprites->at(activeSpriteIndex);;
 }
 
 void Animation::switchToNextSprite() {
-    if (sprites->size() == 1) {
-        return;
-    }
-    activeSpriteIndex++;
-    if (activeSpriteIndex == getNumberOfSprites()) {
-        activeSpriteIndex = 0;
+    if (sprites->size() > 1) {
+        activeSpriteIndex++;
+        if (activeSpriteIndex == getNumberOfSprites()) {
+            activeSpriteIndex = 0;
+        }
     }
 }
 

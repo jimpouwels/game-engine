@@ -11,7 +11,7 @@ class Sprite {
 private:
     float x;
     float y;
-    float scale;
+    float scale = 1.0F;
     std::string filePath;
     sf::Image* image;
     
@@ -26,6 +26,8 @@ public:
     float getY();
     void setY(float y);
     float getScale();
+    int getWidth();
+    int getHeight();
     void setPosition(float x, float y);
     std::string getFilePath();
     sf::Image& getImage();

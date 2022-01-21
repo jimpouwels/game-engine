@@ -32,6 +32,14 @@ void Sprite::setY(float y) {
     this->y = y;
 }
 
+int Sprite::getWidth() {
+    return image->getSize().x * scale;
+}
+
+int Sprite::getHeight() {
+    return image->getSize().y * scale;
+}
+
 std::string Sprite::getFilePath() {
     return filePath;
 }

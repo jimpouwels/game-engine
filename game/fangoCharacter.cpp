@@ -89,7 +89,7 @@ void FangoCharacter::handleFiring(float elapsedTime) {
     float timeBetweenShots = 1.0F / SHOTS_PER_SECOND;
     if (elapsedTimeSinceLastShot >= timeBetweenShots || firstShot) {
         firstShot = false;
-        Bullet* bullet = new Bullet(getX(), getY());
+        Bullet* bullet = new Bullet(getX(), getY() + (getHeight() / 2));
         eventListener->onWeaponFired(bullet);
         elapsedTimeSinceLastShot = 0;
     }

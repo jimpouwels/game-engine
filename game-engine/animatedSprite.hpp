@@ -29,6 +29,8 @@ protected:
 public:
     float getX();
     float getY();
+    int getWidth();
+    int getHeight();
     AnimatedSprite(float x, float y, float scale, float imageSwapIntervalInSeconds);
     ~AnimatedSprite();
     jimp::Sprite& getActiveSprite();

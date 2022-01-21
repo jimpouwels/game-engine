@@ -24,9 +24,7 @@ AnimatedSprite::~AnimatedSprite() {
 }
 
 jimp::Sprite& AnimatedSprite::getActiveSprite() {
-    jimp::Sprite* activeSprite = activeAnimation->getActiveSprite();
-    activeSprite->setPosition(x, y);
-    return *activeSprite;
+    return *activeAnimation->getActiveSprite();
 }
 
 void AnimatedSprite::setCurrentAnimation(std::string animationId) {
@@ -41,21 +39,7 @@ void AnimatedSprite::updateAnimation(float elapsedTime) {
         activeAnimation->switchToNextSprite();
         elapsedTimeSinceLastSwap = 0;
     }
-}
-
-void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {
-    jimp::Animation* animation = nullptr;
-    if (animationMap->find(animationId) == animationMap->end()) {
-        animation = new jimp::Animation(animationId);
-        animationMap->insert({animationId, animation});
-    } else {
-        animation = animationMap->find(animationId)->second;
-    }
-    jimp::Sprite* sprite = new jimp::Sprite(0, 0, scale, filePath);
-    animationMap->find(animationId)->second->addSprite(sprite);
-    if (activeAnimation == nullptr) {
-        activeAnimation = animation;
-    }
+    activeAnimation->getActiveSprite()->setPosition(x, y);
 }
 
 float AnimatedSprite::getX() {
@@ -72,6 +56,29 @@ float AnimatedSprite::getY() {
 
 void AnimatedSprite::setY(float y) {
     this->y = y;
+}
+
+int AnimatedSprite::getWidth() {
+    return activeAnimation->getActiveSprite()->getWidth();
+}
+
+int AnimatedSprite::getHeight() {
+    return activeAnimation->getActiveSprite()->getHeight();
+}
+
+void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {
+    jimp::Animation* animation = nullptr;
+    if (animationMap->find(animationId) == animationMap->end()) {
+        animation = new jimp::Animation(animationId);
+        animationMap->insert({animationId, animation});
+    } else {
+        animation = animationMap->find(animationId)->second;
+    }
+    jimp::Sprite* sprite = new jimp::Sprite(0, 0, scale, filePath);
+    animationMap->find(animationId)->second->addSprite(sprite);
+    if (activeAnimation == nullptr) {
+        activeAnimation = animation;
+    }
 }
 
 }
