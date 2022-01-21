@@ -11,6 +11,7 @@
 class FangoCharacter : public jimp::AnimatedSprite, public jimp::KeyListener {
     
 private:
+    static const float SCALE;
     enum MoveDirection { MIN, PLUS, IDLE };
     static const int SPEED_IN_PIXELS_PER_SECOND;
     static const float IMAGE_SWAP_INTERVAL_IN_SECONDS;
