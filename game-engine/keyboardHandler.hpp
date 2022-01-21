@@ -17,6 +17,7 @@ private:
     void handleKeyboardRight(KeyState keyState);
     void handleKeyboardUp(KeyState keyState);
     void handleKeyboardDown(KeyState keyState);
+    void handleKeyboardSpaceBar(KeyState keyState);
     KeyState keyStateFor(sf::Event);
     void handleKeyEvent(sf::Keyboard::Key key, KeyState keyState);
     

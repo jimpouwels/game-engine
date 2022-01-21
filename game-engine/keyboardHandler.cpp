@@ -11,9 +11,6 @@ KeyboardHandler::KeyboardHandler() {
 }
 
 KeyboardHandler::~KeyboardHandler() {
-    for (auto const& keyListener : *keyListeners) {
-        delete keyListener;
-    }
     delete keyListeners;
     delete pressedKeys;
 }
@@ -64,6 +61,12 @@ void KeyboardHandler::handleKeyboardDown(KeyState keyState) {
     }
 }
 
+void KeyboardHandler::handleKeyboardSpaceBar(KeyState keyState) {
+    for (auto const& keyListener : *keyListeners) {
+        keyListener->onKeyboardSpaceBar(keyState);
+    }
+}
+
 KeyState KeyboardHandler::keyStateFor(sf::Event event) {
     if (event.type == sf::Event::KeyPressed) {
         return PRESSED;
@@ -85,6 +88,9 @@ void KeyboardHandler::handleKeyEvent(sf::Keyboard::Key key, KeyState keyState) {
             break;
         case sf::Keyboard::Down:
             handleKeyboardDown(keyState);
+            break;
+        case sf::Keyboard::Space:
+            handleKeyboardSpaceBar(keyState);
             break;
     }
 }

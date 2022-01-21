@@ -30,6 +30,9 @@ Sprite* Animation::getActiveSprite() {
 }
 
 void Animation::switchToNextSprite() {
+    if (sprites->size() == 1) {
+        return;
+    }
     activeSpriteIndex++;
     if (activeSpriteIndex == getNumberOfSprites()) {
         activeSpriteIndex = 0;

@@ -6,12 +6,11 @@
 
 namespace jimp {
 
-GameEngine::GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate, float pixelSize) {
-    this->screenWidth = screenWidth * pixelSize;
-    this->screenHeight = screenHeight * pixelSize;
+GameEngine::GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate) {
+    this->screenWidth = screenWidth;
+    this->screenHeight = screenHeight;
     this->frameRate = desiredFrameRate;
     this->timePerFrame = 1.0 / desiredFrameRate;
-    this->pixelSize = pixelSize;
     this->windowTitle = windowTitle;
     window = new sf::RenderWindow(sf::VideoMode(this->getScreenWidth(), this->getScreenHeight()), windowTitle);
     keyboardHandler = new jimp::KeyboardHandler();
@@ -40,12 +39,13 @@ void GameEngine::start() {
 }
 
 void GameEngine::draw(jimp::Sprite& sprite) {
+    std::cout << "drawing: " << sprite.getFilePath() << std::endl;
     sf::Texture sfmlTexture;
     sfmlTexture.loadFromImage(sprite.getImage());
     sf::Sprite sfmlSprite;
     sfmlSprite.setTexture(sfmlTexture);
-    sfmlSprite.setPosition(sprite.getX() * pixelSize, sprite.getY() * pixelSize);
-    sfmlSprite.setScale(pixelSize, pixelSize);
+    sfmlSprite.setPosition(sprite.getX(), sprite.getY());
+    sfmlSprite.setScale(sprite.getScale(), sprite.getScale());
     window->draw(sfmlSprite);
 }
 

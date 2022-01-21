@@ -14,6 +14,7 @@ public:
     virtual void onKeyboardRight(KeyState keyState) { };
     virtual void onKeyboardUp(KeyState keyState) { };
     virtual void onKeyboardDown(KeyState keyState) { };
+    virtual void onKeyboardSpaceBar(KeyState keyState) { };
     
 };
 

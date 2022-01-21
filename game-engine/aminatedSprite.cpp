@@ -8,9 +8,10 @@
 
 namespace jimp {
 
-AnimatedSprite::AnimatedSprite(float x, float y, int width, int height, float imageSwapIntervalInSeconds) {
+AnimatedSprite::AnimatedSprite(float x, float y, float scale, float imageSwapIntervalInSeconds) {
     this->x = x;
     this->y = y;
+    this->scale = scale;
     animationMap = new std::map<std::string, jimp::Animation*>;
     this->imageSwapIntervalInSeconds = imageSwapIntervalInSeconds;
 }
@@ -34,7 +35,7 @@ void AnimatedSprite::setCurrentAnimation(std::string animationId) {
     }
 }
 
-void AnimatedSprite::switchToNextSprite(float elapsedTime) {
+void AnimatedSprite::updateAnimation(float elapsedTime) {
     elapsedTimeSinceLastSwap += elapsedTime;
     if (elapsedTimeSinceLastSwap >= imageSwapIntervalInSeconds) {
         activeAnimation->switchToNextSprite();
@@ -50,7 +51,7 @@ void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {
     } else {
         animation = animationMap->find(animationId)->second;
     }
-    jimp::Sprite* sprite = new jimp::Sprite(0, 0, filePath);
+    jimp::Sprite* sprite = new jimp::Sprite(0, 0, scale, filePath);
     animationMap->find(animationId)->second->addSprite(sprite);
     if (activeAnimation == nullptr) {
         activeAnimation = animation;

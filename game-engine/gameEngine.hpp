@@ -16,7 +16,6 @@ private:
     int screenHeight;
     int frameRate;
     std::string windowTitle;
-    float pixelSize;
     float timePerFrame;
     jimp::KeyboardHandler* keyboardHandler = nullptr;
     std::chrono::time_point<std::chrono::system_clock> previousFrameTime;
@@ -28,7 +27,7 @@ private:
     void handleEvents();
     
 public:
-    GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate, float pixelSize);
+    GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate);
     ~GameEngine();
     void start();
     void draw(jimp::Sprite& sprite);

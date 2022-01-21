@@ -36,6 +36,8 @@
 		23D5C7E027833CFD00C6C916 /* libsfml-system.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7DB27833CFD00C6C916 /* libsfml-system.2.5.1.dylib */; };
 		23D5C7E127833CFD00C6C916 /* libsfml-window.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7DC27833CFD00C6C916 /* libsfml-window.2.5.1.dylib */; };
 		23D5C7E32783432F00C6C916 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23D5C7E22783432F00C6C916 /* game.cpp */; };
+		23E5E2F5279A979100B62583 /* bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23E5E2F3279A979100B62583 /* bullet.cpp */; };
+		23E5E2F7279A9C2900B62583 /* bullet.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23E5E2F6279A9C1E00B62583 /* bullet.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +47,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				23E5E2F7279A9C2900B62583 /* bullet.png in CopyFiles */,
 				23A933E2278F061B00769F69 /* fango-down1.png in CopyFiles */,
 				23A933E3278F061B00769F69 /* fango-down2.png in CopyFiles */,
 				23A933E4278F061B00769F69 /* fango-down3.png in CopyFiles */,
@@ -67,6 +70,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2350E82D279976840017F7C3 /* fangoEventListener.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = fangoEventListener.hpp; sourceTree = "<group>"; };
 		23A933AC27864EA700769F69 /* animatedSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animatedSprite.hpp; sourceTree = "<group>"; };
 		23A933AD27864EA700769F69 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		23A933AE27864EA700769F69 /* aminatedSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aminatedSprite.cpp; sourceTree = "<group>"; };
@@ -103,6 +107,9 @@
 		23D5C7DC27833CFD00C6C916 /* libsfml-window.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-window.2.5.1.dylib"; path = "External Libraries/SFML/lib/libsfml-window.2.5.1.dylib"; sourceTree = "<group>"; };
 		23D5C7E22783432F00C6C916 /* game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
 		23D5C7E827847B6200C6C916 /* sprite.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sprite.hpp; sourceTree = "<group>"; };
+		23E5E2F3279A979100B62583 /* bullet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = bullet.cpp; sourceTree = "<group>"; };
+		23E5E2F4279A979100B62583 /* bullet.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = bullet.hpp; sourceTree = "<group>"; };
+		23E5E2F6279A9C1E00B62583 /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +180,7 @@
 		23D5C7E4278357D400C6C916 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				23E5E2F6279A9C1E00B62583 /* bullet.png */,
 				23A933D7278F061200769F69 /* fango-down1.png */,
 				23A933DE278F061300769F69 /* fango-down2.png */,
 				23A933DF278F061300769F69 /* fango-down3.png */,
@@ -199,6 +207,9 @@
 				23D5C7E22783432F00C6C916 /* game.cpp */,
 				23A933BC2788B4EC00769F69 /* fangoCharacter.cpp */,
 				23A933BD2788B4EC00769F69 /* fangoCharacter.hpp */,
+				2350E82D279976840017F7C3 /* fangoEventListener.hpp */,
+				23E5E2F3279A979100B62583 /* bullet.cpp */,
+				23E5E2F4279A979100B62583 /* bullet.hpp */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -261,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23A933BE2788B4EC00769F69 /* fangoCharacter.cpp in Sources */,
+				23E5E2F5279A979100B62583 /* bullet.cpp in Sources */,
 				23D5C7C527832B5600C6C916 /* gameEngine.hpp in Sources */,
 				23D5C7E32783432F00C6C916 /* game.cpp in Sources */,
 				23A933B327864EA800769F69 /* aminatedSprite.cpp in Sources */,

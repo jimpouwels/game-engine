@@ -5,9 +5,10 @@
 
 namespace jimp {
 
-Sprite::Sprite(float x, float y, std::string filePath) {
+Sprite::Sprite(float x, float y, float scale, std::string filePath) {
     this->x = x;
     this->y = y;
+    this->scale = scale;
     loadImage(filePath);
 }
 
@@ -31,6 +32,14 @@ void Sprite::setY(float y) {
     this->y = y;
 }
 
+std::string Sprite::getFilePath() {
+    return filePath;
+}
+
+float Sprite::getScale() {
+    return scale;
+}
+
 void Sprite::setPosition(float x, float y) {
     setX(x);
     setY(y);
@@ -44,10 +53,6 @@ void Sprite::loadImage(std::string filePath) {
 
 sf::Image& Sprite::getImage() {
     return *this->image;
-}
-
-std::string Sprite::getFilePath() {
-    return filePath;
 }
 
 }

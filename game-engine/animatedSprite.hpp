@@ -14,8 +14,7 @@ class AnimatedSprite {
 private:
     float x;
     float y;
-    int width;
-    int height;
+    float scale;
     std::map<std::string, jimp::Animation*>* animationMap;
     jimp::Animation* activeAnimation = nullptr;
     float elapsedTimeSinceLastSwap;
@@ -26,14 +25,17 @@ protected:
     void setX(float x);
     float getY();
     void setY(float y);
-    void addSprite(std::string animationId, std::string filePath);
+    void updateAnimation(float elapsedTime);
     void setCurrentAnimation(std::string animationId);
-    void switchToNextSprite(float elapsedTime);
     
 public:
-    AnimatedSprite(float x, float y, int width, int height, float imageSwapIntervalInSeconds);
+    AnimatedSprite(float x, float y, float scale, float imageSwapIntervalInSeconds);
     ~AnimatedSprite();
     jimp::Sprite& getActiveSprite();
+    virtual void update(float elapsedTime) {
+        this->updateAnimation(elapsedTime);
+    };
+    void addSprite(std::string animationId, std::string filePath);
 };
 }
 

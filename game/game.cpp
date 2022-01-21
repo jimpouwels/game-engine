@@ -1,21 +1,36 @@
 #include "gameEngine.hpp"
 #include "sprite.hpp"
 #include "fangoCharacter.hpp"
+#include "fangoEventListener.hpp"
 #include <iostream>
 #include <chrono>
 
-class Game : public jimp::GameEngine {
+class Game : public jimp::GameEngine, public FangoEventListener {
     
 private:
-    jimp::FangoCharacter* fango;
+    FangoCharacter* fango = nullptr;
+    std::list<jimp::AnimatedSprite*>* bullets = nullptr;
     
 public:
-    Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60, 2) {
-        fango = new jimp::FangoCharacter();
+    Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60) {
+        fango = new FangoCharacter(this);
+        bullets = new std::list<jimp::AnimatedSprite*>;
         addKeyListener(fango);
     }
     
+    ~Game() {
+        delete fango;
+    }
+    
+    void onWeaponFired(jimp::AnimatedSprite* projectile) {
+        bullets->push_back(projectile);
+    }
+    
     void onFrame(float elapsedTime) {
+        for (const auto& bullet: *bullets) {
+            bullet->update(elapsedTime);
+            draw(bullet->getActiveSprite());
+        }
         fango->update(elapsedTime);
         renderFango();
     }
