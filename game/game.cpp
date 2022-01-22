@@ -31,7 +31,6 @@ public:
     }
     
     void onFrame(float elapsedTime) {
-        std::cout << "bullet count: " << bullets->size() << std::endl;
         cleanupBullets();
         for (const auto& bullet: *bullets) {
             bullet->update(elapsedTime);

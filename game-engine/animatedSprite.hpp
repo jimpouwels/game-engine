@@ -35,8 +35,6 @@ public:
     int getWidth();
     int getHeight();
     void setRotationAngle(float rotationAngle);
-    void rotateRight(float degrees);
-    void rotateLeft(float degrees);
     bool isPositionedWithinScreen();
     GameEngine& getGameEngine();
     AnimatedSprite(jimp::GameEngine* gameEngine, float x, float y, float scale, float imageSwapIntervalInSeconds);

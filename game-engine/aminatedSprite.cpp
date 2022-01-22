@@ -81,14 +81,6 @@ void AnimatedSprite::setRotationAngle(float rotationAngle) {
     this->rotationAngle = rotationAngle;
 }
 
-void AnimatedSprite::rotateLeft(float degrees) {
-    this->rotationAngle -= degrees;
-}
-
-void AnimatedSprite::rotateRight(float degrees) {
-    this->rotationAngle += degrees;
-}
-
 GameEngine& AnimatedSprite::getGameEngine() {
     return *gameEngine;
 }

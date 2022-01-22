@@ -6,7 +6,7 @@
 #include "direction.hpp"
 
 const int Ship::SPEED_IN_PIXELS_PER_SECOND = 200;
-const int Ship::ROTATION_DEGREES_PER_SECOND = 150;
+const int Ship::ROTATION_DEGREES_PER_SECOND = 100;
 const float Ship::IMAGE_SWAP_INTERVAL_IN_SECONDS = 0.1F;
 const int Ship::SHOTS_PER_SECOND = 3;
 const float Ship::SCALE = 0.2F;
@@ -96,10 +96,10 @@ void Ship::handleMovement(float elapsedTime) {
     }
     switch (directionX) {
         case LEFT:
-            rotateLeft(deltaDegrees);
+            setRotationAngle(-deltaDegrees);
             break;
         case RIGHT:
-            rotateRight(deltaDegrees);
+            setRotationAngle(deltaDegrees);
             break;
     }
     setX(getX() + deltaX);
