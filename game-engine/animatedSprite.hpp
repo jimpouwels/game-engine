@@ -16,7 +16,7 @@ private:
     float x;
     float y;
     float scale;
-    int rotationAngle = 0;
+    float rotationAngle = 0;
     jimp::GameEngine* gameEngine;
     std::map<std::string, jimp::Animation*>* animationMap;
     jimp::Animation* activeAnimation = nullptr;
@@ -34,7 +34,9 @@ public:
     float getY();
     int getWidth();
     int getHeight();
-    void setRotationAngle(int rotationAngle);
+    void setRotationAngle(float rotationAngle);
+    void rotateRight(float degrees);
+    void rotateLeft(float degrees);
     bool isPositionedWithinScreen();
     GameEngine& getGameEngine();
     AnimatedSprite(jimp::GameEngine* gameEngine, float x, float y, float scale, float imageSwapIntervalInSeconds);

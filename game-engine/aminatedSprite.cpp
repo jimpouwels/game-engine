@@ -77,8 +77,16 @@ bool AnimatedSprite::isPositionedWithinScreen() {
     return gameEngine->isPositionWithinScreen(getX(), getY());
 }
 
-void AnimatedSprite::setRotationAngle(int rotationAngle) {
+void AnimatedSprite::setRotationAngle(float rotationAngle) {
     this->rotationAngle = rotationAngle;
+}
+
+void AnimatedSprite::rotateLeft(float degrees) {
+    this->rotationAngle -= degrees;
+}
+
+void AnimatedSprite::rotateRight(float degrees) {
+    this->rotationAngle += degrees;
 }
 
 GameEngine& AnimatedSprite::getGameEngine() {
@@ -97,6 +105,7 @@ void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {
     animationMap->find(animationId)->second->addSprite(sprite);
     if (activeAnimation == nullptr) {
         activeAnimation = animation;
+        updateAnimation(0);
     }
 }
 

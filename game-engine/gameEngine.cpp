@@ -44,9 +44,10 @@ void GameEngine::draw(jimp::Sprite& sprite) {
     sf::Sprite sfmlSprite;
     sfmlSprite.setTexture(sfmlTexture);
     sfmlSprite.setPosition(sprite.getX(), sprite.getY());
-    sfmlSprite.setRotation(sprite.getRotationAngle());
     sfmlSprite.setScale(sprite.getScale(), sprite.getScale());
-    window->draw(sfmlSprite);
+    sf::Transform transform;
+    transform.rotate(sprite.getRotationAngle(), sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight() / 2);
+    window->draw(sfmlSprite, transform);
 }
 
 void GameEngine::addKeyListener(KeyListener* keyListener) {

@@ -1,7 +1,7 @@
 #include "gameEngine.hpp"
 #include "sprite.hpp"
 #include "bullet.hpp"
-#include "fangoCharacter.hpp"
+#include "ship.hpp"
 #include "fangoEventListener.hpp"
 #include <iostream>
 #include <chrono>
@@ -9,17 +9,17 @@
 class Game : public jimp::GameEngine, public FangoEventListener {
     
 private:
-    FangoCharacter* fango = nullptr;
+    Ship* ship = nullptr;
     std::list<jimp::AnimatedSprite*>* bullets = nullptr;
     
 public:
     Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60) {
-        fango = new FangoCharacter(this, this);
+        ship = new Ship(this, this);
         bullets = new std::list<jimp::AnimatedSprite*>;
     }
     
     ~Game() {
-        delete fango;
+        delete ship;
         for (const auto& bullet: *bullets) {
             delete bullet;
         }
@@ -37,12 +37,12 @@ public:
             bullet->update(elapsedTime);
             draw(bullet->getActiveSprite());
         }
-        fango->update(elapsedTime);
+        ship->update(elapsedTime);
         renderFango();
     }
     
     void renderFango() {
-        draw(fango->getActiveSprite());
+        draw(ship->getActiveSprite());
     }
     
     void cleanupBullets() {

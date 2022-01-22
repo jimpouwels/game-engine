@@ -49,7 +49,7 @@ int Sprite::getRotationAngle() {
     return rotationAngle;
 }
 
-void Sprite::setRotationAngle(int rotationAngle) {
+void Sprite::setRotationAngle(float rotationAngle) {
     this->rotationAngle = rotationAngle;
 }
 

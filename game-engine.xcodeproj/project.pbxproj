@@ -11,23 +11,7 @@
 		23A933B327864EA800769F69 /* aminatedSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AE27864EA700769F69 /* aminatedSprite.cpp */; };
 		23A933B527864EA800769F69 /* gameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933B127864EA700769F69 /* gameEngine.cpp */; };
 		23A933BB2788407F00769F69 /* keyboardHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933B92788407F00769F69 /* keyboardHandler.cpp */; };
-		23A933BE2788B4EC00769F69 /* fangoCharacter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933BC2788B4EC00769F69 /* fangoCharacter.cpp */; };
-		23A933E2278F061B00769F69 /* fango-down1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A933D7278F061200769F69 /* fango-down1.png */; };
-		23A933E3278F061B00769F69 /* fango-down2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A933DE278F061300769F69 /* fango-down2.png */; };
-		23A933E4278F061B00769F69 /* fango-down3.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A933DF278F061300769F69 /* fango-down3.png */; };
-		23A933E5278F061B00769F69 /* fango-down4.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A933D4278F061200769F69 /* fango-down4.png */; };
-		23A933E6278F061B00769F69 /* fango-left1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A933DC278F061300769F69 /* fango-left1.png */; };
-		23A933E7278F061B00769F69 /* fango-left2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A933D9278F061300769F69 /* fango-left2.png */; };
-		23A933E8278F061B00769F69 /* fango-left3.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A933D5278F061200769F69 /* fango-left3.png */; };
-		23A933E9278F061B00769F69 /* fango-left4.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A933D2278F061200769F69 /* fango-left4.png */; };
-		23A933EA278F061B00769F69 /* fango-right1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A933D3278F061200769F69 /* fango-right1.png */; };
-		23A933EB278F061B00769F69 /* fango-right2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A933E0278F061300769F69 /* fango-right2.png */; };
-		23A933EC278F061B00769F69 /* fango-right3.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A933D8278F061200769F69 /* fango-right3.png */; };
-		23A933ED278F061B00769F69 /* fango-right4.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A933DA278F061300769F69 /* fango-right4.png */; };
-		23A933EE278F061B00769F69 /* fango-up1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A933DB278F061300769F69 /* fango-up1.png */; };
-		23A933EF278F061B00769F69 /* fango-up2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A933E1278F061300769F69 /* fango-up2.png */; };
-		23A933F0278F061B00769F69 /* fango-up3.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A933D6278F061200769F69 /* fango-up3.png */; };
-		23A933F1278F061B00769F69 /* fango-up4.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A933DD278F061300769F69 /* fango-up4.png */; };
+		23A933BE2788B4EC00769F69 /* ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933BC2788B4EC00769F69 /* ship.cpp */; };
 		23A933F42790187300769F69 /* animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933F22790187300769F69 /* animation.cpp */; };
 		23D5C7C527832B5600C6C916 /* gameEngine.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23D5C7C427832B5600C6C916 /* gameEngine.hpp */; };
 		23D5C7DD27833CFD00C6C916 /* libsfml-audio.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7D827833CFD00C6C916 /* libsfml-audio.2.5.1.dylib */; };
@@ -38,6 +22,7 @@
 		23D5C7E32783432F00C6C916 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23D5C7E22783432F00C6C916 /* game.cpp */; };
 		23E5E2F5279A979100B62583 /* bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23E5E2F3279A979100B62583 /* bullet.cpp */; };
 		23E5E2F7279A9C2900B62583 /* bullet.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23E5E2F6279A9C1E00B62583 /* bullet.png */; };
+		23E5E2FB279C208400B62583 /* spaceship.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23E5E2FA279C207B00B62583 /* spaceship.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,23 +32,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				23E5E2FB279C208400B62583 /* spaceship.png in CopyFiles */,
 				23E5E2F7279A9C2900B62583 /* bullet.png in CopyFiles */,
-				23A933E2278F061B00769F69 /* fango-down1.png in CopyFiles */,
-				23A933E3278F061B00769F69 /* fango-down2.png in CopyFiles */,
-				23A933E4278F061B00769F69 /* fango-down3.png in CopyFiles */,
-				23A933E5278F061B00769F69 /* fango-down4.png in CopyFiles */,
-				23A933E6278F061B00769F69 /* fango-left1.png in CopyFiles */,
-				23A933E7278F061B00769F69 /* fango-left2.png in CopyFiles */,
-				23A933E8278F061B00769F69 /* fango-left3.png in CopyFiles */,
-				23A933E9278F061B00769F69 /* fango-left4.png in CopyFiles */,
-				23A933EA278F061B00769F69 /* fango-right1.png in CopyFiles */,
-				23A933EB278F061B00769F69 /* fango-right2.png in CopyFiles */,
-				23A933EC278F061B00769F69 /* fango-right3.png in CopyFiles */,
-				23A933ED278F061B00769F69 /* fango-right4.png in CopyFiles */,
-				23A933EE278F061B00769F69 /* fango-up1.png in CopyFiles */,
-				23A933EF278F061B00769F69 /* fango-up2.png in CopyFiles */,
-				23A933F0278F061B00769F69 /* fango-up3.png in CopyFiles */,
-				23A933F1278F061B00769F69 /* fango-up4.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,24 +48,8 @@
 		23A933B72787617D00769F69 /* keyListener.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = keyListener.hpp; sourceTree = "<group>"; };
 		23A933B92788407F00769F69 /* keyboardHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = keyboardHandler.cpp; sourceTree = "<group>"; };
 		23A933BA2788407F00769F69 /* keyboardHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = keyboardHandler.hpp; sourceTree = "<group>"; };
-		23A933BC2788B4EC00769F69 /* fangoCharacter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fangoCharacter.cpp; sourceTree = "<group>"; };
-		23A933BD2788B4EC00769F69 /* fangoCharacter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = fangoCharacter.hpp; sourceTree = "<group>"; };
-		23A933D2278F061200769F69 /* fango-left4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fango-left4.png"; sourceTree = "<group>"; };
-		23A933D3278F061200769F69 /* fango-right1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fango-right1.png"; sourceTree = "<group>"; };
-		23A933D4278F061200769F69 /* fango-down4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fango-down4.png"; sourceTree = "<group>"; };
-		23A933D5278F061200769F69 /* fango-left3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fango-left3.png"; sourceTree = "<group>"; };
-		23A933D6278F061200769F69 /* fango-up3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fango-up3.png"; sourceTree = "<group>"; };
-		23A933D7278F061200769F69 /* fango-down1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fango-down1.png"; sourceTree = "<group>"; };
-		23A933D8278F061200769F69 /* fango-right3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fango-right3.png"; sourceTree = "<group>"; };
-		23A933D9278F061300769F69 /* fango-left2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fango-left2.png"; sourceTree = "<group>"; };
-		23A933DA278F061300769F69 /* fango-right4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fango-right4.png"; sourceTree = "<group>"; };
-		23A933DB278F061300769F69 /* fango-up1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fango-up1.png"; sourceTree = "<group>"; };
-		23A933DC278F061300769F69 /* fango-left1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fango-left1.png"; sourceTree = "<group>"; };
-		23A933DD278F061300769F69 /* fango-up4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fango-up4.png"; sourceTree = "<group>"; };
-		23A933DE278F061300769F69 /* fango-down2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fango-down2.png"; sourceTree = "<group>"; };
-		23A933DF278F061300769F69 /* fango-down3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fango-down3.png"; sourceTree = "<group>"; };
-		23A933E0278F061300769F69 /* fango-right2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fango-right2.png"; sourceTree = "<group>"; };
-		23A933E1278F061300769F69 /* fango-up2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fango-up2.png"; sourceTree = "<group>"; };
+		23A933BC2788B4EC00769F69 /* ship.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ship.cpp; sourceTree = "<group>"; };
+		23A933BD2788B4EC00769F69 /* ship.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ship.hpp; sourceTree = "<group>"; };
 		23A933F22790187300769F69 /* animation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animation.cpp; sourceTree = "<group>"; };
 		23A933F32790187300769F69 /* animation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animation.hpp; sourceTree = "<group>"; };
 		23D5C7C127832B5600C6C916 /* game-engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "game-engine"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +65,7 @@
 		23E5E2F4279A979100B62583 /* bullet.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = bullet.hpp; sourceTree = "<group>"; };
 		23E5E2F6279A9C1E00B62583 /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
 		23E5E2F8279ABCF900B62583 /* direction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = direction.hpp; sourceTree = "<group>"; };
+		23E5E2FA279C207B00B62583 /* spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceship.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,23 +136,8 @@
 		23D5C7E4278357D400C6C916 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				23E5E2FA279C207B00B62583 /* spaceship.png */,
 				23E5E2F6279A9C1E00B62583 /* bullet.png */,
-				23A933D7278F061200769F69 /* fango-down1.png */,
-				23A933DE278F061300769F69 /* fango-down2.png */,
-				23A933DF278F061300769F69 /* fango-down3.png */,
-				23A933D4278F061200769F69 /* fango-down4.png */,
-				23A933DC278F061300769F69 /* fango-left1.png */,
-				23A933D9278F061300769F69 /* fango-left2.png */,
-				23A933D5278F061200769F69 /* fango-left3.png */,
-				23A933D2278F061200769F69 /* fango-left4.png */,
-				23A933D3278F061200769F69 /* fango-right1.png */,
-				23A933E0278F061300769F69 /* fango-right2.png */,
-				23A933D8278F061200769F69 /* fango-right3.png */,
-				23A933DA278F061300769F69 /* fango-right4.png */,
-				23A933DB278F061300769F69 /* fango-up1.png */,
-				23A933E1278F061300769F69 /* fango-up2.png */,
-				23A933D6278F061200769F69 /* fango-up3.png */,
-				23A933DD278F061300769F69 /* fango-up4.png */,
 			);
 			path = assets;
 			sourceTree = "<group>";
@@ -206,8 +146,8 @@
 			isa = PBXGroup;
 			children = (
 				23D5C7E22783432F00C6C916 /* game.cpp */,
-				23A933BC2788B4EC00769F69 /* fangoCharacter.cpp */,
-				23A933BD2788B4EC00769F69 /* fangoCharacter.hpp */,
+				23A933BC2788B4EC00769F69 /* ship.cpp */,
+				23A933BD2788B4EC00769F69 /* ship.hpp */,
 				2350E82D279976840017F7C3 /* fangoEventListener.hpp */,
 				23E5E2F3279A979100B62583 /* bullet.cpp */,
 				23E5E2F4279A979100B62583 /* bullet.hpp */,
@@ -273,7 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23A933BE2788B4EC00769F69 /* fangoCharacter.cpp in Sources */,
+				23A933BE2788B4EC00769F69 /* ship.cpp in Sources */,
 				23E5E2F5279A979100B62583 /* bullet.cpp in Sources */,
 				23D5C7C527832B5600C6C916 /* gameEngine.hpp in Sources */,
 				23D5C7E32783432F00C6C916 /* game.cpp in Sources */,
