@@ -2,11 +2,11 @@
 #include "sprite.hpp"
 #include "bullet.hpp"
 #include "ship.hpp"
-#include "fangoEventListener.hpp"
+#include "shipEventListener.hpp"
 #include <iostream>
 #include <chrono>
 
-class Game : public jimp::GameEngine, public FangoEventListener {
+class Game : public jimp::GameEngine, public ShipEventListener {
     
 private:
     Ship* ship = nullptr;

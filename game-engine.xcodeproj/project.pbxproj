@@ -40,7 +40,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2350E82D279976840017F7C3 /* fangoEventListener.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = fangoEventListener.hpp; sourceTree = "<group>"; };
+		2350E82D279976840017F7C3 /* shipEventListener.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = shipEventListener.hpp; sourceTree = "<group>"; };
 		23A933AC27864EA700769F69 /* animatedSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animatedSprite.hpp; sourceTree = "<group>"; };
 		23A933AD27864EA700769F69 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		23A933AE27864EA700769F69 /* aminatedSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aminatedSprite.cpp; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 				23D5C7E22783432F00C6C916 /* game.cpp */,
 				23A933BC2788B4EC00769F69 /* ship.cpp */,
 				23A933BD2788B4EC00769F69 /* ship.hpp */,
-				2350E82D279976840017F7C3 /* fangoEventListener.hpp */,
+				2350E82D279976840017F7C3 /* shipEventListener.hpp */,
 				23E5E2F3279A979100B62583 /* bullet.cpp */,
 				23E5E2F4279A979100B62583 /* bullet.hpp */,
 				23E5E2F8279ABCF900B62583 /* direction.hpp */,

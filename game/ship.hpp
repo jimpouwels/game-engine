@@ -6,7 +6,7 @@
 
 #include "animatedSprite.hpp"
 #include "keyListener.hpp"
-#include "fangoEventListener.hpp"
+#include "shipEventListener.hpp"
 #include "direction.hpp"
 #include "gameEngine.hpp"
 
@@ -25,13 +25,13 @@ private:
     bool isRotatingRight = false;
     int speedInPixelsPerSecond;
     float elapsedTimeSinceLastShot = 0;
-    FangoEventListener* eventListener = nullptr;
+    ShipEventListener* eventListener = nullptr;
     void handleMovement(float elapsedTime);
     void handleFiring(float elapsedTime);
     void setMoving(jimp::KeyState keyState);
 
 public:
-    Ship(jimp::GameEngine* gameEngine, FangoEventListener* fangoEventListener);
+    Ship(jimp::GameEngine* gameEngine, ShipEventListener* shipEventListener);
     void update(float elapsedTime);
     void onKeyboardLeft(jimp::KeyState keyState) override;
     void onKeyboardRight(jimp::KeyState keyState) override;

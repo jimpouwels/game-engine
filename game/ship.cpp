@@ -1,7 +1,7 @@
 #include <math.h>
 
 #include "ship.hpp"
-#include "fangoEventListener.hpp"
+#include "shipEventListener.hpp"
 #include "bullet.hpp"
 #include "direction.hpp"
 
@@ -11,7 +11,7 @@ const float Ship::IMAGE_SWAP_INTERVAL_IN_SECONDS = 0.1F;
 const int Ship::SHOTS_PER_SECOND = 3;
 const float Ship::SCALE = 0.2F;
 
-Ship::Ship(jimp::GameEngine* gameEngine, FangoEventListener* eventListener) : jimp::AnimatedSprite(gameEngine, gameEngine->getScreenWidth() / 2, gameEngine->getScreenHeight() / 2, SCALE, IMAGE_SWAP_INTERVAL_IN_SECONDS) {
+Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jimp::AnimatedSprite(gameEngine, gameEngine->getScreenWidth() / 2, gameEngine->getScreenHeight() / 2, SCALE, IMAGE_SWAP_INTERVAL_IN_SECONDS) {
     getGameEngine().addKeyListener(this);
     this->eventListener = eventListener;
     addSprite("default", "spaceship.png");
