@@ -14,19 +14,19 @@ void Bullet::update(float elapsedTime) {
     float delta = SPEED_IN_PIXELS_PER_SECOND / (1.0F / elapsedTime);
     switch (direction) {
         case RIGHT:
-            setRotationAngle(0);
+            rotate(0);
             setX(getX() + delta);
             break;
         case LEFT:
-            setRotationAngle(180);
+            rotate(180);
             setX(getX() - delta);
             break;
         case UP:
-            setRotationAngle(270);
+            rotate(270);
             setY(getY() - delta);
             break;
         case DOWN:
-            setRotationAngle(90);
+            rotate(90);
             setY(getY() + delta);
             break;
     }

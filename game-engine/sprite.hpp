@@ -12,7 +12,7 @@ private:
     float x;
     float y;
     float scale = 1.0F;
-    float rotationAngle = 0;
+    float rotationAngle = 0.0F;
     std::string filePath;
     sf::Image* image;
     
@@ -28,8 +28,9 @@ public:
     float getY();
     void setY(float y);
     float getScale();
-    int getRotationAngle();
+    float getRotationAngle();
     void setRotationAngle(float rotationAngle);
+    void rotate(float angle);
     int getWidth();
     int getHeight();
     void setPosition(float x, float y);

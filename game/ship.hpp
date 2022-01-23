@@ -20,8 +20,9 @@ private:
     static const int SHOTS_PER_SECOND;
     bool hasFired = false;
     bool isFiring = false;
-    Direction directionX = Direction::IDLE;
-    Direction directionY = Direction::IDLE;
+    bool isThrothling = false;
+    bool isRotatingLeft = false;
+    bool isRotatingRight = false;
     int speedInPixelsPerSecond;
     float elapsedTimeSinceLastShot = 0;
     FangoEventListener* eventListener = nullptr;

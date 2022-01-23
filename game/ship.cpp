@@ -6,7 +6,7 @@
 #include "direction.hpp"
 
 const int Ship::SPEED_IN_PIXELS_PER_SECOND = 200;
-const int Ship::ROTATION_DEGREES_PER_SECOND = 100;
+const int Ship::ROTATION_DEGREES_PER_SECOND = 140;
 const float Ship::IMAGE_SWAP_INTERVAL_IN_SECONDS = 0.1F;
 const int Ship::SHOTS_PER_SECOND = 3;
 const float Ship::SCALE = 0.2F;
@@ -23,34 +23,18 @@ void Ship::update(float elapsedTime) {
 }
 
 void Ship::onKeyboardLeft(jimp::KeyState keyState) {
-    if (keyState == jimp::PRESSED) {
-        directionX = Direction::LEFT;
-    } else {
-        directionX = Direction::IDLE;
-    }
+    isRotatingLeft = keyState == jimp::KeyState::PRESSED;
 }
 
 void Ship::onKeyboardRight(jimp::KeyState keyState) {
-    if (keyState == jimp::PRESSED) {
-        directionX = Direction::RIGHT;
-    } else {
-        directionX = Direction::IDLE;
-    }
+    isRotatingRight = keyState == jimp::KeyState::PRESSED;
 }
 
 void Ship::onKeyboardUp(jimp::KeyState keyState) {
-    if (keyState == jimp::PRESSED) {
-        directionY = Direction::UP;
-    } else {
-        directionY = Direction::IDLE;
-    }
+    isThrothling = keyState == jimp::KeyState::PRESSED;
 }
 void Ship::onKeyboardDown(jimp::KeyState keyState) {
-    if (keyState == jimp::PRESSED) {
-        directionY = Direction::DOWN;
-    } else {
-        directionY = Direction::IDLE;
-    }
+    isThrothling = keyState == jimp::KeyState::PRESSED;
 }
 
 void Ship::onKeyboardSpaceBar(jimp::KeyState keyState) {
@@ -75,35 +59,21 @@ void Ship::handleFiring(float elapsedTime) {
 }
 
 void Ship::handleMovement(float elapsedTime) {
-    if (directionX == Direction::IDLE && directionY == Direction::IDLE) {
-        return;
+    if (isThrothling) {
+        float delta = SPEED_IN_PIXELS_PER_SECOND / (1.0F / elapsedTime);
+        float deltaX = delta * sin(M_PI * 2 * getRotationAngle() / 360);
+        float deltaY = delta * cos(M_PI * 2 * getRotationAngle() / 360);
+        
+        setX(getX() + deltaX);
+        setY(getY() + -deltaY);
     }
-    float delta = SPEED_IN_PIXELS_PER_SECOND / (1.0F / elapsedTime);
-    float deltaDegrees = ROTATION_DEGREES_PER_SECOND / (1.0F / elapsedTime);
-    float deltaX = 0;
-    float deltaY = 0;
-    if (directionX != Direction::IDLE && directionY != Direction::IDLE) {
-        delta = sqrt((delta * delta) / 2);
+    if (isRotatingLeft || isRotatingRight) {
+        float deltaDegrees = ROTATION_DEGREES_PER_SECOND / (1.0F / elapsedTime);
+        if (isRotatingLeft) {
+            deltaDegrees = -deltaDegrees;
+        }
+        rotate(deltaDegrees);
     }
-    std::string nextAnimation;
-    switch (directionY) {
-        case UP:
-            deltaY = -delta;
-            break;
-        case DOWN:
-            deltaY = delta;
-            break;
-    }
-    switch (directionX) {
-        case LEFT:
-            setRotationAngle(-deltaDegrees);
-            break;
-        case RIGHT:
-            setRotationAngle(deltaDegrees);
-            break;
-    }
-    setX(getX() + deltaX);
-    setY(getY() + deltaY);
     
     updateAnimation(elapsedTime);
 }
