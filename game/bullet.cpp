@@ -8,13 +8,13 @@ const float Bullet::SCALE = 0.3F;
 
 Bullet::Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle) : jimp::AnimatedSprite(gameEngine, x, y, SCALE, 0.0F) {
     addSprite("default", "bullet.png");
-    setRotationAngle(angle - 90);
+    setRotationAngle(angle);
 }
 
 void Bullet::update(float elapsedTime) {
     float delta = SPEED_IN_PIXELS_PER_SECOND / (1.0F / elapsedTime);
-    float velocityX = delta * sin(M_PI * 2 * (getRotationAngle() + 90) / 360);
-    float velocityY = delta * cos(M_PI * 2 * (getRotationAngle() + 90) / 360);
+    float velocityX = delta * sin(M_PI * 2 * (getRotationAngle()) / 360);
+    float velocityY = delta * cos(M_PI * 2 * (getRotationAngle()) / 360);
     setX(getX() + velocityX);
     setY(getY() + -velocityY);
     this->updateAnimation(elapsedTime);
