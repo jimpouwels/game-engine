@@ -9,12 +9,11 @@ class Bullet : public jimp::AnimatedSprite {
     
 private:
     jimp::GameEngine* gameEngine = nullptr;
-    Direction direction;
     
 public:
     static const int SPEED_IN_PIXELS_PER_SECOND;
     static const float SCALE;
-    Bullet(jimp::GameEngine* gameEngine, float x, float y, Direction direction);
+    Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle);
     void update(float elapsedTime);
 
 };

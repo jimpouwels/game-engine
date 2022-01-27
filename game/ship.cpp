@@ -52,7 +52,7 @@ void Ship::handleFiring(float elapsedTime) {
     float timeBetweenShots = 1.0F / SHOTS_PER_SECOND;
     if (elapsedTimeSinceLastShot >= timeBetweenShots && (hasFired || isFiring)) {
         hasFired = false;
-        Bullet* bullet = new Bullet(&getGameEngine(), getX() + (getWidth() / 2), getY() + (getHeight() / 2), Direction::RIGHT);
+        Bullet* bullet = new Bullet(&getGameEngine(), getX() + (getWidth() / 2), getY() + (getHeight() / 2), getRotationAngle());
         eventListener->onWeaponFired(bullet);
         elapsedTimeSinceLastShot = 0;
     }
@@ -60,13 +60,13 @@ void Ship::handleFiring(float elapsedTime) {
 
 void Ship::handleMovement(float elapsedTime) {
     if (isThrothling) {
-        float delta = SPEED_IN_PIXELS_PER_SECOND / (1.0F / elapsedTime);
-        float deltaX = delta * sin(M_PI * 2 * getRotationAngle() / 360);
-        float deltaY = delta * cos(M_PI * 2 * getRotationAngle() / 360);
-        
-        setX(getX() + deltaX);
-        setY(getY() + -deltaY);
+        float delta = (SPEED_IN_PIXELS_PER_SECOND) / (1.0F / elapsedTime);
+        velocityX = delta * sin(M_PI * 2 * getRotationAngle() / 360);
+        velocityY = delta * cos(M_PI * 2 * getRotationAngle() / 360);
     }
+    setX(getX() + velocityX);
+    setY(getY() + -velocityY);
+    
     if (isRotatingLeft || isRotatingRight) {
         float deltaDegrees = ROTATION_DEGREES_PER_SECOND / (1.0F / elapsedTime);
         if (isRotatingLeft) {

@@ -87,6 +87,10 @@ float AnimatedSprite::getRotationAngle() {
     return getActiveSprite().getRotationAngle();
 }
 
+void AnimatedSprite::setRotationAngle(float angle) {
+    getActiveSprite().setRotationAngle(angle);
+}
+
 GameEngine& AnimatedSprite::getGameEngine() {
     return *gameEngine;
 }

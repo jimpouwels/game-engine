@@ -24,6 +24,8 @@ private:
     bool isRotatingLeft = false;
     bool isRotatingRight = false;
     int speedInPixelsPerSecond;
+    float velocityX = 0.0F;
+    float velocityY = 0.0F;
     float elapsedTimeSinceLastShot = 0;
     ShipEventListener* eventListener = nullptr;
     void handleMovement(float elapsedTime);
