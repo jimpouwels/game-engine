@@ -13,9 +13,9 @@ Bullet::Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle) : ji
 
 void Bullet::update(float elapsedTime) {
     float delta = SPEED_IN_PIXELS_PER_SECOND / (1.0F / elapsedTime);
-    float velocityX = delta * sin(M_PI * 2 * (getRotationAngle()) / 360);
-    float velocityY = delta * cos(M_PI * 2 * (getRotationAngle()) / 360);
-    setX(getX() + velocityX);
-    setY(getY() + -velocityY);
+    float deltaX = delta * sin(M_PI * 2 * (getRotationAngle()) / 360);
+    float deltaY = delta * cos(M_PI * 2 * (getRotationAngle()) / 360);
+    setX(getX() + deltaX);
+    setY(getY() + -deltaY);
     this->updateAnimation(elapsedTime);
 }
