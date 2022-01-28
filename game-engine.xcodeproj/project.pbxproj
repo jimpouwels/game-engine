@@ -13,6 +13,16 @@
 		23A933BB2788407F00769F69 /* keyboardHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933B92788407F00769F69 /* keyboardHandler.cpp */; };
 		23A933BE2788B4EC00769F69 /* ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933BC2788B4EC00769F69 /* ship.cpp */; };
 		23A933F42790187300769F69 /* animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933F22790187300769F69 /* animation.cpp */; };
+		23B177A127A3E3160094B178 /* ship.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933BD2788B4EC00769F69 /* ship.hpp */; };
+		23B177A227A3E3160094B178 /* shipEventListener.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 2350E82D279976840017F7C3 /* shipEventListener.hpp */; };
+		23B177A327A3E3160094B178 /* bullet.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23E5E2F4279A979100B62583 /* bullet.hpp */; };
+		23B177A427A3E3160094B178 /* direction.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23E5E2F8279ABCF900B62583 /* direction.hpp */; };
+		23B177A527A3E3160094B178 /* asteroid.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23E5E2FF27A302DD00B62583 /* asteroid.hpp */; };
+		23B177A627A3E3160094B178 /* animatedSprite.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AC27864EA700769F69 /* animatedSprite.hpp */; };
+		23B177A727A3E3160094B178 /* animation.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933F32790187300769F69 /* animation.hpp */; };
+		23B177A827A3E3160094B178 /* sprite.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23D5C7E827847B6200C6C916 /* sprite.hpp */; };
+		23B177A927A3E3160094B178 /* keyListener.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933B72787617D00769F69 /* keyListener.hpp */; };
+		23B177AA27A3E3160094B178 /* keyboardHandler.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933BA2788407F00769F69 /* keyboardHandler.hpp */; };
 		23D5C7C527832B5600C6C916 /* gameEngine.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23D5C7C427832B5600C6C916 /* gameEngine.hpp */; };
 		23D5C7DD27833CFD00C6C916 /* libsfml-audio.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7D827833CFD00C6C916 /* libsfml-audio.2.5.1.dylib */; };
 		23D5C7DE27833CFD00C6C916 /* libsfml-graphics.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7D927833CFD00C6C916 /* libsfml-graphics.2.5.1.dylib */; };
@@ -23,6 +33,8 @@
 		23E5E2F5279A979100B62583 /* bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23E5E2F3279A979100B62583 /* bullet.cpp */; };
 		23E5E2F7279A9C2900B62583 /* bullet.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23E5E2F6279A9C1E00B62583 /* bullet.png */; };
 		23E5E2FB279C208400B62583 /* spaceship.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23E5E2FA279C207B00B62583 /* spaceship.png */; };
+		23E5E2FD27A302C700B62583 /* asteroid.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23E5E2FC27A302C000B62583 /* asteroid.png */; };
+		23E5E30027A302DD00B62583 /* asteroid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23E5E2FE27A302DD00B62583 /* asteroid.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +44,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				23E5E2FD27A302C700B62583 /* asteroid.png in CopyFiles */,
 				23E5E2FB279C208400B62583 /* spaceship.png in CopyFiles */,
 				23E5E2F7279A9C2900B62583 /* bullet.png in CopyFiles */,
 			);
@@ -66,6 +79,9 @@
 		23E5E2F6279A9C1E00B62583 /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
 		23E5E2F8279ABCF900B62583 /* direction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = direction.hpp; sourceTree = "<group>"; };
 		23E5E2FA279C207B00B62583 /* spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceship.png; sourceTree = "<group>"; };
+		23E5E2FC27A302C000B62583 /* asteroid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroid.png; sourceTree = "<group>"; };
+		23E5E2FE27A302DD00B62583 /* asteroid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = asteroid.cpp; sourceTree = "<group>"; };
+		23E5E2FF27A302DD00B62583 /* asteroid.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = asteroid.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +152,7 @@
 		23D5C7E4278357D400C6C916 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				23E5E2FC27A302C000B62583 /* asteroid.png */,
 				23E5E2FA279C207B00B62583 /* spaceship.png */,
 				23E5E2F6279A9C1E00B62583 /* bullet.png */,
 			);
@@ -152,6 +169,8 @@
 				23E5E2F3279A979100B62583 /* bullet.cpp */,
 				23E5E2F4279A979100B62583 /* bullet.hpp */,
 				23E5E2F8279ABCF900B62583 /* direction.hpp */,
+				23E5E2FE27A302DD00B62583 /* asteroid.cpp */,
+				23E5E2FF27A302DD00B62583 /* asteroid.hpp */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -213,15 +232,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23B177A127A3E3160094B178 /* ship.hpp in Sources */,
+				23B177A227A3E3160094B178 /* shipEventListener.hpp in Sources */,
+				23B177A327A3E3160094B178 /* bullet.hpp in Sources */,
+				23B177A427A3E3160094B178 /* direction.hpp in Sources */,
+				23B177A527A3E3160094B178 /* asteroid.hpp in Sources */,
+				23B177A627A3E3160094B178 /* animatedSprite.hpp in Sources */,
+				23B177A727A3E3160094B178 /* animation.hpp in Sources */,
+				23B177A827A3E3160094B178 /* sprite.hpp in Sources */,
+				23B177A927A3E3160094B178 /* keyListener.hpp in Sources */,
+				23B177AA27A3E3160094B178 /* keyboardHandler.hpp in Sources */,
+				23E5E30027A302DD00B62583 /* asteroid.cpp in Sources */,
 				23A933BE2788B4EC00769F69 /* ship.cpp in Sources */,
 				23E5E2F5279A979100B62583 /* bullet.cpp in Sources */,
 				23D5C7C527832B5600C6C916 /* gameEngine.hpp in Sources */,
+				23A933B527864EA800769F69 /* gameEngine.cpp in Sources */,
 				23D5C7E32783432F00C6C916 /* game.cpp in Sources */,
 				23A933B327864EA800769F69 /* aminatedSprite.cpp in Sources */,
 				23A933BB2788407F00769F69 /* keyboardHandler.cpp in Sources */,
 				23A933B227864EA800769F69 /* sprite.cpp in Sources */,
 				23A933F42790187300769F69 /* animation.cpp in Sources */,
-				23A933B527864EA800769F69 /* gameEngine.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

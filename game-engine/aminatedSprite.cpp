@@ -8,8 +8,7 @@
 
 namespace jimp {
 
-AnimatedSprite::AnimatedSprite(jimp::GameEngine* gameEngine, float x, float y, float scale, float imageSwapIntervalInSeconds) {
-    this->gameEngine = gameEngine;
+AnimatedSprite::AnimatedSprite(float x, float y, float scale, float imageSwapIntervalInSeconds) {
     this->x = x;
     this->y = y;
     this->scale = scale;
@@ -17,8 +16,9 @@ AnimatedSprite::AnimatedSprite(jimp::GameEngine* gameEngine, float x, float y, f
     this->imageSwapIntervalInSeconds = imageSwapIntervalInSeconds;
 }
 
-AnimatedSprite::AnimatedSprite(jimp::GameEngine* gameEngine, float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
-    AnimatedSprite(gameEngine, x, y, scale, 0, imageSwapIntervalInSeconds);
+AnimatedSprite::AnimatedSprite(float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
+    AnimatedSprite(x, y, scale, 0, imageSwapIntervalInSeconds);
+    this->angle = rotationAngle;
 }
 
 AnimatedSprite::~AnimatedSprite() {
@@ -40,31 +40,26 @@ void AnimatedSprite::setCurrentAnimation(std::string animationId) {
 
 void AnimatedSprite::updateAnimation(float elapsedTime) {
     elapsedTimeSinceLastSwap += elapsedTime;
-    float rotationAngle = getActiveSprite().getRotationAngle();
-    float x = getActiveSprite().getX();
-    float y = getActiveSprite().getY();
     if (elapsedTimeSinceLastSwap >= imageSwapIntervalInSeconds) {
         activeAnimation->switchToNextSprite();
         elapsedTimeSinceLastSwap = 0;
     }
-    activeAnimation->getActiveSprite()->setPosition(x, y);
-    activeAnimation->getActiveSprite()->setRotationAngle(rotationAngle);
 }
 
 float AnimatedSprite::getX() {
-    return getActiveSprite().getX();
+    return x;
 }
 
 void AnimatedSprite::setX(float x) {
-    getActiveSprite().setX(x);
+    this->x = x;
 }
 
 float AnimatedSprite::getY() {
-    return getActiveSprite().getY();
+    return y;
 }
 
 void AnimatedSprite::setY(float y) {
-    getActiveSprite().setY(y);
+    this->y = y;
 }
 
 int AnimatedSprite::getWidth() {
@@ -75,24 +70,30 @@ int AnimatedSprite::getHeight() {
     return activeAnimation->getActiveSprite()->getHeight();
 }
 
+float AnimatedSprite::getScale() {
+    return scale;
+}
+
 bool AnimatedSprite::isPositionedWithinScreen() {
-    return gameEngine->isPositionWithinScreen(getX(), getY());
+//    return gameEngine->isPositionWithinScreen(x, y);
+    return true;
 }
 
 void AnimatedSprite::rotate(float angle) {
-    getActiveSprite().rotate(angle);
+    this->angle = this->angle + angle;
+    if (this->angle >= 360) {
+        this->angle -= 360;
+    } else if (this->angle <= 0) {
+        this->angle += 360;
+    }
 }
 
 float AnimatedSprite::getRotationAngle() {
-    return getActiveSprite().getRotationAngle();
+    return angle;
 }
 
 void AnimatedSprite::setRotationAngle(float angle) {
-    getActiveSprite().setRotationAngle(angle);
-}
-
-GameEngine& AnimatedSprite::getGameEngine() {
-    return *gameEngine;
+    this->angle = angle;
 }
 
 void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {

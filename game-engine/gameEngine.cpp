@@ -2,6 +2,8 @@
 #include <chrono>
 
 #include "gameEngine.hpp"
+#include "sprite.hpp"
+#include "animatedSprite.hpp"
 #include "keyboardHandler.hpp"
 
 namespace jimp {
@@ -47,6 +49,18 @@ void GameEngine::draw(jimp::Sprite& sprite) {
     sfmlSprite.setScale(sprite.getScale(), sprite.getScale());
     sf::Transform transform;
     transform.rotate(sprite.getRotationAngle(), sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight() / 2);
+    window->draw(sfmlSprite, transform);
+}
+
+void GameEngine::draw(jimp::AnimatedSprite& animatedSprite) {
+    sf::Texture sfmlTexture;
+    sfmlTexture.loadFromImage(animatedSprite.getActiveSprite().getImage());
+    sf::Sprite sfmlSprite;
+    sfmlSprite.setTexture(sfmlTexture);
+    sfmlSprite.setPosition(animatedSprite.getX(), animatedSprite.getY());
+    sfmlSprite.setScale(animatedSprite.getScale(), animatedSprite.getScale());
+    sf::Transform transform;
+    transform.rotate(animatedSprite.getRotationAngle(), animatedSprite.getX() + animatedSprite.getWidth() / 2, animatedSprite.getY() + animatedSprite.getHeight() / 2);
     window->draw(sfmlSprite, transform);
 }
 

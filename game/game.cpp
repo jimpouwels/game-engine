@@ -1,5 +1,6 @@
 #include "gameEngine.hpp"
 #include "sprite.hpp"
+#include "asteroid.hpp"
 #include "bullet.hpp"
 #include "ship.hpp"
 #include "shipEventListener.hpp"
@@ -10,16 +11,20 @@ class Game : public jimp::GameEngine, public ShipEventListener {
     
 private:
     Ship* ship = nullptr;
+    Asteroid* asteroid = nullptr;
     std::list<jimp::AnimatedSprite*>* bullets = nullptr;
     
 public:
     Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60) {
-        ship = new Ship(this, this);
+        ship = new Ship(this);
+        addKeyListener(ship);
+        asteroid = new Asteroid(10, 10);
         bullets = new std::list<jimp::AnimatedSprite*>;
     }
     
     ~Game() {
         delete ship;
+        delete asteroid;
         for (const auto& bullet: *bullets) {
             delete bullet;
         }
@@ -34,14 +39,12 @@ public:
         cleanupBullets();
         for (const auto& bullet: *bullets) {
             bullet->update(elapsedTime);
-            draw(bullet->getActiveSprite());
+            draw(*bullet);
         }
         ship->update(elapsedTime);
-        renderFango();
-    }
-    
-    void renderFango() {
-        draw(ship->getActiveSprite());
+        asteroid->update(elapsedTime);
+        draw(*ship);
+        draw(*asteroid);
     }
     
     void cleanupBullets() {

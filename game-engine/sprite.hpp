@@ -30,7 +30,6 @@ public:
     float getScale();
     float getRotationAngle();
     void setRotationAngle(float rotationAngle);
-    void rotate(float angle);
     int getWidth();
     int getHeight();
     void setPosition(float x, float y);

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "sprite.hpp"
+#include "animatedSprite.hpp"
 #include "keyListener.hpp"
 #include "keyboardHandler.hpp"
 
@@ -31,6 +32,7 @@ public:
     ~GameEngine();
     void start();
     void draw(jimp::Sprite& sprite);
+    void draw(jimp::AnimatedSprite& animatedSprite);
     int getScreenWidth();
     int getScreenHeight();
     bool isPositionWithinScreen(float x, float y);
