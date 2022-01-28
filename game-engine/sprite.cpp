@@ -46,16 +46,16 @@ int Sprite::getHeight() {
 }
 
 float Sprite::getRotationAngle() {
-    if (this->rotationAngle >= 360) {
-        this->rotationAngle -= (this->rotationAngle / 360);
-    } else if (this->rotationAngle <= 0) {
-        this->rotationAngle += 360;
-    }
     return rotationAngle;
 }
 
 void Sprite::setRotationAngle(float rotationAngle) {
     this->rotationAngle = rotationAngle;
+    if (this->rotationAngle >= 360) {
+        this->rotationAngle -= (this->rotationAngle / 360);
+    } else if (this->rotationAngle <= 0) {
+        this->rotationAngle += 360;
+    }
 }
 
 std::string Sprite::getFilePath() {
