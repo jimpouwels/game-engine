@@ -11,7 +11,7 @@ class Animation {
   
 private:
     std::string id;
-    std::vector<jimp::Sprite*>* sprites;
+    std::vector<Sprite*>* sprites;
     int activeSpriteIndex = 0;
     
 public:
@@ -20,7 +20,7 @@ public:
     std::string getId();
     void addSprite(Sprite* sprite);
     long getNumberOfSprites();
-    jimp::Sprite* getActiveSprite();
+    Sprite* getActiveSprite();
     void switchToNextSprite();
     
 };

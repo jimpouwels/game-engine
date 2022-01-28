@@ -3,6 +3,7 @@
 #include "asteroid.hpp"
 #include "bullet.hpp"
 #include "ship.hpp"
+#include "screen.hpp"
 #include "shipEventListener.hpp"
 #include <iostream>
 #include <chrono>
@@ -12,13 +13,15 @@ class Game : public jimp::GameEngine, public ShipEventListener {
 private:
     Ship* ship = nullptr;
     Asteroid* asteroid = nullptr;
+    jimp::Screen* screen = nullptr;
     std::list<jimp::AnimatedSprite*>* bullets = nullptr;
     
 public:
     Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60) {
-        ship = new Ship(this);
+        screen = new jimp::Screen(this);
+        ship = new Ship(screen, this);
         addKeyListener(ship);
-        asteroid = new Asteroid(10, 10);
+        asteroid = new Asteroid(screen, 10, 10);
         bullets = new std::list<jimp::AnimatedSprite*>;
     }
     

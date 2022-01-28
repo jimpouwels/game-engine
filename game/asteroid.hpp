@@ -2,6 +2,7 @@
 #define asteroid_hpp
 
 #include "animatedSprite.hpp"
+#include "screen.hpp"
 
 class Asteroid : public jimp::AnimatedSprite {
   
@@ -10,7 +11,7 @@ private:
     static const int ROTATION_DEGREES_PER_SECOND;
     
 public:
-    Asteroid(float x, float y);
+    Asteroid(jimp::Screen* screen, float x, float y);
     ~Asteroid();
     void update(float elapsedTime);
 };

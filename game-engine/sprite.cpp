@@ -5,15 +5,16 @@
 
 namespace jimp {
 
-Sprite::Sprite(float x, float y, float scale, int rotationAngle, std::string filePath) {
-    Sprite(x, y, scale, filePath);
+Sprite::Sprite(jimp::Screen* screen, float x, float y, float scale, int rotationAngle, std::string filePath) {
+    Sprite(screen, x, y, scale, filePath);
     this->rotationAngle = rotationAngle;
 }
 
-Sprite::Sprite(float x, float y, float scale, std::string filePath) {
+Sprite::Sprite(jimp::Screen* screen, float x, float y, float scale, std::string filePath) {
     this->x = x;
     this->y = y;
     this->scale = scale;
+    this->screen = screen;
     loadImage(filePath);
 }
 

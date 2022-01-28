@@ -6,6 +6,7 @@
 #include <map>
 #include "sprite.hpp"
 #include "animation.hpp"
+#include "screen.hpp"
 
 namespace jimp {
 
@@ -16,8 +17,9 @@ private:
     float y;
     float scale;
     float angle;
-    std::map<std::string, jimp::Animation*>* animationMap;
-    jimp::Animation* activeAnimation = nullptr;
+    Screen* screen;
+    std::map<std::string, Animation*>* animationMap;
+    Animation* activeAnimation = nullptr;
     float elapsedTimeSinceLastSwap;
     float imageSwapIntervalInSeconds;
     
@@ -28,6 +30,7 @@ protected:
     void setCurrentAnimation(std::string animationId);
     
 public:
+    Screen& getScreen();
     float getX();
     float getY();
     float getScale();
@@ -36,10 +39,10 @@ public:
     float getRotationAngle();
     void setRotationAngle(float angle);
     bool isPositionedWithinScreen();
-    AnimatedSprite(float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
-    AnimatedSprite(float x, float y, float scale, float imageSwapIntervalInSeconds);
+    AnimatedSprite(Screen* screen, float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
+    AnimatedSprite(Screen* screen, float x, float y, float scale, float imageSwapIntervalInSeconds);
     ~AnimatedSprite();
-    jimp::Sprite& getActiveSprite();
+    Sprite& getActiveSprite();
     virtual void update(float elapsedTime) {
         this->updateAnimation(elapsedTime);
     };

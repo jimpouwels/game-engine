@@ -8,16 +8,17 @@
 
 namespace jimp {
 
-AnimatedSprite::AnimatedSprite(float x, float y, float scale, float imageSwapIntervalInSeconds) {
+AnimatedSprite::AnimatedSprite(Screen* screen, float x, float y, float scale, float imageSwapIntervalInSeconds) {
     this->x = x;
     this->y = y;
     this->scale = scale;
-    animationMap = new std::map<std::string, jimp::Animation*>;
+    this->screen = screen;
+    animationMap = new std::map<std::string, Animation*>;
     this->imageSwapIntervalInSeconds = imageSwapIntervalInSeconds;
 }
 
-AnimatedSprite::AnimatedSprite(float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
-    AnimatedSprite(x, y, scale, 0, imageSwapIntervalInSeconds);
+AnimatedSprite::AnimatedSprite(Screen* screen, float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
+    AnimatedSprite(screen, x, y, scale, 0, imageSwapIntervalInSeconds);
     this->angle = rotationAngle;
 }
 
@@ -28,8 +29,8 @@ AnimatedSprite::~AnimatedSprite() {
     delete animationMap;
 }
 
-jimp::Sprite& AnimatedSprite::getActiveSprite() {
-    jimp::Sprite* activeSprite = activeAnimation->getActiveSprite();
+Sprite& AnimatedSprite::getActiveSprite() {
+    Sprite* activeSprite = activeAnimation->getActiveSprite();
     activeSprite->setPosition(x, y);
     activeSprite->setScale(scale);
     activeSprite->setRotationAngle(angle);
@@ -48,6 +49,10 @@ void AnimatedSprite::updateAnimation(float elapsedTime) {
         activeAnimation->switchToNextSprite();
         elapsedTimeSinceLastSwap = 0;
     }
+}
+
+jimp::Screen& AnimatedSprite::getScreen() {
+    return *screen;
 }
 
 float AnimatedSprite::getX() {
@@ -79,7 +84,7 @@ float AnimatedSprite::getScale() {
 }
 
 bool AnimatedSprite::isPositionedWithinScreen() {
-//    return gameEngine->isPositionWithinScreen(x, y);
+    return screen->isWithin(x, y);
     return true;
 }
 
@@ -92,14 +97,14 @@ void AnimatedSprite::setRotationAngle(float angle) {
 }
 
 void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {
-    jimp::Animation* animation = nullptr;
+    Animation* animation = nullptr;
     if (animationMap->find(animationId) == animationMap->end()) {
-        animation = new jimp::Animation(animationId);
+        animation = new Animation(animationId);
         animationMap->insert({animationId, animation});
     } else {
         animation = animationMap->find(animationId)->second;
     }
-    jimp::Sprite* sprite = new jimp::Sprite(x, y, scale, filePath);
+    Sprite* sprite = new Sprite(screen, x, y, scale, filePath);
     animationMap->find(animationId)->second->addSprite(sprite);
     if (activeAnimation == nullptr) {
         activeAnimation = animation;
