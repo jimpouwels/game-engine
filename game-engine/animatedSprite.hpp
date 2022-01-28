@@ -33,7 +33,6 @@ public:
     float getScale();
     int getWidth();
     int getHeight();
-    void rotate(float angle);
     float getRotationAngle();
     void setRotationAngle(float angle);
     bool isPositionedWithinScreen();

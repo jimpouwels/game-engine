@@ -29,6 +29,10 @@ AnimatedSprite::~AnimatedSprite() {
 }
 
 jimp::Sprite& AnimatedSprite::getActiveSprite() {
+    jimp::Sprite* activeSprite = activeAnimation->getActiveSprite();
+    activeSprite->setPosition(x, y);
+    activeSprite->setScale(scale);
+    activeSprite->setRotationAngle(angle);
     return *activeAnimation->getActiveSprite();
 }
 
@@ -77,15 +81,6 @@ float AnimatedSprite::getScale() {
 bool AnimatedSprite::isPositionedWithinScreen() {
 //    return gameEngine->isPositionWithinScreen(x, y);
     return true;
-}
-
-void AnimatedSprite::rotate(float angle) {
-    this->angle = this->angle + angle;
-    if (this->angle >= 360) {
-        this->angle -= 360;
-    } else if (this->angle <= 0) {
-        this->angle += 360;
-    }
 }
 
 float AnimatedSprite::getRotationAngle() {

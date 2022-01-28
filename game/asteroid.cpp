@@ -23,7 +23,7 @@ void Asteroid::update(float elapsedTime) {
     
 
     float deltaDegrees = ROTATION_DEGREES_PER_SECOND / (1.0F / elapsedTime);
-    rotate(deltaDegrees);
+    setRotationAngle(getRotationAngle() + deltaDegrees);
 
     this->updateAnimation(elapsedTime);
 }

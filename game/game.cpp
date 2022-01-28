@@ -39,12 +39,12 @@ public:
         cleanupBullets();
         for (const auto& bullet: *bullets) {
             bullet->update(elapsedTime);
-            draw(*bullet);
+            draw(bullet->getActiveSprite());
         }
         ship->update(elapsedTime);
         asteroid->update(elapsedTime);
-        draw(*ship);
-        draw(*asteroid);
+        draw(ship->getActiveSprite());
+        draw(asteroid->getActiveSprite());
     }
     
     void cleanupBullets() {

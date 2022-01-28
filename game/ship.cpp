@@ -70,7 +70,7 @@ void Ship::handleMovement(float elapsedTime) {
         if (isRotatingLeft) {
             deltaDegrees = -deltaDegrees;
         }
-        rotate(deltaDegrees);
+        setRotationAngle(getRotationAngle() + deltaDegrees);
     }
     
     updateAnimation(elapsedTime);

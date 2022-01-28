@@ -28,6 +28,7 @@ public:
     float getY();
     void setY(float y);
     float getScale();
+    void setScale(float scale);
     float getRotationAngle();
     void setRotationAngle(float rotationAngle);
     int getWidth();

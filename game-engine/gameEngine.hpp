@@ -32,7 +32,6 @@ public:
     ~GameEngine();
     void start();
     void draw(jimp::Sprite& sprite);
-    void draw(jimp::AnimatedSprite& animatedSprite);
     int getScreenWidth();
     int getScreenHeight();
     bool isPositionWithinScreen(float x, float y);
