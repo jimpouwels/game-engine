@@ -16,9 +16,6 @@ Asteroid::~Asteroid() {
 }
 
 void Asteroid::update(float elapsedTime) {
-    if (elapsedTime > 1) {
-        return;
-    }
     float deltaPosition = (SPEED_IN_PIXELS_PER_SECOND) / (1.0F / elapsedTime);
     std::cout << elapsedTime << ", " << (SPEED_IN_PIXELS_PER_SECOND) / (1.0F / elapsedTime) << std::endl;
     setX(getX() + deltaPosition);

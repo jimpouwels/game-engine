@@ -16,6 +16,7 @@ GameEngine::GameEngine(int screenWidth, int screenHeight, std::string windowTitl
     this->windowTitle = windowTitle;
     window = new sf::RenderWindow(sf::VideoMode(this->getScreenWidth(), this->getScreenHeight()), windowTitle);
     keyboardHandler = new jimp::KeyboardHandler();
+    this->previousFrameTime = std::chrono::system_clock::now();
 }
 
 GameEngine::~GameEngine() {
@@ -30,9 +31,10 @@ void GameEngine::start() {
         std::chrono::time_point<std::chrono::system_clock> currentTime = std::chrono::system_clock::now();
         std::chrono::duration<float> elapsedTimeSincePreviousFrame = (currentTime - previousFrameTime);
         
-        if (elapsedTimeSincePreviousFrame.count() > timePerFrame || frameRate == -1) {
+        float elapsedTime = elapsedTimeSincePreviousFrame.count();
+        if (elapsedTime > timePerFrame || frameRate == -1) {
             totalFrames++;
-            drawFrame(elapsedTimeSincePreviousFrame);
+            drawFrame(elapsedTime);
             previousFrameTime = currentTime;
         }
         
@@ -89,9 +91,9 @@ float GameEngine::measureFps(std::chrono::time_point<std::chrono::system_clock>&
     return totalFrames / elapsedTimeSincePreviousMeasurement.count();
 }
 
-void GameEngine::drawFrame(std::chrono::duration<float>& elapsedTimeSincePreviousFrame) {
+void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     window->clear();
-    onFrame(elapsedTimeSincePreviousFrame.count());
+    onFrame(elapsedTimeSincePreviousFrame);
     window->display();
 }
 
