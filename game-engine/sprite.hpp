@@ -36,6 +36,10 @@ public:
     void setRotationAngle(float rotationAngle);
     int getWidth();
     int getHeight();
+    bool isOutsideScreenBelow();
+    bool isOutsideScreenAbove();
+    bool isOutsideScreenLeft();
+    bool isOutsideScreenRight();
     void setPosition(float x, float y);
     std::string getFilePath();
     sf::Image& getImage();

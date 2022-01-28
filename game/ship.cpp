@@ -7,7 +7,7 @@
 
 const int Ship::SPEED_IN_PIXELS_PER_SECOND = 200;
 const int Ship::ROTATION_DEGREES_PER_SECOND = 140;
-const int Ship::SHOTS_PER_SECOND = 3;
+const int Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.2F;
 
 Ship::Ship(jimp::Screen* screen, ShipEventListener* eventListener) : jimp::AnimatedSprite(screen, screen->getWidth() / 2, screen->getHeight() / 2, SCALE, -1) {

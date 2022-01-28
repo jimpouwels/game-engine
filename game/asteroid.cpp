@@ -21,15 +21,15 @@ Asteroid::~Asteroid() {
 void Asteroid::update(float elapsedTime) {
     float deltaPosition = (SPEED_IN_PIXELS_PER_SECOND) / (1.0F / elapsedTime);
     
-    if (getY() >= getScreen().getHeight() - getHeight()) {
-        directionY = DirectionY::UP;
-    } else if (getY() <= 0) {
+    if (isOutsideScreenAbove()) {
         directionY = DirectionY::DOWN;
+    } else if (isOutsideScreenBelow()) {
+        directionY = DirectionY::UP;
     }
-    if (getX() >= getScreen().getWidth() - getWidth()) {
-        directionX = DirectionX::LEFT;
-    } else if (getX() <= 0) {
+    if (isOutsideScreenLeft()) {
         directionX = DirectionX::RIGHT;
+    } else if (isOutsideScreenRight()) {
+        directionX = DirectionX::LEFT;
     }
     
     switch (directionY) {

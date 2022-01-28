@@ -59,6 +59,22 @@ void Sprite::setRotationAngle(float rotationAngle) {
     }
 }
 
+bool Sprite::isOutsideScreenLeft() {
+    return this->x < 0;
+}
+
+bool Sprite::isOutsideScreenRight() {
+    return getX() > screen->getWidth() - getWidth();
+}
+
+bool Sprite::isOutsideScreenAbove() {
+    return this->y < 0;
+}
+
+bool Sprite::isOutsideScreenBelow() {
+    return getY() > screen->getHeight() - getHeight();
+}
+
 std::string Sprite::getFilePath() {
     return filePath;
 }

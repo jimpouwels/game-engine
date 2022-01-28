@@ -39,6 +39,10 @@ public:
     float getRotationAngle();
     void setRotationAngle(float angle);
     bool isPositionedWithinScreen();
+    bool isOutsideScreenBelow();
+    bool isOutsideScreenAbove();
+    bool isOutsideScreenLeft();
+    bool isOutsideScreenRight();
     AnimatedSprite(Screen* screen, float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
     AnimatedSprite(Screen* screen, float x, float y, float scale, float imageSwapIntervalInSeconds);
     ~AnimatedSprite();

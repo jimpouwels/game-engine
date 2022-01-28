@@ -96,6 +96,22 @@ void AnimatedSprite::setRotationAngle(float angle) {
     this->angle = angle;
 }
 
+bool AnimatedSprite::isOutsideScreenLeft() {
+    return getActiveSprite().isOutsideScreenLeft();
+}
+
+bool AnimatedSprite::isOutsideScreenRight() {
+    return getActiveSprite().isOutsideScreenRight();
+}
+
+bool AnimatedSprite::isOutsideScreenAbove() {
+    return getActiveSprite().isOutsideScreenAbove();
+}
+
+bool AnimatedSprite::isOutsideScreenBelow() {
+    return getActiveSprite().isOutsideScreenBelow();
+}
+
 void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {
     Animation* animation = nullptr;
     if (animationMap->find(animationId) == animationMap->end()) {
