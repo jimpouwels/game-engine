@@ -18,6 +18,7 @@ Ship::Ship(jimp::Screen* screen, ShipEventListener* eventListener) : jimp::Anima
 void Ship::update(float elapsedTime) {
     handleFiring(elapsedTime);
     handleMovement(elapsedTime);
+    handleRotation(elapsedTime);
 }
 
 void Ship::onKeyboardLeft(jimp::KeyState keyState) {
@@ -71,7 +72,9 @@ void Ship::handleMovement(float elapsedTime) {
     
     setX(getX() + velocityX);
     setY(getY() + velocityY);
-    
+}
+
+void Ship::handleRotation(float elapsedTime) {
     if (isRotatingLeft || isRotatingRight) {
         float deltaDegrees = ROTATION_DEGREES_PER_SECOND / (1.0F / elapsedTime);
         if (isRotatingLeft) {

@@ -30,6 +30,7 @@ private:
     ShipEventListener* eventListener = nullptr;
     void handleMovement(float elapsedTime);
     void handleFiring(float elapsedTime);
+    void handleRotation(float elapsedTime);
     void setMoving(jimp::KeyState keyState);
 
 public:
