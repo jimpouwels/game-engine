@@ -60,17 +60,17 @@ void Ship::handleMovement(float elapsedTime) {
     if (isThrothling) {
         float delta = (SPEED_IN_PIXELS_PER_SECOND) / (1.0F / elapsedTime);
         velocityX = delta * sin(M_PI * 2 * getRotationAngle() / 360);
-        velocityY = delta * cos(M_PI * 2 * getRotationAngle() / 360);
+        velocityY = -(delta * cos(M_PI * 2 * getRotationAngle() / 360));
     }
 
-    if ((isOutsideScreenAbove() && velocityY >= 0) || (isOutsideScreenBelow() && velocityY <= 0)) {
+    if ((isOutsideScreenAbove() && velocityY <= 0) || (isOutsideScreenBelow() && velocityY >= 0)) {
         velocityY = 0;
     } else if (((isOutsideScreenRight() && velocityX >= 0) || (isOutsideScreenLeft() && velocityX <= 0))) {
         velocityX = 0;
     }
     
     setX(getX() + velocityX);
-    setY(getY() + -velocityY);
+    setY(getY() + velocityY);
     
     if (isRotatingLeft || isRotatingRight) {
         float deltaDegrees = ROTATION_DEGREES_PER_SECOND / (1.0F / elapsedTime);
