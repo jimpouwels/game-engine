@@ -94,6 +94,11 @@ float AnimatedSprite::getRotationAngle() {
 
 void AnimatedSprite::setRotationAngle(float angle) {
     this->angle = angle;
+    if (this->angle >= 360) {
+        this->angle -= 360;
+    } else if (this->angle <= 0) {
+        this->angle += 360;
+    }
 }
 
 bool AnimatedSprite::isOutsideScreenLeft() {
@@ -110,6 +115,22 @@ bool AnimatedSprite::isOutsideScreenAbove() {
 
 bool AnimatedSprite::isOutsideScreenBelow() {
     return getActiveSprite().isOutsideScreenBelow();
+}
+
+bool AnimatedSprite::isFacingUp() {
+    return angle < 90 || angle > 270;
+}
+
+bool AnimatedSprite::isFacingDown() {
+    return angle > 90 && angle < 270;
+}
+
+bool AnimatedSprite::isFacingLeft() {
+    return angle > 180 && angle < 360;
+}
+
+bool AnimatedSprite::isFacingRight() {
+    return angle > 0 && angle < 180;
 }
 
 void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {
