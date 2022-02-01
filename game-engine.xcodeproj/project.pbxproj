@@ -55,6 +55,8 @@
 
 /* Begin PBXFileReference section */
 		2350E82D279976840017F7C3 /* shipEventListener.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = shipEventListener.hpp; sourceTree = "<group>"; };
+		235A526227A959110008A8A0 /* geometricsHelper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = geometricsHelper.hpp; sourceTree = "<group>"; };
+		235A526327A959790008A8A0 /* position2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = position2D.hpp; sourceTree = "<group>"; };
 		23A933AC27864EA700769F69 /* animatedSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animatedSprite.hpp; sourceTree = "<group>"; };
 		23A933AD27864EA700769F69 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		23A933AE27864EA700769F69 /* aminatedSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aminatedSprite.cpp; sourceTree = "<group>"; };
@@ -138,6 +140,8 @@
 				23A933BA2788407F00769F69 /* keyboardHandler.hpp */,
 				23B177AF27A40C0A0094B178 /* screen.cpp */,
 				23B177B027A40C0A0094B178 /* screen.hpp */,
+				235A526227A959110008A8A0 /* geometricsHelper.hpp */,
+				235A526327A959790008A8A0 /* position2D.hpp */,
 			);
 			path = "game-engine";
 			sourceTree = "<group>";

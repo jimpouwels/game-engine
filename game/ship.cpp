@@ -4,6 +4,8 @@
 #include "shipEventListener.hpp"
 #include "bullet.hpp"
 #include "direction.hpp"
+#include "geometricsHelper.hpp"
+#include "position2D.hpp"
 
 const int Ship::SPEED_IN_PIXELS_PER_SECOND = 200;
 const int Ship::ROTATION_DEGREES_PER_SECOND = 140;
@@ -59,20 +61,19 @@ void Ship::handleFiring(float elapsedTime) {
 
 void Ship::handleMovement(float elapsedTime) {
     if (isThrothling) {
-        float delta = (SPEED_IN_PIXELS_PER_SECOND) / (1.0F / elapsedTime);
-        velocityX = delta * sin(M_PI * 2 * getRotationAngle() / 360);
-        velocityY = -(delta * cos(M_PI * 2 * getRotationAngle() / 360));
+        float distance = (SPEED_IN_PIXELS_PER_SECOND) / (1.0F / elapsedTime);
+        deltaPosition = jimp::GeometricsHelper::deltaByAngle(getRotationAngle(), distance);
     }
     
-    if ((isOutsideScreenAbove() && velocityY <= 0) || (isOutsideScreenBelow() && velocityY >= 0)) {
-        velocityY = 0;
+    if ((isOutsideScreenRight() && deltaPosition.x >= 0) || (isOutsideScreenLeft() && deltaPosition.x <= 0)) {
+        deltaPosition.x = 0;
     }
-    if ((isOutsideScreenRight() && velocityX >= 0) || (isOutsideScreenLeft() && velocityX <= 0)) {
-        velocityX = 0;
+    if ((isOutsideScreenAbove() && deltaPosition.y <= 0) || (isOutsideScreenBelow() && deltaPosition.y >= 0)) {
+        deltaPosition.y = 0;
     }
     
-    setX(getX() + velocityX);
-    setY(getY() + velocityY);
+    setX(getX() + deltaPosition.x);
+    setY(getY() + deltaPosition.y);
 }
 
 void Ship::handleRotation(float elapsedTime) {
