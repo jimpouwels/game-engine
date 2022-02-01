@@ -1,18 +1,18 @@
-#ifndef Header_h
-#define Header_h
+#ifndef geo2d_hpp
+#define geo2d_hpp
 
 #include <math.h>
-#include "position2D.hpp"
+#include "point2D.hpp"
 
 namespace jimp {
 
 class Geo2D {
 
 public:
-    static Position2D deltaByAngle(float angle, float distance) {
+    static Point2D deltaByAngle(float angle, float distance) {
         float deltaX = distance * sin(M_PI * 2 * angle / 360);
         float deltaY = -(distance * cos(M_PI * 2 * angle / 360));
-        return Position2D { .x = deltaX, .y = deltaY };
+        return Point2D { .x = deltaX, .y = deltaY };
     }
     
     static float normalizeAngle(float angle) {

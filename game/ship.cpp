@@ -3,7 +3,7 @@
 #include "bullet.hpp"
 #include "direction.hpp"
 #include "geo2D.hpp"
-#include "position2D.hpp"
+#include "point2D.hpp"
 
 const int Ship::SPEED_IN_PIXELS_PER_SECOND = 200;
 const int Ship::ROTATION_DEGREES_PER_SECOND = 140;
