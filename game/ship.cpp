@@ -1,5 +1,3 @@
-#include <math.h>
-
 #include "ship.hpp"
 #include "shipEventListener.hpp"
 #include "bullet.hpp"

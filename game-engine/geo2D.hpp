@@ -1,6 +1,7 @@
 #ifndef Header_h
 #define Header_h
 
+#include <math.h>
 #include "position2D.hpp"
 
 namespace jimp {
