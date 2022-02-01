@@ -64,7 +64,7 @@ bool Sprite::isOutsideScreenLeft() {
 }
 
 bool Sprite::isOutsideScreenRight() {
-    return getX() > screen->getWidth() - getWidth();
+    return this->x > screen->getWidth() - getWidth();
 }
 
 bool Sprite::isOutsideScreenAbove() {

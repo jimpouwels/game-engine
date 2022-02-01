@@ -63,10 +63,12 @@ void Ship::handleMovement(float elapsedTime) {
         velocityX = delta * sin(M_PI * 2 * getRotationAngle() / 360);
         velocityY = -(delta * cos(M_PI * 2 * getRotationAngle() / 360));
     }
-
+    
+    std::cout << rand() << "isoutside-right: " << isOutsideScreenRight() << ", vel-x: " << velocityX << std::endl;
     if ((isOutsideScreenAbove() && velocityY <= 0) || (isOutsideScreenBelow() && velocityY >= 0)) {
         velocityY = 0;
-    } else if (((isOutsideScreenRight() && velocityX >= 0) || (isOutsideScreenLeft() && velocityX <= 0))) {
+    }
+    if ((isOutsideScreenRight() && velocityX >= 0) || (isOutsideScreenLeft() && velocityX <= 0)) {
         velocityX = 0;
     }
     
