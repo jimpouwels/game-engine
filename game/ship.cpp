@@ -79,7 +79,7 @@ void Ship::handleRotation(float elapsedTime) {
         if (isRotatingLeft) {
             deltaDegrees = -deltaDegrees;
         }
-        setRotationAngle(getRotationAngle() + deltaDegrees);
+        setRotationAngle(jimp::Geo2D::normalizeAngle(getRotationAngle() + deltaDegrees));
     }
     
     updateAnimation(elapsedTime);

@@ -94,11 +94,6 @@ float AnimatedSprite::getRotationAngle() {
 
 void AnimatedSprite::setRotationAngle(float angle) {
     this->angle = angle;
-    if (this->angle >= 360) {
-        this->angle -= 360;
-    } else if (this->angle <= 0) {
-        this->angle += 360;
-    }
 }
 
 bool AnimatedSprite::isOutsideScreenLeft() {

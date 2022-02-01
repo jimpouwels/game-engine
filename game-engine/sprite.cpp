@@ -5,9 +5,9 @@
 
 namespace jimp {
 
-Sprite::Sprite(jimp::Screen* screen, float x, float y, float scale, int rotationAngle, std::string filePath) {
+Sprite::Sprite(jimp::Screen* screen, float x, float y, float scale, int angle, std::string filePath) {
     Sprite(screen, x, y, scale, filePath);
-    this->rotationAngle = rotationAngle;
+    this->angle = angle;
 }
 
 Sprite::Sprite(jimp::Screen* screen, float x, float y, float scale, std::string filePath) {
@@ -47,16 +47,11 @@ int Sprite::getHeight() {
 }
 
 float Sprite::getRotationAngle() {
-    return rotationAngle;
+    return angle;
 }
 
-void Sprite::setRotationAngle(float rotationAngle) {
-    this->rotationAngle = rotationAngle;
-    if (this->rotationAngle >= 360) {
-        this->rotationAngle -= 360;
-    } else if (this->rotationAngle <= 0) {
-        this->rotationAngle += 360;
-    }
+void Sprite::setRotationAngle(float angle) {
+    this->angle = angle;
 }
 
 bool Sprite::isOutsideScreenLeft() {

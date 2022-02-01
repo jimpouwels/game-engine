@@ -15,6 +15,15 @@ public:
         return Position2D { .x = deltaX, .y = deltaY };
     }
     
+    static float normalizeAngle(float angle) {
+        if (angle >= 360) {
+            return angle -= 360;
+        } else if (angle <= 0) {
+            return angle += 360;
+        }
+        return angle;
+    }
+    
 };
 
 }

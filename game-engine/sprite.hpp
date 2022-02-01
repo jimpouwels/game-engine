@@ -14,7 +14,7 @@ private:
     float x;
     float y;
     float scale = 1.0F;
-    float rotationAngle = 0.0F;
+    float angle = 0.0F;
     jimp::Screen* screen;
     std::string filePath;
     sf::Image* image;
@@ -24,7 +24,7 @@ protected:
     
 public:
     Sprite(jimp::Screen* screen, float x, float y, float scale, std::string filePath);
-    Sprite(jimp::Screen* screen, float x, float y, float scale, int rotationAngle, std::string filePath);
+    Sprite(jimp::Screen* screen, float x, float y, float scale, int angle, std::string filePath);
     ~Sprite();
     float getX();
     void setX(float x);
@@ -33,7 +33,7 @@ public:
     float getScale();
     void setScale(float scale);
     float getRotationAngle();
-    void setRotationAngle(float rotationAngle);
+    void setRotationAngle(float angle);
     int getWidth();
     int getHeight();
     bool isOutsideScreenBelow();
