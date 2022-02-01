@@ -5,7 +5,7 @@
 
 namespace jimp {
 
-class GeometricsHelper {
+class Geo2D {
 
 public:
     static Position2D deltaByAngle(float angle, float distance) {

@@ -4,7 +4,7 @@
 #include "shipEventListener.hpp"
 #include "bullet.hpp"
 #include "direction.hpp"
-#include "geometricsHelper.hpp"
+#include "geo2D.hpp"
 #include "position2D.hpp"
 
 const int Ship::SPEED_IN_PIXELS_PER_SECOND = 200;
@@ -34,14 +34,13 @@ void Ship::onKeyboardRight(jimp::KeyState keyState) {
 void Ship::onKeyboardUp(jimp::KeyState keyState) {
     isThrothling = keyState == jimp::KeyState::PRESSED;
 }
+
 void Ship::onKeyboardDown(jimp::KeyState keyState) {
     isThrothling = keyState == jimp::KeyState::PRESSED;
 }
 
 void Ship::onKeyboardSpaceBar(jimp::KeyState keyState) {
-    if (keyState == jimp::KeyState::PRESSED) {
-        hasFired = keyState == jimp::KeyState::PRESSED;
-    }
+    hasFired = keyState == jimp::KeyState::PRESSED;
     isFiring = keyState == jimp::KeyState::PRESSED;
 }
 
@@ -62,7 +61,7 @@ void Ship::handleFiring(float elapsedTime) {
 void Ship::handleMovement(float elapsedTime) {
     if (isThrothling) {
         float distance = (SPEED_IN_PIXELS_PER_SECOND) / (1.0F / elapsedTime);
-        deltaPosition = jimp::GeometricsHelper::deltaByAngle(getRotationAngle(), distance);
+        deltaPosition = jimp::Geo2D::deltaByAngle(getRotationAngle(), distance);
     }
     
     if ((isOutsideScreenRight() && deltaPosition.x >= 0) || (isOutsideScreenLeft() && deltaPosition.x <= 0)) {
