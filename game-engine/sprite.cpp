@@ -11,8 +11,8 @@ Sprite::Sprite(jimp::Screen* screen, float x, float y, float scale, int angle, s
 }
 
 Sprite::Sprite(jimp::Screen* screen, float x, float y, float scale, std::string filePath) {
-    this->x = x;
-    this->y = y;
+    this->position.x = x;
+    this->position.y = y;
     this->scale = scale;
     this->screen = screen;
     loadImage(filePath);
@@ -22,20 +22,12 @@ Sprite::~Sprite() {
     delete image;
 }
 
-float Sprite::getX() {
-    return this->x;
-}
-
 void Sprite::setX(float x) {
-    this->x = x;
-}
-
-float Sprite::getY() {
-    return this->y;
+    position.x = x;
 }
 
 void Sprite::setY(float y) {
-    this->y = y;
+    position.y = y;
 }
 
 int Sprite::getWidth() {
@@ -50,24 +42,32 @@ float Sprite::getRotationAngle() {
     return angle;
 }
 
+void Sprite::setPosition(Point2D position) {
+    this->position = position;
+}
+
+Point2D& Sprite::getPosition() {
+    return position;
+}
+
 void Sprite::setRotationAngle(float angle) {
     this->angle = angle;
 }
 
 bool Sprite::isOutsideScreenLeft() {
-    return this->x < 0;
+    return position.x < 0;
 }
 
 bool Sprite::isOutsideScreenRight() {
-    return this->x > screen->getWidth() - getWidth();
+    return position.x > screen->getWidth() - getWidth();
 }
 
 bool Sprite::isOutsideScreenAbove() {
-    return this->y < 0;
+    return position.y < 0;
 }
 
 bool Sprite::isOutsideScreenBelow() {
-    return getY() > screen->getHeight() - getHeight();
+    return position.y > screen->getHeight() - getHeight();
 }
 
 std::string Sprite::getFilePath() {

@@ -47,10 +47,10 @@ void GameEngine::draw(jimp::Sprite& sprite) {
     sfmlTexture.loadFromImage(sprite.getImage());
     sf::Sprite sfmlSprite;
     sfmlSprite.setTexture(sfmlTexture);
-    sfmlSprite.setPosition(sprite.getX(), sprite.getY());
+    sfmlSprite.setPosition(sprite.getPosition().x, sprite.getPosition().y);
     sfmlSprite.setScale(sprite.getScale(), sprite.getScale());
     sf::Transform transform;
-    transform.rotate(sprite.getRotationAngle(), sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight() / 2);
+    transform.rotate(sprite.getRotationAngle(), sprite.getPosition().x + sprite.getWidth() / 2, sprite.getPosition().y + sprite.getHeight() / 2);
     window->draw(sfmlSprite, transform);
 }
 

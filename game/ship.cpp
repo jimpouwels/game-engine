@@ -50,7 +50,7 @@ void Ship::handleFiring(float elapsedTime) {
     float timeBetweenShots = 1.0F / SHOTS_PER_SECOND;
     if (elapsedTimeSinceLastShot >= timeBetweenShots && (hasFired || isFiring)) {
         hasFired = false;
-        Bullet* bullet = new Bullet(&getScreen(), getX() + (getWidth() / 2), getY() + (getHeight() / 2), getRotationAngle());
+        Bullet* bullet = new Bullet(&getScreen(), getPosition().x + (getWidth() / 2), getPosition().y + (getHeight() / 2), getRotationAngle());
         eventListener->onWeaponFired(bullet);
         elapsedTimeSinceLastShot = 0;
     }
@@ -68,9 +68,7 @@ void Ship::handleMovement(float elapsedTime) {
     if ((isOutsideScreenAbove() && deltaPosition.y <= 0) || (isOutsideScreenBelow() && deltaPosition.y >= 0)) {
         deltaPosition.y = 0;
     }
-    
-    setX(getX() + deltaPosition.x);
-    setY(getY() + deltaPosition.y);
+    addToPosition(deltaPosition);
 }
 
 void Ship::handleRotation(float elapsedTime) {

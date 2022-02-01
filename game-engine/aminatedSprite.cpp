@@ -9,8 +9,8 @@
 namespace jimp {
 
 AnimatedSprite::AnimatedSprite(Screen* screen, float x, float y, float scale, float imageSwapIntervalInSeconds) {
-    this->x = x;
-    this->y = y;
+    this->position.x = x;
+    this->position.y = y;
     this->scale = scale;
     this->screen = screen;
     animationMap = new std::map<std::string, Animation*>;
@@ -31,7 +31,7 @@ AnimatedSprite::~AnimatedSprite() {
 
 Sprite& AnimatedSprite::getActiveSprite() {
     Sprite* activeSprite = activeAnimation->getActiveSprite();
-    activeSprite->setPosition(x, y);
+    activeSprite->setPosition(position);
     activeSprite->setScale(scale);
     activeSprite->setRotationAngle(angle);
     return *activeAnimation->getActiveSprite();
@@ -55,20 +55,25 @@ jimp::Screen& AnimatedSprite::getScreen() {
     return *screen;
 }
 
-float AnimatedSprite::getX() {
-    return x;
-}
-
 void AnimatedSprite::setX(float x) {
-    this->x = x;
-}
-
-float AnimatedSprite::getY() {
-    return y;
+    position.x = x;
 }
 
 void AnimatedSprite::setY(float y) {
-    this->y = y;
+    position.y = y;
+}
+
+Point2D& AnimatedSprite::getPosition() {
+    return position;
+}
+
+void AnimatedSprite::setPosition(Point2D position) {
+    this->position = position;
+}
+
+void AnimatedSprite::addToPosition(Point2D delta) {
+    position.x += delta.x;
+    position.y += delta.y;
 }
 
 int AnimatedSprite::getWidth() {
@@ -84,7 +89,7 @@ float AnimatedSprite::getScale() {
 }
 
 bool AnimatedSprite::isPositionedWithinScreen() {
-    return screen->isWithin(x, y);
+    return screen->isWithin(position.x, position.y);
     return true;
 }
 
@@ -136,7 +141,7 @@ void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {
     } else {
         animation = animationMap->find(animationId)->second;
     }
-    Sprite* sprite = new Sprite(screen, x, y, scale, filePath);
+    Sprite* sprite = new Sprite(screen, position.x, position.y, scale, filePath);
     animationMap->find(animationId)->second->addSprite(sprite);
     if (activeAnimation == nullptr) {
         activeAnimation = animation;

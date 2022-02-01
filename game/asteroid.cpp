@@ -34,18 +34,18 @@ void Asteroid::update(float elapsedTime) {
     
     switch (directionY) {
         case UP:
-            setY(getY() - deltaPosition);
+            setY(getPosition().y - deltaPosition);
             break;
         case DOWN:
-            setY(getY() + deltaPosition);
+            setY(getPosition().y + deltaPosition);
             break;
     }
     switch (directionX) {
         case RIGHT:
-            setX(getX() + deltaPosition);
+            setX(getPosition().x + deltaPosition);
             break;
         case LEFT:
-            setX(getX() - deltaPosition);
+            setX(getPosition().x - deltaPosition);
             break;
     }
 

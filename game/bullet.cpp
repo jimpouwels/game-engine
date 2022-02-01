@@ -1,4 +1,4 @@
-#include <math.h>
+#include "geo2D.hpp"
 #include "bullet.hpp"
 #include "animatedSprite.hpp"
 #include "direction.hpp"
@@ -12,10 +12,8 @@ Bullet::Bullet(jimp::Screen* screen, float x, float y, float angle) : jimp::Anim
 }
 
 void Bullet::update(float elapsedTime) {
-    float delta = SPEED_IN_PIXELS_PER_SECOND / (1.0F / elapsedTime);
-    float deltaX = delta * sin(M_PI * 2 * (getRotationAngle()) / 360);
-    float deltaY = delta * cos(M_PI * 2 * (getRotationAngle()) / 360);
-    setX(getX() + deltaX);
-    setY(getY() + -deltaY);
+    float distance = SPEED_IN_PIXELS_PER_SECOND / (1.0F / elapsedTime);
+    jimp::Point2D deltaPosition = jimp::Geo2D::deltaByAngle(getRotationAngle(), distance);
+    addToPosition(deltaPosition);
     this->updateAnimation(elapsedTime);
 }

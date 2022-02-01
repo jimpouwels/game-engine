@@ -5,14 +5,14 @@
 #include <SFML/Graphics.hpp>
 
 #include "screen.hpp"
+#include "point2D.hpp"
 
 namespace jimp {
 
 class Sprite {
     
 private:
-    float x;
-    float y;
+    Point2D position = { .x = 0, .y = 0};
     float scale = 1.0F;
     float angle = 0.0F;
     jimp::Screen* screen;
@@ -26,9 +26,9 @@ public:
     Sprite(jimp::Screen* screen, float x, float y, float scale, std::string filePath);
     Sprite(jimp::Screen* screen, float x, float y, float scale, int angle, std::string filePath);
     ~Sprite();
-    float getX();
+    Point2D& getPosition();
+    void setPosition(Point2D position);
     void setX(float x);
-    float getY();
     void setY(float y);
     float getScale();
     void setScale(float scale);

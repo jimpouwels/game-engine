@@ -7,14 +7,14 @@
 #include "sprite.hpp"
 #include "animation.hpp"
 #include "screen.hpp"
+#include "point2D.hpp"
 
 namespace jimp {
 
 class AnimatedSprite {
 
 private:
-    float x;
-    float y;
+    Point2D position = { .x = 0, .y = 0 };
     float scale;
     float angle;
     Screen* screen;
@@ -26,13 +26,14 @@ private:
 protected:
     void setX(float x);
     void setY(float y);
+    void setPosition(Point2D position);
+    void addToPosition(Point2D delta);
     void updateAnimation(float elapsedTime);
     void setCurrentAnimation(std::string animationId);
     
 public:
     Screen& getScreen();
-    float getX();
-    float getY();
+    Point2D& getPosition();
     float getScale();
     int getWidth();
     int getHeight();
