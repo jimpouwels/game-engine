@@ -2,6 +2,7 @@
 #include "asteroid.hpp"
 #include "screen.hpp"
 #include "geo2D.hpp"
+#include "timing.hpp"
 
 #include <iostream>
 
@@ -15,7 +16,6 @@ Asteroid::Asteroid(jimp::Screen* screen, float x, float y) : jimp::AnimatedSprit
 }
 
 Asteroid::~Asteroid() {
-    
 }
 
 void Asteroid::update(float elapsedTime) {
@@ -36,12 +36,12 @@ void Asteroid::updateDirection(float elapsedTime) {
 }
 
 void Asteroid::updateMovement(float elapsedTime) {
-    float distance = (SPEED_IN_PIXELS_PER_SECOND) / (1.0F / elapsedTime);
+    float distance = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
     jimp::Point2D deltaPosition = jimp::Geo2D::deltaByAngle(directionAngle, distance);
     addToPosition(deltaPosition);
 }
 
 void Asteroid::updateRotation(float elapsedTime) {
-    float deltaDegrees = ROTATION_DEGREES_PER_SECOND / (1.0F / elapsedTime);
+    float deltaDegrees = jimp::Timing::toValueForElapsedTime(ROTATION_DEGREES_PER_SECOND, elapsedTime);
     setRotationAngle(getRotationAngle() + deltaDegrees);
 }

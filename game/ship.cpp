@@ -4,6 +4,7 @@
 #include "direction.hpp"
 #include "geo2D.hpp"
 #include "point2D.hpp"
+#include "timing.hpp"
 
 const int Ship::SPEED_IN_PIXELS_PER_SECOND = 200;
 const int Ship::ROTATION_DEGREES_PER_SECOND = 140;
@@ -58,7 +59,7 @@ void Ship::updateFiring(float elapsedTime) {
 
 void Ship::updateMovement(float elapsedTime) {
     if (isThrothling) {
-        float distance = (SPEED_IN_PIXELS_PER_SECOND) / (1.0F / elapsedTime);
+        float distance = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
         deltaPosition = jimp::Geo2D::deltaByAngle(getRotationAngle(), distance);
     }
     
@@ -73,7 +74,7 @@ void Ship::updateMovement(float elapsedTime) {
 
 void Ship::updateRotation(float elapsedTime) {
     if (isRotatingLeft || isRotatingRight) {
-        float deltaDegrees = ROTATION_DEGREES_PER_SECOND / (1.0F / elapsedTime);
+        float deltaDegrees = jimp::Timing::toValueForElapsedTime(ROTATION_DEGREES_PER_SECOND, elapsedTime);
         if (isRotatingLeft) {
             deltaDegrees = -deltaDegrees;
         }

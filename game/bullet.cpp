@@ -2,6 +2,7 @@
 #include "bullet.hpp"
 #include "animatedSprite.hpp"
 #include "direction.hpp"
+#include "timing.hpp"
 
 const int Bullet::SPEED_IN_PIXELS_PER_SECOND = 1200;
 const float Bullet::SCALE = 0.3F;
@@ -12,7 +13,7 @@ Bullet::Bullet(jimp::Screen* screen, float x, float y, float angle) : jimp::Anim
 }
 
 void Bullet::update(float elapsedTime) {
-    float distance = SPEED_IN_PIXELS_PER_SECOND / (1.0F / elapsedTime);
+    float distance = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
     jimp::Point2D deltaPosition = jimp::Geo2D::deltaByAngle(getRotationAngle(), distance);
     addToPosition(deltaPosition);
     this->updateAnimation(elapsedTime);
