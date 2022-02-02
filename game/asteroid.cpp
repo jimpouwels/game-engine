@@ -32,7 +32,6 @@ void Asteroid::handleDirection(float elapsedTime) {
     if (isOutsideScreenLeft() || isOutsideScreenRight()) {
         directionAngle = jimp::Geo2D::inverseAngleHorizontally(directionAngle);
     }
-    directionAngle = jimp::Geo2D::normalizeAngle(directionAngle);
 }
 
 void Asteroid::handleMovement(float elapsedTime) {

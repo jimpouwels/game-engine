@@ -15,6 +15,30 @@ public:
         return Point2D { .x = deltaX, .y = deltaY };
     }
     
+    static float inverseAngleVertically(float angle) {
+        float newAngle = angle;
+        if (newAngle == 0 || newAngle == 180) {
+            newAngle = newAngle + 180;
+        } else if (newAngle < 90 || (newAngle < 270 && newAngle > 180)) {
+            newAngle = newAngle + 90;
+        } else {
+            newAngle = newAngle - 90;
+        }
+        return normalizeAngle(newAngle);
+    }
+    
+    static float inverseAngleHorizontally(float angle) {
+        float newAngle = angle;
+        if (newAngle == 0 || newAngle == 180) {
+            newAngle = newAngle + 180;
+        } else if (angle < 90 || (newAngle < 270 && newAngle > 180)) {
+            newAngle = newAngle - 90;
+        } else {
+            newAngle = newAngle + 90;
+        }
+        return normalizeAngle(newAngle);
+    }
+    
     static float normalizeAngle(float angle) {
         if (angle >= 360) {
             return angle -= 360;
@@ -22,26 +46,6 @@ public:
             return angle += 360;
         }
         return angle;
-    }
-    
-    static float inverseAngleVertically(float angle) {
-        if (angle == 0 || angle == 180) {
-            return angle + 180;
-        } else if (angle < 90 || (angle < 270 && angle > 180)) {
-            return angle + 90;
-        } else {
-            return angle - 90;
-        }
-    }
-    
-    static float inverseAngleHorizontally(float angle) {
-        if (angle == 0 || angle == 180) {
-            return angle + 180;
-        } else if (angle < 90 || (angle < 270 && angle > 180)) {
-            return angle - 90;
-        } else {
-            return angle + 90;
-        }
     }
     
 };
