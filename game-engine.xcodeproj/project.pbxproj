@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		235A526727AAB2A00008A8A0 /* asteroidSpawner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235A526527AAB29F0008A8A0 /* asteroidSpawner.cpp */; };
 		23A933B227864EA800769F69 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AD27864EA700769F69 /* sprite.cpp */; };
 		23A933B327864EA800769F69 /* aminatedSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AE27864EA700769F69 /* aminatedSprite.cpp */; };
 		23A933B527864EA800769F69 /* gameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933B127864EA700769F69 /* gameEngine.cpp */; };
@@ -58,6 +59,8 @@
 		235A526227A959110008A8A0 /* geo2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = geo2D.hpp; sourceTree = "<group>"; };
 		235A526327A959790008A8A0 /* vector2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = vector2D.hpp; sourceTree = "<group>"; };
 		235A526427AA81180008A8A0 /* timing.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = timing.hpp; sourceTree = "<group>"; };
+		235A526527AAB29F0008A8A0 /* asteroidSpawner.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = asteroidSpawner.cpp; sourceTree = "<group>"; };
+		235A526627AAB29F0008A8A0 /* asteroidSpawner.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = asteroidSpawner.hpp; sourceTree = "<group>"; };
 		23A933AC27864EA700769F69 /* animatedSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animatedSprite.hpp; sourceTree = "<group>"; };
 		23A933AD27864EA700769F69 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		23A933AE27864EA700769F69 /* aminatedSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aminatedSprite.cpp; sourceTree = "<group>"; };
@@ -182,6 +185,8 @@
 				23E5E2F8279ABCF900B62583 /* direction.hpp */,
 				23E5E2FE27A302DD00B62583 /* asteroid.cpp */,
 				23E5E2FF27A302DD00B62583 /* asteroid.hpp */,
+				235A526527AAB29F0008A8A0 /* asteroidSpawner.cpp */,
+				235A526627AAB29F0008A8A0 /* asteroidSpawner.hpp */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 				23B177A727A3E3160094B178 /* animation.hpp in Sources */,
 				23B177A827A3E3160094B178 /* sprite.hpp in Sources */,
 				23B177A927A3E3160094B178 /* keyListener.hpp in Sources */,
+				235A526727AAB2A00008A8A0 /* asteroidSpawner.cpp in Sources */,
 				23B177AA27A3E3160094B178 /* keyboardHandler.hpp in Sources */,
 				23B177B127A40C0A0094B178 /* screen.cpp in Sources */,
 				23E5E30027A302DD00B62583 /* asteroid.cpp in Sources */,

@@ -5,6 +5,7 @@
 #include "ship.hpp"
 #include "screen.hpp"
 #include "shipEventListener.hpp"
+#include "asteroidSpawner.hpp"
 #include <iostream>
 #include <chrono>
 
@@ -12,7 +13,7 @@ class Game : public jimp::GameEngine, public ShipEventListener {
     
 private:
     Ship* ship = nullptr;
-    Asteroid* asteroid = nullptr;
+    AsteroidSpawner* asteroidSpawner = nullptr;
     jimp::Screen* screen = nullptr;
     std::list<jimp::AnimatedSprite*>* bullets = nullptr;
     
@@ -21,13 +22,13 @@ public:
         screen = new jimp::Screen(this);
         ship = new Ship(screen, this);
         addKeyListener(ship);
-        asteroid = new Asteroid(screen, 10, 10);
+        asteroidSpawner = new AsteroidSpawner(screen);
         bullets = new std::list<jimp::AnimatedSprite*>;
     }
     
     ~Game() {
         delete ship;
-        delete asteroid;
+        delete asteroidSpawner;
         for (const auto& bullet: *bullets) {
             delete bullet;
         }
@@ -45,9 +46,11 @@ public:
             draw(bullet->getActiveSprite());
         }
         ship->update(elapsedTime);
-        asteroid->update(elapsedTime);
+        asteroidSpawner->onFrame(elapsedTime);
         draw(ship->getActiveSprite());
-        draw(asteroid->getActiveSprite());
+        for (const auto& asteroid: asteroidSpawner->getAsteroids()) {
+            draw(asteroid->getActiveSprite());
+        }
     }
     
     void cleanupBullets() {
