@@ -24,6 +24,26 @@ public:
         return angle;
     }
     
+    static float inverseAngleVertically(float angle) {
+        if (angle == 0 || angle == 180) {
+            return angle + 180;
+        } else if (angle < 90 || (angle < 270 && angle > 180)) {
+            return angle + 90;
+        } else {
+            return angle - 90;
+        }
+    }
+    
+    static float inverseAngleHorizontally(float angle) {
+        if (angle == 0 || angle == 180) {
+            return angle + 180;
+        } else if (angle < 90 || (angle < 270 && angle > 180)) {
+            return angle - 90;
+        } else {
+            return angle + 90;
+        }
+    }
+    
 };
 
 }

@@ -26,39 +26,11 @@ void Asteroid::update(float elapsedTime) {
 }
 
 void Asteroid::handleDirection(float elapsedTime) {
-    if (isOutsideScreenAbove()) {
-        if (directionAngle == 0 || directionAngle == 180) {
-            directionAngle += 180;
-        } else if (directionAngle < 90) {
-            directionAngle += 90;
-        } else {
-            directionAngle -= 90;
-        }
-    } else if (isOutsideScreenBelow()) {
-        if (directionAngle == 0 || directionAngle == 180) {
-            directionAngle += 180;
-        } else if (directionAngle > 180) {
-            directionAngle += 90;
-        } else {
-            directionAngle -= 90;
-        }
+    if (isOutsideScreenAbove() || isOutsideScreenBelow()) {
+        directionAngle = jimp::Geo2D::inverseAngleVertically(directionAngle);
     }
-    if (isOutsideScreenLeft()) {
-        if (directionAngle == 270 || directionAngle == 90) {
-            directionAngle += 180;
-        } else if (directionAngle > 270) {
-            directionAngle += 90;
-        } else {
-            directionAngle -= 90;
-        }
-    } else if (isOutsideScreenRight()) {
-        if (directionAngle == 270 || directionAngle == 90) {
-            directionAngle += 180;
-        } else if (directionAngle < 90) {
-            directionAngle -= 90;
-        } else {
-            directionAngle += 90;
-        }
+    if (isOutsideScreenLeft() || isOutsideScreenRight()) {
+        directionAngle = jimp::Geo2D::inverseAngleHorizontally(directionAngle);
     }
     directionAngle = jimp::Geo2D::normalizeAngle(directionAngle);
 }
