@@ -16,9 +16,9 @@ Ship::Ship(jimp::Screen* screen, ShipEventListener* eventListener) : jimp::Anima
 }
 
 void Ship::update(float elapsedTime) {
-    handleFiring(elapsedTime);
-    handleMovement(elapsedTime);
-    handleRotation(elapsedTime);
+    updateFiring(elapsedTime);
+    updateMovement(elapsedTime);
+    updateRotation(elapsedTime);
 }
 
 void Ship::onKeyboardLeft(jimp::KeyState keyState) {
@@ -42,7 +42,7 @@ void Ship::onKeyboardSpaceBar(jimp::KeyState keyState) {
     isFiring = keyState == jimp::KeyState::PRESSED;
 }
 
-void Ship::handleFiring(float elapsedTime) {
+void Ship::updateFiring(float elapsedTime) {
     elapsedTimeSinceLastShot += elapsedTime;
     if (!isFiring && !hasFired) {
         return;
@@ -56,7 +56,7 @@ void Ship::handleFiring(float elapsedTime) {
     }
 }
 
-void Ship::handleMovement(float elapsedTime) {
+void Ship::updateMovement(float elapsedTime) {
     if (isThrothling) {
         float distance = (SPEED_IN_PIXELS_PER_SECOND) / (1.0F / elapsedTime);
         deltaPosition = jimp::Geo2D::deltaByAngle(getRotationAngle(), distance);
@@ -71,7 +71,7 @@ void Ship::handleMovement(float elapsedTime) {
     addToPosition(deltaPosition);
 }
 
-void Ship::handleRotation(float elapsedTime) {
+void Ship::updateRotation(float elapsedTime) {
     if (isRotatingLeft || isRotatingRight) {
         float deltaDegrees = ROTATION_DEGREES_PER_SECOND / (1.0F / elapsedTime);
         if (isRotatingLeft) {

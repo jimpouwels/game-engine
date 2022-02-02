@@ -10,8 +10,9 @@ private:
     static const int SPEED_IN_PIXELS_PER_SECOND;
     static const int ROTATION_DEGREES_PER_SECOND;
     float directionAngle;
-    void handleDirection(float elapsedTime);
-    void handleMovement(float elapsedTime);
+    void updateDirection(float elapsedTime);
+    void updateMovement(float elapsedTime);
+    void updateRotation(float elapsedTime);
     
 public:
     Asteroid(jimp::Screen* screen, float x, float y);

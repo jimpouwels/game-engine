@@ -28,9 +28,9 @@ private:
     jimp::Point2D deltaPosition = { .x = 0, .y = 0 };
     float elapsedTimeSinceLastShot = 0;
     ShipEventListener* eventListener = nullptr;
-    void handleMovement(float elapsedTime);
-    void handleFiring(float elapsedTime);
-    void handleRotation(float elapsedTime);
+    void updateMovement(float elapsedTime);
+    void updateFiring(float elapsedTime);
+    void updateRotation(float elapsedTime);
     void setMoving(jimp::KeyState keyState);
 
 public:
