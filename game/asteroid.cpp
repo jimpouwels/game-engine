@@ -37,7 +37,7 @@ void Asteroid::updateDirection(float elapsedTime) {
 
 void Asteroid::updateMovement(float elapsedTime) {
     float distance = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
-    jimp::Vector2D deltaVector = jimp::Geo2D::deltaByAngle(directionAngle, distance);
+    jimp::Vector2D deltaVector = jimp::Geo2D::deltaVectorByAngle(directionAngle, distance);
     addToPosition(deltaVector);
 }
 
