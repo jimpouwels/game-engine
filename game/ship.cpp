@@ -60,7 +60,7 @@ void Ship::updateFiring(float elapsedTime) {
 void Ship::updateMovement(float elapsedTime) {
     if (isThrothling) {
         float distance = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
-        deltaVector = jimp::Geo2D::deltaByAngle(getRotationAngle(), distance);
+        deltaVector = jimp::Geo2D::deltaVectorByAngle(getRotationAngle(), distance);
     }
     
     if ((isOutsideScreenRight() && deltaVector.x >= 0) || (isOutsideScreenLeft() && deltaVector.x <= 0)) {
