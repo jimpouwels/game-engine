@@ -14,7 +14,7 @@ Bullet::Bullet(jimp::Screen* screen, float x, float y, float angle) : jimp::Anim
 
 void Bullet::update(float elapsedTime) {
     float distance = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
-    jimp::Point2D deltaPosition = jimp::Geo2D::deltaByAngle(getRotationAngle(), distance);
-    addToPosition(deltaPosition);
+    jimp::Vector2D deltaVector = jimp::Geo2D::deltaByAngle(getRotationAngle(), distance);
+    addToPosition(deltaVector);
     this->updateAnimation(elapsedTime);
 }

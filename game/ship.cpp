@@ -3,7 +3,7 @@
 #include "bullet.hpp"
 #include "direction.hpp"
 #include "geo2D.hpp"
-#include "point2D.hpp"
+#include "vector2D.hpp"
 #include "timing.hpp"
 
 const int Ship::SPEED_IN_PIXELS_PER_SECOND = 200;
@@ -60,16 +60,16 @@ void Ship::updateFiring(float elapsedTime) {
 void Ship::updateMovement(float elapsedTime) {
     if (isThrothling) {
         float distance = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
-        deltaPosition = jimp::Geo2D::deltaByAngle(getRotationAngle(), distance);
+        deltaVector = jimp::Geo2D::deltaByAngle(getRotationAngle(), distance);
     }
     
-    if ((isOutsideScreenRight() && deltaPosition.x >= 0) || (isOutsideScreenLeft() && deltaPosition.x <= 0)) {
-        deltaPosition.x = 0;
+    if ((isOutsideScreenRight() && deltaVector.x >= 0) || (isOutsideScreenLeft() && deltaVector.x <= 0)) {
+        deltaVector.x = 0;
     }
-    if ((isOutsideScreenAbove() && deltaPosition.y <= 0) || (isOutsideScreenBelow() && deltaPosition.y >= 0)) {
-        deltaPosition.y = 0;
+    if ((isOutsideScreenAbove() && deltaVector.y <= 0) || (isOutsideScreenBelow() && deltaVector.y >= 0)) {
+        deltaVector.y = 0;
     }
-    addToPosition(deltaPosition);
+    addToPosition(deltaVector);
 }
 
 void Ship::updateRotation(float elapsedTime) {

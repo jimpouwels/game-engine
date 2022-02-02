@@ -63,15 +63,15 @@ void AnimatedSprite::setY(float y) {
     position.y = y;
 }
 
-Point2D& AnimatedSprite::getPosition() {
+Vector2D& AnimatedSprite::getPosition() {
     return position;
 }
 
-void AnimatedSprite::setPosition(Point2D position) {
+void AnimatedSprite::setPosition(Vector2D position) {
     this->position = position;
 }
 
-void AnimatedSprite::addToPosition(Point2D delta) {
+void AnimatedSprite::addToPosition(Vector2D delta) {
     position.x += delta.x;
     position.y += delta.y;
 }
@@ -115,22 +115,6 @@ bool AnimatedSprite::isOutsideScreenAbove() {
 
 bool AnimatedSprite::isOutsideScreenBelow() {
     return getActiveSprite().isOutsideScreenBelow();
-}
-
-bool AnimatedSprite::isFacingUp() {
-    return angle < 90 || angle > 270;
-}
-
-bool AnimatedSprite::isFacingDown() {
-    return angle > 90 && angle < 270;
-}
-
-bool AnimatedSprite::isFacingLeft() {
-    return angle > 180 && angle < 360;
-}
-
-bool AnimatedSprite::isFacingRight() {
-    return angle > 0 && angle < 180;
 }
 
 void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {

@@ -42,11 +42,11 @@ float Sprite::getRotationAngle() {
     return angle;
 }
 
-void Sprite::setPosition(Point2D position) {
+void Sprite::setPosition(Vector2D position) {
     this->position = position;
 }
 
-Point2D& Sprite::getPosition() {
+Vector2D& Sprite::getPosition() {
     return position;
 }
 

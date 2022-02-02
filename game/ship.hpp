@@ -9,7 +9,7 @@
 #include "shipEventListener.hpp"
 #include "direction.hpp"
 #include "screen.hpp"
-#include "point2D.hpp"
+#include "vector2D.hpp"
 
 class Ship : public jimp::AnimatedSprite, public jimp::KeyListener {
     
@@ -25,7 +25,7 @@ private:
     bool isRotatingLeft = false;
     bool isRotatingRight = false;
     int speedInPixelsPerSecond;
-    jimp::Point2D deltaPosition = { .x = 0, .y = 0 };
+    jimp::Vector2D deltaVector = { .x = 0, .y = 0 };
     float elapsedTimeSinceLastShot = 0;
     ShipEventListener* eventListener = nullptr;
     void updateMovement(float elapsedTime);
