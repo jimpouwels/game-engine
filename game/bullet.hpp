@@ -14,7 +14,7 @@ public:
     static const int SPEED_IN_PIXELS_PER_SECOND;
     static const float SCALE;
     Bullet(jimp::Screen* screen, float x, float y, float angle);
-    void update(float elapsedTime);
+    void onFrame(float elapsedTime) override;
 
 };
 

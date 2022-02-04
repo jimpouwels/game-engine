@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		235A526727AAB2A00008A8A0 /* asteroidSpawner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235A526527AAB29F0008A8A0 /* asteroidSpawner.cpp */; };
+		235A526927AD25440008A8A0 /* asteroid-hit.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235A526827AD253C0008A8A0 /* asteroid-hit.png */; };
+		235A526B27AD49B50008A8A0 /* background.jpeg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235A526A27AD48D60008A8A0 /* background.jpeg */; };
 		23A933B227864EA800769F69 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AD27864EA700769F69 /* sprite.cpp */; };
 		23A933B327864EA800769F69 /* aminatedSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AE27864EA700769F69 /* aminatedSprite.cpp */; };
 		23A933B527864EA800769F69 /* gameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933B127864EA700769F69 /* gameEngine.cpp */; };
@@ -46,6 +48,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				235A526B27AD49B50008A8A0 /* background.jpeg in CopyFiles */,
+				235A526927AD25440008A8A0 /* asteroid-hit.png in CopyFiles */,
 				23E5E2FD27A302C700B62583 /* asteroid.png in CopyFiles */,
 				23E5E2FB279C208400B62583 /* spaceship.png in CopyFiles */,
 				23E5E2F7279A9C2900B62583 /* bullet.png in CopyFiles */,
@@ -61,6 +65,9 @@
 		235A526427AA81180008A8A0 /* timing.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = timing.hpp; sourceTree = "<group>"; };
 		235A526527AAB29F0008A8A0 /* asteroidSpawner.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = asteroidSpawner.cpp; sourceTree = "<group>"; };
 		235A526627AAB29F0008A8A0 /* asteroidSpawner.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = asteroidSpawner.hpp; sourceTree = "<group>"; };
+		235A526827AD253C0008A8A0 /* asteroid-hit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "asteroid-hit.png"; sourceTree = "<group>"; };
+		235A526A27AD48D60008A8A0 /* background.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpeg; sourceTree = "<group>"; };
+		235A526C27AD72E00008A8A0 /* mathUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mathUtils.hpp; sourceTree = "<group>"; };
 		23A933AC27864EA700769F69 /* animatedSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animatedSprite.hpp; sourceTree = "<group>"; };
 		23A933AD27864EA700769F69 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		23A933AE27864EA700769F69 /* aminatedSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aminatedSprite.cpp; sourceTree = "<group>"; };
@@ -147,6 +154,7 @@
 				235A526227A959110008A8A0 /* geo2D.hpp */,
 				235A526327A959790008A8A0 /* vector2D.hpp */,
 				235A526427AA81180008A8A0 /* timing.hpp */,
+				235A526C27AD72E00008A8A0 /* mathUtils.hpp */,
 			);
 			path = "game-engine";
 			sourceTree = "<group>";
@@ -166,6 +174,8 @@
 		23D5C7E4278357D400C6C916 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				235A526A27AD48D60008A8A0 /* background.jpeg */,
+				235A526827AD253C0008A8A0 /* asteroid-hit.png */,
 				23E5E2FC27A302C000B62583 /* asteroid.png */,
 				23E5E2FA279C207B00B62583 /* spaceship.png */,
 				23E5E2F6279A9C1E00B62583 /* bullet.png */,

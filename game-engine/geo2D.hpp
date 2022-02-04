@@ -16,27 +16,27 @@ public:
     }
     
     static float inverseAngleVertically(float angle) {
-        float newAngle = angle;
-        if (newAngle == 0 || newAngle == 180) {
-            newAngle = newAngle + 180;
-        } else if (newAngle < 90 || (newAngle < 270 && newAngle > 180)) {
-            newAngle = newAngle + 90;
+        float invertedAngle = angle;
+        if (angle == 0 || angle == 180) {
+            invertedAngle = angle + 180;
+        } else if (angle < 90 || (angle < 270 && angle > 180)) {
+            invertedAngle = 180 - angle;
         } else {
-            newAngle = newAngle - 90;
+            invertedAngle = 180 + (360 - angle);
         }
-        return normalizeAngle(newAngle);
+        return normalizeAngle(invertedAngle);
     }
     
     static float inverseAngleHorizontally(float angle) {
-        float newAngle = angle;
-        if (newAngle == 0 || newAngle == 180) {
-            newAngle = newAngle + 180;
-        } else if (angle < 90 || (newAngle < 270 && newAngle > 180)) {
-            newAngle = newAngle - 90;
+        float invertedAngle = angle;
+        if (invertedAngle == 0 || angle == 180) {
+            invertedAngle = angle;
+        } if (angle < 90 || angle > 270) {
+            invertedAngle = 360 - angle;
         } else {
-            newAngle = newAngle + 90;
+            invertedAngle = 180 - (angle - 180);
         }
-        return normalizeAngle(newAngle);
+        return normalizeAngle(invertedAngle);
     }
     
     static float normalizeAngle(float angle) {

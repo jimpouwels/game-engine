@@ -12,6 +12,7 @@ private:
     jimp::Screen* screen = nullptr;
     std::list<Asteroid*>* asteroids = nullptr;
     float timeSinceLastAsteroid = 0.0F;
+    void deleteAsteroids(std::list<Asteroid*>& asteroidsToDelete);
     
 public:
     AsteroidSpawner(jimp::Screen* screen);

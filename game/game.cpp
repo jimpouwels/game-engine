@@ -12,10 +12,11 @@
 class Game : public jimp::GameEngine, public ShipEventListener {
     
 private:
+    jimp::Sprite* background = nullptr;
     Ship* ship = nullptr;
     AsteroidSpawner* asteroidSpawner = nullptr;
     jimp::Screen* screen = nullptr;
-    std::list<jimp::AnimatedSprite*>* bullets = nullptr;
+    std::list<jimp::AnimatedSprite*>* projectiles = nullptr;
     
 public:
     Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60) {
@@ -23,46 +24,62 @@ public:
         ship = new Ship(screen, this);
         addKeyListener(ship);
         asteroidSpawner = new AsteroidSpawner(screen);
-        bullets = new std::list<jimp::AnimatedSprite*>;
+        projectiles = new std::list<jimp::AnimatedSprite*>;
+        background = new jimp::Sprite(screen, 0, 0, 1.0F, "background.jpeg");
     }
     
     ~Game() {
+        delete background;
         delete ship;
         delete asteroidSpawner;
-        for (const auto& bullet: *bullets) {
-            delete bullet;
+        for (const auto& projectile: *projectiles) {
+            delete projectile;
         }
-        delete bullets;
+        delete projectiles;
     }
     
     void onWeaponFired(jimp::AnimatedSprite* projectile) {
-        bullets->push_back(projectile);
+        projectiles->push_back(projectile);
     }
     
     void onFrame(float elapsedTime) {
+        draw(*background);
         cleanupBullets();
-        for (const auto& bullet: *bullets) {
-            bullet->update(elapsedTime);
-            draw(bullet->getActiveSprite());
+        handleProjectileHits();
+        for (const auto& projectile: *projectiles) {
+            projectile->onFrame(elapsedTime);
         }
-        ship->update(elapsedTime);
         asteroidSpawner->onFrame(elapsedTime);
-        draw(ship->getActiveSprite());
-        for (const auto& asteroid: asteroidSpawner->getAsteroids()) {
-            draw(asteroid->getActiveSprite());
+        ship->onFrame(elapsedTime);
+    }
+    
+    void handleProjectileHits() {
+        std::list<jimp::AnimatedSprite*> projectilesToRemove;
+        for (const auto& projectile: *projectiles) {
+            for (const auto& asteroid: asteroidSpawner->getAsteroids()) {
+                if (asteroid->isHitBy(*projectile)) {
+                    asteroid->setHit();
+                    projectilesToRemove.push_back(projectile);
+                }
+            }
         }
+        removeProjectiles(projectilesToRemove);
     }
     
     void cleanupBullets() {
-        std::list<jimp::AnimatedSprite*> bulletsToRemove;
-        for (const auto& bullet: *bullets) {
+        std::list<jimp::AnimatedSprite*> projectilesToRemove;
+        for (const auto& bullet: *projectiles) {
             if (!bullet->isPositionedWithinScreen()) {
-                bulletsToRemove.push_back(bullet);
+                projectilesToRemove.push_back(bullet);
             }
         }
-        for (const auto& bulletToRemove: bulletsToRemove) {
-            bullets->remove(bulletToRemove);
-            delete bulletToRemove;
+        removeProjectiles(projectilesToRemove);
+    }
+    
+    void removeProjectiles(std::list<jimp::AnimatedSprite*>& projectilesToRemove) {
+        for (const auto& projectileToRemove: projectilesToRemove) {
+            projectiles->remove(projectileToRemove);
+            delete projectileToRemove;
         }
     }
 };

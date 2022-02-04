@@ -22,4 +22,8 @@ bool Screen::isWithin(float x, float y) {
     return gameEngine->isPositionWithinScreen(x, y);
 }
 
+void Screen::draw(Sprite& sprite) {
+    gameEngine->draw(sprite);
+}
+
 }

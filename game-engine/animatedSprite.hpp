@@ -22,14 +22,15 @@ private:
     Animation* activeAnimation = nullptr;
     float elapsedTimeSinceLastSwap;
     float imageSwapIntervalInSeconds;
+    void updateAnimation(float elapsedTime);
     
 protected:
     void setX(float x);
     void setY(float y);
     void setPosition(Vector2D position);
     void addToPosition(Vector2D delta);
-    void updateAnimation(float elapsedTime);
     void setCurrentAnimation(std::string animationId);
+    void draw(float elapsedTime);
     
 public:
     Screen& getScreen();
@@ -48,7 +49,7 @@ public:
     AnimatedSprite(Screen* screen, float x, float y, float scale, float imageSwapIntervalInSeconds);
     ~AnimatedSprite();
     Sprite& getActiveSprite();
-    virtual void update(float elapsedTime) {
+    virtual void onFrame(float elapsedTime) {
         this->updateAnimation(elapsedTime);
     };
     void addSprite(std::string animationId, std::string filePath);

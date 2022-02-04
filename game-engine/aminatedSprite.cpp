@@ -29,6 +29,11 @@ AnimatedSprite::~AnimatedSprite() {
     delete animationMap;
 }
 
+void AnimatedSprite::draw(float elapsedTime) {
+    updateAnimation(elapsedTime);
+    screen->draw(getActiveSprite());
+}
+
 Sprite& AnimatedSprite::getActiveSprite() {
     Sprite* activeSprite = activeAnimation->getActiveSprite();
     activeSprite->setPosition(position);

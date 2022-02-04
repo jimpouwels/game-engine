@@ -35,11 +35,10 @@ private:
 
 public:
     Ship(jimp::Screen* screen, ShipEventListener* shipEventListener);
-    void update(float elapsedTime) override;
+    void onFrame(float elapsedTime) override;
     void onKeyboardLeft(jimp::KeyState keyState) override;
     void onKeyboardRight(jimp::KeyState keyState) override;
     void onKeyboardUp(jimp::KeyState keyState) override;
-    void onKeyboardDown(jimp::KeyState keyState) override;
     void onKeyboardSpaceBar(jimp::KeyState keyState) override;
 };
 

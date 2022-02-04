@@ -16,10 +16,12 @@ Ship::Ship(jimp::Screen* screen, ShipEventListener* eventListener) : jimp::Anima
     addSprite("default", "spaceship.png");
 }
 
-void Ship::update(float elapsedTime) {
+void Ship::onFrame(float elapsedTime) {
     updateFiring(elapsedTime);
     updateMovement(elapsedTime);
     updateRotation(elapsedTime);
+    
+    draw(elapsedTime);
 }
 
 void Ship::onKeyboardLeft(jimp::KeyState keyState) {
@@ -31,10 +33,6 @@ void Ship::onKeyboardRight(jimp::KeyState keyState) {
 }
 
 void Ship::onKeyboardUp(jimp::KeyState keyState) {
-    isThrothling = keyState == jimp::KeyState::PRESSED;
-}
-
-void Ship::onKeyboardDown(jimp::KeyState keyState) {
     isThrothling = keyState == jimp::KeyState::PRESSED;
 }
 
@@ -80,6 +78,4 @@ void Ship::updateRotation(float elapsedTime) {
         }
         setRotationAngle(jimp::Geo2D::normalizeAngle(getRotationAngle() + deltaDegrees));
     }
-    
-    updateAnimation(elapsedTime);
 }
