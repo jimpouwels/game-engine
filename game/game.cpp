@@ -43,8 +43,10 @@ public:
     }
     
     void onFrame(float elapsedTime) {
+        std::cout << "bullet count: " << projectiles->size() << std::endl;
+        std::cout << "asteroid count: " << asteroidSpawner->getAsteroids().size() << std::endl;
         draw(*background);
-        cleanupBullets();
+        cleanupProjectiles();
         handleProjectileHits();
         for (const auto& projectile: *projectiles) {
             projectile->onFrame(elapsedTime);
@@ -66,11 +68,11 @@ public:
         removeProjectiles(projectilesToRemove);
     }
     
-    void cleanupBullets() {
+    void cleanupProjectiles() {
         std::list<jimp::AnimatedSprite*> projectilesToRemove;
-        for (const auto& bullet: *projectiles) {
-            if (!bullet->isPositionedWithinScreen()) {
-                projectilesToRemove.push_back(bullet);
+        for (const auto& projectile: *projectiles) {
+            if (!projectile->isPositionedWithinScreen()) {
+                projectilesToRemove.push_back(projectile);
             }
         }
         removeProjectiles(projectilesToRemove);

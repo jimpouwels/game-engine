@@ -18,7 +18,7 @@ public:
     static float inverseAngleVertically(float angle) {
         float invertedAngle = angle;
         if (angle == 0 || angle == 180) {
-            invertedAngle = angle + 180;
+            invertedAngle += 180;
         } else if (angle < 90 || (angle < 270 && angle > 180)) {
             invertedAngle = 180 - angle;
         } else {
@@ -30,7 +30,7 @@ public:
     static float inverseAngleHorizontally(float angle) {
         float invertedAngle = angle;
         if (invertedAngle == 0 || angle == 180) {
-            invertedAngle = angle;
+            invertedAngle += 180;
         } if (angle < 90 || angle > 270) {
             invertedAngle = 360 - angle;
         } else {
