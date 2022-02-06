@@ -5,7 +5,7 @@
 #include <map>
 #include <SFML/Graphics.hpp>
 #include "sprite.hpp"
-#include "cachedSprite.hpp"
+#include "spriteCache.hpp"
 #include "animatedSprite.hpp"
 #include "keyListener.hpp"
 #include "keyboardHandler.hpp"
@@ -19,7 +19,7 @@ private:
     int screenHeight;
     int frameRate;
     std::string windowTitle;
-    std::map<Sprite*, CachedSprite*>* spriteCache = nullptr;
+    SpriteCache* spriteCache = nullptr;
     float timePerFrame;
     jimp::KeyboardHandler* keyboardHandler = nullptr;
     std::chrono::time_point<std::chrono::system_clock> previousFrameTime;

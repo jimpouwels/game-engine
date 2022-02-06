@@ -12,7 +12,6 @@
 		235A526B27AD49B50008A8A0 /* background.jpeg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235A526A27AD48D60008A8A0 /* background.jpeg */; };
 		235A526F27AFD7090008A8A0 /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235A526D27AFD7090008A8A0 /* image.cpp */; };
 		235A527427AFD9B20008A8A0 /* gamingInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235A527327AFD9B20008A8A0 /* gamingInterface.cpp */; };
-		235A527727B008400008A8A0 /* cachedSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235A527527B008400008A8A0 /* cachedSprite.cpp */; };
 		23A933B227864EA800769F69 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AD27864EA700769F69 /* sprite.cpp */; };
 		23A933B327864EA800769F69 /* aminatedSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AE27864EA700769F69 /* aminatedSprite.cpp */; };
 		23A933B527864EA800769F69 /* gameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933B127864EA700769F69 /* gameEngine.cpp */; };
@@ -75,8 +74,7 @@
 		235A526E27AFD7090008A8A0 /* image.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = image.hpp; sourceTree = "<group>"; };
 		235A527127AFD9800008A8A0 /* gamingInterface.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamingInterface.hpp; sourceTree = "<group>"; };
 		235A527327AFD9B20008A8A0 /* gamingInterface.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gamingInterface.cpp; sourceTree = "<group>"; };
-		235A527527B008400008A8A0 /* cachedSprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = cachedSprite.cpp; sourceTree = "<group>"; };
-		235A527627B008400008A8A0 /* cachedSprite.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = cachedSprite.hpp; sourceTree = "<group>"; };
+		235A527827B00C760008A8A0 /* spriteCache.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = spriteCache.hpp; sourceTree = "<group>"; };
 		23A933AC27864EA700769F69 /* animatedSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animatedSprite.hpp; sourceTree = "<group>"; };
 		23A933AD27864EA700769F69 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		23A933AE27864EA700769F69 /* aminatedSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aminatedSprite.cpp; sourceTree = "<group>"; };
@@ -151,23 +149,22 @@
 				23A933AC27864EA700769F69 /* animatedSprite.hpp */,
 				23A933F22790187300769F69 /* animation.cpp */,
 				23A933F32790187300769F69 /* animation.hpp */,
-				235A527527B008400008A8A0 /* cachedSprite.cpp */,
-				235A527627B008400008A8A0 /* cachedSprite.hpp */,
 				23A933B127864EA700769F69 /* gameEngine.cpp */,
 				23D5C7C427832B5600C6C916 /* gameEngine.hpp */,
-				235A527127AFD9800008A8A0 /* gamingInterface.hpp */,
 				235A527327AFD9B20008A8A0 /* gamingInterface.cpp */,
+				235A527127AFD9800008A8A0 /* gamingInterface.hpp */,
 				235A526227A959110008A8A0 /* geo2D.hpp */,
 				235A526D27AFD7090008A8A0 /* image.cpp */,
 				235A526E27AFD7090008A8A0 /* image.hpp */,
-				23A933AD27864EA700769F69 /* sprite.cpp */,
-				23D5C7E827847B6200C6C916 /* sprite.hpp */,
-				23A933B72787617D00769F69 /* keyListener.hpp */,
 				23A933B92788407F00769F69 /* keyboardHandler.cpp */,
 				23A933BA2788407F00769F69 /* keyboardHandler.hpp */,
+				23A933B72787617D00769F69 /* keyListener.hpp */,
 				235A526C27AD72E00008A8A0 /* mathUtils.hpp */,
 				23B177AF27A40C0A0094B178 /* screen.cpp */,
 				23B177B027A40C0A0094B178 /* screen.hpp */,
+				23A933AD27864EA700769F69 /* sprite.cpp */,
+				23D5C7E827847B6200C6C916 /* sprite.hpp */,
+				235A527827B00C760008A8A0 /* spriteCache.hpp */,
 				235A526427AA81180008A8A0 /* timing.hpp */,
 				235A526327A959790008A8A0 /* vector2D.hpp */,
 			);
@@ -201,17 +198,17 @@
 		23D5C7E727847B3000C6C916 /* game */ = {
 			isa = PBXGroup;
 			children = (
-				23D5C7E22783432F00C6C916 /* game.cpp */,
-				23A933BC2788B4EC00769F69 /* ship.cpp */,
-				23A933BD2788B4EC00769F69 /* ship.hpp */,
-				2350E82D279976840017F7C3 /* shipEventListener.hpp */,
-				23E5E2F3279A979100B62583 /* bullet.cpp */,
-				23E5E2F4279A979100B62583 /* bullet.hpp */,
-				23E5E2F8279ABCF900B62583 /* direction.hpp */,
 				23E5E2FE27A302DD00B62583 /* asteroid.cpp */,
 				23E5E2FF27A302DD00B62583 /* asteroid.hpp */,
 				235A526527AAB29F0008A8A0 /* asteroidSpawner.cpp */,
 				235A526627AAB29F0008A8A0 /* asteroidSpawner.hpp */,
+				23E5E2F3279A979100B62583 /* bullet.cpp */,
+				23E5E2F4279A979100B62583 /* bullet.hpp */,
+				23E5E2F8279ABCF900B62583 /* direction.hpp */,
+				23D5C7E22783432F00C6C916 /* game.cpp */,
+				23A933BC2788B4EC00769F69 /* ship.cpp */,
+				23A933BD2788B4EC00769F69 /* ship.hpp */,
+				2350E82D279976840017F7C3 /* shipEventListener.hpp */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -277,7 +274,6 @@
 				23B177A127A3E3160094B178 /* ship.hpp in Sources */,
 				23B177A227A3E3160094B178 /* shipEventListener.hpp in Sources */,
 				23B177A327A3E3160094B178 /* bullet.hpp in Sources */,
-				235A527727B008400008A8A0 /* cachedSprite.cpp in Sources */,
 				23B177A427A3E3160094B178 /* direction.hpp in Sources */,
 				23B177A527A3E3160094B178 /* asteroid.hpp in Sources */,
 				23B177A627A3E3160094B178 /* animatedSprite.hpp in Sources */,
