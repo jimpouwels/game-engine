@@ -12,6 +12,7 @@
 		235A526B27AD49B50008A8A0 /* background.jpeg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235A526A27AD48D60008A8A0 /* background.jpeg */; };
 		235A526F27AFD7090008A8A0 /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235A526D27AFD7090008A8A0 /* image.cpp */; };
 		235A527427AFD9B20008A8A0 /* gamingInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235A527327AFD9B20008A8A0 /* gamingInterface.cpp */; };
+		235A527727B008400008A8A0 /* cachedSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235A527527B008400008A8A0 /* cachedSprite.cpp */; };
 		23A933B227864EA800769F69 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AD27864EA700769F69 /* sprite.cpp */; };
 		23A933B327864EA800769F69 /* aminatedSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AE27864EA700769F69 /* aminatedSprite.cpp */; };
 		23A933B527864EA800769F69 /* gameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933B127864EA700769F69 /* gameEngine.cpp */; };
@@ -74,6 +75,8 @@
 		235A526E27AFD7090008A8A0 /* image.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = image.hpp; sourceTree = "<group>"; };
 		235A527127AFD9800008A8A0 /* gamingInterface.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamingInterface.hpp; sourceTree = "<group>"; };
 		235A527327AFD9B20008A8A0 /* gamingInterface.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gamingInterface.cpp; sourceTree = "<group>"; };
+		235A527527B008400008A8A0 /* cachedSprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = cachedSprite.cpp; sourceTree = "<group>"; };
+		235A527627B008400008A8A0 /* cachedSprite.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = cachedSprite.hpp; sourceTree = "<group>"; };
 		23A933AC27864EA700769F69 /* animatedSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animatedSprite.hpp; sourceTree = "<group>"; };
 		23A933AD27864EA700769F69 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		23A933AE27864EA700769F69 /* aminatedSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aminatedSprite.cpp; sourceTree = "<group>"; };
@@ -148,6 +151,8 @@
 				23A933AC27864EA700769F69 /* animatedSprite.hpp */,
 				23A933F22790187300769F69 /* animation.cpp */,
 				23A933F32790187300769F69 /* animation.hpp */,
+				235A527527B008400008A8A0 /* cachedSprite.cpp */,
+				235A527627B008400008A8A0 /* cachedSprite.hpp */,
 				23A933B127864EA700769F69 /* gameEngine.cpp */,
 				23D5C7C427832B5600C6C916 /* gameEngine.hpp */,
 				235A527127AFD9800008A8A0 /* gamingInterface.hpp */,
@@ -272,6 +277,7 @@
 				23B177A127A3E3160094B178 /* ship.hpp in Sources */,
 				23B177A227A3E3160094B178 /* shipEventListener.hpp in Sources */,
 				23B177A327A3E3160094B178 /* bullet.hpp in Sources */,
+				235A527727B008400008A8A0 /* cachedSprite.cpp in Sources */,
 				23B177A427A3E3160094B178 /* direction.hpp in Sources */,
 				23B177A527A3E3160094B178 /* asteroid.hpp in Sources */,
 				23B177A627A3E3160094B178 /* animatedSprite.hpp in Sources */,

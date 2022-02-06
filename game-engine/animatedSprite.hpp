@@ -48,7 +48,7 @@ public:
     AnimatedSprite(GamingInterface* gamingInterface, float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
     AnimatedSprite(GamingInterface* gamingInterface, float x, float y, float scale, float imageSwapIntervalInSeconds);
     ~AnimatedSprite();
-    Sprite& getActiveSprite();
+    Sprite* getActiveSprite();
     virtual void onFrame(float elapsedTime) {
         this->updateAnimation(elapsedTime);
     };

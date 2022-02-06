@@ -45,7 +45,7 @@ public:
     void onFrame(float elapsedTime) {
 //        std::cout << "bullet count: " << projectiles->size() << std::endl;
 //        std::cout << "asteroid count: " << asteroidSpawner->getAsteroids().size() << std::endl;
-        draw(*background);
+        draw(background);
         cleanupProjectiles();
         handleProjectileHits();
         for (const auto& projectile: *projectiles) {

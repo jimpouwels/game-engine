@@ -3,6 +3,7 @@
 
 #include "gameEngine.hpp"
 #include "sprite.hpp"
+#include "cachedSprite.hpp"
 #include "animatedSprite.hpp"
 #include "keyboardHandler.hpp"
 
@@ -14,6 +15,7 @@ GameEngine::GameEngine(int screenWidth, int screenHeight, std::string windowTitl
     this->frameRate = desiredFrameRate;
     this->timePerFrame = 1.0 / desiredFrameRate;
     this->windowTitle = windowTitle;
+    this->spriteCache = new std::map<Sprite*, CachedSprite*>;
     window = new sf::RenderWindow(sf::VideoMode(this->getScreenWidth(), this->getScreenHeight()), windowTitle);
     keyboardHandler = new jimp::KeyboardHandler();
     this->previousFrameTime = std::chrono::system_clock::now();
@@ -42,16 +44,25 @@ void GameEngine::start() {
     }
 }
 
-void GameEngine::draw(jimp::Sprite& sprite) {
-    sf::Texture sfmlTexture;
-    sfmlTexture.loadFromImage(sprite.getImage().getImage());
-    sf::Sprite sfmlSprite;
-    sfmlSprite.setTexture(sfmlTexture);
-    sfmlSprite.setPosition(sprite.getPosition().x, sprite.getPosition().y);
-    sfmlSprite.setScale(sprite.getScale(), sprite.getScale());
+void GameEngine::draw(jimp::Sprite* sprite) {
+    CachedSprite* cachedSprite = nullptr;
+    if (spriteCache->find(sprite) == spriteCache->end()) {
+        sf::Sprite* sfmlSprite = new sf::Sprite();
+        sf::Texture* sfmlTexture = new sf::Texture();
+        sfmlTexture->loadFromImage(sprite->getImage().getImage());
+        sfmlSprite->setTexture(*sfmlTexture);
+        
+        cachedSprite = new CachedSprite(sfmlTexture, sfmlSprite);
+        spriteCache->insert({sprite, cachedSprite});
+    } else {
+        cachedSprite = spriteCache->find(sprite)->second;
+    }
+
     sf::Transform transform;
-    transform.rotate(sprite.getRotationAngle(), sprite.getPosition().x + sprite.getWidth() / 2, sprite.getPosition().y + sprite.getHeight() / 2);
-    window->draw(sfmlSprite, transform);
+    transform.rotate(sprite->getRotationAngle(), sprite->getPosition().x + sprite->getWidth() / 2, sprite->getPosition().y + sprite->getHeight() / 2);
+    cachedSprite->getSprite()->setPosition(sprite->getPosition().x, sprite->getPosition().y);
+    cachedSprite->getSprite()->setScale(sprite->getScale(), sprite->getScale());
+    window->draw(*cachedSprite->getSprite(), transform);
 }
 
 void GameEngine::addKeyListener(KeyListener* keyListener) {

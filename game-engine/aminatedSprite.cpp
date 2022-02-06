@@ -34,12 +34,12 @@ void AnimatedSprite::draw(float elapsedTime) {
     gamingInterface->getScreen()->draw(getActiveSprite());
 }
 
-Sprite& AnimatedSprite::getActiveSprite() {
+Sprite* AnimatedSprite::getActiveSprite() {
     Sprite* activeSprite = activeAnimation->getActiveSprite();
     activeSprite->setPosition(position);
     activeSprite->setScale(scale);
     activeSprite->setRotationAngle(angle);
-    return *activeAnimation->getActiveSprite();
+    return activeAnimation->getActiveSprite();
 }
 
 void AnimatedSprite::setCurrentAnimation(std::string animationId) {
@@ -95,7 +95,6 @@ float AnimatedSprite::getScale() {
 
 bool AnimatedSprite::isPositionedWithinScreen() {
     return gamingInterface->getScreen()->isWithin(position.x, position.y);
-    return true;
 }
 
 float AnimatedSprite::getRotationAngle() {
@@ -107,19 +106,19 @@ void AnimatedSprite::setRotationAngle(float angle) {
 }
 
 bool AnimatedSprite::isOutsideScreenLeft() {
-    return getActiveSprite().isOutsideScreenLeft();
+    return getActiveSprite()->isOutsideScreenLeft();
 }
 
 bool AnimatedSprite::isOutsideScreenRight() {
-    return getActiveSprite().isOutsideScreenRight();
+    return getActiveSprite()->isOutsideScreenRight();
 }
 
 bool AnimatedSprite::isOutsideScreenAbove() {
-    return getActiveSprite().isOutsideScreenAbove();
+    return getActiveSprite()->isOutsideScreenAbove();
 }
 
 bool AnimatedSprite::isOutsideScreenBelow() {
-    return getActiveSprite().isOutsideScreenBelow();
+    return getActiveSprite()->isOutsideScreenBelow();
 }
 
 void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {

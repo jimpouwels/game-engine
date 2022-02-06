@@ -2,8 +2,10 @@
 #define gameEngine_hpp
 
 #include <iostream>
+#include <map>
 #include <SFML/Graphics.hpp>
 #include "sprite.hpp"
+#include "cachedSprite.hpp"
 #include "animatedSprite.hpp"
 #include "keyListener.hpp"
 #include "keyboardHandler.hpp"
@@ -17,6 +19,7 @@ private:
     int screenHeight;
     int frameRate;
     std::string windowTitle;
+    std::map<Sprite*, CachedSprite*>* spriteCache = nullptr;
     float timePerFrame;
     jimp::KeyboardHandler* keyboardHandler = nullptr;
     std::chrono::time_point<std::chrono::system_clock> previousFrameTime;
@@ -31,7 +34,7 @@ public:
     GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate);
     ~GameEngine();
     void start();
-    void draw(jimp::Sprite& sprite);
+    void draw(jimp::Sprite* sprite);
     int getScreenWidth();
     int getScreenHeight();
     bool isPositionWithinScreen(float x, float y);

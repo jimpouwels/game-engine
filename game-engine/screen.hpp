@@ -17,7 +17,7 @@ private:
 public:
     Screen(GameEngine* gameEngine);
     ~Screen();
-    void draw(Sprite& sprite);
+    void draw(Sprite* sprite);
     int getWidth();
     int getHeight();
     bool isWithin(float x, float y);
