@@ -4,9 +4,9 @@
 
 const int AsteroidSpawner::SECONDS_BETWEEN_ASTEROID_SPAWN = 3;
 
-AsteroidSpawner::AsteroidSpawner(jimp::Screen* screen) {
+AsteroidSpawner::AsteroidSpawner(jimp::GamingInterface* gamingInterface) {
     asteroids = new std::list<Asteroid*>;
-    this->screen = screen;
+    this->gamingInterface = gamingInterface;
 }
 
 AsteroidSpawner::~AsteroidSpawner() {
@@ -21,18 +21,18 @@ void AsteroidSpawner::onFrame(float elapsedTime) {
     if (timeSinceLastAsteroid >= SECONDS_BETWEEN_ASTEROID_SPAWN) {
         timeSinceLastAsteroid = 0.0F;
         
-        float x, y, angle = 0.0F;
-        int randomSide = jimp::MathUtils::randomNumberBetween(0, 2);
-        if (randomSide == 0) { // left
-            x = -100;
-            y = jimp::MathUtils::randomNumberBetween(screen->getHeight() * 0.25, screen->getHeight() * 0.75);
-            angle = jimp::MathUtils::randomNumberBetween(45, 135);
-        } else { // right
-            x = screen->getWidth() + 100;
-            y = jimp::MathUtils::randomNumberBetween(screen->getHeight() * 0.25, screen->getHeight() * 0.75);
-            angle = jimp::MathUtils::randomNumberBetween(225, 315);
-        }
-        asteroids->push_back(new Asteroid(screen, x, y, angle));
+//        float x, y, angle = 0.0F;
+//        int randomSide = jimp::MathUtils::randomNumberBetween(0, 2);
+//        if (randomSide == 0) { // left
+//            x = -100;
+//            y = jimp::MathUtils::randomNumberBetween(screen->getHeight() * 0.25, screen->getHeight() * 0.75);
+//            angle = jimp::MathUtils::randomNumberBetween(45, 135);
+//        } else { // right
+//            x = screen->getWidth() + 100;
+//            y = jimp::MathUtils::randomNumberBetween(screen->getHeight() * 0.25, screen->getHeight() * 0.75);
+//            angle = jimp::MathUtils::randomNumberBetween(225, 315);
+//        }
+        asteroids->push_back(new Asteroid(gamingInterface, 10, 10, 135));
     }
     std::list<Asteroid*> asteroidsToDelete;
     for (const auto& asteroid: *asteroids) {

@@ -1,0 +1,28 @@
+#ifndef image_hpp
+#define image_hpp
+
+#include <SFML/Graphics.hpp>
+#include <stdio.h>
+#include <string>
+
+namespace jimp {
+
+class Image {
+  
+private:
+    std::string filePath;
+    sf::Image* image = nullptr;
+    void loadImage(std::string filePath);
+    
+public:
+    Image(std::string filePath);
+    ~Image();
+    int getWidth();
+    int getHeight();
+    sf::Image& getImage();
+    
+};
+
+}
+
+#endif

@@ -8,17 +8,17 @@
 
 namespace jimp {
 
-AnimatedSprite::AnimatedSprite(Screen* screen, float x, float y, float scale, float imageSwapIntervalInSeconds) {
+AnimatedSprite::AnimatedSprite(GamingInterface* gamingInterface, float x, float y, float scale, float imageSwapIntervalInSeconds) {
     this->position.x = x;
     this->position.y = y;
     this->scale = scale;
-    this->screen = screen;
+    this->gamingInterface = gamingInterface;
     animationMap = new std::map<std::string, Animation*>;
     this->imageSwapIntervalInSeconds = imageSwapIntervalInSeconds;
 }
 
-AnimatedSprite::AnimatedSprite(Screen* screen, float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
-    AnimatedSprite(screen, x, y, scale, 0, imageSwapIntervalInSeconds);
+AnimatedSprite::AnimatedSprite(GamingInterface* gamingInterface, float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
+    AnimatedSprite(gamingInterface, x, y, scale, 0, imageSwapIntervalInSeconds);
     this->angle = rotationAngle;
 }
 
@@ -31,7 +31,7 @@ AnimatedSprite::~AnimatedSprite() {
 
 void AnimatedSprite::draw(float elapsedTime) {
     updateAnimation(elapsedTime);
-    screen->draw(getActiveSprite());
+    gamingInterface->getScreen()->draw(getActiveSprite());
 }
 
 Sprite& AnimatedSprite::getActiveSprite() {
@@ -56,8 +56,8 @@ void AnimatedSprite::updateAnimation(float elapsedTime) {
     }
 }
 
-jimp::Screen& AnimatedSprite::getScreen() {
-    return *screen;
+jimp::GamingInterface* AnimatedSprite::getGamingInterface() {
+    return gamingInterface;
 }
 
 void AnimatedSprite::setX(float x) {
@@ -94,7 +94,7 @@ float AnimatedSprite::getScale() {
 }
 
 bool AnimatedSprite::isPositionedWithinScreen() {
-    return screen->isWithin(position.x, position.y);
+    return gamingInterface->getScreen()->isWithin(position.x, position.y);
     return true;
 }
 
@@ -130,7 +130,7 @@ void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {
     } else {
         animation = animationMap->find(animationId)->second;
     }
-    Sprite* sprite = new Sprite(screen, position.x, position.y, scale, filePath);
+    Sprite* sprite = new Sprite(gamingInterface, position.x, position.y, scale, filePath);
     animationMap->find(animationId)->second->addSprite(sprite);
     if (activeAnimation == nullptr) {
         activeAnimation = animation;

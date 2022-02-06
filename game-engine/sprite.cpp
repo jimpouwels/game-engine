@@ -5,21 +5,21 @@
 
 namespace jimp {
 
-Sprite::Sprite(jimp::Screen* screen, float x, float y, float scale, int angle, std::string filePath) {
-    Sprite(screen, x, y, scale, filePath);
+Sprite::Sprite(jimp::GamingInterface* gamingInterface, float x, float y, float scale, int angle, std::string filePath) {
+    Sprite(gamingInterface, x, y, scale, filePath);
     this->angle = angle;
 }
 
-Sprite::Sprite(jimp::Screen* screen, float x, float y, float scale, std::string filePath) {
+Sprite::Sprite(jimp::GamingInterface* gamingInterface, float x, float y, float scale, std::string filePath) {
     this->position.x = x;
     this->position.y = y;
     this->scale = scale;
-    this->screen = screen;
-    loadImage(filePath);
+    this->gamingInterface = gamingInterface;
+    this->image = gamingInterface->loadImage(filePath);
 }
 
 Sprite::~Sprite() {
-    delete image;
+    // delete shared pointer?
 }
 
 void Sprite::setX(float x) {
@@ -31,15 +31,19 @@ void Sprite::setY(float y) {
 }
 
 int Sprite::getWidth() {
-    return image->getSize().x * scale;
+    return image->getWidth() * scale;
 }
 
 int Sprite::getHeight() {
-    return image->getSize().y * scale;
+    return image->getHeight() * scale;
 }
 
 float Sprite::getRotationAngle() {
     return angle;
+}
+
+void Sprite::setRotationAngle(float angle) {
+    this->angle = angle;
 }
 
 void Sprite::setPosition(Vector2D position) {
@@ -50,16 +54,12 @@ Vector2D& Sprite::getPosition() {
     return position;
 }
 
-void Sprite::setRotationAngle(float angle) {
-    this->angle = angle;
-}
-
 bool Sprite::isOutsideScreenLeft() {
     return position.x < 0;
 }
 
 bool Sprite::isOutsideScreenRight() {
-    return position.x > screen->getWidth() - getWidth();
+    return position.x > gamingInterface->getScreen()->getWidth() - getWidth();
 }
 
 bool Sprite::isOutsideScreenAbove() {
@@ -67,11 +67,7 @@ bool Sprite::isOutsideScreenAbove() {
 }
 
 bool Sprite::isOutsideScreenBelow() {
-    return position.y > screen->getHeight() - getHeight();
-}
-
-std::string Sprite::getFilePath() {
-    return filePath;
+    return position.y > gamingInterface->getScreen()->getHeight() - getHeight();
 }
 
 float Sprite::getScale() {
@@ -87,13 +83,7 @@ void Sprite::setPosition(float x, float y) {
     setY(y);
 }
 
-void Sprite::loadImage(std::string filePath) {
-    this->filePath = filePath;
-    this->image = new sf::Image();
-    image->loadFromFile(filePath);
-}
-
-sf::Image& Sprite::getImage() {
+jimp::Image& Sprite::getImage() {
     return *this->image;
 }
 

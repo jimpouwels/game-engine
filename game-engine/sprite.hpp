@@ -2,10 +2,10 @@
 #define sprite_hpp
 
 #include <string>
-#include <SFML/Graphics.hpp>
 
-#include "screen.hpp"
+#include "gamingInterface.hpp"
 #include "vector2D.hpp"
+#include "image.hpp"
 
 namespace jimp {
 
@@ -15,16 +15,12 @@ private:
     Vector2D position = { .x = 0, .y = 0};
     float scale = 1.0F;
     float angle = 0.0F;
-    jimp::Screen* screen;
-    std::string filePath;
-    sf::Image* image;
-    
-protected:
-    void loadImage(std::string filePath);
+    GamingInterface* gamingInterface;
+    Image* image;
     
 public:
-    Sprite(jimp::Screen* screen, float x, float y, float scale, std::string filePath);
-    Sprite(jimp::Screen* screen, float x, float y, float scale, int angle, std::string filePath);
+    Sprite(GamingInterface* gamingInterface, float x, float y, float scale, std::string filePath);
+    Sprite(GamingInterface* gamingInterface, float x, float y, float scale, int angle, std::string filePath);
     ~Sprite();
     Vector2D& getPosition();
     void setPosition(Vector2D position);
@@ -41,8 +37,7 @@ public:
     bool isOutsideScreenLeft();
     bool isOutsideScreenRight();
     void setPosition(float x, float y);
-    std::string getFilePath();
-    sf::Image& getImage();
+    jimp::Image& getImage();
 };
 }
 

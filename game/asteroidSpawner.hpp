@@ -9,13 +9,13 @@ class AsteroidSpawner {
     
 private:
     static const int SECONDS_BETWEEN_ASTEROID_SPAWN;
-    jimp::Screen* screen = nullptr;
+    jimp::GamingInterface* gamingInterface = nullptr;
     std::list<Asteroid*>* asteroids = nullptr;
     float timeSinceLastAsteroid = 0.0F;
     void deleteAsteroids(std::list<Asteroid*>& asteroidsToDelete);
     
 public:
-    AsteroidSpawner(jimp::Screen* screen);
+    AsteroidSpawner(jimp::GamingInterface* gamingInterface);
     ~AsteroidSpawner();
     void onFrame(float elapsedTime);
     std::list<Asteroid*>& getAsteroids();

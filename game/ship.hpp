@@ -34,7 +34,7 @@ private:
     void setMoving(jimp::KeyState keyState);
 
 public:
-    Ship(jimp::Screen* screen, ShipEventListener* shipEventListener);
+    Ship(jimp::GamingInterface* gamingInterface, ShipEventListener* shipEventListener);
     void onFrame(float elapsedTime) override;
     void onKeyboardLeft(jimp::KeyState keyState) override;
     void onKeyboardRight(jimp::KeyState keyState) override;

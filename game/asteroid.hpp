@@ -2,7 +2,7 @@
 #define asteroid_hpp
 
 #include "animatedSprite.hpp"
-#include "screen.hpp"
+#include "gamingInterface.hpp"
 #include "bullet.hpp"
 
 class Asteroid : public jimp::AnimatedSprite {
@@ -24,7 +24,7 @@ private:
     void handleHits(float elapsedTime);
     
 public:
-    Asteroid(jimp::Screen* screen, float x, float y, float directionAngle);
+    Asteroid(jimp::GamingInterface* gamingInterface, float x, float y, float directionAngle);
     ~Asteroid();
     void onFrame(float elapsedTime) override;
     void setHit();

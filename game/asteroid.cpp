@@ -10,7 +10,7 @@ const int Asteroid::SPEED_IN_PIXELS_PER_SECOND = 180;
 const int Asteroid::ROTATION_DEGREES_PER_SECOND = 50;
 const float Asteroid::HIT_ANIMATION_DURATION_IN_SECONDS = 0.01F;
 
-Asteroid::Asteroid(jimp::Screen* screen, float x, float y, float directionAngle) : jimp::AnimatedSprite(screen, x, y, 0.1F, -1) {
+Asteroid::Asteroid(jimp::GamingInterface* gamingInterface, float x, float y, float directionAngle) : jimp::AnimatedSprite(gamingInterface, x, y, 0.1F, -1) {
     addSprite("default", "asteroid.png");
     addSprite("hit", "asteroid-hit.png");
     setRotationAngle(90);
@@ -45,7 +45,7 @@ bool Asteroid::isDestroyed() {
 }
 
 void Asteroid::updateDirection(float elapsedTime) {
-    if (getPosition().x > 0 && getPosition().x < (getScreen().getWidth() - getWidth())) {
+    if (getPosition().x > 0 && getPosition().x < (getGamingInterface()->getScreen()->getWidth() - getWidth())) {
         isEnteringScreen = false;
     }
     if (!isEnteringScreen) {
