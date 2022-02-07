@@ -11,7 +11,7 @@ const int Ship::ROTATION_DEGREES_PER_SECOND = 140;
 const int Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.2F;
 
-Ship::Ship(jimp::GamingInterface* gamingInterface, ShipEventListener* eventListener) : jimp::AnimatedSprite(gamingInterface, gamingInterface->getScreen()->getWidth() / 2, gamingInterface->getScreen()->getHeight() / 2, SCALE, -1) {
+Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jimp::AnimatedSprite(gameEngine, gameEngine->getScreenWidth() / 2, gameEngine->getScreenHeight() / 2, SCALE, -1) {
     this->eventListener = eventListener;
     addSprite("default", "spaceship.png");
 }
@@ -49,7 +49,7 @@ void Ship::updateFiring(float elapsedTime) {
     float timeBetweenShots = 1.0F / SHOTS_PER_SECOND;
     if (elapsedTimeSinceLastShot >= timeBetweenShots && (hasFired || isFiring)) {
         hasFired = false;
-        Bullet* bullet = new Bullet(getGamingInterface(), getPosition().x + (getWidth() / 2), getPosition().y + (getHeight() / 2), getRotationAngle());
+        Bullet* bullet = new Bullet(getGameEngine(), getPosition().x + (getWidth() / 2), getPosition().y + (getHeight() / 2), getRotationAngle());
         eventListener->onWeaponFired(bullet);
         elapsedTimeSinceLastShot = 0;
     }

@@ -3,11 +3,13 @@
 
 #include <string>
 
-#include "gamingInterface.hpp"
 #include "vector2D.hpp"
 #include "image.hpp"
+#include "gameEngine.hpp"
 
 namespace jimp {
+
+class GameEngine;
 
 class Sprite {
     
@@ -15,12 +17,12 @@ private:
     Vector2D position = { .x = 0, .y = 0};
     float scale = 1.0F;
     float angle = 0.0F;
-    GamingInterface* gamingInterface;
+    GameEngine* gameEngine;
     Image* image;
     
 public:
-    Sprite(GamingInterface* gamingInterface, float x, float y, float scale, std::string filePath);
-    Sprite(GamingInterface* gamingInterface, float x, float y, float scale, int angle, std::string filePath);
+    Sprite(GameEngine* gameEngine, float x, float y, float scale, std::string filePath);
+    Sprite(GameEngine* gameEngine, float x, float y, float scale, int angle, std::string filePath);
     ~Sprite();
     Vector2D& getPosition();
     void setPosition(Vector2D position);

@@ -3,7 +3,7 @@
 #include "asteroid.hpp"
 #include "bullet.hpp"
 #include "ship.hpp"
-#include "gamingInterface.hpp"
+#include "gameEngine.hpp"
 #include "shipEventListener.hpp"
 #include "asteroidSpawner.hpp"
 #include <iostream>
@@ -15,17 +15,15 @@ private:
     jimp::Sprite* background = nullptr;
     Ship* ship = nullptr;
     AsteroidSpawner* asteroidSpawner = nullptr;
-    jimp::GamingInterface* gamingInterface = nullptr;
     std::list<jimp::AnimatedSprite*>* projectiles = nullptr;
     
 public:
     Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60) {
-        gamingInterface = new jimp::GamingInterface(new jimp::Screen(this));
-        ship = new Ship(gamingInterface, this);
+        ship = new Ship(this, this);
         addKeyListener(ship);
-        asteroidSpawner = new AsteroidSpawner(gamingInterface);
+        asteroidSpawner = new AsteroidSpawner(this);
         projectiles = new std::list<jimp::AnimatedSprite*>;
-        background = new jimp::Sprite(gamingInterface, 0, 0, 1.0F, "background.jpeg");
+        background = new jimp::Sprite(this, 0, 0, 1.0F, "background.jpeg");
     }
     
     ~Game() {
@@ -43,8 +41,6 @@ public:
     }
     
     void onFrame(float elapsedTime) {
-//        std::cout << "bullet count: " << projectiles->size() << std::endl;
-//        std::cout << "asteroid count: " << asteroidSpawner->getAsteroids().size() << std::endl;
         draw(background);
         cleanupProjectiles();
         handleProjectileHits();

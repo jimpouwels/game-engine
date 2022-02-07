@@ -16,6 +16,7 @@ GameEngine::GameEngine(int screenWidth, int screenHeight, std::string windowTitl
     this->timePerFrame = 1.0 / desiredFrameRate;
     this->windowTitle = windowTitle;
     this->spriteCache = new SpriteCache();
+    this->imageCache = new std::map<std::string, Image*>;
     window = new sf::RenderWindow(sf::VideoMode(this->getScreenWidth(), this->getScreenHeight()), windowTitle);
     keyboardHandler = new jimp::KeyboardHandler();
     this->previousFrameTime = std::chrono::system_clock::now();
@@ -63,6 +64,21 @@ void GameEngine::draw(jimp::Sprite* sprite) {
     cachedSprite->sprite->setPosition(sprite->getPosition().x, sprite->getPosition().y);
     cachedSprite->sprite->setScale(sprite->getScale(), sprite->getScale());
     window->draw(*cachedSprite->sprite, transform);
+}
+
+Image* GameEngine::loadImage(std::string filePath) {
+    Image* image = nullptr;
+    if (imageCache->find(filePath) == imageCache->end()) {
+        image = new Image(filePath);
+        imageCache->insert({filePath, image});
+    } else {
+        image = imageCache->find(filePath)->second;
+    }
+    return image;
+}
+
+void GameEngine::eraseFromCache(Sprite *sprite) {
+    spriteCache->remove(sprite);
 }
 
 void GameEngine::addKeyListener(KeyListener* keyListener) {

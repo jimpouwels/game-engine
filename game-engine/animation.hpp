@@ -4,18 +4,20 @@
 #include <vector>
 #include <string>
 #include "sprite.hpp"
+#include "gameEngine.hpp"
 
 namespace jimp {
 
 class Animation {
-  
+
 private:
     std::string id;
     std::vector<Sprite*>* sprites;
     int activeSpriteIndex = 0;
+    GameEngine* gameEngine = nullptr;
     
 public:
-    Animation(std::string id);
+    Animation(GameEngine* gameEngine, std::string id);
     ~Animation();
     std::string getId();
     void addSprite(Sprite* sprite);

@@ -3,8 +3,11 @@
 
 #include <map>
 #include <SFML/Graphics.hpp>
+#include "sprite.hpp"
 
 namespace jimp {
+
+class Sprite;
 
 class SpriteCache {
     
@@ -29,6 +32,12 @@ public:
     
     void add(Sprite* sprite, CachedSprite* cachedSprite) {
         spriteCache->insert({sprite, cachedSprite});
+    }
+    
+    void remove(Sprite* sprite) {
+        if (hasSprite(sprite)) {
+            spriteCache->erase(sprite);
+        }
     }
 
     CachedSprite* getSprite(Sprite* sprite) {

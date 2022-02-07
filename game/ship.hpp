@@ -8,7 +8,6 @@
 #include "keyListener.hpp"
 #include "shipEventListener.hpp"
 #include "direction.hpp"
-#include "screen.hpp"
 #include "vector2D.hpp"
 
 class Ship : public jimp::AnimatedSprite, public jimp::KeyListener {
@@ -34,7 +33,7 @@ private:
     void setMoving(jimp::KeyState keyState);
 
 public:
-    Ship(jimp::GamingInterface* gamingInterface, ShipEventListener* shipEventListener);
+    Ship(jimp::GameEngine* gameEngine, ShipEventListener* shipEventListener);
     void onFrame(float elapsedTime) override;
     void onKeyboardLeft(jimp::KeyState keyState) override;
     void onKeyboardRight(jimp::KeyState keyState) override;

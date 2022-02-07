@@ -3,7 +3,7 @@
 
 #include "animatedSprite.hpp"
 #include "direction.hpp"
-#include "gamingInterface.hpp"
+#include "gameEngine.hpp"
 
 class Bullet : public jimp::AnimatedSprite {
     
@@ -12,7 +12,7 @@ private:
 public:
     static const int SPEED_IN_PIXELS_PER_SECOND;
     static const float SCALE;
-    Bullet(jimp::GamingInterface* gamingInterface, float x, float y, float angle);
+    Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle);
     void onFrame(float elapsedTime) override;
 
 };

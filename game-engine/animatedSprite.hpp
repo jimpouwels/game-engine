@@ -6,7 +6,7 @@
 #include <map>
 #include "sprite.hpp"
 #include "animation.hpp"
-#include "gamingInterface.hpp"
+#include "gameEngine.hpp"
 #include "vector2D.hpp"
 
 namespace jimp {
@@ -17,7 +17,7 @@ private:
     Vector2D position = { .x = 0, .y = 0 };
     float scale;
     float angle;
-    GamingInterface* gamingInterface;
+    GameEngine* gameEngine;
     std::map<std::string, Animation*>* animationMap;
     Animation* activeAnimation = nullptr;
     float elapsedTimeSinceLastSwap;
@@ -33,7 +33,7 @@ protected:
     void draw(float elapsedTime);
     
 public:
-    GamingInterface* getGamingInterface();
+    GameEngine* getGameEngine();
     Vector2D& getPosition();
     float getScale();
     int getWidth();
@@ -45,8 +45,8 @@ public:
     bool isOutsideScreenAbove();
     bool isOutsideScreenLeft();
     bool isOutsideScreenRight();
-    AnimatedSprite(GamingInterface* gamingInterface, float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
-    AnimatedSprite(GamingInterface* gamingInterface, float x, float y, float scale, float imageSwapIntervalInSeconds);
+    AnimatedSprite(GameEngine* gameEngine, float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
+    AnimatedSprite(GameEngine* gameEngine, float x, float y, float scale, float imageSwapIntervalInSeconds);
     ~AnimatedSprite();
     Sprite* getActiveSprite();
     virtual void onFrame(float elapsedTime) {

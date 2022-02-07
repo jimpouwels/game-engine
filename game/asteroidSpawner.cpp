@@ -4,9 +4,9 @@
 
 const int AsteroidSpawner::SECONDS_BETWEEN_ASTEROID_SPAWN = 3;
 
-AsteroidSpawner::AsteroidSpawner(jimp::GamingInterface* gamingInterface) {
+AsteroidSpawner::AsteroidSpawner(jimp::GameEngine* gameEngine) {
     asteroids = new std::list<Asteroid*>;
-    this->gamingInterface = gamingInterface;
+    this->gameEngine = gameEngine;
 }
 
 AsteroidSpawner::~AsteroidSpawner() {
@@ -32,7 +32,7 @@ void AsteroidSpawner::onFrame(float elapsedTime) {
 //            y = jimp::MathUtils::randomNumberBetween(screen->getHeight() * 0.25, screen->getHeight() * 0.75);
 //            angle = jimp::MathUtils::randomNumberBetween(225, 315);
 //        }
-        asteroids->push_back(new Asteroid(gamingInterface, 10, 10, 135));
+        asteroids->push_back(new Asteroid(gameEngine, 10, 10, 135));
     }
     std::list<Asteroid*> asteroidsToDelete;
     for (const auto& asteroid: *asteroids) {
