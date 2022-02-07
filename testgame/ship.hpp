@@ -24,7 +24,7 @@ private:
     bool isRotatingLeft = false;
     bool isRotatingRight = false;
     int speedInPixelsPerSecond;
-    jimp::Vector2D deltaVector = { .x = 0, .y = 0 };
+    jimp::Vector2D velocity = { .x = 0, .y = 0 };
     float elapsedTimeSinceLastShot = 0;
     ShipEventListener* eventListener = nullptr;
     void updateMovement(float elapsedTime);

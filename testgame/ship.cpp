@@ -58,20 +58,20 @@ void Ship::updateFiring(float elapsedTime) {
 void Ship::updateMovement(float elapsedTime) {
     if (isThrothling) {
         float distance = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
-        deltaVector = jimp::Geo2D::deltaVectorByAngle(getRotationAngle(), distance);
+        velocity = jimp::Geo2D::deltaVectorByAngle(getRotationAngle(), distance);
     }
     
-    if (isOutsideScreenRight() && deltaVector.x >= 0) {
+    if (isOutsideScreenRight() && velocity.x >= 0) {
         setX(-getWidth());
-    } else if (isOutsideScreenLeft() && deltaVector.x <= 0) {
+    } else if (isOutsideScreenLeft() && velocity.x <= 0) {
         setX(getGameEngine()->getScreenWidth());
     }
-    if (isOutsideScreenTop() && deltaVector.y <= 0) {
+    if (isOutsideScreenTop() && velocity.y <= 0) {
         setY(getGameEngine()->getScreenHeight());
-    } else if (isOutsideScreenBottom() && deltaVector.y >= 0) {
+    } else if (isOutsideScreenBottom() && velocity.y >= 0) {
         setY(-getHeight());
     }
-    addToPosition(deltaVector);
+    addToPosition(velocity);
 }
 
 void Ship::updateRotation(float elapsedTime) {
