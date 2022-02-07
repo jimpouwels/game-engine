@@ -152,7 +152,7 @@
 		23D5C7B827832B5600C6C916 = {
 			isa = PBXGroup;
 			children = (
-				23D5C7E727847B3000C6C916 /* game */,
+				23D5C7E727847B3000C6C916 /* testgame */,
 				23D5C7E4278357D400C6C916 /* assets */,
 				23D5C7C327832B5600C6C916 /* game-engine */,
 				23D5C7C227832B5600C6C916 /* Products */,
@@ -201,7 +201,7 @@
 			path = assets;
 			sourceTree = "<group>";
 		};
-		23D5C7E727847B3000C6C916 /* game */ = {
+		23D5C7E727847B3000C6C916 /* testgame */ = {
 			isa = PBXGroup;
 			children = (
 				23E5E2FE27A302DD00B62583 /* asteroid.cpp */,
@@ -216,7 +216,7 @@
 				23A933BD2788B4EC00769F69 /* ship.hpp */,
 				2350E82D279976840017F7C3 /* shipEventListener.hpp */,
 			);
-			path = game;
+			path = testgame;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

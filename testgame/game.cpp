@@ -83,7 +83,7 @@ public:
 };
 
 int main() {
-    Game game(1500, 900, "Fango");
+    Game game(1500, 900, "Asteroids");
     game.start();
     return 0;
 }

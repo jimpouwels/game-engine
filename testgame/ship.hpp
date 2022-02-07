@@ -1,5 +1,5 @@
-#ifndef fangoCharacter_hpp
-#define fangoCharacter_hpp
+#ifndef ship_hpp
+#define ship_hpp
 
 #include <stdio.h>
 #include <list>
