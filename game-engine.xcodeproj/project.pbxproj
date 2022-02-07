@@ -117,6 +117,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		235A527927B0FC7B0008A8A0 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				235A526C27AD72E00008A8A0 /* mathUtils.hpp */,
+				235A526227A959110008A8A0 /* geo2D.hpp */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		235A527A27B0FC900008A8A0 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				23A933AE27864EA700769F69 /* aminatedSprite.cpp */,
+				23A933AC27864EA700769F69 /* animatedSprite.hpp */,
+				23A933F22790187300769F69 /* animation.cpp */,
+				23A933F32790187300769F69 /* animation.hpp */,
+				23A933B127864EA700769F69 /* gameEngine.cpp */,
+				23D5C7C427832B5600C6C916 /* gameEngine.hpp */,
+				235A526D27AFD7090008A8A0 /* image.cpp */,
+				235A526E27AFD7090008A8A0 /* image.hpp */,
+				23A933B92788407F00769F69 /* keyboardHandler.cpp */,
+				23A933BA2788407F00769F69 /* keyboardHandler.hpp */,
+				23A933B72787617D00769F69 /* keyListener.hpp */,
+				23A933AD27864EA700769F69 /* sprite.cpp */,
+				23D5C7E827847B6200C6C916 /* sprite.hpp */,
+				235A527827B00C760008A8A0 /* spriteCache.hpp */,
+				235A526427AA81180008A8A0 /* timing.hpp */,
+				235A526327A959790008A8A0 /* vector2D.hpp */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
 		23D5C7B827832B5600C6C916 = {
 			isa = PBXGroup;
 			children = (
@@ -139,24 +171,8 @@
 		23D5C7C327832B5600C6C916 /* game-engine */ = {
 			isa = PBXGroup;
 			children = (
-				23A933AE27864EA700769F69 /* aminatedSprite.cpp */,
-				23A933AC27864EA700769F69 /* animatedSprite.hpp */,
-				23A933F22790187300769F69 /* animation.cpp */,
-				23A933F32790187300769F69 /* animation.hpp */,
-				23A933B127864EA700769F69 /* gameEngine.cpp */,
-				23D5C7C427832B5600C6C916 /* gameEngine.hpp */,
-				235A526227A959110008A8A0 /* geo2D.hpp */,
-				235A526D27AFD7090008A8A0 /* image.cpp */,
-				235A526E27AFD7090008A8A0 /* image.hpp */,
-				23A933B92788407F00769F69 /* keyboardHandler.cpp */,
-				23A933BA2788407F00769F69 /* keyboardHandler.hpp */,
-				23A933B72787617D00769F69 /* keyListener.hpp */,
-				235A526C27AD72E00008A8A0 /* mathUtils.hpp */,
-				23A933AD27864EA700769F69 /* sprite.cpp */,
-				23D5C7E827847B6200C6C916 /* sprite.hpp */,
-				235A527827B00C760008A8A0 /* spriteCache.hpp */,
-				235A526427AA81180008A8A0 /* timing.hpp */,
-				235A526327A959790008A8A0 /* vector2D.hpp */,
+				235A527A27B0FC900008A8A0 /* core */,
+				235A527927B0FC7B0008A8A0 /* util */,
 			);
 			path = "game-engine";
 			sourceTree = "<group>";
