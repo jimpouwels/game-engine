@@ -10,7 +10,7 @@ This is my attempt to build a simple game engine. The game engine is equipped wi
 - keyboard handling
 - basic geo calculation utilities
 
-##Install
+## Install
 
 - clone the code
 - install XCode
