@@ -41,8 +41,12 @@ public:
     float getRotationAngle();
     void setRotationAngle(float angle);
     bool isPositionedWithinScreen();
-    bool isOutsideScreenBelow();
-    bool isOutsideScreenAbove();
+    bool isAtBottomEdgeOfScreen();
+    bool isAtTopEdgeOfScreen();
+    bool isAtLeftEdgeOfScreen();
+    bool isAtRightEdgeOfScreen();
+    bool isOutsideScreenBottom();
+    bool isOutsideScreenTop();
     bool isOutsideScreenLeft();
     bool isOutsideScreenRight();
     AnimatedSprite(GameEngine* gameEngine, float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds);

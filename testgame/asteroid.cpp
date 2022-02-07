@@ -44,13 +44,13 @@ bool Asteroid::isDestroyed() {
 }
 
 void Asteroid::updateDirection(float elapsedTime) {
-    if (isEnteringScreen && !isOutsideScreenLeft() && !isOutsideScreenRight()) {
+    if (isEnteringScreen && !isAtLeftEdgeOfScreen() && !isAtRightEdgeOfScreen()) {
         isEnteringScreen = false;
     }
-    if (isOutsideScreenAbove() || isOutsideScreenBelow()) {
+    if (isAtTopEdgeOfScreen() || isAtBottomEdgeOfScreen()) {
         directionAngle = jimp::Geo2D::inverseAngleVertically(directionAngle);
     }
-    if (!isEnteringScreen && (isOutsideScreenLeft() || isOutsideScreenRight())) {
+    if (!isEnteringScreen && (isAtLeftEdgeOfScreen() || isAtRightEdgeOfScreen())) {
         directionAngle = jimp::Geo2D::inverseAngleHorizontally(directionAngle);
     }
 }

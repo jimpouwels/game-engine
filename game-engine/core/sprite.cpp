@@ -53,20 +53,36 @@ Vector2D& Sprite::getPosition() {
     return position;
 }
 
-bool Sprite::isOutsideScreenLeft() {
+bool Sprite::isAtLeftEdgeOfScreen() {
     return position.x < 0;
 }
 
-bool Sprite::isOutsideScreenRight() {
+bool Sprite::isAtRightEdgeOfScreen() {
     return position.x > gameEngine->getScreenWidth() - getWidth();
 }
 
-bool Sprite::isOutsideScreenAbove() {
+bool Sprite::isAtTopEdgeOfScreen() {
     return position.y < 0;
 }
 
-bool Sprite::isOutsideScreenBelow() {
+bool Sprite::isAtBottomEdgeOfScreen() {
     return position.y > gameEngine->getScreenHeight() - getHeight();
+}
+
+bool Sprite::isOutsideScreenTop() {
+    return position.y < -getHeight();
+}
+
+bool Sprite::isOutsideScreenBottom() {
+    return position.y > gameEngine->getScreenHeight();
+}
+
+bool Sprite::isOutsideScreenLeft() {
+    return position.x < -getWidth();
+}
+
+bool Sprite::isOutsideScreenRight() {
+    return position.x > gameEngine->getScreenWidth();
 }
 
 float Sprite::getScale() {

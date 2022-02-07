@@ -61,11 +61,15 @@ void Ship::updateMovement(float elapsedTime) {
         deltaVector = jimp::Geo2D::deltaVectorByAngle(getRotationAngle(), distance);
     }
     
-    if ((isOutsideScreenRight() && deltaVector.x >= 0) || (isOutsideScreenLeft() && deltaVector.x <= 0)) {
-        deltaVector.x = 0;
+    if (isOutsideScreenRight() && deltaVector.x >= 0) {
+        setX(-getWidth());
+    } else if (isOutsideScreenLeft() && deltaVector.x <= 0) {
+        setX(getGameEngine()->getScreenWidth());
     }
-    if ((isOutsideScreenAbove() && deltaVector.y <= 0) || (isOutsideScreenBelow() && deltaVector.y >= 0)) {
-        deltaVector.y = 0;
+    if (isOutsideScreenTop() && deltaVector.y <= 0) {
+        setY(getGameEngine()->getScreenHeight());
+    } else if (isOutsideScreenBottom() && deltaVector.y >= 0) {
+        setY(-getHeight());
     }
     addToPosition(deltaVector);
 }
