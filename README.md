@@ -6,7 +6,7 @@ This is my attempt to build a simple game engine. The game engine is equipped wi
   - size
   - angle
   - scale
-- animation handling
+- animated sprites based on sprite groups
 - keyboard handling
 - basic geo calculation utilities
 
