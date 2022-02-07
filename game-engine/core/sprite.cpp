@@ -66,7 +66,7 @@ bool Sprite::isOutsideScreenAbove() {
 }
 
 bool Sprite::isOutsideScreenBelow() {
-    return position.y > gameEngine->getScreenWidth() - getHeight();
+    return position.y > gameEngine->getScreenHeight() - getHeight();
 }
 
 float Sprite::getScale() {

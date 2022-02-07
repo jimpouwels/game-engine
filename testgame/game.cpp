@@ -58,6 +58,7 @@ public:
                 if (asteroid->isHitBy(*projectile)) {
                     asteroid->setHit();
                     projectilesToRemove.push_back(projectile);
+                    break;
                 }
             }
         }

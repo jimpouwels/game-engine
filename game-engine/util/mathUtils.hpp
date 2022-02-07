@@ -9,7 +9,7 @@ class MathUtils {
 
 public:
     static int randomNumberBetween(int from, int to) {
-        return rand() % to + from;
+        return rand() % (to - from) + from;
     }
     
 };
