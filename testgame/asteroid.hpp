@@ -8,7 +8,7 @@
 class Asteroid : public jimp::AnimatedSprite {
   
 private:
-    static const int SPEED_IN_PIXELS_PER_SECOND;
+    static const int FORCE;
     static const int ROTATION_DEGREES_PER_SECOND;
     static const float HIT_ANIMATION_DURATION_IN_SECONDS;
     float directionAngle;

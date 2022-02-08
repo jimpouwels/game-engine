@@ -11,15 +11,15 @@ class Geo2D {
 
 public:
     
-    static Vector2D updateVelocity(Vector2D currentVelocity, float force, float angle, float elapsedTime) {
+    static Vector2D updateVelocity(Vector2D currentVelocity, float force, float angle, float mass, float elapsedTime) {
         float forceForElapsedTime = Timing::toValueForElapsedTime(force, elapsedTime);
-        jimp::Vector2D velocityDelta = deltaVectorByAngle(angle, forceForElapsedTime);
+        jimp::Vector2D velocityDelta = vectorFrom(angle, forceForElapsedTime / mass);
         return currentVelocity + velocityDelta;
     }
     
-    static Vector2D deltaVectorByAngle(float angle, float distance) {
-        float deltaX = distance * sin(M_PI * 2 * angle / 360);
-        float deltaY = -(distance * cos(M_PI * 2 * angle / 360));
+    static Vector2D vectorFrom(float angle, float force) {
+        float deltaX = force * sin(M_PI * 2 * angle / 360);
+        float deltaY = -(force * cos(M_PI * 2 * angle / 360));
         return Vector2D { .x = deltaX, .y = deltaY };
     }
     

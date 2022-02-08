@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-const int Asteroid::SPEED_IN_PIXELS_PER_SECOND = 180;
+const int Asteroid::FORCE = 180;
 const int Asteroid::ROTATION_DEGREES_PER_SECOND = 50;
 const float Asteroid::HIT_ANIMATION_DURATION_IN_SECONDS = 0.01F;
 
@@ -56,8 +56,8 @@ void Asteroid::updateDirection(float elapsedTime) {
 }
 
 void Asteroid::updateMovement(float elapsedTime) {
-    float distance = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
-    jimp::Vector2D deltaVector = jimp::Geo2D::deltaVectorByAngle(directionAngle, distance);
+    float force = jimp::Timing::toValueForElapsedTime(FORCE, elapsedTime);
+    jimp::Vector2D deltaVector = jimp::Geo2D::vectorFrom(directionAngle, force);
     addToPosition(deltaVector);
 }
 

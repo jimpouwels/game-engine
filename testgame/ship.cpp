@@ -7,7 +7,7 @@
 #include "timing.hpp"
 
 const int Ship::SPEED_IN_PIXELS_PER_SECOND = 350;
-const int Ship::THRUST_FORCE = 10;
+const int Ship::THRUST_FORCE = 25000;
 const int Ship::ROTATION_DEGREES_PER_SECOND = 140;
 const int Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.2F;
@@ -58,7 +58,7 @@ void Ship::updateFiring(float elapsedTime) {
 
 void Ship::updateMovement(float elapsedTime) {
     if (isThrothling) {
-        jimp::Vector2D newVelocity = jimp::Geo2D::updateVelocity(velocity, THRUST_FORCE, getRotationAngle(), elapsedTime);
+        jimp::Vector2D newVelocity = jimp::Geo2D::updateVelocity(velocity, THRUST_FORCE, getRotationAngle(), 4000, elapsedTime);
         
         float maximumVelocity = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
         if (abs(newVelocity.x) < maximumVelocity || abs(newVelocity.x) < abs(velocity.x)) {
