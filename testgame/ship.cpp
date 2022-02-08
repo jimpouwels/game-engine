@@ -58,11 +58,9 @@ void Ship::updateFiring(float elapsedTime) {
 
 void Ship::updateMovement(float elapsedTime) {
     if (isThrothling) {
-        float maximumVelocity = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
-        float thrustForce = jimp::Timing::toValueForElapsedTime(THRUST_FORCE, elapsedTime);
-        jimp::Vector2D velocityDelta = jimp::Geo2D::deltaVectorByAngle(getRotationAngle(), thrustForce);
-        jimp::Vector2D newVelocity = velocity + velocityDelta;
+        jimp::Vector2D newVelocity = jimp::Geo2D::updateVelocity(velocity, THRUST_FORCE, getRotationAngle(), elapsedTime);
         
+        float maximumVelocity = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
         if (abs(newVelocity.x) < maximumVelocity || abs(newVelocity.x) < abs(velocity.x)) {
             velocity.x = newVelocity.x;
         }
