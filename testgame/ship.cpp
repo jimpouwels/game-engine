@@ -6,7 +6,8 @@
 #include "vector2D.hpp"
 #include "timing.hpp"
 
-const int Ship::SPEED_IN_PIXELS_PER_SECOND = 200;
+const int Ship::SPEED_IN_PIXELS_PER_SECOND = 350;
+const int Ship::THRUST_FORCE = 10;
 const int Ship::ROTATION_DEGREES_PER_SECOND = 140;
 const int Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.2F;
@@ -57,8 +58,17 @@ void Ship::updateFiring(float elapsedTime) {
 
 void Ship::updateMovement(float elapsedTime) {
     if (isThrothling) {
-        float distance = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
-        velocity = jimp::Geo2D::deltaVectorByAngle(getRotationAngle(), distance);
+        float maximumVelocity = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
+        float thrustForce = jimp::Timing::toValueForElapsedTime(THRUST_FORCE, elapsedTime);
+        jimp::Vector2D velocityDelta = jimp::Geo2D::deltaVectorByAngle(getRotationAngle(), thrustForce);
+        jimp::Vector2D newVelocity = velocity + velocityDelta;
+        
+        if (abs(newVelocity.x) < maximumVelocity || abs(newVelocity.x) < abs(velocity.x)) {
+            velocity.x = newVelocity.x;
+        }
+        if (abs(newVelocity.y) < maximumVelocity || abs(newVelocity.y) < abs(velocity.y)) {
+            velocity.y = newVelocity.y;
+        }
     }
     
     if (isOutsideScreenRight() && velocity.x >= 0) {
