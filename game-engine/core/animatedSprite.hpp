@@ -40,7 +40,7 @@ public:
     int getHeight();
     float getRotationAngle();
     void setRotationAngle(float angle);
-    bool isPositionedWithinScreen();
+    virtual bool isPositionedWithinScreen();
     bool isAtBottomEdgeOfScreen();
     bool isAtTopEdgeOfScreen();
     bool isAtLeftEdgeOfScreen();

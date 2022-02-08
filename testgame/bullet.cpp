@@ -3,6 +3,7 @@
 #include "animatedSprite.hpp"
 #include "direction.hpp"
 #include "timing.hpp"
+#include "vector2D.hpp"
 
 const int Bullet::FORCE = 1200;
 const float Bullet::SCALE = 0.3F;
@@ -18,4 +19,9 @@ void Bullet::onFrame(float elapsedTime) {
     addToPosition(deltaVector);
     
     draw(elapsedTime);
+}
+
+bool Bullet::isPositionedWithinScreen() {
+    jimp::Vector2D p = getPosition();
+    return p.x <= getGameEngine()->getScreenWidth() + 400 && p.x >= -400 && p.y <= getGameEngine()->getScreenHeight() + 400 && p.y > -400;
 }
