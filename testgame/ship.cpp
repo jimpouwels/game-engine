@@ -30,8 +30,7 @@ void Ship::onFrame(float elapsedTime) {
 }
 
 jimp::Vector2D Ship::getRotationPoint() {
-    jimp::Vector2D position = getPosition();
-    return jimp::Vector2D { .x = position.x + (getWidth() / 2), .y = position.y + ((getHeight() - (ROTATION_POINT_Y_OFFSET * getScale())) / 2)};
+    return jimp::Vector2D { .x = getWidth() / 2.0F, .y = (getHeight() - (ROTATION_POINT_Y_OFFSET * getScale())) / 2.0F };
 }
 
 void Ship::onKeyboardLeft(jimp::KeyState keyState) {
@@ -65,7 +64,7 @@ void Ship::updateFiring(float elapsedTime) {
     if (elapsedTimeSinceLastShot >= timeBetweenShots && (hasFired || isFiring)) {
         hasFired = false;
         jimp::Vector2D rotationPoint = getRotationPoint();
-        Bullet* bullet = new Bullet(getGameEngine(), rotationPoint.x, rotationPoint.y, getRotationAngle());
+        Bullet* bullet = new Bullet(getGameEngine(), getPosition().x + rotationPoint.x, getPosition().y + rotationPoint.y, getRotationAngle());
         eventListener->onWeaponFired(bullet);
         elapsedTimeSinceLastShot = 0;
     }

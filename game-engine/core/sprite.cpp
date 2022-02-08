@@ -15,13 +15,8 @@ Sprite::Sprite(jimp::GameEngine* gameEngine, float x, float y, float scale, std:
     this->scale = scale;
     this->gameEngine = gameEngine;
     this->image = gameEngine->loadImage(filePath);
-    this->rotationPoint.x = x + (getWidth() / 2);
-    this->rotationPoint.y = y + (getHeight() / 2);
-}
-
-Sprite::Sprite(GameEngine* gameEngine, float x, float y, float scale, int angle, std::string filePath, Vector2D rotationPoint) {
-    Sprite(gameEngine, x, y, scale, angle, filePath);
-    this->rotationPoint = rotationPoint;
+    this->rotationPoint.x = getWidth() / 2.0F;
+    this->rotationPoint.y = getHeight() / 2.0F;
 }
 
 Sprite::~Sprite() {

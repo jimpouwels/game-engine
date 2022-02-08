@@ -57,7 +57,7 @@ public:
         this->updateAnimation(elapsedTime);
     };
     virtual Vector2D getRotationPoint() {
-        return Vector2D { .x = position.x + (getWidth() / 2), .y = position.y + (getHeight() / 2) };
+        return Vector2D { getWidth() / 2.0F, .y = getHeight() / 2.0F };
     }
     void addSprite(std::string animationId, std::string filePath);
 };

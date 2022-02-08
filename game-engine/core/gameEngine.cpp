@@ -60,7 +60,7 @@ void GameEngine::draw(jimp::Sprite* sprite) {
     }
 
     sf::Transform transform;
-    transform.rotate(sprite->getRotationAngle(), sprite->getRotationPoint().x, sprite->getRotationPoint().y);
+    transform.rotate(sprite->getRotationAngle(), sprite->getPosition().x + sprite->getRotationPoint().x, sprite->getPosition().y + sprite->getRotationPoint().y);
     cachedSprite->sprite->setPosition(sprite->getPosition().x, sprite->getPosition().y);
     cachedSprite->sprite->setScale(sprite->getScale(), sprite->getScale());
     window->draw(*cachedSprite->sprite, transform);
