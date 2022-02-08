@@ -14,7 +14,7 @@ public:
     static const float SCALE;
     Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle);
     void onFrame(float elapsedTime) override;
-    bool isPositionedWithinScreen() override;
+
 };
 
 #endif
