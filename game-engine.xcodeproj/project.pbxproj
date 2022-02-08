@@ -11,6 +11,8 @@
 		235A526927AD25440008A8A0 /* asteroid-hit.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235A526827AD253C0008A8A0 /* asteroid-hit.png */; };
 		235A526B27AD49B50008A8A0 /* background.jpeg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235A526A27AD48D60008A8A0 /* background.jpeg */; };
 		235A526F27AFD7090008A8A0 /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235A526D27AFD7090008A8A0 /* image.cpp */; };
+		236D5A2027B2C5D4005183C5 /* spaceship-thrust1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 236D5A1F27B2C5CC005183C5 /* spaceship-thrust1.png */; };
+		236D5A2127B2C5D4005183C5 /* spaceship-thrust2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 236D5A1E27B2C5CC005183C5 /* spaceship-thrust2.png */; };
 		23A933B227864EA800769F69 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AD27864EA700769F69 /* sprite.cpp */; };
 		23A933B327864EA800769F69 /* aminatedSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AE27864EA700769F69 /* aminatedSprite.cpp */; };
 		23A933B527864EA800769F69 /* gameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933B127864EA700769F69 /* gameEngine.cpp */; };
@@ -48,6 +50,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				236D5A2027B2C5D4005183C5 /* spaceship-thrust1.png in CopyFiles */,
+				236D5A2127B2C5D4005183C5 /* spaceship-thrust2.png in CopyFiles */,
 				235A526B27AD49B50008A8A0 /* background.jpeg in CopyFiles */,
 				235A526927AD25440008A8A0 /* asteroid-hit.png in CopyFiles */,
 				23E5E2FD27A302C700B62583 /* asteroid.png in CopyFiles */,
@@ -71,6 +75,8 @@
 		235A526D27AFD7090008A8A0 /* image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = image.cpp; sourceTree = "<group>"; };
 		235A526E27AFD7090008A8A0 /* image.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = image.hpp; sourceTree = "<group>"; };
 		235A527827B00C760008A8A0 /* spriteCache.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = spriteCache.hpp; sourceTree = "<group>"; };
+		236D5A1E27B2C5CC005183C5 /* spaceship-thrust2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spaceship-thrust2.png"; sourceTree = "<group>"; };
+		236D5A1F27B2C5CC005183C5 /* spaceship-thrust1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spaceship-thrust1.png"; sourceTree = "<group>"; };
 		23A933AC27864EA700769F69 /* animatedSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animatedSprite.hpp; sourceTree = "<group>"; };
 		23A933AD27864EA700769F69 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		23A933AE27864EA700769F69 /* aminatedSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aminatedSprite.cpp; sourceTree = "<group>"; };
@@ -192,6 +198,8 @@
 		23D5C7E4278357D400C6C916 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				236D5A1F27B2C5CC005183C5 /* spaceship-thrust1.png */,
+				236D5A1E27B2C5CC005183C5 /* spaceship-thrust2.png */,
 				235A526A27AD48D60008A8A0 /* background.jpeg */,
 				235A526827AD253C0008A8A0 /* asteroid-hit.png */,
 				23E5E2FC27A302C000B62583 /* asteroid.png */,

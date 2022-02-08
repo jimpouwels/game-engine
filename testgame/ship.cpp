@@ -8,13 +8,16 @@
 
 const int Ship::SPEED_IN_PIXELS_PER_SECOND = 350;
 const int Ship::THRUST_FORCE = 25000;
+const int Ship::MASS = 4000;
 const int Ship::ROTATION_DEGREES_PER_SECOND = 140;
 const int Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.2F;
 
-Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jimp::AnimatedSprite(gameEngine, gameEngine->getScreenWidth() / 2, gameEngine->getScreenHeight() / 2, SCALE, -1) {
+Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jimp::AnimatedSprite(gameEngine, gameEngine->getScreenWidth() / 2, gameEngine->getScreenHeight() / 2, SCALE, 0.05F) {
     this->eventListener = eventListener;
     addSprite("default", "spaceship.png");
+    addSprite("throttling", "spaceship-thrust1.png");
+    addSprite("throttling", "spaceship-thrust2.png");
 }
 
 void Ship::onFrame(float elapsedTime) {
@@ -35,6 +38,11 @@ void Ship::onKeyboardRight(jimp::KeyState keyState) {
 
 void Ship::onKeyboardUp(jimp::KeyState keyState) {
     isThrothling = keyState == jimp::KeyState::PRESSED;
+    if (isThrothling) {
+        setCurrentAnimation("throttling");
+    } else {
+        setCurrentAnimation("default");
+    }
 }
 
 void Ship::onKeyboardSpaceBar(jimp::KeyState keyState) {
@@ -58,7 +66,7 @@ void Ship::updateFiring(float elapsedTime) {
 
 void Ship::updateMovement(float elapsedTime) {
     if (isThrothling) {
-        jimp::Vector2D newVelocity = jimp::Geo2D::updateVelocity(velocity, THRUST_FORCE, getRotationAngle(), 4000, elapsedTime);
+        jimp::Vector2D newVelocity = jimp::Geo2D::updateVelocity(velocity, THRUST_FORCE, getRotationAngle(), MASS, elapsedTime);
         
         float maximumVelocity = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
         if (abs(newVelocity.x) < maximumVelocity || abs(newVelocity.x) < abs(velocity.x)) {
