@@ -39,6 +39,7 @@ Sprite* AnimatedSprite::getActiveSprite() {
     activeSprite->setPosition(position);
     activeSprite->setScale(scale);
     activeSprite->setRotationAngle(angle);
+    activeSprite->setRotationPoint(getRotationPoint());
     return activeAnimation->getActiveSprite();
 }
 

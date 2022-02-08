@@ -15,6 +15,7 @@ class Sprite {
     
 private:
     Vector2D position = { .x = 0, .y = 0};
+    Vector2D rotationPoint = { .x = 0, .y = 0 };
     float scale = 1.0F;
     float angle = 0.0F;
     GameEngine* gameEngine;
@@ -23,6 +24,7 @@ private:
 public:
     Sprite(GameEngine* gameEngine, float x, float y, float scale, std::string filePath);
     Sprite(GameEngine* gameEngine, float x, float y, float scale, int angle, std::string filePath);
+    Sprite(GameEngine* gameEngine, float x, float y, float scale, int angle, std::string filePath, Vector2D rotationPoint);
     ~Sprite();
     Vector2D& getPosition();
     void setPosition(Vector2D position);
@@ -43,6 +45,8 @@ public:
     bool isOutsideScreenLeft();
     bool isOutsideScreenRight();
     void setPosition(float x, float y);
+    void setRotationPoint(Vector2D rotationPoint);
+    Vector2D getRotationPoint();
     jimp::Image& getImage();
 };
 }

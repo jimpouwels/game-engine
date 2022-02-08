@@ -20,6 +20,7 @@ private:
     static const float IMAGE_SWAP_INTERVAL_IN_SECONDS;
     static const int ROTATION_DEGREES_PER_SECOND;
     static const int SHOTS_PER_SECOND;
+    static const int ROTATION_POINT_Y_OFFSET; // the excaust flame makes the spaceship image non-symmetrical
     bool hasFired = false;
     bool isFiring = false;
     bool isThrothling = false;
@@ -41,6 +42,7 @@ public:
     void onKeyboardRight(jimp::KeyState keyState) override;
     void onKeyboardUp(jimp::KeyState keyState) override;
     void onKeyboardSpaceBar(jimp::KeyState keyState) override;
+    jimp::Vector2D getRotationPoint() override;
 };
 
 #endif

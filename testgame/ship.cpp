@@ -12,6 +12,7 @@ const int Ship::MASS = 4000;
 const int Ship::ROTATION_DEGREES_PER_SECOND = 140;
 const int Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.2F;
+const int Ship::ROTATION_POINT_Y_OFFSET = 296;
 
 Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jimp::AnimatedSprite(gameEngine, gameEngine->getScreenWidth() / 2, gameEngine->getScreenHeight() / 2, SCALE, 0.05F) {
     this->eventListener = eventListener;
@@ -26,6 +27,11 @@ void Ship::onFrame(float elapsedTime) {
     updateRotation(elapsedTime);
     
     draw(elapsedTime);
+}
+
+jimp::Vector2D Ship::getRotationPoint() {
+    jimp::Vector2D position = getPosition();
+    return jimp::Vector2D { .x = position.x + (getWidth() / 2), .y = position.y + ((getHeight() - (ROTATION_POINT_Y_OFFSET * getScale())) / 2)};
 }
 
 void Ship::onKeyboardLeft(jimp::KeyState keyState) {
@@ -58,7 +64,8 @@ void Ship::updateFiring(float elapsedTime) {
     float timeBetweenShots = 1.0F / SHOTS_PER_SECOND;
     if (elapsedTimeSinceLastShot >= timeBetweenShots && (hasFired || isFiring)) {
         hasFired = false;
-        Bullet* bullet = new Bullet(getGameEngine(), getPosition().x + (getWidth() / 2), getPosition().y + (getHeight() / 2), getRotationAngle());
+        jimp::Vector2D rotationPoint = getRotationPoint();
+        Bullet* bullet = new Bullet(getGameEngine(), rotationPoint.x, rotationPoint.y, getRotationAngle());
         eventListener->onWeaponFired(bullet);
         elapsedTimeSinceLastShot = 0;
     }
