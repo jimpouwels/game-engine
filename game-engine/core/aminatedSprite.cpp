@@ -35,11 +35,6 @@ void AnimatedSprite::draw(float elapsedTime) {
 }
 
 Sprite* AnimatedSprite::getActiveSprite() {
-    Sprite* activeSprite = activeAnimation->getActiveSprite();
-    activeSprite->setPosition(position);
-    activeSprite->setScale(scale);
-    activeSprite->setRotationAngle(angle);
-    activeSprite->setRotationPoint(getRotationPoint());
     return activeAnimation->getActiveSprite();
 }
 
@@ -55,6 +50,11 @@ void AnimatedSprite::updateAnimation(float elapsedTime) {
         activeAnimation->switchToNextSprite();
         elapsedTimeSinceLastSwap = 0;
     }
+    Sprite* activeSprite = getActiveSprite();
+    activeSprite->setPosition(position);
+    activeSprite->setScale(scale);
+    activeSprite->setRotationAngle(angle);
+    activeSprite->setRotationPoint(getRotationPoint());
 }
 
 jimp::GameEngine* AnimatedSprite::getGameEngine() {
@@ -83,11 +83,11 @@ void AnimatedSprite::addToPosition(Vector2D delta) {
 }
 
 int AnimatedSprite::getWidth() {
-    return activeAnimation->getActiveSprite()->getWidth();
+    return getActiveSprite()->getWidth();
 }
 
 int AnimatedSprite::getHeight() {
-    return activeAnimation->getActiveSprite()->getHeight();
+    return getActiveSprite()->getHeight();
 }
 
 float AnimatedSprite::getScale() {
