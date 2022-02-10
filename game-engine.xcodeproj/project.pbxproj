@@ -176,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				23D5C7E727847B3000C6C916 /* testgame */,
-				23D5C7E4278357D400C6C916 /* assets */,
 				23D5C7C327832B5600C6C916 /* game-engine */,
 				23D5C7C227832B5600C6C916 /* Products */,
 				23D5C7CB27832BE500C6C916 /* Frameworks */,
@@ -233,6 +232,7 @@
 		23D5C7E727847B3000C6C916 /* testgame */ = {
 			isa = PBXGroup;
 			children = (
+				23D5C7E4278357D400C6C916 /* assets */,
 				23E5E2FE27A302DD00B62583 /* asteroid.cpp */,
 				23E5E2FF27A302DD00B62583 /* asteroid.hpp */,
 				235A526527AAB29F0008A8A0 /* asteroidSpawner.cpp */,
