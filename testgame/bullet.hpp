@@ -15,6 +15,7 @@ public:
     Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle);
     void onFrame(float elapsedTime) override;
     bool isPositionedWithinScreen() override;
+    void hasCollidedWith(AnimatedSprite *otherSprite) override;
 };
 
 #endif

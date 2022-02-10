@@ -18,7 +18,11 @@ void Bullet::onFrame(float elapsedTime) {
     jimp::Vector2D deltaVector = jimp::Geo2D::vectorFrom(getRotationAngle(), force);
     addToPosition(deltaVector);
     
-    draw(elapsedTime);
+    AnimatedSprite::onFrame(elapsedTime);
+}
+
+void Bullet::hasCollidedWith(AnimatedSprite *otherSprite) {
+    markForDeletion();
 }
 
 bool Bullet::isPositionedWithinScreen() {

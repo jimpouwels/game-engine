@@ -20,9 +20,11 @@ private:
     GameEngine* gameEngine;
     std::map<std::string, Animation*>* animationMap;
     Animation* activeAnimation = nullptr;
+    bool markedForDeletion = false;
     float elapsedTimeSinceLastSwap;
     float imageSwapIntervalInSeconds;
     void updateAnimation(float elapsedTime);
+    void draw(float elapsedTime);
     
 protected:
     void setX(float x);
@@ -30,9 +32,15 @@ protected:
     void setPosition(Vector2D position);
     void addToPosition(Vector2D delta);
     void setCurrentAnimation(std::string animationId);
-    void draw(float elapsedTime);
+    void markForDeletion() {
+        markedForDeletion = true;
+    }
+    virtual void hasCollidedWith(AnimatedSprite* otherSprite) {};
     
 public:
+    AnimatedSprite(GameEngine* gameEngine, float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
+    AnimatedSprite(GameEngine* gameEngine, float x, float y, float scale, float imageSwapIntervalInSeconds);
+    ~AnimatedSprite();
     GameEngine* getGameEngine();
     Vector2D& getPosition();
     float getScale();
@@ -49,12 +57,12 @@ public:
     bool isOutsideScreenTop();
     bool isOutsideScreenLeft();
     bool isOutsideScreenRight();
-    AnimatedSprite(GameEngine* gameEngine, float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
-    AnimatedSprite(GameEngine* gameEngine, float x, float y, float scale, float imageSwapIntervalInSeconds);
-    ~AnimatedSprite();
+    bool isMarkedForDeletion();
+    bool checkCollision(AnimatedSprite* otherSprite);
     Sprite* getActiveSprite();
     virtual void onFrame(float elapsedTime) {
         this->updateAnimation(elapsedTime);
+        gameEngine->draw(getActiveSprite());
     };
     virtual Vector2D getRotationPoint() {
         return Vector2D { getWidth() / 2.0F, .y = getHeight() / 2.0F };

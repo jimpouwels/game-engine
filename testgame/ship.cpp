@@ -29,7 +29,7 @@ void Ship::onFrame(float elapsedTime) {
     updateRotation(elapsedTime);
     updateSound(elapsedTime);
     
-    draw(elapsedTime);
+    AnimatedSprite::onFrame(elapsedTime);
 }
 
 jimp::Vector2D Ship::getRotationPoint() {
@@ -47,7 +47,6 @@ void Ship::onKeyboardRight(jimp::KeyState keyState) {
 void Ship::onKeyboardUp(jimp::KeyState keyState) {
     isThrothling = keyState == jimp::KeyState::PRESSED;
     if (isThrothling) {
-        isThrustSoundFadingOut = false;
         thrustSound->loop(180);
         setCurrentAnimation("throttling");
     } else {
@@ -62,7 +61,7 @@ void Ship::onKeyboardSpaceBar(jimp::KeyState keyState) {
 }
 
 void Ship::updateSound(float elapsedTime) {
-    if (isThrustSoundFadingOut) {
+    if (isThrustSoundFadingOut && !isThrothling) {
         float volumeDecrease = jimp::Timing::toValueForElapsedTime(200, elapsedTime);
         thrustSound->setVolume(thrustSound->getVolume() - volumeDecrease);
         

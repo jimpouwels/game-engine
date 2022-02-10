@@ -29,11 +29,6 @@ AnimatedSprite::~AnimatedSprite() {
     delete animationMap;
 }
 
-void AnimatedSprite::draw(float elapsedTime) {
-    updateAnimation(elapsedTime);
-    gameEngine->draw(getActiveSprite());
-}
-
 Sprite* AnimatedSprite::getActiveSprite() {
     return activeAnimation->getActiveSprite();
 }
@@ -44,9 +39,20 @@ void AnimatedSprite::setCurrentAnimation(std::string animationId) {
     }
 }
 
+bool AnimatedSprite::checkCollision(AnimatedSprite* otherSprite) {
+    Vector2D otherSpritePosition = otherSprite->getPosition();
+    bool hasCollided = otherSpritePosition.x > getPosition().x && otherSpritePosition.x < (getPosition().x + getWidth())
+        && otherSpritePosition.y > getPosition().y && otherSpritePosition.y < (getPosition().y + getHeight());
+    if (hasCollided) {
+        hasCollidedWith(otherSprite);
+        otherSprite->hasCollidedWith(this);
+    }
+    return hasCollided;
+}
+
 void AnimatedSprite::updateAnimation(float elapsedTime) {
     elapsedTimeSinceLastSwap += elapsedTime;
-    if (elapsedTimeSinceLastSwap >= imageSwapIntervalInSeconds) {
+    if (imageSwapIntervalInSeconds >= 0 && elapsedTimeSinceLastSwap >= imageSwapIntervalInSeconds) {
         activeAnimation->switchToNextSprite();
         elapsedTimeSinceLastSwap = 0;
     }
@@ -136,6 +142,10 @@ bool AnimatedSprite::isOutsideScreenLeft() {
 
 bool AnimatedSprite::isOutsideScreenRight() {
     return getActiveSprite()->isOutsideScreenRight();
+}
+
+bool AnimatedSprite::isMarkedForDeletion() {
+    return markedForDeletion;
 }
 
 void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {

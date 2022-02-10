@@ -15,7 +15,6 @@ private:
     float directionAngle;
     float totalHitAnimationDuration = 0.0F;
     bool isHit = false;
-    bool destroyed = false;
     int hitCount = 0;
     bool isEnteringScreen = true;
     bool hasBeenFullyInsideScreen = false;
@@ -29,9 +28,7 @@ public:
     Asteroid(jimp::GameEngine* gameEngine, float x, float y, float directionAngle);
     ~Asteroid();
     void onFrame(float elapsedTime) override;
-    void setHit();
-    bool isHitBy(jimp::AnimatedSprite& animatedSprite);
-    bool isDestroyed();
+    void hasCollidedWith(jimp::AnimatedSprite* otherSprite) override;
 };
 
 #endif

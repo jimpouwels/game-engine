@@ -26,23 +26,13 @@ void Asteroid::onFrame(float elapsedTime) {
     updateRotation(elapsedTime);
     handleHits(elapsedTime);
     
-    draw(elapsedTime);
+    AnimatedSprite::onFrame(elapsedTime);
 }
 
-bool Asteroid::isHitBy(jimp::AnimatedSprite& animatedSprite) {
-    jimp::Vector2D bulletPosition = animatedSprite.getPosition();
-    return bulletPosition.x > getPosition().x && bulletPosition.x < (getPosition().x + getWidth())
-        && bulletPosition.y > getPosition().y && bulletPosition.y < (getPosition().y + getHeight());
-}
-
-void Asteroid::setHit() {
+void Asteroid::hasCollidedWith(jimp::AnimatedSprite* otherSprite) {
     isHit = true;
     this->hitSound->play(14);
     hitCount++;
-}
-
-bool Asteroid::isDestroyed() {
-    return destroyed;
 }
 
 void Asteroid::updateDirection(float elapsedTime) {
@@ -70,7 +60,7 @@ void Asteroid::updateRotation(float elapsedTime) {
 
 void Asteroid::handleHits(float elapsedTime) {
     if (hitCount > 5) {
-        destroyed = true;
+        markForDeletion();
     } else if (isHit) {
         setCurrentAnimation("hit");
         totalHitAnimationDuration += elapsedTime;

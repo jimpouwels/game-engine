@@ -45,8 +45,8 @@ public:
     
     void onFrame(float elapsedTime) {
         draw(background);
-        cleanupProjectiles();
-        handleProjectileHits();
+        cleanupProjectilesOutsideScreen();
+        handleProjectileCollisionWithAsteroids();
         for (const auto& projectile: *projectiles) {
             projectile->onFrame(elapsedTime);
         }
@@ -54,12 +54,13 @@ public:
         ship->onFrame(elapsedTime);
     }
     
-    void handleProjectileHits() {
+    void handleProjectileCollisionWithAsteroids() {
         std::list<jimp::AnimatedSprite*> projectilesToRemove;
+        std::list<jimp::AnimatedSprite*> asteroidsToRemove;
         for (const auto& projectile: *projectiles) {
             for (const auto& asteroid: asteroidSpawner->getAsteroids()) {
-                if (asteroid->isHitBy(*projectile)) {
-                    asteroid->setHit();
+                asteroid->checkCollision(projectile);
+                if (projectile->isMarkedForDeletion()) {
                     projectilesToRemove.push_back(projectile);
                     break;
                 }
@@ -68,7 +69,7 @@ public:
         removeProjectiles(projectilesToRemove);
     }
     
-    void cleanupProjectiles() {
+    void cleanupProjectilesOutsideScreen() {
         std::list<jimp::AnimatedSprite*> projectilesToRemove;
         for (const auto& projectile: *projectiles) {
             if (!projectile->isPositionedWithinScreen()) {

@@ -35,7 +35,7 @@ void AsteroidSpawner::onFrame(float elapsedTime) {
     }
     std::list<Asteroid*> asteroidsToDelete;
     for (const auto& asteroid: *asteroids) {
-        if (asteroid->isDestroyed()) {
+        if (asteroid->isMarkedForDeletion()) {
             asteroidsToDelete.push_back(asteroid);
         } else {
             asteroid->onFrame(elapsedTime);
