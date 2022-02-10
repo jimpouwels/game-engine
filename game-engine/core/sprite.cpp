@@ -1,6 +1,4 @@
 #include "sprite.hpp"
-#include <iostream>
-#include <stdio.h>
 
 namespace jimp {
 

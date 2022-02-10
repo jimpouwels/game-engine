@@ -9,6 +9,7 @@
 #include "shipEventListener.hpp"
 #include "direction.hpp"
 #include "vector2D.hpp"
+#include "sound.hpp"
 
 class Ship : public jimp::AnimatedSprite, public jimp::KeyListener {
     
@@ -30,9 +31,13 @@ private:
     jimp::Vector2D velocity = { .x = 0, .y = 0 };
     float elapsedTimeSinceLastShot = 0;
     ShipEventListener* eventListener = nullptr;
+    jimp::Sound* firingSound = nullptr;
+    jimp::Sound* thrustSound = nullptr;
+    bool isThrustSoundFadingOut = false;
     void updateMovement(float elapsedTime);
     void updateFiring(float elapsedTime);
     void updateRotation(float elapsedTime);
+    void updateSound(float elapsedTime);
     void setMoving(jimp::KeyState keyState);
 
 public:

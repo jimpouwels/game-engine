@@ -11,11 +11,13 @@ const uint16_t Ship::THRUST_FORCE = 25000;
 const uint16_t Ship::MASS = 4000;
 const uint8_t Ship::ROTATION_DEGREES_PER_SECOND = 140;
 const uint8_t Ship::SHOTS_PER_SECOND = 10;
-const float Ship::SCALE = 0.2F;
+const float Ship::SCALE = 0.15F;
 const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 
 Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jimp::AnimatedSprite(gameEngine, gameEngine->getScreenWidth() / 2, gameEngine->getScreenHeight() / 2, SCALE, 0.05F) {
     this->eventListener = eventListener;
+    this->firingSound = gameEngine->loadSound("laser.ogg");
+    this->thrustSound = gameEngine->loadSound("thrust.ogg");
     addSprite("default", "spaceship.png");
     addSprite("throttling", "spaceship-thrust1.png");
     addSprite("throttling", "spaceship-thrust2.png");
@@ -25,6 +27,7 @@ void Ship::onFrame(float elapsedTime) {
     updateFiring(elapsedTime);
     updateMovement(elapsedTime);
     updateRotation(elapsedTime);
+    updateSound(elapsedTime);
     
     draw(elapsedTime);
 }
@@ -44,8 +47,11 @@ void Ship::onKeyboardRight(jimp::KeyState keyState) {
 void Ship::onKeyboardUp(jimp::KeyState keyState) {
     isThrothling = keyState == jimp::KeyState::PRESSED;
     if (isThrothling) {
+        isThrustSoundFadingOut = false;
+        thrustSound->loop(180);
         setCurrentAnimation("throttling");
     } else {
+        isThrustSoundFadingOut = true;
         setCurrentAnimation("default");
     }
 }
@@ -53,6 +59,17 @@ void Ship::onKeyboardUp(jimp::KeyState keyState) {
 void Ship::onKeyboardSpaceBar(jimp::KeyState keyState) {
     hasFired = keyState == jimp::KeyState::PRESSED;
     isFiring = keyState == jimp::KeyState::PRESSED;
+}
+
+void Ship::updateSound(float elapsedTime) {
+    if (isThrustSoundFadingOut) {
+        float volumeDecrease = jimp::Timing::toValueForElapsedTime(200, elapsedTime);
+        thrustSound->setVolume(thrustSound->getVolume() - volumeDecrease);
+        
+        if (thrustSound->getVolume() == 0) {
+            isThrustSoundFadingOut = false;
+        }
+    }
 }
 
 void Ship::updateFiring(float elapsedTime) {
@@ -64,7 +81,8 @@ void Ship::updateFiring(float elapsedTime) {
     if (elapsedTimeSinceLastShot >= timeBetweenShots && (hasFired || isFiring)) {
         hasFired = false;
         jimp::Vector2D rotationPoint = getRotationPoint();
-        Bullet* bullet = new Bullet(getGameEngine(), getPosition().x + rotationPoint.x, getPosition().y + rotationPoint.y, getRotationAngle());
+        Bullet* bullet = new Bullet(getGameEngine(), getPosition().x + rotationPoint.x - 5, getPosition().y + rotationPoint.y - 10, getRotationAngle());
+        firingSound->play(30);
         eventListener->onWeaponFired(bullet);
         elapsedTimeSinceLastShot = 0;
     }

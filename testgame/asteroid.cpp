@@ -13,6 +13,7 @@ Asteroid::Asteroid(jimp::GameEngine* gameEngine, float x, float y, float directi
     addSprite("default", "asteroid.png");
     addSprite("hit", "asteroid-hit.png");
     setRotationAngle(90);
+    this->hitSound = new jimp::Sound("hit.ogg");
     this->directionAngle = directionAngle;
 }
 
@@ -36,6 +37,7 @@ bool Asteroid::isHitBy(jimp::AnimatedSprite& animatedSprite) {
 
 void Asteroid::setHit() {
     isHit = true;
+    this->hitSound->play(14);
     hitCount++;
 }
 

@@ -13,6 +13,11 @@
 		235A526F27AFD7090008A8A0 /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235A526D27AFD7090008A8A0 /* image.cpp */; };
 		236D5A2027B2C5D4005183C5 /* spaceship-thrust1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 236D5A1F27B2C5CC005183C5 /* spaceship-thrust1.png */; };
 		236D5A2127B2C5D4005183C5 /* spaceship-thrust2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 236D5A1E27B2C5CC005183C5 /* spaceship-thrust2.png */; };
+		236D5A2727B565A7005183C5 /* sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 236D5A2527B565A7005183C5 /* sound.cpp */; };
+		236D5A2F27B56962005183C5 /* laser.ogg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 236D5A2E27B5695C005183C5 /* laser.ogg */; };
+		236D5A3127B5707F005183C5 /* hit.ogg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 236D5A3027B57079005183C5 /* hit.ogg */; };
+		236D5A3327B5722D005183C5 /* thrust.ogg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 236D5A3227B57228005183C5 /* thrust.ogg */; };
+		236D5A3527B5794E005183C5 /* music.ogg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 236D5A3427B5794A005183C5 /* music.ogg */; };
 		23A933B227864EA800769F69 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AD27864EA700769F69 /* sprite.cpp */; };
 		23A933B327864EA800769F69 /* aminatedSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AE27864EA700769F69 /* aminatedSprite.cpp */; };
 		23A933B527864EA800769F69 /* gameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933B127864EA700769F69 /* gameEngine.cpp */; };
@@ -50,6 +55,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				236D5A3527B5794E005183C5 /* music.ogg in CopyFiles */,
+				236D5A3327B5722D005183C5 /* thrust.ogg in CopyFiles */,
+				236D5A3127B5707F005183C5 /* hit.ogg in CopyFiles */,
+				236D5A2F27B56962005183C5 /* laser.ogg in CopyFiles */,
 				236D5A2027B2C5D4005183C5 /* spaceship-thrust1.png in CopyFiles */,
 				236D5A2127B2C5D4005183C5 /* spaceship-thrust2.png in CopyFiles */,
 				235A526B27AD49B50008A8A0 /* background.jpeg in CopyFiles */,
@@ -77,6 +86,12 @@
 		235A527827B00C760008A8A0 /* spriteCache.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = spriteCache.hpp; sourceTree = "<group>"; };
 		236D5A1E27B2C5CC005183C5 /* spaceship-thrust2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spaceship-thrust2.png"; sourceTree = "<group>"; };
 		236D5A1F27B2C5CC005183C5 /* spaceship-thrust1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spaceship-thrust1.png"; sourceTree = "<group>"; };
+		236D5A2527B565A7005183C5 /* sound.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sound.cpp; sourceTree = "<group>"; };
+		236D5A2627B565A7005183C5 /* sound.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sound.hpp; sourceTree = "<group>"; };
+		236D5A2E27B5695C005183C5 /* laser.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = laser.ogg; sourceTree = "<group>"; };
+		236D5A3027B57079005183C5 /* hit.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = hit.ogg; sourceTree = "<group>"; };
+		236D5A3227B57228005183C5 /* thrust.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = thrust.ogg; sourceTree = "<group>"; };
+		236D5A3427B5794A005183C5 /* music.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = music.ogg; sourceTree = "<group>"; };
 		23A933AC27864EA700769F69 /* animatedSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animatedSprite.hpp; sourceTree = "<group>"; };
 		23A933AD27864EA700769F69 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		23A933AE27864EA700769F69 /* aminatedSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aminatedSprite.cpp; sourceTree = "<group>"; };
@@ -151,6 +166,8 @@
 				235A527827B00C760008A8A0 /* spriteCache.hpp */,
 				235A526427AA81180008A8A0 /* timing.hpp */,
 				235A526327A959790008A8A0 /* vector2D.hpp */,
+				236D5A2527B565A7005183C5 /* sound.cpp */,
+				236D5A2627B565A7005183C5 /* sound.hpp */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -198,6 +215,10 @@
 		23D5C7E4278357D400C6C916 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				236D5A3427B5794A005183C5 /* music.ogg */,
+				236D5A3227B57228005183C5 /* thrust.ogg */,
+				236D5A3027B57079005183C5 /* hit.ogg */,
+				236D5A2E27B5695C005183C5 /* laser.ogg */,
 				236D5A1F27B2C5CC005183C5 /* spaceship-thrust1.png */,
 				236D5A1E27B2C5CC005183C5 /* spaceship-thrust2.png */,
 				235A526A27AD48D60008A8A0 /* background.jpeg */,
@@ -300,6 +321,7 @@
 				23A933BE2788B4EC00769F69 /* ship.cpp in Sources */,
 				23E5E2F5279A979100B62583 /* bullet.cpp in Sources */,
 				23D5C7C527832B5600C6C916 /* gameEngine.hpp in Sources */,
+				236D5A2727B565A7005183C5 /* sound.cpp in Sources */,
 				23A933B527864EA800769F69 /* gameEngine.cpp in Sources */,
 				23D5C7E32783432F00C6C916 /* game.cpp in Sources */,
 				23A933B327864EA800769F69 /* aminatedSprite.cpp in Sources */,

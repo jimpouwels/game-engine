@@ -5,6 +5,7 @@
 #include <map>
 #include <SFML/Graphics.hpp>
 #include "sprite.hpp"
+#include "sound.hpp"
 #include "spriteCache.hpp"
 #include "keyListener.hpp"
 #include "keyboardHandler.hpp"
@@ -20,6 +21,7 @@ private:
     GameEngine* gameEngine = nullptr;
     std::string windowTitle;
     std::map<std::string, Image*>* imageCache = nullptr;
+    std::map<std::string, Sound*>* soundCache = nullptr;
     SpriteCache* spriteCache = nullptr;
     float timePerFrame;
     jimp::KeyboardHandler* keyboardHandler = nullptr;
@@ -42,6 +44,7 @@ public:
     bool isPositionWithinScreen(float x, float y);
     void addKeyListener(jimp::KeyListener* keyListener);
     Image* loadImage(std::string filePath);
+    Sound* loadSound(std::string filePath);
     virtual void onFrame(float elapsedTime) = 0;
     
 };

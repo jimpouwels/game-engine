@@ -19,7 +19,6 @@ uint16_t Image::getHeight() {
 }
 
 void Image::loadImage(std::string filePath) {
-    this->filePath = filePath;
     this->image = new sf::Image();
     image->loadFromFile(filePath);
 }

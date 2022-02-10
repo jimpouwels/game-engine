@@ -4,6 +4,7 @@
 #include "animatedSprite.hpp"
 #include "gameEngine.hpp"
 #include "bullet.hpp"
+#include "sound.hpp"
 
 class Asteroid : public jimp::AnimatedSprite {
   
@@ -18,6 +19,7 @@ private:
     int hitCount = 0;
     bool isEnteringScreen = true;
     bool hasBeenFullyInsideScreen = false;
+    jimp::Sound* hitSound = nullptr;
     void updateDirection(float elapsedTime);
     void updateMovement(float elapsedTime);
     void updateRotation(float elapsedTime);

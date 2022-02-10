@@ -15,12 +15,15 @@ private:
     jimp::Sprite* background = nullptr;
     Ship* ship = nullptr;
     AsteroidSpawner* asteroidSpawner = nullptr;
+    jimp::Sound* music = nullptr;
     std::list<jimp::AnimatedSprite*>* projectiles = nullptr;
     
 public:
     Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60) {
         ship = new Ship(this, this);
         addKeyListener(ship);
+        music = new jimp::Sound("music.ogg");
+        music->loop(30);
         asteroidSpawner = new AsteroidSpawner(this);
         projectiles = new std::list<jimp::AnimatedSprite*>;
         background = new jimp::Sprite(this, 0, 0, 1.0F, "background.jpeg");

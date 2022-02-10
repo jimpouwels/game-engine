@@ -17,6 +17,7 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string 
     this->windowTitle = windowTitle;
     this->spriteCache = new SpriteCache();
     this->imageCache = new std::map<std::string, Image*>;
+    this->soundCache = new std::map<std::string, Sound*>;
     window = new sf::RenderWindow(sf::VideoMode(this->getScreenWidth(), this->getScreenHeight()), windowTitle);
     keyboardHandler = new jimp::KeyboardHandler();
     this->previousFrameTime = std::chrono::system_clock::now();
@@ -75,6 +76,17 @@ Image* GameEngine::loadImage(std::string filePath) {
         image = imageCache->find(filePath)->second;
     }
     return image;
+}
+
+Sound* GameEngine::loadSound(std::string filePath) {
+    Sound* sound = nullptr;
+    if (soundCache->find(filePath) == soundCache->end()) {
+        sound = new Sound(filePath);
+        soundCache->insert({filePath, sound});
+    } else {
+        sound = soundCache->find(filePath)->second;
+    }
+    return sound;
 }
 
 void GameEngine::eraseFromCache(Sprite *sprite) {

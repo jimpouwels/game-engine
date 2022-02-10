@@ -10,7 +10,6 @@ namespace jimp {
 class Image {
   
 private:
-    std::string filePath;
     sf::Image* image = nullptr;
     void loadImage(std::string filePath);
     
