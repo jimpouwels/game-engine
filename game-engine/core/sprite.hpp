@@ -23,7 +23,7 @@ private:
     
 public:
     Sprite(GameEngine* gameEngine, float x, float y, float scale, std::string filePath);
-    Sprite(GameEngine* gameEngine, float x, float y, float scale, int angle, std::string filePath);
+    Sprite(GameEngine* gameEngine, float x, float y, float scale, uint16_t angle, std::string filePath);
     ~Sprite();
     Vector2D& getPosition();
     void setPosition(Vector2D position);

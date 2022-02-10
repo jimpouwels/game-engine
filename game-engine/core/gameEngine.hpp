@@ -14,9 +14,9 @@ namespace jimp {
 class GameEngine {
     
 private:
-    int screenWidth;
-    int screenHeight;
-    int frameRate;
+    uint16_t screenWidth;
+    uint16_t screenHeight;
+    int16_t frameRate;
     GameEngine* gameEngine = nullptr;
     std::string windowTitle;
     std::map<std::string, Image*>* imageCache = nullptr;
@@ -32,7 +32,7 @@ private:
     void handleEvents();
     
 public:
-    GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate);
+    GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate);
     ~GameEngine();
     void start();
     void draw(Sprite* sprite);

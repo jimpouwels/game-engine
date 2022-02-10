@@ -10,7 +10,7 @@ class Bullet : public jimp::AnimatedSprite {
 private:
     
 public:
-    static const int FORCE;
+    static const uint16_t FORCE;
     static const float SCALE;
     Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle);
     void onFrame(float elapsedTime) override;

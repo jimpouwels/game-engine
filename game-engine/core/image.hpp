@@ -17,8 +17,8 @@ private:
 public:
     Image(std::string filePath);
     ~Image();
-    int getWidth();
-    int getHeight();
+    uint16_t getWidth();
+    uint16_t getHeight();
     sf::Image& getImage();
     
 };

@@ -10,11 +10,11 @@ Image::~Image() {
     delete image;
 }
 
-int Image::getWidth() {
+uint16_t Image::getWidth() {
     return image->getSize().x;
 }
 
-int Image::getHeight() {
+uint16_t Image::getHeight() {
     return image->getSize().y;
 }
 

@@ -4,7 +4,7 @@
 
 namespace jimp {
 
-Sprite::Sprite(jimp::GameEngine* gameEngine, float x, float y, float scale, int angle, std::string filePath) {
+Sprite::Sprite(jimp::GameEngine* gameEngine, float x, float y, float scale, uint16_t angle, std::string filePath) {
     Sprite(gameEngine, x, y, scale, filePath);
     this->angle = angle;
 }

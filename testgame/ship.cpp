@@ -6,13 +6,13 @@
 #include "vector2D.hpp"
 #include "timing.hpp"
 
-const int Ship::SPEED_IN_PIXELS_PER_SECOND = 350;
-const int Ship::THRUST_FORCE = 25000;
-const int Ship::MASS = 4000;
-const int Ship::ROTATION_DEGREES_PER_SECOND = 140;
-const int Ship::SHOTS_PER_SECOND = 10;
+const uint16_t Ship::SPEED_IN_PIXELS_PER_SECOND = 350;
+const uint16_t Ship::THRUST_FORCE = 25000;
+const uint16_t Ship::MASS = 4000;
+const uint8_t Ship::ROTATION_DEGREES_PER_SECOND = 140;
+const uint8_t Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.2F;
-const int Ship::ROTATION_POINT_Y_OFFSET = 296;
+const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 
 Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jimp::AnimatedSprite(gameEngine, gameEngine->getScreenWidth() / 2, gameEngine->getScreenHeight() / 2, SCALE, 0.05F) {
     this->eventListener = eventListener;

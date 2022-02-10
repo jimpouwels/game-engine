@@ -2,7 +2,7 @@
 #include "geo2D.hpp"
 #include "mathUtils.hpp"
 
-const int AsteroidSpawner::SECONDS_BETWEEN_ASTEROID_SPAWN = 3;
+const uint8_t AsteroidSpawner::SECONDS_BETWEEN_ASTEROID_SPAWN = 3;
 
 AsteroidSpawner::AsteroidSpawner(jimp::GameEngine* gameEngine) {
     asteroids = new std::list<Asteroid*>;

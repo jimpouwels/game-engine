@@ -9,7 +9,7 @@
 
 namespace jimp {
 
-GameEngine::GameEngine(int screenWidth, int screenHeight, std::string windowTitle, int desiredFrameRate) {
+GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate) {
     this->screenWidth = screenWidth;
     this->screenHeight = screenHeight;
     this->frameRate = desiredFrameRate;

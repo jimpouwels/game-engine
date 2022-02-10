@@ -13,7 +13,7 @@ class Animation {
 private:
     std::string id;
     std::vector<Sprite*>* sprites;
-    int activeSpriteIndex = 0;
+    uint16_t activeSpriteIndex = 0;
     GameEngine* gameEngine = nullptr;
     
 public:

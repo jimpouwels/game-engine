@@ -5,8 +5,8 @@
 
 #include <iostream>
 
-const int Asteroid::FORCE = 180;
-const int Asteroid::ROTATION_DEGREES_PER_SECOND = 50;
+const uint16_t Asteroid::FORCE = 180;
+const uint16_t Asteroid::ROTATION_DEGREES_PER_SECOND = 50;
 const float Asteroid::HIT_ANIMATION_DURATION_IN_SECONDS = 0.01F;
 
 Asteroid::Asteroid(jimp::GameEngine* gameEngine, float x, float y, float directionAngle) : jimp::AnimatedSprite(gameEngine, x, y, 0.1F, -1) {

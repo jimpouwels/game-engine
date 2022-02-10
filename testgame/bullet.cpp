@@ -5,7 +5,7 @@
 #include "timing.hpp"
 #include "vector2D.hpp"
 
-const int Bullet::FORCE = 1200;
+const uint16_t Bullet::FORCE = 1200;
 const float Bullet::SCALE = 0.3F;
 
 Bullet::Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle) : jimp::AnimatedSprite(gameEngine, x, y, SCALE, -1) {

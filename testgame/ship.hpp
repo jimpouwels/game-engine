@@ -14,13 +14,13 @@ class Ship : public jimp::AnimatedSprite, public jimp::KeyListener {
     
 private:
     static const float SCALE;
-    static const int SPEED_IN_PIXELS_PER_SECOND;
-    static const int THRUST_FORCE;
-    static const int MASS;
+    static const uint16_t SPEED_IN_PIXELS_PER_SECOND;
+    static const uint16_t THRUST_FORCE;
+    static const uint16_t MASS;
     static const float IMAGE_SWAP_INTERVAL_IN_SECONDS;
-    static const int ROTATION_DEGREES_PER_SECOND;
-    static const int SHOTS_PER_SECOND;
-    static const int ROTATION_POINT_Y_OFFSET; // the excaust flame makes the spaceship image non-symmetrical
+    static const uint8_t ROTATION_DEGREES_PER_SECOND;
+    static const uint8_t SHOTS_PER_SECOND;
+    static const uint16_t ROTATION_POINT_Y_OFFSET; // the excaust flame makes the spaceship image non-symmetrical
     bool hasFired = false;
     bool isFiring = false;
     bool isThrothling = false;
