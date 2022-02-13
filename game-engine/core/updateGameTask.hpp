@@ -15,6 +15,7 @@ public:
     UpdateGameTask(std::function<void(float)> callback);
     ~UpdateGameTask();
     void start();
+    void stop();
     
 };
 

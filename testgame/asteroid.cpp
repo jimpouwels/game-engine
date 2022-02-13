@@ -3,11 +3,11 @@
 #include "geo2D.hpp"
 #include "timing.hpp"
 #include "ship.hpp"
+#include "mathUtils.hpp"
 
 #include <iostream>
 
 const uint16_t Asteroid::FORCE = 180;
-const uint16_t Asteroid::ROTATION_DEGREES_PER_SECOND = 50;
 const float Asteroid::HIT_ANIMATION_DURATION_IN_SECONDS = 0.1F;
 
 Asteroid::Asteroid(jimp::GameEngine* gameEngine, float x, float y, float directionAngle) : jimp::AnimatedSprite(gameEngine, x, y, 0.1F, -1) {
@@ -16,6 +16,8 @@ Asteroid::Asteroid(jimp::GameEngine* gameEngine, float x, float y, float directi
     setRotationAngle(90);
     this->hitSound = new jimp::Sound("hit.ogg");
     this->directionAngle = directionAngle;
+    this->rotationDegreesPerSecond = jimp::MathUtils::randomNumberBetween(30, 130);
+    this->rotatingDirection = jimp::MathUtils::randomNumberBetween(0, 2) == 1;
 }
 
 Asteroid::~Asteroid() {
@@ -93,7 +95,10 @@ void Asteroid::updateMovement(float elapsedTime) {
 }
 
 void Asteroid::updateRotation(float elapsedTime) {
-    float deltaDegrees = jimp::Timing::toValueForElapsedTime(ROTATION_DEGREES_PER_SECOND, elapsedTime);
+    float deltaDegrees = jimp::Timing::toValueForElapsedTime(rotationDegreesPerSecond, elapsedTime);
+    if (rotatingDirection) {
+        deltaDegrees = -deltaDegrees;
+    }
     setRotationAngle(getRotationAngle() + deltaDegrees);
 }
 

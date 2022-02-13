@@ -11,11 +11,12 @@ class Asteroid : public jimp::AnimatedSprite {
   
 private:
     static const uint16_t FORCE;
-    static const uint16_t ROTATION_DEGREES_PER_SECOND;
     static const float HIT_ANIMATION_DURATION_IN_SECONDS;
     float directionAngle;
     float totalHitAnimationDuration = 0.0F;
     bool isHit = false;
+    uint16_t rotationDegreesPerSecond = 0;
+    bool rotatingDirection = false;
     int hitCount = 0;
     bool isEnteringScreen = true;
     bool hasBeenFullyInsideScreen = false;

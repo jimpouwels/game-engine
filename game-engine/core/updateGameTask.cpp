@@ -32,4 +32,8 @@ void UpdateGameTask::start() {
     this->updateThread = new std::thread(doLoop, callback);
 }
 
+void UpdateGameTask::stop() {
+    isUpdatingGame = false;
+}
+
 }

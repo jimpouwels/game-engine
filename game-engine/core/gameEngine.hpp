@@ -21,6 +21,7 @@ private:
     int16_t frameRate;
     GameEngine* gameEngine = nullptr;
     std::string windowTitle;
+    bool isWindowClosed = false;
     std::map<std::string, Image*>* imageCache = nullptr;
     std::map<std::string, Sound*>* soundCache = nullptr;
     UpdateGameTask* updateGameTask = nullptr;

@@ -36,6 +36,10 @@ void GameEngine::start() {
     while (window->isOpen()) {
         handleEvents();
         
+        if (isWindowClosed) {
+            break;
+        }
+        
         std::chrono::time_point<std::chrono::system_clock> currentTime = std::chrono::system_clock::now();
         std::chrono::duration<float> elapsedTimeSincePreviousFrame = (currentTime - previousFrameTime);
         
@@ -48,6 +52,8 @@ void GameEngine::start() {
         
         window->setTitle(windowTitle + " FPS: " + std::to_string(measureFps(currentTime)));
     }
+    updateGameTask->stop();
+    window->close();
 }
 
 void GameEngine::draw(jimp::Sprite* sprite) {
@@ -138,7 +144,7 @@ void GameEngine::handleEvents() {
     while (window->pollEvent(event)) {
         switch (event.type) {
             case sf::Event::Closed:
-                window->close();
+                isWindowClosed = true;
                 break;
             case sf::Event::KeyPressed:
                 keyboardHandler->handleEvent(event);
