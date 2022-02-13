@@ -43,19 +43,35 @@ void Asteroid::hasCollidedRect(jimp::AnimatedSprite *otherSprite, jimp::Geo2D::S
 }
 
 void Asteroid::hasCollidedRectLeft(jimp::AnimatedSprite* otherSprite) {
-
+    if (Asteroid* v = dynamic_cast<Asteroid*>(otherSprite)) {
+        if (directionAngle > 180) {
+            directionAngle = jimp::Geo2D::inverseAngleHorizontally(directionAngle);
+        }
+    }
 }
 
 void Asteroid::hasCollidedRectRight(jimp::AnimatedSprite* otherSprite) {
-
+    if (Asteroid* v = dynamic_cast<Asteroid*>(otherSprite)) {
+        if (directionAngle < 180) {
+            directionAngle = jimp::Geo2D::inverseAngleHorizontally(directionAngle);
+        }
+    }
 }
 
 void Asteroid::hasCollidedRectTop(jimp::AnimatedSprite* otherSprite) {
- 
+    if (Asteroid* v = dynamic_cast<Asteroid*>(otherSprite)) {
+        if (directionAngle < 90 || directionAngle > 270) {
+            directionAngle = jimp::Geo2D::inverseAngleVertically(directionAngle);
+        }
+    }
 }
 
 void Asteroid::hasCollidedRectBottom(jimp::AnimatedSprite* otherSprite) {
- 
+    if (Asteroid* v = dynamic_cast<Asteroid*>(otherSprite)) {
+        if (directionAngle > 90 && directionAngle < 270) {
+            directionAngle = jimp::Geo2D::inverseAngleVertically(directionAngle);
+        }
+    }
 }
 
 void Asteroid::updateDirection(float elapsedTime) {
