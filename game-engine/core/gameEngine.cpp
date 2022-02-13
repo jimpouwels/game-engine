@@ -15,6 +15,8 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string 
     this->frameRate = desiredFrameRate;
     this->timePerFrame = 1.0 / desiredFrameRate;
     this->windowTitle = windowTitle;
+    auto fp = std::bind(&GameEngine::triggerUpdate, this, std::placeholders::_1);
+    this->updateGameTask = new UpdateGameTask(fp);
     this->spriteCache = new SpriteCache();
     this->imageCache = new std::map<std::string, Image*>;
     this->soundCache = new std::map<std::string, Sound*>;
@@ -26,9 +28,11 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string 
 GameEngine::~GameEngine() {
     delete window;
     delete keyboardHandler;
+    delete updateGameTask;
 }
 
 void GameEngine::start() {
+    updateGameTask->start();
     while (window->isOpen()) {
         handleEvents();
         
@@ -122,6 +126,10 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     window->clear();
     onFrame(elapsedTimeSincePreviousFrame);
     window->display();
+}
+
+void GameEngine::triggerUpdate(float elapsedTime) {
+    onUpdate(elapsedTime);
 }
 
 void GameEngine::handleEvents() {

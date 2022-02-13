@@ -45,8 +45,6 @@ public:
     
     void onFrame(float elapsedTime) {
         draw(background);
-        cleanupProjectilesOutsideScreen();
-        handleProjectileCollisionWithAsteroids();
         for (const auto& projectile: *projectiles) {
             projectile->onFrame(elapsedTime);
         }
@@ -54,12 +52,24 @@ public:
         ship->onFrame(elapsedTime);
     }
     
+    void onUpdate(float elapsedTime) {
+        cleanupProjectilesOutsideScreen();
+        handleAsteroidsHitByAsteroids();
+        handleProjectileCollisionWithAsteroids();
+        handleShipCollisionWithAsteroids();
+        for (const auto& projectile: *projectiles) {
+            projectile->onUpdate(elapsedTime);
+        }
+        asteroidSpawner->onUpdate(elapsedTime);
+        ship->onUpdate(elapsedTime);
+    }
+    
     void handleProjectileCollisionWithAsteroids() {
         std::list<jimp::AnimatedSprite*> projectilesToRemove;
         std::list<jimp::AnimatedSprite*> asteroidsToRemove;
         for (const auto& projectile: *projectiles) {
             for (const auto& asteroid: asteroidSpawner->getAsteroids()) {
-                asteroid->checkCollision(projectile);
+                asteroid->checkCollisionRect(projectile);
                 if (projectile->isMarkedForDeletion()) {
                     projectilesToRemove.push_back(projectile);
                     break;
@@ -67,6 +77,20 @@ public:
             }
         }
         removeProjectiles(projectilesToRemove);
+    }
+    
+    void handleAsteroidsHitByAsteroids() {
+        for (uint16_t i = 0; i < asteroidSpawner->getAsteroids().size(); i++) {
+            for (uint16_t j = i + 1; j < asteroidSpawner->getAsteroids().size(); j++) {
+                asteroidSpawner->getAsteroids().at(i)->checkCollisionRect(asteroidSpawner->getAsteroids().at(j));
+            }
+        }
+    }
+    
+    void handleShipCollisionWithAsteroids() {
+        for (const auto& asteroid: asteroidSpawner->getAsteroids()) {
+            asteroid->checkCollisionRect(ship);
+        }
     }
     
     void cleanupProjectilesOutsideScreen() {

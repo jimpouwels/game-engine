@@ -6,9 +6,9 @@
 #include "vector2D.hpp"
 #include "timing.hpp"
 
-const uint16_t Ship::SPEED_IN_PIXELS_PER_SECOND = 350;
-const uint16_t Ship::THRUST_FORCE = 25000;
-const uint16_t Ship::MASS = 4000;
+const uint16_t Ship::SPEED_IN_PIXELS_PER_SECOND = 200;
+const uint32_t Ship::THRUST_FORCE = 24000;
+const uint16_t Ship::MASS = 200;
 const uint8_t Ship::ROTATION_DEGREES_PER_SECOND = 140;
 const uint8_t Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.15F;
@@ -23,13 +23,17 @@ Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jim
     addSprite("throttling", "spaceship-thrust2.png");
 }
 
-void Ship::onFrame(float elapsedTime) {
+void Ship::onUpdate(float elapsedTime) {
     updateFiring(elapsedTime);
     updateMovement(elapsedTime);
     updateRotation(elapsedTime);
     updateSound(elapsedTime);
     
-    AnimatedSprite::onFrame(elapsedTime);
+    AnimatedSprite::onUpdate(elapsedTime);
+}
+
+void Ship::hasCollidedRect(jimp::AnimatedSprite* otherSprite, jimp::Geo2D::Side side) {
+    std::cout << rand() << "ship hit by asteroid" << std::endl;
 }
 
 jimp::Vector2D Ship::getRotationPoint() {
@@ -91,13 +95,13 @@ void Ship::updateMovement(float elapsedTime) {
     if (isThrothling) {
         jimp::Vector2D newVelocity = jimp::Geo2D::updateVelocity(velocity, THRUST_FORCE, getRotationAngle(), MASS, elapsedTime);
         
-        float maximumVelocity = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
-        if (abs(newVelocity.x) < maximumVelocity || abs(newVelocity.x) < abs(velocity.x)) {
+//        float maximumVelocity = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
+//        if (abs(newVelocity.x) < maximumVelocity || abs(newVelocity.x) < abs(velocity.x)) {
             velocity.x = newVelocity.x;
-        }
-        if (abs(newVelocity.y) < maximumVelocity || abs(newVelocity.y) < abs(velocity.y)) {
+//        }
+//        if (abs(newVelocity.y) < maximumVelocity || abs(newVelocity.y) < abs(velocity.y)) {
             velocity.y = newVelocity.y;
-        }
+//        }
     }
     
     if (isOutsideScreenRight() && velocity.x >= 0) {
@@ -110,7 +114,10 @@ void Ship::updateMovement(float elapsedTime) {
     } else if (isOutsideScreenBottom() && velocity.y >= 0) {
         setY(-getHeight());
     }
-    addToPosition(velocity);
+    
+    float deltaX = jimp::Timing::toValueForElapsedTime(velocity.x, elapsedTime);
+    float deltaY = jimp::Timing::toValueForElapsedTime(velocity.y, elapsedTime);
+    addToPosition(jimp::Vector2D { .x = deltaX, .y = deltaY } );
 }
 
 void Ship::updateRotation(float elapsedTime) {

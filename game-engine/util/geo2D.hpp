@@ -4,17 +4,19 @@
 #include <math.h>
 #include "vector2D.hpp"
 #include "timing.hpp"
+#include <iostream>
 
 namespace jimp {
 
 class Geo2D {
 
 public:
+    const enum Side { LEFT, RIGHT, TOP, BOTTOM };
     
     static Vector2D updateVelocity(Vector2D currentVelocity, float force, float angle, float mass, float elapsedTime) {
-        float forceForElapsedTime = Timing::toValueForElapsedTime(force, elapsedTime);
-        jimp::Vector2D velocityDelta = vectorFrom(angle, forceForElapsedTime / mass);
-        return currentVelocity + velocityDelta;
+        float velocityDelta = (force / mass) * elapsedTime;
+        Vector2D deltaVector = vectorFrom(angle, velocityDelta);
+        return currentVelocity + deltaVector;
     }
     
     static Vector2D vectorFrom(float angle, float force) {

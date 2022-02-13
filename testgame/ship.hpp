@@ -16,7 +16,7 @@ class Ship : public jimp::AnimatedSprite, public jimp::KeyListener {
 private:
     static const float SCALE;
     static const uint16_t SPEED_IN_PIXELS_PER_SECOND;
-    static const uint16_t THRUST_FORCE;
+    static const uint32_t THRUST_FORCE;
     static const uint16_t MASS;
     static const float IMAGE_SWAP_INTERVAL_IN_SECONDS;
     static const uint8_t ROTATION_DEGREES_PER_SECOND;
@@ -42,12 +42,13 @@ private:
 
 public:
     Ship(jimp::GameEngine* gameEngine, ShipEventListener* shipEventListener);
-    void onFrame(float elapsedTime) override;
+    void onUpdate(float elapsedTime) override;
     void onKeyboardLeft(jimp::KeyState keyState) override;
     void onKeyboardRight(jimp::KeyState keyState) override;
     void onKeyboardUp(jimp::KeyState keyState) override;
     void onKeyboardSpaceBar(jimp::KeyState keyState) override;
     jimp::Vector2D getRotationPoint() override;
+    void hasCollidedRect(jimp::AnimatedSprite* otherSprite, jimp::Geo2D::Side side) override;
 };
 
 #endif

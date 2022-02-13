@@ -8,6 +8,7 @@
 #include "animation.hpp"
 #include "gameEngine.hpp"
 #include "vector2D.hpp"
+#include "geo2D.hpp"
 
 namespace jimp {
 
@@ -35,7 +36,11 @@ protected:
     void markForDeletion() {
         markedForDeletion = true;
     }
-    virtual void hasCollidedWith(AnimatedSprite* otherSprite) {};
+    virtual void hasCollidedRectLeft(AnimatedSprite* otherSprite) {};
+    virtual void hasCollidedRectRight(AnimatedSprite* otherSprite) {};
+    virtual void hasCollidedRectTop(AnimatedSprite* otherSprite) {};
+    virtual void hasCollidedRectBottom(AnimatedSprite* otherSprite) {};
+    virtual void hasCollidedRect(AnimatedSprite* otherSprite, Geo2D::Side side) {};
     
 public:
     AnimatedSprite(GameEngine* gameEngine, float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
@@ -58,12 +63,14 @@ public:
     bool isOutsideScreenLeft();
     bool isOutsideScreenRight();
     bool isMarkedForDeletion();
-    bool checkCollision(AnimatedSprite* otherSprite);
+    bool checkCollisionRect(AnimatedSprite* otherSprite);
     Sprite* getActiveSprite();
     virtual void onFrame(float elapsedTime) {
-        this->updateAnimation(elapsedTime);
         gameEngine->draw(getActiveSprite());
     };
+    virtual void onUpdate(float elapsedTime) {
+        this->updateAnimation(elapsedTime);
+    }
     virtual Vector2D getRotationPoint() {
         return Vector2D { getWidth() / 2.0F, .y = getHeight() / 2.0F };
     }

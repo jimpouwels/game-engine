@@ -9,6 +9,7 @@
 #include "spriteCache.hpp"
 #include "keyListener.hpp"
 #include "keyboardHandler.hpp"
+#include "updateGameTask.hpp"
 
 namespace jimp {
 
@@ -22,6 +23,7 @@ private:
     std::string windowTitle;
     std::map<std::string, Image*>* imageCache = nullptr;
     std::map<std::string, Sound*>* soundCache = nullptr;
+    UpdateGameTask* updateGameTask = nullptr;
     SpriteCache* spriteCache = nullptr;
     float timePerFrame;
     jimp::KeyboardHandler* keyboardHandler = nullptr;
@@ -32,6 +34,8 @@ private:
     float measureFps(std::chrono::time_point<std::chrono::system_clock>& currentTime);
     void drawFrame(float elapsedTimeSincePreviousFrame);
     void handleEvents();
+    void triggerUpdate(float elapsedTime);
+    void updateLoop(GameEngine* gameEngine);
     
 public:
     GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate);
@@ -45,7 +49,8 @@ public:
     void addKeyListener(jimp::KeyListener* keyListener);
     Image* loadImage(std::string filePath);
     Sound* loadSound(std::string filePath);
-    virtual void onFrame(float elapsedTime) = 0;
+    virtual void onFrame(float elapsedTime) {};
+    virtual void onUpdate(float elapsedTime) {};
     
 };
 }

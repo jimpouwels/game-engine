@@ -5,6 +5,7 @@
 #include "gameEngine.hpp"
 #include "bullet.hpp"
 #include "sound.hpp"
+#include "geo2D.hpp"
 
 class Asteroid : public jimp::AnimatedSprite {
   
@@ -27,8 +28,12 @@ private:
 public:
     Asteroid(jimp::GameEngine* gameEngine, float x, float y, float directionAngle);
     ~Asteroid();
-    void onFrame(float elapsedTime) override;
-    void hasCollidedWith(jimp::AnimatedSprite* otherSprite) override;
+    void onUpdate(float elapsedTime) override;
+    void hasCollidedRectLeft(jimp::AnimatedSprite* otherSprite) override;
+    void hasCollidedRectRight(jimp::AnimatedSprite* otherSprite) override;
+    void hasCollidedRectTop(jimp::AnimatedSprite* otherSprite) override;
+    void hasCollidedRectBottom(jimp::AnimatedSprite* otherSprite) override;
+    void hasCollidedRect(jimp::AnimatedSprite* otherSprite, jimp::Geo2D::Side side) override;
 };
 
 #endif

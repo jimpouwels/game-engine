@@ -39,15 +39,44 @@ void AnimatedSprite::setCurrentAnimation(std::string animationId) {
     }
 }
 
-bool AnimatedSprite::checkCollision(AnimatedSprite* otherSprite) {
+bool AnimatedSprite::checkCollisionRect(AnimatedSprite* otherSprite) {
     Vector2D otherSpritePosition = otherSprite->getPosition();
-    bool hasCollided = otherSpritePosition.x > getPosition().x && otherSpritePosition.x < (getPosition().x + getWidth())
-        && otherSpritePosition.y > getPosition().y && otherSpritePosition.y < (getPosition().y + getHeight());
-    if (hasCollided) {
-        hasCollidedWith(otherSprite);
-        otherSprite->hasCollidedWith(this);
+    
+    if ((abs((getPosition().x + getWidth()) - otherSprite->getPosition().x) <= 0.5) &&
+        ((getPosition().y >= otherSprite->getPosition().y && getPosition().y <= (otherSprite->getPosition().y + otherSprite->getHeight())) ||
+         ((getPosition().y + getHeight()) >= otherSprite->getPosition().y && (getPosition().y + getHeight()) <= (otherSprite->getPosition().y + otherSprite->getHeight())))) {
+        hasCollidedRect(otherSprite, Geo2D::Side::RIGHT);
+        hasCollidedRectRight(otherSprite);
+        otherSprite->hasCollidedRect(this, Geo2D::Side::LEFT);
+        otherSprite->hasCollidedRectLeft(otherSprite);
+        return true;
+    } else if ((abs((otherSprite->getPosition().x + getWidth()) - getPosition().x)) <= 0.5 &&
+            ((otherSprite->getPosition().y >= getPosition().y && otherSprite->getPosition().y <= getPosition().y + getHeight()) ||
+             (otherSprite->getPosition().y + otherSprite->getHeight() >= getPosition().y && otherSprite->getPosition().y + otherSprite->getHeight() <= getPosition().y + getHeight()))) {
+        hasCollidedRect(otherSprite, Geo2D::Side::LEFT);
+        hasCollidedRectLeft(otherSprite);
+        otherSprite->hasCollidedRect(this, Geo2D::Side::RIGHT);
+        otherSprite->hasCollidedRectRight(otherSprite);
+        return true;
+    } else if ((abs((getPosition().y + getHeight()) - otherSprite->getPosition().y)) <= 0.5 &&
+            ((getPosition().x >= otherSprite->getPosition().x && getPosition().x <= otherSprite->getPosition().x + otherSprite->getWidth()) ||
+             (getPosition().x + getWidth() >= otherSprite->getPosition().x && getPosition().x + getWidth() <= otherSprite->getPosition().x + otherSprite->getWidth()))) {
+        hasCollidedRect(otherSprite, Geo2D::Side::BOTTOM);
+        hasCollidedRectBottom(otherSprite);
+        otherSprite->hasCollidedRect(this, Geo2D::Side::TOP);
+        otherSprite->hasCollidedRectTop(otherSprite);
+        return true;
+    } else if ((abs((otherSprite->getPosition().y + getHeight()) - getPosition().y)) <= 0.5 &&
+            ((otherSprite->getPosition().x >= getPosition().x && otherSprite->getPosition().x <= getPosition().x + getWidth()) ||
+             (otherSprite->getPosition().x + otherSprite->getWidth() >= getPosition().x && otherSprite->getPosition().x + otherSprite->getWidth() <= getPosition().x + getWidth()))) {
+        hasCollidedRect(otherSprite, Geo2D::Side::TOP);
+        hasCollidedRectTop(otherSprite);
+        otherSprite->hasCollidedRect(this, Geo2D::Side::BOTTOM);
+        otherSprite->hasCollidedRectBottom(otherSprite);
+        return true;
     }
-    return hasCollided;
+    
+    return false;
 }
 
 void AnimatedSprite::updateAnimation(float elapsedTime) {
