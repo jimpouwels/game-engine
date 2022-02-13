@@ -51,7 +51,7 @@ bool AnimatedSprite::checkCollisionRect(AnimatedSprite* otherSprite) {
         hasCollidedRect(otherSprite, Geo2D::Side::RIGHT);
         hasCollidedRectRight(otherSprite);
         otherSprite->hasCollidedRect(this, Geo2D::Side::LEFT);
-        otherSprite->hasCollidedRectLeft(otherSprite);
+        otherSprite->hasCollidedRectLeft(this);
         return true;
     } else if (abs(getPosition().x - (otherSpritePosition.x + otherSprite->getWidth())) <= 2 &&
             (((jimp::MathUtils::isBetween(otherSpritePosition.y, getPosition().y, getPosition().y + getHeight())) ||
@@ -61,7 +61,7 @@ bool AnimatedSprite::checkCollisionRect(AnimatedSprite* otherSprite) {
         hasCollidedRect(otherSprite, Geo2D::Side::LEFT);
         hasCollidedRectLeft(otherSprite);
         otherSprite->hasCollidedRect(this, Geo2D::Side::RIGHT);
-        otherSprite->hasCollidedRectRight(otherSprite);
+        otherSprite->hasCollidedRectRight(this);
         return true;
     } else if (abs((getPosition().y + getHeight()) - otherSpritePosition.y) <= 2 &&
             (((jimp::MathUtils::isBetween(getPosition().x, otherSpritePosition.x, otherSpritePosition.x + otherSprite->getWidth()) ||
@@ -71,7 +71,7 @@ bool AnimatedSprite::checkCollisionRect(AnimatedSprite* otherSprite) {
         hasCollidedRect(otherSprite, Geo2D::Side::BOTTOM);
         hasCollidedRectBottom(otherSprite);
         otherSprite->hasCollidedRect(this, Geo2D::Side::TOP);
-        otherSprite->hasCollidedRectTop(otherSprite);
+        otherSprite->hasCollidedRectTop(this);
         return true;
     } else if (abs(getPosition().y - (otherSpritePosition.y + otherSprite->getHeight())) <= 2 &&
             (((jimp::MathUtils::isBetween(otherSpritePosition.x, getPosition().x, getPosition().x + getWidth()) ||
@@ -81,7 +81,7 @@ bool AnimatedSprite::checkCollisionRect(AnimatedSprite* otherSprite) {
         hasCollidedRect(otherSprite, Geo2D::Side::TOP);
         hasCollidedRectTop(otherSprite);
         otherSprite->hasCollidedRect(this, Geo2D::Side::BOTTOM);
-        otherSprite->hasCollidedRectBottom(otherSprite);
+        otherSprite->hasCollidedRectBottom(this);
         return true;
     }
     
