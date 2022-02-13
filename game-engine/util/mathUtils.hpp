@@ -12,6 +12,10 @@ public:
         return rand() % (to - from) + from;
     }
     
+    static bool isBetween(float value, float value1, float value2) {
+        return value >= value1 && value <= value2;
+    }
+    
 };
 
 }

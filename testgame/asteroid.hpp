@@ -28,6 +28,7 @@ private:
 public:
     Asteroid(jimp::GameEngine* gameEngine, float x, float y, float directionAngle);
     ~Asteroid();
+    void onFrame(float elapsedTime) override;
     void onUpdate(float elapsedTime) override;
     void hasCollidedRectLeft(jimp::AnimatedSprite* otherSprite) override;
     void hasCollidedRectRight(jimp::AnimatedSprite* otherSprite) override;

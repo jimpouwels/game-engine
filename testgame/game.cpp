@@ -69,7 +69,7 @@ public:
         std::list<jimp::AnimatedSprite*> asteroidsToRemove;
         for (const auto& projectile: *projectiles) {
             for (const auto& asteroid: asteroidSpawner->getAsteroids()) {
-                asteroid->checkCollisionRect(projectile);
+                projectile->checkCollisionRect(asteroid);
                 if (projectile->isMarkedForDeletion()) {
                     projectilesToRemove.push_back(projectile);
                     break;

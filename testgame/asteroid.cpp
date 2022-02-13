@@ -8,7 +8,7 @@
 
 const uint16_t Asteroid::FORCE = 180;
 const uint16_t Asteroid::ROTATION_DEGREES_PER_SECOND = 50;
-const float Asteroid::HIT_ANIMATION_DURATION_IN_SECONDS = 0.01F;
+const float Asteroid::HIT_ANIMATION_DURATION_IN_SECONDS = 0.1F;
 
 Asteroid::Asteroid(jimp::GameEngine* gameEngine, float x, float y, float directionAngle) : jimp::AnimatedSprite(gameEngine, x, y, 0.1F, -1) {
     addSprite("default", "asteroid.png");
@@ -30,48 +30,32 @@ void Asteroid::onUpdate(float elapsedTime) {
     AnimatedSprite::onUpdate(elapsedTime);
 }
 
+void Asteroid::onFrame(float elapsedTime) {
+    AnimatedSprite::onFrame(elapsedTime);
+}
+
 void Asteroid::hasCollidedRect(jimp::AnimatedSprite *otherSprite, jimp::Geo2D::Side side) {
     if (Bullet* v = dynamic_cast<Bullet*>(otherSprite)) {
         isHit = true;
         this->hitSound->play(14);
         hitCount++;
-    } else if (Ship* v = dynamic_cast<Ship*>(otherSprite)) {
-        
-    }
+    } 
 }
 
 void Asteroid::hasCollidedRectLeft(jimp::AnimatedSprite* otherSprite) {
-   if (Asteroid* v = dynamic_cast<Asteroid*>(otherSprite)) {
-//       std::cout << "hit on left" << std::endl;
-//       if (directionAngle > 180) {
-//            directionAngle = jimp::Geo2D::inverseAngleHorizontally(getRotationAngle());
-//       }
-    }
+
 }
 
 void Asteroid::hasCollidedRectRight(jimp::AnimatedSprite* otherSprite) {
-    if (Asteroid* v = dynamic_cast<Asteroid*>(otherSprite)) {
-//        std::cout << "hit on right" << std::endl;
-//        if (directionAngle < 180) {
-//            directionAngle = jimp::Geo2D::inverseAngleHorizontally(getRotationAngle());
-//        }
-    }
+
 }
 
 void Asteroid::hasCollidedRectTop(jimp::AnimatedSprite* otherSprite) {
-    if (Asteroid* v = dynamic_cast<Asteroid*>(otherSprite)) {
-//        if (directionAngle < 90 || directionAngle > 270) {
-//            directionAngle = jimp::Geo2D::inverseAngleVertically(getRotationAngle());
-//        }
-    }
+ 
 }
 
 void Asteroid::hasCollidedRectBottom(jimp::AnimatedSprite* otherSprite) {
-    if (Asteroid* v = dynamic_cast<Asteroid*>(otherSprite)) {
-//        if (directionAngle > 90 && directionAngle < 270) {
-//            directionAngle = jimp::Geo2D::inverseAngleVertically(getRotationAngle());
-//        }
-    }
+ 
 }
 
 void Asteroid::updateDirection(float elapsedTime) {

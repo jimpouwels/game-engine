@@ -10,7 +10,7 @@ void doLoop(std::function<void(float)> callback) {
     isUpdatingGame = true;
     std::chrono::time_point<std::chrono::system_clock> previousUpdateTime;
     while (isUpdatingGame) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(5));
+        std::this_thread::sleep_for(std::chrono::milliseconds(2));
         std::chrono::time_point<std::chrono::system_clock> currentTime = std::chrono::system_clock::now();
         std::chrono::duration<float> elapsed = currentTime - previousUpdateTime;
         previousUpdateTime = currentTime;
