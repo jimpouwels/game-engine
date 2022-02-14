@@ -13,10 +13,9 @@ class Geo2D {
 public:
     const enum Side { LEFT, RIGHT, TOP, BOTTOM };
     
-    static Vector2D updateVelocity(Vector2D currentVelocity, float force, float angle, float mass, float elapsedTime) {
+    static Vector2D vectorFrom(float force, float angle, float mass, float elapsedTime) {
         float velocityDelta = (force / mass) * elapsedTime;
-        Vector2D deltaVector = vectorFrom(angle, velocityDelta);
-        return currentVelocity + deltaVector;
+        return vectorFrom(angle, velocityDelta);
     }
     
     static Vector2D vectorFrom(float angle, float force) {

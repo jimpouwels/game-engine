@@ -93,15 +93,15 @@ void Ship::updateFiring(float elapsedTime) {
 
 void Ship::updateMovement(float elapsedTime) {
     if (isThrothling) {
-        jimp::Vector2D newVelocity = jimp::Geo2D::updateVelocity(velocity, THRUST_FORCE, getRotationAngle(), MASS, elapsedTime);
+        jimp::Vector2D velocityDelta = jimp::Geo2D::vectorFrom(THRUST_FORCE, getRotationAngle(), MASS, elapsedTime);
+        jimp::Vector2D newVelocity = velocity + velocityDelta;
         
-//        float maximumVelocity = jimp::Timing::toValueForElapsedTime(SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
-//        if (abs(newVelocity.x) < maximumVelocity || abs(newVelocity.x) < abs(velocity.x)) {
+        if (abs(newVelocity.x) < SPEED_IN_PIXELS_PER_SECOND || abs(newVelocity.x) < abs(velocity.x)) {
             velocity.x = newVelocity.x;
-//        }
-//        if (abs(newVelocity.y) < maximumVelocity || abs(newVelocity.y) < abs(velocity.y)) {
+        }
+        if (abs(newVelocity.y) < SPEED_IN_PIXELS_PER_SECOND || abs(newVelocity.y) < abs(velocity.y)) {
             velocity.y = newVelocity.y;
-//        }
+        }
     }
     
     if (isOutsideScreenRight() && velocity.x >= 0) {
@@ -115,9 +115,7 @@ void Ship::updateMovement(float elapsedTime) {
         setY(-getHeight());
     }
     
-    float deltaX = jimp::Timing::toValueForElapsedTime(velocity.x, elapsedTime);
-    float deltaY = jimp::Timing::toValueForElapsedTime(velocity.y, elapsedTime);
-    addToPosition(jimp::Vector2D { .x = deltaX, .y = deltaY } );
+    addToPosition(jimp::Timing::toValueForElapsedTime(velocity, elapsedTime));
 }
 
 void Ship::updateRotation(float elapsedTime) {
