@@ -22,7 +22,7 @@ public:
     Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60) {
         ship = new Ship(this, this);
         addKeyListener(ship);
-        music = new jimp::Sound("music.ogg");
+        music = new jimp::Sound(this, "music.ogg");
         music->loop(30);
         asteroidSpawner = new AsteroidSpawner(this);
         projectiles = new std::list<jimp::AnimatedSprite*>;

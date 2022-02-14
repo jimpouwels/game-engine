@@ -16,8 +16,8 @@ const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 
 Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jimp::AnimatedSprite(gameEngine, gameEngine->getScreenWidth() / 2, gameEngine->getScreenHeight() / 2, SCALE, 0.05F) {
     this->eventListener = eventListener;
-    this->firingSound = gameEngine->loadSound("laser.ogg");
-    this->thrustSound = gameEngine->loadSound("thrust.ogg");
+    this->firingSound = new jimp::Sound(gameEngine, "laser.ogg");
+    this->thrustSound = new jimp::Sound(gameEngine, "thrust.ogg");
     addSprite("default", "spaceship.png");
     addSprite("throttling", "spaceship-thrust1.png");
     addSprite("throttling", "spaceship-thrust2.png");
@@ -27,7 +27,6 @@ void Ship::onUpdate(float elapsedTime) {
     updateFiring(elapsedTime);
     updateMovement(elapsedTime);
     updateRotation(elapsedTime);
-    thrustSound->onUpdate(elapsedTime);
     
     AnimatedSprite::onUpdate(elapsedTime);
 }

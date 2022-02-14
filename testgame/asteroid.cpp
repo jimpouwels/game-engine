@@ -14,7 +14,7 @@ Asteroid::Asteroid(jimp::GameEngine* gameEngine, float x, float y, float directi
     addSprite("default", "asteroid.png");
     addSprite("hit", "asteroid-hit.png");
     setRotationAngle(90);
-    this->hitSound = new jimp::Sound("hit.ogg");
+    this->hitSound = new jimp::Sound(gameEngine, "hit.ogg");
     this->directionAngle = directionAngle;
     this->rotationDegreesPerSecond = jimp::MathUtils::randomNumberBetween(30, 130);
     this->rotatingDirection = jimp::MathUtils::randomNumberBetween(0, 2) == 1;

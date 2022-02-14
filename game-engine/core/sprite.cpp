@@ -12,7 +12,8 @@ Sprite::Sprite(jimp::GameEngine* gameEngine, float x, float y, float scale, std:
     this->position.y = y;
     this->scale = scale;
     this->gameEngine = gameEngine;
-    this->image = gameEngine->loadImage(filePath);
+    this->image = new Image(filePath);
+    this->gameEngine->registerImage(image);
     this->rotationPoint.x = getWidth() / 2.0F;
     this->rotationPoint.y = getHeight() / 2.0F;
 }

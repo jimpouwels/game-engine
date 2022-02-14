@@ -1,22 +1,25 @@
 #include "sound.hpp"
 #include "timing.hpp"
+#include "gameEngine.hpp"
 #include <iostream>
 
 namespace jimp {
 
-Sound::Sound(std::string filePath) {
+Sound::Sound(GameEngine* gameEngine, std::string filePath) {
+    this->filePath = filePath;
     this->fullRuns = new std::list<sf::Sound*>;
     this->buffer = new sf::SoundBuffer();
     this->buffer->loadFromFile(filePath);
     this->sound = new sf::Sound();
     this->sound->setBuffer(*buffer);
+    gameEngine->registerSound(this);
 }
 
 Sound::~Sound() {
     delete sound;
 }
 
-void Sound::onUpdate(float elapsedTime) {
+void Sound::onFrame(float elapsedTime) {
     updateFadeOut(elapsedTime);
 }
 
@@ -54,6 +57,10 @@ float Sound::getVolume() {
     return this->sound->getVolume();
 }
 
+std::string Sound::getFilePath() {
+    return filePath;
+}
+
 void Sound::loop(uint16_t volume) {
     this->sound->stop();
     this->sound->setLoop(true);
@@ -84,7 +91,6 @@ void Sound::updateFadeOut(float elapsedTime) {
             float fadeOutFactor = remainingFadeOutTimeInMillis / (elapsedTime * 1000);
             float newVolume = getVolume() - (getVolume() / fadeOutFactor);
             setVolume(newVolume);
-            
         }
     } else if (sound->getStatus() == 0) {
         stopFadeOut();

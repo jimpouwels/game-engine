@@ -36,8 +36,8 @@ private:
     void drawFrame(float elapsedTimeSincePreviousFrame);
     void handleEvents();
     void triggerUpdate(float elapsedTime);
+    void handleSounds(float elapsedTime);
     void updateLoop(GameEngine* gameEngine);
-    void cleanupOldSoundRuns();
     
 public:
     GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate);
@@ -49,8 +49,8 @@ public:
     int getScreenHeight();
     bool isPositionWithinScreen(float x, float y);
     void addKeyListener(jimp::KeyListener* keyListener);
-    Image* loadImage(std::string filePath);
-    Sound* loadSound(std::string filePath);
+    Image* registerImage(Image* image);
+    Sound* registerSound(Sound* sound);
     virtual void onFrame(float elapsedTime) {};
     virtual void onUpdate(float elapsedTime) {};
     

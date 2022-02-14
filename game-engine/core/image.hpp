@@ -11,6 +11,7 @@ class Image {
   
 private:
     sf::Image* image = nullptr;
+    std::string filePath;
     void loadImage(std::string filePath);
     
 public:
@@ -19,6 +20,7 @@ public:
     uint16_t getWidth();
     uint16_t getHeight();
     sf::Image& getImage();
+    std::string getFilePath();
     
 };
 

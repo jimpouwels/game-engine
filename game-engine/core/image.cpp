@@ -4,6 +4,7 @@ namespace jimp {
 
 Image::Image(std::string filePath) {
     loadImage(filePath);
+    this->filePath = filePath;
 }
 
 Image::~Image() {
@@ -25,6 +26,10 @@ void Image::loadImage(std::string filePath) {
 
 sf::Image& Image::getImage() {
     return *image;
+}
+
+std::string Image::getFilePath() {
+    return filePath;
 }
 
 }

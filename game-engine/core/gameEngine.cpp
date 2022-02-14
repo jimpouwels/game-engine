@@ -35,7 +35,6 @@ void GameEngine::start() {
     updateGameTask->start();
     while (window->isOpen()) {
         handleEvents();
-        cleanupOldSoundRuns();
         
         if (isWindowClosed) {
             break;
@@ -48,6 +47,7 @@ void GameEngine::start() {
         if (elapsedTimeInSeconds > timePerFrame || frameRate == -1) {
             totalFrames++;
             drawFrame(elapsedTimeInSeconds);
+            handleSounds(elapsedTimeInSeconds);
             previousFrameTime = currentTime;
         }
         
@@ -78,24 +78,20 @@ void GameEngine::draw(jimp::Sprite* sprite) {
     window->draw(*cachedSprite->sprite, transform);
 }
 
-Image* GameEngine::loadImage(std::string filePath) {
-    Image* image = nullptr;
-    if (imageCache->find(filePath) == imageCache->end()) {
-        image = new Image(filePath);
-        imageCache->insert({filePath, image});
+Image* GameEngine::registerImage(Image* image) {
+    if (imageCache->find(image->getFilePath()) == imageCache->end()) {
+        imageCache->insert({image->getFilePath(), image});
     } else {
-        image = imageCache->find(filePath)->second;
+        image = imageCache->find(image->getFilePath())->second;
     }
     return image;
 }
 
-Sound* GameEngine::loadSound(std::string filePath) {
-    Sound* sound = nullptr;
-    if (soundCache->find(filePath) == soundCache->end()) {
-        sound = new Sound(filePath);
-        soundCache->insert({filePath, sound});
+Sound* GameEngine::registerSound(Sound* sound) {
+    if (soundCache->find(sound->getFilePath()) == soundCache->end()) {
+        soundCache->insert({sound->getFilePath(), sound});
     } else {
-        sound = soundCache->find(filePath)->second;
+        sound = soundCache->find(sound->getFilePath())->second;
     }
     return sound;
 }
@@ -139,8 +135,9 @@ void GameEngine::triggerUpdate(float elapsedTime) {
     onUpdate(elapsedTime);
 }
 
-void GameEngine::cleanupOldSoundRuns() {
+void GameEngine::handleSounds(float elapsedTime) {
     for (auto const& sound : *soundCache) {
+        sound.second->onFrame(elapsedTime);
         sound.second->cleanupCompletedFullRunRuns();
     }
 }

@@ -7,11 +7,14 @@
 
 namespace jimp {
 
+class GameEngine;
+
 class Sound {
 
 private:
     sf::SoundBuffer* buffer = nullptr;
     sf::Sound* sound = nullptr;
+    std::string filePath;
     bool isFadingOut = false;
     std::chrono::time_point<std::chrono::system_clock> fadeOutEndTime;
     std::list<sf::Sound*>* fullRuns = nullptr;
@@ -19,9 +22,9 @@ private:
     void stopFadeOut();
     
 public:
-    Sound(std::string filePath);
+    Sound(GameEngine* gameEngine, std::string filePath);
     ~Sound();
-    void onUpdate(float elapsedTime);
+    void onFrame(float elapsedTime);
     void play(uint16_t volume);
     void playTillEnd(uint16_t volume);
     void fadeOut(uint16_t durationInSeconds);
@@ -29,6 +32,7 @@ public:
     void loop(uint16_t volume);
     void setVolume(float volume);
     float getVolume();
+    std::string getFilePath();
     void cleanupCompletedFullRunRuns();
     
 };
