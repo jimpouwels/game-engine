@@ -2,7 +2,6 @@
 #include "bullet.hpp"
 #include "animatedSprite.hpp"
 #include "direction.hpp"
-#include "timing.hpp"
 #include "vector2D.hpp"
 
 const uint16_t Bullet::FORCE = 1200;
@@ -14,8 +13,7 @@ Bullet::Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle) : ji
 }
 
 void Bullet::onUpdate(float elapsedTime) {
-    float force = jimp::Timing::toValueForElapsedTime(FORCE, elapsedTime);
-    jimp::Vector2D deltaVector = jimp::Geo2D::vectorFrom(getRotationAngle(), force);
+    jimp::Vector2D deltaVector = jimp::Geo2D::vectorFrom(getRotationAngle(), FORCE, elapsedTime);
     addToPosition(deltaVector);
     
     AnimatedSprite::onUpdate(elapsedTime);
