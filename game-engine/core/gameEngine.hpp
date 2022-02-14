@@ -37,6 +37,7 @@ private:
     void handleEvents();
     void triggerUpdate(float elapsedTime);
     void updateLoop(GameEngine* gameEngine);
+    void cleanupOldSoundRuns();
     
 public:
     GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate);

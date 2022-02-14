@@ -35,6 +35,7 @@ void GameEngine::start() {
     updateGameTask->start();
     while (window->isOpen()) {
         handleEvents();
+        cleanupOldSoundRuns();
         
         if (isWindowClosed) {
             break;
@@ -136,6 +137,12 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
 
 void GameEngine::triggerUpdate(float elapsedTime) {
     onUpdate(elapsedTime);
+}
+
+void GameEngine::cleanupOldSoundRuns() {
+    for (auto const& sound : *soundCache) {
+        sound.second->cleanupCompletedFullRunRuns();
+    }
 }
 
 void GameEngine::handleEvents() {

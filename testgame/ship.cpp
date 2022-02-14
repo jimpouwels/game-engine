@@ -85,7 +85,7 @@ void Ship::updateFiring(float elapsedTime) {
         hasFired = false;
         jimp::Vector2D rotationPoint = getRotationPoint();
         Bullet* bullet = new Bullet(getGameEngine(), getPosition().x + rotationPoint.x - 5, getPosition().y + rotationPoint.y - 10, getRotationAngle());
-        firingSound->play(30);
+        firingSound->playTillEnd(30);
         eventListener->onWeaponFired(bullet);
         elapsedTimeSinceLastShot = 0;
     }
