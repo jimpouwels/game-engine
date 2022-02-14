@@ -37,7 +37,6 @@ private:
     void updateMovement(float elapsedTime);
     void updateFiring(float elapsedTime);
     void updateRotation(float elapsedTime);
-    void updateSound(float elapsedTime);
     void setMoving(jimp::KeyState keyState);
 
 public:

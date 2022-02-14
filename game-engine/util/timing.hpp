@@ -1,6 +1,8 @@
 #ifndef timing_hpp
 #define timing_hpp
 
+#include "vector2D.hpp"
+
 namespace jimp {
 
 class Timing {

@@ -27,7 +27,7 @@ void Ship::onUpdate(float elapsedTime) {
     updateFiring(elapsedTime);
     updateMovement(elapsedTime);
     updateRotation(elapsedTime);
-    updateSound(elapsedTime);
+    thrustSound->onUpdate(elapsedTime);
     
     AnimatedSprite::onUpdate(elapsedTime);
 }
@@ -54,7 +54,7 @@ void Ship::onKeyboardUp(jimp::KeyState keyState) {
         thrustSound->loop(180);
         setCurrentAnimation("throttling");
     } else {
-        isThrustSoundFadingOut = true;
+        thrustSound->fadeOut(1);
         setCurrentAnimation("default");
     }
 }
@@ -62,17 +62,6 @@ void Ship::onKeyboardUp(jimp::KeyState keyState) {
 void Ship::onKeyboardSpaceBar(jimp::KeyState keyState) {
     hasFired = keyState == jimp::KeyState::PRESSED;
     isFiring = keyState == jimp::KeyState::PRESSED;
-}
-
-void Ship::updateSound(float elapsedTime) {
-    if (isThrustSoundFadingOut && !isThrothling) {
-        float volumeDecrease = jimp::Timing::toValueForElapsedTime(200, elapsedTime);
-        thrustSound->setVolume(thrustSound->getVolume() - volumeDecrease);
-        
-        if (thrustSound->getVolume() == 0) {
-            isThrustSoundFadingOut = false;
-        }
-    }
 }
 
 void Ship::updateFiring(float elapsedTime) {

@@ -42,12 +42,12 @@ void GameEngine::start() {
         }
         
         std::chrono::time_point<std::chrono::system_clock> currentTime = std::chrono::system_clock::now();
-        std::chrono::duration<float> elapsedTimeSincePreviousFrame = (currentTime - previousFrameTime);
         
-        float elapsedTime = elapsedTimeSincePreviousFrame.count();
-        if (elapsedTime > timePerFrame || frameRate == -1) {
+        float elapsedTimeInMillis = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - previousFrameTime).count();
+        float elapsedTimeInSeconds = elapsedTimeInMillis / 1000.0F;
+        if (elapsedTimeInSeconds > timePerFrame || frameRate == -1) {
             totalFrames++;
-            drawFrame(elapsedTime);
+            drawFrame(elapsedTimeInSeconds);
             previousFrameTime = currentTime;
         }
         
