@@ -48,39 +48,31 @@ void Asteroid::hasCollidedRect(jimp::AnimatedSprite *otherSprite, jimp::Geo2D::S
 }
 
 void Asteroid::hasCollidedRectLeft(jimp::AnimatedSprite* otherSprite) {
-    if (dynamic_cast<Asteroid*>(otherSprite) != nullptr) {
-        if (getVelocityAngle() > 180) {
-            updateVelocityAngle(jimp::Geo2D::inverseAngleHorizontally(getVelocityAngle()));
-        }
+    Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
+    if (asteroid != nullptr) {
+        getVelocity().x = -getVelocity().x;
     }
 }
 
 void Asteroid::hasCollidedRectRight(jimp::AnimatedSprite* otherSprite) {
-    if (dynamic_cast<Asteroid*>(otherSprite) != nullptr) {
-        if (getVelocityAngle() < 180) {
-            updateVelocityAngle(jimp::Geo2D::inverseAngleHorizontally(getVelocityAngle()));
-        }
+    Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
+    if (asteroid != nullptr) {
+        getVelocity().x = -getVelocity().x;
     }
 }
 
 void Asteroid::hasCollidedRectTop(jimp::AnimatedSprite* otherSprite) {
-    if (dynamic_cast<Asteroid*>(otherSprite) != nullptr) {
-        if (getVelocityAngle() < 90 || getVelocityAngle() > 270) {
-            updateVelocityAngle(jimp::Geo2D::inverseAngleVertically(getVelocityAngle()));
-        }
+    Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
+    if (asteroid != nullptr) {
+        getVelocity().y = -getVelocity().y;
     }
 }
 
 void Asteroid::hasCollidedRectBottom(jimp::AnimatedSprite* otherSprite) {
-    if (dynamic_cast<Asteroid*>(otherSprite) != nullptr) {
-        if (getVelocityAngle() > 90 && getVelocityAngle() < 270) {
-            updateVelocityAngle(jimp::Geo2D::inverseAngleVertically(getVelocityAngle()));
-        }
+    Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
+    if (asteroid != nullptr) {
+        getVelocity().y = -getVelocity().y;
     }
-}
-
-jimp::Vector2D Asteroid::getVelocity() {
-    return velocity;
 }
 
 void Asteroid::updateDirection(float elapsedTime) {
@@ -88,10 +80,10 @@ void Asteroid::updateDirection(float elapsedTime) {
         isEnteringScreen = false;
     }
     if (isAtTopEdgeOfScreen() || isAtBottomEdgeOfScreen()) {
-        updateVelocityAngle(jimp::Geo2D::inverseAngleVertically(getVelocityAngle()));
+        getVelocity().y = -getVelocity().y;
     }
     if (!isEnteringScreen && (isAtLeftEdgeOfScreen() || isAtRightEdgeOfScreen())) {
-        updateVelocityAngle(jimp::Geo2D::inverseAngleHorizontally(getVelocityAngle()));
+        getVelocity().x = -getVelocity().x;
     }
 }
 

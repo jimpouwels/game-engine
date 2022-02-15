@@ -31,7 +31,6 @@ public:
     ~Asteroid();
     void onFrame(float elapsedTime) override;
     void onUpdate(float elapsedTime) override;
-    jimp::Vector2D getVelocity();
     void hasCollidedRectLeft(jimp::AnimatedSprite* otherSprite) override;
     void hasCollidedRectRight(jimp::AnimatedSprite* otherSprite) override;
     void hasCollidedRectTop(jimp::AnimatedSprite* otherSprite) override;

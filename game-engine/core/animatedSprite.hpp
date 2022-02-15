@@ -45,7 +45,6 @@ protected:
         markedForDeletion = true;
     }
     void accelerate(float angle, uint16_t mass, uint16_t force);
-    void updateVelocityAngle(float angle);
     virtual void hasCollidedRectLeft(AnimatedSprite* otherSprite) {};
     virtual void hasCollidedRectRight(AnimatedSprite* otherSprite) {};
     virtual void hasCollidedRectTop(AnimatedSprite* otherSprite) {};

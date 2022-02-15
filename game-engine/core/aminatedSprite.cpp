@@ -149,14 +149,9 @@ float AnimatedSprite::getRotationAngle() {
 
 void AnimatedSprite::accelerate(float angle, uint16_t mass, uint16_t force) {
     this->isAccelerating = true;
-    this->velocityAngle = angle;
+    this->velocityAngle = jimp::Geo2D::normalizeAngle(angle);
     this->mass = mass;
     this->moveForce = force;
-}
-
-void AnimatedSprite::updateVelocityAngle(float angle) {
-    velocityAngle = angle;
-    updateCurrentVelocity = true;
 }
 
 void AnimatedSprite::setRotationAngle(float angle) {
@@ -204,10 +199,7 @@ uint16_t AnimatedSprite::getVelocityAngle() {
 }
 
 void AnimatedSprite::updateMovement(float elapsedTime) {
-    if (updateCurrentVelocity) {
-        velocity = jimp::Geo2D::vectorFrom(moveForce, velocityAngle, mass, elapsedTime);
-        updateCurrentVelocity = false;
-    } else if (isAccelerating) {
+    if (isAccelerating) {
         velocity = velocity + jimp::Geo2D::vectorFrom(moveForce, velocityAngle, mass, elapsedTime);
         isAccelerating = false;
     }
