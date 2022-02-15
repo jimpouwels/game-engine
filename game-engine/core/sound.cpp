@@ -16,6 +16,7 @@ Sound::Sound(GameEngine* gameEngine, std::string filePath) {
 }
 
 Sound::~Sound() {
+    sound->stop();
     delete sound;
 }
 

@@ -23,7 +23,7 @@ public:
         ship = new Ship(this, this);
         addKeyListener(ship);
         music = new jimp::Sound(this, "music.ogg");
-        music->loop(30);
+        music->loop(25);
         asteroidSpawner = new AsteroidSpawner(this);
         projectiles = new std::list<jimp::AnimatedSprite*>;
         background = new jimp::Sprite(this, 0, 0, 1.0F, "background.jpeg");

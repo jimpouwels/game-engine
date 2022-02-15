@@ -48,6 +48,10 @@ public:
     void onKeyboardSpaceBar(jimp::KeyState keyState) override;
     jimp::Vector2D getRotationPoint() override;
     void hasCollidedRect(jimp::AnimatedSprite* otherSprite, jimp::Geo2D::Side side) override;
+    void hasCollidedRectRight(jimp::AnimatedSprite* otherSprite) override;
+    void hasCollidedRectLeft(jimp::AnimatedSprite* otherSprite) override;
+    void hasCollidedRectTop(jimp::AnimatedSprite* otherSprite) override;
+    void hasCollidedRectBottom(jimp::AnimatedSprite* otherSprite) override;
 };
 
 #endif

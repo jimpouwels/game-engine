@@ -14,7 +14,9 @@ void doLoop(std::function<void(float)> callback) {
         std::chrono::time_point<std::chrono::system_clock> currentTime = std::chrono::system_clock::now();
         std::chrono::duration<float> elapsed = currentTime - previousUpdateTime;
         previousUpdateTime = currentTime;
-        callback(elapsed.count());
+        if (elapsed.count() < 1) {
+            callback(elapsed.count());
+        }
     }
 }
 

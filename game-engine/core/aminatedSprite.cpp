@@ -37,6 +37,7 @@ Sprite* AnimatedSprite::getActiveSprite() {
 void AnimatedSprite::setCurrentAnimation(std::string animationId) {
     if (activeAnimation->getId().compare(animationId) != 0) {
         activeAnimation = animationMap->find(animationId)->second;
+        updateCurrentSpriteData();
     }
 }
 
@@ -94,11 +95,7 @@ void AnimatedSprite::updateAnimation(float elapsedTime) {
         activeAnimation->switchToNextSprite();
         elapsedTimeSinceLastSwap = 0;
     }
-    Sprite* activeSprite = getActiveSprite();
-    activeSprite->setPosition(position);
-    activeSprite->setScale(scale);
-    activeSprite->setRotationAngle(angle);
-    activeSprite->setRotationPoint(getRotationPoint());
+    updateCurrentSpriteData();
 }
 
 jimp::GameEngine* AnimatedSprite::getGameEngine() {
@@ -146,6 +143,17 @@ float AnimatedSprite::getRotationAngle() {
     return angle;
 }
 
+void AnimatedSprite::accelerate(float angle, uint16_t mass, uint16_t force) {
+    this->isAccelerating = true;
+    this->velocityAngle = angle;
+    this->mass = mass;
+    this->moveForce = force;
+}
+
+void AnimatedSprite::updateVelocityAngle(float angle) {
+    velocityAngle = angle;
+}
+
 void AnimatedSprite::setRotationAngle(float angle) {
     this->angle = angle;
 }
@@ -184,6 +192,35 @@ bool AnimatedSprite::isOutsideScreenRight() {
 
 bool AnimatedSprite::isMarkedForDeletion() {
     return markedForDeletion;
+}
+
+uint16_t AnimatedSprite::getVelocityAngle() {
+    return velocityAngle;
+}
+
+void AnimatedSprite::updateMovement(float elapsedTime) {
+    if (isAccelerating) {
+        jimp::Vector2D velocityDelta = jimp::Geo2D::vectorFrom(moveForce, velocityAngle, mass, elapsedTime);
+        jimp::Vector2D newVelocity = velocity + velocityDelta;
+//        if (abs(newVelocity.x) < SPEED_IN_PIXELS_PER_SECOND || abs(newVelocity.x) < abs(velocity.x)) {
+        velocity.x = newVelocity.x;
+//        }
+//        if (abs(newVelocity.y) < SPEED_IN_PIXELS_PER_SECOND || abs(newVelocity.y) < abs(velocity.y)) {
+        velocity.y = newVelocity.y;
+//        }
+        isAccelerating = false;
+    } else {
+        velocity = jimp::Geo2D::vectorFrom(moveForce, velocityAngle, mass, elapsedTime);
+    }
+    addToPosition(jimp::Timing::toValueForElapsedTime(velocity, elapsedTime));
+}
+
+void AnimatedSprite::updateCurrentSpriteData() {
+    Sprite* activeSprite = getActiveSprite();
+    activeSprite->setPosition(position);
+    activeSprite->setScale(scale);
+    activeSprite->setRotationAngle(angle);
+    activeSprite->setRotationPoint(getRotationPoint());
 }
 
 void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {

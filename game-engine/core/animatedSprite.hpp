@@ -22,9 +22,16 @@ private:
     std::map<std::string, Animation*>* animationMap;
     Animation* activeAnimation = nullptr;
     bool markedForDeletion = false;
+    bool isAccelerating = false;
+    float velocityAngle = 0;
+    uint16_t mass = 0;
+    uint16_t moveForce = 0;
+    Vector2D velocity = Vector2D { .x = 0, .y = 0 };
     float elapsedTimeSinceLastSwap;
     float imageSwapIntervalInSeconds;
+    void updateCurrentSpriteData();
     void updateAnimation(float elapsedTime);
+    void updateMovement(float elapsedTime);
     void draw(float elapsedTime);
     
 protected:
@@ -36,6 +43,9 @@ protected:
     void markForDeletion() {
         markedForDeletion = true;
     }
+    uint16_t getVelocityAngle();
+    void accelerate(float angle, uint16_t mass, uint16_t force);
+    void updateVelocityAngle(float angle);
     virtual void hasCollidedRectLeft(AnimatedSprite* otherSprite) {};
     virtual void hasCollidedRectRight(AnimatedSprite* otherSprite) {};
     virtual void hasCollidedRectTop(AnimatedSprite* otherSprite) {};
@@ -69,6 +79,7 @@ public:
         gameEngine->draw(getActiveSprite());
     };
     virtual void onUpdate(float elapsedTime) {
+        updateMovement(elapsedTime);
         this->updateAnimation(elapsedTime);
     }
     virtual Vector2D getRotationPoint() {

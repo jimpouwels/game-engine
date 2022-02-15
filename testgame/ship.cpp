@@ -5,6 +5,7 @@
 #include "geo2D.hpp"
 #include "vector2D.hpp"
 #include "timing.hpp"
+#include "asteroid.hpp"
 
 const uint16_t Ship::SPEED_IN_PIXELS_PER_SECOND = 200;
 const uint32_t Ship::THRUST_FORCE = 24000;
@@ -24,6 +25,9 @@ Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jim
 }
 
 void Ship::onUpdate(float elapsedTime) {
+    if (isThrothling) {
+        accelerate(getRotationAngle(), MASS, THRUST_FORCE);
+    }
     updateFiring(elapsedTime);
     updateMovement(elapsedTime);
     updateRotation(elapsedTime);
@@ -31,8 +35,39 @@ void Ship::onUpdate(float elapsedTime) {
     AnimatedSprite::onUpdate(elapsedTime);
 }
 
-void Ship::hasCollidedRect(jimp::AnimatedSprite* otherSprite, jimp::Geo2D::Side side) {
-    std::cout << rand() << "ship hit by asteroid" << std::endl;
+void Ship::hasCollidedRect(jimp::AnimatedSprite *otherSprite, jimp::Geo2D::Side side) {
+    Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
+    if (asteroid != nullptr) {
+        
+    }
+}
+
+void Ship::hasCollidedRectRight(jimp::AnimatedSprite* otherSprite) {
+    Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
+    if (asteroid != nullptr) {
+//        velocity.x = asteroid->getVelocity().x - 2;
+    }
+}
+
+void Ship::hasCollidedRectLeft(jimp::AnimatedSprite* otherSprite) {
+    Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
+    if (asteroid != nullptr) {
+//        velocity.x = asteroid->getVelocity().x + 2;
+    }
+}
+
+void Ship::hasCollidedRectTop(jimp::AnimatedSprite* otherSprite) {
+    Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
+    if (asteroid != nullptr) {
+//        velocity.y = asteroid->getVelocity().y + 2;
+    }
+}
+
+void Ship::hasCollidedRectBottom(jimp::AnimatedSprite* otherSprite) {
+    Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
+    if (asteroid != nullptr) {
+//        velocity.y = asteroid->getVelocity().y - 2;
+    }
 }
 
 jimp::Vector2D Ship::getRotationPoint() {
@@ -80,18 +115,6 @@ void Ship::updateFiring(float elapsedTime) {
 }
 
 void Ship::updateMovement(float elapsedTime) {
-    if (isThrothling) {
-        jimp::Vector2D velocityDelta = jimp::Geo2D::vectorFrom(THRUST_FORCE, getRotationAngle(), MASS, elapsedTime);
-        jimp::Vector2D newVelocity = velocity + velocityDelta;
-        
-        if (abs(newVelocity.x) < SPEED_IN_PIXELS_PER_SECOND || abs(newVelocity.x) < abs(velocity.x)) {
-            velocity.x = newVelocity.x;
-        }
-        if (abs(newVelocity.y) < SPEED_IN_PIXELS_PER_SECOND || abs(newVelocity.y) < abs(velocity.y)) {
-            velocity.y = newVelocity.y;
-        }
-    }
-    
     if (isOutsideScreenRight() && velocity.x >= 0) {
         setX(-getWidth());
     } else if (isOutsideScreenLeft() && velocity.x <= 0) {
@@ -102,8 +125,6 @@ void Ship::updateMovement(float elapsedTime) {
     } else if (isOutsideScreenBottom() && velocity.y >= 0) {
         setY(-getHeight());
     }
-    
-    addToPosition(jimp::Timing::toValueForElapsedTime(velocity, elapsedTime));
 }
 
 void Ship::updateRotation(float elapsedTime) {

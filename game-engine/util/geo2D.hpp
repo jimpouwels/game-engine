@@ -9,19 +9,16 @@
 namespace jimp {
 
 class Geo2D {
-    
-private:
-    static Vector2D vectorFrom(float angle, float force) {
-        float deltaX = force * sin(M_PI * 2 * angle / 360);
-        float deltaY = -(force * cos(M_PI * 2 * angle / 360));
-        return Vector2D { .x = deltaX, .y = deltaY };
-    }
 
 public:
     enum Side { LEFT, RIGHT, TOP, BOTTOM };
     
     static Vector2D vectorFrom(float force, float angle, float mass, float elapsedTime) {
-        float velocityDelta = (force / mass) * elapsedTime;
+        float netForce = force;
+        if (mass > 0) {
+            netForce = force / mass;
+        }
+        float velocityDelta = netForce * elapsedTime;
         return vectorFrom(angle, velocityDelta);
     }
     
@@ -29,6 +26,12 @@ public:
         float forceForElapsedTime = Timing::toValueForElapsedTime(force, elapsedTime);
         float deltaX = forceForElapsedTime * sin(M_PI * 2 * angle / 360);
         float deltaY = -(forceForElapsedTime * cos(M_PI * 2 * angle / 360));
+        return Vector2D { .x = deltaX, .y = deltaY };
+    }
+    
+    static Vector2D vectorFrom(float angle, float force) {
+        float deltaX = force * sin(M_PI * 2 * angle / 360);
+        float deltaY = -(force * cos(M_PI * 2 * angle / 360));
         return Vector2D { .x = deltaX, .y = deltaY };
     }
     
