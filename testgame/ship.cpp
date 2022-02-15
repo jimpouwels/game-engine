@@ -45,28 +45,24 @@ void Ship::hasCollidedRect(jimp::AnimatedSprite *otherSprite, jimp::Geo2D::Side 
 void Ship::hasCollidedRectRight(jimp::AnimatedSprite* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-        updateVelocityAngle(asteroid->getVelocityAngle());
     }
 }
 
 void Ship::hasCollidedRectLeft(jimp::AnimatedSprite* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-        updateVelocityAngle(asteroid->getVelocityAngle());
     }
 }
 
 void Ship::hasCollidedRectTop(jimp::AnimatedSprite* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-        updateVelocityAngle(asteroid->getVelocityAngle());
     }
 }
 
 void Ship::hasCollidedRectBottom(jimp::AnimatedSprite* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-        updateVelocityAngle(asteroid->getVelocityAngle());
     }
 }
 
