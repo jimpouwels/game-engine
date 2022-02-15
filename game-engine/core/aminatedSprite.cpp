@@ -204,13 +204,11 @@ uint16_t AnimatedSprite::getVelocityAngle() {
 }
 
 void AnimatedSprite::updateMovement(float elapsedTime) {
-    if (isAccelerating || updateCurrentVelocity) {
-        if (updateCurrentVelocity) {
-            velocity = jimp::Geo2D::vectorFrom(moveForce, velocityAngle, 0, elapsedTime);
-            updateCurrentVelocity = false;
-        } else {
-            velocity = velocity + jimp::Geo2D::vectorFrom(moveForce, velocityAngle, mass, elapsedTime);
-        }
+    if (updateCurrentVelocity) {
+        velocity = jimp::Geo2D::vectorFrom(moveForce, velocityAngle, mass, elapsedTime);
+        updateCurrentVelocity = false;
+    } else if (isAccelerating) {
+        velocity = velocity + jimp::Geo2D::vectorFrom(moveForce, velocityAngle, mass, elapsedTime);
         isAccelerating = false;
     }
     addToPosition(jimp::Timing::toValueForElapsedTime(velocity, elapsedTime));
