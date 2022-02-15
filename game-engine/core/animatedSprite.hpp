@@ -24,6 +24,7 @@ private:
     bool markedForDeletion = false;
     bool isAccelerating = false;
     float velocityAngle = 0;
+    bool updateCurrentVelocity = false;
     uint16_t mass = 0;
     uint16_t moveForce = 0;
     Vector2D velocity = Vector2D { .x = 0, .y = 0 };
@@ -43,7 +44,6 @@ protected:
     void markForDeletion() {
         markedForDeletion = true;
     }
-    uint16_t getVelocityAngle();
     void accelerate(float angle, uint16_t mass, uint16_t force);
     void updateVelocityAngle(float angle);
     virtual void hasCollidedRectLeft(AnimatedSprite* otherSprite) {};
@@ -58,6 +58,7 @@ public:
     ~AnimatedSprite();
     GameEngine* getGameEngine();
     Vector2D& getPosition();
+    Vector2D& getVelocity();
     float getScale();
     int getWidth();
     int getHeight();
@@ -74,6 +75,7 @@ public:
     bool isOutsideScreenRight();
     bool isMarkedForDeletion();
     bool checkCollisionRect(AnimatedSprite* otherSprite);
+    uint16_t getVelocityAngle();
     Sprite* getActiveSprite();
     virtual void onFrame(float elapsedTime) {
         gameEngine->draw(getActiveSprite());

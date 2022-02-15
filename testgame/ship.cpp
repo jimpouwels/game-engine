@@ -45,28 +45,28 @@ void Ship::hasCollidedRect(jimp::AnimatedSprite *otherSprite, jimp::Geo2D::Side 
 void Ship::hasCollidedRectRight(jimp::AnimatedSprite* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-//        velocity.x = asteroid->getVelocity().x - 2;
+        updateVelocityAngle(asteroid->getVelocityAngle());
     }
 }
 
 void Ship::hasCollidedRectLeft(jimp::AnimatedSprite* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-//        velocity.x = asteroid->getVelocity().x + 2;
+        updateVelocityAngle(asteroid->getVelocityAngle());
     }
 }
 
 void Ship::hasCollidedRectTop(jimp::AnimatedSprite* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-//        velocity.y = asteroid->getVelocity().y + 2;
+        updateVelocityAngle(asteroid->getVelocityAngle());
     }
 }
 
 void Ship::hasCollidedRectBottom(jimp::AnimatedSprite* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-//        velocity.y = asteroid->getVelocity().y - 2;
+        updateVelocityAngle(asteroid->getVelocityAngle());
     }
 }
 
@@ -115,14 +115,14 @@ void Ship::updateFiring(float elapsedTime) {
 }
 
 void Ship::updateMovement(float elapsedTime) {
-    if (isOutsideScreenRight() && velocity.x >= 0) {
+    if (isOutsideScreenRight() && getVelocity().x >= 0) {
         setX(-getWidth());
-    } else if (isOutsideScreenLeft() && velocity.x <= 0) {
+    } else if (isOutsideScreenLeft() && getVelocity().x <= 0) {
         setX(getGameEngine()->getScreenWidth());
     }
-    if (isOutsideScreenTop() && velocity.y <= 0) {
+    if (isOutsideScreenTop() && getVelocity().y <= 0) {
         setY(getGameEngine()->getScreenHeight());
-    } else if (isOutsideScreenBottom() && velocity.y >= 0) {
+    } else if (isOutsideScreenBottom() && getVelocity().y >= 0) {
         setY(-getHeight());
     }
 }

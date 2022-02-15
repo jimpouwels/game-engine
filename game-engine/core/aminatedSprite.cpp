@@ -114,6 +114,10 @@ Vector2D& AnimatedSprite::getPosition() {
     return position;
 }
 
+Vector2D& AnimatedSprite::getVelocity() {
+    return velocity;
+}
+
 void AnimatedSprite::setPosition(Vector2D position) {
     this->position = position;
 }
@@ -152,6 +156,7 @@ void AnimatedSprite::accelerate(float angle, uint16_t mass, uint16_t force) {
 
 void AnimatedSprite::updateVelocityAngle(float angle) {
     velocityAngle = angle;
+    updateCurrentVelocity = true;
 }
 
 void AnimatedSprite::setRotationAngle(float angle) {
@@ -199,18 +204,14 @@ uint16_t AnimatedSprite::getVelocityAngle() {
 }
 
 void AnimatedSprite::updateMovement(float elapsedTime) {
-    if (isAccelerating) {
-        jimp::Vector2D velocityDelta = jimp::Geo2D::vectorFrom(moveForce, velocityAngle, mass, elapsedTime);
-        jimp::Vector2D newVelocity = velocity + velocityDelta;
-//        if (abs(newVelocity.x) < SPEED_IN_PIXELS_PER_SECOND || abs(newVelocity.x) < abs(velocity.x)) {
-        velocity.x = newVelocity.x;
-//        }
-//        if (abs(newVelocity.y) < SPEED_IN_PIXELS_PER_SECOND || abs(newVelocity.y) < abs(velocity.y)) {
-        velocity.y = newVelocity.y;
-//        }
+    if (isAccelerating || updateCurrentVelocity) {
+        if (updateCurrentVelocity) {
+            velocity = jimp::Geo2D::vectorFrom(moveForce, velocityAngle, 0, elapsedTime);
+            updateCurrentVelocity = false;
+        } else {
+            velocity = velocity + jimp::Geo2D::vectorFrom(moveForce, velocityAngle, mass, elapsedTime);
+        }
         isAccelerating = false;
-    } else {
-        velocity = jimp::Geo2D::vectorFrom(moveForce, velocityAngle, mass, elapsedTime);
     }
     addToPosition(jimp::Timing::toValueForElapsedTime(velocity, elapsedTime));
 }
