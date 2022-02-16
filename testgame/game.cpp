@@ -14,15 +14,13 @@ class Game : public jimp::GameEngine, public ShipEventListener {
     
 private:
     jimp::Sprite* background = nullptr;
-    Ship* ship = nullptr;
     AsteroidSpawner* asteroidSpawner = nullptr;
     jimp::Sound* music = nullptr;
     std::list<jimp::AnimatedSprite*>* projectiles = nullptr;
     
 public:
     Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60) {
-        ship = new Ship(this, this);
-        addKeyListener(ship);
+        registerAnimatedSprite(new Ship(this, this));
         music = new jimp::Sound("music.ogg");
         registerSound(music);
         music->loop(25);

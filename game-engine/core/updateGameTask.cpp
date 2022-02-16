@@ -21,9 +21,13 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                 for (uint16_t j = i + 1; j < registeredSprites->size(); j++) {
                     registeredSprite->checkCollisionRect(registeredSprites->at(j));
                 }
-                registeredSprite->onUpdate(elapsed.count());
                 if (registeredSprite->isMarkedForDeletion()) {
                     spritesToDelete.push_back(registeredSprite);
+                } else {
+                    registeredSprite->onUpdate(elapsed.count());
+                    if (registeredSprite->isMarkedForDeletion()) {
+                        spritesToDelete.push_back(registeredSprite);
+                    }
                 }
             }
             for (const auto& spriteToDelete: spritesToDelete) {

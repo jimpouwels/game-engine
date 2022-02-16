@@ -5,13 +5,12 @@
 #include <list>
 
 #include "animatedSprite.hpp"
-#include "keyListener.hpp"
 #include "shipEventListener.hpp"
 #include "direction.hpp"
 #include "vector2D.hpp"
 #include "sound.hpp"
 
-class Ship : public jimp::AnimatedSprite, public jimp::KeyListener {
+class Ship : public jimp::AnimatedSprite {
     
 private:
     static const float SCALE;

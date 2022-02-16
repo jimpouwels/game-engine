@@ -165,14 +165,14 @@
 				23A933B92788407F00769F69 /* keyboardHandler.cpp */,
 				23A933BA2788407F00769F69 /* keyboardHandler.hpp */,
 				23A933B72787617D00769F69 /* keyListener.hpp */,
+				236D5A2527B565A7005183C5 /* sound.cpp */,
+				236D5A2627B565A7005183C5 /* sound.hpp */,
 				23A933AD27864EA700769F69 /* sprite.cpp */,
 				23D5C7E827847B6200C6C916 /* sprite.hpp */,
 				235A527827B00C760008A8A0 /* spriteCache.hpp */,
-				235A526327A959790008A8A0 /* vector2D.hpp */,
-				236D5A2527B565A7005183C5 /* sound.cpp */,
-				236D5A2627B565A7005183C5 /* sound.hpp */,
 				230D483C27B9177A001F6494 /* updateGameTask.cpp */,
 				230D483D27B9177A001F6494 /* updateGameTask.hpp */,
+				235A526327A959790008A8A0 /* vector2D.hpp */,
 			);
 			path = core;
 			sourceTree = "<group>";

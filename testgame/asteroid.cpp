@@ -19,7 +19,6 @@ Asteroid::Asteroid(jimp::GameEngine* gameEngine, float x, float y, float directi
     this->rotationDegreesPerSecond = jimp::MathUtils::randomNumberBetween(30, 130);
     this->rotatingDirection = jimp::MathUtils::randomNumberBetween(0, 2) == 1;
     accelerate(directionAngle, 0, FORCE);
-    gameEngine->registerAnimatedSprite(this);
 }
 
 Asteroid::~Asteroid() {

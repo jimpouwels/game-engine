@@ -24,7 +24,6 @@ Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jim
     addSprite("default", "spaceship.png");
     addSprite("throttling", "spaceship-thrust1.png");
     addSprite("throttling", "spaceship-thrust2.png");
-    this->gameEngine->registerAnimatedSprite(this);
 }
 
 void Ship::onUpdate(float elapsedTime) {
@@ -111,6 +110,7 @@ void Ship::updateFiring(float elapsedTime) {
         hasFired = false;
         jimp::Vector2D rotationPoint = getRotationPoint();
         Bullet* bullet = new Bullet(gameEngine, getPosition().x + rotationPoint.x - 5, getPosition().y + rotationPoint.y - 10, getRotationAngle());
+        gameEngine->registerAnimatedSprite(bullet);
         firingSound->playTillEnd(30);
         eventListener->onWeaponFired(bullet);
         elapsedTimeSinceLastShot = 0;

@@ -25,6 +25,7 @@ public:
     KeyboardHandler();
     ~KeyboardHandler();
     void addKeyListener(jimp::KeyListener* keyListener);
+    void removeKeyListener(jimp::KeyListener* keyListener);
     void handleEvent(sf::Event event);
     
 };

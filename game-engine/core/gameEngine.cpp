@@ -91,6 +91,7 @@ void GameEngine::draw(jimp::Sprite* sprite) {
 }
 
 void GameEngine::registerAnimatedSprite(AnimatedSprite *animatedSprite) {
+    addKeyListener(animatedSprite);
     updateGameTask->registerAnimatedSprite(animatedSprite);
 }
 
@@ -191,6 +192,7 @@ void GameEngine::handleSpriteDeleted(AnimatedSprite* animatedSprite) {
          spriteCache->remove(sprite);
     }
     onSpriteDeleted(animatedSprite);
+    keyboardHandler->removeKeyListener(animatedSprite);
     updateGameTask->unregisterAnimatedSprite(animatedSprite);
 }
 

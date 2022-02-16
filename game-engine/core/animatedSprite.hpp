@@ -8,10 +8,11 @@
 #include "animation.hpp"
 #include "vector2D.hpp"
 #include "geo2D.hpp"
+#include "keyListener.hpp"
 
 namespace jimp {
 
-class AnimatedSprite {
+class AnimatedSprite : public KeyListener {
     
 private:
     Vector2D position = { .x = 0, .y = 0 };
@@ -78,6 +79,10 @@ public:
         return Vector2D { getWidth() / 2.0F, .y = getHeight() / 2.0F };
     }
     void addSprite(std::string animationId, std::string filePath);
+    void onKeyboardLeft(jimp::KeyState keyState) {};
+    void onKeyboardRight(jimp::KeyState keyState) {};
+    void onKeyboardUp(jimp::KeyState keyState) {};
+    void onKeyboardSpaceBar(jimp::KeyState keyState) {};
 };
 }
 

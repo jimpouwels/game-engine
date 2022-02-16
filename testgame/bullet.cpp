@@ -12,7 +12,6 @@ const float Bullet::SCALE = 0.3F;
 Bullet::Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle) : jimp::AnimatedSprite(x, y, SCALE, -1) {
     addSprite("default", "bullet.png");
     setRotationAngle(angle);
-    gameEngine->registerAnimatedSprite(this);
 }
 
 void Bullet::onUpdate(float elapsedTime) {

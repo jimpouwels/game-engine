@@ -37,6 +37,10 @@ void KeyboardHandler::addKeyListener(jimp::KeyListener* keyListener) {
     keyListeners->push_back(keyListener);
 }
 
+void KeyboardHandler::removeKeyListener(jimp::KeyListener* keyListener) {
+    keyListeners->remove(keyListener);
+}
+
 void KeyboardHandler::handleKeyboardLeft(KeyState keyState) {
     for (auto const& keyListener : *keyListeners) {
         keyListener->onKeyboardLeft(keyState);
