@@ -5,14 +5,11 @@
 const uint8_t AsteroidSpawner::SECONDS_BETWEEN_ASTEROID_SPAWN = 3;
 
 AsteroidSpawner::AsteroidSpawner(jimp::GameEngine* gameEngine) {
-    asteroids = new std::vector<Asteroid*>;
+    asteroids = new std::list<Asteroid*>;
     this->gameEngine = gameEngine;
 }
 
 AsteroidSpawner::~AsteroidSpawner() {
-    for (const auto& asteroid: *asteroids) {
-        delete asteroid;
-    }
     delete asteroids;
 }
 
@@ -33,15 +30,9 @@ void AsteroidSpawner::onUpdate(float elapsedTime) {
         }
         asteroids->push_back(new Asteroid(gameEngine, x, y, angle));
     }
-    std::list<Asteroid*> asteroidsToDelete;
     for (const auto& asteroid: *asteroids) {
-        if (asteroid->isMarkedForDeletion()) {
-            asteroidsToDelete.push_back(asteroid);
-        } else {
-            asteroid->onUpdate(elapsedTime);
-        }
+        asteroid->onUpdate(elapsedTime);
     }
-    deleteAsteroids(asteroidsToDelete);
 }
 
 void AsteroidSpawner::onFrame(float elapsedTime) {
@@ -50,13 +41,10 @@ void AsteroidSpawner::onFrame(float elapsedTime) {
     }
 }
 
-std::vector<Asteroid*>& AsteroidSpawner::getAsteroids() {
-    return *asteroids;
+void AsteroidSpawner::deleteAsteroid(Asteroid *asteroid){
+    return asteroids->remove(asteroid);
 }
 
-void AsteroidSpawner::deleteAsteroids(std::list<Asteroid*>& asteroidsToDelete) {
-    for (const auto& asteroid: asteroidsToDelete) {
-        asteroids->erase(std::remove(asteroids->begin(), asteroids->end(), asteroid), asteroids->end());
-        delete asteroid;
-    }
+std::list<Asteroid*>& AsteroidSpawner::getAsteroids() {
+    return *asteroids;
 }

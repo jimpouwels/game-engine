@@ -13,5 +13,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "Game::onSpriteDeleted(jimp::AnimatedSprite*):game.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "animatedSprite-&gt;getActiveSprite()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

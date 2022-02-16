@@ -2,15 +2,13 @@
 
 namespace jimp {
 
-Animation::Animation(GameEngine* gameEngine, std::string id) {
+Animation::Animation(std::string id) {
     this->id = id;
     this->sprites = new std::vector<Sprite*>;
-    this->gameEngine = gameEngine;
 }
 
 Animation::~Animation() {
     for (auto const& sprite : *sprites) {
-        gameEngine->eraseFromCache(sprite);
         delete sprite;
     }
     delete sprites;
@@ -30,6 +28,12 @@ long Animation::getNumberOfSprites() {
 
 Sprite* Animation::getActiveSprite() {
     return sprites->at(activeSpriteIndex);;
+}
+
+std::list<Sprite*> Animation::getAllSprites() {
+    std::list<Sprite*> allSprites = std::list<Sprite*>();
+    std::copy(sprites->begin(), sprites->end(), std::back_inserter(allSprites));
+    return allSprites;
 }
 
 void Animation::switchToNextSprite() {

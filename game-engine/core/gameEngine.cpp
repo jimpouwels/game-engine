@@ -15,8 +15,9 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string 
     this->frameRate = desiredFrameRate;
     this->timePerFrame = 1.0 / desiredFrameRate;
     this->windowTitle = windowTitle;
-    auto fp = std::bind(&GameEngine::triggerUpdate, this, std::placeholders::_1);
-    this->updateGameTask = new UpdateGameTask(fp);
+    auto fp1 = std::bind(&GameEngine::triggerUpdate, this, std::placeholders::_1);
+    auto fp2 = std::bind(&GameEngine::handleSpriteDeleted, this, std::placeholders::_1);
+    this->updateGameTask = new UpdateGameTask(fp1, fp2);
     this->spriteCache = new SpriteCache();
     this->imageCache = new std::map<std::string, Image*>;
     this->soundCache = new std::map<std::string, Sound*>;
@@ -28,7 +29,18 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string 
 GameEngine::~GameEngine() {
     delete window;
     delete keyboardHandler;
+    updateGameTask->removeAllSprites();
     delete updateGameTask;
+    spriteCache->erase();
+    delete spriteCache;
+    for (const auto& [filePath, image]: *imageCache) {
+        delete image;
+    }
+    delete imageCache;
+    for (const auto& [filePath, sound]: *soundCache) {
+        delete sound;
+    }
+    delete soundCache;
 }
 
 void GameEngine::start() {
@@ -78,6 +90,10 @@ void GameEngine::draw(jimp::Sprite* sprite) {
     window->draw(*cachedSprite->sprite, transform);
 }
 
+void GameEngine::registerAnimatedSprite(AnimatedSprite *animatedSprite) {
+    updateGameTask->registerAnimatedSprite(animatedSprite);
+}
+
 Image* GameEngine::registerImage(Image* image) {
     if (imageCache->find(image->getFilePath()) == imageCache->end()) {
         imageCache->insert({image->getFilePath(), image});
@@ -96,10 +112,6 @@ Sound* GameEngine::registerSound(Sound* sound) {
     return sound;
 }
 
-void GameEngine::eraseFromCache(Sprite *sprite) {
-    spriteCache->remove(sprite);
-}
-
 void GameEngine::addKeyListener(KeyListener* keyListener) {
     keyboardHandler->addKeyListener(keyListener);
 }
@@ -112,8 +124,40 @@ int GameEngine::getScreenHeight() {
     return screenHeight;
 }
 
-bool GameEngine::isPositionWithinScreen(float x, float y) {
-    return x <= getScreenWidth() && x >= 0 && y <= getScreenHeight() && y > 0;
+bool GameEngine::isAtLeftEdgeOfScreen(AnimatedSprite* sprite) {
+    return sprite->getPosition().x < 0;
+}
+
+bool GameEngine::isAtRightEdgeOfScreen(AnimatedSprite* sprite) {
+    return sprite->getPosition().x > getScreenWidth() - sprite->getWidth();
+}
+
+bool GameEngine::isAtTopEdgeOfScreen(AnimatedSprite* sprite) {
+    return sprite->getPosition().y < 0;
+}
+
+bool GameEngine::isAtBottomEdgeOfScreen(AnimatedSprite* sprite) {
+    return sprite->getPosition().y > getScreenHeight() - sprite->getHeight();
+}
+
+bool GameEngine::isOutsideScreenTop(AnimatedSprite* sprite) {
+    return sprite->getPosition().y < -sprite->getHeight();
+}
+
+bool GameEngine::isOutsideScreenBottom(AnimatedSprite* sprite) {
+    return sprite->getPosition().y > getScreenHeight();
+}
+
+bool GameEngine::isOutsideScreenLeft(AnimatedSprite* sprite) {
+    return sprite->getPosition().x < -(sprite->getWidth());
+}
+
+bool GameEngine::isOutsideScreenRight(AnimatedSprite* sprite) {
+    return sprite->getPosition().x > getScreenWidth();
+}
+
+bool GameEngine::isPositionWithinScreen(Vector2D position) {
+    return position.x <= getScreenWidth() && position.x >= 0 && position.y <= getScreenHeight() && position.y > 0;
 }
 
 float GameEngine::measureFps(std::chrono::time_point<std::chrono::system_clock>& currentTime) {
@@ -128,11 +172,26 @@ float GameEngine::measureFps(std::chrono::time_point<std::chrono::system_clock>&
 void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     window->clear();
     onFrame(elapsedTimeSincePreviousFrame);
+    for (const auto& sprite: *updateGameTask->getAllSprites()) {
+        if (!sprite->isMarkedForDeletion()) {
+            sprite->tryLock();
+            draw(sprite->getActiveSprite());
+            sprite->unlock();
+        }
+    }
     window->display();
 }
 
 void GameEngine::triggerUpdate(float elapsedTime) {
     onUpdate(elapsedTime);
+}
+
+void GameEngine::handleSpriteDeleted(AnimatedSprite* animatedSprite) {
+    for (const auto& sprite: animatedSprite->getAllSprites()) {
+         spriteCache->remove(sprite);
+    }
+    onSpriteDeleted(animatedSprite);
+    updateGameTask->unregisterAnimatedSprite(animatedSprite);
 }
 
 void GameEngine::handleSounds(float elapsedTime) {

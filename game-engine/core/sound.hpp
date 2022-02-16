@@ -22,7 +22,7 @@ private:
     void stopFadeOut();
     
 public:
-    Sound(GameEngine* gameEngine, std::string filePath);
+    Sound(std::string filePath);
     ~Sound();
     void onFrame(float elapsedTime);
     void play(uint16_t volume);

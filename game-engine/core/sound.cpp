@@ -5,14 +5,13 @@
 
 namespace jimp {
 
-Sound::Sound(GameEngine* gameEngine, std::string filePath) {
+Sound::Sound(std::string filePath) {
     this->filePath = filePath;
     this->fullRuns = new std::list<sf::Sound*>;
     this->buffer = new sf::SoundBuffer();
     this->buffer->loadFromFile(filePath);
     this->sound = new sf::Sound();
     this->sound->setBuffer(*buffer);
-    gameEngine->registerSound(this);
 }
 
 Sound::~Sound() {

@@ -37,21 +37,33 @@ private:
     void handleEvents();
     void triggerUpdate(float elapsedTime);
     void handleSounds(float elapsedTime);
+    void handleSpriteDeleted(AnimatedSprite* animatedSprite);
+    
+protected:
+    virtual void onFrame(float elapsedTime) {};
+    virtual void onUpdate(float elapsedTime) {};
+    virtual void onSpriteDeleted(AnimatedSprite* animatedSprite) {};
     
 public:
     GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate);
     ~GameEngine();
     void start();
     void draw(Sprite* sprite);
-    void eraseFromCache(Sprite* sprite);
     int getScreenWidth();
     int getScreenHeight();
-    bool isPositionWithinScreen(float x, float y);
-    void addKeyListener(jimp::KeyListener* keyListener);
+    bool isAtLeftEdgeOfScreen(AnimatedSprite* animatedSprite);
+    bool isAtRightEdgeOfScreen(AnimatedSprite* animatedSprite);
+    bool isAtTopEdgeOfScreen(AnimatedSprite* animatedSprite);
+    bool isAtBottomEdgeOfScreen(AnimatedSprite* animatedSprite);
+    bool isOutsideScreenTop(AnimatedSprite* animatedSprite);
+    bool isOutsideScreenBottom(AnimatedSprite* animatedSprite);
+    bool isOutsideScreenLeft(AnimatedSprite* animatedSprite);
+    bool isOutsideScreenRight(AnimatedSprite* animatedSprite);
+    bool isPositionWithinScreen(Vector2D position);
+    void addKeyListener(KeyListener* keyListener);
+    void registerAnimatedSprite(AnimatedSprite* animatedSprite);
     Image* registerImage(Image* image);
     Sound* registerSound(Sound* sound);
-    virtual void onFrame(float elapsedTime) {};
-    virtual void onUpdate(float elapsedTime) {};
     
 };
 }

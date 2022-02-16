@@ -12,6 +12,7 @@ class Asteroid : public jimp::AnimatedSprite {
 private:
     static const uint16_t FORCE;
     static const float HIT_ANIMATION_DURATION_IN_SECONDS;
+    jimp::GameEngine* gameEngine = nullptr;
     jimp::Vector2D velocity = jimp::Vector2D { .x = 0, .y = 0 };
     float totalHitAnimationDuration = 0.0F;
     uint16_t rotationDegreesPerSecond = 0;

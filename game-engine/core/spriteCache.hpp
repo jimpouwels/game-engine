@@ -3,7 +3,7 @@
 
 #include <map>
 #include <SFML/Graphics.hpp>
-#include "sprite.hpp"
+#include "animatedSprite.hpp"
 
 namespace jimp {
 
@@ -37,6 +37,12 @@ public:
     void remove(Sprite* sprite) {
         if (hasSprite(sprite)) {
             spriteCache->erase(sprite);
+        }
+    }
+    
+    void erase() {
+        for (const auto& [sprite, cachedSprite]: *spriteCache) {
+            delete cachedSprite;
         }
     }
 

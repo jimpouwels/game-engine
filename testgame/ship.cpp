@@ -16,13 +16,15 @@ const uint8_t Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.15F;
 const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 
-Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jimp::AnimatedSprite(gameEngine, gameEngine->getScreenWidth() / 2, gameEngine->getScreenHeight() / 2, SCALE, 0.05F) {
+Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jimp::AnimatedSprite(400, 400, SCALE, 0.05F) {
+    this->gameEngine = gameEngine;
     this->eventListener = eventListener;
-    this->firingSound = new jimp::Sound(gameEngine, "laser.ogg");
-    this->thrustSound = new jimp::Sound(gameEngine, "thrust.ogg");
+    this->firingSound = gameEngine->registerSound(new jimp::Sound("laser.ogg"));
+    this->thrustSound = gameEngine->registerSound(new jimp::Sound("thrust.ogg"));
     addSprite("default", "spaceship.png");
     addSprite("throttling", "spaceship-thrust1.png");
     addSprite("throttling", "spaceship-thrust2.png");
+    this->gameEngine->registerAnimatedSprite(this);
 }
 
 void Ship::onUpdate(float elapsedTime) {
@@ -108,7 +110,7 @@ void Ship::updateFiring(float elapsedTime) {
     if (elapsedTimeSinceLastShot >= timeBetweenShots && (hasFired || isFiring)) {
         hasFired = false;
         jimp::Vector2D rotationPoint = getRotationPoint();
-        Bullet* bullet = new Bullet(getGameEngine(), getPosition().x + rotationPoint.x - 5, getPosition().y + rotationPoint.y - 10, getRotationAngle());
+        Bullet* bullet = new Bullet(gameEngine, getPosition().x + rotationPoint.x - 5, getPosition().y + rotationPoint.y - 10, getRotationAngle());
         firingSound->playTillEnd(30);
         eventListener->onWeaponFired(bullet);
         elapsedTimeSinceLastShot = 0;
@@ -116,14 +118,14 @@ void Ship::updateFiring(float elapsedTime) {
 }
 
 void Ship::updateMovement(float elapsedTime) {
-    if (isOutsideScreenRight() && getVelocity().x >= 0) {
+    if (gameEngine->isOutsideScreenRight(this) && getVelocity().x >= 0) {
         setX(-getWidth());
-    } else if (isOutsideScreenLeft() && getVelocity().x <= 0) {
-        setX(getGameEngine()->getScreenWidth());
+    } else if (gameEngine->isOutsideScreenLeft(this) && getVelocity().x <= 0) {
+        setX(gameEngine->getScreenWidth());
     }
-    if (isOutsideScreenTop() && getVelocity().y <= 0) {
-        setY(getGameEngine()->getScreenHeight());
-    } else if (isOutsideScreenBottom() && getVelocity().y >= 0) {
+    if (gameEngine->isOutsideScreenTop(this) && getVelocity().y <= 0) {
+        setY(gameEngine->getScreenHeight());
+    } else if (gameEngine->isOutsideScreenBottom(this) && getVelocity().y >= 0) {
         setY(-getHeight());
     }
 }

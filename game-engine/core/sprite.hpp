@@ -5,7 +5,6 @@
 
 #include "vector2D.hpp"
 #include "image.hpp"
-#include "gameEngine.hpp"
 
 namespace jimp {
 
@@ -22,8 +21,8 @@ private:
     Image* image;
     
 public:
-    Sprite(GameEngine* gameEngine, float x, float y, float scale, std::string filePath);
-    Sprite(GameEngine* gameEngine, float x, float y, float scale, uint16_t angle, std::string filePath);
+    Sprite(float x, float y, float scale, std::string filePath);
+    Sprite(float x, float y, float scale, uint16_t angle, std::string filePath);
     ~Sprite();
     Vector2D& getPosition();
     void setPosition(Vector2D position);
@@ -35,14 +34,6 @@ public:
     void setRotationAngle(float angle);
     int getWidth();
     int getHeight();
-    bool isAtBottomEdgeOfScreen();
-    bool isAtTopEdgeOfScreen();
-    bool isAtLeftEdgeOfScreen();
-    bool isAtRightEdgeOfScreen();
-    bool isOutsideScreenBottom();
-    bool isOutsideScreenTop();
-    bool isOutsideScreenLeft();
-    bool isOutsideScreenRight();
     void setPosition(float x, float y);
     void setRotationPoint(Vector2D rotationPoint);
     Vector2D getRotationPoint();

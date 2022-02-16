@@ -6,7 +6,7 @@ namespace jimp {
 
 bool isUpdatingGame = false;
 
-void doLoop(std::function<void(float)> callback) {
+void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedSprite*)> onSpriteDeletedCallback, std::vector<AnimatedSprite*>* registeredSprites) {
     isUpdatingGame = true;
     std::chrono::time_point<std::chrono::system_clock> previousUpdateTime;
     while (isUpdatingGame) {
@@ -15,13 +15,31 @@ void doLoop(std::function<void(float)> callback) {
         std::chrono::duration<float> elapsed = currentTime - previousUpdateTime;
         previousUpdateTime = currentTime;
         if (elapsed.count() < 1) {
-            callback(elapsed.count());
+            std::list<AnimatedSprite*> spritesToDelete = std::list<AnimatedSprite*>();
+            for (uint16_t i = 0; i < registeredSprites->size(); i++) {
+                AnimatedSprite* registeredSprite = registeredSprites->at(i);
+                for (uint16_t j = i + 1; j < registeredSprites->size(); j++) {
+                    registeredSprite->checkCollisionRect(registeredSprites->at(j));
+                }
+                registeredSprite->onUpdate(elapsed.count());
+                if (registeredSprite->isMarkedForDeletion()) {
+                    spritesToDelete.push_back(registeredSprite);
+                }
+            }
+            for (const auto& spriteToDelete: spritesToDelete) {
+                spriteToDelete->tryLock();
+                onSpriteDeletedCallback(spriteToDelete);
+                spriteToDelete->unlock();
+            }
+            onUpdateCallback(elapsed.count());
         }
     }
 }
 
-UpdateGameTask::UpdateGameTask(std::function<void(float)> callback) {
-    this->callback = callback;
+UpdateGameTask::UpdateGameTask(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedSprite*)> onSpriteDeletedCallback) {
+    this->onUpdateCallback = onUpdateCallback;
+    this->onSpriteDeletedCallback = onSpriteDeletedCallback;
+    this->registeredAnimatedSprites = new std::vector<AnimatedSprite*>;
 }
 
 UpdateGameTask::~UpdateGameTask() {
@@ -31,11 +49,30 @@ UpdateGameTask::~UpdateGameTask() {
 }
 
 void UpdateGameTask::start() {
-    this->updateThread = new std::thread(doLoop, callback);
+    this->updateThread = new std::thread(doLoop, onUpdateCallback, onSpriteDeletedCallback, registeredAnimatedSprites);
 }
 
 void UpdateGameTask::stop() {
     isUpdatingGame = false;
+}
+
+std::vector<AnimatedSprite*>* UpdateGameTask::getAllSprites() {
+    return registeredAnimatedSprites;
+}
+
+void UpdateGameTask::registerAnimatedSprite(AnimatedSprite* animatedSprite) {
+    registeredAnimatedSprites->push_back(animatedSprite);
+}
+
+void UpdateGameTask::unregisterAnimatedSprite(AnimatedSprite* animatedSprite) {
+    registeredAnimatedSprites->erase(std::remove(registeredAnimatedSprites->begin(), registeredAnimatedSprites->end(), animatedSprite), registeredAnimatedSprites->end());
+    delete animatedSprite;
+}
+
+void UpdateGameTask::removeAllSprites() {
+    for (const auto& sprite: *registeredAnimatedSprites) {
+        delete sprite;
+    }
 }
 
 }

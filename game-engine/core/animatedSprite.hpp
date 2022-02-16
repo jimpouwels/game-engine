@@ -6,19 +6,17 @@
 #include <map>
 #include "sprite.hpp"
 #include "animation.hpp"
-#include "gameEngine.hpp"
 #include "vector2D.hpp"
 #include "geo2D.hpp"
 
 namespace jimp {
 
 class AnimatedSprite {
-
+    
 private:
     Vector2D position = { .x = 0, .y = 0 };
     float scale;
     float angle;
-    GameEngine* gameEngine;
     std::map<std::string, Animation*>* animationMap;
     Animation* activeAnimation = nullptr;
     bool markedForDeletion = false;
@@ -28,6 +26,7 @@ private:
     uint16_t mass = 0;
     uint16_t moveForce = 0;
     Vector2D velocity = Vector2D { .x = 0, .y = 0 };
+    std::mutex* lock = new std::mutex();
     float elapsedTimeSinceLastSwap;
     float imageSwapIntervalInSeconds;
     void updateCurrentSpriteData();
@@ -41,9 +40,6 @@ protected:
     void setPosition(Vector2D position);
     void addToPosition(Vector2D delta);
     void setCurrentAnimation(std::string animationId);
-    void markForDeletion() {
-        markedForDeletion = true;
-    }
     void accelerate(float angle, uint16_t mass, uint16_t force);
     virtual void hasCollidedRectLeft(AnimatedSprite* otherSprite) {};
     virtual void hasCollidedRectRight(AnimatedSprite* otherSprite) {};
@@ -52,10 +48,9 @@ protected:
     virtual void hasCollidedRect(AnimatedSprite* otherSprite, Geo2D::Side side) {};
     
 public:
-    AnimatedSprite(GameEngine* gameEngine, float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
-    AnimatedSprite(GameEngine* gameEngine, float x, float y, float scale, float imageSwapIntervalInSeconds);
+    AnimatedSprite( float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
+    AnimatedSprite( float x, float y, float scale, float imageSwapIntervalInSeconds);
     ~AnimatedSprite();
-    GameEngine* getGameEngine();
     Vector2D& getPosition();
     Vector2D& getVelocity();
     float getScale();
@@ -63,21 +58,17 @@ public:
     int getHeight();
     float getRotationAngle();
     void setRotationAngle(float angle);
-    virtual bool isPositionedWithinScreen();
-    bool isAtBottomEdgeOfScreen();
-    bool isAtTopEdgeOfScreen();
-    bool isAtLeftEdgeOfScreen();
-    bool isAtRightEdgeOfScreen();
-    bool isOutsideScreenBottom();
-    bool isOutsideScreenTop();
-    bool isOutsideScreenLeft();
-    bool isOutsideScreenRight();
     bool isMarkedForDeletion();
     bool checkCollisionRect(AnimatedSprite* otherSprite);
     uint16_t getVelocityAngle();
     Sprite* getActiveSprite();
+    std::list<Sprite*> getAllSprites();
+    void tryLock();
+    void unlock();
+    void markForDeletion() {
+        markedForDeletion = true;
+    }
     virtual void onFrame(float elapsedTime) {
-        gameEngine->draw(getActiveSprite());
     };
     virtual void onUpdate(float elapsedTime) {
         updateMovement(elapsedTime);

@@ -2,9 +2,9 @@
 #define animation_hpp
 
 #include <vector>
+#include <list>
 #include <string>
 #include "sprite.hpp"
-#include "gameEngine.hpp"
 
 namespace jimp {
 
@@ -17,12 +17,13 @@ private:
     GameEngine* gameEngine = nullptr;
     
 public:
-    Animation(GameEngine* gameEngine, std::string id);
+    Animation(std::string id);
     ~Animation();
     std::string getId();
     void addSprite(Sprite* sprite);
     long getNumberOfSprites();
     Sprite* getActiveSprite();
+    std::list<Sprite*> getAllSprites();
     void switchToNextSprite();
     
 };

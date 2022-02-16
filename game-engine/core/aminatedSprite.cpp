@@ -1,5 +1,6 @@
 #include <vector>
 #include <map>
+#include <list>
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "animatedSprite.hpp"
@@ -9,17 +10,16 @@
 
 namespace jimp {
 
-AnimatedSprite::AnimatedSprite(GameEngine* gameEngine, float x, float y, float scale, float imageSwapIntervalInSeconds) {
+AnimatedSprite::AnimatedSprite(float x, float y, float scale, float imageSwapIntervalInSeconds) {
     this->position.x = x;
     this->position.y = y;
     this->scale = scale;
-    this->gameEngine = gameEngine;
     animationMap = new std::map<std::string, Animation*>;
     this->imageSwapIntervalInSeconds = imageSwapIntervalInSeconds;
 }
 
-AnimatedSprite::AnimatedSprite(GameEngine* gameEngine, float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
-    AnimatedSprite(gameEngine, x, y, scale, 0, imageSwapIntervalInSeconds);
+AnimatedSprite::AnimatedSprite(float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
+    AnimatedSprite(x, y, scale, 0, imageSwapIntervalInSeconds);
     this->angle = rotationAngle;
 }
 
@@ -98,10 +98,6 @@ void AnimatedSprite::updateAnimation(float elapsedTime) {
     updateCurrentSpriteData();
 }
 
-jimp::GameEngine* AnimatedSprite::getGameEngine() {
-    return gameEngine;
-}
-
 void AnimatedSprite::setX(float x) {
     position.x = x;
 }
@@ -139,12 +135,18 @@ float AnimatedSprite::getScale() {
     return scale;
 }
 
-bool AnimatedSprite::isPositionedWithinScreen() {
-    return gameEngine->isPositionWithinScreen(position.x, position.y);
-}
-
 float AnimatedSprite::getRotationAngle() {
     return angle;
+}
+
+std::list<Sprite*> AnimatedSprite::getAllSprites() {
+    std::list<Sprite*> allSprites = std::list<Sprite*>();
+    for (const auto& [animationId, animation]: *animationMap) {
+        for (const auto& sprite: animation->getAllSprites()) {
+            allSprites.push_back(sprite);
+        }
+    }
+    return allSprites;
 }
 
 void AnimatedSprite::accelerate(float angle, uint16_t mass, uint16_t force) {
@@ -158,44 +160,20 @@ void AnimatedSprite::setRotationAngle(float angle) {
     this->angle = angle;
 }
 
-bool AnimatedSprite::isAtLeftEdgeOfScreen() {
-    return getActiveSprite()->isAtLeftEdgeOfScreen();
-}
-
-bool AnimatedSprite::isAtRightEdgeOfScreen() {
-    return getActiveSprite()->isAtRightEdgeOfScreen();
-}
-
-bool AnimatedSprite::isAtTopEdgeOfScreen() {
-    return getActiveSprite()->isAtTopEdgeOfScreen();
-}
-
-bool AnimatedSprite::isAtBottomEdgeOfScreen() {
-    return getActiveSprite()->isAtBottomEdgeOfScreen();
-}
-
-bool AnimatedSprite::isOutsideScreenTop() {
-    return getActiveSprite()->isOutsideScreenTop();
-}
-
-bool AnimatedSprite::isOutsideScreenBottom() {
-    return getActiveSprite()->isOutsideScreenBottom();
-}
-
-bool AnimatedSprite::isOutsideScreenLeft() {
-    return getActiveSprite()->isOutsideScreenLeft();
-}
-
-bool AnimatedSprite::isOutsideScreenRight() {
-    return getActiveSprite()->isOutsideScreenRight();
-}
-
 bool AnimatedSprite::isMarkedForDeletion() {
     return markedForDeletion;
 }
 
 uint16_t AnimatedSprite::getVelocityAngle() {
     return velocityAngle;
+}
+
+void AnimatedSprite::tryLock() {
+    lock->try_lock();
+}
+
+void AnimatedSprite::unlock() {
+    lock->unlock();
 }
 
 void AnimatedSprite::updateMovement(float elapsedTime) {
@@ -217,12 +195,12 @@ void AnimatedSprite::updateCurrentSpriteData() {
 void AnimatedSprite::addSprite(std::string animationId, std::string filePath) {
     Animation* animation = nullptr;
     if (animationMap->find(animationId) == animationMap->end()) {
-        animation = new Animation(gameEngine, animationId);
+        animation = new Animation(animationId);
         animationMap->insert({animationId, animation});
     } else {
         animation = animationMap->find(animationId)->second;
     }
-    Sprite* sprite = new Sprite(gameEngine, position.x, position.y, scale, filePath);
+    Sprite* sprite = new Sprite(position.x, position.y, scale, filePath);
     animationMap->find(animationId)->second->addSprite(sprite);
     if (activeAnimation == nullptr) {
         activeAnimation = animation;

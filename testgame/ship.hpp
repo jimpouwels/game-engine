@@ -22,6 +22,7 @@ private:
     static const uint8_t ROTATION_DEGREES_PER_SECOND;
     static const uint8_t SHOTS_PER_SECOND;
     static const uint16_t ROTATION_POINT_Y_OFFSET; // the excaust flame makes the spaceship image non-symmetrical
+    jimp::GameEngine* gameEngine = nullptr;
     bool hasFired = false;
     bool isFiring = false;
     bool isThrothling = false;
