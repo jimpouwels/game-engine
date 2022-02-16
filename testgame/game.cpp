@@ -41,7 +41,6 @@ public:
     
     void onFrame(float elapsedTime) {
         draw(background);
-        asteroidSpawner->onFrame(elapsedTime);
     }
     
     void onUpdate(float elapsedTime) {
@@ -50,10 +49,6 @@ public:
     }
     
     void onSpriteDeleted(jimp::AnimatedSprite* animatedSprite) {
-        Asteroid* asteroid = dynamic_cast<Asteroid*>(animatedSprite);
-        if (asteroid != nullptr) {
-            asteroidSpawner->deleteAsteroid(asteroid);
-        }
         Bullet* projectile = dynamic_cast<Bullet*>(animatedSprite);
         if (projectile != nullptr) {
             projectiles->remove(projectile);

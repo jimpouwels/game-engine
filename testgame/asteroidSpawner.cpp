@@ -5,12 +5,10 @@
 const uint8_t AsteroidSpawner::SECONDS_BETWEEN_ASTEROID_SPAWN = 3;
 
 AsteroidSpawner::AsteroidSpawner(jimp::GameEngine* gameEngine) {
-    asteroids = new std::list<Asteroid*>;
     this->gameEngine = gameEngine;
 }
 
 AsteroidSpawner::~AsteroidSpawner() {
-    delete asteroids;
 }
 
 void AsteroidSpawner::onUpdate(float elapsedTime) {
@@ -29,21 +27,6 @@ void AsteroidSpawner::onUpdate(float elapsedTime) {
             angle = jimp::MathUtils::randomNumberBetween(225, 315);
         }
         Asteroid *newAsteroid = new Asteroid(gameEngine, x, y, angle);
-        asteroids->push_back(newAsteroid);
         gameEngine->registerAnimatedSprite(newAsteroid);
     }
-}
-
-void AsteroidSpawner::onFrame(float elapsedTime) {
-    for (const auto& asteroid: *asteroids) {
-        asteroid->onFrame(elapsedTime);
-    }
-}
-
-void AsteroidSpawner::deleteAsteroid(Asteroid *asteroid){
-    return asteroids->remove(asteroid);
-}
-
-std::list<Asteroid*>& AsteroidSpawner::getAsteroids() {
-    return *asteroids;
 }

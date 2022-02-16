@@ -15,6 +15,7 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
         std::chrono::duration<float> elapsed = currentTime - previousUpdateTime;
         previousUpdateTime = currentTime;
         if (elapsed.count() < 1) {
+            onUpdateCallback(elapsed.count());
             std::list<AnimatedSprite*> spritesToDelete = std::list<AnimatedSprite*>();
             for (uint16_t i = 0; i < registeredSprites->size(); i++) {
                 AnimatedSprite* registeredSprite = registeredSprites->at(i);
@@ -35,7 +36,6 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                 onSpriteDeletedCallback(spriteToDelete);
                 spriteToDelete->unlock();
             }
-            onUpdateCallback(elapsed.count());
         }
     }
 }
