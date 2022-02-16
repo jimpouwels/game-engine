@@ -30,9 +30,6 @@ void AsteroidSpawner::onUpdate(float elapsedTime) {
         }
         asteroids->push_back(new Asteroid(gameEngine, x, y, angle));
     }
-    for (const auto& asteroid: *asteroids) {
-        asteroid->onUpdate(elapsedTime);
-    }
 }
 
 void AsteroidSpawner::onFrame(float elapsedTime) {

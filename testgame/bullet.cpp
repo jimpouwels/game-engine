@@ -18,6 +18,7 @@ Bullet::Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle) : ji
 void Bullet::onUpdate(float elapsedTime) {
     jimp::Vector2D deltaVector = jimp::Geo2D::vectorFrom(getRotationAngle(), FORCE, elapsedTime);
     addToPosition(deltaVector);
+    
     AnimatedSprite::onUpdate(elapsedTime);
 }
 
