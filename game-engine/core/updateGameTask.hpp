@@ -10,6 +10,7 @@ class UpdateGameTask {
     
 private:
     std::thread* updateThread = nullptr;
+    std::mutex* processingLock = new std::mutex();
     std::function<void(float)> onUpdateCallback;
     std::function<void(AnimatedSprite*)> onSpriteDeletedCallback;
     std::vector<AnimatedSprite*>* registeredAnimatedSprites = nullptr;

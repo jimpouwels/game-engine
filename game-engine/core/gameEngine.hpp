@@ -48,7 +48,6 @@ public:
     GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate);
     ~GameEngine();
     void start();
-    void draw(Sprite* sprite);
     int getScreenWidth();
     int getScreenHeight();
     bool isAtLeftEdgeOfScreen(AnimatedSprite* animatedSprite);
@@ -61,6 +60,7 @@ public:
     bool isOutsideScreenRight(AnimatedSprite* animatedSprite);
     bool isPositionWithinScreen(Vector2D position);
     void addKeyListener(KeyListener* keyListener);
+    void draw(Sprite* sprite);
     void registerAnimatedSprite(AnimatedSprite* animatedSprite);
     Image* registerImage(Image* image);
     Sound* registerSound(Sound* sound);
