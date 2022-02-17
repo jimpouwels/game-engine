@@ -9,7 +9,7 @@
 const uint16_t Bullet::FORCE = 1200;
 const float Bullet::SCALE = 0.3F;
 
-Bullet::Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle) : jimp::AnimatedSprite(x, y, SCALE, -1) {
+Bullet::Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle) : jimp::AnimatedSprite(x, y, SCALE, 999, -1) {
     addSprite("default", "bullet.png");
     setRotationAngle(angle);
 }

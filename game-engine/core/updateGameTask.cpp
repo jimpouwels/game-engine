@@ -10,7 +10,7 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
     isWorking = true;
     std::chrono::time_point<std::chrono::system_clock> previousUpdateTime;
     while (true) {
-        processingLock->try_lock();
+        processingLock->lock();
         if (isWorking) {
             std::this_thread::sleep_for(std::chrono::milliseconds(2));
             std::chrono::time_point<std::chrono::system_clock> currentTime = std::chrono::system_clock::now();
@@ -34,7 +34,7 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                     }
                 }
                 for (const auto& spriteToDelete: spritesToDelete) {
-                    spriteToDelete->tryLock();
+                    spriteToDelete->lock();
                     onSpriteDeletedCallback(spriteToDelete);
                     spriteToDelete->unlock();
                 }
@@ -47,15 +47,19 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
 }
 
 UpdateGameTask::UpdateGameTask(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedSprite*)> onSpriteDeletedCallback) {
+    this->processingLock = new std::mutex();
     this->onUpdateCallback = onUpdateCallback;
     this->onSpriteDeletedCallback = onSpriteDeletedCallback;
     this->registeredAnimatedSprites = new std::vector<AnimatedSprite*>;
 }
 
 UpdateGameTask::~UpdateGameTask() {
-    isWorking = false;
+    for (const auto& sprite: *registeredAnimatedSprites) {
+        delete sprite;
+    }
     updateThread->join();
     delete updateThread;
+    delete processingLock;
 }
 
 void UpdateGameTask::start() {
@@ -63,7 +67,9 @@ void UpdateGameTask::start() {
 }
 
 void UpdateGameTask::stop() {
+    processingLock->lock();
     isWorking = false;
+    processingLock->unlock();
 }
 
 std::vector<AnimatedSprite*>* UpdateGameTask::getAllSprites() {
@@ -72,25 +78,16 @@ std::vector<AnimatedSprite*>* UpdateGameTask::getAllSprites() {
 
 void UpdateGameTask::registerAnimatedSprite(AnimatedSprite* animatedSprite) {
     registeredAnimatedSprites->push_back(animatedSprite);
+//    std::sort(registeredAnimatedSprites->begin(), registeredAnimatedSprites->end());
+//    std::cout << "=====================" << std::endl;
+//    for (const auto& sprite: *registeredAnimatedSprites) {
+//        std::cout << "zindex: " << sprite->getZIndex() << std::endl;
+//    }
 }
 
 void UpdateGameTask::unregisterAnimatedSprite(AnimatedSprite* animatedSprite) {
     registeredAnimatedSprites->erase(std::remove(registeredAnimatedSprites->begin(), registeredAnimatedSprites->end(), animatedSprite), registeredAnimatedSprites->end());
     delete animatedSprite;
-}
-
-void UpdateGameTask::removeAllSprites() {
-    for (const auto& sprite: *registeredAnimatedSprites) {
-        delete sprite;
-    }
-}
-
-void UpdateGameTask::tryLock() {
-    processingLock->try_lock();
-}
-
-void UpdateGameTask::unlock() {
-    processingLock->unlock();
 }
 
 }

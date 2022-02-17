@@ -10,16 +10,17 @@
 
 namespace jimp {
 
-AnimatedSprite::AnimatedSprite(float x, float y, float scale, float imageSwapIntervalInSeconds) {
+AnimatedSprite::AnimatedSprite(float x, float y, float scale, uint16_t zIndex, float imageSwapIntervalInSeconds) {
     this->position.x = x;
     this->position.y = y;
     this->scale = scale;
+    this->zIndex = zIndex;
     animationMap = new std::map<std::string, Animation*>;
     this->imageSwapIntervalInSeconds = imageSwapIntervalInSeconds;
 }
 
-AnimatedSprite::AnimatedSprite(float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
-    AnimatedSprite(x, y, scale, 0, imageSwapIntervalInSeconds);
+AnimatedSprite::AnimatedSprite(float x, float y, float scale, int rotationAngle, uint16_t zIndex, float imageSwapIntervalInSeconds) {
+    AnimatedSprite(x, y, scale, 0, zIndex, imageSwapIntervalInSeconds);
     this->angle = rotationAngle;
 }
 
@@ -114,6 +115,10 @@ Vector2D& AnimatedSprite::getVelocity() {
     return velocity;
 }
 
+uint16_t AnimatedSprite::getZIndex() {
+    return zIndex;
+}
+
 void AnimatedSprite::setPosition(Vector2D position) {
     this->position = position;
 }
@@ -168,12 +173,12 @@ uint16_t AnimatedSprite::getVelocityAngle() {
     return velocityAngle;
 }
 
-void AnimatedSprite::tryLock() {
-    lock->try_lock();
+void AnimatedSprite::lock() {
+    operationLock->lock();
 }
 
 void AnimatedSprite::unlock() {
-    lock->unlock();
+    operationLock->unlock();
 }
 
 void AnimatedSprite::updateMovement(float elapsedTime) {

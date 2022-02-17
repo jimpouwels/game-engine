@@ -27,10 +27,9 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string 
 }
 
 GameEngine::~GameEngine() {
+    delete updateGameTask;
     delete window;
     delete keyboardHandler;
-    updateGameTask->removeAllSprites();
-    delete updateGameTask;
     spriteCache->erase();
     delete spriteCache;
     for (const auto& [filePath, image]: *imageCache) {
@@ -65,9 +64,7 @@ void GameEngine::start() {
         
         window->setTitle(windowTitle + " FPS: " + std::to_string(measureFps(currentTime)));
     }
-    updateGameTask->tryLock();
     updateGameTask->stop();
-    updateGameTask->unlock();
     window->close();
 }
 
@@ -168,7 +165,7 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     onFrame(elapsedTimeSincePreviousFrame);
     for (const auto& sprite: *updateGameTask->getAllSprites()) {
         if (!sprite->isMarkedForDeletion()) {
-            sprite->tryLock();
+            sprite->lock();
             draw(sprite->getActiveSprite());
             sprite->unlock();
         }
