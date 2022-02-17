@@ -18,7 +18,6 @@ private:
     Vector2D position = { .x = 0, .y = 0 };
     float scale;
     float angle;
-    uint16_t zIndex = 0;
     std::map<std::string, Animation*>* animationMap;
     Animation* activeAnimation = nullptr;
     bool markedForDeletion = false;
@@ -50,15 +49,14 @@ protected:
     virtual void hasCollidedRect(AnimatedSprite* otherSprite, Geo2D::Side side) {};
     
 public:
-    AnimatedSprite( float x, float y, float scale, int rotationAngle, uint16_t zIndexfloat, float imageSwapIntervalInSeconds);
-    AnimatedSprite( float x, float y, float scale, uint16_t zIndex, float imageSwapIntervalInSeconds);
+    AnimatedSprite( float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
+    AnimatedSprite( float x, float y, float scale, float imageSwapIntervalInSeconds);
     ~AnimatedSprite();
     Vector2D& getPosition();
     Vector2D& getVelocity();
     float getScale();
     int getWidth();
     int getHeight();
-    uint16_t getZIndex();
     float getRotationAngle();
     void setRotationAngle(float angle);
     bool isMarkedForDeletion();
@@ -80,19 +78,14 @@ public:
     virtual Vector2D getRotationPoint() {
         return Vector2D { getWidth() / 2.0F, .y = getHeight() / 2.0F };
     }
+    virtual uint16_t getZIndex() {
+        return 0;
+    }
     void addSprite(std::string animationId, std::string filePath);
     void onKeyboardLeft(jimp::KeyState keyState) {};
     void onKeyboardRight(jimp::KeyState keyState) {};
     void onKeyboardUp(jimp::KeyState keyState) {};
     void onKeyboardSpaceBar(jimp::KeyState keyState) {};
-    bool operator< (AnimatedSprite& other) {
-        std::cout << "Lower than" << std::endl;
-        return getZIndex() < other.getZIndex();
-    }
-    bool operator> (AnimatedSprite& other) {
-        std::cout << "greater than" << std::endl;
-        return getZIndex() > other.getZIndex();
-    }
 };
 }
 

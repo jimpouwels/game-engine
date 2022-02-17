@@ -9,7 +9,7 @@
 const uint16_t Bullet::FORCE = 1200;
 const float Bullet::SCALE = 0.3F;
 
-Bullet::Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle) : jimp::AnimatedSprite(x, y, SCALE, 999, -1) {
+Bullet::Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle) : jimp::AnimatedSprite(x, y, SCALE, -1) {
     addSprite("default", "bullet.png");
     setRotationAngle(angle);
 }
@@ -26,4 +26,8 @@ void Bullet::hasCollidedRect(AnimatedSprite *otherSprite, jimp::Geo2D::Side side
     if (asteroid != nullptr) {
         markForDeletion();
     }
+}
+
+uint16_t Bullet::getZIndex() {
+    return 999;
 }

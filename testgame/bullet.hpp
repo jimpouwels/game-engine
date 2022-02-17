@@ -14,6 +14,7 @@ public:
     Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle);
     void onUpdate(float elapsedTime) override;
     void hasCollidedRect(AnimatedSprite *otherSprite, jimp::Geo2D::Side side) override;
+    uint16_t getZIndex() override;
 };
 
 #endif

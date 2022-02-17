@@ -51,6 +51,7 @@ public:
     void hasCollidedRectLeft(jimp::AnimatedSprite* otherSprite) override;
     void hasCollidedRectTop(jimp::AnimatedSprite* otherSprite) override;
     void hasCollidedRectBottom(jimp::AnimatedSprite* otherSprite) override;
+    uint16_t getZIndex() override;
 };
 
 #endif

@@ -16,7 +16,7 @@ const uint8_t Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.15F;
 const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 
-Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jimp::AnimatedSprite(400, 400, SCALE, 1, 0.05F) {
+Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jimp::AnimatedSprite(400, 400, SCALE, 0.05F) {
     this->gameEngine = gameEngine;
     this->eventListener = eventListener;
     this->firingSound = gameEngine->registerSound(new jimp::Sound("laser.ogg"));
@@ -35,6 +35,10 @@ void Ship::onUpdate(float elapsedTime) {
     updateRotation(elapsedTime);
     
     AnimatedSprite::onUpdate(elapsedTime);
+}
+
+uint16_t Ship::getZIndex() {
+    return 1;
 }
 
 void Ship::hasCollidedRect(jimp::AnimatedSprite *otherSprite, jimp::Geo2D::Side side) {

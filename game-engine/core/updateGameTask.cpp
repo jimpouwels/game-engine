@@ -78,11 +78,9 @@ std::vector<AnimatedSprite*>* UpdateGameTask::getAllSprites() {
 
 void UpdateGameTask::registerAnimatedSprite(AnimatedSprite* animatedSprite) {
     registeredAnimatedSprites->push_back(animatedSprite);
-//    std::sort(registeredAnimatedSprites->begin(), registeredAnimatedSprites->end());
-//    std::cout << "=====================" << std::endl;
-//    for (const auto& sprite: *registeredAnimatedSprites) {
-//        std::cout << "zindex: " << sprite->getZIndex() << std::endl;
-//    }
+    std::sort(registeredAnimatedSprites->begin(), registeredAnimatedSprites->end(), [](AnimatedSprite* a, AnimatedSprite* b) {
+         return a->getZIndex() > b->getZIndex();
+    });
 }
 
 void UpdateGameTask::unregisterAnimatedSprite(AnimatedSprite* animatedSprite) {
