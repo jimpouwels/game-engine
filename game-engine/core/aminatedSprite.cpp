@@ -168,14 +168,6 @@ uint16_t AnimatedSprite::getVelocityAngle() {
     return velocityAngle;
 }
 
-void AnimatedSprite::lock() {
-    operationLock->lock();
-}
-
-void AnimatedSprite::unlock() {
-    operationLock->unlock();
-}
-
 void AnimatedSprite::updateMovement(float elapsedTime) {
     if (isAccelerating) {
         velocity = velocity + jimp::Geo2D::vectorFrom(moveForce, velocityAngle, mass, elapsedTime);

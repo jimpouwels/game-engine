@@ -27,7 +27,7 @@ private:
     uint16_t mass = 0;
     uint16_t moveForce = 0;
     Vector2D velocity = Vector2D { .x = 0, .y = 0 };
-    std::mutex* operationLock = new std::mutex();
+    std::mutex* lock = new std::mutex();
     float elapsedTimeSinceLastSwap;
     float imageSwapIntervalInSeconds;
     void updateCurrentSpriteData();
@@ -42,6 +42,8 @@ protected:
     void addToPosition(Vector2D delta);
     void setCurrentAnimation(std::string animationId);
     void accelerate(float angle, uint16_t mass, uint16_t force);
+    virtual void doOnUpdate(float elapsedTime) { };
+    virtual void doOnFrame(float elapsedTime) { };
     virtual void hasCollidedRectLeft(AnimatedSprite* otherSprite) {};
     virtual void hasCollidedRectRight(AnimatedSprite* otherSprite) {};
     virtual void hasCollidedRectTop(AnimatedSprite* otherSprite) {};
@@ -64,16 +66,20 @@ public:
     uint16_t getVelocityAngle();
     Sprite* getActiveSprite();
     std::list<Sprite*> getAllSprites();
-    void lock();
-    void unlock();
     void markForDeletion() {
         markedForDeletion = true;
     }
-    virtual void onFrame(float elapsedTime) {
+    void onFrame(float elapsedTime) {
+        lock->lock();
+        doOnFrame(elapsedTime);
+        lock->unlock();
     };
-    virtual void onUpdate(float elapsedTime) {
+    void onUpdate(float elapsedTime) {
+        lock->lock();
+        doOnUpdate(elapsedTime);
         updateMovement(elapsedTime);
         this->updateAnimation(elapsedTime);
+        lock->unlock();
     }
     virtual Vector2D getRotationPoint() {
         return Vector2D { getWidth() / 2.0F, .y = getHeight() / 2.0F };

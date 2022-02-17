@@ -26,15 +26,13 @@ Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jim
     addSprite("throttling", "spaceship-thrust2.png");
 }
 
-void Ship::onUpdate(float elapsedTime) {
+void Ship::doOnUpdate(float elapsedTime) {
     if (isThrothling) {
         accelerate(getRotationAngle(), MASS, THRUST_FORCE);
     }
     updateFiring(elapsedTime);
     updateMovement(elapsedTime);
     updateRotation(elapsedTime);
-    
-    AnimatedSprite::onUpdate(elapsedTime);
 }
 
 uint16_t Ship::getZIndex() {

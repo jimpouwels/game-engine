@@ -14,11 +14,9 @@ Bullet::Bullet(jimp::GameEngine* gameEngine, float x, float y, float angle) : ji
     setRotationAngle(angle);
 }
 
-void Bullet::onUpdate(float elapsedTime) {
+void Bullet::doOnUpdate(float elapsedTime) {
     jimp::Vector2D deltaVector = jimp::Geo2D::vectorFrom(getRotationAngle(), FORCE, elapsedTime);
     addToPosition(deltaVector);
-    
-    AnimatedSprite::onUpdate(elapsedTime);
 }
 
 void Bullet::hasCollidedRect(AnimatedSprite *otherSprite, jimp::Geo2D::Side side) {

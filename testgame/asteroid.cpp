@@ -24,16 +24,10 @@ Asteroid::Asteroid(jimp::GameEngine* gameEngine, float x, float y, float directi
 Asteroid::~Asteroid() {
 }
 
-void Asteroid::onUpdate(float elapsedTime) {
+void Asteroid::doOnUpdate(float elapsedTime) {
     updateDirection(elapsedTime);
     updateRotation(elapsedTime);
     animateHit(elapsedTime);
-    
-    AnimatedSprite::onUpdate(elapsedTime);
-}
-
-void Asteroid::onFrame(float elapsedTime) {
-    AnimatedSprite::onFrame(elapsedTime);
 }
 
 void Asteroid::hasCollidedRect(jimp::AnimatedSprite *otherSprite, jimp::Geo2D::Side side) {

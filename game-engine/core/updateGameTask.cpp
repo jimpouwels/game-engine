@@ -34,9 +34,7 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                     }
                 }
                 for (const auto& spriteToDelete: spritesToDelete) {
-                    spriteToDelete->lock();
                     onSpriteDeletedCallback(spriteToDelete);
-                    spriteToDelete->unlock();
                 }
             }
         } else {

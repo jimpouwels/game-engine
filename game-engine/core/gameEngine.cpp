@@ -165,9 +165,8 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     onFrame(elapsedTimeSincePreviousFrame);
     for (const auto& sprite: *updateGameTask->getAllSprites()) {
         if (!sprite->isMarkedForDeletion()) {
-            sprite->lock();
+            sprite->onFrame(elapsedTimeSincePreviousFrame);
             draw(sprite->getActiveSprite());
-            sprite->unlock();
         }
     }
     window->display();

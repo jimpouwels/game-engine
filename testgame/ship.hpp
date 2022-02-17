@@ -40,7 +40,7 @@ private:
 
 public:
     Ship(jimp::GameEngine* gameEngine, ShipEventListener* shipEventListener);
-    void onUpdate(float elapsedTime) override;
+    void doOnUpdate(float elapsedTime) override;
     void onKeyboardLeft(jimp::KeyState keyState) override;
     void onKeyboardRight(jimp::KeyState keyState) override;
     void onKeyboardUp(jimp::KeyState keyState) override;
