@@ -66,24 +66,10 @@ public:
     uint16_t getVelocityAngle();
     Sprite* getActiveSprite();
     std::list<Sprite*> getAllSprites();
-    void markForDeletion() {
-        markedForDeletion = true;
-    }
-    void onFrame(float elapsedTime) {
-        lock->lock();
-        doOnFrame(elapsedTime);
-        lock->unlock();
-    };
-    void onUpdate(float elapsedTime) {
-        lock->lock();
-        doOnUpdate(elapsedTime);
-        updateMovement(elapsedTime);
-        this->updateAnimation(elapsedTime);
-        lock->unlock();
-    }
-    virtual Vector2D getRotationPoint() {
-        return Vector2D { getWidth() / 2.0F, .y = getHeight() / 2.0F };
-    }
+    void markForDeletion();
+    void onFrame(float elapsedTime);
+    void onUpdate(float elapsedTime);
+    virtual Vector2D getRotationPoint();
     virtual uint16_t getZIndex() {
         return 0;
     }

@@ -30,6 +30,28 @@ AnimatedSprite::~AnimatedSprite() {
     delete animationMap;
 }
 
+void AnimatedSprite::onFrame(float elapsedTime) {
+    lock->lock();
+    doOnFrame(elapsedTime);
+    lock->unlock();
+}
+
+void AnimatedSprite::onUpdate(float elapsedTime) {
+    lock->lock();
+    doOnUpdate(elapsedTime);
+    updateMovement(elapsedTime);
+    this->updateAnimation(elapsedTime);
+    lock->unlock();
+}
+
+void AnimatedSprite::markForDeletion() {
+    markedForDeletion = true;
+}
+
+Vector2D AnimatedSprite::getRotationPoint() {
+    return Vector2D { getWidth() / 2.0F, .y = getHeight() / 2.0F };
+}
+
 Sprite* AnimatedSprite::getActiveSprite() {
     return activeAnimation->getActiveSprite();
 }
