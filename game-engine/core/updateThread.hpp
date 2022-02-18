@@ -1,12 +1,12 @@
-#ifndef updateGameTask_hpp
-#define updateGameTask_hpp
+#ifndef updateThread_hpp
+#define updateThread_hpp
 
 #include <thread>
 #include "animatedSprite.hpp"
 
 namespace jimp {
 
-class UpdateGameTask {
+class UpdateThread {
     
 private:
     std::thread* updateThread = nullptr;
@@ -16,8 +16,8 @@ private:
     std::vector<AnimatedSprite*>* registeredAnimatedSprites = nullptr;
     
 public:
-    UpdateGameTask(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedSprite*)> onSpriteDeletedCallback);
-    ~UpdateGameTask();
+    UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedSprite*)> onSpriteDeletedCallback);
+    ~UpdateThread();
     void start();
     void stop();
     void registerAnimatedSprite(AnimatedSprite* animatedSprite);

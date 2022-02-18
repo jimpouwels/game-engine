@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		230D483E27B9177A001F6494 /* updateGameTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 230D483C27B9177A001F6494 /* updateGameTask.cpp */; };
+		230D483E27B9177A001F6494 /* updateThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 230D483C27B9177A001F6494 /* updateThread.cpp */; };
 		235A526727AAB2A00008A8A0 /* asteroidSpawner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235A526527AAB29F0008A8A0 /* asteroidSpawner.cpp */; };
 		235A526927AD25440008A8A0 /* asteroid-hit.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235A526827AD253C0008A8A0 /* asteroid-hit.png */; };
 		235A526B27AD49B50008A8A0 /* background.jpeg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235A526A27AD48D60008A8A0 /* background.jpeg */; };
@@ -73,8 +73,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		230D483C27B9177A001F6494 /* updateGameTask.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = updateGameTask.cpp; sourceTree = "<group>"; };
-		230D483D27B9177A001F6494 /* updateGameTask.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = updateGameTask.hpp; sourceTree = "<group>"; };
+		230D483C27B9177A001F6494 /* updateThread.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = updateThread.cpp; sourceTree = "<group>"; };
+		230D483D27B9177A001F6494 /* updateThread.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = updateThread.hpp; sourceTree = "<group>"; };
 		2350E82D279976840017F7C3 /* shipEventListener.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = shipEventListener.hpp; sourceTree = "<group>"; };
 		235A526227A959110008A8A0 /* geo2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = geo2D.hpp; sourceTree = "<group>"; };
 		235A526327A959790008A8A0 /* vector2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = vector2D.hpp; sourceTree = "<group>"; };
@@ -170,8 +170,8 @@
 				23A933AD27864EA700769F69 /* sprite.cpp */,
 				23D5C7E827847B6200C6C916 /* sprite.hpp */,
 				235A527827B00C760008A8A0 /* spriteCache.hpp */,
-				230D483C27B9177A001F6494 /* updateGameTask.cpp */,
-				230D483D27B9177A001F6494 /* updateGameTask.hpp */,
+				230D483C27B9177A001F6494 /* updateThread.cpp */,
+				230D483D27B9177A001F6494 /* updateThread.hpp */,
 				235A526327A959790008A8A0 /* vector2D.hpp */,
 			);
 			path = core;
@@ -329,7 +329,7 @@
 				236D5A2727B565A7005183C5 /* sound.cpp in Sources */,
 				23A933B527864EA800769F69 /* gameEngine.cpp in Sources */,
 				23D5C7E32783432F00C6C916 /* game.cpp in Sources */,
-				230D483E27B9177A001F6494 /* updateGameTask.cpp in Sources */,
+				230D483E27B9177A001F6494 /* updateThread.cpp in Sources */,
 				23A933B327864EA800769F69 /* aminatedSprite.cpp in Sources */,
 				23A933BB2788407F00769F69 /* keyboardHandler.cpp in Sources */,
 				23A933B227864EA800769F69 /* sprite.cpp in Sources */,

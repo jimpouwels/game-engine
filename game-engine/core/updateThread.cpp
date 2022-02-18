@@ -1,4 +1,4 @@
-#include "updateGameTask.hpp"
+#include "updateThread.hpp"
 #include <iostream>
 #include <chrono>
 
@@ -44,14 +44,14 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
     }
 }
 
-UpdateGameTask::UpdateGameTask(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedSprite*)> onSpriteDeletedCallback) {
+UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedSprite*)> onSpriteDeletedCallback) {
     this->processingLock = new std::mutex();
     this->onUpdateCallback = onUpdateCallback;
     this->onSpriteDeletedCallback = onSpriteDeletedCallback;
     this->registeredAnimatedSprites = new std::vector<AnimatedSprite*>;
 }
 
-UpdateGameTask::~UpdateGameTask() {
+UpdateThread::~UpdateThread() {
     for (const auto& sprite: *registeredAnimatedSprites) {
         delete sprite;
     }
@@ -60,28 +60,28 @@ UpdateGameTask::~UpdateGameTask() {
     delete processingLock;
 }
 
-void UpdateGameTask::start() {
+void UpdateThread::start() {
     this->updateThread = new std::thread(doLoop, onUpdateCallback, onSpriteDeletedCallback, registeredAnimatedSprites, processingLock);
 }
 
-void UpdateGameTask::stop() {
+void UpdateThread::stop() {
     processingLock->lock();
     isWorking = false;
     processingLock->unlock();
 }
 
-std::vector<AnimatedSprite*>* UpdateGameTask::getAllSprites() {
+std::vector<AnimatedSprite*>* UpdateThread::getAllSprites() {
     return registeredAnimatedSprites;
 }
 
-void UpdateGameTask::registerAnimatedSprite(AnimatedSprite* animatedSprite) {
+void UpdateThread::registerAnimatedSprite(AnimatedSprite* animatedSprite) {
     registeredAnimatedSprites->push_back(animatedSprite);
     std::sort(registeredAnimatedSprites->begin(), registeredAnimatedSprites->end(), [](AnimatedSprite* a, AnimatedSprite* b) {
          return a->getZIndex() > b->getZIndex();
     });
 }
 
-void UpdateGameTask::unregisterAnimatedSprite(AnimatedSprite* animatedSprite) {
+void UpdateThread::unregisterAnimatedSprite(AnimatedSprite* animatedSprite) {
     registeredAnimatedSprites->erase(std::remove(registeredAnimatedSprites->begin(), registeredAnimatedSprites->end(), animatedSprite), registeredAnimatedSprites->end());
     delete animatedSprite;
 }

@@ -9,7 +9,7 @@
 #include "spriteCache.hpp"
 #include "keyListener.hpp"
 #include "keyboardHandler.hpp"
-#include "updateGameTask.hpp"
+#include "updateThread.hpp"
 
 namespace jimp {
 
@@ -24,7 +24,7 @@ private:
     bool isWindowClosed = false;
     std::map<std::string, Image*>* imageCache = nullptr;
     std::map<std::string, Sound*>* soundCache = nullptr;
-    UpdateGameTask* updateGameTask = nullptr;
+    UpdateThread* updateThread = nullptr;
     SpriteCache* spriteCache = nullptr;
     float timePerFrame;
     jimp::KeyboardHandler* keyboardHandler = nullptr;

@@ -17,7 +17,7 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string 
     this->windowTitle = windowTitle;
     auto fp1 = std::bind(&GameEngine::triggerUpdate, this, std::placeholders::_1);
     auto fp2 = std::bind(&GameEngine::handleSpriteDeleted, this, std::placeholders::_1);
-    this->updateGameTask = new UpdateGameTask(fp1, fp2);
+    this->updateThread = new UpdateThread(fp1, fp2);
     this->spriteCache = new SpriteCache();
     this->imageCache = new std::map<std::string, Image*>;
     this->soundCache = new std::map<std::string, Sound*>;
@@ -27,7 +27,7 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string 
 }
 
 GameEngine::~GameEngine() {
-    delete updateGameTask;
+    delete updateThread;
     delete window;
     delete keyboardHandler;
     spriteCache->erase();
@@ -43,7 +43,7 @@ GameEngine::~GameEngine() {
 }
 
 void GameEngine::start() {
-    updateGameTask->start();
+    updateThread->start();
     while (window->isOpen()) {
         handleEvents();
         
@@ -64,7 +64,7 @@ void GameEngine::start() {
         
         window->setTitle(windowTitle + " FPS: " + std::to_string(measureFps(currentTime)));
     }
-    updateGameTask->stop();
+    updateThread->stop();
     window->close();
 }
 
@@ -91,7 +91,7 @@ void GameEngine::draw(jimp::Sprite* sprite) {
 
 void GameEngine::registerAnimatedSprite(AnimatedSprite *animatedSprite) {
     addKeyListener(animatedSprite);
-    updateGameTask->registerAnimatedSprite(animatedSprite);
+    updateThread->registerAnimatedSprite(animatedSprite);
 }
 
 Image* GameEngine::registerImage(Image* image) {
@@ -163,7 +163,7 @@ bool GameEngine::isPositionWithinScreen(Vector2D position) {
 void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     window->clear();
     onFrame(elapsedTimeSincePreviousFrame);
-    for (const auto& sprite: *updateGameTask->getAllSprites()) {
+    for (const auto& sprite: *updateThread->getAllSprites()) {
         if (!sprite->isMarkedForDeletion()) {
             sprite->onFrame(elapsedTimeSincePreviousFrame);
             draw(sprite->getActiveSprite());
@@ -191,7 +191,7 @@ void GameEngine::handleSpriteDeleted(AnimatedSprite* animatedSprite) {
     }
     onSpriteDeleted(animatedSprite);
     keyboardHandler->removeKeyListener(animatedSprite);
-    updateGameTask->unregisterAnimatedSprite(animatedSprite);
+    updateThread->unregisterAnimatedSprite(animatedSprite);
 }
 
 void GameEngine::handleSounds(float elapsedTime) {
