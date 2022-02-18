@@ -154,14 +154,14 @@
 		235A527A27B0FC900008A8A0 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				23A4D56627BFA939006F4220 /* input */,
-				23A4D56527BFA928006F4220 /* audio */,
-				23A4D56427BFA913006F4220 /* graphics */,
 				23A933B127864EA700769F69 /* gameEngine.cpp */,
+				230D483C27B9177A001F6494 /* updateThread.cpp */,
 				23D5C7C427832B5600C6C916 /* gameEngine.hpp */,
 				235A527827B00C760008A8A0 /* spriteCache.hpp */,
-				230D483C27B9177A001F6494 /* updateThread.cpp */,
 				230D483D27B9177A001F6494 /* updateThread.hpp */,
+				23A4D56527BFA928006F4220 /* audio */,
+				23A4D56427BFA913006F4220 /* graphics */,
+				23A4D56627BFA939006F4220 /* input */,
 			);
 			path = core;
 			sourceTree = "<group>";
