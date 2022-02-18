@@ -154,27 +154,51 @@
 		235A527A27B0FC900008A8A0 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				23A4D56627BFA939006F4220 /* input */,
+				23A4D56527BFA928006F4220 /* audio */,
+				23A4D56427BFA913006F4220 /* graphics */,
+				23A933B127864EA700769F69 /* gameEngine.cpp */,
+				23D5C7C427832B5600C6C916 /* gameEngine.hpp */,
+				235A527827B00C760008A8A0 /* spriteCache.hpp */,
+				230D483C27B9177A001F6494 /* updateThread.cpp */,
+				230D483D27B9177A001F6494 /* updateThread.hpp */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		23A4D56427BFA913006F4220 /* graphics */ = {
+			isa = PBXGroup;
+			children = (
 				23A933AE27864EA700769F69 /* aminatedSprite.cpp */,
 				23A933AC27864EA700769F69 /* animatedSprite.hpp */,
 				23A933F22790187300769F69 /* animation.cpp */,
 				23A933F32790187300769F69 /* animation.hpp */,
-				23A933B127864EA700769F69 /* gameEngine.cpp */,
-				23D5C7C427832B5600C6C916 /* gameEngine.hpp */,
 				235A526D27AFD7090008A8A0 /* image.cpp */,
 				235A526E27AFD7090008A8A0 /* image.hpp */,
+				23A933AD27864EA700769F69 /* sprite.cpp */,
+				23D5C7E827847B6200C6C916 /* sprite.hpp */,
+				235A526327A959790008A8A0 /* vector2D.hpp */,
+			);
+			path = graphics;
+			sourceTree = "<group>";
+		};
+		23A4D56527BFA928006F4220 /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				236D5A2527B565A7005183C5 /* sound.cpp */,
+				236D5A2627B565A7005183C5 /* sound.hpp */,
+			);
+			path = audio;
+			sourceTree = "<group>";
+		};
+		23A4D56627BFA939006F4220 /* input */ = {
+			isa = PBXGroup;
+			children = (
 				23A933B92788407F00769F69 /* keyboardHandler.cpp */,
 				23A933BA2788407F00769F69 /* keyboardHandler.hpp */,
 				23A933B72787617D00769F69 /* keyListener.hpp */,
-				236D5A2527B565A7005183C5 /* sound.cpp */,
-				236D5A2627B565A7005183C5 /* sound.hpp */,
-				23A933AD27864EA700769F69 /* sprite.cpp */,
-				23D5C7E827847B6200C6C916 /* sprite.hpp */,
-				235A527827B00C760008A8A0 /* spriteCache.hpp */,
-				230D483C27B9177A001F6494 /* updateThread.cpp */,
-				230D483D27B9177A001F6494 /* updateThread.hpp */,
-				235A526327A959790008A8A0 /* vector2D.hpp */,
 			);
-			path = core;
+			path = input;
 			sourceTree = "<group>";
 		};
 		23D5C7B827832B5600C6C916 = {
