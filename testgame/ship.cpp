@@ -89,7 +89,7 @@ void Ship::onKeyboardRight(jimp::KeyState keyState) {
 void Ship::onKeyboardUp(jimp::KeyState keyState) {
     isThrothling = keyState == jimp::KeyState::PRESSED;
     if (isThrothling) {
-        thrustSound->loop(180);
+        thrustSound->loop(32);
         setCurrentAnimation("throttling");
     } else {
         thrustSound->fadeOut(1);
