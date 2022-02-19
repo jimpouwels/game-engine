@@ -16,7 +16,7 @@ const uint8_t Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.15F;
 const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 
-Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jimp::AnimatedSprite(400, 400, SCALE, 0.05F) {
+Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jimp::AnimatedSprite(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0.05F) {
     this->gameEngine = gameEngine;
     this->eventListener = eventListener;
     this->firingSound = gameEngine->registerSound(new jimp::Sound("laser.ogg"));
@@ -111,7 +111,9 @@ void Ship::updateFiring(float elapsedTime) {
     if (elapsedTimeSinceLastShot >= timeBetweenShots && (hasFired || isFiring)) {
         hasFired = false;
         jimp::Vector2D rotationPoint = getRotationPoint();
-        Bullet* bullet = new Bullet(gameEngine, getPosition().x + rotationPoint.x - 5, getPosition().y + rotationPoint.y - 10, getRotationAngle());
+        rotationPoint.x += getPosition().x - 5;
+        rotationPoint.y += getPosition().y - 10;
+        Bullet* bullet = new Bullet(gameEngine, rotationPoint, getRotationAngle());
         gameEngine->registerAnimatedSprite(bullet);
         firingSound->playTillEnd(30);
         eventListener->onWeaponFired(bullet);

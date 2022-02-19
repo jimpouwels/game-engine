@@ -51,8 +51,8 @@ protected:
     virtual void hasCollidedRect(AnimatedSprite* otherSprite, Geo2D::Side side) {};
     
 public:
-    AnimatedSprite( float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
-    AnimatedSprite( float x, float y, float scale, float imageSwapIntervalInSeconds);
+    AnimatedSprite(Vector2D position, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
+    AnimatedSprite(Vector2D position, float scale, float imageSwapIntervalInSeconds);
     ~AnimatedSprite();
     Vector2D& getPosition();
     Vector2D& getVelocity();

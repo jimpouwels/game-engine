@@ -10,7 +10,7 @@
 const uint16_t Asteroid::FORCE = 60000;
 const float Asteroid::HIT_ANIMATION_DURATION_IN_SECONDS = 0.05F;
 
-Asteroid::Asteroid(jimp::GameEngine* gameEngine, float x, float y, float directionAngle) : jimp::AnimatedSprite(x, y, 0.1F, -1) {
+Asteroid::Asteroid(jimp::GameEngine* gameEngine, jimp::Vector2D position, float directionAngle) : jimp::AnimatedSprite(position, 0.1F, -1) {
     this->gameEngine = gameEngine;
     addSprite("default", "asteroid.png");
     addSprite("hit", "asteroid-hit.png");

@@ -10,16 +10,15 @@
 
 namespace jimp {
 
-AnimatedSprite::AnimatedSprite(float x, float y, float scale, float imageSwapIntervalInSeconds) {
-    this->position.x = x;
-    this->position.y = y;
+AnimatedSprite::AnimatedSprite(Vector2D position, float scale, float imageSwapIntervalInSeconds) {
+    this->position = position;
     this->scale = scale;
     animationMap = new std::map<std::string, Animation*>;
     this->imageSwapIntervalInSeconds = imageSwapIntervalInSeconds;
 }
 
-AnimatedSprite::AnimatedSprite(float x, float y, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
-    AnimatedSprite(x, y, scale, 0, imageSwapIntervalInSeconds);
+AnimatedSprite::AnimatedSprite(Vector2D position, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
+    AnimatedSprite(position, scale, 0, imageSwapIntervalInSeconds);
     this->angle = rotationAngle;
 }
 

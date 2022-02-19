@@ -26,7 +26,7 @@ void AsteroidSpawner::onUpdate(float elapsedTime) {
             x = gameEngine->getScreenWidth() + 100;
             angle = jimp::MathUtils::randomNumberBetween(225, 315);
         }
-        Asteroid *newAsteroid = new Asteroid(gameEngine, x, y, angle);
+        Asteroid *newAsteroid = new Asteroid(gameEngine, jimp::Vector2D { .x = x, .y = y }, angle);
         gameEngine->registerAnimatedSprite(newAsteroid);
     }
 }

@@ -28,7 +28,7 @@ private:
     void animateHit(float elapsedTime);
     
 public:
-    Asteroid(jimp::GameEngine* gameEngine, float x, float y, float directionAngle);
+    Asteroid(jimp::GameEngine* gameEngine, jimp::Vector2D position, float directionAngle);
     ~Asteroid();
     void doOnUpdate(float elapsedTime) override;
     void hasCollidedRectLeft(jimp::AnimatedSprite* otherSprite) override;
