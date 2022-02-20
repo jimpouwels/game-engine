@@ -5,7 +5,6 @@
 #include <list>
 
 #include "animatedSprite.hpp"
-#include "shipEventListener.hpp"
 #include "direction.hpp"
 #include "vector2D.hpp"
 #include "sound.hpp"
@@ -29,7 +28,6 @@ private:
     bool isRotatingRight = false;
     int speedInPixelsPerSecond;
     float elapsedTimeSinceLastShot = 0;
-    ShipEventListener* eventListener = nullptr;
     jimp::Sound* firingSound = nullptr;
     jimp::Sound* thrustSound = nullptr;
     bool isThrustSoundFadingOut = false;
@@ -39,7 +37,7 @@ private:
     void setMoving(jimp::KeyState keyState);
 
 public:
-    Ship(jimp::GameEngine* gameEngine, ShipEventListener* shipEventListener);
+    Ship(jimp::GameEngine* gameEngine);
     void doOnUpdate(float elapsedTime) override;
     void onKeyboardLeft(jimp::KeyState keyState) override;
     void onKeyboardRight(jimp::KeyState keyState) override;

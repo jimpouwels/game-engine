@@ -10,13 +10,18 @@ const uint16_t Bullet::FORCE = 1200;
 const float Bullet::SCALE = 0.3F;
 
 Bullet::Bullet(jimp::GameEngine* gameEngine, jimp::Vector2D position, float angle) : jimp::AnimatedSprite(position, SCALE, -1) {
+    this->gameEngine = gameEngine;
     addSprite("default", "bullet.png");
     setRotationAngle(angle);
 }
 
 void Bullet::doOnUpdate(float elapsedTime) {
-    jimp::Vector2D deltaVector = jimp::Geo2D::vectorFrom(getRotationAngle(), FORCE, elapsedTime);
-    addToPosition(deltaVector);
+    if (!gameEngine->isPositionWithinScreen(getPosition())) {
+        markForDeletion();
+    } else {
+        jimp::Vector2D deltaVector = jimp::Geo2D::vectorFrom(getRotationAngle(), FORCE, elapsedTime);
+        addToPosition(deltaVector);
+    }
 }
 
 void Bullet::hasCollidedRect(AnimatedSprite *otherSprite, jimp::Geo2D::Side side) {

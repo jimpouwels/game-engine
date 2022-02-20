@@ -1,6 +1,5 @@
 #include <math.h>
 #include "ship.hpp"
-#include "shipEventListener.hpp"
 #include "bullet.hpp"
 #include "direction.hpp"
 #include "geo2D.hpp"
@@ -16,9 +15,8 @@ const uint8_t Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.15F;
 const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 
-Ship::Ship(jimp::GameEngine* gameEngine, ShipEventListener* eventListener) : jimp::AnimatedSprite(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0.05F) {
+Ship::Ship(jimp::GameEngine* gameEngine) : jimp::AnimatedSprite(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0.05F) {
     this->gameEngine = gameEngine;
-    this->eventListener = eventListener;
     this->firingSound = gameEngine->registerSound(new jimp::Sound("laser.ogg"));
     this->thrustSound = gameEngine->registerSound(new jimp::Sound("thrust.ogg"));
     addSprite("default", "spaceship.png");
@@ -116,7 +114,6 @@ void Ship::updateFiring(float elapsedTime) {
         Bullet* bullet = new Bullet(gameEngine, rotationPoint, getRotationAngle());
         gameEngine->registerAnimatedSprite(bullet);
         firingSound->playTillEnd(30);
-        eventListener->onWeaponFired(bullet);
         elapsedTimeSinceLastShot = 0;
     }
 }

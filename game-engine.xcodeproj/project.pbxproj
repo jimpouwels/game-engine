@@ -26,7 +26,6 @@
 		23A933BE2788B4EC00769F69 /* ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933BC2788B4EC00769F69 /* ship.cpp */; };
 		23A933F42790187300769F69 /* animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933F22790187300769F69 /* animation.cpp */; };
 		23B177A127A3E3160094B178 /* ship.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933BD2788B4EC00769F69 /* ship.hpp */; };
-		23B177A227A3E3160094B178 /* shipEventListener.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 2350E82D279976840017F7C3 /* shipEventListener.hpp */; };
 		23B177A327A3E3160094B178 /* bullet.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23E5E2F4279A979100B62583 /* bullet.hpp */; };
 		23B177A427A3E3160094B178 /* direction.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23E5E2F8279ABCF900B62583 /* direction.hpp */; };
 		23B177A527A3E3160094B178 /* asteroid.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23E5E2FF27A302DD00B62583 /* asteroid.hpp */; };
@@ -75,7 +74,6 @@
 /* Begin PBXFileReference section */
 		230D483C27B9177A001F6494 /* updateThread.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = updateThread.cpp; sourceTree = "<group>"; };
 		230D483D27B9177A001F6494 /* updateThread.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = updateThread.hpp; sourceTree = "<group>"; };
-		2350E82D279976840017F7C3 /* shipEventListener.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = shipEventListener.hpp; sourceTree = "<group>"; };
 		235A526227A959110008A8A0 /* geo2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = geo2D.hpp; sourceTree = "<group>"; };
 		235A526327A959790008A8A0 /* vector2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = vector2D.hpp; sourceTree = "<group>"; };
 		235A526427AA81180008A8A0 /* timing.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = timing.hpp; sourceTree = "<group>"; };
@@ -154,14 +152,14 @@
 		235A527A27B0FC900008A8A0 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				23A933B127864EA700769F69 /* gameEngine.cpp */,
-				230D483C27B9177A001F6494 /* updateThread.cpp */,
-				23D5C7C427832B5600C6C916 /* gameEngine.hpp */,
-				235A527827B00C760008A8A0 /* spriteCache.hpp */,
-				230D483D27B9177A001F6494 /* updateThread.hpp */,
 				23A4D56527BFA928006F4220 /* audio */,
+				23A933B127864EA700769F69 /* gameEngine.cpp */,
+				23D5C7C427832B5600C6C916 /* gameEngine.hpp */,
 				23A4D56427BFA913006F4220 /* graphics */,
 				23A4D56627BFA939006F4220 /* input */,
+				235A527827B00C760008A8A0 /* spriteCache.hpp */,
+				230D483C27B9177A001F6494 /* updateThread.cpp */,
+				230D483D27B9177A001F6494 /* updateThread.hpp */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -272,7 +270,6 @@
 				23D5C7E22783432F00C6C916 /* game.cpp */,
 				23A933BC2788B4EC00769F69 /* ship.cpp */,
 				23A933BD2788B4EC00769F69 /* ship.hpp */,
-				2350E82D279976840017F7C3 /* shipEventListener.hpp */,
 			);
 			path = testgame;
 			sourceTree = "<group>";
@@ -336,7 +333,6 @@
 			files = (
 				235A526F27AFD7090008A8A0 /* image.cpp in Sources */,
 				23B177A127A3E3160094B178 /* ship.hpp in Sources */,
-				23B177A227A3E3160094B178 /* shipEventListener.hpp in Sources */,
 				23B177A327A3E3160094B178 /* bullet.hpp in Sources */,
 				23B177A427A3E3160094B178 /* direction.hpp in Sources */,
 				23B177A527A3E3160094B178 /* asteroid.hpp in Sources */,
