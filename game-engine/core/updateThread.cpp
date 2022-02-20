@@ -55,6 +55,7 @@ UpdateThread::~UpdateThread() {
     for (const auto& sprite: *registeredAnimatedSprites) {
         delete sprite;
     }
+    delete registeredAnimatedSprites;
     updateThread->join();
     delete updateThread;
     delete processingLock;
