@@ -64,7 +64,6 @@ void GameEngine::start() {
         
         window->setTitle(windowTitle + " FPS: " + std::to_string(measureFps(currentTime)));
     }
-    updateThread->stop();
     window->close();
 }
 

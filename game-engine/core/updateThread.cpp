@@ -52,6 +52,7 @@ UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::fun
 }
 
 UpdateThread::~UpdateThread() {
+    stop();
     for (const auto& sprite: *registeredAnimatedSprites) {
         delete sprite;
     }

@@ -14,12 +14,12 @@ private:
     std::function<void(float)> onUpdateCallback;
     std::function<void(AnimatedSprite*)> onSpriteDeletedCallback;
     std::vector<AnimatedSprite*>* registeredAnimatedSprites = nullptr;
+    void stop();
     
 public:
     UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedSprite*)> onSpriteDeletedCallback);
     ~UpdateThread();
     void start();
-    void stop();
     void registerAnimatedSprite(AnimatedSprite* animatedSprite);
     void unregisterAnimatedSprite(AnimatedSprite* animatedSprite);
     std::vector<AnimatedSprite*>* getAllSprites();
