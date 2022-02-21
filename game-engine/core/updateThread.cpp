@@ -95,6 +95,17 @@ void UpdateThread::registerAnimatedSprite(AnimatedSprite* animatedSprite) {
 }
 
 void UpdateThread::onUpdate(float elapsedTime) {
+    this->makeNewSpritesPartOfUpdateLoopWhenInitialized();
+    this->onUpdateCallback(elapsedTime);
+}
+
+void UpdateThread::onSpriteDeleted(AnimatedSprite* animatedSprite) {
+    onSpriteDeletedCallback(animatedSprite);
+    registeredAnimatedSprites->erase(std::remove(registeredAnimatedSprites->begin(), registeredAnimatedSprites->end(), animatedSprite), registeredAnimatedSprites->end());
+    delete animatedSprite;
+}
+
+void UpdateThread::makeNewSpritesPartOfUpdateLoopWhenInitialized() {
     if (addedAnimatedSprites->size() > 0) {
         std::list<AnimatedSprite*> completedSprites = std::list<AnimatedSprite*>();
         for (const auto& addedSprite: *addedAnimatedSprites) {
@@ -108,17 +119,10 @@ void UpdateThread::onUpdate(float elapsedTime) {
                 addedAnimatedSprites->remove(completedSprite);
             }
             std::sort(registeredAnimatedSprites->begin(), registeredAnimatedSprites->end(), [](AnimatedSprite* a, AnimatedSprite* b) {
-                 return a->getZIndex() > b->getZIndex();
+                return a->getZIndex() > b->getZIndex();
             });
         }
     }
-    this->onUpdateCallback(elapsedTime);
-}
-
-void UpdateThread::onSpriteDeleted(AnimatedSprite* animatedSprite) {
-    onSpriteDeletedCallback(animatedSprite);
-    registeredAnimatedSprites->erase(std::remove(registeredAnimatedSprites->begin(), registeredAnimatedSprites->end(), animatedSprite), registeredAnimatedSprites->end());
-    delete animatedSprite;
 }
 
 }
