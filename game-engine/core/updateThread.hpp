@@ -15,7 +15,9 @@ private:
     std::function<void(float)> onUpdateCallback;
     std::function<void(AnimatedSprite*)> onSpriteDeletedCallback;
     std::vector<AnimatedSprite*>* registeredAnimatedSprites = nullptr;
+    std::list<AnimatedSprite*>* addedAnimatedSprites = nullptr;
     void stop();
+    void onUpdate(float elapsedTime);
     void onSpriteDeleted(AnimatedSprite* animatedSprite);
     
 public:

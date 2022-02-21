@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-const uint16_t Asteroid::FORCE = 60000;
+const uint16_t Asteroid::FORCE = 10000;
 const float Asteroid::HIT_ANIMATION_DURATION_IN_SECONDS = 0.05F;
 
 Asteroid::Asteroid(jimp::Vector2D position, float directionAngle) : jimp::AnimatedSprite(position, 0.1F, -1) {

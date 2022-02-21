@@ -8,7 +8,7 @@
 #include "asteroid.hpp"
 
 const uint16_t Ship::SPEED_IN_PIXELS_PER_SECOND = 200;
-const uint32_t Ship::THRUST_FORCE = 24000;
+const uint32_t Ship::THRUST_FORCE = 35000;
 const uint16_t Ship::MASS = 200;
 const uint8_t Ship::ROTATION_DEGREES_PER_SECOND = 140;
 const uint8_t Ship::SHOTS_PER_SECOND = 10;
