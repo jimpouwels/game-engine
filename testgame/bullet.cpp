@@ -13,6 +13,7 @@ Bullet::Bullet(jimp::Vector2D position, float angle) : jimp::AnimatedSprite(posi
     addSprite("default", "bullet.png");
     setRotationAngle(angle);
     setDeleteOnLeaveScreen(true);
+    markAsInitialized();
 }
 
 void Bullet::doOnUpdate(float elapsedTime) {

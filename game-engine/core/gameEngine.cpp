@@ -73,9 +73,6 @@ void GameEngine::start() {
 }
 
 void GameEngine::draw(jimp::Sprite* sprite) {
-    if (sprite == nullptr) {
-        return;
-    }
     SpriteCache::CachedSprite* cachedSprite = nullptr;
     if (!spriteCache->hasSprite(sprite)) {
         sf::Sprite* sfmlSprite = new sf::Sprite();
@@ -173,7 +170,7 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     
     updateThread->lockForDeletion();
     for (const auto& sprite: *updateThread->getAllSprites()) {
-        if (!sprite->isMarkedForDeletion()) {
+        if (!sprite->isMarkedForDeletion() && sprite->isInitialized()) {
             sprite->onFrame(elapsedTimeSincePreviousFrame);
             draw(sprite->getActiveSprite());
         }

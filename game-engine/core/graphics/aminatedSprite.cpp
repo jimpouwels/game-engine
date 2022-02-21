@@ -53,6 +53,14 @@ void AnimatedSprite::markForDeletion() {
     markedForDeletion = true;
 }
 
+void AnimatedSprite::markAsInitialized() {
+    initialized = true;
+}
+
+bool AnimatedSprite::isInitialized() {
+    return initialized;
+}
+
 void AnimatedSprite::setDeleteOnLeaveScreen(bool deleteOnLeaveScreen) {
     this->deleteOnLeaveScreen = deleteOnLeaveScreen;
 }
@@ -62,10 +70,7 @@ Vector2D AnimatedSprite::getRotationPoint() {
 }
 
 Sprite* AnimatedSprite::getActiveSprite() {
-    if (activeAnimation != nullptr) {
-        return activeAnimation->getActiveSprite();
-    }
-    return nullptr;
+    return activeAnimation->getActiveSprite();
 }
 
 void AnimatedSprite::setCurrentAnimation(std::string animationId) {

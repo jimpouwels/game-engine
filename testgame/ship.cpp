@@ -21,6 +21,7 @@ Ship::Ship() : jimp::AnimatedSprite(jimp::Vector2D { .x = 400, .y = 400 }, SCALE
     addSprite("default", "spaceship.png");
     addSprite("throttling", "spaceship-thrust1.png");
     addSprite("throttling", "spaceship-thrust2.png");
+    markAsInitialized();
 }
 
 void Ship::doOnUpdate(float elapsedTime) {

@@ -23,6 +23,7 @@ private:
     bool markedForDeletion = false;
     bool deleteOnLeaveScreen = false;
     bool isAccelerating = false;
+    bool initialized = false;
     float velocityAngle = 0;
     bool updateCurrentVelocity = false;
     uint16_t mass = 0;
@@ -39,6 +40,7 @@ private:
 protected:
     void setCurrentAnimation(std::string animationId);
     void accelerate(float angle, uint16_t mass, uint16_t force);
+    void markAsInitialized();
     virtual void doOnUpdate(float elapsedTime) { };
     virtual void doOnFrame(float elapsedTime) { };
     virtual void hasCollidedRectLeft(AnimatedSprite* otherSprite) {};
@@ -60,6 +62,7 @@ public:
     void setRotationAngle(float angle);
     void setDeleteOnLeaveScreen(bool deleteOnLeaveScreen);
     bool isMarkedForDeletion();
+    bool isInitialized();
     bool checkCollisionRect(AnimatedSprite* otherSprite);
     uint16_t getVelocityAngle();
     Sprite* getActiveSprite();
