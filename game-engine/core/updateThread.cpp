@@ -52,7 +52,7 @@ UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::fun
     this->onUpdateCallback = onUpdateCallback;
     this->onSpriteDeletedCallback = onSpriteDeletedCallback;
     this->registeredAnimatedSprites = new std::vector<AnimatedSprite*>;
-    this->addedAnimatedSprites = new std::list<AnimatedSprite*>;
+    this->newSprites = new std::list<AnimatedSprite*>;
 }
 
 UpdateThread::~UpdateThread() {
@@ -91,11 +91,11 @@ std::vector<AnimatedSprite*>* UpdateThread::getAllSprites() {
 }
 
 void UpdateThread::registerAnimatedSprite(AnimatedSprite* animatedSprite) {
-    addedAnimatedSprites->push_back(animatedSprite);
+    newSprites->push_back(animatedSprite);
 }
 
 void UpdateThread::onUpdate(float elapsedTime) {
-    this->makeNewSpritesPartOfUpdateLoopWhenInitialized();
+    this->loadNewSpritesIntoUpdateLoop();
     this->onUpdateCallback(elapsedTime);
 }
 
@@ -105,18 +105,18 @@ void UpdateThread::onSpriteDeleted(AnimatedSprite* animatedSprite) {
     delete animatedSprite;
 }
 
-void UpdateThread::makeNewSpritesPartOfUpdateLoopWhenInitialized() {
-    if (addedAnimatedSprites->size() > 0) {
-        std::list<AnimatedSprite*> completedSprites = std::list<AnimatedSprite*>();
-        for (const auto& addedSprite: *addedAnimatedSprites) {
-            if (addedSprite->isInitialized()) {
-                registeredAnimatedSprites->push_back(addedSprite);
-                completedSprites.push_back(addedSprite);
+void UpdateThread::loadNewSpritesIntoUpdateLoop() {
+    if (newSprites->size() > 0) {
+        std::list<AnimatedSprite*> loadedSprites = std::list<AnimatedSprite*>();
+        for (const auto& newSprite: *newSprites) {
+            if (newSprite->isInitialized()) {
+                registeredAnimatedSprites->push_back(newSprite);
+                loadedSprites.push_back(newSprite);
             }
         }
-        if (completedSprites.size() > 0) {
-            for (const auto& completedSprite: completedSprites) {
-                addedAnimatedSprites->remove(completedSprite);
+        if (loadedSprites.size() > 0) {
+            for (const auto& loadedSprite: loadedSprites) {
+                newSprites->remove(loadedSprite);
             }
             std::sort(registeredAnimatedSprites->begin(), registeredAnimatedSprites->end(), [](AnimatedSprite* a, AnimatedSprite* b) {
                 return a->getZIndex() > b->getZIndex();
