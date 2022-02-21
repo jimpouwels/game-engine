@@ -6,7 +6,7 @@ namespace jimp {
 
 bool isWorking = false;
 
-void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedSprite*)> onSpriteDeletedCallback, std::vector<AnimatedSprite*>* registeredSprites, std::mutex* processingLock) {
+void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedSprite*)> onSpriteDeletedCallback, std::vector<AnimatedSprite*>* registeredSprites, std::mutex* processingLock, std::mutex* deleteSpriteLock) {
     isWorking = true;
     std::chrono::time_point<std::chrono::system_clock> previousUpdateTime;
     while (true) {
@@ -34,7 +34,9 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                     }
                 }
                 for (const auto& spriteToDelete: spritesToDelete) {
+                    deleteSpriteLock->lock();
                     onSpriteDeletedCallback(spriteToDelete);
+                    deleteSpriteLock->unlock();
                 }
             }
         } else {
@@ -46,6 +48,7 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
 
 UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedSprite*)> onSpriteDeletedCallback) {
     this->processingLock = new std::mutex();
+    this->deleteSpriteLock = new std::mutex();
     this->onUpdateCallback = onUpdateCallback;
     this->onSpriteDeletedCallback = onSpriteDeletedCallback;
     this->registeredAnimatedSprites = new std::vector<AnimatedSprite*>;
@@ -63,13 +66,22 @@ UpdateThread::~UpdateThread() {
 }
 
 void UpdateThread::start() {
-    this->updateThread = new std::thread(doLoop, onUpdateCallback, onSpriteDeletedCallback, registeredAnimatedSprites, processingLock);
+    auto onSpriteDeletedLambda = std::bind(&UpdateThread::onSpriteDeleted, this, std::placeholders::_1);
+    this->updateThread = new std::thread(doLoop, onUpdateCallback, onSpriteDeletedLambda, registeredAnimatedSprites, processingLock, deleteSpriteLock);
 }
 
 void UpdateThread::stop() {
     processingLock->lock();
     isWorking = false;
     processingLock->unlock();
+}
+
+void UpdateThread::lockForDeletion() {
+    deleteSpriteLock->lock();
+}
+
+void UpdateThread::unlockForDeletion() {
+    deleteSpriteLock->unlock();
 }
 
 std::vector<AnimatedSprite*>* UpdateThread::getAllSprites() {
@@ -83,7 +95,8 @@ void UpdateThread::registerAnimatedSprite(AnimatedSprite* animatedSprite) {
     });
 }
 
-void UpdateThread::unregisterAnimatedSprite(AnimatedSprite* animatedSprite) {
+void UpdateThread::onSpriteDeleted(AnimatedSprite* animatedSprite) {
+    onSpriteDeletedCallback(animatedSprite);
     registeredAnimatedSprites->erase(std::remove(registeredAnimatedSprites->begin(), registeredAnimatedSprites->end(), animatedSprite), registeredAnimatedSprites->end());
     delete animatedSprite;
 }

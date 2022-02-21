@@ -8,11 +8,10 @@ class Bullet : public jimp::AnimatedSprite {
     
 private:
     static const uint16_t FORCE;
-    jimp::GameEngine* gameEngine;
     
 public:
     static const float SCALE;
-    Bullet(jimp::GameEngine* gameEngine, jimp::Vector2D position, float angle);
+    Bullet(jimp::Vector2D position, float angle);
     void doOnUpdate(float elapsedTime) override;
     void hasCollidedRect(AnimatedSprite *otherSprite, jimp::Geo2D::Side side) override;
     uint16_t getZIndex() override;

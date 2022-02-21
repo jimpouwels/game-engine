@@ -15,10 +15,9 @@ const uint8_t Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.15F;
 const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 
-Ship::Ship(jimp::GameEngine* gameEngine) : jimp::AnimatedSprite(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0.05F) {
-    this->gameEngine = gameEngine;
-    this->firingSound = gameEngine->registerSound(new jimp::Sound("laser.ogg"));
-    this->thrustSound = gameEngine->registerSound(new jimp::Sound("thrust.ogg"));
+Ship::Ship() : jimp::AnimatedSprite(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0.05F) {
+    this->firingSound = new jimp::Sound("laser.ogg");
+    this->thrustSound = new jimp::Sound("thrust.ogg");
     addSprite("default", "spaceship.png");
     addSprite("throttling", "spaceship-thrust1.png");
     addSprite("throttling", "spaceship-thrust2.png");
@@ -87,7 +86,7 @@ void Ship::onKeyboardRight(jimp::KeyState keyState) {
 void Ship::onKeyboardUp(jimp::KeyState keyState) {
     isThrothling = keyState == jimp::KeyState::PRESSED;
     if (isThrothling) {
-        thrustSound->loop(32);
+        thrustSound->loop(11);
         setCurrentAnimation("throttling");
     } else {
         thrustSound->fadeOut(1);
@@ -111,22 +110,21 @@ void Ship::updateFiring(float elapsedTime) {
         jimp::Vector2D rotationPoint = getRotationPoint();
         rotationPoint.x += getPosition().x - 5;
         rotationPoint.y += getPosition().y - 10;
-        Bullet* bullet = new Bullet(gameEngine, rotationPoint, getRotationAngle());
-        gameEngine->registerAnimatedSprite(bullet);
+        new Bullet(rotationPoint, getRotationAngle());
         firingSound->playTillEnd(30);
         elapsedTimeSinceLastShot = 0;
     }
 }
 
 void Ship::updateMovement(float elapsedTime) {
-    if (gameEngine->isOutsideScreenRight(this) && getVelocity().x >= 0) {
+    if (jimp::GameEngine::getInstance()->isOutsideScreenRight(this) && getVelocity().x >= 0) {
         setX(-getWidth());
-    } else if (gameEngine->isOutsideScreenLeft(this) && getVelocity().x <= 0) {
-        setX(gameEngine->getScreenWidth());
+    } else if (jimp::GameEngine::getInstance()->isOutsideScreenLeft(this) && getVelocity().x <= 0) {
+        setX(jimp::GameEngine::getInstance()->getScreenWidth());
     }
-    if (gameEngine->isOutsideScreenTop(this) && getVelocity().y <= 0) {
-        setY(gameEngine->getScreenHeight());
-    } else if (gameEngine->isOutsideScreenBottom(this) && getVelocity().y >= 0) {
+    if (jimp::GameEngine::getInstance()->isOutsideScreenTop(this) && getVelocity().y <= 0) {
+        setY(jimp::GameEngine::getInstance()->getScreenHeight());
+    } else if (jimp::GameEngine::getInstance()->isOutsideScreenBottom(this) && getVelocity().y >= 0) {
         setY(-getHeight());
     }
 }

@@ -10,6 +10,7 @@
 namespace jimp {
 
 GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate) {
+    instance = this;
     this->screenWidth = screenWidth;
     this->screenHeight = screenHeight;
     this->frameRate = desiredFrameRate;
@@ -42,6 +43,10 @@ GameEngine::~GameEngine() {
     delete soundCache;
 }
 
+GameEngine* GameEngine::getInstance() {
+    return instance;
+}
+
 void GameEngine::start() {
     updateThread->start();
     while (window->isOpen()) {
@@ -68,6 +73,9 @@ void GameEngine::start() {
 }
 
 void GameEngine::draw(jimp::Sprite* sprite) {
+    if (sprite == nullptr) {
+        return;
+    }
     SpriteCache::CachedSprite* cachedSprite = nullptr;
     if (!spriteCache->hasSprite(sprite)) {
         sf::Sprite* sfmlSprite = new sf::Sprite();
@@ -162,12 +170,16 @@ bool GameEngine::isPositionWithinScreen(Vector2D position) {
 void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     window->clear();
     onFrame(elapsedTimeSincePreviousFrame);
+    
+    updateThread->lockForDeletion();
     for (const auto& sprite: *updateThread->getAllSprites()) {
         if (!sprite->isMarkedForDeletion()) {
             sprite->onFrame(elapsedTimeSincePreviousFrame);
             draw(sprite->getActiveSprite());
         }
     }
+    
+    updateThread->unlockForDeletion();
     window->display();
 }
 
@@ -190,7 +202,6 @@ void GameEngine::handleSpriteDeleted(AnimatedSprite* animatedSprite) {
     }
     onSpriteDeleted(animatedSprite);
     keyboardHandler->removeKeyListener(animatedSprite);
-    updateThread->unregisterAnimatedSprite(animatedSprite);
 }
 
 void GameEngine::handleSounds(float elapsedTime) {

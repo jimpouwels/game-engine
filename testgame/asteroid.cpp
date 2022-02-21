@@ -10,12 +10,11 @@
 const uint16_t Asteroid::FORCE = 60000;
 const float Asteroid::HIT_ANIMATION_DURATION_IN_SECONDS = 0.05F;
 
-Asteroid::Asteroid(jimp::GameEngine* gameEngine, jimp::Vector2D position, float directionAngle) : jimp::AnimatedSprite(position, 0.1F, -1) {
-    this->gameEngine = gameEngine;
+Asteroid::Asteroid(jimp::Vector2D position, float directionAngle) : jimp::AnimatedSprite(position, 0.1F, -1) {
     addSprite("default", "asteroid.png");
     addSprite("hit", "asteroid-hit.png");
     setRotationAngle(90);
-    this->hitSound = gameEngine->registerSound(new jimp::Sound("hit.ogg"));
+    this->hitSound = new jimp::Sound("hit.ogg");
     this->rotationDegreesPerSecond = jimp::MathUtils::randomNumberBetween(30, 130);
     this->rotatingDirection = jimp::MathUtils::randomNumberBetween(0, 2) == 1;
     accelerate(directionAngle, 0, FORCE);
@@ -75,13 +74,13 @@ void Asteroid::hasCollidedRectBottom(jimp::AnimatedSprite* otherSprite) {
 }
 
 void Asteroid::updateDirection(float elapsedTime) {
-    if (isEnteringScreen && !gameEngine->isAtLeftEdgeOfScreen(this) && !gameEngine->isAtRightEdgeOfScreen(this)) {
+    if (isEnteringScreen && !jimp::GameEngine::getInstance()->isAtLeftEdgeOfScreen(this) && !jimp::GameEngine::getInstance()->isAtRightEdgeOfScreen(this)) {
         isEnteringScreen = false;
     }
-    if (gameEngine->isAtTopEdgeOfScreen(this) || gameEngine->isAtBottomEdgeOfScreen(this)) {
+    if (jimp::GameEngine::getInstance()->isAtTopEdgeOfScreen(this) || jimp::GameEngine::getInstance()->isAtBottomEdgeOfScreen(this)) {
         getVelocity().y = -getVelocity().y;
     }
-    if (!isEnteringScreen && (gameEngine->isAtLeftEdgeOfScreen(this) || gameEngine->isAtRightEdgeOfScreen(this))) {
+    if (!isEnteringScreen && (jimp::GameEngine::getInstance()->isAtLeftEdgeOfScreen(this) || jimp::GameEngine::getInstance()->isAtRightEdgeOfScreen(this))) {
         getVelocity().x = -getVelocity().x;
     }
 }

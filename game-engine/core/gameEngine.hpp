@@ -13,6 +13,8 @@
 
 namespace jimp {
 
+static GameEngine* instance = nullptr;
+
 class GameEngine {
     
 private:
@@ -40,13 +42,14 @@ private:
     void handleSpriteDeleted(AnimatedSprite* animatedSprite);
     
 protected:
+    GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate);
     virtual void onFrame(float elapsedTime) {};
     virtual void onUpdate(float elapsedTime) {};
     virtual void onSpriteDeleted(AnimatedSprite* animatedSprite) {};
     
 public:
-    GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate);
     ~GameEngine();
+    static GameEngine* getInstance();
     void start();
     int getScreenWidth();
     int getScreenHeight();

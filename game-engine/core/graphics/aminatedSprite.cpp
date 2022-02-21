@@ -7,6 +7,7 @@
 #include "sprite.hpp"
 #include "animation.hpp"
 #include "mathUtils.hpp"
+#include "gameEngine.hpp"
 
 namespace jimp {
 
@@ -15,6 +16,7 @@ AnimatedSprite::AnimatedSprite(Vector2D position, float scale, float imageSwapIn
     this->scale = scale;
     animationMap = new std::map<std::string, Animation*>;
     this->imageSwapIntervalInSeconds = imageSwapIntervalInSeconds;
+    GameEngine::getInstance()->registerAnimatedSprite(this);
 }
 
 AnimatedSprite::AnimatedSprite(Vector2D position, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
@@ -37,9 +39,13 @@ void AnimatedSprite::onFrame(float elapsedTime) {
 
 void AnimatedSprite::onUpdate(float elapsedTime) {
     lock->lock();
-    doOnUpdate(elapsedTime);
-    updateMovement(elapsedTime);
-    this->updateAnimation(elapsedTime);
+    if (deleteOnLeaveScreen && !GameEngine::getInstance()->isPositionWithinScreen(getPosition())) {
+        markForDeletion();
+    } else {
+        doOnUpdate(elapsedTime);
+        updateMovement(elapsedTime);
+        this->updateAnimation(elapsedTime);
+    }
     lock->unlock();
 }
 
@@ -47,12 +53,19 @@ void AnimatedSprite::markForDeletion() {
     markedForDeletion = true;
 }
 
+void AnimatedSprite::setDeleteOnLeaveScreen(bool deleteOnLeaveScreen) {
+    this->deleteOnLeaveScreen = deleteOnLeaveScreen;
+}
+
 Vector2D AnimatedSprite::getRotationPoint() {
     return Vector2D { getWidth() / 2.0F, .y = getHeight() / 2.0F };
 }
 
 Sprite* AnimatedSprite::getActiveSprite() {
-    return activeAnimation->getActiveSprite();
+    if (activeAnimation != nullptr) {
+        return activeAnimation->getActiveSprite();
+    }
+    return nullptr;
 }
 
 void AnimatedSprite::setCurrentAnimation(std::string animationId) {

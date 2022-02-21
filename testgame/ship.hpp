@@ -19,8 +19,7 @@ private:
     static const float IMAGE_SWAP_INTERVAL_IN_SECONDS;
     static const uint8_t ROTATION_DEGREES_PER_SECOND;
     static const uint8_t SHOTS_PER_SECOND;
-    static const uint16_t ROTATION_POINT_Y_OFFSET; // the excaust flame makes the spaceship image non-symmetrical
-    jimp::GameEngine* gameEngine = nullptr;
+    static const uint16_t ROTATION_POINT_Y_OFFSET; // the exhaust flame makes the spaceship image non-symmetrical
     bool hasFired = false;
     bool isFiring = false;
     bool isThrothling = false;
@@ -37,7 +36,7 @@ private:
     void setMoving(jimp::KeyState keyState);
 
 public:
-    Ship(jimp::GameEngine* gameEngine);
+    Ship();
     void doOnUpdate(float elapsedTime) override;
     void onKeyboardLeft(jimp::KeyState keyState) override;
     void onKeyboardRight(jimp::KeyState keyState) override;

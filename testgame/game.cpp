@@ -18,11 +18,11 @@ private:
     
 public:
     Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60) {
-        registerAnimatedSprite(new Ship(this));
+        new Ship();
         music = new jimp::Sound("music.ogg");
         registerSound(music);
         music->loop(25);
-        asteroidSpawner = new AsteroidSpawner(this);
+        asteroidSpawner = new AsteroidSpawner();
         background = new jimp::Sprite(0, 0, 1.0F, "background.jpeg");
     }
     

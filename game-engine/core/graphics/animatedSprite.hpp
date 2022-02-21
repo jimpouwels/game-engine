@@ -21,6 +21,7 @@ private:
     std::map<std::string, Animation*>* animationMap;
     Animation* activeAnimation = nullptr;
     bool markedForDeletion = false;
+    bool deleteOnLeaveScreen = false;
     bool isAccelerating = false;
     float velocityAngle = 0;
     bool updateCurrentVelocity = false;
@@ -36,10 +37,6 @@ private:
     void draw(float elapsedTime);
     
 protected:
-    void setX(float x);
-    void setY(float y);
-    void setPosition(Vector2D position);
-    void addToPosition(Vector2D delta);
     void setCurrentAnimation(std::string animationId);
     void accelerate(float angle, uint16_t mass, uint16_t force);
     virtual void doOnUpdate(float elapsedTime) { };
@@ -61,12 +58,17 @@ public:
     int getHeight();
     float getRotationAngle();
     void setRotationAngle(float angle);
+    void setDeleteOnLeaveScreen(bool deleteOnLeaveScreen);
     bool isMarkedForDeletion();
     bool checkCollisionRect(AnimatedSprite* otherSprite);
     uint16_t getVelocityAngle();
     Sprite* getActiveSprite();
     std::list<Sprite*> getAllSprites();
     void markForDeletion();
+    void setX(float x);
+    void setY(float y);
+    void setPosition(Vector2D position);
+    void addToPosition(Vector2D delta);
     void onFrame(float elapsedTime);
     void onUpdate(float elapsedTime);
     virtual Vector2D getRotationPoint();
