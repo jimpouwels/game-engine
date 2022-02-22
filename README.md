@@ -97,11 +97,11 @@ For each class extending from AnimatedSprite, you have to implement the followin
 
 ### Sprite
 
-## Timing
+### Timing
 // Utilities
 // Elapsed time
 
-## Movement and accelaration
+### Movement and accelaration
 
 ## Points of attention
 
