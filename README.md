@@ -92,8 +92,8 @@ When the active animation becomes `throttling`, the game engine will switch betw
 
 For each class extending from AnimatedSprite, you have to implement the following functions:
 
-- doOnUpdate(float elapsedTime): Perform all the logic that is required to update the state of the AnimatedSprite.
-- doOnFrame(float elapsedTime): Perform all the logic that is required to render the AnimatedSprite. For simple cases, you don't have to do anything here.
+- `doOnUpdate(float elapsedTime)`: Perform all the logic that is required to update the state of the AnimatedSprite (e.g. move the sprite across the screen or switch to a different animation).
+- `doOnFrame(float elapsedTime)`: Perform all the logic that is required to render the AnimatedSprite. For simple cases, you don't have to do anything here.
 
 ### Sprite
 
