@@ -44,9 +44,9 @@ At this point, the game will be in a running state. You can add sprites to the s
 
 AnimatedSprite wraps a collection of sprites, grouped by animations:
 
-`AnimatedSprite`
- - `Animation[]`
-  - `Sprite[]`
+- `AnimatedSprite`
+  - `Animation[]`
+    - `Sprite[]`
 
 ## Points of attention
 
