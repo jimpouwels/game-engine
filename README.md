@@ -41,3 +41,23 @@ At this point, the game will be in a running state. You can add sprites to the s
 
 1. Create a new instance of the `AnimatedSprite` class. It will automatically register itself with the gameloop and it will be rendered in the next frame.
 2. Create a new class that extends the `AnimatedSprite` class.
+
+AnimatedSprite wraps a collection of sprites, grouped by animations:
+
+`AnimatedSprite`
+ |
+ |_> `Animation[]`
+      |
+      |_> `Sprite[]`
+
+## Points of attention
+
+### Separation of update and render
+An AnimatedSprite will never be rendered while it's in updating state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get rendered until that function completes.
+An AnimatedSprite will never be updated while it's in rendering state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get updated until that function completes.
+
+### Registration of animated sprites and sounds
+Don't register sprites or sounds with the game engine yourself. The `AnimatedSprite` class will do that for you.
+
+### Drawing 'unmanaged' sprites
+You can call the `draw(Sprite* sprite)` function on the game engine to render a single, unanimated sprite in the `onFrame()` event, but remind that this sprite will not become part of the render or update loop. 
