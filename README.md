@@ -44,7 +44,7 @@ At this point, the game will be in a running state.
 You can add sprites to the scene by creating an AnimatedSprite, which is done by creating a new class that extends from `jimp::AnimatedSprite`.
 
 #### Registration
-You can make an AnimatedSprite part of the game loop by registering it. This happens automatically when instantiating your class that extends `AnimatedSprite`. However, to prevent partially AnimatedSprites to be made part of the game loop, make sure you call `markAsInitialized()` at the end of your class' constructor.
+You can make an AnimatedSprite part of the game loop by registering it. This happens automatically when instantiating your class that extends `AnimatedSprite`. However, to prevent partially initialized AnimatedSprites to be made part of the game loop, make sure you call `markAsInitialized()` at the end of your class' constructor.
 
 **Note**
 Don't register sprites or sounds with the game engine yourself. The `AnimatedSprite` class will do that for you.
