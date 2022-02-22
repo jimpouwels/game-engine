@@ -11,11 +11,11 @@
 
 namespace jimp {
 
-AnimatedSprite::AnimatedSprite(Vector2D position, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
+AnimatedSprite::AnimatedSprite(Vector2D position, float scale, int rotationAngle, float spriteSwapIntervalInSeconds) {
     this->position = position;
     this->scale = scale;
     animationMap = new std::map<std::string, Animation*>;
-    this->imageSwapIntervalInSeconds = imageSwapIntervalInSeconds;
+    this->spriteSwapIntervalInSeconds = spriteSwapIntervalInSeconds;
     GameEngine::getInstance()->registerAnimatedSprite(this);
     this->angle = rotationAngle;
 }
@@ -127,7 +127,7 @@ bool AnimatedSprite::checkCollisionRect(AnimatedSprite* otherSprite) {
 
 void AnimatedSprite::updateAnimation(float elapsedTime) {
     elapsedTimeSinceLastSwap += elapsedTime;
-    if (imageSwapIntervalInSeconds >= 0 && elapsedTimeSinceLastSwap >= imageSwapIntervalInSeconds) {
+    if (spriteSwapIntervalInSeconds >= 0 && elapsedTimeSinceLastSwap >= spriteSwapIntervalInSeconds) {
         activeAnimation->switchToNextSprite();
         elapsedTimeSinceLastSwap = 0;
     }

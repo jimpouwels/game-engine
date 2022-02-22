@@ -31,7 +31,7 @@ private:
     Vector2D velocity = Vector2D { .x = 0, .y = 0 };
     std::mutex* lock = new std::mutex();
     float elapsedTimeSinceLastSwap;
-    float imageSwapIntervalInSeconds;
+    float spriteSwapIntervalInSeconds;
     void updateCurrentSpriteData();
     void updateAnimation(float elapsedTime);
     void updateMovement(float elapsedTime);
