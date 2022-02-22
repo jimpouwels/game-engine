@@ -30,6 +30,7 @@ public:
     Asteroid(jimp::Vector2D position, float directionAngle);
     ~Asteroid();
     void doOnUpdate(float elapsedTime) override;
+    void doOnFrame(float elapsedTime) override;
     void hasCollidedRectLeft(jimp::AnimatedSprite* otherSprite) override;
     void hasCollidedRectRight(jimp::AnimatedSprite* otherSprite) override;
     void hasCollidedRectTop(jimp::AnimatedSprite* otherSprite) override;

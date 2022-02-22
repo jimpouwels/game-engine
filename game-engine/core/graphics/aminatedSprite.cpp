@@ -11,16 +11,12 @@
 
 namespace jimp {
 
-AnimatedSprite::AnimatedSprite(Vector2D position, float scale, float imageSwapIntervalInSeconds) {
+AnimatedSprite::AnimatedSprite(Vector2D position, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
     this->position = position;
     this->scale = scale;
     animationMap = new std::map<std::string, Animation*>;
     this->imageSwapIntervalInSeconds = imageSwapIntervalInSeconds;
     GameEngine::getInstance()->registerAnimatedSprite(this);
-}
-
-AnimatedSprite::AnimatedSprite(Vector2D position, float scale, int rotationAngle, float imageSwapIntervalInSeconds) {
-    AnimatedSprite(position, scale, 0, imageSwapIntervalInSeconds);
     this->angle = rotationAngle;
 }
 
@@ -29,6 +25,7 @@ AnimatedSprite::~AnimatedSprite() {
         delete animation;
     }
     delete animationMap;
+    delete lock;
 }
 
 void AnimatedSprite::onFrame(float elapsedTime) {

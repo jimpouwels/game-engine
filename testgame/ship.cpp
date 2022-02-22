@@ -15,7 +15,7 @@ const uint8_t Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.15F;
 const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 
-Ship::Ship() : jimp::AnimatedSprite(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0.05F) {
+Ship::Ship() : jimp::AnimatedSprite(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0, 0.05F) {
     this->firingSound = new jimp::Sound("laser.ogg");
     this->thrustSound = new jimp::Sound("thrust.ogg");
     addSprite("default", "spaceship.png");
@@ -31,6 +31,9 @@ void Ship::doOnUpdate(float elapsedTime) {
     updateFiring(elapsedTime);
     updateMovement(elapsedTime);
     updateRotation(elapsedTime);
+}
+
+void Ship::doOnFrame(float elapsedTime) {
 }
 
 uint16_t Ship::getZIndex() {

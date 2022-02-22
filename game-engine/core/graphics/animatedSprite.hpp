@@ -51,7 +51,6 @@ protected:
     
 public:
     AnimatedSprite(Vector2D position, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
-    AnimatedSprite(Vector2D position, float scale, float imageSwapIntervalInSeconds);
     ~AnimatedSprite();
     Vector2D& getPosition();
     Vector2D& getVelocity();
