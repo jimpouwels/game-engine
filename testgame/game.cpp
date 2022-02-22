@@ -31,6 +31,10 @@ public:
         delete asteroidSpawner;
     }
     
+    void startGame() {
+        this->start();
+    }
+    
     void onFrame(float elapsedTime) {
         draw(background);
     }
@@ -42,6 +46,6 @@ public:
 
 int main() {
     Game game(1500, 900, "Asteroids");
-    game.start();
+    game.startGame();
     return 0;
 }

@@ -43,6 +43,7 @@ private:
     
 protected:
     GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate);
+    void start();
     virtual void onFrame(float elapsedTime) {};
     virtual void onUpdate(float elapsedTime) {};
     virtual void onSpriteDeleted(AnimatedSprite* animatedSprite) {};
@@ -50,7 +51,6 @@ protected:
 public:
     ~GameEngine();
     static GameEngine* getInstance();
-    void start();
     int getScreenWidth();
     int getScreenHeight();
     bool isAtLeftEdgeOfScreen(AnimatedSprite* animatedSprite);
