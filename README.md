@@ -109,7 +109,9 @@ For each class extending from AnimatedSprite, you have to implement the followin
 - `doOnUpdate(float elapsedTime)`: Perform all the logic that is required to update the state of the AnimatedSprite (e.g. move the sprite across the screen or switch to a different animation).
 - `doOnFrame(float elapsedTime)`: Perform all the logic that is required to render the AnimatedSprite. For simple cases, you don't have to do anything here.
 
-#### Points of attention
+#### Concurrency
+Updating the state of an AnimatedSprite and rendering it takes place on two different threads. Keep the following in mind:
+
 - An AnimatedSprite will never be rendered while it's in updating state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get rendered until that function completes.
 - An AnimatedSprite will never be updated while it's in rendering state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get updated until that function completes.
 
