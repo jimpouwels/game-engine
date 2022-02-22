@@ -108,4 +108,4 @@ gameEngine->registerAnimatedSprite(spaceship);
 ```
 
 ### Drawing 'unmanaged' sprites
-You can call the `draw(Sprite* sprite)` function on the game engine to render a single, unanimated sprite in the `onFrame()` event, but remind that this sprite will not become part of the render or update loop. 
+You can call the `draw(Sprite* sprite)` function on the game engine to render a single, unanimated sprite in the `onFrame()` event, but remind that this sprite will not become part of the render or update loop. This approach can be used to render a background sprite, or some other sprite that is fixed on the screen and doesn't need any specific handling or animation.
