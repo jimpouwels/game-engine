@@ -43,6 +43,19 @@ At this point, the game will be in a running state.
 ### AnimatedSprite
 You can add sprites to the scene by creating an AnimatedSprite, which is done by creating a new class that extends from `jimp::AnimatedSprite`.
 
+#### Registration
+You can make an AnimatedSprite part of the game loop by registring it. This happens automatically when instantiating an AnimatedSprite. However, to prevent partially AnimatedSprites to be made part of the game loop, make sure you call `markAsInitialized()` at the end of your Class' constructor that extends AnimatedSprite.
+
+**Note**
+Don't register sprites or sounds with the game engine yourself. The `AnimatedSprite` class will do that for you.
+In other words, **don't do this**:
+
+```
+SpaceShip* spaceship = new SpaceShip();
+gameEngine->registerAnimatedSprite(spaceship);
+```
+
+#### Animations
 The model for an AnimatedSprite is as follows: 
 
 - `AnimatedSprite`
@@ -90,10 +103,15 @@ void Ship::onKeyboardUp(jimp::KeyState keyState) {
 
 When the active animation becomes `throttling`, the game engine will switch between sprite `spaceship-thrust1.png` and `spaceship-thrust2.png` every 0.05 seconds. This value has to be passed to the `AnimatedSprite` constructor.
 
+#### doOnUpdate and doOnFrame
 For each class extending from AnimatedSprite, you have to implement the following functions:
 
 - `doOnUpdate(float elapsedTime)`: Perform all the logic that is required to update the state of the AnimatedSprite (e.g. move the sprite across the screen or switch to a different animation).
 - `doOnFrame(float elapsedTime)`: Perform all the logic that is required to render the AnimatedSprite. For simple cases, you don't have to do anything here.
+
+#### Points of attention
+- An AnimatedSprite will never be rendered while it's in updating state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get rendered until that function completes.
+- An AnimatedSprite will never be updated while it's in rendering state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get updated until that function completes.
 
 ### Sprite
 
@@ -106,17 +124,3 @@ For each class extending from AnimatedSprite, you have to implement the followin
 ## Points of attention
 
 ### Separation of update and render
-- An AnimatedSprite will never be rendered while it's in updating state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get rendered until that function completes.
-- An AnimatedSprite will never be updated while it's in rendering state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get updated until that function completes.
-
-### Registration of animated sprites and sounds
-Don't register sprites or sounds with the game engine yourself. The `AnimatedSprite` class will do that for you.
-In other words, **don't do this**:
-
-```
-SpaceShip* spaceship = new SpaceShip();
-gameEngine->registerAnimatedSprite(spaceship);
-```
-
-### Drawing 'unmanaged' sprites
-You can call the `draw(Sprite* sprite)` function on the game engine to render a single, unanimated sprite in the `onFrame()` event, but remind that this sprite will not become part of the render or update loop. This approach can be used to render a background sprite, or some other sprite that is fixed on the screen and doesn't need any specific handling or animation.
