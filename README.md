@@ -64,7 +64,7 @@ It's up to the game developer to switch between animations at the right time (as
 Code example of a space ship:
 
 ```
-SpaceShip::SpaceShip() : jimp::AnimatedSprite(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0.05F) {
+SpaceShip::SpaceShip() : jimp::AnimatedSprite(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0, 0.05F) {
     addSprite("idle", "spaceship.png");
     addSprite("throttling", "spaceship-thrust1.png");
     addSprite("throttling", "spaceship-thrust2.png");
@@ -95,11 +95,17 @@ When the active animation becomes `throttling`, the game engine will switch betw
 ## Points of attention
 
 ### Separation of update and render
-An AnimatedSprite will never be rendered while it's in updating state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get rendered until that function completes.
-An AnimatedSprite will never be updated while it's in rendering state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get updated until that function completes.
+- An AnimatedSprite will never be rendered while it's in updating state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get rendered until that function completes.
+- An AnimatedSprite will never be updated while it's in rendering state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get updated until that function completes.
 
 ### Registration of animated sprites and sounds
 Don't register sprites or sounds with the game engine yourself. The `AnimatedSprite` class will do that for you.
+In other words, **don't do this**:
+
+```
+SpaceShip* spaceship = new SpaceShip();
+gameEngine->registerAnimatedSprite(spaceship);
+```
 
 ### Drawing 'unmanaged' sprites
 You can call the `draw(Sprite* sprite)` function on the game engine to render a single, unanimated sprite in the `onFrame()` event, but remind that this sprite will not become part of the render or update loop. 
