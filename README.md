@@ -16,3 +16,7 @@ This is my attempt to build a simple game engine. The game engine is equipped wi
 - install XCode
 - open the project in XCode
 - run it!
+
+## Usage
+
+Extend from the the `GameEngine` class.
