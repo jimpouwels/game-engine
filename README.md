@@ -34,19 +34,63 @@ The game engine manages these two processes and you don't have to intervene with
 
 ## Usage
 
+### Create a Game
 1. Extend from the the `GameEngine` class.
 2. Invoke the `start()` function to make the gameloop start
 
-At this point, the game will be in a running state. You can add sprites to the scene by creating one in one of the following ways:
+At this point, the game will be in a running state. 
 
-1. Create a new instance of the `AnimatedSprite` class. It will automatically register itself with the gameloop and it will be rendered in the next frame.
-2. Create a new class that extends the `AnimatedSprite` class.
+### AnimatedSprite
+You can add sprites to the scene by creating an AnimatedSprite, which is done by creating a new class that extends from `jimp::AnimatedSprite`.
 
-AnimatedSprite wraps a collection of sprites, grouped by animations:
+The model for an AnimatedSprite is as follows: 
 
 - `AnimatedSprite`
   - `Animation[]`
     - `Sprite[]`
+
+In essence, an AnimatedSprites is a complex sprite that represents a single 'character' or 'object' on the screen that can be rendered in the form of different animations which each constists of a collection of sprites rendered in order. Example:
+
+- AnimatedSprite: running person
+  - Animation1
+    - name: "running left"
+    - sprites: 5 sprites that represent running to the left
+  - Animation2
+    - name: "running right"
+    - sprites: 5 sprites that represent running to the right
+
+It's up to the game developer to switch between animations at the right time (as part of handling an event, such as `doOnUpdate()`). However, the game engine will handle switching between sprites within an animation. You have to tell the sprite how much time will be between each sprite within the animation, and the game engine will handle that.
+
+Code example of a space ship:
+
+```
+SpaceShip::SpaceShip() : jimp::AnimatedSprite(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0.05F) {
+    addSprite("idle", "spaceship.png");
+    addSprite("throttling", "spaceship-thrust1.png");
+    addSprite("throttling", "spaceship-thrust2.png");
+    markAsInitialized();
+}
+```
+
+In this example, we created an AnimatedSprite `SpaceShip`. It has two animations, being `idle` and `throttling`. The first animation you add a sprite for will be the active animation, in this case `idle`. 
+
+**Do note that at the end of the constructor of an AnimatedSprite, it has to be marked as initialized by calling `markAsInitialized()`. This is important for the game engine to know that the AnimatedSprite is ready to be rendered to the screen.**
+
+You can switch between `throttling` and `idle` like this:
+
+```
+void Ship::onKeyboardUp(jimp::KeyState keyState) {
+    if (keyState == jimp::KeyState::PRESSED) {
+        setCurrentAnimation("throttling");
+    } else {
+        setCurrentAnimation("default");
+    }
+}
+```
+
+When the active animation becomes `throttling`, the game engine will switch between sprite `spaceship-thrust1.png` and `spaceship-thrust2.png` every 0.05 seconds. This value has to be passed to the `AnimatedSprite` constructor.
+
+### Sprite
 
 ## Points of attention
 
