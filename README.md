@@ -101,7 +101,7 @@ void Ship::onKeyboardUp(jimp::KeyState keyState) {
 }
 ```
 
-When the active animation becomes `throttling`, the game engine will start switching between sprite `spaceship-thrust1.png` and `spaceship-thrust2.png` every 0.05 seconds. This value has to be passed to the `AnimatedSprite` constructor.
+When the active animation becomes `throttling`, the game engine will start switching between sprite `spaceship-thrust1.png` and `spaceship-thrust2.png` every 0.05 seconds (`spriteSwapIntervalInSeconds`). This value has to be passed to the `AnimatedSprite` constructor. Keep in mind that bringing the `spriteSwapIntervalInSeconds` value below the duration of a frame (dependent on fps), there will no longer be a noticable difference in swapping speed.
 
 #### doOnUpdate and doOnFrame
 For each class extending from AnimatedSprite, you have to implement the following functions:
