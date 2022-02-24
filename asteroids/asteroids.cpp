@@ -1,6 +1,6 @@
 #include "gameEngine.hpp"
 #include "sprite.hpp"
-#include "animatedSprite.hpp"
+#include "graphic.hpp"
 #include "asteroid.hpp"
 #include "bullet.hpp"
 #include "ship.hpp"
@@ -9,7 +9,7 @@
 #include <iostream>
 #include <chrono>
 
-class Game : public jimp::GameEngine {
+class Asteroids : public jimp::GameEngine {
     
 private:
     jimp::Sprite* background = nullptr;
@@ -17,7 +17,7 @@ private:
     jimp::Sound* music = nullptr;
     
 public:
-    Game(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60) {
+    Asteroids(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60) {
         new Ship();
         music = new jimp::Sound("music.ogg");
         registerSound(music);
@@ -26,7 +26,7 @@ public:
         background = new jimp::Sprite(0, 0, 1.0F, "background.jpeg");
     }
     
-    ~Game() {
+    ~Asteroids() {
         delete background;
         delete asteroidSpawner;
     }
@@ -44,8 +44,8 @@ public:
     }
 };
 
-int main() {
-    Game game(1500, 900, "Asteroids");
-    game.startGame();
-    return 0;
-}
+//int main() {
+//    Asteroids game(1500, 900, "Asteroids");
+//    game.startGame();
+//    return 0;
+//}

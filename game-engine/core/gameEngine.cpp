@@ -4,7 +4,7 @@
 #include "gameEngine.hpp"
 #include "sprite.hpp"
 #include "spriteCache.hpp"
-#include "animatedSprite.hpp"
+#include "graphic.hpp"
 #include "keyboardHandler.hpp"
 
 namespace jimp {
@@ -93,9 +93,14 @@ void GameEngine::draw(jimp::Sprite* sprite) {
     window->draw(*cachedSprite->sprite, transform);
 }
 
-void GameEngine::registerAnimatedSprite(AnimatedSprite *animatedSprite) {
-    addKeyListener(animatedSprite);
-    updateThread->registerAnimatedSprite(animatedSprite);
+void GameEngine::registerGraphic(Graphic *graphic) {
+    addKeyListener(graphic);
+    updateThread->registerGraphic(graphic);
+}
+
+void GameEngine::drawRectangle(float width, float height, Vector2D position) {
+    
+    window->draw(rectangle);
 }
 
 Image* GameEngine::registerImage(Image* image) {
@@ -128,35 +133,35 @@ int GameEngine::getScreenHeight() {
     return screenHeight;
 }
 
-bool GameEngine::isAtLeftEdgeOfScreen(AnimatedSprite* sprite) {
+bool GameEngine::isAtLeftEdgeOfScreen(Graphic* sprite) {
     return sprite->getPosition().x < 0;
 }
 
-bool GameEngine::isAtRightEdgeOfScreen(AnimatedSprite* sprite) {
+bool GameEngine::isAtRightEdgeOfScreen(Graphic* sprite) {
     return sprite->getPosition().x > getScreenWidth() - sprite->getWidth();
 }
 
-bool GameEngine::isAtTopEdgeOfScreen(AnimatedSprite* sprite) {
+bool GameEngine::isAtTopEdgeOfScreen(Graphic* sprite) {
     return sprite->getPosition().y < 0;
 }
 
-bool GameEngine::isAtBottomEdgeOfScreen(AnimatedSprite* sprite) {
+bool GameEngine::isAtBottomEdgeOfScreen(Graphic* sprite) {
     return sprite->getPosition().y > getScreenHeight() - sprite->getHeight();
 }
 
-bool GameEngine::isOutsideScreenTop(AnimatedSprite* sprite) {
+bool GameEngine::isOutsideScreenTop(Graphic* sprite) {
     return sprite->getPosition().y < -sprite->getHeight();
 }
 
-bool GameEngine::isOutsideScreenBottom(AnimatedSprite* sprite) {
+bool GameEngine::isOutsideScreenBottom(Graphic* sprite) {
     return sprite->getPosition().y > getScreenHeight();
 }
 
-bool GameEngine::isOutsideScreenLeft(AnimatedSprite* sprite) {
+bool GameEngine::isOutsideScreenLeft(Graphic* sprite) {
     return sprite->getPosition().x < -(sprite->getWidth());
 }
 
-bool GameEngine::isOutsideScreenRight(AnimatedSprite* sprite) {
+bool GameEngine::isOutsideScreenRight(Graphic* sprite) {
     return sprite->getPosition().x > getScreenWidth();
 }
 
@@ -169,7 +174,7 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     onFrame(elapsedTimeSincePreviousFrame);
     
     updateThread->lockForDeletion();
-    for (const auto& sprite: *updateThread->getAllSprites()) {
+    for (const auto& sprite: *updateThread->getAllGraphics()) {
         if (!sprite->isMarkedForDeletion() && sprite->isInitialized()) {
             sprite->onFrame(elapsedTimeSincePreviousFrame);
             draw(sprite->getActiveSprite());
@@ -193,12 +198,12 @@ void GameEngine::triggerUpdate(float elapsedTime) {
     onUpdate(elapsedTime);
 }
 
-void GameEngine::handleSpriteDeleted(AnimatedSprite* animatedSprite) {
-    for (const auto& sprite: animatedSprite->getAllSprites()) {
+void GameEngine::handleSpriteDeleted(Graphic* graphic) {
+    for (const auto& sprite: graphic->getAllSprites()) {
          spriteCache->remove(sprite);
     }
-    onSpriteDeleted(animatedSprite);
-    keyboardHandler->removeKeyListener(animatedSprite);
+    onSpriteDeleted(graphic);
+    keyboardHandler->removeKeyListener(graphic);
 }
 
 void GameEngine::handleSounds(float elapsedTime) {

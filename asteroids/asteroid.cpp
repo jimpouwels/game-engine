@@ -10,9 +10,9 @@
 const uint16_t Asteroid::FORCE = 10000;
 const float Asteroid::HIT_ANIMATION_DURATION_IN_SECONDS = 0.05F;
 
-Asteroid::Asteroid(jimp::Vector2D position, float directionAngle) : jimp::AnimatedSprite(position, 0.1F, 0, -1) {
-    addSprite("default", "asteroid.png");
-    addSprite("hit", "asteroid-hit.png");
+Asteroid::Asteroid(jimp::Vector2D position, float directionAngle) : jimp::Graphic(position, 0.1F, 0, -1) {
+    addDrawable("default", "asteroid.png");
+    addDrawable("hit", "asteroid-hit.png");
     setRotationAngle(90);
     this->hitSound = new jimp::Sound("hit.ogg");
     this->rotationDegreesPerSecond = jimp::MathUtils::randomNumberBetween(30, 130);
@@ -24,6 +24,9 @@ Asteroid::Asteroid(jimp::Vector2D position, float directionAngle) : jimp::Animat
 Asteroid::~Asteroid() {
 }
 
+void Asteroid::doOnInit() {
+}
+
 void Asteroid::doOnUpdate(float elapsedTime) {
     updateDirection(elapsedTime);
     updateRotation(elapsedTime);
@@ -33,7 +36,7 @@ void Asteroid::doOnUpdate(float elapsedTime) {
 void Asteroid::doOnFrame(float elapsedTime) {
 }
 
-void Asteroid::hasCollidedRect(jimp::AnimatedSprite *otherSprite, jimp::Geo2D::Side side) {
+void Asteroid::hasCollidedRect(jimp::Graphic *otherSprite, jimp::Geo2D::Side side) {
     if (dynamic_cast<Bullet*>(otherSprite) != nullptr) {
         isAnimatingHit = true;
         hitCount++;
@@ -49,28 +52,28 @@ uint16_t Asteroid::getZIndex() {
     return 2;
 }
 
-void Asteroid::hasCollidedRectLeft(jimp::AnimatedSprite* otherSprite) {
+void Asteroid::hasCollidedRectLeft(jimp::Graphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
         getVelocity().x = -getVelocity().x;
     }
 }
 
-void Asteroid::hasCollidedRectRight(jimp::AnimatedSprite* otherSprite) {
+void Asteroid::hasCollidedRectRight(jimp::Graphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
         getVelocity().x = -getVelocity().x;
     }
 }
 
-void Asteroid::hasCollidedRectTop(jimp::AnimatedSprite* otherSprite) {
+void Asteroid::hasCollidedRectTop(jimp::Graphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
         getVelocity().y = -getVelocity().y;
     }
 }
 
-void Asteroid::hasCollidedRectBottom(jimp::AnimatedSprite* otherSprite) {
+void Asteroid::hasCollidedRectBottom(jimp::Graphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
         getVelocity().y = -getVelocity().y;

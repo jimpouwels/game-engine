@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <vector>
 #include <map>
-#include "sprite.hpp"
+#include "drawable.hpp"
 #include "animation.hpp"
 #include "vector2D.hpp"
 #include "geo2D.hpp"
@@ -12,7 +12,7 @@
 
 namespace jimp {
 
-class AnimatedSprite : public KeyListener {
+class Graphic : public KeyListener {
     
 private:
     Vector2D position = { .x = 0, .y = 0 };
@@ -31,8 +31,8 @@ private:
     Vector2D velocity = Vector2D { .x = 0, .y = 0 };
     std::mutex* lock = new std::mutex();
     float elapsedTimeSinceLastSwap;
-    float spriteSwapIntervalInSeconds;
-    void updateCurrentSpriteData();
+    float drawableSwapIntervalInSeconds;
+    void updateCurrentDrawableData();
     void updateAnimation(float elapsedTime);
     void updateMovement(float elapsedTime);
     void draw(float elapsedTime);
@@ -41,17 +41,18 @@ protected:
     void setCurrentAnimation(std::string animationId);
     void accelerate(float angle, uint16_t mass, uint16_t force);
     void markAsInitialized();
+    virtual void doOnInit();
     virtual void doOnUpdate(float elapsedTime) { };
     virtual void doOnFrame(float elapsedTime) { };
-    virtual void hasCollidedRectLeft(AnimatedSprite* otherSprite) {};
-    virtual void hasCollidedRectRight(AnimatedSprite* otherSprite) {};
-    virtual void hasCollidedRectTop(AnimatedSprite* otherSprite) {};
-    virtual void hasCollidedRectBottom(AnimatedSprite* otherSprite) {};
-    virtual void hasCollidedRect(AnimatedSprite* otherSprite, Geo2D::Side side) {};
+    virtual void hasCollidedRectLeft(Graphic* otherGraphic) {};
+    virtual void hasCollidedRectRight(Graphic* otherGraphic) {};
+    virtual void hasCollidedRectTop(Graphic* otherGraphic) {};
+    virtual void hasCollidedRectBottom(Graphic* otherGraphic) {};
+    virtual void hasCollidedRect(Graphic* otherGraphic, Geo2D::Side side) {};
     
 public:
-    AnimatedSprite(Vector2D position, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
-    ~AnimatedSprite();
+    Graphic(Vector2D position, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
+    ~Graphic();
     Vector2D& getPosition();
     Vector2D& getVelocity();
     float getScale();
@@ -62,22 +63,24 @@ public:
     void setDeleteOnLeaveScreen(bool deleteOnLeaveScreen);
     bool isMarkedForDeletion();
     bool isInitialized();
-    bool checkCollisionRect(AnimatedSprite* otherSprite);
+    bool checkCollisionRect(Graphic* otherGraphicp);
     uint16_t getVelocityAngle();
-    Sprite* getActiveSprite();
-    std::list<Sprite*> getAllSprites();
+    Drawable* getActiveDrawable();
+    std::list<Drawable*> getAllDrawables();
     void markForDeletion();
     void setX(float x);
     void setY(float y);
     void setPosition(Vector2D position);
     void addToPosition(Vector2D delta);
+    void onInit();
     void onFrame(float elapsedTime);
     void onUpdate(float elapsedTime);
     virtual Vector2D getRotationPoint();
     virtual uint16_t getZIndex() {
         return 0;
     }
-    void addSprite(std::string animationId, std::string filePath);
+    void addDrawable(std::string animationId, std::string filePath);
+    void addDrawable(std::string animationId, Drawable* drawable);
     void onKeyboardLeft(jimp::KeyState keyState) {};
     void onKeyboardRight(jimp::KeyState keyState) {};
     void onKeyboardUp(jimp::KeyState keyState) {};

@@ -2,7 +2,7 @@
 #define updateThread_hpp
 
 #include <thread>
-#include "animatedSprite.hpp"
+#include "graphic.hpp"
 
 namespace jimp {
 
@@ -11,25 +11,25 @@ class UpdateThread {
 private:
     std::thread* updateThread = nullptr;
     std::mutex* processingLock = nullptr;
-    std::mutex* deleteSpriteLock = nullptr;
+    std::mutex* deleteGraphicLock = nullptr;
     std::function<void(float)> onUpdateCallback;
-    std::function<void(AnimatedSprite*)> onSpriteDeletedCallback;
-    std::vector<AnimatedSprite*>* registeredAnimatedSprites = nullptr;
-    std::list<AnimatedSprite*>* newSprites = nullptr;
+    std::function<void(Graphic*)> onGraphicDeletedCallback;
+    std::vector<Graphic*>* registeredGraphics = nullptr;
+    std::list<Graphic*>* newGraphics = nullptr;
     void stop();
-    void loadNewSpritesIntoUpdateLoop();
+    void loadNewGraphicsIntoUpdateLoop();
     void onUpdate(float elapsedTime);
-    void onSpriteDeleted(AnimatedSprite* animatedSprite);
+    void onGraphicDeleted(Graphic* graphic);
     
 public:
-    UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedSprite*)> onSpriteDeletedCallback);
+    UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(Graphic*)> onGraphicDeletedCallback);
     ~UpdateThread();
     void start();
-    void registerAnimatedSprite(AnimatedSprite* animatedSprite);
+    void registerGraphic(Graphic* graphic);
     void lockForDeletion();
     void unlockForDeletion();
-    std::vector<AnimatedSprite*>* getAllSprites();
-    void removeAllSprites();
+    std::vector<Graphic*>* getAllGraphics();
+    void removeAllGraphics();
     
 };
 
