@@ -4,7 +4,7 @@
 #include <vector>
 #include <list>
 #include <string>
-#include "sprite.hpp"
+#include "drawable.hpp"
 
 namespace jimp {
 
@@ -12,19 +12,18 @@ class Animation {
 
 private:
     std::string id;
-    std::vector<Sprite*>* sprites;
-    uint16_t activeSpriteIndex = 0;
-    GameEngine* gameEngine = nullptr;
+    std::vector<Drawable*>* drawables;
+    uint16_t activeDrawableIndex = 0;
     
 public:
     Animation(std::string id);
     ~Animation();
     std::string getId();
-    void addSprite(Sprite* sprite);
-    long getNumberOfSprites();
-    Sprite* getActiveSprite();
-    std::list<Sprite*> getAllSprites();
-    void switchToNextSprite();
+    void addDrawable(Drawable* drawable);
+    long getNumberOfDrawables();
+    Drawable* getActiveDrawable();
+    std::list<Drawable*> getAllDrawables();
+    void switchToNextDrawable();
     
 };
 

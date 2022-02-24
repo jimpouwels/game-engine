@@ -4,12 +4,11 @@
 #include <stdio.h>
 #include <list>
 
-#include "animatedSprite.hpp"
-#include "direction.hpp"
+#include "graphic.hpp"
 #include "vector2D.hpp"
 #include "sound.hpp"
 
-class Ship : public jimp::AnimatedSprite {
+class Ship : public jimp::Graphic {
     
 private:
     static const float SCALE;
@@ -37,6 +36,7 @@ private:
 
 public:
     Ship();
+    void doOnInit() override;
     void doOnUpdate(float elapsedTime) override;
     void doOnFrame(float elapsedTime) override;
     void onKeyboardLeft(jimp::KeyState keyState) override;
@@ -44,11 +44,11 @@ public:
     void onKeyboardUp(jimp::KeyState keyState) override;
     void onKeyboardSpaceBar(jimp::KeyState keyState) override;
     jimp::Vector2D getRotationPoint() override;
-    void hasCollidedRect(jimp::AnimatedSprite* otherSprite, jimp::Geo2D::Side side) override;
-    void hasCollidedRectRight(jimp::AnimatedSprite* otherSprite) override;
-    void hasCollidedRectLeft(jimp::AnimatedSprite* otherSprite) override;
-    void hasCollidedRectTop(jimp::AnimatedSprite* otherSprite) override;
-    void hasCollidedRectBottom(jimp::AnimatedSprite* otherSprite) override;
+    void hasCollidedRect(jimp::Graphic* otherSprite, jimp::Geo2D::Side side) override;
+    void hasCollidedRectRight(jimp::Graphic* otherSprite) override;
+    void hasCollidedRectLeft(jimp::Graphic* otherSprite) override;
+    void hasCollidedRectTop(jimp::Graphic* otherSprite) override;
+    void hasCollidedRectBottom(jimp::Graphic* otherSprite) override;
     uint16_t getZIndex() override;
 };
 

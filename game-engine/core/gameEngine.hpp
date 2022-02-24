@@ -39,32 +39,33 @@ private:
     void handleEvents();
     void triggerUpdate(float elapsedTime);
     void handleSounds(float elapsedTime);
-    void handleSpriteDeleted(AnimatedSprite* animatedSprite);
+    void handleSpriteDeleted(Graphic* graphic);
     
 protected:
     GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate);
     void start();
     virtual void onFrame(float elapsedTime) {};
     virtual void onUpdate(float elapsedTime) {};
-    virtual void onSpriteDeleted(AnimatedSprite* animatedSprite) {};
+    virtual void onSpriteDeleted(Graphic* graphic) {};
     
 public:
     ~GameEngine();
     static GameEngine* getInstance();
     int getScreenWidth();
     int getScreenHeight();
-    bool isAtLeftEdgeOfScreen(AnimatedSprite* animatedSprite);
-    bool isAtRightEdgeOfScreen(AnimatedSprite* animatedSprite);
-    bool isAtTopEdgeOfScreen(AnimatedSprite* animatedSprite);
-    bool isAtBottomEdgeOfScreen(AnimatedSprite* animatedSprite);
-    bool isOutsideScreenTop(AnimatedSprite* animatedSprite);
-    bool isOutsideScreenBottom(AnimatedSprite* animatedSprite);
-    bool isOutsideScreenLeft(AnimatedSprite* animatedSprite);
-    bool isOutsideScreenRight(AnimatedSprite* animatedSprite);
+    bool isAtLeftEdgeOfScreen(Graphic* graphic);
+    bool isAtRightEdgeOfScreen(Graphic* graphic);
+    bool isAtTopEdgeOfScreen(Graphic* graphic);
+    bool isAtBottomEdgeOfScreen(Graphic* graphic);
+    bool isOutsideScreenTop(Graphic* graphic);
+    bool isOutsideScreenBottom(Graphic* graphic);
+    bool isOutsideScreenLeft(Graphic* graphic);
+    bool isOutsideScreenRight(Graphic* graphic);
     bool isPositionWithinScreen(Vector2D position);
     void addKeyListener(KeyListener* keyListener);
     void draw(Sprite* sprite);
-    void registerAnimatedSprite(AnimatedSprite* animatedSprite);
+    void registerGraphic(Graphic* graphic);
+    void drawRectangle(float width, float height, Vector2D position);
     Image* registerImage(Image* image);
     Sound* registerSound(Sound* sound);
     

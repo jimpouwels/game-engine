@@ -6,7 +6,7 @@ namespace jimp {
 
 bool isWorking = false;
 
-void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedSprite*)> onSpriteDeletedCallback, std::vector<AnimatedSprite*>* registeredSprites, std::mutex* processingLock, std::mutex* deleteSpriteLock) {
+void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Graphic*)> onSpriteDeletedCallback, std::vector<Graphic*>* registeredSprites, std::mutex* processingLock, std::mutex* deleteSpriteLock) {
     isWorking = true;
     std::chrono::time_point<std::chrono::system_clock> previousUpdateTime;
     while (true) {
@@ -18,9 +18,9 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
             previousUpdateTime = currentTime;
             if (elapsed.count() < 1) {
                 onUpdateCallback(elapsed.count());
-                std::list<AnimatedSprite*> spritesToDelete = std::list<AnimatedSprite*>();
+                std::list<Graphic*> spritesToDelete = std::list<Graphic*>();
                 for (uint16_t i = 0; i < registeredSprites->size(); i++) {
-                    AnimatedSprite* registeredSprite = registeredSprites->at(i);
+                    Graphic* registeredSprite = registeredSprites->at(i);
                     for (uint16_t j = i + 1; j < registeredSprites->size(); j++) {
                         registeredSprite->checkCollisionRect(registeredSprites->at(j));
                     }
@@ -46,30 +46,30 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
     }
 }
 
-UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedSprite*)> onSpriteDeletedCallback) {
+UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(Graphic*)> onGraphicDeletedCallback) {
     this->processingLock = new std::mutex();
-    this->deleteSpriteLock = new std::mutex();
+    this->deleteGraphicLock = new std::mutex();
     this->onUpdateCallback = onUpdateCallback;
-    this->onSpriteDeletedCallback = onSpriteDeletedCallback;
-    this->registeredAnimatedSprites = new std::vector<AnimatedSprite*>;
-    this->newSprites = new std::list<AnimatedSprite*>;
+    this->onGraphicDeletedCallback = onGraphicDeletedCallback;
+    this->registeredGraphics = new std::vector<Graphic*>;
+    this->newGraphics = new std::list<Graphic*>;
 }
 
 UpdateThread::~UpdateThread() {
     stop();
-    for (const auto& sprite: *registeredAnimatedSprites) {
+    for (const auto& sprite: *registeredGraphics) {
         delete sprite;
     }
-    delete registeredAnimatedSprites;
+    delete registeredGraphics;
     updateThread->join();
     delete updateThread;
     delete processingLock;
 }
 
 void UpdateThread::start() {
-    auto onSpriteDeletedLambda = std::bind(&UpdateThread::onSpriteDeleted, this, std::placeholders::_1);
-    auto onSpriteUpdateLambda = std::bind(&UpdateThread::onUpdate, this, std::placeholders::_1);
-    this->updateThread = new std::thread(doLoop, onSpriteUpdateLambda, onSpriteDeletedLambda, registeredAnimatedSprites, processingLock, deleteSpriteLock);
+    auto onGraphicDeletedLambda = std::bind(&UpdateThread::onGraphicDeleted, this, std::placeholders::_1);
+    auto onGraphicUpdateLambda = std::bind(&UpdateThread::onUpdate, this, std::placeholders::_1);
+    this->updateThread = new std::thread(doLoop, onGraphicUpdateLambda, onGraphicDeletedLambda, registeredGraphics, processingLock, deleteGraphicLock);
 }
 
 void UpdateThread::stop() {
@@ -79,46 +79,47 @@ void UpdateThread::stop() {
 }
 
 void UpdateThread::lockForDeletion() {
-    deleteSpriteLock->lock();
+    deleteGraphicLock->lock();
 }
 
 void UpdateThread::unlockForDeletion() {
-    deleteSpriteLock->unlock();
+    deleteGraphicLock->unlock();
 }
 
-std::vector<AnimatedSprite*>* UpdateThread::getAllSprites() {
-    return registeredAnimatedSprites;
+std::vector<Graphic*>* UpdateThread::getAllGraphics() {
+    return registeredGraphics;
 }
 
-void UpdateThread::registerAnimatedSprite(AnimatedSprite* animatedSprite) {
-    newSprites->push_back(animatedSprite);
+void UpdateThread::registerGraphic(Graphic* graphic) {
+    newGraphics->push_back(graphic);
 }
 
 void UpdateThread::onUpdate(float elapsedTime) {
-    this->loadNewSpritesIntoUpdateLoop();
+    this->loadNewGraphicsIntoUpdateLoop();
     this->onUpdateCallback(elapsedTime);
 }
 
-void UpdateThread::onSpriteDeleted(AnimatedSprite* animatedSprite) {
-    onSpriteDeletedCallback(animatedSprite);
-    registeredAnimatedSprites->erase(std::remove(registeredAnimatedSprites->begin(), registeredAnimatedSprites->end(), animatedSprite), registeredAnimatedSprites->end());
-    delete animatedSprite;
+void UpdateThread::onGraphicDeleted(Graphic* graphic) {
+    onGraphicDeletedCallback(graphic);
+    registeredGraphics->erase(std::remove(registeredGraphics->begin(), registeredGraphics->end(), graphic), registeredGraphics->end());
+    delete graphic;
 }
 
-void UpdateThread::loadNewSpritesIntoUpdateLoop() {
-    if (newSprites->size() > 0) {
-        std::list<AnimatedSprite*> loadedSprites = std::list<AnimatedSprite*>();
-        for (const auto& newSprite: *newSprites) {
-            if (newSprite->isInitialized()) {
-                registeredAnimatedSprites->push_back(newSprite);
-                loadedSprites.push_back(newSprite);
+void UpdateThread::loadNewGraphicsIntoUpdateLoop() {
+    if (newGraphics->size() > 0) {
+        std::list<Graphic*> loadedGraphics = std::list<Graphic*>();
+        for (const auto& newGraphic: *newGraphics) {
+            if (newGraphic->isInitialized()) {
+                newGraphic->onInit();
+                registeredGraphics->push_back(newGraphic);
+                loadedGraphics.push_back(newGraphic);
             }
         }
-        if (loadedSprites.size() > 0) {
-            for (const auto& loadedSprite: loadedSprites) {
-                newSprites->remove(loadedSprite);
+        if (loadedGraphics.size() > 0) {
+            for (const auto& loadedGraphic: loadedGraphics) {
+                newGraphics->remove(loadedGraphic);
             }
-            std::sort(registeredAnimatedSprites->begin(), registeredAnimatedSprites->end(), [](AnimatedSprite* a, AnimatedSprite* b) {
+            std::sort(registeredGraphics->begin(), registeredGraphics->end(), [](Graphic* a, Graphic* b) {
                 return a->getZIndex() > b->getZIndex();
             });
         }
