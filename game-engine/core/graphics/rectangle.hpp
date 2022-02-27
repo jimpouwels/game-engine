@@ -5,10 +5,16 @@
 
 namespace jimp {
 
-class Rectangle : Shape {
+class Rectangle : public Shape {
+    
+private:
+    float width;
+    float height;
     
 public:
-    sf::Shape getShape() override;
+    Rectangle(int width, int height);
+    int getWidth() override;
+    int getHeight() override;
     
 };
 

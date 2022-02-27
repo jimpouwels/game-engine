@@ -17,9 +17,9 @@ const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 Ship::Ship() : jimp::Graphic(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0, 0.05F) {
     this->firingSound = new jimp::Sound("laser.ogg");
     this->thrustSound = new jimp::Sound("thrust.ogg");
-    addDrawable("default", "spaceship.png");
-    addDrawable("throttling", "spaceship-thrust1.png");
-    addDrawable("throttling", "spaceship-thrust2.png");
+    addSprite("default", "spaceship.png");
+    addSprite("throttling", "spaceship-thrust1.png");
+    addSprite("throttling", "spaceship-thrust2.png");
     markAsInitialized();
 }
 

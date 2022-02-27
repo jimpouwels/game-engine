@@ -11,8 +11,8 @@ const uint16_t Asteroid::FORCE = 10000;
 const float Asteroid::HIT_ANIMATION_DURATION_IN_SECONDS = 0.05F;
 
 Asteroid::Asteroid(jimp::Vector2D position, float directionAngle) : jimp::Graphic(position, 0.1F, 0, -1) {
-    addDrawable("default", "asteroid.png");
-    addDrawable("hit", "asteroid-hit.png");
+    addSprite("default", "asteroid.png");
+    addSprite("hit", "asteroid-hit.png");
     setRotationAngle(90);
     this->hitSound = new jimp::Sound("hit.ogg");
     this->rotationDegreesPerSecond = jimp::MathUtils::randomNumberBetween(30, 130);

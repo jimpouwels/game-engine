@@ -9,6 +9,7 @@
 #include "vector2D.hpp"
 #include "geo2D.hpp"
 #include "keyListener.hpp"
+#include "shape.hpp"
 
 namespace jimp {
 
@@ -36,12 +37,13 @@ private:
     void updateAnimation(float elapsedTime);
     void updateMovement(float elapsedTime);
     void draw(float elapsedTime);
+    void addDrawable(std::string animationId, Drawable* drawable);
     
 protected:
     void setCurrentAnimation(std::string animationId);
     void accelerate(float angle, uint16_t mass, uint16_t force);
     void markAsInitialized();
-    virtual void doOnInit();
+    virtual void doOnInit() { };
     virtual void doOnUpdate(float elapsedTime) { };
     virtual void doOnFrame(float elapsedTime) { };
     virtual void hasCollidedRectLeft(Graphic* otherGraphic) {};
@@ -79,8 +81,8 @@ public:
     virtual uint16_t getZIndex() {
         return 0;
     }
-    void addDrawable(std::string animationId, std::string filePath);
-    void addDrawable(std::string animationId, Drawable* drawable);
+    void addSprite(std::string animationId, std::string filePath);
+    void addShape(std::string animationId, Shape* shape);
     void onKeyboardLeft(jimp::KeyState keyState) {};
     void onKeyboardRight(jimp::KeyState keyState) {};
     void onKeyboardUp(jimp::KeyState keyState) {};
