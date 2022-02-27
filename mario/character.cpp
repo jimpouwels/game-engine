@@ -16,28 +16,18 @@ void Character::doOnUpdate(float elapsedTime) {
     }
     if (!(isMovingLeft && getPosition().x <= 0) &&
         !(isMovingRight && getPosition().x >= (jimp::GameEngine::getInstance()->getScreenWidth() - getWidth()))) {
-//        jimp::Vector2D delta = jimp::Vector2D { .x = 500, .y = 0 };
-//        if (isMovingLeft) {
-//            delta.x = -delta.x;
-//        }
-        float angle = isMovingLeft ? 270 : 90;
-//        accelerate(angle, 0, 5000);
+        jimp::Vector2D delta = jimp::Vector2D { .x = 500, .y = 0 };
+        if (isMovingLeft) {
+            delta.x = -delta.x;
+        }
+        addToPosition(jimp::Timing::toValueForElapsedTime(delta, elapsedTime));
     }
 }
 
 void Character::onKeyboardLeft(jimp::KeyState keyState) {
-    if (keyState == jimp::KeyState::PRESSED) {
-        accelerate(270, 0, 25000);
-    } else {
-        stopMoving();
-    }
+    isMovingLeft = keyState == jimp::KeyState::PRESSED;
 }
 
 void Character::onKeyboardRight(jimp::KeyState keyState) {
-    if (keyState == jimp::KeyState::PRESSED) {
-        accelerate(90, 0, 25000);
-    } else {
-        stopMoving();
-    }
-
+    isMovingRight = keyState == jimp::KeyState::PRESSED;
 }
