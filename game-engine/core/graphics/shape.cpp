@@ -5,4 +5,7 @@ namespace jimp {
 Shape::Shape() : Drawable(0, 0, 0, 0) {
 }
 
+Shape::~Shape() {
+}
+
 }

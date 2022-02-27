@@ -7,6 +7,9 @@ Drawable::Drawable(float x, float y, float scale, float angle) {
     this->position = Vector2D { .x = x, .y = y };
 }
 
+Drawable::~Drawable() {
+}
+
 Vector2D& Drawable::getPosition() {
     return position;
 }
