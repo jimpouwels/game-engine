@@ -42,6 +42,7 @@ private:
 protected:
     void setCurrentAnimation(std::string animationId);
     void accelerate(float angle, uint16_t mass, uint16_t force);
+    void stopMoving();
     void markAsInitialized();
     virtual void doOnInit() { };
     virtual void doOnUpdate(float elapsedTime) { };

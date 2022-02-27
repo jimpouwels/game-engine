@@ -9,3 +9,35 @@ Character::Character() : jimp::Graphic(jimp::Vector2D { .x = 10, .y = 10}, 0.5F,
     this->setPosition(jimp::Vector2D { .x = 10, .y = static_cast<float>((gameEngine->getScreenHeight() - getHeight())) });
     markAsInitialized();
 }
+
+void Character::doOnUpdate(float elapsedTime) {
+    if (!isMovingLeft && !isMovingRight) {
+        return;
+    }
+    if (!(isMovingLeft && getPosition().x <= 0) &&
+        !(isMovingRight && getPosition().x >= (jimp::GameEngine::getInstance()->getScreenWidth() - getWidth()))) {
+//        jimp::Vector2D delta = jimp::Vector2D { .x = 500, .y = 0 };
+//        if (isMovingLeft) {
+//            delta.x = -delta.x;
+//        }
+        float angle = isMovingLeft ? 270 : 90;
+//        accelerate(angle, 0, 5000);
+    }
+}
+
+void Character::onKeyboardLeft(jimp::KeyState keyState) {
+    if (keyState == jimp::KeyState::PRESSED) {
+        accelerate(270, 0, 25000);
+    } else {
+        stopMoving();
+    }
+}
+
+void Character::onKeyboardRight(jimp::KeyState keyState) {
+    if (keyState == jimp::KeyState::PRESSED) {
+        accelerate(90, 0, 25000);
+    } else {
+        stopMoving();
+    }
+
+}
