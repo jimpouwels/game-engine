@@ -4,10 +4,11 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "graphic.hpp"
-#include "sprite.hpp"
 #include "animation.hpp"
 #include "mathUtils.hpp"
 #include "gameEngine.hpp"
+#include "shape.hpp"
+#include "sprite.hpp"
 
 namespace jimp {
 
@@ -182,7 +183,7 @@ float Graphic::getRotationAngle() {
 std::list<Drawable*> Graphic::getAllDrawables() {
     std::list<Drawable*> allDrawables = std::list<Drawable*>();
     for (const auto& [animationId, animation]: *animationMap) {
-        for (const auto& drawable: animation->getAllDrawables()()) {
+        for (const auto& drawable: animation->getAllDrawables()) {
             allDrawables.push_back(drawable);
         }
     }
@@ -224,9 +225,16 @@ void Graphic::updateCurrentDrawableData() {
     activeDrawable->setRotationPoint(getRotationPoint());
 }
 
-void Graphic::addDrawable(std::string animationId, std::string filePath) {
+void Graphic::addSprite(std::string animationId, std::string filePath) {
     Sprite* sprite = new Sprite(position.x, position.y, scale, filePath);
     addDrawable(animationId, sprite);
+}
+
+void Graphic::addShape(std::string animationId, Shape* shape) {
+    shape->setScale(scale);
+    shape->setRotationAngle(angle);
+    shape->setPosition(position);
+    addDrawable(animationId, shape);
 }
 
 void Graphic::addDrawable(std::string animationId, Drawable* drawable) {

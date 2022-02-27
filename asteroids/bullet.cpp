@@ -9,7 +9,7 @@ const uint16_t Bullet::FORCE = 1200;
 const float Bullet::SCALE = 0.3F;
 
 Bullet::Bullet(jimp::Vector2D position, float angle) : jimp::Graphic(position, SCALE, 0, -1) {
-    addDrawable("default", "bullet.png");
+    addSprite("default", "bullet.png");
     setRotationAngle(angle);
     setDeleteOnLeaveScreen(true);
     markAsInitialized();

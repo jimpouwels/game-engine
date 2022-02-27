@@ -15,7 +15,6 @@ private:
         
 public:
     Drawable(float x, float y, float scale, float angle);
-    virtual ~Drawable();
     Vector2D& getPosition();
     void setPosition(Vector2D position);
     void setX(float x);

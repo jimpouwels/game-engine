@@ -4,7 +4,8 @@
 #include <iostream>
 #include <map>
 #include <SFML/Graphics.hpp>
-#include "sprite.hpp"
+#include "drawable.hpp"
+#include "image.hpp"
 #include "sound.hpp"
 #include "spriteCache.hpp"
 #include "keyListener.hpp"
@@ -39,14 +40,14 @@ private:
     void handleEvents();
     void triggerUpdate(float elapsedTime);
     void handleSounds(float elapsedTime);
-    void handleSpriteDeleted(Graphic* graphic);
+    void handleDrawableDeleted(Graphic* graphic);
     
 protected:
     GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate);
     void start();
     virtual void onFrame(float elapsedTime) {};
     virtual void onUpdate(float elapsedTime) {};
-    virtual void onSpriteDeleted(Graphic* graphic) {};
+    virtual void onGraphicDeleted(Graphic* graphic) {};
     
 public:
     ~GameEngine();
@@ -63,7 +64,7 @@ public:
     bool isOutsideScreenRight(Graphic* graphic);
     bool isPositionWithinScreen(Vector2D position);
     void addKeyListener(KeyListener* keyListener);
-    void draw(Sprite* sprite);
+    void draw(Drawable* drawable);
     void registerGraphic(Graphic* graphic);
     void drawRectangle(float width, float height, Vector2D position);
     Image* registerImage(Image* image);

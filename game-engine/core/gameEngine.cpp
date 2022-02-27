@@ -5,6 +5,7 @@
 #include "sprite.hpp"
 #include "spriteCache.hpp"
 #include "graphic.hpp"
+#include "rectangle.hpp"
 #include "keyboardHandler.hpp"
 
 namespace jimp {
@@ -17,7 +18,7 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string 
     this->timePerFrame = 1.0 / desiredFrameRate;
     this->windowTitle = windowTitle;
     auto fp1 = std::bind(&GameEngine::triggerUpdate, this, std::placeholders::_1);
-    auto fp2 = std::bind(&GameEngine::handleSpriteDeleted, this, std::placeholders::_1);
+    auto fp2 = std::bind(&GameEngine::handleDrawableDeleted, this, std::placeholders::_1);
     this->updateThread = new UpdateThread(fp1, fp2);
     this->spriteCache = new SpriteCache();
     this->imageCache = new std::map<std::string, Image*>;
@@ -72,35 +73,44 @@ void GameEngine::start() {
     window->close();
 }
 
-void GameEngine::draw(jimp::Sprite* sprite) {
-    SpriteCache::CachedSprite* cachedSprite = nullptr;
-    if (!spriteCache->hasSprite(sprite)) {
-        sf::Sprite* sfmlSprite = new sf::Sprite();
-        sf::Texture* sfmlTexture = new sf::Texture();
-        sfmlTexture->loadFromImage(sprite->getImage().getImage());
-        sfmlSprite->setTexture(*sfmlTexture);
-        
-        cachedSprite = new SpriteCache::CachedSprite{ .texture = sfmlTexture, .sprite = sfmlSprite };
-        spriteCache->add(sprite, cachedSprite);
-    } else {
-        cachedSprite = spriteCache->getSprite(sprite);
-    }
+void GameEngine::draw(jimp::Drawable* drawable) {
+    if (dynamic_cast<Sprite*>(drawable) != nullptr) {
+        Sprite* sprite = dynamic_cast<Sprite*>(drawable);
+        SpriteCache::CachedSprite* cachedSprite = nullptr;
+        if (!spriteCache->hasSprite(sprite)) {
+            sf::Sprite* sfmlSprite = new sf::Sprite();
+            sf::Texture* sfmlTexture = new sf::Texture();
+            sfmlTexture->loadFromImage(sprite->getImage().getImage());
+            sfmlSprite->setTexture(*sfmlTexture);
+            
+            cachedSprite = new SpriteCache::CachedSprite{ .texture = sfmlTexture, .sprite = sfmlSprite };
+            spriteCache->add(sprite, cachedSprite);
+        } else {
+            cachedSprite = spriteCache->getSprite(sprite);
+        }
 
-    sf::Transform transform;
-    transform.rotate(sprite->getRotationAngle(), sprite->getPosition().x + sprite->getRotationPoint().x, sprite->getPosition().y + sprite->getRotationPoint().y);
-    cachedSprite->sprite->setPosition(sprite->getPosition().x, sprite->getPosition().y);
-    cachedSprite->sprite->setScale(sprite->getScale(), sprite->getScale());
-    window->draw(*cachedSprite->sprite, transform);
+        sf::Transform transform;
+        transform.rotate(sprite->getRotationAngle(), sprite->getPosition().x + sprite->getRotationPoint().x, sprite->getPosition().y + sprite->getRotationPoint().y);
+        cachedSprite->sprite->setPosition(sprite->getPosition().x, sprite->getPosition().y);
+        cachedSprite->sprite->setScale(sprite->getScale(), sprite->getScale());
+        window->draw(*cachedSprite->sprite, transform);
+    } else if (dynamic_cast<Rectangle*>(drawable) != nullptr) {
+        Rectangle* rectangle = dynamic_cast<Rectangle*>(drawable);
+        sf::RectangleShape shape;
+        shape.setSize(sf::Vector2f(rectangle->getWidth(), rectangle->getHeight()));
+        shape.setOutlineColor(sf::Color::Red);
+        shape.setOutlineThickness(5);
+        shape.setPosition(rectangle->getPosition().x, rectangle->getPosition().y);
+        shape.setFillColor(sf::Color::Green);
+        shape.setOutlineColor(sf::Color::Green);
+        window->draw(shape);
+    }
+    
 }
 
 void GameEngine::registerGraphic(Graphic *graphic) {
     addKeyListener(graphic);
     updateThread->registerGraphic(graphic);
-}
-
-void GameEngine::drawRectangle(float width, float height, Vector2D position) {
-    
-    window->draw(rectangle);
 }
 
 Image* GameEngine::registerImage(Image* image) {
@@ -174,10 +184,10 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     onFrame(elapsedTimeSincePreviousFrame);
     
     updateThread->lockForDeletion();
-    for (const auto& sprite: *updateThread->getAllGraphics()) {
-        if (!sprite->isMarkedForDeletion() && sprite->isInitialized()) {
-            sprite->onFrame(elapsedTimeSincePreviousFrame);
-            draw(sprite->getActiveSprite());
+    for (const auto& graphic: *updateThread->getAllGraphics()) {
+        if (!graphic->isMarkedForDeletion() && graphic->isInitialized()) {
+            graphic->onFrame(elapsedTimeSincePreviousFrame);
+            draw(graphic->getActiveDrawable());
         }
     }
     
@@ -198,11 +208,14 @@ void GameEngine::triggerUpdate(float elapsedTime) {
     onUpdate(elapsedTime);
 }
 
-void GameEngine::handleSpriteDeleted(Graphic* graphic) {
-    for (const auto& sprite: graphic->getAllSprites()) {
-         spriteCache->remove(sprite);
+void GameEngine::handleDrawableDeleted(Graphic* graphic) {
+    for (const auto& drawable: graphic->getAllDrawables()) {
+        Sprite* sprite = dynamic_cast<Sprite*>(drawable);
+        if (sprite != nullptr) {
+            spriteCache->remove(sprite);
+        }
     }
-    onSpriteDeleted(graphic);
+    onGraphicDeleted(graphic);
     keyboardHandler->removeKeyListener(graphic);
 }
 
