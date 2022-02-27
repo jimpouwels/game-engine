@@ -10,6 +10,7 @@ class Shape : public Drawable {
     
 public:
     Shape();
+    ~Shape();
 };
 
 }

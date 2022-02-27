@@ -8,11 +8,11 @@ Rectangle::Rectangle(int width, int height) : Shape() {
 }
 
 int Rectangle::getWidth() {
-    return width;
+    return width * getScale();
 }
 
 int Rectangle::getHeight() {
-    return height;
+    return height * getScale();
 }
 
 }
