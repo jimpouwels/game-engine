@@ -10,7 +10,7 @@
 class Asteroid : public jimp::Graphic {
   
 private:
-    static const uint16_t FORCE;
+    static const uint16_t SPEED_IN_PIXELS_PER_SECOND;
     static const float HIT_ANIMATION_DURATION_IN_SECONDS;
     jimp::Vector2D velocity = jimp::Vector2D { .x = 0, .y = 0 };
     float totalHitAnimationDuration = 0.0F;
@@ -18,6 +18,7 @@ private:
     bool rotatingDirection = false;
     bool isAnimatingHit = false;
     int hitCount = 0;
+    float directionAngle = 0;
     bool isEnteringScreen = true;
     bool hasBeenFullyInsideScreen = false;
     jimp::Sound* hitSound = nullptr;

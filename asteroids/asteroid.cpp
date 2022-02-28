@@ -7,17 +7,17 @@
 
 #include <iostream>
 
-const uint16_t Asteroid::FORCE = 10000;
+const uint16_t Asteroid::SPEED_IN_PIXELS_PER_SECOND = 150;
 const float Asteroid::HIT_ANIMATION_DURATION_IN_SECONDS = 0.05F;
 
 Asteroid::Asteroid(jimp::Vector2D position, float directionAngle) : jimp::Graphic(position, 0.1F, 0, -1) {
     addSprite("default", "asteroid.png");
     addSprite("hit", "asteroid-hit.png");
     setRotationAngle(90);
+    this->directionAngle = directionAngle;
     this->hitSound = new jimp::Sound("hit.ogg");
     this->rotationDegreesPerSecond = jimp::MathUtils::randomNumberBetween(30, 130);
     this->rotatingDirection = jimp::MathUtils::randomNumberBetween(0, 2) == 1;
-    accelerate(directionAngle, 0, FORCE);
     markAsInitialized();
 }
 
@@ -30,6 +30,7 @@ void Asteroid::doOnInit() {
 void Asteroid::doOnUpdate(float elapsedTime) {
     updateDirection(elapsedTime);
     updateRotation(elapsedTime);
+    move(directionAngle, SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
     animateHit(elapsedTime);
 }
 
@@ -55,28 +56,28 @@ uint16_t Asteroid::getZIndex() {
 void Asteroid::hasCollidedRectLeft(jimp::Graphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-        getVelocity().x = -getVelocity().x;
+        directionAngle = jimp::Geo2D::inverseAngleHorizontally(directionAngle);
     }
 }
 
 void Asteroid::hasCollidedRectRight(jimp::Graphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-        getVelocity().x = -getVelocity().x;
+        directionAngle = jimp::Geo2D::inverseAngleHorizontally(directionAngle);
     }
 }
 
 void Asteroid::hasCollidedRectTop(jimp::Graphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-        getVelocity().y = -getVelocity().y;
+        directionAngle = jimp::Geo2D::inverseAngleVertically(directionAngle);
     }
 }
 
 void Asteroid::hasCollidedRectBottom(jimp::Graphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-        getVelocity().y = -getVelocity().y;
+        directionAngle = jimp::Geo2D::inverseAngleVertically(directionAngle);
     }
 }
 
@@ -85,10 +86,10 @@ void Asteroid::updateDirection(float elapsedTime) {
         isEnteringScreen = false;
     }
     if (jimp::GameEngine::getInstance()->isAtTopEdgeOfScreen(this) || jimp::GameEngine::getInstance()->isAtBottomEdgeOfScreen(this)) {
-        getVelocity().y = -getVelocity().y;
+        directionAngle = jimp::Geo2D::inverseAngleVertically(directionAngle);
     }
     if (!isEnteringScreen && (jimp::GameEngine::getInstance()->isAtLeftEdgeOfScreen(this) || jimp::GameEngine::getInstance()->isAtRightEdgeOfScreen(this))) {
-        getVelocity().x = -getVelocity().x;
+        directionAngle = jimp::Geo2D::inverseAngleHorizontally(directionAngle);
     }
 }
 

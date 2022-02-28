@@ -197,10 +197,9 @@ void Graphic::accelerate(float angle, uint16_t mass, uint16_t force) {
     this->moveForce = force;
 }
 
-void Graphic::stopMoving() {
-    this->isAccelerating = false;
-    this->moveForce = 0;
-    this->velocity = jimp::Vector2D { .x = 0, .y = 0 };
+void Graphic::move(float angle, float pixelsPerSecond, float elapsedTime) {
+    jimp::Vector2D delta = jimp::Geo2D::vectorFrom(angle, pixelsPerSecond, elapsedTime);
+    addToPosition(delta);
 }
 
 void Graphic::setRotationAngle(float angle) {
