@@ -6,10 +6,11 @@ This is my attempt to build a simple game engine. The game engine is equipped wi
   - size
   - angle
   - scale
-- graphics based on sprite groups
+- animated graphics
 - shapes
 - keyboard handling
 - basic geo calculation utilities
+- timing utilities
 
 ## Install
 
