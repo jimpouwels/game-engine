@@ -41,11 +41,11 @@ The game engine manages these two processes and you don't have to intervene with
 
 At this point, the game will be in a running state. 
 
-### AnimatedSprite
-You can add sprites to the scene by creating an AnimatedSprite, which is done by creating a new class that extends from `jimp::AnimatedSprite`.
+### Graphics
+You can add sprites to the scene by creating a Graphic, which is done by creating a new class that extends from `jimp::Graphic`.
 
 #### Registration
-You can make an AnimatedSprite part of the game loop by registering it. This happens automatically when instantiating your class that extends `AnimatedSprite`. However, to prevent partially initialized AnimatedSprites to be made part of the game loop, make sure you call `markAsInitialized()` at the end of your class' constructor.
+You can make a Graphic part of the game loop by registering it. This happens automatically when instantiating your class that extends `Graphic`. However, to prevent partially initialized graphics to be made part of the game loop, make sure you call `markAsInitialized()` at the end of your class' constructor.
 
 **Note**
 Don't register sprites or sounds with the game engine yourself. The `AnimatedSprite` class will do that for you.
@@ -53,11 +53,8 @@ In other words, **don't do this**:
 
 ```
 SpaceShip* spaceship = new SpaceShip();
-gameEngine->registerAnimatedSprite(spaceship);
+gameEngine->registerGraphic(spaceship);
 ```
-
-#### Shapes
-Coming soon!
 
 #### Graphics
 The model for a `Graphic` is as follows: 
@@ -66,7 +63,7 @@ The model for a `Graphic` is as follows:
   - `Animation[]`
     - `Sprite[]`
 
-In essence, a Graphic is a complex sprite that represents a single 'character' or 'object' on the screen that can be rendered in the form of different animations which each constists of a collection of sprites rendered in order. Example:
+In essence, a Graphic is a complex sprite that represents a single character, object or shape on the screen that can be rendered in the form of different animations which each constists of a collection of sprites rendered in order. Example:
 
 - Graphic: running cartoon
   - Animation1
