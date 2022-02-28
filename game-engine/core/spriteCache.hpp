@@ -3,7 +3,7 @@
 
 #include <map>
 #include <SFML/Graphics.hpp>
-#include "graphic.hpp"
+#include "animatedGraphic.hpp"
 
 namespace jimp {
 

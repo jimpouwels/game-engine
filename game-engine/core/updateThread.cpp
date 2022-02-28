@@ -6,7 +6,7 @@ namespace jimp {
 
 bool isWorking = false;
 
-void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Graphic*)> onSpriteDeletedCallback, std::vector<Graphic*>* registeredSprites, std::mutex* processingLock, std::mutex* deleteSpriteLock) {
+void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onSpriteDeletedCallback, std::vector<AnimatedGraphic*>* registeredSprites, std::mutex* processingLock, std::mutex* deleteSpriteLock) {
     isWorking = true;
     std::chrono::time_point<std::chrono::system_clock> previousUpdateTime;
     while (true) {
@@ -18,9 +18,9 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Grap
             previousUpdateTime = currentTime;
             if (elapsed.count() < 1) {
                 onUpdateCallback(elapsed.count());
-                std::list<Graphic*> spritesToDelete = std::list<Graphic*>();
+                std::list<AnimatedGraphic*> spritesToDelete = std::list<AnimatedGraphic*>();
                 for (uint16_t i = 0; i < registeredSprites->size(); i++) {
-                    Graphic* registeredSprite = registeredSprites->at(i);
+                    AnimatedGraphic* registeredSprite = registeredSprites->at(i);
                     for (uint16_t j = i + 1; j < registeredSprites->size(); j++) {
                         registeredSprite->checkCollisionRect(registeredSprites->at(j));
                     }
@@ -46,13 +46,13 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Grap
     }
 }
 
-UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(Graphic*)> onGraphicDeletedCallback) {
+UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback) {
     this->processingLock = new std::mutex();
     this->deleteGraphicLock = new std::mutex();
     this->onUpdateCallback = onUpdateCallback;
     this->onGraphicDeletedCallback = onGraphicDeletedCallback;
-    this->registeredGraphics = new std::vector<Graphic*>;
-    this->newGraphics = new std::list<Graphic*>;
+    this->registeredGraphics = new std::vector<AnimatedGraphic*>;
+    this->newGraphics = new std::list<AnimatedGraphic*>;
 }
 
 UpdateThread::~UpdateThread() {
@@ -86,11 +86,11 @@ void UpdateThread::unlockForDeletion() {
     deleteGraphicLock->unlock();
 }
 
-std::vector<Graphic*>* UpdateThread::getAllGraphics() {
+std::vector<AnimatedGraphic*>* UpdateThread::getAllGraphics() {
     return registeredGraphics;
 }
 
-void UpdateThread::registerGraphic(Graphic* graphic) {
+void UpdateThread::registerGraphic(AnimatedGraphic* graphic) {
     newGraphics->push_back(graphic);
 }
 
@@ -99,7 +99,7 @@ void UpdateThread::onUpdate(float elapsedTime) {
     this->onUpdateCallback(elapsedTime);
 }
 
-void UpdateThread::onGraphicDeleted(Graphic* graphic) {
+void UpdateThread::onGraphicDeleted(AnimatedGraphic* graphic) {
     onGraphicDeletedCallback(graphic);
     registeredGraphics->erase(std::remove(registeredGraphics->begin(), registeredGraphics->end(), graphic), registeredGraphics->end());
     delete graphic;
@@ -107,7 +107,7 @@ void UpdateThread::onGraphicDeleted(Graphic* graphic) {
 
 void UpdateThread::loadNewGraphicsIntoUpdateLoop() {
     if (newGraphics->size() > 0) {
-        std::list<Graphic*> loadedGraphics = std::list<Graphic*>();
+        std::list<AnimatedGraphic*> loadedGraphics = std::list<AnimatedGraphic*>();
         for (const auto& newGraphic: *newGraphics) {
             if (newGraphic->isInitialized()) {
                 newGraphic->onInit();
@@ -119,7 +119,7 @@ void UpdateThread::loadNewGraphicsIntoUpdateLoop() {
             for (const auto& loadedGraphic: loadedGraphics) {
                 newGraphics->remove(loadedGraphic);
             }
-            std::sort(registeredGraphics->begin(), registeredGraphics->end(), [](Graphic* a, Graphic* b) {
+            std::sort(registeredGraphics->begin(), registeredGraphics->end(), [](AnimatedGraphic* a, AnimatedGraphic* b) {
                 return a->getZIndex() > b->getZIndex();
             });
         }

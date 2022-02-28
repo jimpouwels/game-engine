@@ -1,6 +1,6 @@
 #include "gameEngine.hpp"
 #include "sprite.hpp"
-#include "graphic.hpp"
+#include "animatedGraphic.hpp"
 #include "asteroid.hpp"
 #include "bullet.hpp"
 #include "ship.hpp"
@@ -44,8 +44,8 @@ public:
     }
 };
 
-int main() {
-    Asteroids game(1500, 900, "Asteroids");
-    game.startGame();
-    return 0;
-}
+//int main() {
+//    Asteroids game(1500, 900, "Asteroids");
+//    game.startGame();
+//    return 0;
+//}

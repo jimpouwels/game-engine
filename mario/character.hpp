@@ -1,10 +1,10 @@
 #ifndef character_hpp
 #define character_hpp
 
-#include "graphic.hpp"
+#include "animatedGraphic.hpp"
 #include "vector2D.hpp"
 
-class Character : public jimp::Graphic {
+class Character : public jimp::AnimatedGraphic {
   
 private:
     bool isMovingLeft = false;

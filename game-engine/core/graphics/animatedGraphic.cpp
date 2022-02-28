@@ -3,7 +3,7 @@
 #include <list>
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "graphic.hpp"
+#include "animatedGraphic.hpp"
 #include "animation.hpp"
 #include "mathUtils.hpp"
 #include "gameEngine.hpp"
@@ -12,7 +12,7 @@
 
 namespace jimp {
 
-Graphic::Graphic(Vector2D position, float scale, int rotationAngle, float spriteSwapIntervalInSeconds) {
+AnimatedGraphic::AnimatedGraphic(Vector2D position, float scale, int rotationAngle, float spriteSwapIntervalInSeconds) {
     this->position = position;
     this->scale = scale;
     animationMap = new std::map<std::string, Animation*>;
@@ -21,7 +21,7 @@ Graphic::Graphic(Vector2D position, float scale, int rotationAngle, float sprite
     this->angle = rotationAngle;
 }
 
-Graphic::~Graphic() {
+AnimatedGraphic::~AnimatedGraphic() {
     for (const auto& [animationId, animation]: *animationMap) {
         delete animation;
     }
@@ -29,17 +29,17 @@ Graphic::~Graphic() {
     delete lock;
 }
 
-void Graphic::onInit() {
+void AnimatedGraphic::onInit() {
     doOnInit();
 }
 
-void Graphic::onFrame(float elapsedTime) {
+void AnimatedGraphic::onFrame(float elapsedTime) {
     lock->lock();
     doOnFrame(elapsedTime);
     lock->unlock();
 }
 
-void Graphic::onUpdate(float elapsedTime) {
+void AnimatedGraphic::onUpdate(float elapsedTime) {
     lock->lock();
     if (deleteOnLeaveScreen && !GameEngine::getInstance()->isPositionWithinScreen(getPosition())) {
         markForDeletion();
@@ -51,38 +51,38 @@ void Graphic::onUpdate(float elapsedTime) {
     lock->unlock();
 }
 
-void Graphic::markForDeletion() {
+void AnimatedGraphic::markForDeletion() {
     markedForDeletion = true;
 }
 
-void Graphic::markAsInitialized() {
+void AnimatedGraphic::markAsInitialized() {
     initialized = true;
 }
 
-bool Graphic::isInitialized() {
+bool AnimatedGraphic::isInitialized() {
     return initialized;
 }
 
-void Graphic::setDeleteOnLeaveScreen(bool deleteOnLeaveScreen) {
+void AnimatedGraphic::setDeleteOnLeaveScreen(bool deleteOnLeaveScreen) {
     this->deleteOnLeaveScreen = deleteOnLeaveScreen;
 }
 
-Vector2D Graphic::getRotationPoint() {
+Vector2D AnimatedGraphic::getRotationPoint() {
     return Vector2D { getWidth() / 2.0F, .y = getHeight() / 2.0F };
 }
 
-Drawable* Graphic::getActiveDrawable() {
+Drawable* AnimatedGraphic::getActiveDrawable() {
     return activeAnimation->getActiveDrawable();
 }
 
-void Graphic::setCurrentAnimation(std::string animationId) {
+void AnimatedGraphic::setCurrentAnimation(std::string animationId) {
     if (activeAnimation->getId().compare(animationId) != 0) {
         activeAnimation = animationMap->find(animationId)->second;
         updateCurrentDrawableData();
     }
 }
 
-bool Graphic::checkCollisionRect(Graphic* otherGraphic) {
+bool AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic) {
     Vector2D otherGraphicPosition = otherGraphic->getPosition();
     
     if (abs((getPosition().x + getWidth()) - otherGraphicPosition.x) <= 2 &&
@@ -130,7 +130,7 @@ bool Graphic::checkCollisionRect(Graphic* otherGraphic) {
     return false;
 }
 
-void Graphic::updateAnimation(float elapsedTime) {
+void AnimatedGraphic::updateAnimation(float elapsedTime) {
     elapsedTimeSinceLastSwap += elapsedTime;
     if (drawableSwapIntervalInSeconds >= 0 && elapsedTimeSinceLastSwap >= drawableSwapIntervalInSeconds) {
         activeAnimation->switchToNextDrawable();
@@ -139,48 +139,48 @@ void Graphic::updateAnimation(float elapsedTime) {
     updateCurrentDrawableData();
 }
 
-void Graphic::setX(float x) {
+void AnimatedGraphic::setX(float x) {
     position.x = x;
 }
 
-void Graphic::setY(float y) {
+void AnimatedGraphic::setY(float y) {
     position.y = y;
 }
 
-Vector2D& Graphic::getPosition() {
+Vector2D& AnimatedGraphic::getPosition() {
     return position;
 }
 
-Vector2D& Graphic::getVelocity() {
+Vector2D& AnimatedGraphic::getVelocity() {
     return velocity;
 }
 
-void Graphic::setPosition(Vector2D position) {
+void AnimatedGraphic::setPosition(Vector2D position) {
     this->position = position;
 }
 
-void Graphic::addToPosition(Vector2D delta) {
+void AnimatedGraphic::addToPosition(Vector2D delta) {
     position.x += delta.x;
     position.y += delta.y;
 }
 
-int Graphic::getWidth() {
+int AnimatedGraphic::getWidth() {
     return getActiveDrawable()->getWidth();
 }
 
-int Graphic::getHeight() {
+int AnimatedGraphic::getHeight() {
     return getActiveDrawable()->getHeight();
 }
 
-float Graphic::getScale() {
+float AnimatedGraphic::getScale() {
     return scale;
 }
 
-float Graphic::getRotationAngle() {
+float AnimatedGraphic::getRotationAngle() {
     return angle;
 }
 
-std::list<Drawable*> Graphic::getAllDrawables() {
+std::list<Drawable*> AnimatedGraphic::getAllDrawables() {
     std::list<Drawable*> allDrawables = std::list<Drawable*>();
     for (const auto& [animationId, animation]: *animationMap) {
         for (const auto& drawable: animation->getAllDrawables()) {
@@ -190,31 +190,31 @@ std::list<Drawable*> Graphic::getAllDrawables() {
     return allDrawables;
 }
 
-void Graphic::accelerate(float angle, uint16_t mass, uint16_t force) {
+void AnimatedGraphic::accelerate(float angle, uint16_t mass, uint16_t force) {
     this->isAccelerating = true;
     this->velocityAngle = jimp::Geo2D::normalizeAngle(angle);
     this->mass = mass;
     this->moveForce = force;
 }
 
-void Graphic::move(float angle, float pixelsPerSecond, float elapsedTime) {
+void AnimatedGraphic::move(float angle, float pixelsPerSecond, float elapsedTime) {
     jimp::Vector2D delta = jimp::Geo2D::vectorFrom(angle, pixelsPerSecond, elapsedTime);
     addToPosition(delta);
 }
 
-void Graphic::setRotationAngle(float angle) {
+void AnimatedGraphic::setRotationAngle(float angle) {
     this->angle = angle;
 }
 
-bool Graphic::isMarkedForDeletion() {
+bool AnimatedGraphic::isMarkedForDeletion() {
     return markedForDeletion;
 }
 
-uint16_t Graphic::getVelocityAngle() {
+uint16_t AnimatedGraphic::getVelocityAngle() {
     return velocityAngle;
 }
 
-void Graphic::updateMovement(float elapsedTime) {
+void AnimatedGraphic::updateMovement(float elapsedTime) {
     if (isAccelerating) {
         velocity = velocity + jimp::Geo2D::vectorFrom(moveForce, velocityAngle, mass, elapsedTime);
         isAccelerating = false;
@@ -222,7 +222,7 @@ void Graphic::updateMovement(float elapsedTime) {
     addToPosition(jimp::Timing::toValueForElapsedTime(velocity, elapsedTime));
 }
 
-void Graphic::updateCurrentDrawableData() {
+void AnimatedGraphic::updateCurrentDrawableData() {
     Drawable* activeDrawable = getActiveDrawable();
     activeDrawable->setPosition(position);
     activeDrawable->setScale(scale);
@@ -230,19 +230,19 @@ void Graphic::updateCurrentDrawableData() {
     activeDrawable->setRotationPoint(getRotationPoint());
 }
 
-void Graphic::addSprite(std::string animationId, std::string filePath) {
+void AnimatedGraphic::addSprite(std::string animationId, std::string filePath) {
     Sprite* sprite = new Sprite(position.x, position.y, scale, filePath);
     addDrawable(animationId, sprite);
 }
 
-void Graphic::addShape(std::string animationId, Shape* shape) {
+void AnimatedGraphic::addShape(std::string animationId, Shape* shape) {
     shape->setScale(scale);
     shape->setRotationAngle(angle);
     shape->setPosition(position);
     addDrawable(animationId, shape);
 }
 
-void Graphic::addDrawable(std::string animationId, Drawable* drawable) {
+void AnimatedGraphic::addDrawable(std::string animationId, Drawable* drawable) {
     Animation* animation = nullptr;
     if (animationMap->find(animationId) == animationMap->end()) {
         animation = new Animation(animationId);

@@ -14,7 +14,7 @@ const uint8_t Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.15F;
 const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 
-Ship::Ship() : jimp::Graphic(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0, 0.05F) {
+Ship::Ship() : jimp::AnimatedGraphic(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0, 0.05F) {
     this->firingSound = new jimp::Sound("laser.ogg");
     this->thrustSound = new jimp::Sound("thrust.ogg");
     addSprite("default", "spaceship.png");
@@ -43,35 +43,35 @@ uint16_t Ship::getZIndex() {
     return 1;
 }
 
-void Ship::hasCollidedRect(jimp::Graphic *otherSprite, jimp::Geo2D::Side side) {
+void Ship::hasCollidedRect(jimp::AnimatedGraphic *otherSprite, jimp::Geo2D::Side side) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
         
     }
 }
 
-void Ship::hasCollidedRectRight(jimp::Graphic* otherSprite) {
+void Ship::hasCollidedRectRight(jimp::AnimatedGraphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
         
     }
 }
 
-void Ship::hasCollidedRectLeft(jimp::Graphic* otherSprite) {
+void Ship::hasCollidedRectLeft(jimp::AnimatedGraphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
        
     }
 }
 
-void Ship::hasCollidedRectTop(jimp::Graphic* otherSprite) {
+void Ship::hasCollidedRectTop(jimp::AnimatedGraphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
         
     }
 }
 
-void Ship::hasCollidedRectBottom(jimp::Graphic* otherSprite) {
+void Ship::hasCollidedRectBottom(jimp::AnimatedGraphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
         
