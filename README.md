@@ -41,14 +41,14 @@ The game engine manages these two processes and you don't have to intervene with
 
 At this point, the game will be in a running state. 
 
-### Graphics
-You can add sprites to the scene by creating a Graphic, which is done by creating a new class that extends from `jimp::Graphic`.
+### AnimatedGraphic
+You can add sprites to the scene by creating an AnimatedGraphic, which is done by creating a new class that extends from `jimp::AnimatedGraphic`.
 
 #### Registration
-You can make a Graphic part of the game loop by registering it. This happens automatically when instantiating your class that extends `Graphic`. However, to prevent partially initialized graphics to be made part of the game loop, make sure you call `markAsInitialized()` at the end of your class' constructor.
+You can make an AnimatedGraphic part of the game loop by registering it. This happens automatically when instantiating your class that extends `AnimatedGraphic`. However, to prevent partially initialized graphics to be made part of the game loop, make sure you call `markAsInitialized()` at the end of your class' constructor.
 
 **Note**
-Don't register sprites or sounds with the game engine yourself. The `AnimatedSprite` class will do that for you.
+Don't register an AnimatedGraphic (or sounds) with the game engine explicitely. The `AnimatedSprite` class will do that for you.
 In other words, **don't do this**:
 
 ```
@@ -56,16 +56,16 @@ SpaceShip* spaceship = new SpaceShip();
 gameEngine->registerGraphic(spaceship);
 ```
 
-#### Graphics
-The model for a `Graphic` is as follows: 
+#### Animations
+The model for an `AnimatedGraphic` is as follows: 
 
-- `Graphic`
+- `AnimatedGraphic`
   - `Animation[]`
     - `Sprite[]`
 
-In essence, a Graphic is a complex sprite that represents a single character, object or shape on the screen that can be rendered in the form of different animations which each constists of a collection of sprites rendered in order. Example:
+In essence, an AnimatedGraphic is a complex sprite that represents a single character, object or shape on the screen that can be rendered in the form of different animations which each constists of a collection of sprites rendered in order. Example:
 
-- Graphic: running cartoon
+- AnimatedGraphic: running cartoon
   - Animation1
     - name: "running left"
     - sprites: 5 sprites that represent running to the left
@@ -78,7 +78,7 @@ It's up to the game developer to switch between animations at the right time (as
 Code example of a space ship:
 
 ```
-SpaceShip::SpaceShip() : jimp::Graphic(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0, 0.05F) {
+SpaceShip::SpaceShip() : jimp::AnimatedGraphic(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0, 0.05F) {
     addSprite("idle", "spaceship.png");
     addSprite("throttling", "spaceship-thrust1.png");
     addSprite("throttling", "spaceship-thrust2.png");
@@ -86,9 +86,9 @@ SpaceShip::SpaceShip() : jimp::Graphic(jimp::Vector2D { .x = 400, .y = 400 }, SC
 }
 ```
 
-In this example, we created a Graphic `SpaceShip`. It has two animations, being `idle` and `throttling`. The first animation you add a sprite for will be the active animation, in this case `idle`. 
+In this example, we created an AnimatedGraphic `SpaceShip`. It has two animations, being `idle` and `throttling`. The first animation you add a sprite for will be the active animation, in this case `idle`. 
 
-**Do note that at the end of the constructor of a Graphic, it has to be marked as initialized by calling `markAsInitialized()`. This is important for the game engine to know that the Graphic is ready to be rendered to the screen.**
+**Do note that at the end of the constructor of an AnimatedGraphic, it has to be marked as initialized by calling `markAsInitialized()`. This is important for the game engine to know that the AnimatedGraphic is ready to be rendered to the screen.**
 
 You can switch between `throttling` and `idle` like this:
 
@@ -102,21 +102,21 @@ void Ship::onKeyboardUp(jimp::KeyState keyState) {
 }
 ```
 
-When the active animation becomes `throttling`, the game engine will start switching between sprite `spaceship-thrust1.png` and `spaceship-thrust2.png` every 0.05 seconds (`spriteSwapIntervalInSeconds`). This value has to be passed to the `Graphic` constructor. Keep in mind that bringing the `spriteSwapIntervalInSeconds` value below the duration of a frame (dependent on fps), there will no longer be a noticable difference in swapping speed.
+When the active animation becomes `throttling`, the game engine will start switching between sprite `spaceship-thrust1.png` and `spaceship-thrust2.png` every 0.05 seconds (`spriteSwapIntervalInSeconds`). This value has to be passed to the `AnimatedGraphic` constructor. Keep in mind that bringing the `spriteSwapIntervalInSeconds` value below the duration of a frame (dependent on fps), there will no longer be a noticable difference in swapping speed.
 
 #### doOnUpdate and doOnFrame
-For each class extending from Graphic, you have to implement the following functions:
+For each class extending from AnimatedGraphic, you have to implement the following functions:
 
-- `doOnUpdate(float elapsedTime)`: Perform all the logic that is required to update the state of the Graphic (e.g. move the sprite across the screen or switch to a different animation).
-- `doOnFrame(float elapsedTime)`: Perform all the logic that is required to render the Graphic. For simple cases, you don't have to do anything here.
+- `doOnUpdate(float elapsedTime)`: Perform all the logic that is required to update the state of the AnimatedGraphic (e.g. move the sprite across the screen or switch to a different animation).
+- `doOnFrame(float elapsedTime)`: Perform all the logic that is required to render the AnimatedGraphic. For simple cases, you don't have to do anything here.
+
+#### Shapes
 
 #### Concurrency
-Updating the state of an Graphic and rendering it takes place on two different threads. Keep the following in mind:
+Updating the state of an AnimatedGraphic and rendering it takes place on two different threads. Keep the following in mind:
 
-- A Graphic will never be rendered while it's in updating state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get rendered until that function completes.
-- A Graphic will never be updated while it's in rendering state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get updated until that function completes.
-
-### Sprite
+- An AnimatedGraphic will never be rendered while it's in updating state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get rendered until that function completes.
+- An AnimatedGraphic will never be updated while it's in rendering state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get updated until that function completes.
 
 ### Timing
 // Utilities
