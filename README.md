@@ -6,7 +6,8 @@ This is my attempt to build a simple game engine. The game engine is equipped wi
   - size
   - angle
   - scale
-- animated sprites based on sprite groups
+- graphics based on sprite groups
+- shapes
 - keyboard handling
 - basic geo calculation utilities
 
@@ -55,16 +56,19 @@ SpaceShip* spaceship = new SpaceShip();
 gameEngine->registerAnimatedSprite(spaceship);
 ```
 
-#### Animations
-The model for an AnimatedSprite is as follows: 
+#### Shapes
+Coming soon!
 
-- `AnimatedSprite`
+#### Graphics
+The model for a `Graphic` is as follows: 
+
+- `Graphic`
   - `Animation[]`
     - `Sprite[]`
 
-In essence, an AnimatedSprites is a complex sprite that represents a single 'character' or 'object' on the screen that can be rendered in the form of different animations which each constists of a collection of sprites rendered in order. Example:
+In essence, a Graphic is a complex sprite that represents a single 'character' or 'object' on the screen that can be rendered in the form of different animations which each constists of a collection of sprites rendered in order. Example:
 
-- AnimatedSprite: running person
+- Graphic: running cartoon
   - Animation1
     - name: "running left"
     - sprites: 5 sprites that represent running to the left
@@ -77,7 +81,7 @@ It's up to the game developer to switch between animations at the right time (as
 Code example of a space ship:
 
 ```
-SpaceShip::SpaceShip() : jimp::AnimatedSprite(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0, 0.05F) {
+SpaceShip::SpaceShip() : jimp::Graphic(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0, 0.05F) {
     addSprite("idle", "spaceship.png");
     addSprite("throttling", "spaceship-thrust1.png");
     addSprite("throttling", "spaceship-thrust2.png");
@@ -85,9 +89,9 @@ SpaceShip::SpaceShip() : jimp::AnimatedSprite(jimp::Vector2D { .x = 400, .y = 40
 }
 ```
 
-In this example, we created an AnimatedSprite `SpaceShip`. It has two animations, being `idle` and `throttling`. The first animation you add a sprite for will be the active animation, in this case `idle`. 
+In this example, we created a Graphic `SpaceShip`. It has two animations, being `idle` and `throttling`. The first animation you add a sprite for will be the active animation, in this case `idle`. 
 
-**Do note that at the end of the constructor of an AnimatedSprite, it has to be marked as initialized by calling `markAsInitialized()`. This is important for the game engine to know that the AnimatedSprite is ready to be rendered to the screen.**
+**Do note that at the end of the constructor of a Graphic, it has to be marked as initialized by calling `markAsInitialized()`. This is important for the game engine to know that the Graphic is ready to be rendered to the screen.**
 
 You can switch between `throttling` and `idle` like this:
 
@@ -101,19 +105,19 @@ void Ship::onKeyboardUp(jimp::KeyState keyState) {
 }
 ```
 
-When the active animation becomes `throttling`, the game engine will start switching between sprite `spaceship-thrust1.png` and `spaceship-thrust2.png` every 0.05 seconds (`spriteSwapIntervalInSeconds`). This value has to be passed to the `AnimatedSprite` constructor. Keep in mind that bringing the `spriteSwapIntervalInSeconds` value below the duration of a frame (dependent on fps), there will no longer be a noticable difference in swapping speed.
+When the active animation becomes `throttling`, the game engine will start switching between sprite `spaceship-thrust1.png` and `spaceship-thrust2.png` every 0.05 seconds (`spriteSwapIntervalInSeconds`). This value has to be passed to the `Graphic` constructor. Keep in mind that bringing the `spriteSwapIntervalInSeconds` value below the duration of a frame (dependent on fps), there will no longer be a noticable difference in swapping speed.
 
 #### doOnUpdate and doOnFrame
-For each class extending from AnimatedSprite, you have to implement the following functions:
+For each class extending from Graphic, you have to implement the following functions:
 
-- `doOnUpdate(float elapsedTime)`: Perform all the logic that is required to update the state of the AnimatedSprite (e.g. move the sprite across the screen or switch to a different animation).
-- `doOnFrame(float elapsedTime)`: Perform all the logic that is required to render the AnimatedSprite. For simple cases, you don't have to do anything here.
+- `doOnUpdate(float elapsedTime)`: Perform all the logic that is required to update the state of the Graphic (e.g. move the sprite across the screen or switch to a different animation).
+- `doOnFrame(float elapsedTime)`: Perform all the logic that is required to render the Graphic. For simple cases, you don't have to do anything here.
 
 #### Concurrency
-Updating the state of an AnimatedSprite and rendering it takes place on two different threads. Keep the following in mind:
+Updating the state of an Graphic and rendering it takes place on two different threads. Keep the following in mind:
 
-- An AnimatedSprite will never be rendered while it's in updating state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get rendered until that function completes.
-- An AnimatedSprite will never be updated while it's in rendering state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get updated until that function completes.
+- A Graphic will never be rendered while it's in updating state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get rendered until that function completes.
+- A Graphic will never be updated while it's in rendering state. This means, that as long as the `doOnUpdate` function is running, that sprite will not get updated until that function completes.
 
 ### Sprite
 
