@@ -24,9 +24,7 @@ public:
     
     static Vector2D vectorFrom(float angle, float force, float elapsedTime) {
         float forceForElapsedTime = Timing::toValueForElapsedTime(force, elapsedTime);
-        float deltaX = forceForElapsedTime * sin(M_PI * 2 * angle / 360);
-        float deltaY = -(forceForElapsedTime * cos(M_PI * 2 * angle / 360));
-        return Vector2D { .x = deltaX, .y = deltaY };
+        return vectorFrom(angle, forceForElapsedTime);
     }
     
     static Vector2D vectorFrom(float angle, float force) {

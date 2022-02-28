@@ -11,16 +11,10 @@ Character::Character() : jimp::Graphic(jimp::Vector2D { .x = 10, .y = 10}, 0.5F,
 }
 
 void Character::doOnUpdate(float elapsedTime) {
-    if (!isMovingLeft && !isMovingRight) {
-        return;
-    }
-    if (!(isMovingLeft && getPosition().x <= 0) &&
-        !(isMovingRight && getPosition().x >= (jimp::GameEngine::getInstance()->getScreenWidth() - getWidth()))) {
-        jimp::Vector2D delta = jimp::Vector2D { .x = 500, .y = 0 };
-        if (isMovingLeft) {
-            delta.x = -delta.x;
-        }
-        addToPosition(jimp::Timing::toValueForElapsedTime(delta, elapsedTime));
+    if (isMovingLeft) {
+        move(270, 500, elapsedTime);
+    } else if (isMovingRight) {
+        move(90, 500, elapsedTime);
     }
 }
 
