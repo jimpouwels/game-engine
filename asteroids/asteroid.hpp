@@ -1,13 +1,13 @@
 #ifndef asteroid_hpp
 #define asteroid_hpp
 
-#include "graphic.hpp"
+#include "animatedGraphic.hpp"
 #include "gameEngine.hpp"
 #include "bullet.hpp"
 #include "sound.hpp"
 #include "geo2D.hpp"
 
-class Asteroid : public jimp::Graphic {
+class Asteroid : public jimp::AnimatedGraphic {
   
 private:
     static const uint16_t SPEED_IN_PIXELS_PER_SECOND;
@@ -33,11 +33,11 @@ public:
     void doOnInit() override;
     void doOnUpdate(float elapsedTime) override;
     void doOnFrame(float elapsedTime) override;
-    void hasCollidedRectLeft(jimp::Graphic* otherSprite) override;
-    void hasCollidedRectRight(jimp::Graphic* otherSprite) override;
-    void hasCollidedRectTop(jimp::Graphic* otherSprite) override;
-    void hasCollidedRectBottom(jimp::Graphic* otherSprite) override;
-    void hasCollidedRect(jimp::Graphic* otherSprite, jimp::Geo2D::Side side) override;
+    void hasCollidedRectLeft(jimp::AnimatedGraphic* otherSprite) override;
+    void hasCollidedRectRight(jimp::AnimatedGraphic* otherSprite) override;
+    void hasCollidedRectTop(jimp::AnimatedGraphic* otherSprite) override;
+    void hasCollidedRectBottom(jimp::AnimatedGraphic* otherSprite) override;
+    void hasCollidedRect(jimp::AnimatedGraphic* otherSprite, jimp::Geo2D::Side side) override;
     uint16_t getZIndex() override;
 };
 

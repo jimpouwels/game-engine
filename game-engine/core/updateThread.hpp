@@ -2,7 +2,7 @@
 #define updateThread_hpp
 
 #include <thread>
-#include "graphic.hpp"
+#include "animatedGraphic.hpp"
 
 namespace jimp {
 
@@ -13,22 +13,22 @@ private:
     std::mutex* processingLock = nullptr;
     std::mutex* deleteGraphicLock = nullptr;
     std::function<void(float)> onUpdateCallback;
-    std::function<void(Graphic*)> onGraphicDeletedCallback;
-    std::vector<Graphic*>* registeredGraphics = nullptr;
-    std::list<Graphic*>* newGraphics = nullptr;
+    std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback;
+    std::vector<AnimatedGraphic*>* registeredGraphics = nullptr;
+    std::list<AnimatedGraphic*>* newGraphics = nullptr;
     void stop();
     void loadNewGraphicsIntoUpdateLoop();
     void onUpdate(float elapsedTime);
-    void onGraphicDeleted(Graphic* graphic);
+    void onGraphicDeleted(AnimatedGraphic* graphic);
     
 public:
-    UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(Graphic*)> onGraphicDeletedCallback);
+    UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback);
     ~UpdateThread();
     void start();
-    void registerGraphic(Graphic* graphic);
+    void registerGraphic(AnimatedGraphic* graphic);
     void lockForDeletion();
     void unlockForDeletion();
-    std::vector<Graphic*>* getAllGraphics();
+    std::vector<AnimatedGraphic*>* getAllGraphics();
     void removeAllGraphics();
     
 };

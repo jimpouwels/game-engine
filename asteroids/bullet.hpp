@@ -1,9 +1,9 @@
 #ifndef bullet_hpp
 #define bullet_hpp
 
-#include "graphic.hpp"
+#include "animatedGraphic.hpp"
 
-class Bullet : public jimp::Graphic {
+class Bullet : public jimp::AnimatedGraphic {
     
 private:
     static const uint16_t FORCE;
@@ -14,7 +14,7 @@ public:
     void doOnInit() override;
     void doOnUpdate(float elapsedTime) override;
     void doOnFrame(float elapsedTime) override;
-    void hasCollidedRect(Graphic *otherSprite, jimp::Geo2D::Side side) override;
+    void hasCollidedRect(AnimatedGraphic *otherSprite, jimp::Geo2D::Side side) override;
     uint16_t getZIndex() override;
 };
 

@@ -40,32 +40,32 @@ private:
     void handleEvents();
     void triggerUpdate(float elapsedTime);
     void handleSounds(float elapsedTime);
-    void handleDrawableDeleted(Graphic* graphic);
+    void handleDrawableDeleted(AnimatedGraphic* graphic);
     
 protected:
     GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate);
     void start();
     virtual void onFrame(float elapsedTime) {};
     virtual void onUpdate(float elapsedTime) {};
-    virtual void onGraphicDeleted(Graphic* graphic) {};
+    virtual void onGraphicDeleted(AnimatedGraphic* graphic) {};
     
 public:
     ~GameEngine();
     static GameEngine* getInstance();
     int getScreenWidth();
     int getScreenHeight();
-    bool isAtLeftEdgeOfScreen(Graphic* graphic);
-    bool isAtRightEdgeOfScreen(Graphic* graphic);
-    bool isAtTopEdgeOfScreen(Graphic* graphic);
-    bool isAtBottomEdgeOfScreen(Graphic* graphic);
-    bool isOutsideScreenTop(Graphic* graphic);
-    bool isOutsideScreenBottom(Graphic* graphic);
-    bool isOutsideScreenLeft(Graphic* graphic);
-    bool isOutsideScreenRight(Graphic* graphic);
+    bool isAtLeftEdgeOfScreen(AnimatedGraphic* graphic);
+    bool isAtRightEdgeOfScreen(AnimatedGraphic* graphic);
+    bool isAtTopEdgeOfScreen(AnimatedGraphic* graphic);
+    bool isAtBottomEdgeOfScreen(AnimatedGraphic* graphic);
+    bool isOutsideScreenTop(AnimatedGraphic* graphic);
+    bool isOutsideScreenBottom(AnimatedGraphic* graphic);
+    bool isOutsideScreenLeft(AnimatedGraphic* graphic);
+    bool isOutsideScreenRight(AnimatedGraphic* graphic);
     bool isPositionWithinScreen(Vector2D position);
     void addKeyListener(KeyListener* keyListener);
     void draw(Drawable* drawable);
-    void registerGraphic(Graphic* graphic);
+    void registerGraphic(AnimatedGraphic* graphic);
     void drawRectangle(float width, float height, Vector2D position);
     Image* registerImage(Image* image);
     Sound* registerSound(Sound* sound);

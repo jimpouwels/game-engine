@@ -4,11 +4,11 @@
 #include <stdio.h>
 #include <list>
 
-#include "graphic.hpp"
+#include "animatedGraphic.hpp"
 #include "vector2D.hpp"
 #include "sound.hpp"
 
-class Ship : public jimp::Graphic {
+class Ship : public jimp::AnimatedGraphic {
     
 private:
     static const float SCALE;
@@ -44,11 +44,11 @@ public:
     void onKeyboardUp(jimp::KeyState keyState) override;
     void onKeyboardSpaceBar(jimp::KeyState keyState) override;
     jimp::Vector2D getRotationPoint() override;
-    void hasCollidedRect(jimp::Graphic* otherSprite, jimp::Geo2D::Side side) override;
-    void hasCollidedRectRight(jimp::Graphic* otherSprite) override;
-    void hasCollidedRectLeft(jimp::Graphic* otherSprite) override;
-    void hasCollidedRectTop(jimp::Graphic* otherSprite) override;
-    void hasCollidedRectBottom(jimp::Graphic* otherSprite) override;
+    void hasCollidedRect(jimp::AnimatedGraphic* otherSprite, jimp::Geo2D::Side side) override;
+    void hasCollidedRectRight(jimp::AnimatedGraphic* otherSprite) override;
+    void hasCollidedRectLeft(jimp::AnimatedGraphic* otherSprite) override;
+    void hasCollidedRectTop(jimp::AnimatedGraphic* otherSprite) override;
+    void hasCollidedRectBottom(jimp::AnimatedGraphic* otherSprite) override;
     uint16_t getZIndex() override;
 };
 

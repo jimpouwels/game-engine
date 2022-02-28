@@ -13,7 +13,7 @@
 
 namespace jimp {
 
-class Graphic : public KeyListener {
+class AnimatedGraphic : public KeyListener {
     
 private:
     Vector2D position = { .x = 0, .y = 0 };
@@ -47,15 +47,15 @@ protected:
     virtual void doOnInit() { };
     virtual void doOnUpdate(float elapsedTime) { };
     virtual void doOnFrame(float elapsedTime) { };
-    virtual void hasCollidedRectLeft(Graphic* otherGraphic) {};
-    virtual void hasCollidedRectRight(Graphic* otherGraphic) {};
-    virtual void hasCollidedRectTop(Graphic* otherGraphic) {};
-    virtual void hasCollidedRectBottom(Graphic* otherGraphic) {};
-    virtual void hasCollidedRect(Graphic* otherGraphic, Geo2D::Side side) {};
+    virtual void hasCollidedRectLeft(AnimatedGraphic* otherGraphic) {};
+    virtual void hasCollidedRectRight(AnimatedGraphic* otherGraphic) {};
+    virtual void hasCollidedRectTop(AnimatedGraphic* otherGraphic) {};
+    virtual void hasCollidedRectBottom(AnimatedGraphic* otherGraphic) {};
+    virtual void hasCollidedRect(AnimatedGraphic* otherGraphic, Geo2D::Side side) {};
     
 public:
-    Graphic(Vector2D position, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
-    ~Graphic();
+    AnimatedGraphic(Vector2D position, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
+    ~AnimatedGraphic();
     Vector2D& getPosition();
     Vector2D& getVelocity();
     float getScale();
@@ -66,7 +66,7 @@ public:
     void setDeleteOnLeaveScreen(bool deleteOnLeaveScreen);
     bool isMarkedForDeletion();
     bool isInitialized();
-    bool checkCollisionRect(Graphic* otherGraphicp);
+    bool checkCollisionRect(AnimatedGraphic* otherGraphicp);
     uint16_t getVelocityAngle();
     Drawable* getActiveDrawable();
     std::list<Drawable*> getAllDrawables();

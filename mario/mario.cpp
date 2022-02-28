@@ -1,6 +1,6 @@
 #include "gameEngine.hpp"
 #include "sprite.hpp"
-#include "graphic.hpp"
+#include "animatedGraphic.hpp"
 #include "gameEngine.hpp"
 #include "vector2D.hpp"
 #include "character.hpp"
@@ -19,8 +19,8 @@ public:
     }
 };
 
-//int main() {
-//    Mario game(1500, 900, "Mario");
-//    game.startGame();
-//    return 0;
-//}
+int main() {
+    Mario game(1500, 900, "Mario");
+    game.startGame();
+    return 0;
+}

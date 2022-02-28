@@ -4,7 +4,7 @@
 #include "gameEngine.hpp"
 #include "sprite.hpp"
 #include "spriteCache.hpp"
-#include "graphic.hpp"
+#include "animatedGraphic.hpp"
 #include "rectangle.hpp"
 #include "keyboardHandler.hpp"
 
@@ -108,7 +108,7 @@ void GameEngine::draw(jimp::Drawable* drawable) {
     
 }
 
-void GameEngine::registerGraphic(Graphic *graphic) {
+void GameEngine::registerGraphic(AnimatedGraphic *graphic) {
     addKeyListener(graphic);
     updateThread->registerGraphic(graphic);
 }
@@ -143,35 +143,35 @@ int GameEngine::getScreenHeight() {
     return screenHeight;
 }
 
-bool GameEngine::isAtLeftEdgeOfScreen(Graphic* sprite) {
+bool GameEngine::isAtLeftEdgeOfScreen(AnimatedGraphic* sprite) {
     return sprite->getPosition().x < 0;
 }
 
-bool GameEngine::isAtRightEdgeOfScreen(Graphic* sprite) {
+bool GameEngine::isAtRightEdgeOfScreen(AnimatedGraphic* sprite) {
     return sprite->getPosition().x > getScreenWidth() - sprite->getWidth();
 }
 
-bool GameEngine::isAtTopEdgeOfScreen(Graphic* sprite) {
+bool GameEngine::isAtTopEdgeOfScreen(AnimatedGraphic* sprite) {
     return sprite->getPosition().y < 0;
 }
 
-bool GameEngine::isAtBottomEdgeOfScreen(Graphic* sprite) {
+bool GameEngine::isAtBottomEdgeOfScreen(AnimatedGraphic* sprite) {
     return sprite->getPosition().y > getScreenHeight() - sprite->getHeight();
 }
 
-bool GameEngine::isOutsideScreenTop(Graphic* sprite) {
+bool GameEngine::isOutsideScreenTop(AnimatedGraphic* sprite) {
     return sprite->getPosition().y < -sprite->getHeight();
 }
 
-bool GameEngine::isOutsideScreenBottom(Graphic* sprite) {
+bool GameEngine::isOutsideScreenBottom(AnimatedGraphic* sprite) {
     return sprite->getPosition().y > getScreenHeight();
 }
 
-bool GameEngine::isOutsideScreenLeft(Graphic* sprite) {
+bool GameEngine::isOutsideScreenLeft(AnimatedGraphic* sprite) {
     return sprite->getPosition().x < -(sprite->getWidth());
 }
 
-bool GameEngine::isOutsideScreenRight(Graphic* sprite) {
+bool GameEngine::isOutsideScreenRight(AnimatedGraphic* sprite) {
     return sprite->getPosition().x > getScreenWidth();
 }
 
@@ -208,7 +208,7 @@ void GameEngine::triggerUpdate(float elapsedTime) {
     onUpdate(elapsedTime);
 }
 
-void GameEngine::handleDrawableDeleted(Graphic* graphic) {
+void GameEngine::handleDrawableDeleted(AnimatedGraphic* graphic) {
     for (const auto& drawable: graphic->getAllDrawables()) {
         Sprite* sprite = dynamic_cast<Sprite*>(drawable);
         if (sprite != nullptr) {
