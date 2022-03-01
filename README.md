@@ -46,7 +46,7 @@ At this point, the game will be in a running state.
 You can add sprites to the scene by creating an AnimatedGraphic, which is done by creating a new class that extends from `jimp::AnimatedGraphic`.
 
 #### Registration
-You can make an AnimatedGraphic part of the game loop by registering it. This happens automatically when instantiating your class that extends `AnimatedGraphic`. However, to prevent partially initialized graphics to be made part of the game loop, make sure you call `markAsInitialized()` at the end of your class' constructor.
+You can make an AnimatedGraphic part of the game loop by registering it. This happens automatically when instantiating your class that extends `AnimatedGraphic`.
 
 **Note**
 Don't register an AnimatedGraphic (or sounds) with the game engine explicitely. The `AnimatedSprite` class will do that for you.
@@ -80,16 +80,16 @@ Code example of a space ship:
 
 ```
 SpaceShip::SpaceShip() : jimp::AnimatedGraphic(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0, 0.05F) {
+}
+
+SpaceShip::doOnInit() {
     addSprite("idle", "spaceship.png");
     addSprite("throttling", "spaceship-thrust1.png");
     addSprite("throttling", "spaceship-thrust2.png");
-    markAsInitialized();
 }
 ```
 
 In this example, we created an AnimatedGraphic `SpaceShip`. It has two animations, being `idle` and `throttling`. The first animation you add a sprite for will be the active animation, in this case `idle`. 
-
-**Do note that at the end of the constructor of an AnimatedGraphic, it has to be marked as initialized by calling `markAsInitialized()`. This is important for the game engine to know that the AnimatedGraphic is ready to be rendered to the screen.**
 
 You can switch between `throttling` and `idle` like this:
 
