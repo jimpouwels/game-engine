@@ -232,8 +232,8 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
     if (hasJumped && jumpVelocity.y == 0) { // initiate jump vector
         jumping = true;
         jumpVelocity.y = -jumpForce;
-        hasJumped = false;
     }
+    hasJumped = false;
     
     if ((!reachedGravityBlocker && applyGravity) || jumping)  {
         jumpVelocity.y += GameEngine::getInstance()->getGravityForce();
