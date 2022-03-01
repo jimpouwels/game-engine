@@ -218,11 +218,12 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
         jumpVelocity.y = -jumpForce;
         hasJumped = false;
     }
-    jumpVelocity.y += GameEngine::getInstance()->getGravityForce(); // add gravity (replace by setting gravity as a field)
+    jumpVelocity.y += GameEngine::getInstance()->getGravityForce();
     if (jumpVelocity.y > 0 && getPosition().y >= 400) { // reached floor, replace with collision detection with gravitational blocker
         jumping = false;
         jumpVelocity.y = 0;
     }
+    
     addToPosition(jimp::Timing::toValueForElapsedTime(jumpVelocity, elapsedTime));
     
     if (hasMoved || moving) { // initiate move vector
