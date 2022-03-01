@@ -19,8 +19,8 @@ public:
     }
 };
 
-int main() {
-    Mario game(1500, 900, "Mario");
-    game.startGame();
-    return 0;
-}
+//int main() {
+//    Mario game(1500, 900, "Mario");
+//    game.startGame();
+//    return 0;
+//}
