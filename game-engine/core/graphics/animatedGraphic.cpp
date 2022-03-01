@@ -12,9 +12,10 @@
 
 namespace jimp {
 
-AnimatedGraphic::AnimatedGraphic(Vector2D position, float scale, int rotationAngle, float spriteSwapIntervalInSeconds) {
+AnimatedGraphic::AnimatedGraphic(Vector2D position, float scale, int rotationAngle, float spriteSwapIntervalInSeconds, bool applyGravity) {
     this->position = position;
     this->scale = scale;
+    this->applyGravity = applyGravity;
     animationMap = new std::map<std::string, Animation*>;
     this->drawableSwapIntervalInSeconds = spriteSwapIntervalInSeconds;
     GameEngine::getInstance()->registerGraphic(this);
@@ -143,8 +144,12 @@ Vector2D& AnimatedGraphic::getPosition() {
     return position;
 }
 
-Vector2D& AnimatedGraphic::getVelocity() {
+Vector2D& AnimatedGraphic::getMoveVelocity() {
     return moveVelocity;
+}
+
+Vector2D& AnimatedGraphic::getJumpVelocity() {
+    return jumpVelocity;
 }
 
 void AnimatedGraphic::setPosition(Vector2D position) {
@@ -200,8 +205,19 @@ void AnimatedGraphic::stopMoving() {
 }
 
 void AnimatedGraphic::jump(float force) {
+    reachedGravityBlocker = false;
     hasJumped = true;
     jumpForce = force;
+}
+
+void AnimatedGraphic::disableGravitationalEffect() {
+    reachedGravityBlocker = true;
+    jumping = false;
+}
+
+void AnimatedGraphic::enableGravitationalEffect() {
+    reachedGravityBlocker = false;
+    jumping = false;
 }
 
 void AnimatedGraphic::setRotationAngle(float angle) {
@@ -218,9 +234,10 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
         jumpVelocity.y = -jumpForce;
         hasJumped = false;
     }
-    jumpVelocity.y += GameEngine::getInstance()->getGravityForce();
-    if (jumpVelocity.y > 0 && getPosition().y >= 400) { // reached floor, replace with collision detection with gravitational blocker
-        jumping = false;
+    
+    if ((!reachedGravityBlocker && applyGravity) || jumping)  {
+        jumpVelocity.y += GameEngine::getInstance()->getGravityForce();
+    } else {
         jumpVelocity.y = 0;
     }
     

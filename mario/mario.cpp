@@ -4,6 +4,7 @@
 #include "gameEngine.hpp"
 #include "vector2D.hpp"
 #include "character.hpp"
+#include "platform.hpp"
 
 class Mario : public jimp::GameEngine {
     
@@ -12,6 +13,7 @@ private:
 public:
     Mario(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 9, name, 60) {
         new Character();
+        new Platform();
     }
     
     void startGame() {

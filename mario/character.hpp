@@ -7,8 +7,7 @@
 class Character : public jimp::AnimatedGraphic {
   
 private:
-    bool isMovingLeft = false;
-    bool isMovingRight = false;
+    bool hasCollidedWithBlocker = false;
     
 public:
     Character();
@@ -17,6 +16,8 @@ public:
     void onKeyboardUp(jimp::KeyState keyState) override;
     void onKeyboardLeft(jimp::KeyState keyState) override;
     void onKeyboardRight(jimp::KeyState keyState) override;
+    void hasCollidedRectBottom(AnimatedGraphic* otherGraphic) override;
+    void hasCollidedRectTop(AnimatedGraphic* otherGraphic) override;
 };
 
 #endif

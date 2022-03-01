@@ -19,12 +19,14 @@ private:
     Vector2D position = { .x = 0, .y = 0 };
     float scale;
     float angle;
+    bool applyGravity = false;
     std::map<std::string, Animation*>* animationMap;
     Animation* activeAnimation = nullptr;
     bool markedForDeletion = false;
     bool deleteOnLeaveScreen = false;
     Vector2D moveVelocity = Vector2D { .x = 0, .y = 0 };
     Vector2D jumpVelocity = Vector2D { .x = 0, .y = 0 };
+    bool reachedGravityBlocker = false;
     bool hasJumped = false;
     bool jumping = false;
     float jumpForce = 0;
@@ -46,6 +48,8 @@ protected:
     void accelerate(float angle, uint16_t mass, uint16_t force, float elapsedTime);
     void move(float angle, float pixelsPerSecond);
     void stopMoving();
+    void disableGravitationalEffect();
+    void enableGravitationalEffect();
     void jump(float force);
     bool isJumping();
     virtual void doOnInit() {};
@@ -58,10 +62,11 @@ protected:
     virtual void hasCollidedRect(AnimatedGraphic* otherGraphic, Geo2D::Side side) {};
     
 public:
-    AnimatedGraphic(Vector2D position, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
+    AnimatedGraphic(Vector2D position, float scale, int rotationAngle, float imageSwapIntervalInSeconds, bool applyGravity);
     ~AnimatedGraphic();
     Vector2D& getPosition();
-    Vector2D& getVelocity();
+    Vector2D& getMoveVelocity();
+    Vector2D& getJumpVelocity();
     float getScale();
     int getWidth();
     int getHeight();

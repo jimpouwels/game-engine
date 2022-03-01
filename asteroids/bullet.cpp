@@ -8,7 +8,7 @@
 const uint16_t Bullet::FORCE = 1200;
 const float Bullet::SCALE = 0.3F;
 
-Bullet::Bullet(jimp::Vector2D position, float angle) : jimp::AnimatedGraphic(position, SCALE, 0, -1) {
+Bullet::Bullet(jimp::Vector2D position, float angle) : jimp::AnimatedGraphic(position, SCALE, 0, -1, false) {
     setRotationAngle(angle);
 }
 

@@ -23,6 +23,7 @@
 		236F0BA227C77D340063E19C /* drawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 236F0BA127C77D340063E19C /* drawable.cpp */; };
 		2394CC6127CC09DF00B62AC8 /* shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2394CC6027CC09DF00B62AC8 /* shape.cpp */; };
 		2394CC6327CC0A2300B62AC8 /* rectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2394CC6227CC0A2300B62AC8 /* rectangle.cpp */; };
+		239F327827CE7706007D4E2C /* platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 239F327627CE7706007D4E2C /* platform.cpp */; };
 		23A4D56A27C102F9006F4220 /* thrust.ogg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A4D56927C102F2006F4220 /* thrust.ogg */; };
 		23A933B227864EA800769F69 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AD27864EA700769F69 /* sprite.cpp */; };
 		23A933B327864EA800769F69 /* animatedGraphic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AE27864EA700769F69 /* animatedGraphic.cpp */; };
@@ -105,6 +106,8 @@
 		236F0BA727C786820063E19C /* rectangle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = rectangle.hpp; sourceTree = "<group>"; };
 		2394CC6027CC09DF00B62AC8 /* shape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shape.cpp; sourceTree = "<group>"; };
 		2394CC6227CC0A2300B62AC8 /* rectangle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = rectangle.cpp; sourceTree = "<group>"; };
+		239F327627CE7706007D4E2C /* platform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = platform.cpp; sourceTree = "<group>"; };
+		239F327727CE7706007D4E2C /* platform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = platform.hpp; sourceTree = "<group>"; };
 		23A4D56927C102F2006F4220 /* thrust.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = thrust.ogg; sourceTree = "<group>"; };
 		23A933AC27864EA700769F69 /* animatedGraphic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animatedGraphic.hpp; sourceTree = "<group>"; };
 		23A933AD27864EA700769F69 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
@@ -182,6 +185,8 @@
 				235FEC1A27C6DF5B006306C9 /* mario.cpp */,
 				235FEC1E27C6E1F6006306C9 /* character.cpp */,
 				235FEC1F27C6E1F6006306C9 /* character.hpp */,
+				239F327627CE7706007D4E2C /* platform.cpp */,
+				239F327727CE7706007D4E2C /* platform.hpp */,
 			);
 			path = mario;
 			sourceTree = "<group>";
@@ -365,6 +370,7 @@
 				236F0BA227C77D340063E19C /* drawable.cpp in Sources */,
 				23B177A527A3E3160094B178 /* asteroid.hpp in Sources */,
 				23B177A627A3E3160094B178 /* animatedGraphic.hpp in Sources */,
+				239F327827CE7706007D4E2C /* platform.cpp in Sources */,
 				23B177A727A3E3160094B178 /* animation.hpp in Sources */,
 				23B177A827A3E3160094B178 /* sprite.hpp in Sources */,
 				23B177A927A3E3160094B178 /* keyListener.hpp in Sources */,
