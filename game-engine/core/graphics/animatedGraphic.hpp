@@ -23,12 +23,8 @@ private:
     Animation* activeAnimation = nullptr;
     bool markedForDeletion = false;
     bool deleteOnLeaveScreen = false;
-    bool isAccelerating = false;
     bool initialized = false;
-    float velocityAngle = 0;
     bool updateCurrentVelocity = false;
-    uint16_t mass = 0;
-    uint16_t moveForce = 0;
     Vector2D velocity = Vector2D { .x = 0, .y = 0 };
     std::mutex* lock = new std::mutex();
     float elapsedTimeSinceLastSwap;
@@ -41,7 +37,7 @@ private:
     
 protected:
     void setCurrentAnimation(std::string animationId);
-    void accelerate(float angle, uint16_t mass, uint16_t force);
+    void accelerate(float angle, uint16_t mass, uint16_t force, float elapsedTime);
     void move(float angle, float pixelsPerSecond, float elapsedTime);
     void markAsInitialized();
     virtual void doOnInit() { };
@@ -67,7 +63,6 @@ public:
     bool isMarkedForDeletion();
     bool isInitialized();
     bool checkCollisionRect(AnimatedGraphic* otherGraphicp);
-    uint16_t getVelocityAngle();
     Drawable* getActiveDrawable();
     std::list<Drawable*> getAllDrawables();
     void markForDeletion();

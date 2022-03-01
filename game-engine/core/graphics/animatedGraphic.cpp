@@ -190,11 +190,9 @@ std::list<Drawable*> AnimatedGraphic::getAllDrawables() {
     return allDrawables;
 }
 
-void AnimatedGraphic::accelerate(float angle, uint16_t mass, uint16_t force) {
-    this->isAccelerating = true;
-    this->velocityAngle = jimp::Geo2D::normalizeAngle(angle);
-    this->mass = mass;
-    this->moveForce = force;
+void AnimatedGraphic::accelerate(float angle, uint16_t mass, uint16_t force, float elapsedTime) {
+    float velocityAngle = jimp::Geo2D::normalizeAngle(angle);
+    velocity = velocity + jimp::Geo2D::vectorFrom(force, velocityAngle, mass, elapsedTime);
 }
 
 void AnimatedGraphic::move(float angle, float pixelsPerSecond, float elapsedTime) {
@@ -210,15 +208,7 @@ bool AnimatedGraphic::isMarkedForDeletion() {
     return markedForDeletion;
 }
 
-uint16_t AnimatedGraphic::getVelocityAngle() {
-    return velocityAngle;
-}
-
 void AnimatedGraphic::updateMovement(float elapsedTime) {
-    if (isAccelerating) {
-        velocity = velocity + jimp::Geo2D::vectorFrom(moveForce, velocityAngle, mass, elapsedTime);
-        isAccelerating = false;
-    }
     addToPosition(jimp::Timing::toValueForElapsedTime(velocity, elapsedTime));
 }
 

@@ -29,7 +29,7 @@ void Ship::doOnInit() {
 
 void Ship::doOnUpdate(float elapsedTime) {
     if (isThrothling) {
-        accelerate(getRotationAngle(), MASS, THRUST_FORCE);
+        accelerate(getRotationAngle(), MASS, THRUST_FORCE, elapsedTime);
     }
     updateFiring(elapsedTime);
     updateMovement(elapsedTime);
