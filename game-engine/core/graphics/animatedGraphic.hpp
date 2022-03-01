@@ -24,7 +24,6 @@ private:
     bool markedForDeletion = false;
     bool deleteOnLeaveScreen = false;
     bool initialized = false;
-    bool updateCurrentVelocity = false;
     Vector2D velocity = Vector2D { .x = 0, .y = 0 };
     std::mutex* lock = new std::mutex();
     float elapsedTimeSinceLastSwap;
