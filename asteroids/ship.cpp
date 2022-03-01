@@ -15,16 +15,14 @@ const float Ship::SCALE = 0.15F;
 const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 
 Ship::Ship() : jimp::AnimatedGraphic(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0, 0.05F) {
+}
+
+void Ship::doOnInit() {
     this->firingSound = new jimp::Sound("laser.ogg");
     this->thrustSound = new jimp::Sound("thrust.ogg");
     addSprite("default", "spaceship.png");
     addSprite("throttling", "spaceship-thrust1.png");
     addSprite("throttling", "spaceship-thrust2.png");
-    markAsInitialized();
-}
-
-void Ship::doOnInit() {
-    
 }
 
 void Ship::doOnUpdate(float elapsedTime) {

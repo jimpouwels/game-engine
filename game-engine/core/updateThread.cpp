@@ -109,11 +109,9 @@ void UpdateThread::loadNewGraphicsIntoUpdateLoop() {
     if (newGraphics->size() > 0) {
         std::list<AnimatedGraphic*> loadedGraphics = std::list<AnimatedGraphic*>();
         for (const auto& newGraphic: *newGraphics) {
-            if (newGraphic->isInitialized()) {
-                newGraphic->onInit();
-                registeredGraphics->push_back(newGraphic);
-                loadedGraphics.push_back(newGraphic);
-            }
+            newGraphic->onInit();
+            registeredGraphics->push_back(newGraphic);
+            loadedGraphics.push_back(newGraphic);
         }
         if (loadedGraphics.size() > 0) {
             for (const auto& loadedGraphic: loadedGraphics) {

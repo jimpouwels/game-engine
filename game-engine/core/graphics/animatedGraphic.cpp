@@ -55,14 +55,6 @@ void AnimatedGraphic::markForDeletion() {
     markedForDeletion = true;
 }
 
-void AnimatedGraphic::markAsInitialized() {
-    initialized = true;
-}
-
-bool AnimatedGraphic::isInitialized() {
-    return initialized;
-}
-
 void AnimatedGraphic::setDeleteOnLeaveScreen(bool deleteOnLeaveScreen) {
     this->deleteOnLeaveScreen = deleteOnLeaveScreen;
 }
@@ -191,8 +183,8 @@ std::list<Drawable*> AnimatedGraphic::getAllDrawables() {
 }
 
 void AnimatedGraphic::accelerate(float angle, uint16_t mass, uint16_t force, float elapsedTime) {
-    float velocityAngle = jimp::Geo2D::normalizeAngle(angle);
-    velocity = velocity + jimp::Geo2D::vectorFrom(force, velocityAngle, mass, elapsedTime);
+    float normalizedAngle = jimp::Geo2D::normalizeAngle(angle);
+    velocity = velocity + jimp::Geo2D::vectorFrom(force, normalizedAngle, mass, elapsedTime);
 }
 
 void AnimatedGraphic::move(float angle, float pixelsPerSecond, float elapsedTime) {

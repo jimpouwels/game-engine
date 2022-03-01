@@ -185,7 +185,7 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     
     updateThread->lockForDeletion();
     for (const auto& graphic: *updateThread->getAllGraphics()) {
-        if (!graphic->isMarkedForDeletion() && graphic->isInitialized()) {
+        if (!graphic->isMarkedForDeletion()) {
             graphic->onFrame(elapsedTimeSincePreviousFrame);
             draw(graphic->getActiveDrawable());
         }

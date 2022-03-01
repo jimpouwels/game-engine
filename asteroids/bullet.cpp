@@ -9,14 +9,12 @@ const uint16_t Bullet::FORCE = 1200;
 const float Bullet::SCALE = 0.3F;
 
 Bullet::Bullet(jimp::Vector2D position, float angle) : jimp::AnimatedGraphic(position, SCALE, 0, -1) {
-    addSprite("default", "bullet.png");
     setRotationAngle(angle);
-    setDeleteOnLeaveScreen(true);
-    markAsInitialized();
 }
 
 void Bullet::doOnInit() {
-    
+    addSprite("default", "bullet.png");
+    setDeleteOnLeaveScreen(true);    
 }
 
 void Bullet::doOnUpdate(float elapsedTime) {
