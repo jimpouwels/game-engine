@@ -29,7 +29,7 @@ void Asteroid::doOnInit() {
 void Asteroid::doOnUpdate(float elapsedTime) {
     updateDirection(elapsedTime);
     updateRotation(elapsedTime);
-    move(directionAngle, SPEED_IN_PIXELS_PER_SECOND, elapsedTime);
+    move(directionAngle, SPEED_IN_PIXELS_PER_SECOND);
     animateHit(elapsedTime);
 }
 

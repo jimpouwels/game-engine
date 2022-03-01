@@ -113,8 +113,8 @@ void Ship::updateFiring(float elapsedTime) {
     if (elapsedTimeSinceLastShot >= timeBetweenShots && (hasFired || isFiring)) {
         hasFired = false;
         jimp::Vector2D rotationPoint = getRotationPoint();
-        rotationPoint.x += getPosition().x - 5;
-        rotationPoint.y += getPosition().y - 10;
+        rotationPoint.x += getPosition().x - (10 * getScale());
+        rotationPoint.y += getPosition().y + (45 * getScale());
         new Bullet(rotationPoint, getRotationAngle());
         firingSound->playTillEnd(30);
         elapsedTimeSinceLastShot = 0;

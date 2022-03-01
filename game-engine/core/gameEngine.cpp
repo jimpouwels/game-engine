@@ -10,10 +10,11 @@
 
 namespace jimp {
 
-GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate) {
+GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravityForce, std::string windowTitle, uint16_t desiredFrameRate) {
     instance = this;
     this->screenWidth = screenWidth;
     this->screenHeight = screenHeight;
+    this->gravityForce = gravityForce;
     this->frameRate = desiredFrameRate;
     this->timePerFrame = 1.0 / desiredFrameRate;
     this->windowTitle = windowTitle;
@@ -141,6 +142,10 @@ int GameEngine::getScreenWidth() {
 
 int GameEngine::getScreenHeight() {
     return screenHeight;
+}
+
+float GameEngine::getGravityForce() {
+    return gravityForce;
 }
 
 bool GameEngine::isAtLeftEdgeOfScreen(AnimatedGraphic* sprite) {

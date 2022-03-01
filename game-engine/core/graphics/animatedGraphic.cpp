@@ -144,7 +144,7 @@ Vector2D& AnimatedGraphic::getPosition() {
 }
 
 Vector2D& AnimatedGraphic::getVelocity() {
-    return velocity;
+    return moveVelocity;
 }
 
 void AnimatedGraphic::setPosition(Vector2D position) {
@@ -184,12 +184,24 @@ std::list<Drawable*> AnimatedGraphic::getAllDrawables() {
 
 void AnimatedGraphic::accelerate(float angle, uint16_t mass, uint16_t force, float elapsedTime) {
     float normalizedAngle = jimp::Geo2D::normalizeAngle(angle);
-    velocity = velocity + jimp::Geo2D::vectorFrom(force, normalizedAngle, mass, elapsedTime);
+    moveVelocity = moveVelocity + jimp::Geo2D::vectorFrom(force, normalizedAngle, mass, elapsedTime);
 }
 
-void AnimatedGraphic::move(float angle, float pixelsPerSecond, float elapsedTime) {
-    jimp::Vector2D delta = jimp::Geo2D::vectorFrom(angle, pixelsPerSecond, elapsedTime);
-    addToPosition(delta);
+void AnimatedGraphic::move(float angle, float pixelsPerSecond) {
+    hasMoved = true;
+    moveForce = pixelsPerSecond;
+    moveAngle = angle;
+}
+
+void AnimatedGraphic::stopMoving() {
+    moveVelocity.x = 0;
+    moveVelocity.y = 0;
+    moving = false;
+}
+
+void AnimatedGraphic::jump(float force) {
+    hasJumped = true;
+    jumpForce = force;
 }
 
 void AnimatedGraphic::setRotationAngle(float angle) {
@@ -201,7 +213,29 @@ bool AnimatedGraphic::isMarkedForDeletion() {
 }
 
 void AnimatedGraphic::updateMovement(float elapsedTime) {
-    addToPosition(jimp::Timing::toValueForElapsedTime(velocity, elapsedTime));
+    if (hasJumped && jumpVelocity.y == 0) { // initiate jump vector
+        jumping = true;
+        jumpVelocity.y = -jumpForce;
+        hasJumped = false;
+    }
+    jumpVelocity.y += GameEngine::getInstance()->getGravityForce(); // add gravity (replace by setting gravity as a field)
+    if (jumpVelocity.y > 0 && getPosition().y >= 400) { // reached floor, replace with collision detection with gravitational blocker
+        jumping = false;
+        jumpVelocity.y = 0;
+    }
+    addToPosition(jimp::Timing::toValueForElapsedTime(jumpVelocity, elapsedTime));
+    
+    if (hasMoved || moving) { // initiate move vector
+        moving = true;
+        jimp::Vector2D moveDelta = jimp::Geo2D::vectorFrom(moveAngle, moveForce);
+        moveVelocity = moveVelocity = moveDelta;
+        hasMoved = false;
+    }
+    addToPosition(jimp::Timing::toValueForElapsedTime(moveVelocity, elapsedTime));
+}
+
+bool AnimatedGraphic::isJumping() {
+    return jumping;
 }
 
 void AnimatedGraphic::updateCurrentDrawableData() {

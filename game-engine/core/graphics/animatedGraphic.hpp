@@ -23,7 +23,15 @@ private:
     Animation* activeAnimation = nullptr;
     bool markedForDeletion = false;
     bool deleteOnLeaveScreen = false;
-    Vector2D velocity = Vector2D { .x = 0, .y = 0 };
+    Vector2D moveVelocity = Vector2D { .x = 0, .y = 0 };
+    Vector2D jumpVelocity = Vector2D { .x = 0, .y = 0 };
+    bool hasJumped = false;
+    bool jumping = false;
+    float jumpForce = 0;
+    bool moving = false;
+    bool hasMoved = false;
+    float moveForce = 0;
+    float moveAngle = 0;
     std::mutex* lock = new std::mutex();
     float elapsedTimeSinceLastSwap;
     float drawableSwapIntervalInSeconds;
@@ -36,7 +44,10 @@ private:
 protected:
     void setCurrentAnimation(std::string animationId);
     void accelerate(float angle, uint16_t mass, uint16_t force, float elapsedTime);
-    void move(float angle, float pixelsPerSecond, float elapsedTime);
+    void move(float angle, float pixelsPerSecond);
+    void stopMoving();
+    void jump(float force);
+    bool isJumping();
     virtual void doOnInit() {};
     virtual void doOnUpdate(float elapsedTime) {};
     virtual void doOnFrame(float elapsedTime) {};

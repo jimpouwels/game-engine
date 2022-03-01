@@ -10,7 +10,7 @@ class Mario : public jimp::GameEngine {
 private:
     
 public:
-    Mario(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, name, 60) {
+    Mario(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 9, name, 60) {
         new Character();
     }
     
