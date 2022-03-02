@@ -12,7 +12,7 @@ private:
     bool hasCollidedWithBlocker = false;
     
 public:
-    Character();
+    Character(jimp::Vector2D position);
     void doOnInit() override;
     void doOnUpdate(float elapsedTime) override;
     void onKeyboardUp(jimp::KeyState keyState) override;

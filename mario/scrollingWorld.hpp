@@ -2,8 +2,6 @@
 #define scrollingWorld_hpp
 
 #include "animatedGraphic.hpp"
-#include "tile.hpp"
-#include "tileMap.hpp"
 
 namespace mario {
 
@@ -11,15 +9,13 @@ class ScrollingWorld {
     
 private:
     jimp::AnimatedGraphic* mainCharacter = nullptr;
-    TileMap* tileMap = nullptr;
-    uint16_t tileSize = 0;
-    uint16_t startColumn = 0;
     int offsetX = 0;
+    int width = 0;
+    int height = 0;
     
 public:
-    ScrollingWorld(jimp::AnimatedGraphic* mainCharacter, int rows, int columns, uint16_t tileSize);
+    ScrollingWorld(jimp::AnimatedGraphic* mainCharacter, int width, int height);
     ~ScrollingWorld();
-    void addGraphic(int x, int y, jimp::AnimatedGraphic* animatedGraphic);
     void doOnUpdate();
     void doOnFrame();
 };

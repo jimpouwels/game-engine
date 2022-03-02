@@ -5,12 +5,11 @@
 
 namespace mario {
 
-Character::Character() : jimp::AnimatedGraphic(jimp::Vector2D { .x = 10, .y = 10}, 0.5F, 0.0F, -1.0F, true) {
+Character::Character(jimp::Vector2D position) : jimp::AnimatedGraphic(position, 0.5F, 0.0F, -1.0F, true) {
 }
 
 void Character::doOnInit() {
     addShape("default", new jimp::Rectangle(100, 100, 0xD19F9C));
-    this->setPosition(jimp::Vector2D { .x = 10, .y = 400 });
 }
 
 void Character::doOnUpdate(float elapsedTime) {

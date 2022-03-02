@@ -123,6 +123,22 @@ bool AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic) {
     return false;
 }
 
+bool AnimatedGraphic::isPositionedWithinScreen() {
+    if (getPosition().x + getWidth() < 0) {
+        return false;
+    }
+    if (getPosition().x > GameEngine::getInstance()->getScreenWidth()) {
+        return false;
+    }
+    if (getPosition().y + getHeight() < 0) {
+        return false;
+    }
+    if (getPosition().y > GameEngine::getInstance()->getScreenHeight()) {
+        return false;
+    }
+    return true;
+}
+
 void AnimatedGraphic::updateAnimation(float elapsedTime) {
     elapsedTimeSinceLastSwap += elapsedTime;
     if (drawableSwapIntervalInSeconds >= 0 && elapsedTimeSinceLastSwap >= drawableSwapIntervalInSeconds) {

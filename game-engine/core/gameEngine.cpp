@@ -187,6 +187,10 @@ bool GameEngine::isPositionWithinScreen(Vector2D position) {
     return position.x <= getScreenWidth() && position.x >= 0 && position.y <= getScreenHeight() && position.y > 0;
 }
 
+std::vector<AnimatedGraphic*>* GameEngine::getAllGraphics() {
+    return updateThread->getAllGraphics();
+}
+
 void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     window->clear();
     onFrame(elapsedTimeSincePreviousFrame);

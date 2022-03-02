@@ -16,9 +16,10 @@ private:
     
 public:
     Mario(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 9, name, 60) {
-        scrollingWorld = new ScrollingWorld(new Character(), 50, 1000, 50);
-        scrollingWorld->addGraphic(10, 5, new Platform());
-        scrollingWorld->addGraphic(30, 5, new Platform());
+        scrollingWorld = new ScrollingWorld(new Character(jimp::Vector2D { .x = static_cast<float>(getScreenWidth() / 2), .y = 200 }), 100000, 900);
+        new Platform(jimp::Vector2D { .x = 1200, .y = 200 }, 500);
+        new Platform(jimp::Vector2D { .x = 1600, .y = 260 }, 250);
+        new Platform(jimp::Vector2D { .x = 1950, .y = 350 }, 350);
     }
     
     void startGame() {

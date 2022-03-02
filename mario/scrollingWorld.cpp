@@ -4,44 +4,38 @@
 
 namespace mario {
 
-ScrollingWorld::ScrollingWorld(jimp::AnimatedGraphic* mainCharacter, int rows, int columns, uint16_t tileSize) {
+ScrollingWorld::ScrollingWorld(jimp::AnimatedGraphic* mainCharacter, int width, int height) {
     this->mainCharacter = mainCharacter;
-    this->tileSize = tileSize;
-    this->tileMap = new TileMap(rows, columns);
 }
 
 ScrollingWorld::~ScrollingWorld() {
-    delete tileMap;
-}
-
-void ScrollingWorld::addGraphic(int x, int y, jimp::AnimatedGraphic* animatedGraphic) {
-    tileMap->getTileAt(x, y)->add(animatedGraphic);
 }
 
 void ScrollingWorld::doOnUpdate() {
     jimp::GameEngine* gameEngine = jimp::GameEngine::getInstance();
     float rightSideOfCamera = gameEngine->getScreenWidth() / 2 + 125;
     float leftSideOfCamera = gameEngine->getScreenWidth() / 2 - 125;
-    if (mainCharacter->getPosition().x >= rightSideOfCamera) {
-        offsetX += mainCharacter->getPosition().x - rightSideOfCamera;
-        mainCharacter->getPosition().x = rightSideOfCamera;
-    } else if (mainCharacter->getPosition().x <= leftSideOfCamera) {
-        offsetX -= leftSideOfCamera - mainCharacter->getPosition().x;
+    int offsetDeltaX = 0;
+    if ((mainCharacter->getPosition().x + mainCharacter->getWidth()) > rightSideOfCamera) {
+        offsetDeltaX += (mainCharacter->getPosition().x + mainCharacter->getWidth()) - rightSideOfCamera;
+        mainCharacter->getPosition().x = rightSideOfCamera - mainCharacter->getWidth();
+    } else if (mainCharacter->getPosition().x < leftSideOfCamera) {
+        offsetDeltaX -= leftSideOfCamera - mainCharacter->getPosition().x;
         mainCharacter->getPosition().x = leftSideOfCamera;
     }
-    std::cout << offsetX << std::endl;
-    for (int x = 0; x < tileMap->getColumnCount(); x++) {
-        for (int y = 0; y < tileMap->getRowCount(); y++) {
-            Tile* tile = tileMap->getTileAt(x, y);
-            if (tile->getAnimatedGraphic() != nullptr) {
-                jimp::AnimatedGraphic* graphic = tile->getAnimatedGraphic();
-                graphic->getPosition().x = x * tileSize - offsetX;
-                if (graphic->getPosition().x < -(graphic->getWidth())) {
-                    graphic->hide();
-                } else {
-                    graphic->show();
-                }
-            }
+    offsetX += offsetDeltaX;
+    std::vector<jimp::AnimatedGraphic*>* graphics = gameEngine->getAllGraphics();
+    for (int i = 0; i < graphics->size(); i++) {
+        jimp::AnimatedGraphic* graphic = graphics->at(i);
+        if (graphic == mainCharacter) {
+            continue;
+        }
+        graphic->getPosition().x -= offsetDeltaX;
+        if (graphic->isPositionedWithinScreen()) {
+            graphic->show();
+        } else {
+            std::cout << rand() << "HIDE IT" << std::endl;
+            graphic->hide();
         }
     }
 }

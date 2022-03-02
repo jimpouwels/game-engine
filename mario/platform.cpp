@@ -4,11 +4,12 @@
 
 namespace mario {
 
-Platform::Platform() : jimp::AnimatedGraphic(jimp::Vector2D { .x = 900, .y = 250 }, 0.5F, 0.0F, -1.0F, false) {
+Platform::Platform(jimp::Vector2D position, int width) : jimp::AnimatedGraphic(position, 0.5F, 0.0F, -1.0F, false) {
+    this->width = width;
 }
 
 void Platform::doOnInit() {
-    addShape("default", new jimp::Rectangle(500, 50, 0x9CA9B8));
+    addShape("default", new jimp::Rectangle(width, 50, 0x9CA9B8));
 }
 
 void Platform::doOnUpdate(float elapsedTime) {

@@ -69,6 +69,7 @@ public:
     void registerGraphic(AnimatedGraphic* graphic);
     void drawRectangle(float width, float height, Vector2D position, uint32_t color);
     float getGravityForce();
+    std::vector<AnimatedGraphic*>* getAllGraphics();
     Image* registerImage(Image* image);
     Sound* registerSound(Sound* sound);
     
