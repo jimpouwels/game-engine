@@ -3,6 +3,8 @@
 
 #include "animatedGraphic.hpp"
 
+namespace mario {
+
 class Platform : public jimp::AnimatedGraphic {
   
 private:
@@ -13,5 +15,6 @@ public:
     void doOnUpdate(float elapsedTime) override;
 };
 
+}
 
 #endif

@@ -8,9 +8,13 @@ namespace jimp {
 
 class Shape : public Drawable {
     
+private:
+    uint32_t color;
+    
 public:
-    Shape();
+    Shape(uint32_t color);
     ~Shape();
+    uint32_t getColor();
 };
 
 }

@@ -206,18 +206,23 @@ void AnimatedGraphic::stopMoving() {
 
 void AnimatedGraphic::jump(float force) {
     reachedGravityBlocker = false;
-    hasJumped = true;
+    jumpMotionRequested = true;
     jumpForce = force;
+}
+
+void AnimatedGraphic::interruptJump() {
+    jumpVelocity.y = -jumpVelocity.y;
+    isJumpMotionActive = false;
 }
 
 void AnimatedGraphic::disableGravitationalEffect() {
     reachedGravityBlocker = true;
-    jumping = false;
+    isJumpMotionActive = false;
 }
 
 void AnimatedGraphic::enableGravitationalEffect() {
     reachedGravityBlocker = false;
-    jumping = false;
+    isJumpMotionActive = false;
 }
 
 void AnimatedGraphic::setRotationAngle(float angle) {
@@ -228,19 +233,31 @@ bool AnimatedGraphic::isMarkedForDeletion() {
     return markedForDeletion;
 }
 
+void AnimatedGraphic::hide() {
+    visible = false;
+}
+
+void AnimatedGraphic::show() {
+    visible = true;
+}
+
+bool AnimatedGraphic::isVisible() {
+    return visible;
+}
+
 void AnimatedGraphic::updateMovement(float elapsedTime) {
-    if (hasJumped && jumpVelocity.y == 0) { // initiate jump vector
-        jumping = true;
+    if (jumpMotionRequested && jumpVelocity.y == 0) { // initiate jump vector
+        isJumpMotionActive = true;
         jumpVelocity.y = -jumpForce;
     }
-    hasJumped = false;
     
-    if ((!reachedGravityBlocker && applyGravity) || jumping)  {
+    if ((!reachedGravityBlocker && applyGravity) || jumpMotionRequested)  { // check for 'jumping' to get loose from gravitational blocker
         jumpVelocity.y += GameEngine::getInstance()->getGravityForce();
     } else {
         jumpVelocity.y = 0;
     }
     
+    jumpMotionRequested = false;
     addToPosition(jimp::Timing::toValueForElapsedTime(jumpVelocity, elapsedTime));
     
     if (hasMoved || moving) { // initiate move vector
@@ -253,7 +270,7 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
 }
 
 bool AnimatedGraphic::isJumping() {
-    return jumping;
+    return isJumpMotionActive;
 }
 
 void AnimatedGraphic::updateCurrentDrawableData() {

@@ -24,6 +24,9 @@
 		2394CC6127CC09DF00B62AC8 /* shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2394CC6027CC09DF00B62AC8 /* shape.cpp */; };
 		2394CC6327CC0A2300B62AC8 /* rectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2394CC6227CC0A2300B62AC8 /* rectangle.cpp */; };
 		239F327827CE7706007D4E2C /* platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 239F327627CE7706007D4E2C /* platform.cpp */; };
+		239F327B27CF8293007D4E2C /* scrollingWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 239F327927CF8293007D4E2C /* scrollingWorld.cpp */; };
+		239F327E27CF8DAE007D4E2C /* tile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 239F327C27CF8DAE007D4E2C /* tile.cpp */; };
+		239F328127CF8F2C007D4E2C /* tileMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 239F327F27CF8F2C007D4E2C /* tileMap.cpp */; };
 		23A4D56A27C102F9006F4220 /* thrust.ogg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A4D56927C102F2006F4220 /* thrust.ogg */; };
 		23A933B227864EA800769F69 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AD27864EA700769F69 /* sprite.cpp */; };
 		23A933B327864EA800769F69 /* animatedGraphic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AE27864EA700769F69 /* animatedGraphic.cpp */; };
@@ -108,6 +111,12 @@
 		2394CC6227CC0A2300B62AC8 /* rectangle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = rectangle.cpp; sourceTree = "<group>"; };
 		239F327627CE7706007D4E2C /* platform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = platform.cpp; sourceTree = "<group>"; };
 		239F327727CE7706007D4E2C /* platform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = platform.hpp; sourceTree = "<group>"; };
+		239F327927CF8293007D4E2C /* scrollingWorld.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scrollingWorld.cpp; sourceTree = "<group>"; };
+		239F327A27CF8293007D4E2C /* scrollingWorld.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = scrollingWorld.hpp; sourceTree = "<group>"; };
+		239F327C27CF8DAE007D4E2C /* tile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tile.cpp; sourceTree = "<group>"; };
+		239F327D27CF8DAE007D4E2C /* tile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tile.hpp; sourceTree = "<group>"; };
+		239F327F27CF8F2C007D4E2C /* tileMap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tileMap.cpp; sourceTree = "<group>"; };
+		239F328027CF8F2C007D4E2C /* tileMap.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tileMap.hpp; sourceTree = "<group>"; };
 		23A4D56927C102F2006F4220 /* thrust.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = thrust.ogg; sourceTree = "<group>"; };
 		23A933AC27864EA700769F69 /* animatedGraphic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animatedGraphic.hpp; sourceTree = "<group>"; };
 		23A933AD27864EA700769F69 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
@@ -187,6 +196,12 @@
 				235FEC1F27C6E1F6006306C9 /* character.hpp */,
 				239F327627CE7706007D4E2C /* platform.cpp */,
 				239F327727CE7706007D4E2C /* platform.hpp */,
+				239F327927CF8293007D4E2C /* scrollingWorld.cpp */,
+				239F327A27CF8293007D4E2C /* scrollingWorld.hpp */,
+				239F327C27CF8DAE007D4E2C /* tile.cpp */,
+				239F327D27CF8DAE007D4E2C /* tile.hpp */,
+				239F327F27CF8F2C007D4E2C /* tileMap.cpp */,
+				239F328027CF8F2C007D4E2C /* tileMap.hpp */,
 			);
 			path = mario;
 			sourceTree = "<group>";
@@ -375,6 +390,7 @@
 				23B177A827A3E3160094B178 /* sprite.hpp in Sources */,
 				23B177A927A3E3160094B178 /* keyListener.hpp in Sources */,
 				2394CC6127CC09DF00B62AC8 /* shape.cpp in Sources */,
+				239F327B27CF8293007D4E2C /* scrollingWorld.cpp in Sources */,
 				235A526727AAB2A00008A8A0 /* asteroidSpawner.cpp in Sources */,
 				235FEC2027C6E1F6006306C9 /* character.cpp in Sources */,
 				23B177AA27A3E3160094B178 /* keyboardHandler.hpp in Sources */,
@@ -386,11 +402,13 @@
 				23D5C7C527832B5600C6C916 /* gameEngine.hpp in Sources */,
 				236D5A2727B565A7005183C5 /* sound.cpp in Sources */,
 				23A933B527864EA800769F69 /* gameEngine.cpp in Sources */,
+				239F327E27CF8DAE007D4E2C /* tile.cpp in Sources */,
 				23D5C7E32783432F00C6C916 /* asteroids.cpp in Sources */,
 				230D483E27B9177A001F6494 /* updateThread.cpp in Sources */,
 				23A933B327864EA800769F69 /* animatedGraphic.cpp in Sources */,
 				23A933BB2788407F00769F69 /* keyboardHandler.cpp in Sources */,
 				23A933B227864EA800769F69 /* sprite.cpp in Sources */,
+				239F328127CF8F2C007D4E2C /* tileMap.cpp in Sources */,
 				23A933F42790187300769F69 /* animation.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

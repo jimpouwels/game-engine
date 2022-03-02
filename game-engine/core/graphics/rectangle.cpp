@@ -2,7 +2,7 @@
 
 namespace jimp {
 
-Rectangle::Rectangle(int width, int height) : Shape() {
+Rectangle::Rectangle(int width, int height, uint32_t color) : Shape(color) {
     this->width = width;
     this->height = height;
 }

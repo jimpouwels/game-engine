@@ -3,11 +3,13 @@
 #include "rectangle.hpp"
 #include "vector2D.hpp"
 
+namespace mario {
+
 Character::Character() : jimp::AnimatedGraphic(jimp::Vector2D { .x = 10, .y = 10}, 0.5F, 0.0F, -1.0F, true) {
 }
 
 void Character::doOnInit() {
-    addShape("default", new jimp::Rectangle(100, 100));
+    addShape("default", new jimp::Rectangle(100, 100, 0xD19F9C));
     this->setPosition(jimp::Vector2D { .x = 10, .y = 400 });
 }
 
@@ -25,9 +27,18 @@ void Character::hasCollidedRectBottom(AnimatedGraphic* otherGraphic) {
     hasCollidedWithBlocker = true;
 }
 
-
 void Character::hasCollidedRectTop(AnimatedGraphic* otherGraphic) {
-    getJumpVelocity().y = 0;
+    interruptJump();
+}
+
+void Character::hasCollidedRectRight(AnimatedGraphic* otherGraphic) {
+    stopMoving();
+    getMoveVelocity().x = - getMoveVelocity().x;
+}
+
+void Character::hasCollidedRectLeft(AnimatedGraphic* otherGraphic) {
+    stopMoving();
+    getMoveVelocity().x = - getMoveVelocity().x;
 }
 
 void Character::onKeyboardLeft(jimp::KeyState keyState) {
@@ -52,4 +63,6 @@ void Character::onKeyboardUp(jimp::KeyState keyState) {
             jump(1500);
         }
     }
+}
+
 }

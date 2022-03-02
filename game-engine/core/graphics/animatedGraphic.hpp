@@ -19,6 +19,7 @@ private:
     Vector2D position = { .x = 0, .y = 0 };
     float scale;
     float angle;
+    bool visible = true;
     bool applyGravity = false;
     std::map<std::string, Animation*>* animationMap;
     Animation* activeAnimation = nullptr;
@@ -27,8 +28,8 @@ private:
     Vector2D moveVelocity = Vector2D { .x = 0, .y = 0 };
     Vector2D jumpVelocity = Vector2D { .x = 0, .y = 0 };
     bool reachedGravityBlocker = false;
-    bool hasJumped = false;
-    bool jumping = false;
+    bool jumpMotionRequested = false;
+    bool isJumpMotionActive = false;
     float jumpForce = 0;
     bool moving = false;
     bool hasMoved = false;
@@ -51,6 +52,7 @@ protected:
     void disableGravitationalEffect();
     void enableGravitationalEffect();
     void jump(float force);
+    void interruptJump();
     bool isJumping();
     virtual void doOnInit() {};
     virtual void doOnUpdate(float elapsedTime) {};
@@ -80,6 +82,9 @@ public:
     void markForDeletion();
     void setX(float x);
     void setY(float y);
+    void hide();
+    void show();
+    bool isVisible();
     void setPosition(Vector2D position);
     void addToPosition(Vector2D delta);
     void onInit();

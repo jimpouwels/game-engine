@@ -97,16 +97,19 @@ void GameEngine::draw(jimp::Drawable* drawable) {
         window->draw(*cachedSprite->sprite, transform);
     } else if (dynamic_cast<Rectangle*>(drawable) != nullptr) {
         Rectangle* rectangle = dynamic_cast<Rectangle*>(drawable);
-        sf::RectangleShape shape;
-        shape.setSize(sf::Vector2f(rectangle->getWidth(), rectangle->getHeight()));
-        shape.setOutlineColor(sf::Color::Red);
-        shape.setOutlineThickness(5);
-        shape.setPosition(rectangle->getPosition().x, rectangle->getPosition().y);
-        shape.setFillColor(sf::Color::Green);
-        shape.setOutlineColor(sf::Color::Green);
-        window->draw(shape);
+        drawRectangle(rectangle->getWidth(), rectangle->getHeight(), rectangle->getPosition(), rectangle->getColor());
     }
-    
+}
+
+void GameEngine::drawRectangle(float width, float height, Vector2D position, uint32_t color) {
+    sf::RectangleShape shape;
+    shape.setSize(sf::Vector2f(width, height));
+    shape.setOutlineColor(sf::Color::Red);
+    shape.setOutlineThickness(5);
+    shape.setPosition(position.x, position.y);
+    shape.setFillColor(sf::Color(color));
+    shape.setOutlineColor(sf::Color::Green);
+    window->draw(shape);
 }
 
 void GameEngine::registerGraphic(AnimatedGraphic *graphic) {
@@ -190,7 +193,7 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     
     updateThread->lockForDeletion();
     for (const auto& graphic: *updateThread->getAllGraphics()) {
-        if (!graphic->isMarkedForDeletion()) {
+        if (!graphic->isMarkedForDeletion() && graphic->isVisible()) {
             graphic->onFrame(elapsedTimeSincePreviousFrame);
             draw(graphic->getActiveDrawable());
         }

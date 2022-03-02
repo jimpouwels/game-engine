@@ -67,7 +67,7 @@ public:
     void addKeyListener(KeyListener* keyListener);
     void draw(Drawable* drawable);
     void registerGraphic(AnimatedGraphic* graphic);
-    void drawRectangle(float width, float height, Vector2D position);
+    void drawRectangle(float width, float height, Vector2D position, uint32_t color);
     float getGravityForce();
     Image* registerImage(Image* image);
     Sound* registerSound(Sound* sound);
