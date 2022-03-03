@@ -43,8 +43,6 @@ void ScrollingWorld::doOnUpdate() {
 }
 
 void ScrollingWorld::doOnFrame() {
-    jimp::GameEngine* gameEngine = jimp::GameEngine::getInstance();
-    gameEngine->drawRectangle(250, 250, jimp::Vector2D { .x = static_cast<float>(gameEngine->getScreenWidth() / 2 - 125), .y = static_cast<float>(gameEngine->getScreenHeight() / 2 - 125) }, 0xF7F7D1);
 }
 
 }

@@ -13,9 +13,7 @@ void Character::doOnInit() {
 }
 
 void Character::doOnUpdate(float elapsedTime) {
-    if (getPosition().y >= 400) { // reached floor, replace with collision detection with gravitational blocker
-        blockGravity();
-    } else if (!hasCollidedWithBlocker) {
+    if (!hasCollidedWithBlocker) {
         unblockGravity();
     }
     hasCollidedWithBlocker = false;

@@ -91,9 +91,14 @@ void GameEngine::draw(jimp::Drawable* drawable) {
         }
 
         for (uint16_t i = 0; i < sprite->getRepeat(); i++) {
+            float offsetX = sprite->getPosition().x + i * sprite->getSingleWidth();
+            if (!(isPositionWithinScreen(Vector2D { .x = offsetX, .y = sprite->getPosition().y }))
+                && !(isPositionWithinScreen(Vector2D { .x = offsetX + sprite->getSingleWidth(), .y = sprite->getPosition().y }))) {
+                continue;
+            }
             sf::Transform transform;
             transform.rotate(sprite->getRotationAngle(), sprite->getPosition().x + sprite->getRotationPoint().x, sprite->getPosition().y + sprite->getRotationPoint().y);
-            cachedSprite->sprite->setPosition(sprite->getPosition().x + i * sprite->getSingleWidth(), sprite->getPosition().y);
+            cachedSprite->sprite->setPosition(offsetX, sprite->getPosition().y);
             cachedSprite->sprite->setScale(sprite->getScale(), sprite->getScale());
             window->draw(*cachedSprite->sprite, transform);
         }
