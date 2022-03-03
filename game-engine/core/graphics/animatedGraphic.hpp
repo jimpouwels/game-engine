@@ -26,7 +26,7 @@ private:
     bool markedForDeletion = false;
     bool deleteOnLeaveScreen = false;
     Vector2D moveVelocity = Vector2D { .x = 0, .y = 0 };
-    Vector2D jumpVelocity = Vector2D { .x = 0, .y = 0 };
+    Vector2D gravityVelocity = Vector2D { .x = 0, .y = 0 };
     bool gravityBlocked = false;
     bool moving = false;
     float moveForce = 0;

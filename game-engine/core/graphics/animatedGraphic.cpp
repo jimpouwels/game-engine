@@ -165,7 +165,7 @@ Vector2D& AnimatedGraphic::getMoveVelocity() {
 }
 
 Vector2D& AnimatedGraphic::getJumpVelocity() {
-    return jumpVelocity;
+    return gravityVelocity;
 }
 
 void AnimatedGraphic::setPosition(Vector2D position) {
@@ -221,19 +221,19 @@ void AnimatedGraphic::stopMoving() {
 }
 
 void AnimatedGraphic::jump(float force) {
-    jumpVelocity.y = -force;
+    gravityVelocity.y = -force;
 }
 
 void AnimatedGraphic::interruptJump() {
-    if (jumpVelocity.y < 0) {
-        jumpVelocity.y = -jumpVelocity.y;
+    if (gravityVelocity.y < 0) {
+        gravityVelocity.y = -gravityVelocity.y;
     }
 }
 
 void AnimatedGraphic::blockGravity() {
-    if (jumpVelocity.y > 0) {
+    if (gravityVelocity.y > 0) {
         gravityBlocked = true;
-        jumpVelocity.y = 0;
+        gravityVelocity.y = 0;
     }
 }
 
@@ -262,15 +262,15 @@ bool AnimatedGraphic::isVisible() {
 }
 
 void AnimatedGraphic::updateMovement(float elapsedTime) {
-    // ========= JUMPING
+    // ========= GRAVITY
     if (applyGravity)  {
-        jumpVelocity.y += GameEngine::getInstance()->getGravityForce();
+        gravityVelocity.y += GameEngine::getInstance()->getGravityForce();
     }
     if (gravityBlocked && isFalling()) {
-        jumpVelocity.y = 0;
+        gravityVelocity.y = 0;
     }
     
-    addToPosition(jimp::Timing::toValueForElapsedTime(jumpVelocity, elapsedTime));
+    addToPosition(jimp::Timing::toValueForElapsedTime(gravityVelocity, elapsedTime));
     
     // ========= MOVEMENT
     if (moving) {
@@ -280,11 +280,11 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
 }
 
 bool AnimatedGraphic::isJumping() {
-    return jumpVelocity.y != 0;
+    return gravityVelocity.y != 0;
 }
 
 bool AnimatedGraphic::isFalling() {
-    return jumpVelocity.y > 0;
+    return gravityVelocity.y > 0;
 }
 
 void AnimatedGraphic::updateCurrentDrawableData() {
