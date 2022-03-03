@@ -227,7 +227,9 @@ void AnimatedGraphic::jump(float force) {
 }
 
 void AnimatedGraphic::interruptJump() {
-    jumpVelocity.y = -jumpVelocity.y;
+    if (jumpVelocity.y < 0) {
+        jumpVelocity.y = -jumpVelocity.y;
+    }
     isJumpMotionActive = false;
 }
 
