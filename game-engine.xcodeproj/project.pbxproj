@@ -25,6 +25,7 @@
 		2394CC6327CC0A2300B62AC8 /* rectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2394CC6227CC0A2300B62AC8 /* rectangle.cpp */; };
 		239F327827CE7706007D4E2C /* platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 239F327627CE7706007D4E2C /* platform.cpp */; };
 		239F327B27CF8293007D4E2C /* scrollingWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 239F327927CF8293007D4E2C /* scrollingWorld.cpp */; };
+		239F328727D0CAC0007D4E2C /* block.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F328527D0CAB5007D4E2C /* block.png */; };
 		23A4D56A27C102F9006F4220 /* thrust.ogg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A4D56927C102F2006F4220 /* thrust.ogg */; };
 		23A933B227864EA800769F69 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AD27864EA700769F69 /* sprite.cpp */; };
 		23A933B327864EA800769F69 /* animatedGraphic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AE27864EA700769F69 /* animatedGraphic.cpp */; };
@@ -61,6 +62,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				239F328727D0CAC0007D4E2C /* block.png in CopyFiles */,
 				23A4D56A27C102F9006F4220 /* thrust.ogg in CopyFiles */,
 				236D5A3527B5794E005183C5 /* music.ogg in CopyFiles */,
 				236D5A3127B5707F005183C5 /* hit.ogg in CopyFiles */,
@@ -111,6 +113,7 @@
 		239F327727CE7706007D4E2C /* platform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = platform.hpp; sourceTree = "<group>"; };
 		239F327927CF8293007D4E2C /* scrollingWorld.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scrollingWorld.cpp; sourceTree = "<group>"; };
 		239F327A27CF8293007D4E2C /* scrollingWorld.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = scrollingWorld.hpp; sourceTree = "<group>"; };
+		239F328527D0CAB5007D4E2C /* block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block.png; sourceTree = "<group>"; };
 		23A4D56927C102F2006F4220 /* thrust.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = thrust.ogg; sourceTree = "<group>"; };
 		23A933AC27864EA700769F69 /* animatedGraphic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animatedGraphic.hpp; sourceTree = "<group>"; };
 		23A933AD27864EA700769F69 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
@@ -185,6 +188,7 @@
 		235FEC1927C6DF38006306C9 /* mario */ = {
 			isa = PBXGroup;
 			children = (
+				239F328427D0CA9F007D4E2C /* assets */,
 				235FEC1A27C6DF5B006306C9 /* mario.cpp */,
 				235FEC1E27C6E1F6006306C9 /* character.cpp */,
 				235FEC1F27C6E1F6006306C9 /* character.hpp */,
@@ -194,6 +198,14 @@
 				239F327A27CF8293007D4E2C /* scrollingWorld.hpp */,
 			);
 			path = mario;
+			sourceTree = "<group>";
+		};
+		239F328427D0CA9F007D4E2C /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				239F328527D0CAB5007D4E2C /* block.png */,
+			);
+			path = assets;
 			sourceTree = "<group>";
 		};
 		23A4D56427BFA913006F4220 /* graphics */ = {

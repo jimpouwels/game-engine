@@ -9,10 +9,9 @@ namespace mario {
 class Platform : public jimp::AnimatedGraphic {
   
 private:
-    int width = 0;
     
 public:
-    Platform(jimp::Vector2D position, int width);
+    Platform(jimp::Vector2D position);
     void doOnInit() override;
     void doOnUpdate(float elapsedTime) override;
 };
