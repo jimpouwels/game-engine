@@ -104,11 +104,8 @@ void GameEngine::draw(jimp::Drawable* drawable) {
 void GameEngine::drawRectangle(float width, float height, Vector2D position, uint32_t color) {
     sf::RectangleShape shape;
     shape.setSize(sf::Vector2f(width, height));
-    shape.setOutlineColor(sf::Color::Red);
-    shape.setOutlineThickness(5);
     shape.setPosition(position.x, position.y);
-    shape.setFillColor(sf::Color(color));
-    shape.setOutlineColor(sf::Color::Green);
+    shape.setFillColor(sf::Color((color << 8) | 0xFF));
     window->draw(shape);
 }
 

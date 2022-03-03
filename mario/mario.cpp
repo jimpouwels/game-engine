@@ -38,7 +38,7 @@ public:
 }
 
 int main() {
-    mario::Mario game(1500, 900, "Mario");
+    mario::Mario game(1500, 900, "My First Platform Game");
     game.startGame();
     return 0;
 }
