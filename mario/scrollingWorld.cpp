@@ -6,9 +6,14 @@ namespace mario {
 
 ScrollingWorld::ScrollingWorld(jimp::AnimatedGraphic* mainCharacter, int width, int height) {
     this->mainCharacter = mainCharacter;
+    this->scrollingGraphics = new std::list<jimp::AnimatedGraphic*>;
 }
 
 ScrollingWorld::~ScrollingWorld() {
+}
+
+void ScrollingWorld::addGraphic(jimp::AnimatedGraphic* animatedGraphic) {
+    this->scrollingGraphics->push_back(animatedGraphic);
 }
 
 void ScrollingWorld::doOnUpdate() {
@@ -24,17 +29,15 @@ void ScrollingWorld::doOnUpdate() {
         mainCharacter->getPosition().x = leftSideOfCamera;
     }
     offsetX += offsetDeltaX;
-    std::vector<jimp::AnimatedGraphic*>* graphics = gameEngine->getAllGraphics();
-    for (int i = 0; i < graphics->size(); i++) {
-        jimp::AnimatedGraphic* graphic = graphics->at(i);
-        if (graphic == mainCharacter) {
+    for (const auto& scrollingGraphic: *scrollingGraphics) {
+        if (scrollingGraphic == mainCharacter) {
             continue;
         }
-        graphic->getPosition().x -= offsetDeltaX;
-        if (graphic->isPositionedWithinScreen()) {
-            graphic->show();
+        scrollingGraphic->getPosition().x -= offsetDeltaX;
+        if (scrollingGraphic->isPositionedWithinScreen()) {
+            scrollingGraphic->show();
         } else {
-            graphic->hide();
+            scrollingGraphic->hide();
         }
     }
 }

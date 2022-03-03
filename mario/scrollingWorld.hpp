@@ -9,6 +9,7 @@ class ScrollingWorld {
     
 private:
     jimp::AnimatedGraphic* mainCharacter = nullptr;
+    std::list<jimp::AnimatedGraphic*>* scrollingGraphics = nullptr;
     int offsetX = 0;
     int width = 0;
     int height = 0;
@@ -18,6 +19,7 @@ public:
     ~ScrollingWorld();
     void doOnUpdate();
     void doOnFrame();
+    void addGraphic(jimp::AnimatedGraphic* animatedGraphic);
 };
 
 }
