@@ -3,11 +3,7 @@
 
 namespace jimp {
 
-Sprite::Sprite(float x, float y, float scale, uint16_t angle, std::string filePath) : Drawable(x, y, scale, angle) {
-    Sprite(x, y, scale, filePath);
-}
-
-Sprite::Sprite(float x, float y, float scale, std::string filePath) : Drawable(x, y, scale, 0) {
+Sprite::Sprite(float x, float y, float scale, uint16_t angle, uint16_t repeat, std::string filePath) : Drawable(x, y, scale, angle, repeat) {
     this->image = new Image(filePath);
 }
 
@@ -15,6 +11,10 @@ Sprite::~Sprite() {
 }
 
 int Sprite::getWidth() {
+    return getSingleWidth() * getRepeat();
+}
+
+int Sprite::getSingleWidth() {
     return image->getWidth() * getScale();
 }
 

@@ -23,7 +23,7 @@ public:
         registerSound(music);
         music->loop(25);
         asteroidSpawner = new AsteroidSpawner();
-        background = new jimp::Sprite(0, 0, 1.0F, "background.jpeg");
+        background = new jimp::Sprite(0, 0, 1.0F, 0, 0, "background.jpeg");
     }
     
     ~Asteroids() {

@@ -1,6 +1,7 @@
 #ifndef drawable_hpp
 #define drawable_hpp
 
+#include <cstdint>
 #include "vector2D.hpp"
 
 namespace jimp {
@@ -12,14 +13,16 @@ private:
     Vector2D rotationPoint = { .x = 0, .y = 0 };
     float scale = 1.0F;
     float angle = 0.0F;
+    uint16_t repeat;
         
 public:
-    Drawable(float x, float y, float scale, float angle);
+    Drawable(float x, float y, float scale, float angle, uint16_t repeat);
     virtual ~Drawable();
     Vector2D& getPosition();
     void setPosition(Vector2D position);
     void setX(float x);
     void setY(float y);
+    uint16_t getRepeat();
     float getScale();
     void setScale(float scale);
     float getRotationAngle();

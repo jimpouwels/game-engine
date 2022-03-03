@@ -269,7 +269,6 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
     if (gravityBlocked && isFalling()) {
         gravityVelocity.y = 0;
     }
-    
     addToPosition(jimp::Timing::toValueForElapsedTime(gravityVelocity, elapsedTime));
     
     // ========= MOVEMENT
@@ -296,14 +295,15 @@ void AnimatedGraphic::updateCurrentDrawableData() {
 }
 
 void AnimatedGraphic::addSprite(std::string animationId, std::string filePath) {
-    Sprite* sprite = new Sprite(position.x, position.y, scale, filePath);
+    addSprite(animationId, filePath, 0);
+}
+
+void AnimatedGraphic::addSprite(std::string animationId, std::string filePath, uint16_t repeat) {
+    Sprite* sprite = new Sprite(position.x, position.y, scale, angle, repeat, filePath);
     addDrawable(animationId, sprite);
 }
 
 void AnimatedGraphic::addShape(std::string animationId, Shape* shape) {
-    shape->setScale(scale);
-    shape->setRotationAngle(angle);
-    shape->setPosition(position);
     addDrawable(animationId, shape);
 }
 

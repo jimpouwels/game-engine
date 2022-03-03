@@ -4,11 +4,12 @@
 
 namespace mario {
 
-Platform::Platform(jimp::Vector2D position) : jimp::AnimatedGraphic(position, 0.5F, 0.0F, -1.0F, false) {
+Platform::Platform(jimp::Vector2D position, uint16_t repeat) : jimp::AnimatedGraphic(position, 0.5F, 0.0F, -1.0F, false) {
+    this->repeat = repeat;
 }
 
 void Platform::doOnInit() {
-    addSprite("default", "block.png");
+    addSprite("default", "block.png", repeat);
 }
 
 void Platform::doOnUpdate(float elapsedTime) {

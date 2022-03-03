@@ -51,6 +51,8 @@ protected:
     void interruptJump();
     bool isJumping();
     bool isFalling();
+    void addSprite(std::string animationId, std::string filePath, uint16_t repeat);
+    void addSprite(std::string animationId, std::string filePath);
     virtual void doOnInit() {};
     virtual void doOnUpdate(float elapsedTime) {};
     virtual void doOnFrame(float elapsedTime) {};
@@ -92,7 +94,6 @@ public:
     virtual uint16_t getZIndex() {
         return 0;
     }
-    void addSprite(std::string animationId, std::string filePath);
     void addShape(std::string animationId, Shape* shape);
     void onKeyboardLeft(jimp::KeyState keyState) {};
     void onKeyboardRight(jimp::KeyState keyState) {};

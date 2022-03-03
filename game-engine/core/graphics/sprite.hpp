@@ -15,12 +15,12 @@ private:
     Image* image;
     
 public:
-    Sprite(float x, float y, float scale, std::string filePath);
-    Sprite(float x, float y, float scale, uint16_t angle, std::string filePath);
+    Sprite(float x, float y, float scale, uint16_t angle, uint16_t repeat, std::string filePath);
     ~Sprite();
+    jimp::Image& getImage();
+    int getSingleWidth();
     int getWidth() override;
     int getHeight() override;
-    jimp::Image& getImage();
 };
 }
 

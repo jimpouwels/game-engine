@@ -3,8 +3,9 @@
 
 namespace jimp {
 
-Drawable::Drawable(float x, float y, float scale, float angle) {
+Drawable::Drawable(float x, float y, float scale, float angle, uint16_t repeat) {
     this->position = Vector2D { .x = x, .y = y };
+    this->repeat = repeat;
 }
 
 Drawable::~Drawable() {
@@ -24,6 +25,10 @@ void Drawable::setX(float x) {
 
 void Drawable::setY(float y) {
     position.y = y;
+}
+
+uint16_t Drawable::getRepeat() {
+    return repeat;
 }
 
 float Drawable::getRotationAngle() {

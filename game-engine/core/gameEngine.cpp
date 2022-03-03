@@ -90,11 +90,13 @@ void GameEngine::draw(jimp::Drawable* drawable) {
             cachedSprite = spriteCache->getSprite(sprite);
         }
 
-        sf::Transform transform;
-        transform.rotate(sprite->getRotationAngle(), sprite->getPosition().x + sprite->getRotationPoint().x, sprite->getPosition().y + sprite->getRotationPoint().y);
-        cachedSprite->sprite->setPosition(sprite->getPosition().x, sprite->getPosition().y);
-        cachedSprite->sprite->setScale(sprite->getScale(), sprite->getScale());
-        window->draw(*cachedSprite->sprite, transform);
+        for (uint16_t i = 0; i < sprite->getRepeat(); i++) {
+            sf::Transform transform;
+            transform.rotate(sprite->getRotationAngle(), sprite->getPosition().x + sprite->getRotationPoint().x, sprite->getPosition().y + sprite->getRotationPoint().y);
+            cachedSprite->sprite->setPosition(sprite->getPosition().x + i * sprite->getSingleWidth(), sprite->getPosition().y);
+            cachedSprite->sprite->setScale(sprite->getScale(), sprite->getScale());
+            window->draw(*cachedSprite->sprite, transform);
+        }
     } else if (dynamic_cast<Rectangle*>(drawable) != nullptr) {
         Rectangle* rectangle = dynamic_cast<Rectangle*>(drawable);
         drawRectangle(rectangle->getWidth(), rectangle->getHeight(), rectangle->getPosition(), rectangle->getColor());

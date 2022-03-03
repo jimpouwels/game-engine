@@ -2,7 +2,7 @@
 
 namespace jimp {
 
-Shape::Shape(uint32_t color) : Drawable(0, 0, 0, 0) {
+Shape::Shape(uint32_t color) : Drawable(0, 0, 0, 0, 0) {
     this->color = color;
 }
 
