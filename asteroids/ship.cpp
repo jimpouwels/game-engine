@@ -14,7 +14,7 @@ const uint8_t Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.15F;
 const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 
-Ship::Ship() : jimp::AnimatedGraphic(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0, 0.05F) {
+Ship::Ship() : jimp::AnimatedGraphic(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0, 0.05F, false) {
 }
 
 void Ship::doOnInit() {
@@ -113,8 +113,8 @@ void Ship::updateFiring(float elapsedTime) {
     if (elapsedTimeSinceLastShot >= timeBetweenShots && (hasFired || isFiring)) {
         hasFired = false;
         jimp::Vector2D rotationPoint = getRotationPoint();
-        rotationPoint.x += getPosition().x - 5;
-        rotationPoint.y += getPosition().y - 10;
+        rotationPoint.x += getPosition().x - (10 * getScale());
+        rotationPoint.y += getPosition().y + (45 * getScale());
         new Bullet(rotationPoint, getRotationAngle());
         firingSound->playTillEnd(30);
         elapsedTimeSinceLastShot = 0;
@@ -122,14 +122,14 @@ void Ship::updateFiring(float elapsedTime) {
 }
 
 void Ship::updateMovement(float elapsedTime) {
-    if (jimp::GameEngine::getInstance()->isOutsideScreenRight(this) && getVelocity().x >= 0) {
+    if (jimp::GameEngine::getInstance()->isOutsideScreenRight(this) && getMoveVelocity().x >= 0) {
         setX(-getWidth());
-    } else if (jimp::GameEngine::getInstance()->isOutsideScreenLeft(this) && getVelocity().x <= 0) {
+    } else if (jimp::GameEngine::getInstance()->isOutsideScreenLeft(this) && getMoveVelocity().x <= 0) {
         setX(jimp::GameEngine::getInstance()->getScreenWidth());
     }
-    if (jimp::GameEngine::getInstance()->isOutsideScreenTop(this) && getVelocity().y <= 0) {
+    if (jimp::GameEngine::getInstance()->isOutsideScreenTop(this) && getMoveVelocity().y <= 0) {
         setY(jimp::GameEngine::getInstance()->getScreenHeight());
-    } else if (jimp::GameEngine::getInstance()->isOutsideScreenBottom(this) && getVelocity().y >= 0) {
+    } else if (jimp::GameEngine::getInstance()->isOutsideScreenBottom(this) && getMoveVelocity().y >= 0) {
         setY(-getHeight());
     }
 }

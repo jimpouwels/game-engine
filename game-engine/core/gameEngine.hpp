@@ -30,6 +30,7 @@ private:
     UpdateThread* updateThread = nullptr;
     SpriteCache* spriteCache = nullptr;
     float timePerFrame;
+    float gravityForce;
     jimp::KeyboardHandler* keyboardHandler = nullptr;
     std::chrono::time_point<std::chrono::system_clock> previousFrameTime;
     std::chrono::time_point<std::chrono::system_clock> previousFpsMeasurementTime;
@@ -43,7 +44,7 @@ private:
     void handleDrawableDeleted(AnimatedGraphic* graphic);
     
 protected:
-    GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate);
+    GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravityForce, std::string windowTitle, uint16_t desiredFrameRate);
     void start();
     virtual void onFrame(float elapsedTime) {};
     virtual void onUpdate(float elapsedTime) {};
@@ -66,7 +67,9 @@ public:
     void addKeyListener(KeyListener* keyListener);
     void draw(Drawable* drawable);
     void registerGraphic(AnimatedGraphic* graphic);
-    void drawRectangle(float width, float height, Vector2D position);
+    void drawRectangle(float width, float height, Vector2D position, uint32_t color);
+    float getGravityForce();
+    std::vector<AnimatedGraphic*>* getAllGraphics();
     Image* registerImage(Image* image);
     Sound* registerSound(Sound* sound);
     

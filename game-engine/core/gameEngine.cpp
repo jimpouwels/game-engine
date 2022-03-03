@@ -10,10 +10,11 @@
 
 namespace jimp {
 
-GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, std::string windowTitle, uint16_t desiredFrameRate) {
+GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravityForce, std::string windowTitle, uint16_t desiredFrameRate) {
     instance = this;
     this->screenWidth = screenWidth;
     this->screenHeight = screenHeight;
+    this->gravityForce = gravityForce;
     this->frameRate = desiredFrameRate;
     this->timePerFrame = 1.0 / desiredFrameRate;
     this->windowTitle = windowTitle;
@@ -96,16 +97,16 @@ void GameEngine::draw(jimp::Drawable* drawable) {
         window->draw(*cachedSprite->sprite, transform);
     } else if (dynamic_cast<Rectangle*>(drawable) != nullptr) {
         Rectangle* rectangle = dynamic_cast<Rectangle*>(drawable);
-        sf::RectangleShape shape;
-        shape.setSize(sf::Vector2f(rectangle->getWidth(), rectangle->getHeight()));
-        shape.setOutlineColor(sf::Color::Red);
-        shape.setOutlineThickness(5);
-        shape.setPosition(rectangle->getPosition().x, rectangle->getPosition().y);
-        shape.setFillColor(sf::Color::Green);
-        shape.setOutlineColor(sf::Color::Green);
-        window->draw(shape);
+        drawRectangle(rectangle->getWidth(), rectangle->getHeight(), rectangle->getPosition(), rectangle->getColor());
     }
-    
+}
+
+void GameEngine::drawRectangle(float width, float height, Vector2D position, uint32_t color) {
+    sf::RectangleShape shape;
+    shape.setSize(sf::Vector2f(width, height));
+    shape.setPosition(position.x, position.y);
+    shape.setFillColor(sf::Color((color << 8) | 0xFF));
+    window->draw(shape);
 }
 
 void GameEngine::registerGraphic(AnimatedGraphic *graphic) {
@@ -141,6 +142,10 @@ int GameEngine::getScreenWidth() {
 
 int GameEngine::getScreenHeight() {
     return screenHeight;
+}
+
+float GameEngine::getGravityForce() {
+    return gravityForce;
 }
 
 bool GameEngine::isAtLeftEdgeOfScreen(AnimatedGraphic* sprite) {
@@ -179,13 +184,17 @@ bool GameEngine::isPositionWithinScreen(Vector2D position) {
     return position.x <= getScreenWidth() && position.x >= 0 && position.y <= getScreenHeight() && position.y > 0;
 }
 
+std::vector<AnimatedGraphic*>* GameEngine::getAllGraphics() {
+    return updateThread->getAllGraphics();
+}
+
 void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     window->clear();
     onFrame(elapsedTimeSincePreviousFrame);
     
     updateThread->lockForDeletion();
     for (const auto& graphic: *updateThread->getAllGraphics()) {
-        if (!graphic->isMarkedForDeletion()) {
+        if (!graphic->isMarkedForDeletion() && graphic->isVisible()) {
             graphic->onFrame(elapsedTimeSincePreviousFrame);
             draw(graphic->getActiveDrawable());
         }

@@ -19,11 +19,22 @@ private:
     Vector2D position = { .x = 0, .y = 0 };
     float scale;
     float angle;
+    bool visible = true;
+    bool applyGravity = false;
     std::map<std::string, Animation*>* animationMap;
     Animation* activeAnimation = nullptr;
     bool markedForDeletion = false;
     bool deleteOnLeaveScreen = false;
-    Vector2D velocity = Vector2D { .x = 0, .y = 0 };
+    Vector2D moveVelocity = Vector2D { .x = 0, .y = 0 };
+    Vector2D jumpVelocity = Vector2D { .x = 0, .y = 0 };
+    bool reachedGravityBlocker = false;
+    bool jumpMotionRequested = false;
+    bool isJumpMotionActive = false;
+    float jumpForce = 0;
+    bool moving = false;
+    bool hasMoved = false;
+    float moveForce = 0;
+    float moveAngle = 0;
     std::mutex* lock = new std::mutex();
     float elapsedTimeSinceLastSwap;
     float drawableSwapIntervalInSeconds;
@@ -36,7 +47,13 @@ private:
 protected:
     void setCurrentAnimation(std::string animationId);
     void accelerate(float angle, uint16_t mass, uint16_t force, float elapsedTime);
-    void move(float angle, float pixelsPerSecond, float elapsedTime);
+    void move(float angle, float pixelsPerSecond);
+    void stopMoving();
+    void disableGravitationalEffect();
+    void enableGravitationalEffect();
+    void jump(float force);
+    void interruptJump();
+    bool isJumping();
     virtual void doOnInit() {};
     virtual void doOnUpdate(float elapsedTime) {};
     virtual void doOnFrame(float elapsedTime) {};
@@ -47,10 +64,11 @@ protected:
     virtual void hasCollidedRect(AnimatedGraphic* otherGraphic, Geo2D::Side side) {};
     
 public:
-    AnimatedGraphic(Vector2D position, float scale, int rotationAngle, float imageSwapIntervalInSeconds);
+    AnimatedGraphic(Vector2D position, float scale, int rotationAngle, float imageSwapIntervalInSeconds, bool applyGravity);
     ~AnimatedGraphic();
     Vector2D& getPosition();
-    Vector2D& getVelocity();
+    Vector2D& getMoveVelocity();
+    Vector2D& getJumpVelocity();
     float getScale();
     int getWidth();
     int getHeight();
@@ -64,6 +82,10 @@ public:
     void markForDeletion();
     void setX(float x);
     void setY(float y);
+    void hide();
+    void show();
+    bool isPositionedWithinScreen();
+    bool isVisible();
     void setPosition(Vector2D position);
     void addToPosition(Vector2D delta);
     void onInit();

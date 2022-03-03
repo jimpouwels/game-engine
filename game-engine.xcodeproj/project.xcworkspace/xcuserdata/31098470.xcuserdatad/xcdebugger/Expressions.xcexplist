@@ -3,6 +3,39 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "mario::TileMap::getTileAt(unsigned short, unsigned short):tileMap.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "rowCount * x + y">
+            </PersistentString>
+            <PersistentString
+               value = "tiles-&gt;size()">
+            </PersistentString>
+            <PersistentString
+               value = "rowCount * columnCount">
+            </PersistentString>
+            <PersistentString
+               value = "tiles-&gt;at(columnCount * x + y)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "mario::ScrollingWorld::addGraphic(int, int, jimp::AnimatedGraphic*):scrollingWorld.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "tileMap-&gt;getTileAt(x, y)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Game::onSpriteDeleted(jimp::AnimatedSprite*):game.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "animatedSprite-&gt;getActiveSprite()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Asteroid::updateDirection(float):asteroid.cpp">
          <PersistentStrings>
             <PersistentString
@@ -14,10 +47,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Game::onSpriteDeleted(jimp::AnimatedSprite*):game.cpp">
+         contextName = "mario::ScrollingWorld::doOnUpdate():scrollingWorld.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "animatedSprite-&gt;getActiveSprite()">
+               value = "tileMap-&gt;getRowCount()">
+            </PersistentString>
+            <PersistentString
+               value = "tileMap-&gt;getColumnCount()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
