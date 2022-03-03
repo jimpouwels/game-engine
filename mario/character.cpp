@@ -14,15 +14,15 @@ void Character::doOnInit() {
 
 void Character::doOnUpdate(float elapsedTime) {
     if (getPosition().y >= 400) { // reached floor, replace with collision detection with gravitational blocker
-        disableGravitationalEffect();
+        blockGravity();
     } else if (!hasCollidedWithBlocker) {
-        enableGravitationalEffect();
+        unblockGravity();
     }
     hasCollidedWithBlocker = false;
 }
 
 void Character::hasCollidedRectBottom(AnimatedGraphic* otherGraphic) {
-    disableGravitationalEffect();
+    blockGravity();
     hasCollidedWithBlocker = true;
 }
 

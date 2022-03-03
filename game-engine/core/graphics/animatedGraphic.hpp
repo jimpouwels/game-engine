@@ -27,12 +27,8 @@ private:
     bool deleteOnLeaveScreen = false;
     Vector2D moveVelocity = Vector2D { .x = 0, .y = 0 };
     Vector2D jumpVelocity = Vector2D { .x = 0, .y = 0 };
-    bool reachedGravityBlocker = false;
-    bool jumpMotionRequested = false;
-    bool isJumpMotionActive = false;
-    float jumpForce = 0;
+    bool gravityBlocked = false;
     bool moving = false;
-    bool hasMoved = false;
     float moveForce = 0;
     float moveAngle = 0;
     std::mutex* lock = new std::mutex();
@@ -49,11 +45,12 @@ protected:
     void accelerate(float angle, uint16_t mass, uint16_t force, float elapsedTime);
     void move(float angle, float pixelsPerSecond);
     void stopMoving();
-    void disableGravitationalEffect();
-    void enableGravitationalEffect();
+    void blockGravity();
+    void unblockGravity();
     void jump(float force);
     void interruptJump();
     bool isJumping();
+    bool isFalling();
     virtual void doOnInit() {};
     virtual void doOnUpdate(float elapsedTime) {};
     virtual void doOnFrame(float elapsedTime) {};
