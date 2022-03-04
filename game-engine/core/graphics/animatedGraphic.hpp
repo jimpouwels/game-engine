@@ -45,8 +45,8 @@ protected:
     void accelerate(float angle, uint16_t mass, uint16_t force, float elapsedTime);
     void move(float angle, float pixelsPerSecond);
     void stopMoving();
-    void blockGravity();
-    void unblockGravity();
+    void clampToTopOf(AnimatedGraphic* otherGraphic);
+    void resetGravityVelocity();
     bool isSubjectedToGravity();
     void jump(float force);
     void interruptJump();

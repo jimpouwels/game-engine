@@ -237,12 +237,8 @@ void AnimatedGraphic::interruptJump() {
     }
 }
 
-void AnimatedGraphic::blockGravity() {
-    gravityBlocked = true;
-}
-
-void AnimatedGraphic::unblockGravity() {
-    gravityBlocked = false;
+void AnimatedGraphic::resetGravityVelocity() {
+    gravityVelocity.y = 0;
 }
 
 void AnimatedGraphic::setRotationAngle(float angle) {
@@ -261,16 +257,17 @@ void AnimatedGraphic::show() {
     visible = true;
 }
 
+void AnimatedGraphic::clampToTopOf(AnimatedGraphic *otherGraphic) {
+    getPosition().y = otherGraphic->getPosition().y - getHeight();
+}
+
 bool AnimatedGraphic::isVisible() {
     return visible;
 }
 
 void AnimatedGraphic::updateMovement(float elapsedTime) {
     // ========= GRAVITY
-    if (gravityBlocked && isFalling()) {
-        gravityBlocked = false;
-        gravityVelocity.y = 0;
-    } else if (applyGravity)  {
+    if (applyGravity)  {
         gravityVelocity.y += GameEngine::getInstance()->getGravityForce();
     }
     addToPosition(jimp::Timing::toValueForElapsedTime(gravityVelocity, elapsedTime));
