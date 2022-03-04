@@ -256,10 +256,6 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
     addToPosition(jimp::Timing::toValueForElapsedTime(getVelocity(), elapsedTime));
 }
 
-bool AnimatedGraphic::isFalling() {
-    return gravityVelocity.y > 0;
-}
-
 void AnimatedGraphic::updateCurrentDrawableData() {
     Drawable* activeDrawable = getActiveDrawable();
     activeDrawable->setPosition(position);

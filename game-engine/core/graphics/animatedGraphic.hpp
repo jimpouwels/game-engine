@@ -46,7 +46,6 @@ protected:
     void clampToTopOf(AnimatedGraphic* otherGraphic);
     void jump(float force);
     void interruptJump();
-    bool isFalling();
     void addSprite(std::string animationId, std::string filePath, uint16_t repeat);
     void addSprite(std::string animationId, std::string filePath);
     virtual void doOnInit() {};
