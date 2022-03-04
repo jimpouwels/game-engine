@@ -177,6 +177,10 @@ void AnimatedGraphic::addToPosition(Vector2D delta) {
     position.y += delta.y;
 }
 
+int AnimatedGraphic::getSingleWidth() {
+    return getActiveDrawable()->getSingleWidth();
+}
+
 int AnimatedGraphic::getWidth() {
     return getActiveDrawable()->getWidth();
 }

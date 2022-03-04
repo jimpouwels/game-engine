@@ -10,11 +10,13 @@ class Platform : public jimp::AnimatedGraphic {
   
 private:
     uint16_t repeat = 0;
+    bool hit = false;
     
 public:
     Platform(jimp::Vector2D position, uint16_t repeat);
     void doOnInit() override;
     void doOnUpdate(float elapsedTime) override;
+    void hasCollidedRectTop(AnimatedGraphic* otherGraphic) override;
 };
 
 }

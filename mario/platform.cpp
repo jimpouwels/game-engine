@@ -13,7 +13,11 @@ void Platform::doOnInit() {
 }
 
 void Platform::doOnUpdate(float elapsedTime) {
-   
+    
+}
+
+void Platform::hasCollidedRectTop(AnimatedGraphic* otherGraphic) {
+//    hit = true;
 }
 
 }

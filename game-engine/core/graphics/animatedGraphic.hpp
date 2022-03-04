@@ -70,6 +70,7 @@ public:
     Vector2D& getJumpVelocity();
     float getScale();
     int getWidth();
+    int getSingleWidth();
     int getHeight();
     float getRotationAngle();
     void setRotationAngle(float angle);
