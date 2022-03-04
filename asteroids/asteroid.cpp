@@ -55,28 +55,36 @@ uint16_t Asteroid::getZIndex() {
 void Asteroid::hasCollidedRectLeft(jimp::AnimatedGraphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-        directionAngle = jimp::Geo2D::inverseAngleHorizontally(directionAngle);
+        if (directionAngle < 180) {
+            directionAngle = jimp::Geo2D::inverseAngleHorizontally(directionAngle);
+        }
     }
 }
 
 void Asteroid::hasCollidedRectRight(jimp::AnimatedGraphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-        directionAngle = jimp::Geo2D::inverseAngleHorizontally(directionAngle);
+        if (directionAngle > 180) {
+            directionAngle = jimp::Geo2D::inverseAngleHorizontally(directionAngle);
+        }
     }
 }
 
 void Asteroid::hasCollidedRectTop(jimp::AnimatedGraphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-        directionAngle = jimp::Geo2D::inverseAngleVertically(directionAngle);
+        if (directionAngle < 90 || directionAngle > 270) {
+            directionAngle = jimp::Geo2D::inverseAngleVertically(directionAngle);
+        }
     }
 }
 
 void Asteroid::hasCollidedRectBottom(jimp::AnimatedGraphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-        directionAngle = jimp::Geo2D::inverseAngleVertically(directionAngle);
+        if (directionAngle > 90 && directionAngle < 270) {
+            directionAngle = jimp::Geo2D::inverseAngleVertically(directionAngle);
+        }
     }
 }
 
