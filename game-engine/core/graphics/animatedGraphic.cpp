@@ -68,10 +68,6 @@ Drawable* AnimatedGraphic::getActiveDrawable() {
     return activeAnimation->getActiveDrawable();
 }
 
-bool AnimatedGraphic::isSubjectedToGravity() {
-    return applyGravity;
-}
-
 void AnimatedGraphic::setCurrentAnimation(std::string animationId) {
     if (activeAnimation->getId().compare(animationId) != 0) {
         activeAnimation = animationMap->find(animationId)->second;
@@ -206,15 +202,12 @@ void AnimatedGraphic::accelerate(float angle, uint16_t mass, uint16_t force, flo
 }
 
 void AnimatedGraphic::move(float angle, float pixelsPerSecond) {
-    moving = true;
-    moveForce = pixelsPerSecond;
-    moveAngle = angle;
+    moveVelocity = jimp::Geo2D::vectorFrom(angle, pixelsPerSecond);
 }
 
 void AnimatedGraphic::stopMoving() {
     moveVelocity.x = 0;
     moveVelocity.y = 0;
-    moving = false;
 }
 
 void AnimatedGraphic::jump(float force) {
@@ -257,17 +250,10 @@ bool AnimatedGraphic::isVisible() {
 }
 
 void AnimatedGraphic::updateMovement(float elapsedTime) {
-    // ========= GRAVITY
     if (applyGravity)  {
         gravityVelocity.y += GameEngine::getInstance()->getGravityForce();
     }
-    addToPosition(jimp::Timing::toValueForElapsedTime(gravityVelocity, elapsedTime));
-    
-    // ========= MOVEMENT
-    if (moving) {
-        moveVelocity = jimp::Geo2D::vectorFrom(moveAngle, moveForce);
-    }
-    addToPosition(jimp::Timing::toValueForElapsedTime(moveVelocity, elapsedTime));
+    addToPosition(jimp::Timing::toValueForElapsedTime(moveVelocity + gravityVelocity, elapsedTime));
 }
 
 bool AnimatedGraphic::isFalling() {
@@ -283,16 +269,16 @@ void AnimatedGraphic::updateCurrentDrawableData() {
 }
 
 Vector2D AnimatedGraphic::calculateNextPosition(float elapsedTime) {
-    return getPosition() + calculateNextVelocity(elapsedTime);
+    return getPosition() + calculatePositionDeltaVector(elapsedTime);
 }
 
 Vector2D AnimatedGraphic::calculatePreviousPosition(float elapsedTime) {
-    return getPosition() - calculateNextVelocity(elapsedTime);
+    return getPosition() - calculatePositionDeltaVector(elapsedTime);
 }
 
-Vector2D AnimatedGraphic::calculateNextVelocity(float elapsedTime) {
+Vector2D AnimatedGraphic::calculatePositionDeltaVector(float elapsedTime) {
     Vector2D velocity = getVelocity();
-    if (isSubjectedToGravity())  {
+    if (applyGravity)  {
         velocity.y += GameEngine::getInstance()->getGravityForce();
     }
     return jimp::Timing::toValueForElapsedTime(velocity, elapsedTime);
