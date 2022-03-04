@@ -79,27 +79,15 @@ void AnimatedGraphic::setCurrentAnimation(std::string animationId) {
     }
 }
 
-bool AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float elapsedTime) {
+void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float elapsedTime) {
     Vector2D otherGraphicPosition = otherGraphic->getPosition();
     Vector2D currentGraphicPosition = getPosition();
     
-    // CURRENT GRAPHIC PREVIOUS POSITION
-    Vector2D velocity = getVelocity();
-    if (applyGravity)  {
-        velocity.y += GameEngine::getInstance()->getGravityForce();
-    }
-    Vector2D currentGraphicNextPositionDelta = jimp::Timing::toValueForElapsedTime(velocity, elapsedTime);
-    Vector2D currentGraphicPreviousPosition = getPosition() - currentGraphicNextPositionDelta;
-    Vector2D currentGraphicNextPosition = getPosition() + currentGraphicNextPositionDelta;
+    Vector2D currentGraphicPreviousPosition = calculatePreviousPosition(elapsedTime);
+    Vector2D currentGraphicNextPosition = calculateNextPosition(elapsedTime);
     
-    // OTHER GRAPHIC PREVIOUS POSITION
-    Vector2D otherGraphicVelocity = otherGraphic->getVelocity();
-    if (otherGraphic->isSubjectedToGravity())  {
-        otherGraphicVelocity.y += GameEngine::getInstance()->getGravityForce();
-    }
-    Vector2D otherGraphicNextPositionDelta = jimp::Timing::toValueForElapsedTime(otherGraphicVelocity, elapsedTime);
-    Vector2D otherGraphicPreviousPosition = otherGraphic->getPosition() - otherGraphicVelocity;
-    Vector2D otherGraphicNextPosition = otherGraphic->getPosition() + otherGraphicNextPositionDelta;
+    Vector2D otherGraphicPreviousPosition = otherGraphic->calculatePreviousPosition(elapsedTime);
+    Vector2D otherGraphicNextPosition = otherGraphic->calculateNextPosition(elapsedTime);
    
     if ((((currentGraphicPreviousPosition.y + getHeight() < otherGraphicPreviousPosition.y && currentGraphicNextPosition.y + getHeight() > otherGraphicNextPosition.y) || currentGraphicPosition.y == otherGraphicPosition.y)
          && (currentGraphicNextPosition.x + getWidth() > otherGraphicNextPosition.x && currentGraphicPosition.x < otherGraphicNextPosition.x + otherGraphic->getWidth()))) {
@@ -126,8 +114,6 @@ bool AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
         otherGraphic->hasCollidedRect(this, Geo2D::Side::LEFT);
         otherGraphic->hasCollidedRectLeft(this);
     }
-    
-    return false;
 }
 
 bool AnimatedGraphic::isPositionedWithinScreen() {
@@ -294,6 +280,22 @@ void AnimatedGraphic::updateCurrentDrawableData() {
     activeDrawable->setScale(scale);
     activeDrawable->setRotationAngle(angle);
     activeDrawable->setRotationPoint(getRotationPoint());
+}
+
+Vector2D AnimatedGraphic::calculateNextPosition(float elapsedTime) {
+    return getPosition() + calculateNextVelocity(elapsedTime);
+}
+
+Vector2D AnimatedGraphic::calculatePreviousPosition(float elapsedTime) {
+    return getPosition() - calculateNextVelocity(elapsedTime);
+}
+
+Vector2D AnimatedGraphic::calculateNextVelocity(float elapsedTime) {
+    Vector2D velocity = getVelocity();
+    if (isSubjectedToGravity())  {
+        velocity.y += GameEngine::getInstance()->getGravityForce();
+    }
+    return jimp::Timing::toValueForElapsedTime(velocity, elapsedTime);
 }
 
 void AnimatedGraphic::addSprite(std::string animationId, std::string filePath) {

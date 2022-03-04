@@ -34,6 +34,9 @@ private:
     std::mutex* lock = new std::mutex();
     float elapsedTimeSinceLastSwap;
     float drawableSwapIntervalInSeconds;
+    Vector2D calculateNextVelocity(float elapsedTime);
+    Vector2D calculateNextPosition(float elapsedTime);
+    Vector2D calculatePreviousPosition(float elapsedTime);
     void resetGravityVelocity();
     void updateCurrentDrawableData();
     void updateAnimation(float elapsedTime);
@@ -76,7 +79,7 @@ public:
     void setRotationAngle(float angle);
     void setDeleteOnLeaveScreen(bool deleteOnLeaveScreen);
     bool isMarkedForDeletion();
-    bool checkCollisionRect(AnimatedGraphic* otherGraphicp, float elapsedTime);
+    void checkCollisionRect(AnimatedGraphic* otherGraphicp, float elapsedTime);
     Drawable* getActiveDrawable();
     std::list<Drawable*> getAllDrawables();
     void markForDeletion();
