@@ -47,9 +47,9 @@ protected:
     void stopMoving();
     void blockGravity();
     void unblockGravity();
+    bool isSubjectedToGravity();
     void jump(float force);
     void interruptJump();
-    bool isJumping();
     bool isFalling();
     void addSprite(std::string animationId, std::string filePath, uint16_t repeat);
     void addSprite(std::string animationId, std::string filePath);
@@ -76,7 +76,7 @@ public:
     void setRotationAngle(float angle);
     void setDeleteOnLeaveScreen(bool deleteOnLeaveScreen);
     bool isMarkedForDeletion();
-    bool checkCollisionRect(AnimatedGraphic* otherGraphicp);
+    bool checkCollisionRect(AnimatedGraphic* otherGraphicp, float elapsedTime);
     Drawable* getActiveDrawable();
     std::list<Drawable*> getAllDrawables();
     void markForDeletion();

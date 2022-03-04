@@ -9,7 +9,7 @@ namespace mario {
 class Character : public jimp::AnimatedGraphic {
   
 private:
-    bool hasCollidedWithBlocker = false;
+    bool isJumping;
     
 public:
     Character(jimp::Vector2D position);

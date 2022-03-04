@@ -10,6 +10,10 @@ struct Vector2D {
     Vector2D operator+(Vector2D other) {
         return Vector2D { .x = x + other.x, .y = y + other.y };
     }
+    
+    Vector2D operator-(Vector2D other) {
+        return Vector2D { .x = x - other.x, .y = y - other.y };
+    }
 };
 
 }

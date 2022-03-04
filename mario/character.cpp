@@ -2,6 +2,7 @@
 #include "gameEngine.hpp"
 #include "rectangle.hpp"
 #include "vector2D.hpp"
+#include "floor.hpp"
 
 namespace mario {
 
@@ -13,15 +14,12 @@ void Character::doOnInit() {
 }
 
 void Character::doOnUpdate(float elapsedTime) {
-    if (!hasCollidedWithBlocker) {
-        unblockGravity();
-    }
-    hasCollidedWithBlocker = false;
 }
 
 void Character::hasCollidedRectBottom(AnimatedGraphic* otherGraphic) {
+    isJumping = false;
+    getPosition().y = otherGraphic->getPosition().y - getHeight();
     blockGravity();
-    hasCollidedWithBlocker = true;
 }
 
 void Character::hasCollidedRectTop(AnimatedGraphic* otherGraphic) {
@@ -56,7 +54,8 @@ void Character::onKeyboardRight(jimp::KeyState keyState) {
 
 void Character::onKeyboardUp(jimp::KeyState keyState) {
     if (keyState == jimp::KeyState::PRESSED) {
-        if (!isJumping()) {
+        if (!isJumping) {
+            isJumping = true;
             jump(1500);
         }
     }

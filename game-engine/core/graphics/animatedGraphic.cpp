@@ -68,6 +68,10 @@ Drawable* AnimatedGraphic::getActiveDrawable() {
     return activeAnimation->getActiveDrawable();
 }
 
+bool AnimatedGraphic::isSubjectedToGravity() {
+    return applyGravity;
+}
+
 void AnimatedGraphic::setCurrentAnimation(std::string animationId) {
     if (activeAnimation->getId().compare(animationId) != 0) {
         activeAnimation = animationMap->find(animationId)->second;
@@ -75,50 +79,49 @@ void AnimatedGraphic::setCurrentAnimation(std::string animationId) {
     }
 }
 
-bool AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic) {
+bool AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float elapsedTime) {
     Vector2D otherGraphicPosition = otherGraphic->getPosition();
+    Vector2D currentGraphicPosition = getPosition();
     
-    if (abs((getPosition().x + getWidth()) - otherGraphicPosition.x) <= 2 &&
-        (((jimp::MathUtils::isBetween(getPosition().y, otherGraphicPosition.y, otherGraphicPosition.y + otherGraphic->getHeight())) ||
-         ((jimp::MathUtils::isBetween(getPosition().y + getHeight(), otherGraphic->getPosition().y, otherGraphic->getPosition().y + otherGraphic->getHeight())))) ||
-        ((jimp::MathUtils::isBetween(otherGraphicPosition.y, getPosition().y, getPosition().y + getHeight())) ||
-         ((jimp::MathUtils::isBetween(otherGraphicPosition.y + otherGraphic->getHeight(), getPosition().y, getPosition().y + getHeight())))))) {
-        hasCollidedRect(otherGraphic, Geo2D::Side::RIGHT);
-        hasCollidedRectRight(otherGraphic);
-        otherGraphic->hasCollidedRect(this, Geo2D::Side::LEFT);
-        otherGraphic->hasCollidedRectLeft(this);
-        return true;
-    } else if (abs(getPosition().x - (otherGraphicPosition.x + otherGraphic->getWidth())) <= 2 &&
-            (((jimp::MathUtils::isBetween(otherGraphicPosition.y, getPosition().y, getPosition().y + getHeight())) ||
-             (jimp::MathUtils::isBetween(otherGraphicPosition.y + otherGraphic->getHeight(), getPosition().y, getPosition().y + getHeight()))) ||
-               ((jimp::MathUtils::isBetween(getPosition().y, otherGraphicPosition.y, otherGraphicPosition.y + otherGraphic->getHeight())) ||
-                (jimp::MathUtils::isBetween(getPosition().y + getHeight(), otherGraphicPosition.y, otherGraphicPosition.y + otherGraphic->getHeight()))))) {
-        hasCollidedRect(otherGraphic, Geo2D::Side::LEFT);
-        hasCollidedRectLeft(otherGraphic);
-        otherGraphic->hasCollidedRect(this, Geo2D::Side::RIGHT);
-        otherGraphic->hasCollidedRectRight(this);
-        return true;
-    } else if (abs((getPosition().y + getHeight()) - otherGraphicPosition.y) <= 2 &&
-            (((jimp::MathUtils::isBetween(getPosition().x, otherGraphicPosition.x, otherGraphicPosition.x + otherGraphic->getWidth()) ||
-             (jimp::MathUtils::isBetween(getPosition().x + getWidth(), otherGraphicPosition.x, otherGraphicPosition.x + otherGraphic->getWidth())))) ||
-               ((jimp::MathUtils::isBetween(otherGraphicPosition.x, getPosition().x, getPosition().x + getWidth()) ||
-                (jimp::MathUtils::isBetween(otherGraphicPosition.x + otherGraphic->getWidth(), getPosition().x, getPosition().x + getWidth())))))) {
-        hasCollidedRect(otherGraphic, Geo2D::Side::BOTTOM);
-        hasCollidedRectBottom(otherGraphic);
-        otherGraphic->hasCollidedRect(this, Geo2D::Side::TOP);
-        otherGraphic->hasCollidedRectTop(this);
-        return true;
-    } else if (abs(getPosition().y - (otherGraphicPosition.y + otherGraphic->getHeight())) <= 2 &&
-            (((jimp::MathUtils::isBetween(otherGraphicPosition.x, getPosition().x, getPosition().x + getWidth()) ||
-             (jimp::MathUtils::isBetween(otherGraphicPosition.x + otherGraphic->getWidth(), getPosition().x, getPosition().x + getWidth())))) ||
-               ((jimp::MathUtils::isBetween(getPosition().x, otherGraphicPosition.x, otherGraphicPosition.x + otherGraphic->getWidth()) ||
-                (jimp::MathUtils::isBetween(getPosition().x + getWidth(), otherGraphicPosition.x, otherGraphicPosition.x + otherGraphic->getWidth())))))) {
-        hasCollidedRect(otherGraphic, Geo2D::Side::TOP);
-        hasCollidedRectTop(otherGraphic);
-        otherGraphic->hasCollidedRect(this, Geo2D::Side::BOTTOM);
-        otherGraphic->hasCollidedRectBottom(this);
-        return true;
+    // CURRENT GRAPHIC
+    Vector2D velocity = getVelocity();
+    if (applyGravity)  {
+        velocity.y += GameEngine::getInstance()->getGravityForce();
     }
+    Vector2D currentGraphicNextPositionDelta = jimp::Timing::toValueForElapsedTime(velocity, elapsedTime);
+    Vector2D currentGraphicPreviousPosition = getPosition() - currentGraphicNextPositionDelta;
+    Vector2D currentGraphicNextPosition = getPosition() + currentGraphicNextPositionDelta;
+    
+    // OTHER GRAPHIC
+    Vector2D otherGraphicVelocity = otherGraphic->getVelocity();
+    if (otherGraphic->isSubjectedToGravity())  {
+        otherGraphicVelocity.y += GameEngine::getInstance()->getGravityForce();
+    }
+    Vector2D otherGraphicNextPositionDelta = jimp::Timing::toValueForElapsedTime(otherGraphicVelocity, elapsedTime);
+    Vector2D otherGraphicPreviousPosition = otherGraphic->getPosition() - otherGraphicVelocity;
+    Vector2D otherGraphicNextPosition = otherGraphic->getPosition() + otherGraphicNextPositionDelta;
+   
+    if (getVelocity().y != 0 || otherGraphic->getVelocity().y != 0) {
+        // BOTTOM OF CURRENT HITS TOP OF OTHER
+        if (((currentGraphicPreviousPosition.y + getHeight() < otherGraphicPreviousPosition.y && currentGraphicNextPosition.y + getHeight() > otherGraphicNextPosition.y)
+             && (currentGraphicNextPosition.x + getWidth() > otherGraphicNextPosition.x && currentGraphicPosition.x < otherGraphicNextPosition.x + otherGraphic->getWidth()))
+            || currentGraphicPosition.y == otherGraphicPosition.y) {
+            hasCollidedRect(otherGraphic, Geo2D::Side::BOTTOM);
+            hasCollidedRectBottom(otherGraphic);
+            otherGraphic->hasCollidedRect(this, Geo2D::Side::TOP);
+            otherGraphic->hasCollidedRectTop(this);
+        }
+        // TOP OF CURRENT HITS OP OF OTHER
+        if (((currentGraphicPreviousPosition.y > otherGraphicPreviousPosition.y + otherGraphic->getHeight() && currentGraphicNextPosition.y < otherGraphicNextPosition.y + otherGraphic->getHeight()) &&
+            (currentGraphicNextPosition.x + getWidth() > otherGraphicNextPosition.x && currentGraphicPosition.x < otherGraphicNextPosition.x + otherGraphic->getWidth()))
+            || currentGraphicPosition.y == otherGraphicPosition.y) {
+            hasCollidedRect(otherGraphic, Geo2D::Side::TOP);
+            hasCollidedRectTop(otherGraphic);
+            otherGraphic->hasCollidedRect(this, Geo2D::Side::BOTTOM);
+            otherGraphic->hasCollidedRectBottom(this);
+        }
+    }
+    
     
     return false;
 }
@@ -235,10 +238,7 @@ void AnimatedGraphic::interruptJump() {
 }
 
 void AnimatedGraphic::blockGravity() {
-    if (gravityVelocity.y > 0) {
-        gravityBlocked = true;
-        gravityVelocity.y = 0;
-    }
+    gravityBlocked = true;
 }
 
 void AnimatedGraphic::unblockGravity() {
@@ -267,11 +267,11 @@ bool AnimatedGraphic::isVisible() {
 
 void AnimatedGraphic::updateMovement(float elapsedTime) {
     // ========= GRAVITY
-    if (applyGravity)  {
-        gravityVelocity.y += GameEngine::getInstance()->getGravityForce();
-    }
     if (gravityBlocked && isFalling()) {
+        gravityBlocked = false;
         gravityVelocity.y = 0;
+    } else if (applyGravity)  {
+        gravityVelocity.y += GameEngine::getInstance()->getGravityForce();
     }
     addToPosition(jimp::Timing::toValueForElapsedTime(gravityVelocity, elapsedTime));
     
@@ -280,10 +280,6 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
         moveVelocity = jimp::Geo2D::vectorFrom(moveAngle, moveForce);
     }
     addToPosition(jimp::Timing::toValueForElapsedTime(moveVelocity, elapsedTime));
-}
-
-bool AnimatedGraphic::isJumping() {
-    return gravityVelocity.y != 0;
 }
 
 bool AnimatedGraphic::isFalling() {

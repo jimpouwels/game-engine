@@ -21,7 +21,7 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                 for (uint16_t i = 0; i < registeredSprites->size(); i++) {
                     AnimatedGraphic* registeredSprite = registeredSprites->at(i);
                     for (uint16_t j = i + 1; j < registeredSprites->size(); j++) {
-                        registeredSprite->checkCollisionRect(registeredSprites->at(j));
+                        registeredSprite->checkCollisionRect(registeredSprites->at(j), elapsed.count());
                     }
                     if (registeredSprite->isMarkedForDeletion()) {
                         spritesToDelete.push_back(registeredSprite);
