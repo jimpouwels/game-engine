@@ -206,8 +206,7 @@ void AnimatedGraphic::move(float angle, float pixelsPerSecond) {
 }
 
 void AnimatedGraphic::stopMoving() {
-    moveVelocity.x = 0;
-    moveVelocity.y = 0;
+    moveVelocity.reset();
 }
 
 void AnimatedGraphic::jump(float force) {
