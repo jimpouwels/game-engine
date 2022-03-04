@@ -67,7 +67,7 @@ public:
     ~AnimatedGraphic();
     Vector2D& getPosition();
     Vector2D& getMoveVelocity();
-    Vector2D& getJumpVelocity();
+    Vector2D getVelocity();
     float getScale();
     int getWidth();
     int getSingleWidth();

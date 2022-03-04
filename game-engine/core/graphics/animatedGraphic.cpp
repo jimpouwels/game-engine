@@ -164,8 +164,8 @@ Vector2D& AnimatedGraphic::getMoveVelocity() {
     return moveVelocity;
 }
 
-Vector2D& AnimatedGraphic::getJumpVelocity() {
-    return gravityVelocity;
+Vector2D AnimatedGraphic::getVelocity() {
+    return gravityVelocity + moveVelocity;
 }
 
 void AnimatedGraphic::setPosition(Vector2D position) {
