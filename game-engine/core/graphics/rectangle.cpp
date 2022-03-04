@@ -2,12 +2,12 @@
 
 namespace jimp {
 
-Rectangle::Rectangle(int width, int height, uint32_t color) : Shape(color) {
+Rectangle::Rectangle(int width, int height, uint32_t color, uint16_t repeat) : Shape(color, repeat) {
     this->width = width;
     this->height = height;
 }
 
-int Rectangle::getWidth() {
+int Rectangle::getSingleWidth() {
     return width * getScale();
 }
 

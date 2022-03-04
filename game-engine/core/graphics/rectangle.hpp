@@ -12,8 +12,8 @@ private:
     float height;
     
 public:
-    Rectangle(int width, int height, uint32_t color);
-    int getWidth() override;
+    Rectangle(int width, int height, uint32_t color, uint16_t repeat);
+    int getSingleWidth() override;
     int getHeight() override;
     
 };

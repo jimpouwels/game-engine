@@ -12,9 +12,10 @@ private:
     uint32_t color;
     
 public:
-    Shape(uint32_t color);
+    Shape(uint32_t color, uint16_t repeat);
     ~Shape();
     uint32_t getColor();
+    int getWidth() override;
 };
 
 }

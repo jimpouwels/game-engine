@@ -9,7 +9,7 @@ Character::Character(jimp::Vector2D position) : jimp::AnimatedGraphic(position, 
 }
 
 void Character::doOnInit() {
-    addShape("default", new jimp::Rectangle(100, 100, 0xD19F9C));
+    addShape("default", new jimp::Rectangle(100, 100, 0xD19F9C, 1));
 }
 
 void Character::doOnUpdate(float elapsedTime) {

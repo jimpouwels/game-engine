@@ -29,6 +29,7 @@ public:
     void setRotationAngle(float angle);
     Vector2D getRotationPoint();
     void setRotationPoint(Vector2D rotationPoint);
+    virtual int getSingleWidth() = 0;
     virtual int getWidth() = 0;
     virtual int getHeight() = 0;
 };

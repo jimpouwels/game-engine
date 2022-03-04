@@ -11,7 +11,7 @@ Sprite::~Sprite() {
 }
 
 int Sprite::getWidth() {
-    return getSingleWidth() * getRepeat();
+    return image->getWidth() * getScale() * getRepeat();
 }
 
 int Sprite::getSingleWidth() {
