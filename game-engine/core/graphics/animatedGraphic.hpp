@@ -30,8 +30,6 @@ private:
     std::mutex* lock = new std::mutex();
     float elapsedTimeSinceLastSwap;
     float drawableSwapIntervalInSeconds;
-    Vector2D calculatePositionDeltaVector(float elapsedTime);
-    Vector2D calculateNextPosition(float elapsedTime);
     Vector2D calculatePreviousPosition(float elapsedTime);
     void resetGravityVelocity();
     void updateCurrentDrawableData();
