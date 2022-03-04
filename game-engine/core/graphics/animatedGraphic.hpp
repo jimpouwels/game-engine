@@ -34,6 +34,7 @@ private:
     std::mutex* lock = new std::mutex();
     float elapsedTimeSinceLastSwap;
     float drawableSwapIntervalInSeconds;
+    void resetGravityVelocity();
     void updateCurrentDrawableData();
     void updateAnimation(float elapsedTime);
     void updateMovement(float elapsedTime);
@@ -46,7 +47,6 @@ protected:
     void move(float angle, float pixelsPerSecond);
     void stopMoving();
     void clampToTopOf(AnimatedGraphic* otherGraphic);
-    void resetGravityVelocity();
     bool isSubjectedToGravity();
     void jump(float force);
     void interruptJump();

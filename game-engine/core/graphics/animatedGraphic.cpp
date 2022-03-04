@@ -259,6 +259,7 @@ void AnimatedGraphic::show() {
 
 void AnimatedGraphic::clampToTopOf(AnimatedGraphic *otherGraphic) {
     getPosition().y = otherGraphic->getPosition().y - getHeight();
+    resetGravityVelocity();
 }
 
 bool AnimatedGraphic::isVisible() {
