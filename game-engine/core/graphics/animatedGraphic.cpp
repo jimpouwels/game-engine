@@ -110,7 +110,7 @@ bool AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
             hasCollidedRectBottom(otherGraphic);
             otherGraphic->hasCollidedRect(this, Geo2D::Side::TOP);
             otherGraphic->hasCollidedRectTop(this);
-        }
+        } else
         // TOP OF CURRENT HITS OP OF OTHER
         if (((currentGraphicPreviousPosition.y > otherGraphicPreviousPosition.y + otherGraphic->getHeight() && currentGraphicNextPosition.y < otherGraphicNextPosition.y + otherGraphic->getHeight()) &&
             (currentGraphicNextPosition.x + getWidth() > otherGraphicNextPosition.x && currentGraphicPosition.x < otherGraphicNextPosition.x + otherGraphic->getWidth()))
@@ -119,6 +119,26 @@ bool AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
             hasCollidedRectTop(otherGraphic);
             otherGraphic->hasCollidedRect(this, Geo2D::Side::BOTTOM);
             otherGraphic->hasCollidedRectBottom(this);
+        }
+    }
+    if (getVelocity().x != 0 || otherGraphic->getVelocity().x != 0) {
+        // RIGHT OF CURRENT HITS LEFT OF OTHER
+        if (((currentGraphicPreviousPosition.x + getWidth() < otherGraphicPreviousPosition.x && currentGraphicNextPosition.x + getWidth() > otherGraphicNextPosition.x)
+             && (currentGraphicNextPosition.y + getHeight() > otherGraphicNextPosition.y && currentGraphicPosition.y < otherGraphicNextPosition.y + otherGraphic->getHeight()))
+            || currentGraphicPosition.x == otherGraphicPosition.x) {
+            hasCollidedRect(otherGraphic, Geo2D::Side::LEFT);
+            hasCollidedRectLeft(otherGraphic);
+            otherGraphic->hasCollidedRect(this, Geo2D::Side::RIGHT);
+            otherGraphic->hasCollidedRectRight(this);
+        } else
+        // LEFT OF CURRENT HITS RIGHT OF OTHER
+        if (((currentGraphicPreviousPosition.x > otherGraphicPreviousPosition.x + otherGraphic->getWidth() && currentGraphicNextPosition.x < otherGraphicNextPosition.x + otherGraphic->getWidth()) &&
+            (currentGraphicNextPosition.y + getHeight() > otherGraphicNextPosition.y && currentGraphicPosition.y < otherGraphicNextPosition.y + otherGraphic->getHeight()))
+            || currentGraphicPosition.x == otherGraphicPosition.x) {
+            hasCollidedRect(otherGraphic, Geo2D::Side::RIGHT);
+            hasCollidedRectRight(otherGraphic);
+            otherGraphic->hasCollidedRect(this, Geo2D::Side::LEFT);
+            otherGraphic->hasCollidedRectLeft(this);
         }
     }
     
