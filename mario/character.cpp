@@ -18,7 +18,7 @@ void Character::doOnUpdate(float elapsedTime) {
 
 void Character::hasCollidedRectBottom(AnimatedGraphic* otherGraphic) {
     isJumping = false;
-    clampToTopOf(otherGraphic);
+    stayOnTopOf(otherGraphic);
 }
 
 void Character::hasCollidedRectTop(AnimatedGraphic* otherGraphic) {

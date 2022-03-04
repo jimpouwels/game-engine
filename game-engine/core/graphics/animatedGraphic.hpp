@@ -43,7 +43,7 @@ protected:
     void accelerate(float angle, uint16_t mass, uint16_t force, float elapsedTime);
     void move(float angle, float pixelsPerSecond);
     void stopMoving();
-    void clampToTopOf(AnimatedGraphic* otherGraphic);
+    void stayOnTopOf(AnimatedGraphic* otherGraphic);
     void jump(float force);
     void interruptJump();
     void addSprite(std::string animationId, std::string filePath, uint16_t repeat);
