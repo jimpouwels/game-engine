@@ -16,7 +16,7 @@ private:
     ScrollingWorld* scrollingWorld = nullptr;
     
 public:
-    Mario(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 9, name, 600) {
+    Mario(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 9, name, 1000) {
         scrollingWorld = new ScrollingWorld(new Character(jimp::Vector2D { .x = static_cast<float>(getScreenWidth() / 2), .y = 200 }), 100000, 900);
         scrollingWorld->addGraphic(new Floor(jimp::Vector2D { .x = 0, .y = 0 }, 500));
         scrollingWorld->addGraphic(new Platform(jimp::Vector2D { .x = 1200, .y = 600 }, 5));

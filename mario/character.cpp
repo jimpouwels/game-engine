@@ -6,14 +6,37 @@
 
 namespace mario {
 
-Character::Character(jimp::Vector2D position) : jimp::AnimatedGraphic(position, 0.5F, 0.0F, -1.0F, true) {
+Character::Character(jimp::Vector2D position) : jimp::AnimatedGraphic(position, 5.0F, 0.0F, 0.1F, true) {
 }
 
 void Character::doOnInit() {
-    addShape("default", new jimp::Rectangle(100, 100, getScale(), 0xD19F9C, 1));
+    addSprite("idle-left", "mario-idleleft.png", 1);
+    addSprite("idle-right", "mario-idleright.png", 1);
+    addSprite("run-left", "mario-runleft1.png", 1);
+    addSprite("run-left", "mario-runleft2.png", 1);
+    addSprite("run-left", "mario-runleft3.png", 1);
+    addSprite("run-right", "mario-runright1.png", 1);
+    addSprite("run-right", "mario-runright2.png", 1);
+    addSprite("run-right", "mario-runright3.png", 1);
+    addSprite("jump-left", "mario-jumpleft.png", 1);
+    addSprite("jump-right", "mario-jumpright.png", 1);
 }
 
 void Character::doOnUpdate(float elapsedTime) {
+    std::string currentAnimationId = getCurrentAnimationId();
+    if (isJumping) {
+        if (getVelocity().x != 0) {
+            getVelocity().x > 0 ? setCurrentAnimation("jump-right") : setCurrentAnimation("jump-left");
+        }
+    } else if (getVelocity().x > 0) {
+        setCurrentAnimation("run-right");
+    } else if (getVelocity().x < 0) {
+        setCurrentAnimation("run-left");
+    } else if (currentAnimationId == "jump-right" || currentAnimationId == "run-right") {
+        setCurrentAnimation("idle-right");
+    } else if (currentAnimationId == "jump-left" || currentAnimationId == "run-left") {
+        setCurrentAnimation("idle-left");
+    }
 }
 
 void Character::hasCollidedRectBottom(AnimatedGraphic* otherGraphic) {

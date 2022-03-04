@@ -40,6 +40,7 @@ private:
     
 protected:
     void setCurrentAnimation(std::string animationId);
+    std::string getCurrentAnimationId();
     void accelerate(float angle, uint16_t mass, uint16_t force, float elapsedTime);
     void move(float angle, float pixelsPerSecond);
     void stopMoving();

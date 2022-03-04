@@ -75,6 +75,10 @@ void AnimatedGraphic::setCurrentAnimation(std::string animationId) {
     }
 }
 
+std::string AnimatedGraphic::getCurrentAnimationId() {
+    return activeAnimation->getId();
+}
+
 void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float elapsedTime) {
     Vector2D otherGraphicPosition = otherGraphic->getPosition();
     Vector2D currentGraphicPosition = getPosition();
