@@ -20,7 +20,7 @@ public:
     Mario(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 9, name, 1000) {
         scrollingWorld = new jimp::ScrollingWorld(new Character(jimp::Vector2D { .x = static_cast<float>(getScreenWidth() / 2), .y = 200 }), 100000, 900);
         setBackgroundColor(0x7fb4c9);
-        new BackgroundRedCharacter(jimp::Vector2D { .x = 100, .y = 600 });
+        new BackgroundRedCharacter(jimp::Vector2D { .x = 1670, .y = 600 });
         new Floor(jimp::Vector2D { .x = 0, .y = 0 }, 500);
         new Platform(jimp::Vector2D { .x = 1200, .y = 600 }, 5);
         new Platform(jimp::Vector2D { .x = 1600, .y = 400 }, 10);
