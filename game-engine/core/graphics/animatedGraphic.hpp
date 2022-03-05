@@ -20,6 +20,7 @@ private:
     float scale;
     float angle;
     bool visible = true;
+    bool applyScrolling = false;
     bool applyGravity = false;
     bool inversedHorizontally = false;
     std::map<std::string, Animation*>* animationMap;
@@ -75,6 +76,8 @@ public:
     void setDeleteOnLeaveScreen(bool deleteOnLeaveScreen);
     bool drawInversedHorizontally();
     bool isMarkedForDeletion();
+    bool isApplyScrolling();
+    void setApplyScrolling(bool applyScrolling);
     void checkCollisionRect(AnimatedGraphic* otherGraphicp, float elapsedTime);
     Drawable* getActiveDrawable();
     std::list<Drawable*> getAllDrawables();

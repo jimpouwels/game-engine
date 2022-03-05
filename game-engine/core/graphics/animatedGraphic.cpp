@@ -198,6 +198,14 @@ float AnimatedGraphic::getRotationAngle() {
     return angle;
 }
 
+bool AnimatedGraphic::isApplyScrolling() {
+    return applyScrolling;
+}
+
+void AnimatedGraphic::setApplyScrolling(bool applyScrolling) {
+    this->applyScrolling = applyScrolling;
+}
+
 std::list<Drawable*> AnimatedGraphic::getAllDrawables() {
     std::list<Drawable*> allDrawables = std::list<Drawable*>();
     for (const auto& [animationId, animation]: *animationMap) {

@@ -13,15 +13,15 @@ namespace mario {
 class Mario : public jimp::GameEngine {
     
 private:
-    ScrollingWorld* scrollingWorld = nullptr;
+    jimp::ScrollingWorld* scrollingWorld = nullptr;
     
 public:
     Mario(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 9, name, 1000) {
-        scrollingWorld = new ScrollingWorld(new Character(jimp::Vector2D { .x = static_cast<float>(getScreenWidth() / 2), .y = 200 }), 100000, 900);
-        scrollingWorld->addGraphic(new Floor(jimp::Vector2D { .x = 0, .y = 0 }, 500));
-        scrollingWorld->addGraphic(new Platform(jimp::Vector2D { .x = 1200, .y = 600 }, 5));
-        scrollingWorld->addGraphic(new Platform(jimp::Vector2D { .x = 1600, .y = 400 }, 10));
-        scrollingWorld->addGraphic(new Platform(jimp::Vector2D { .x = 1800, .y = 250 }, 2));
+        scrollingWorld = new jimp::ScrollingWorld(new Character(jimp::Vector2D { .x = static_cast<float>(getScreenWidth() / 2), .y = 200 }), 100000, 900);
+        new Floor(jimp::Vector2D { .x = 0, .y = 0 }, 500);
+        new Platform(jimp::Vector2D { .x = 1200, .y = 600 }, 5);
+        new Platform(jimp::Vector2D { .x = 1600, .y = 400 }, 10);
+        new Platform(jimp::Vector2D { .x = 1800, .y = 250 }, 2);
     }
     
     void startGame() {

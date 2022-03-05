@@ -8,6 +8,7 @@ Floor::Floor(jimp::Vector2D position, uint16_t repeat) : jimp::AnimatedGraphic(p
 }
 
 void Floor::doOnInit() {
+    setApplyScrolling(true);
     addSprite("default", "floor.png", repeat);
     getPosition().y = jimp::GameEngine::getInstance()->getScreenHeight() - getHeight();
 }

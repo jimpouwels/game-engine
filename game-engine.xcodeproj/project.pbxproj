@@ -199,6 +199,8 @@
 				23D5C7C427832B5600C6C916 /* gameEngine.hpp */,
 				23A4D56427BFA913006F4220 /* graphics */,
 				23A4D56627BFA939006F4220 /* input */,
+				239F327927CF8293007D4E2C /* scrollingWorld.cpp */,
+				239F327A27CF8293007D4E2C /* scrollingWorld.hpp */,
 				235A527827B00C760008A8A0 /* spriteCache.hpp */,
 				230D483C27B9177A001F6494 /* updateThread.cpp */,
 				230D483D27B9177A001F6494 /* updateThread.hpp */,
@@ -217,8 +219,6 @@
 				235FEC1A27C6DF5B006306C9 /* mario.cpp */,
 				239F327627CE7706007D4E2C /* platform.cpp */,
 				239F327727CE7706007D4E2C /* platform.hpp */,
-				239F327927CF8293007D4E2C /* scrollingWorld.cpp */,
-				239F327A27CF8293007D4E2C /* scrollingWorld.hpp */,
 			);
 			path = mario;
 			sourceTree = "<group>";

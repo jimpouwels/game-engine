@@ -3,23 +3,21 @@
 
 #include "animatedGraphic.hpp"
 
-namespace mario {
+namespace jimp {
 
 class ScrollingWorld {
     
 private:
-    jimp::AnimatedGraphic* mainCharacter = nullptr;
-    std::list<jimp::AnimatedGraphic*>* scrollingGraphics = nullptr;
+    AnimatedGraphic* mainCharacter = nullptr;
     int offsetX = 0;
     int width = 0;
     int height = 0;
     
 public:
-    ScrollingWorld(jimp::AnimatedGraphic* mainCharacter, int width, int height);
+    ScrollingWorld(AnimatedGraphic* mainCharacter, int width, int height);
     ~ScrollingWorld();
     void doOnUpdate();
     void doOnFrame();
-    void addGraphic(jimp::AnimatedGraphic* animatedGraphic);
 };
 
 }

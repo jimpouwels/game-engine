@@ -6,10 +6,11 @@
 
 namespace mario {
 
-Character::Character(jimp::Vector2D position) : jimp::AnimatedGraphic(position, 5.0F, 0.0F, 0.1F, true) {
+Character::Character(jimp::Vector2D position) : jimp::AnimatedGraphic(position, 5.0F, 0.0F, 0.06F, true) {
 }
 
 void Character::doOnInit() {
+    setApplyScrolling(true);
     addSprite("idle", "mario-idle.png", 1);
     addSprite("run", "mario-run1.png", 1);
     addSprite("run", "mario-run2.png", 1);

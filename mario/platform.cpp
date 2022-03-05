@@ -9,6 +9,7 @@ Platform::Platform(jimp::Vector2D position, uint16_t repeat) : jimp::AnimatedGra
 }
 
 void Platform::doOnInit() {
+    setApplyScrolling(true);
     addSprite("default", "block.png", repeat);
 }
 
@@ -17,7 +18,6 @@ void Platform::doOnUpdate(float elapsedTime) {
 }
 
 void Platform::hasCollidedRectTop(AnimatedGraphic* otherGraphic) {
-//    hit = true;
 }
 
 }

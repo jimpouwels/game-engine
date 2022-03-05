@@ -2,22 +2,17 @@
 #include "gameEngine.hpp"
 #include <math.h>
 
-namespace mario {
+namespace jimp {
 
-ScrollingWorld::ScrollingWorld(jimp::AnimatedGraphic* mainCharacter, int width, int height) {
+ScrollingWorld::ScrollingWorld(AnimatedGraphic* mainCharacter, int width, int height) {
     this->mainCharacter = mainCharacter;
-    this->scrollingGraphics = new std::list<jimp::AnimatedGraphic*>;
 }
 
 ScrollingWorld::~ScrollingWorld() {
 }
 
-void ScrollingWorld::addGraphic(jimp::AnimatedGraphic* animatedGraphic) {
-    this->scrollingGraphics->push_back(animatedGraphic);
-}
-
 void ScrollingWorld::doOnUpdate() {
-    jimp::GameEngine* gameEngine = jimp::GameEngine::getInstance();
+    GameEngine* gameEngine = GameEngine::getInstance();
     float rightSideOfCamera = gameEngine->getScreenWidth() / 2 + 125;
     float leftSideOfCamera = gameEngine->getScreenWidth() / 2 - 125;
     int offsetDeltaX = 0;
@@ -29,8 +24,8 @@ void ScrollingWorld::doOnUpdate() {
         mainCharacter->getPosition().x = leftSideOfCamera;
     }
     offsetX += offsetDeltaX;
-    for (const auto& scrollingGraphic: *scrollingGraphics) {
-        if (scrollingGraphic == mainCharacter) {
+    for (const auto& scrollingGraphic: *GameEngine::getInstance()->getAllGraphics()) {
+        if (scrollingGraphic == mainCharacter || !scrollingGraphic->isApplyScrolling()) {
             continue;
         }
         scrollingGraphic->getPosition().x -= offsetDeltaX;
