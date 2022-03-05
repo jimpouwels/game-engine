@@ -200,8 +200,12 @@ std::vector<AnimatedGraphic*>* GameEngine::getAllGraphics() {
     return updateThread->getAllGraphics();
 }
 
+void GameEngine::setBackgroundColor(uint32_t color) {
+    backgroundColor = color;
+}
+
 void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
-    window->clear();
+    window->clear(sf::Color((backgroundColor << 8) + 0xFF));
     onFrame(elapsedTimeSincePreviousFrame);
     
     updateThread->lockForDeletion();

@@ -21,6 +21,7 @@ class GameEngine {
 private:
     uint16_t screenWidth;
     uint16_t screenHeight;
+    uint32_t backgroundColor;
     int16_t frameRate;
     GameEngine* gameEngine = nullptr;
     std::string windowTitle;
@@ -46,6 +47,7 @@ private:
 protected:
     GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravityForce, std::string windowTitle, uint16_t desiredFrameRate);
     void start();
+    void setBackgroundColor(uint32_t color);
     virtual void onFrame(float elapsedTime) {};
     virtual void onUpdate(float elapsedTime) {};
     virtual void onGraphicDeleted(AnimatedGraphic* graphic) {};

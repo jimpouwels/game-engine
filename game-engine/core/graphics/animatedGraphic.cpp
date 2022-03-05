@@ -275,6 +275,14 @@ void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
     resetGravityVelocity();
 }
 
+void AnimatedGraphic::stayToLeftOf(AnimatedGraphic *otherGraphic) {
+    getPosition().x = otherGraphic->getPosition().x - getWidth();
+}
+
+void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
+    getPosition().x = otherGraphic->getPosition().x + otherGraphic->getWidth();
+}
+
 bool AnimatedGraphic::isVisible() {
     return visible;
 }

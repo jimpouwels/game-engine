@@ -48,6 +48,8 @@ protected:
     void move(float angle, float pixelsPerSecond);
     void stopMoving();
     void stayOnTopOf(AnimatedGraphic* otherGraphic);
+    void stayToLeftOf(AnimatedGraphic* otherGraphic);
+    void stayToRightOf(AnimatedGraphic* otherGraphic);
     void jump(float force);
     void interruptJump();
     void setCollidable(bool collidable);
