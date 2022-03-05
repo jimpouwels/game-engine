@@ -20,13 +20,13 @@ void BackgroundRedCharacter::doOnUpdate(float elapsedTime) {
     std::string currentAnimationId = getCurrentAnimationId();
     if (currentAnimationId == "eyes-closed") {
         eyesClosedTime += elapsedTime;
-        if (eyesClosedTime > 5) {
+        if (eyesClosedTime > 3) {
             jimp::MathUtils::randomNumberBetween(0, 2) == 0 ? setCurrentAnimation("eyes-right-eye-open") : setCurrentAnimation("eyes-left-eye-open");
             eyesClosedTime = 0;
         }
     } else if (currentAnimationId != "eyes-closed") {
         eyeOpenTime += elapsedTime;
-        if (eyeOpenTime > 1) {
+        if (eyeOpenTime > 0.4F) {
             setCurrentAnimation("eyes-closed");
             eyeOpenTime = 0;
         }
