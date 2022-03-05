@@ -22,6 +22,7 @@ private:
     bool visible = true;
     bool applyScrolling = false;
     bool applyGravity = false;
+    bool collidable = true;
     bool inversedHorizontally = false;
     std::map<std::string, Animation*>* animationMap;
     Animation* activeAnimation = nullptr;
@@ -49,6 +50,8 @@ protected:
     void stayOnTopOf(AnimatedGraphic* otherGraphic);
     void jump(float force);
     void interruptJump();
+    void setCollidable(bool collidable);
+    bool isCollidable();
     void drawInversedHorizontally(bool inverse);
     void addSprite(std::string animationId, std::string filePath, uint16_t repeat);
     void addSprite(std::string animationId, std::string filePath);

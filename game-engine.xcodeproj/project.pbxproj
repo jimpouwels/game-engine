@@ -33,6 +33,10 @@
 		239F32B127D3567B007D4E2C /* mario-run2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32AC27D35674007D4E2C /* mario-run2.png */; };
 		239F32B227D3567B007D4E2C /* mario-run3.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32AD27D35674007D4E2C /* mario-run3.png */; };
 		239F32B427D3579C007D4E2C /* mario-idle.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32B327D35796007D4E2C /* mario-idle.png */; };
+		239F32B827D3C487007D4E2C /* background-red-thingy-eyeopenleft.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32B527D3C47E007D4E2C /* background-red-thingy-eyeopenleft.png */; };
+		239F32B927D3C487007D4E2C /* background-red-thingy-eyeopenright.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32B627D3C47E007D4E2C /* background-red-thingy-eyeopenright.png */; };
+		239F32BA27D3C487007D4E2C /* background-red-thingy-eyesclosed.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32B727D3C47E007D4E2C /* background-red-thingy-eyesclosed.png */; };
+		239F32BD27D3C4A0007D4E2C /* backgroundRedCharacter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 239F32BB27D3C4A0007D4E2C /* backgroundRedCharacter.cpp */; };
 		23A4D56A27C102F9006F4220 /* thrust.ogg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A4D56927C102F2006F4220 /* thrust.ogg */; };
 		23A933B227864EA800769F69 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AD27864EA700769F69 /* sprite.cpp */; };
 		23A933B327864EA800769F69 /* animatedGraphic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AE27864EA700769F69 /* animatedGraphic.cpp */; };
@@ -69,6 +73,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				239F32B827D3C487007D4E2C /* background-red-thingy-eyeopenleft.png in CopyFiles */,
+				239F32B927D3C487007D4E2C /* background-red-thingy-eyeopenright.png in CopyFiles */,
+				239F32BA27D3C487007D4E2C /* background-red-thingy-eyesclosed.png in CopyFiles */,
 				239F32B427D3579C007D4E2C /* mario-idle.png in CopyFiles */,
 				239F32AF27D3567B007D4E2C /* mario-jump.png in CopyFiles */,
 				239F32B027D3567B007D4E2C /* mario-run1.png in CopyFiles */,
@@ -135,6 +142,11 @@
 		239F32AC27D35674007D4E2C /* mario-run2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-run2.png"; sourceTree = "<group>"; };
 		239F32AD27D35674007D4E2C /* mario-run3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-run3.png"; sourceTree = "<group>"; };
 		239F32B327D35796007D4E2C /* mario-idle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-idle.png"; sourceTree = "<group>"; };
+		239F32B527D3C47E007D4E2C /* background-red-thingy-eyeopenleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-red-thingy-eyeopenleft.png"; sourceTree = "<group>"; };
+		239F32B627D3C47E007D4E2C /* background-red-thingy-eyeopenright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-red-thingy-eyeopenright.png"; sourceTree = "<group>"; };
+		239F32B727D3C47E007D4E2C /* background-red-thingy-eyesclosed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-red-thingy-eyesclosed.png"; sourceTree = "<group>"; };
+		239F32BB27D3C4A0007D4E2C /* backgroundRedCharacter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = backgroundRedCharacter.cpp; sourceTree = "<group>"; };
+		239F32BC27D3C4A0007D4E2C /* backgroundRedCharacter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = backgroundRedCharacter.hpp; sourceTree = "<group>"; };
 		23A4D56927C102F2006F4220 /* thrust.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = thrust.ogg; sourceTree = "<group>"; };
 		23A933AC27864EA700769F69 /* animatedGraphic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animatedGraphic.hpp; sourceTree = "<group>"; };
 		23A933AD27864EA700769F69 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
@@ -212,6 +224,8 @@
 			isa = PBXGroup;
 			children = (
 				239F328427D0CA9F007D4E2C /* assets */,
+				239F32BB27D3C4A0007D4E2C /* backgroundRedCharacter.cpp */,
+				239F32BC27D3C4A0007D4E2C /* backgroundRedCharacter.hpp */,
 				235FEC1E27C6E1F6006306C9 /* character.cpp */,
 				235FEC1F27C6E1F6006306C9 /* character.hpp */,
 				239F328A27D11A98007D4E2C /* floor.cpp */,
@@ -226,6 +240,9 @@
 		239F328427D0CA9F007D4E2C /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				239F32B527D3C47E007D4E2C /* background-red-thingy-eyeopenleft.png */,
+				239F32B627D3C47E007D4E2C /* background-red-thingy-eyeopenright.png */,
+				239F32B727D3C47E007D4E2C /* background-red-thingy-eyesclosed.png */,
 				239F32B327D35796007D4E2C /* mario-idle.png */,
 				239F32A927D35674007D4E2C /* mario-jump.png */,
 				239F32AA27D35674007D4E2C /* mario-run1.png */,
@@ -428,6 +445,7 @@
 				23B177AA27A3E3160094B178 /* keyboardHandler.hpp in Sources */,
 				235FEC1B27C6DF5B006306C9 /* mario.cpp in Sources */,
 				23E5E30027A302DD00B62583 /* asteroid.cpp in Sources */,
+				239F32BD27D3C4A0007D4E2C /* backgroundRedCharacter.cpp in Sources */,
 				2394CC6327CC0A2300B62AC8 /* rectangle.cpp in Sources */,
 				23A933BE2788B4EC00769F69 /* ship.cpp in Sources */,
 				23E5E2F5279A979100B62583 /* bullet.cpp in Sources */,

@@ -80,6 +80,9 @@ std::string AnimatedGraphic::getCurrentAnimationId() {
 }
 
 void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float elapsedTime) {
+    if (!isCollidable() || !otherGraphic->isCollidable()) {
+        return;
+    }
     Vector2D otherGraphicPosition = otherGraphic->getPosition();
     Vector2D currentGraphicPosition = getPosition();
     
@@ -176,6 +179,14 @@ void AnimatedGraphic::setPosition(Vector2D position) {
 void AnimatedGraphic::addToPosition(Vector2D delta) {
     position.x += delta.x;
     position.y += delta.y;
+}
+
+bool AnimatedGraphic::isCollidable() {
+    return collidable;
+}
+
+void AnimatedGraphic::setCollidable(bool collidable) {
+    this->collidable = collidable;
 }
 
 int AnimatedGraphic::getSingleWidth() {
