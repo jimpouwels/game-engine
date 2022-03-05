@@ -141,6 +141,14 @@ void AnimatedGraphic::updateAnimation(float elapsedTime) {
     updateCurrentDrawableData();
 }
 
+void AnimatedGraphic::drawInversedHorizontally(bool value) {
+    inversedHorizontally = value;
+}
+
+bool AnimatedGraphic::drawInversedHorizontally() {
+    return inversedHorizontally;
+}
+
 void AnimatedGraphic::setX(float x) {
     position.x = x;
 }
@@ -265,6 +273,10 @@ void AnimatedGraphic::updateCurrentDrawableData() {
     activeDrawable->setScale(scale);
     activeDrawable->setRotationAngle(angle);
     activeDrawable->setRotationPoint(getRotationPoint());
+    Sprite* sprite = dynamic_cast<Sprite*>(activeDrawable);
+    if (sprite != nullptr) {
+        sprite->setDrawInversedHorizontally(inversedHorizontally);
+    }
 }
 
 Vector2D AnimatedGraphic::calculatePreviousPosition(float elapsedTime) {

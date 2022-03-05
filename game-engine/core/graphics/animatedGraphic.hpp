@@ -21,6 +21,7 @@ private:
     float angle;
     bool visible = true;
     bool applyGravity = false;
+    bool inversedHorizontally = false;
     std::map<std::string, Animation*>* animationMap;
     Animation* activeAnimation = nullptr;
     bool markedForDeletion = false;
@@ -47,6 +48,7 @@ protected:
     void stayOnTopOf(AnimatedGraphic* otherGraphic);
     void jump(float force);
     void interruptJump();
+    void drawInversedHorizontally(bool inverse);
     void addSprite(std::string animationId, std::string filePath, uint16_t repeat);
     void addSprite(std::string animationId, std::string filePath);
     virtual void doOnInit() {};
@@ -71,6 +73,7 @@ public:
     float getRotationAngle();
     void setRotationAngle(float angle);
     void setDeleteOnLeaveScreen(bool deleteOnLeaveScreen);
+    bool drawInversedHorizontally();
     bool isMarkedForDeletion();
     void checkCollisionRect(AnimatedGraphic* otherGraphicp, float elapsedTime);
     Drawable* getActiveDrawable();

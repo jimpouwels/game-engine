@@ -10,32 +10,21 @@ Character::Character(jimp::Vector2D position) : jimp::AnimatedGraphic(position, 
 }
 
 void Character::doOnInit() {
-    addSprite("idle-left", "mario-idleleft.png", 1);
-    addSprite("idle-right", "mario-idleright.png", 1);
-    addSprite("run-left", "mario-runleft1.png", 1);
-    addSprite("run-left", "mario-runleft2.png", 1);
-    addSprite("run-left", "mario-runleft3.png", 1);
-    addSprite("run-right", "mario-runright1.png", 1);
-    addSprite("run-right", "mario-runright2.png", 1);
-    addSprite("run-right", "mario-runright3.png", 1);
-    addSprite("jump-left", "mario-jumpleft.png", 1);
-    addSprite("jump-right", "mario-jumpright.png", 1);
+    addSprite("idle", "mario-idle.png", 1);
+    addSprite("run", "mario-run1.png", 1);
+    addSprite("run", "mario-run2.png", 1);
+    addSprite("run", "mario-run3.png", 1);
+    addSprite("jump", "mario-jump.png", 1);
 }
 
 void Character::doOnUpdate(float elapsedTime) {
     std::string currentAnimationId = getCurrentAnimationId();
     if (isJumping) {
-        if (getVelocity().x != 0) {
-            getVelocity().x > 0 ? setCurrentAnimation("jump-right") : setCurrentAnimation("jump-left");
-        }
-    } else if (getVelocity().x > 0) {
-        setCurrentAnimation("run-right");
-    } else if (getVelocity().x < 0) {
-        setCurrentAnimation("run-left");
-    } else if (currentAnimationId == "jump-right" || currentAnimationId == "run-right") {
-        setCurrentAnimation("idle-right");
-    } else if (currentAnimationId == "jump-left" || currentAnimationId == "run-left") {
-        setCurrentAnimation("idle-left");
+        setCurrentAnimation("jump");
+    } else if (getVelocity().x != 0) {
+        setCurrentAnimation("run");
+    } else {
+        setCurrentAnimation("idle");
     }
 }
 
@@ -61,6 +50,7 @@ void Character::hasCollidedRectLeft(AnimatedGraphic* otherGraphic) {
 void Character::onKeyboardLeft(jimp::KeyState keyState) {
     if (keyState == jimp::KeyState::PRESSED) {
         move(270, 500);
+        drawInversedHorizontally(true);
     } else {
         stopMoving();
     }
@@ -69,6 +59,7 @@ void Character::onKeyboardLeft(jimp::KeyState keyState) {
 void Character::onKeyboardRight(jimp::KeyState keyState) {
     if (keyState == jimp::KeyState::PRESSED) {
         move(90, 500);
+        drawInversedHorizontally(false);
     } else {
         stopMoving();
     }

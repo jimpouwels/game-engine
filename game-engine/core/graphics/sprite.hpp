@@ -13,11 +13,14 @@ class Sprite : public Drawable {
     
 private:
     Image* image;
+    bool inversedHorizontally = false;
     
 public:
     Sprite(float x, float y, float scale, uint16_t angle, uint16_t repeat, std::string filePath);
     ~Sprite();
     jimp::Image& getImage();
+    void setDrawInversedHorizontally(bool inversed);
+    bool drawInversedHorizontally();
     int getSingleWidth();
     int getWidth() override;
     int getHeight() override;

@@ -22,6 +22,14 @@ int Sprite::getHeight() {
     return image->getHeight() * getScale();
 }
 
+void Sprite::setDrawInversedHorizontally(bool inversed) {
+    inversedHorizontally = inversed;
+}
+
+bool Sprite::drawInversedHorizontally() {
+    return inversedHorizontally;
+}
+
 Image& Sprite::getImage() {
     return *this->image;
 }

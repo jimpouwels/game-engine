@@ -28,16 +28,11 @@
 		239F328727D0CAC0007D4E2C /* block.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F328527D0CAB5007D4E2C /* block.png */; };
 		239F328927D11A75007D4E2C /* floor.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F328827D11A6F007D4E2C /* floor.png */; };
 		239F328C27D11A98007D4E2C /* floor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 239F328A27D11A98007D4E2C /* floor.cpp */; };
-		239F329B27D2800A007D4E2C /* mario-runleft1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F329727D28004007D4E2C /* mario-runleft1.png */; };
-		239F329C27D2800A007D4E2C /* mario-runleft2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F329527D28003007D4E2C /* mario-runleft2.png */; };
-		239F329D27D2800A007D4E2C /* mario-runleft3.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F329827D28004007D4E2C /* mario-runleft3.png */; };
-		239F329E27D2800A007D4E2C /* mario-runright1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F329927D28004007D4E2C /* mario-runright1.png */; };
-		239F329F27D2800A007D4E2C /* mario-runright2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F329627D28003007D4E2C /* mario-runright2.png */; };
-		239F32A027D2800A007D4E2C /* mario-runright3.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F329A27D28004007D4E2C /* mario-runright3.png */; };
-		239F32A327D2806C007D4E2C /* mario-idleleft.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32A227D28066007D4E2C /* mario-idleleft.png */; };
-		239F32A427D2806C007D4E2C /* mario-idleright.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32A127D28066007D4E2C /* mario-idleright.png */; };
-		239F32A727D28335007D4E2C /* mario-jumpleft.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32A527D2832F007D4E2C /* mario-jumpleft.png */; };
-		239F32A827D28335007D4E2C /* mario-jumpright.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32A627D2832F007D4E2C /* mario-jumpright.png */; };
+		239F32AF27D3567B007D4E2C /* mario-jump.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32A927D35674007D4E2C /* mario-jump.png */; };
+		239F32B027D3567B007D4E2C /* mario-run1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32AA27D35674007D4E2C /* mario-run1.png */; };
+		239F32B127D3567B007D4E2C /* mario-run2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32AC27D35674007D4E2C /* mario-run2.png */; };
+		239F32B227D3567B007D4E2C /* mario-run3.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32AD27D35674007D4E2C /* mario-run3.png */; };
+		239F32B427D3579C007D4E2C /* mario-idle.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32B327D35796007D4E2C /* mario-idle.png */; };
 		23A4D56A27C102F9006F4220 /* thrust.ogg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23A4D56927C102F2006F4220 /* thrust.ogg */; };
 		23A933B227864EA800769F69 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AD27864EA700769F69 /* sprite.cpp */; };
 		23A933B327864EA800769F69 /* animatedGraphic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933AE27864EA700769F69 /* animatedGraphic.cpp */; };
@@ -74,16 +69,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				239F32A727D28335007D4E2C /* mario-jumpleft.png in CopyFiles */,
-				239F32A827D28335007D4E2C /* mario-jumpright.png in CopyFiles */,
-				239F32A327D2806C007D4E2C /* mario-idleleft.png in CopyFiles */,
-				239F32A427D2806C007D4E2C /* mario-idleright.png in CopyFiles */,
-				239F329B27D2800A007D4E2C /* mario-runleft1.png in CopyFiles */,
-				239F329C27D2800A007D4E2C /* mario-runleft2.png in CopyFiles */,
-				239F329D27D2800A007D4E2C /* mario-runleft3.png in CopyFiles */,
-				239F329E27D2800A007D4E2C /* mario-runright1.png in CopyFiles */,
-				239F329F27D2800A007D4E2C /* mario-runright2.png in CopyFiles */,
-				239F32A027D2800A007D4E2C /* mario-runright3.png in CopyFiles */,
+				239F32B427D3579C007D4E2C /* mario-idle.png in CopyFiles */,
+				239F32AF27D3567B007D4E2C /* mario-jump.png in CopyFiles */,
+				239F32B027D3567B007D4E2C /* mario-run1.png in CopyFiles */,
+				239F32B127D3567B007D4E2C /* mario-run2.png in CopyFiles */,
+				239F32B227D3567B007D4E2C /* mario-run3.png in CopyFiles */,
 				239F328927D11A75007D4E2C /* floor.png in CopyFiles */,
 				239F328727D0CAC0007D4E2C /* block.png in CopyFiles */,
 				23A4D56A27C102F9006F4220 /* thrust.ogg in CopyFiles */,
@@ -140,16 +130,11 @@
 		239F328827D11A6F007D4E2C /* floor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floor.png; sourceTree = "<group>"; };
 		239F328A27D11A98007D4E2C /* floor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = floor.cpp; sourceTree = "<group>"; };
 		239F328B27D11A98007D4E2C /* floor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = floor.hpp; sourceTree = "<group>"; };
-		239F329527D28003007D4E2C /* mario-runleft2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-runleft2.png"; sourceTree = "<group>"; };
-		239F329627D28003007D4E2C /* mario-runright2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-runright2.png"; sourceTree = "<group>"; };
-		239F329727D28004007D4E2C /* mario-runleft1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-runleft1.png"; sourceTree = "<group>"; };
-		239F329827D28004007D4E2C /* mario-runleft3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-runleft3.png"; sourceTree = "<group>"; };
-		239F329927D28004007D4E2C /* mario-runright1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-runright1.png"; sourceTree = "<group>"; };
-		239F329A27D28004007D4E2C /* mario-runright3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-runright3.png"; sourceTree = "<group>"; };
-		239F32A127D28066007D4E2C /* mario-idleright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-idleright.png"; sourceTree = "<group>"; };
-		239F32A227D28066007D4E2C /* mario-idleleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-idleleft.png"; sourceTree = "<group>"; };
-		239F32A527D2832F007D4E2C /* mario-jumpleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-jumpleft.png"; sourceTree = "<group>"; };
-		239F32A627D2832F007D4E2C /* mario-jumpright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-jumpright.png"; sourceTree = "<group>"; };
+		239F32A927D35674007D4E2C /* mario-jump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-jump.png"; sourceTree = "<group>"; };
+		239F32AA27D35674007D4E2C /* mario-run1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-run1.png"; sourceTree = "<group>"; };
+		239F32AC27D35674007D4E2C /* mario-run2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-run2.png"; sourceTree = "<group>"; };
+		239F32AD27D35674007D4E2C /* mario-run3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-run3.png"; sourceTree = "<group>"; };
+		239F32B327D35796007D4E2C /* mario-idle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-idle.png"; sourceTree = "<group>"; };
 		23A4D56927C102F2006F4220 /* thrust.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = thrust.ogg; sourceTree = "<group>"; };
 		23A933AC27864EA700769F69 /* animatedGraphic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animatedGraphic.hpp; sourceTree = "<group>"; };
 		23A933AD27864EA700769F69 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
@@ -241,16 +226,11 @@
 		239F328427D0CA9F007D4E2C /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				239F32A527D2832F007D4E2C /* mario-jumpleft.png */,
-				239F32A627D2832F007D4E2C /* mario-jumpright.png */,
-				239F32A227D28066007D4E2C /* mario-idleleft.png */,
-				239F32A127D28066007D4E2C /* mario-idleright.png */,
-				239F329727D28004007D4E2C /* mario-runleft1.png */,
-				239F329527D28003007D4E2C /* mario-runleft2.png */,
-				239F329827D28004007D4E2C /* mario-runleft3.png */,
-				239F329927D28004007D4E2C /* mario-runright1.png */,
-				239F329627D28003007D4E2C /* mario-runright2.png */,
-				239F329A27D28004007D4E2C /* mario-runright3.png */,
+				239F32B327D35796007D4E2C /* mario-idle.png */,
+				239F32A927D35674007D4E2C /* mario-jump.png */,
+				239F32AA27D35674007D4E2C /* mario-run1.png */,
+				239F32AC27D35674007D4E2C /* mario-run2.png */,
+				239F32AD27D35674007D4E2C /* mario-run3.png */,
 				239F328827D11A6F007D4E2C /* floor.png */,
 				239F328527D0CAB5007D4E2C /* block.png */,
 			);
