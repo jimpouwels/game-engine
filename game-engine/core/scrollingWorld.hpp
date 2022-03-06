@@ -9,15 +9,19 @@ class ScrollingWorld {
     
 private:
     AnimatedGraphic* mainCharacter = nullptr;
-    int offsetX = 0;
+    float offsetX = 0;
+    float offsetY = 0;
     int width = 0;
     int height = 0;
     
 public:
     ScrollingWorld(AnimatedGraphic* mainCharacter, int width, int height);
     ~ScrollingWorld();
+    int getWidth();
+    int getHeight();
     void doOnUpdate();
     void doOnFrame();
+    static ScrollingWorld* getInstance();
 };
 
 }

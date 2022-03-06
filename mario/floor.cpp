@@ -1,5 +1,6 @@
 #include "floor.hpp"
 #include "gameEngine.hpp"
+#include "scrollingWorld.hpp"
 
 namespace mario {
   
@@ -10,7 +11,8 @@ Floor::Floor(jimp::Vector2D position, uint16_t repeat) : jimp::AnimatedGraphic(p
 void Floor::doOnInit() {
     setApplyScrolling(true);
     addSprite("default", "block.png", repeat);
-    getPosition().y = jimp::GameEngine::getInstance()->getScreenHeight() - getHeight();
+    getPosition().y = jimp::ScrollingWorld::getInstance()->getHeight() - getHeight();
+    std::cout << getPosition().y << std::endl;
 }
 
 void Floor::doOnUpdate(float elapsedTime) {

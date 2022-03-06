@@ -4,37 +4,66 @@
 
 namespace jimp {
 
+static ScrollingWorld* scrollingWorldInstance = nullptr;
+
 ScrollingWorld::ScrollingWorld(AnimatedGraphic* mainCharacter, int width, int height) {
+    scrollingWorldInstance = this;
+    this->width = width;
+    this->height = height;
     this->mainCharacter = mainCharacter;
 }
 
 ScrollingWorld::~ScrollingWorld() {
 }
 
+int ScrollingWorld::getWidth() {
+    return width;
+}
+
+int ScrollingWorld::getHeight() {
+    return height;
+}
+
 void ScrollingWorld::doOnUpdate() {
     GameEngine* gameEngine = GameEngine::getInstance();
     float rightSideOfCamera = gameEngine->getScreenWidth() / 2 + 125;
     float leftSideOfCamera = gameEngine->getScreenWidth() / 2 - 125;
-    int offsetDeltaX = 0;
+    float topSideOfCamera = gameEngine->getScreenHeight() / 2 - 250;
+    float bottomSideOfCamera = gameEngine->getScreenHeight() / 2;
+    float offsetDeltaX = 0;
+    float offsetDeltaY = 0;
     if ((mainCharacter->getPosition().x + mainCharacter->getWidth()) >= rightSideOfCamera) {
         offsetDeltaX += (mainCharacter->getPosition().x + mainCharacter->getWidth()) - rightSideOfCamera;
         mainCharacter->getPosition().x = rightSideOfCamera - mainCharacter->getWidth();
-    } else if (offsetX != 0 && mainCharacter->getPosition().x <= leftSideOfCamera) {
+    } else if (offsetX >= 0 && mainCharacter->getPosition().x <= leftSideOfCamera) {
         offsetDeltaX -= leftSideOfCamera - mainCharacter->getPosition().x;
         mainCharacter->getPosition().x = leftSideOfCamera;
     }
+    if (offsetY <= (height - GameEngine::getInstance()->getScreenHeight()) && (mainCharacter->getPosition().y + mainCharacter->getHeight()) >= bottomSideOfCamera) {
+        offsetDeltaY += (mainCharacter->getPosition().y + mainCharacter->getHeight()) - bottomSideOfCamera;
+        mainCharacter->getPosition().y -= offsetDeltaY;
+    } else if ((mainCharacter->getPosition().y <= topSideOfCamera)) {
+        offsetDeltaY -= topSideOfCamera - mainCharacter->getPosition().y;
+        mainCharacter->getPosition().y = topSideOfCamera;
+    }
     offsetX += offsetDeltaX;
+    offsetY += offsetDeltaY;
     for (const auto& scrollingGraphic: *GameEngine::getInstance()->getAllGraphics()) {
         if (scrollingGraphic == mainCharacter || !scrollingGraphic->isApplyScrolling()) {
             continue;
         }
         scrollingGraphic->getPosition().x -= offsetDeltaX;
+        scrollingGraphic->getPosition().y -= offsetDeltaY;
         if (scrollingGraphic->isPositionedWithinScreen()) {
             scrollingGraphic->show();
         } else {
             scrollingGraphic->hide();
         }
     }
+}
+
+ScrollingWorld* ScrollingWorld::getInstance() {
+    return scrollingWorldInstance;
 }
 
 void ScrollingWorld::doOnFrame() {
