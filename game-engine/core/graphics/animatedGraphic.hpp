@@ -22,6 +22,8 @@ private:
     bool visible = true;
     bool applyScrolling = false;
     bool applyGravity = false;
+    bool interruptGravity = false;
+    bool interruptMovement = false;
     bool collidable = true;
     bool inversedHorizontally = false;
     std::map<std::string, Animation*>* animationMap;
@@ -33,7 +35,7 @@ private:
     std::mutex* lock = new std::mutex();
     float elapsedTimeSinceLastSwap;
     float drawableSwapIntervalInSeconds;
-    Vector2D calculatePreviousPosition(float elapsedTime);
+    Vector2D calculateNextPosition(float elapsedTime);
     void resetGravityVelocity();
     void updateCurrentDrawableData();
     void updateAnimation(float elapsedTime);

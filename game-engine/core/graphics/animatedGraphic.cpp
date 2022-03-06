@@ -83,35 +83,33 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
     if (!isCollidable() || !otherGraphic->isCollidable()) {
         return;
     }
-    Vector2D otherGraphicPosition = otherGraphic->getPosition();
-    Vector2D currentGraphicPosition = getPosition();
     
-    Vector2D currentGraphicPreviousPosition = calculatePreviousPosition(elapsedTime);
-    Vector2D currentGraphicNextPosition = getPosition();
+    Vector2D currentGraphicCurrentPosition = getPosition();
+    Vector2D currentGraphicNextPosition = calculateNextPosition(elapsedTime);
     
-    Vector2D otherGraphicPreviousPosition = otherGraphic->calculatePreviousPosition(elapsedTime);
-    Vector2D otherGraphicNextPosition = otherGraphic->getPosition();
+    Vector2D otherGraphicCurrentPosition = otherGraphic->getPosition();
+    Vector2D otherGraphicNextPosition = otherGraphic->calculateNextPosition(elapsedTime);
    
-    if ((((currentGraphicPreviousPosition.y + getHeight() <= otherGraphicPreviousPosition.y && currentGraphicNextPosition.y + getHeight() > otherGraphicNextPosition.y) || currentGraphicPosition.y == otherGraphicPosition.y)
-         && (currentGraphicNextPosition.x + getWidth() > otherGraphicNextPosition.x && currentGraphicPosition.x < otherGraphicNextPosition.x + otherGraphic->getWidth()))) {
+    if ((((currentGraphicCurrentPosition.y + getHeight() <= otherGraphicCurrentPosition.y && currentGraphicNextPosition.y + getHeight() > otherGraphicNextPosition.y) || currentGraphicCurrentPosition.y == otherGraphicCurrentPosition.y)
+         && (currentGraphicNextPosition.x + getWidth() > otherGraphicNextPosition.x && currentGraphicCurrentPosition.x < otherGraphicNextPosition.x + otherGraphic->getWidth()))) {
         hasCollidedRect(otherGraphic, Geo2D::Side::BOTTOM);
         hasCollidedRectBottom(otherGraphic);
         otherGraphic->hasCollidedRect(this, Geo2D::Side::TOP);
         otherGraphic->hasCollidedRectTop(this);
-    } else if ((((currentGraphicPreviousPosition.y >= otherGraphicPreviousPosition.y + otherGraphic->getHeight() && currentGraphicNextPosition.y < otherGraphicNextPosition.y + otherGraphic->getHeight()) || currentGraphicPosition.y == otherGraphicPosition.y) &&
-        (currentGraphicNextPosition.x + getWidth() > otherGraphicNextPosition.x && currentGraphicPosition.x < otherGraphicNextPosition.x + otherGraphic->getWidth()))) {
+    } else if ((((currentGraphicCurrentPosition.y >= otherGraphicCurrentPosition.y + otherGraphic->getHeight() && currentGraphicNextPosition.y < otherGraphicNextPosition.y + otherGraphic->getHeight()) || currentGraphicCurrentPosition.y == otherGraphicCurrentPosition.y) &&
+        (currentGraphicNextPosition.x + getWidth() > otherGraphicNextPosition.x && currentGraphicCurrentPosition.x < otherGraphicNextPosition.x + otherGraphic->getWidth()))) {
         hasCollidedRect(otherGraphic, Geo2D::Side::TOP);
         hasCollidedRectTop(otherGraphic);
         otherGraphic->hasCollidedRect(this, Geo2D::Side::BOTTOM);
         otherGraphic->hasCollidedRectBottom(this);
-    } else if ((((currentGraphicPreviousPosition.x + getWidth() <= otherGraphicPreviousPosition.x && currentGraphicNextPosition.x + getWidth() > otherGraphicNextPosition.x) || currentGraphicPosition.x == otherGraphicPosition.x)
-         && (currentGraphicNextPosition.y + getHeight() > otherGraphicNextPosition.y && currentGraphicPosition.y < otherGraphicNextPosition.y + otherGraphic->getHeight()))) {
+    } else if ((((currentGraphicCurrentPosition.x + getWidth() <= otherGraphicCurrentPosition.x && currentGraphicNextPosition.x + getWidth() > otherGraphicNextPosition.x) || currentGraphicCurrentPosition.x == otherGraphicCurrentPosition.x)
+         && (currentGraphicNextPosition.y + getHeight() > otherGraphicNextPosition.y && currentGraphicCurrentPosition.y < otherGraphicNextPosition.y + otherGraphic->getHeight()))) {
         hasCollidedRect(otherGraphic, Geo2D::Side::LEFT);
         hasCollidedRectLeft(otherGraphic);
         otherGraphic->hasCollidedRect(this, Geo2D::Side::RIGHT);
         otherGraphic->hasCollidedRectRight(this);
-    } else if ((((currentGraphicPreviousPosition.x >= otherGraphicPreviousPosition.x + otherGraphic->getWidth() && currentGraphicNextPosition.x < otherGraphicNextPosition.x + otherGraphic->getWidth()) || currentGraphicPosition.x == otherGraphicPosition.x) &&
-        (currentGraphicNextPosition.y + getHeight() > otherGraphicNextPosition.y && currentGraphicPosition.y < otherGraphicNextPosition.y + otherGraphic->getHeight()))) {
+    } else if ((((currentGraphicCurrentPosition.x >= otherGraphicCurrentPosition.x + otherGraphic->getWidth() && currentGraphicNextPosition.x < otherGraphicNextPosition.x + otherGraphic->getWidth()) || currentGraphicCurrentPosition.x == otherGraphicCurrentPosition.x) &&
+        (currentGraphicNextPosition.y + getHeight() > otherGraphicNextPosition.y && currentGraphicCurrentPosition.y < otherGraphicNextPosition.y + otherGraphic->getHeight()))) {
         hasCollidedRect(otherGraphic, Geo2D::Side::RIGHT);
         hasCollidedRectRight(otherGraphic);
         otherGraphic->hasCollidedRect(this, Geo2D::Side::LEFT);
@@ -273,14 +271,17 @@ void AnimatedGraphic::show() {
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
     getPosition().y = otherGraphic->getPosition().y - getHeight();
     resetGravityVelocity();
+    interruptGravity = true;
 }
 
 void AnimatedGraphic::stayToLeftOf(AnimatedGraphic *otherGraphic) {
     getPosition().x = otherGraphic->getPosition().x - getWidth();
+    interruptMovement = true;
 }
 
 void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
     getPosition().x = otherGraphic->getPosition().x + otherGraphic->getWidth();
+    interruptMovement = true;
 }
 
 bool AnimatedGraphic::isVisible() {
@@ -288,10 +289,16 @@ bool AnimatedGraphic::isVisible() {
 }
 
 void AnimatedGraphic::updateMovement(float elapsedTime) {
-    if (applyGravity)  {
+    if (applyGravity && !interruptGravity)  {
         gravityVelocity.y += GameEngine::getInstance()->getGravityForce();
     }
-    addToPosition(jimp::Timing::toValueForElapsedTime(getVelocity(), elapsedTime));
+    interruptGravity = false;
+    addToPosition(jimp::Timing::toValueForElapsedTime(gravityVelocity, elapsedTime));
+    
+    if (!interruptMovement) {
+        addToPosition(jimp::Timing::toValueForElapsedTime(moveVelocity, elapsedTime));
+    }
+    interruptMovement = false;
 }
 
 void AnimatedGraphic::updateCurrentDrawableData() {
@@ -306,8 +313,12 @@ void AnimatedGraphic::updateCurrentDrawableData() {
     }
 }
 
-Vector2D AnimatedGraphic::calculatePreviousPosition(float elapsedTime) {
-    return getPosition() - jimp::Timing::toValueForElapsedTime(getVelocity(), elapsedTime);
+Vector2D AnimatedGraphic::calculateNextPosition(float elapsedTime) {
+    Vector2D velocity = getVelocity();
+    if (applyGravity)  {
+        velocity.y += GameEngine::getInstance()->getGravityForce();
+    }
+    return getPosition() + jimp::Timing::toValueForElapsedTime(velocity, elapsedTime);
 }
 
 void AnimatedGraphic::addSprite(std::string animationId, std::string filePath) {
