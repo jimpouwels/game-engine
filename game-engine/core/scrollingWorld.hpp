@@ -11,6 +11,8 @@ private:
     AnimatedGraphic* mainCharacter = nullptr;
     float offsetX = 0;
     float offsetY = 0;
+    float maxScrollX = 0;
+    float maxScrollY = 0;
     int width = 0;
     int height = 0;
     
