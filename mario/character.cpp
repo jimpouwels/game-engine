@@ -39,15 +39,11 @@ void Character::hasCollidedRectTop(AnimatedGraphic* otherGraphic) {
 }
 
 void Character::hasCollidedRectRight(AnimatedGraphic* otherGraphic) {
-    if (dynamic_cast<Floor*>(otherGraphic) == nullptr) {
-        stayToRightOf(otherGraphic);
-    }
+    stayToRightOf(otherGraphic);
 }
 
 void Character::hasCollidedRectLeft(AnimatedGraphic* otherGraphic) {
-    if (dynamic_cast<Floor*>(otherGraphic) == nullptr) {
-        stayToLeftOf(otherGraphic);
-    }
+    stayToLeftOf(otherGraphic);
 }
 
 void Character::onKeyboardLeft(jimp::KeyState keyState) {

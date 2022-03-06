@@ -32,7 +32,7 @@ void ScrollingWorld::doOnUpdate() {
     float bottomSideOfCamera = gameEngine->getScreenHeight() / 2;
     float offsetDeltaX = 0;
     float offsetDeltaY = 0;
-    if ((mainCharacter->getPosition().x + mainCharacter->getWidth()) >= rightSideOfCamera) {
+    if (offsetX <= (width - GameEngine::getInstance()->getScreenWidth()) && (mainCharacter->getPosition().x + mainCharacter->getWidth()) >= rightSideOfCamera) {
         offsetDeltaX += (mainCharacter->getPosition().x + mainCharacter->getWidth()) - rightSideOfCamera;
         mainCharacter->getPosition().x = rightSideOfCamera - mainCharacter->getWidth();
     } else if (offsetX >= 0 && mainCharacter->getPosition().x <= leftSideOfCamera) {
@@ -42,7 +42,7 @@ void ScrollingWorld::doOnUpdate() {
     if (offsetY <= (height - GameEngine::getInstance()->getScreenHeight()) && (mainCharacter->getPosition().y + mainCharacter->getHeight()) >= bottomSideOfCamera) {
         offsetDeltaY += (mainCharacter->getPosition().y + mainCharacter->getHeight()) - bottomSideOfCamera;
         mainCharacter->getPosition().y -= offsetDeltaY;
-    } else if ((mainCharacter->getPosition().y <= topSideOfCamera)) {
+    } else if (offsetY != 0 && (mainCharacter->getPosition().y <= topSideOfCamera)) {
         offsetDeltaY -= topSideOfCamera - mainCharacter->getPosition().y;
         mainCharacter->getPosition().y = topSideOfCamera;
     }
