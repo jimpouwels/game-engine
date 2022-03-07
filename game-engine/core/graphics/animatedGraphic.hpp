@@ -26,8 +26,8 @@ private:
     bool interruptMovement = false;
     bool collidable = true;
     bool inversedHorizontally = false;
-    int fixedWidth = 0;
-    int fixedHeight = 0;
+    int collisionBoxWidth = 0;
+    int collisionBoxHeight = 0;
     std::map<std::string, Animation*>* animationMap;
     Animation* activeAnimation = nullptr;
     bool markedForDeletion = false;
@@ -80,6 +80,8 @@ public:
     int getWidth();
     int getSingleWidth();
     int getHeight();
+    int getCollisionRectWidth();
+    int getCollisionRectHeight();
     float getRotationAngle();
     void setRotationAngle(float angle);
     void setDeleteOnLeaveScreen(bool deleteOnLeaveScreen);

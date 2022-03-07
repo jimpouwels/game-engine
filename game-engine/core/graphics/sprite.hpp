@@ -26,11 +26,11 @@ public:
     jimp::Image& getImage();
     void setDrawInversedHorizontally(bool inversed);
     bool drawInversedHorizontally();
-    int getSingleWidth();
     int getMarginLeft();
     int getMarginRight();
     int getMarginTop();
     int getMarginBottom();
+    int getSingleWidth() override;
     int getWidth() override;
     int getHeight() override;
 };

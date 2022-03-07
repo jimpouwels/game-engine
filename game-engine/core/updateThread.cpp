@@ -7,10 +7,14 @@ namespace jimp {
 
 bool isWorking = false;
 
-void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onSpriteDeletedCallback, std::vector<AnimatedGraphic*>* registeredSprites, std::mutex* processingLock, std::mutex* graphicsLock) {
+void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onSpriteDeletedCallback, std::function<void()> onLoadNewGraphicsCallback, std::vector<AnimatedGraphic*>* registeredSprites, std::list<AnimatedGraphic*>* newGraphics, std::mutex* processingLock, std::mutex* graphicsLock) {
     isWorking = true;
     std::chrono::time_point<std::chrono::system_clock> previousUpdateTime;
     while (true) {
+        onLoadNewGraphicsCallback();
+        if (newGraphics->size() > 0) {
+            continue;
+        }
         processingLock->lock();
         if (isWorking) {
             std::this_thread::sleep_for(std::chrono::milliseconds(2));
@@ -78,7 +82,8 @@ UpdateThread::~UpdateThread() {
 void UpdateThread::start() {
     auto onGraphicDeletedLambda = std::bind(&UpdateThread::onGraphicDeleted, this, std::placeholders::_1);
     auto onGraphicUpdateLambda = std::bind(&UpdateThread::onUpdate, this, std::placeholders::_1);
-    this->updateThread = new std::thread(doLoop, onGraphicUpdateLambda, onGraphicDeletedLambda, registeredGraphics, processingLock, graphicsLock);
+    auto onLoadNewGraphicsLambda = std::bind(&UpdateThread::loadNewGraphicsIntoUpdateLoop, this);
+    this->updateThread = new std::thread(doLoop, onGraphicUpdateLambda, onGraphicDeletedLambda, onLoadNewGraphicsLambda, registeredGraphics, newGraphics, processingLock, graphicsLock);
 }
 
 void UpdateThread::stop() {
@@ -104,7 +109,6 @@ void UpdateThread::registerGraphic(AnimatedGraphic* graphic) {
 }
 
 void UpdateThread::onUpdate(float elapsedTime) {
-    this->loadNewGraphicsIntoUpdateLoop();
     this->onUpdateCallback(elapsedTime);
 }
 

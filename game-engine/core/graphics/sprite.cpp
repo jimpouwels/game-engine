@@ -13,7 +13,7 @@ Sprite::~Sprite() {
 }
 
 int Sprite::getWidth() {
-    return (image->getWidth() - marginLeft - marginRight) * getScale();
+    return (image->getWidth() - marginLeft - marginRight) * getScale() * getRepeat();
 }
 
 int Sprite::getSingleWidth() {
