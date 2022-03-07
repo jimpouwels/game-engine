@@ -28,6 +28,10 @@ private:
     bool inversedHorizontally = false;
     int collisionBoxWidth = 0;
     int collisionBoxHeight = 0;
+    int marginLeft = 0;
+    int marginRight = 0;
+    int marginTop = 0;
+    int marginBottom = 0;
     std::map<std::string, Animation*>* animationMap;
     Animation* activeAnimation = nullptr;
     bool markedForDeletion = false;
@@ -84,6 +88,10 @@ public:
     int getHeight();
     int getCollisionRectWidth();
     int getCollisionRectHeight();
+    int getMarginLeft();
+    int getMarginRight();
+    int getMarginTop();
+    int getMarginBottom();
     float getRotationAngle();
     void setRotationAngle(float angle);
     void setDeleteOnLeaveScreen(bool deleteOnLeaveScreen);

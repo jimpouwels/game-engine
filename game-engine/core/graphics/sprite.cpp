@@ -13,15 +13,15 @@ Sprite::~Sprite() {
 }
 
 int Sprite::getWidth() {
-    return (image->getWidth() - marginLeft - marginRight) * getScale() * getRepeat();
+    return (image->getWidth()) * getScale() * getRepeat();
 }
 
 int Sprite::getSingleWidth() {
-    return (image->getWidth() - marginLeft - marginRight) * getScale();
+    return (image->getWidth()) * getScale();
 }
 
 int Sprite::getHeight() {
-    return (image->getHeight() - marginTop - marginBottom) * getScale();
+    return (image->getHeight()) * getScale();
 }
 
 void Sprite::setDrawInversedHorizontally(bool inversed) {

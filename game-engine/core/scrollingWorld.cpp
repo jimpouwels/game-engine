@@ -45,31 +45,31 @@ void ScrollingWorld::doOnUpdate() {
     float bottomSideOfCamera = gameEngine->getScreenHeight() / 2;
     float offsetDeltaX = 0;
     float offsetDeltaY = 0;
-    if (offsetX < maxScrollX && (mainCharacter->getPosition().x + mainCharacter->getCollisionRectWidth()) >= rightSideOfCamera && mainCharacter->getVelocity().x > 0) {
-        offsetDeltaX += (mainCharacter->getPosition().x + mainCharacter->getCollisionRectWidth()) - rightSideOfCamera;
+    if (offsetX < maxScrollX && (mainCharacter->getPosition().x + mainCharacter->getWidth() - mainCharacter->getMarginRight()) >= rightSideOfCamera && mainCharacter->getVelocity().x > 0) {
+        offsetDeltaX += (mainCharacter->getPosition().x + mainCharacter->getWidth() - mainCharacter->getMarginRight()) - rightSideOfCamera;
         if (offsetX + offsetDeltaX > maxScrollX) {
             offsetDeltaX = maxScrollX - offsetX;
         }
-        mainCharacter->getPosition().x = rightSideOfCamera - mainCharacter->getCollisionRectWidth();
-    } else if (offsetX > 0 && mainCharacter->getPosition().x <= leftSideOfCamera && mainCharacter->getVelocity().x < 0) {
-        offsetDeltaX -= leftSideOfCamera - mainCharacter->getPosition().x;
+        mainCharacter->getPosition().x = rightSideOfCamera - mainCharacter->getWidth() + mainCharacter->getMarginRight();
+    } else if (offsetX > 0 && mainCharacter->getPosition().x + mainCharacter->getMarginLeft() <= leftSideOfCamera && mainCharacter->getVelocity().x < 0) {
+        offsetDeltaX -= leftSideOfCamera - mainCharacter->getPosition().x + mainCharacter->getMarginLeft();
         if (offsetX - offsetDeltaX < 0) {
             offsetDeltaX = -offsetX;
         }
-        mainCharacter->getPosition().x = leftSideOfCamera;
+        mainCharacter->getPosition().x = leftSideOfCamera - mainCharacter->getMarginLeft();
     }
-    if (offsetY < maxScrollY && (mainCharacter->getPosition().y + mainCharacter->getCollisionRectHeight()) >= bottomSideOfCamera && mainCharacter->getVelocity().y > 0) {
-        offsetDeltaY += (mainCharacter->getPosition().y + mainCharacter->getCollisionRectHeight()) - bottomSideOfCamera;
+    if (offsetY < maxScrollY && (mainCharacter->getPosition().y + mainCharacter->getHeight() - mainCharacter->getMarginBottom()) >= bottomSideOfCamera && mainCharacter->getVelocity().y > 0) {
+        offsetDeltaY += (mainCharacter->getPosition().y + mainCharacter->getHeight() - mainCharacter->getMarginBottom()) - bottomSideOfCamera;
         if (offsetY + offsetDeltaY > maxScrollY) {
             offsetDeltaY = maxScrollY - offsetY;
         }
-        mainCharacter->getPosition().y = bottomSideOfCamera - mainCharacter->getCollisionRectHeight();
-    } else if (offsetY > 0 && (mainCharacter->getPosition().y <= topSideOfCamera) && mainCharacter->getVelocity().y < 0) {
-        offsetDeltaY -= topSideOfCamera - mainCharacter->getPosition().y;
+        mainCharacter->getPosition().y = bottomSideOfCamera - mainCharacter->getHeight() + mainCharacter->getMarginBottom();
+    } else if (offsetY > 0 && (mainCharacter->getPosition().y + mainCharacter->getMarginTop() <= topSideOfCamera) && mainCharacter->getVelocity().y < 0) {
+        offsetDeltaY -= topSideOfCamera - mainCharacter->getPosition().y + mainCharacter->getMarginTop();
         if (offsetY - offsetDeltaY < 0) {
             offsetDeltaY = -offsetY;
         }
-        mainCharacter->getPosition().y = topSideOfCamera;
+        mainCharacter->getPosition().y = topSideOfCamera - mainCharacter->getMarginTop();
     }
     offsetX += offsetDeltaX;
     offsetY += offsetDeltaY;
