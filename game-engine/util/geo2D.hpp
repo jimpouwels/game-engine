@@ -28,8 +28,14 @@ public:
     }
     
     static Vector2D vectorFrom(float angle, float force) {
-        float deltaX = force * sin(M_PI * 2 * angle / 360);
-        float deltaY = -(force * cos(M_PI * 2 * angle / 360));
+        float deltaX = 0;
+        float deltaY = 0;
+        if (angle != 180 && angle != 0) {
+            deltaX = force * sin(M_PI * 2 * angle / 360);
+        }
+        if (angle != 90 && angle != 270) {
+            deltaY = -(force * cos(M_PI * 2 * angle / 360));
+        }
         return Vector2D { .x = deltaX, .y = deltaY };
     }
     

@@ -24,6 +24,7 @@ void Character::doOnInit() {
 
 void Character::doOnUpdate(float elapsedTime) {
     std::string currentAnimationId = getCurrentAnimationId();
+    std::cout << getVelocity().y << std::endl;
     if (isJumping) {
         setCurrentAnimation("jump");
     } else if (getVelocity().x != 0) {
@@ -43,11 +44,11 @@ void Character::hasCollidedRectTop(AnimatedGraphic* otherGraphic) {
 }
 
 void Character::hasCollidedRectRight(AnimatedGraphic* otherGraphic) {
-    stayToRightOf(otherGraphic);
+    stayToLeftOf(otherGraphic);
 }
 
 void Character::hasCollidedRectLeft(AnimatedGraphic* otherGraphic) {
-    stayToLeftOf(otherGraphic);
+    stayToRightOf(otherGraphic);
 }
 
 void Character::onKeyboardLeft(jimp::KeyState keyState) {
