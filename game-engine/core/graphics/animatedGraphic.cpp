@@ -9,6 +9,7 @@
 #include "gameEngine.hpp"
 #include "shape.hpp"
 #include "sprite.hpp"
+#include "character.hpp"
 
 namespace jimp {
 
@@ -89,7 +90,7 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
     
     Vector2D otherGraphicCurrentPosition = otherGraphic->getPosition();
     Vector2D otherGraphicNextPosition = otherGraphic->calculateNextPosition(elapsedTime);
-   
+    
     if ((((currentGraphicCurrentPosition.y + getHeight() <= otherGraphicCurrentPosition.y && currentGraphicNextPosition.y + getHeight() > otherGraphicNextPosition.y) || currentGraphicCurrentPosition.y == otherGraphicCurrentPosition.y)
          && (currentGraphicNextPosition.x + getWidth() > otherGraphicNextPosition.x && currentGraphicCurrentPosition.x < otherGraphicNextPosition.x + otherGraphic->getWidth()))) {
         hasCollidedRect(otherGraphic, Geo2D::Side::BOTTOM);
@@ -188,15 +189,15 @@ void AnimatedGraphic::setCollidable(bool collidable) {
 }
 
 int AnimatedGraphic::getSingleWidth() {
-    return getActiveDrawable()->getSingleWidth();
+    return fixedWidth;
 }
 
 int AnimatedGraphic::getWidth() {
-    return getActiveDrawable()->getWidth();
+    return fixedWidth * getActiveDrawable()->getRepeat();
 }
 
 int AnimatedGraphic::getHeight() {
-    return getActiveDrawable()->getHeight();
+    return fixedHeight;
 }
 
 float AnimatedGraphic::getScale() {
@@ -346,6 +347,8 @@ void AnimatedGraphic::addDrawable(std::string animationId, Drawable* drawable) {
     if (activeAnimation == nullptr) {
         activeAnimation = animation;
         updateAnimation(0);
+        fixedWidth = getActiveDrawable()->getWidth();
+        fixedHeight = getActiveDrawable()->getHeight();
     }
 }
 

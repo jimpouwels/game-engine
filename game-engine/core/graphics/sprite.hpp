@@ -13,7 +13,12 @@ class Sprite : public Drawable {
     
 private:
     Image* image;
+    int marginLeft = 0;
+    int marginRight = 0;
+    int marginTop = 0;
+    int marginBottom = 0;
     bool inversedHorizontally = false;
+    void crop();
     
 public:
     Sprite(float x, float y, float scale, uint16_t angle, uint16_t repeat, std::string filePath);
@@ -22,6 +27,10 @@ public:
     void setDrawInversedHorizontally(bool inversed);
     bool drawInversedHorizontally();
     int getSingleWidth();
+    int getMarginLeft();
+    int getMarginRight();
+    int getMarginTop();
+    int getMarginBottom();
     int getWidth() override;
     int getHeight() override;
 };

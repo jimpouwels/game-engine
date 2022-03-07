@@ -20,18 +20,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "mario::ScrollingWorld::addGraphic(int, int, jimp::AnimatedGraphic*):scrollingWorld.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "tileMap-&gt;getTileAt(x, y)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "Game::onSpriteDeleted(jimp::AnimatedSprite*):game.cpp">
          <PersistentStrings>
             <PersistentString
                value = "animatedSprite-&gt;getActiveSprite()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "mario::ScrollingWorld::addGraphic(int, int, jimp::AnimatedGraphic*):scrollingWorld.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "tileMap-&gt;getTileAt(x, y)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -54,6 +54,17 @@
             </PersistentString>
             <PersistentString
                value = "tileMap-&gt;getColumnCount()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "jimp::Sprite::crop():sprite.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "getImage().getImage()">
+            </PersistentString>
+            <PersistentString
+               value = "getImage().getImage().getPixel(256, 256)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

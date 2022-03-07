@@ -26,6 +26,8 @@ private:
     bool interruptMovement = false;
     bool collidable = true;
     bool inversedHorizontally = false;
+    int fixedWidth = 0;
+    int fixedHeight = 0;
     std::map<std::string, Animation*>* animationMap;
     Animation* activeAnimation = nullptr;
     bool markedForDeletion = false;

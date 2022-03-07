@@ -103,9 +103,9 @@ void GameEngine::draw(jimp::Drawable* drawable) {
             cachedSprite->sprite->setPosition(offsetX, sprite->getPosition().y);
             cachedSprite->sprite->setScale(sprite->getScale(), sprite->getScale());
             if (sprite->drawInversedHorizontally()) {
-                cachedSprite->sprite->setTextureRect(sf::IntRect(cachedSprite->sprite->getTexture()->getSize().x, 0, -cachedSprite->sprite->getTexture()->getSize().x, cachedSprite->sprite->getTexture()->getSize().y));
+                cachedSprite->sprite->setTextureRect(sf::IntRect(cachedSprite->sprite->getTexture()->getSize().x - sprite->getMarginRight(), sprite->getMarginTop(), -(cachedSprite->sprite->getTexture()->getSize().x - sprite->getMarginLeft() - sprite->getMarginRight()), cachedSprite->sprite->getTexture()->getSize().y - sprite->getMarginBottom() - sprite->getMarginTop()));
             } else {
-                cachedSprite->sprite->setTextureRect(sf::IntRect(0, 0, cachedSprite->sprite->getTexture()->getSize().x, cachedSprite->sprite->getTexture()->getSize().y));
+                cachedSprite->sprite->setTextureRect(sf::IntRect(sprite->getMarginLeft(), sprite->getMarginTop(), cachedSprite->sprite->getTexture()->getSize().x - sprite->getMarginLeft() - sprite->getMarginRight(), cachedSprite->sprite->getTexture()->getSize().y - sprite->getMarginBottom() - sprite->getMarginTop()));
             }
             window->draw(*cachedSprite->sprite, transform);
         }

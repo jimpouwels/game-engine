@@ -39,9 +39,9 @@ void ScrollingWorld::doOnUpdate() {
         return;
     }
     GameEngine* gameEngine = GameEngine::getInstance();
-    float rightSideOfCamera = gameEngine->getScreenWidth() / 2 + 250;
-    float leftSideOfCamera = gameEngine->getScreenWidth() / 2 - 250;
-    float topSideOfCamera = gameEngine->getScreenHeight() / 2 - 500;
+    float rightSideOfCamera = gameEngine->getScreenWidth() / 2 + 125;
+    float leftSideOfCamera = gameEngine->getScreenWidth() / 2 - 125;
+    float topSideOfCamera = gameEngine->getScreenHeight() / 2 - 250;
     float bottomSideOfCamera = gameEngine->getScreenHeight() / 2;
     float offsetDeltaX = 0;
     float offsetDeltaY = 0;
@@ -88,7 +88,7 @@ void ScrollingWorld::doOnUpdate() {
 }
 
 void ScrollingWorld::doOnFrame() {
-    GameEngine::getInstance()->drawRectangle(500, 500, Vector2D { .x = static_cast<float>(GameEngine::getInstance()->getScreenWidth() / 2 - 250), .y = static_cast<float>(GameEngine::getInstance()->getScreenHeight() / 2 - 500) }, 0xFFFFFF);
+    GameEngine::getInstance()->drawRectangle(250, 250, Vector2D { .x = static_cast<float>(GameEngine::getInstance()->getScreenWidth() / 2 - 125), .y = static_cast<float>(GameEngine::getInstance()->getScreenHeight() / 2 - 250) }, 0xFFFFFF);
 }
 
 ScrollingWorld* ScrollingWorld::getInstance() {
