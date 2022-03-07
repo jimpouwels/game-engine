@@ -1,4 +1,5 @@
 #include "updateThread.hpp"
+#include "scrollingWorld.hpp"
 #include <iostream>
 #include <chrono>
 
@@ -6,7 +7,7 @@ namespace jimp {
 
 bool isWorking = false;
 
-void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onSpriteDeletedCallback, std::vector<AnimatedGraphic*>* registeredSprites, std::mutex* processingLock, std::mutex* deleteSpriteLock) {
+void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onSpriteDeletedCallback, std::vector<AnimatedGraphic*>* registeredSprites, std::mutex* processingLock, std::mutex* graphicsLock) {
     isWorking = true;
     std::chrono::time_point<std::chrono::system_clock> previousUpdateTime;
     while (true) {
@@ -38,9 +39,12 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                     }
                 }
                 for (const auto& spriteToDelete: spritesToDelete) {
-                    deleteSpriteLock->lock();
+                    graphicsLock->lock();
                     onSpriteDeletedCallback(spriteToDelete);
-                    deleteSpriteLock->unlock();
+                    graphicsLock->unlock();
+                }
+                if (ScrollingWorld::getInstance() != nullptr) {
+                    ScrollingWorld::getInstance()->doOnUpdate();
                 }
                 onUpdateCallback(elapsed.count());
             }
@@ -53,7 +57,7 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
 
 UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback) {
     this->processingLock = new std::mutex();
-    this->deleteGraphicLock = new std::mutex();
+    this->graphicsLock = new std::mutex();
     this->onUpdateCallback = onUpdateCallback;
     this->onGraphicDeletedCallback = onGraphicDeletedCallback;
     this->registeredGraphics = new std::vector<AnimatedGraphic*>;
@@ -74,7 +78,7 @@ UpdateThread::~UpdateThread() {
 void UpdateThread::start() {
     auto onGraphicDeletedLambda = std::bind(&UpdateThread::onGraphicDeleted, this, std::placeholders::_1);
     auto onGraphicUpdateLambda = std::bind(&UpdateThread::onUpdate, this, std::placeholders::_1);
-    this->updateThread = new std::thread(doLoop, onGraphicUpdateLambda, onGraphicDeletedLambda, registeredGraphics, processingLock, deleteGraphicLock);
+    this->updateThread = new std::thread(doLoop, onGraphicUpdateLambda, onGraphicDeletedLambda, registeredGraphics, processingLock, graphicsLock);
 }
 
 void UpdateThread::stop() {
@@ -83,12 +87,12 @@ void UpdateThread::stop() {
     processingLock->unlock();
 }
 
-void UpdateThread::lockForDeletion() {
-    deleteGraphicLock->lock();
+void UpdateThread::lockGraphics() {
+    graphicsLock->lock();
 }
 
-void UpdateThread::unlockForDeletion() {
-    deleteGraphicLock->unlock();
+void UpdateThread::unlockGraphics() {
+    graphicsLock->unlock();
 }
 
 std::vector<AnimatedGraphic*>* UpdateThread::getAllGraphics() {
@@ -117,6 +121,9 @@ void UpdateThread::loadNewGraphicsIntoUpdateLoop() {
             newGraphic->onInit();
             registeredGraphics->push_back(newGraphic);
             loadedGraphics.push_back(newGraphic);
+            if (newGraphic == ScrollingWorld::getInstance()->getMainCharacter()) {
+                ScrollingWorld::getInstance()->setMainCharacterLoaded(true);
+            }
         }
         if (loadedGraphics.size() > 0) {
             for (const auto& loadedGraphic: loadedGraphics) {

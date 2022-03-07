@@ -14,7 +14,6 @@ namespace mario {
 class Mario : public jimp::GameEngine {
     
 private:
-    jimp::ScrollingWorld* scrollingWorld = nullptr;
     
 public:
     Mario(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 9, name, 1000) {
@@ -44,11 +43,9 @@ public:
     }
     
     void onUpdate(float elapsedTime) {
-        scrollingWorld->doOnUpdate();
     }
     
     void onFrame(float elapsedTime) {
-        scrollingWorld->doOnFrame();
     }
 };
 

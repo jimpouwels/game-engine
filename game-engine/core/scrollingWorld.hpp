@@ -5,10 +5,13 @@
 
 namespace jimp {
 
+class GameEngine;
+
 class ScrollingWorld {
     
 private:
     AnimatedGraphic* mainCharacter = nullptr;
+    bool mainCharacterLoaded = false;
     float offsetX = 0;
     float offsetY = 0;
     float maxScrollX = 0;
@@ -23,6 +26,8 @@ public:
     int getHeight();
     void doOnUpdate();
     void doOnFrame();
+    AnimatedGraphic* getMainCharacter();
+    void setMainCharacterLoaded(bool loaded);
     static ScrollingWorld* getInstance();
 };
 

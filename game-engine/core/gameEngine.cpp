@@ -210,15 +210,15 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     window->clear(sf::Color((backgroundColor << 8) + 0xFF));
     onFrame(elapsedTimeSincePreviousFrame);
     
-    updateThread->lockForDeletion();
+    scrollingWorld->doOnFrame();
+    updateThread->lockGraphics();
     for (const auto& graphic: *updateThread->getAllGraphics()) {
         if (!graphic->isMarkedForDeletion() && graphic->isVisible()) {
             graphic->onFrame(elapsedTimeSincePreviousFrame);
             draw(graphic->getActiveDrawable());
         }
     }
-    
-    updateThread->unlockForDeletion();
+    updateThread->unlockGraphics();
     window->display();
 }
 
