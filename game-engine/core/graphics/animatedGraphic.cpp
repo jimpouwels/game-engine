@@ -9,7 +9,6 @@
 #include "gameEngine.hpp"
 #include "shape.hpp"
 #include "sprite.hpp"
-#include "character.hpp"
 
 namespace jimp {
 
