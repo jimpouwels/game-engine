@@ -25,9 +25,6 @@ public:
         Floor* middle = new Floor(jimp::Vector2D { .x = static_cast<float>(left->getWidth()), .y = 0 }, "platform-top-middle.png", 3);
         Floor* right = new Floor(jimp::Vector2D { .x = (middle->getPosition().x + middle->getWidth()), .y = 0 }, "platform-top-right.png", 1);
         
-        Floor* middle2 = new Floor(jimp::Vector2D { .x = static_cast<float>(left->getWidth()), .y = 0 }, "platform-top-middle.png", 3);
-        middle2->getPosition().y -= 256;
-        
         Plant* plant = new Plant(jimp::Vector2D { .x = middle->getPosition().x + (middle->getSingleWidth() * 2), .y = middle->getPosition().y - 128 }, 1);
         
 //        new Platform(jimp::Vector2D { .x = (middle->getPosition().x + middle->getSingleWidth()), .y = middle->getPosition().y - 300 }, 5);
