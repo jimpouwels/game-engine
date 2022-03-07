@@ -88,7 +88,6 @@ void ScrollingWorld::doOnUpdate() {
 }
 
 void ScrollingWorld::doOnFrame() {
-    GameEngine::getInstance()->drawRectangle(250, 250, Vector2D { .x = static_cast<float>(GameEngine::getInstance()->getScreenWidth() / 2 - 125), .y = static_cast<float>(GameEngine::getInstance()->getScreenHeight() / 2 - 250) }, 0xFFFFFF);
 }
 
 ScrollingWorld* ScrollingWorld::getInstance() {
