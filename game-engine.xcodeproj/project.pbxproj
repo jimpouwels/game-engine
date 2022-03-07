@@ -31,10 +31,6 @@
 		239F328727D0CAC0007D4E2C /* block.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F328527D0CAB5007D4E2C /* block.png */; };
 		239F328927D11A75007D4E2C /* floor.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F328827D11A6F007D4E2C /* floor.png */; };
 		239F328C27D11A98007D4E2C /* floor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 239F328A27D11A98007D4E2C /* floor.cpp */; };
-		239F32AF27D3567B007D4E2C /* mario-jump.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32A927D35674007D4E2C /* mario-jump.png */; };
-		239F32B027D3567B007D4E2C /* mario-run1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32AA27D35674007D4E2C /* mario-run1.png */; };
-		239F32B127D3567B007D4E2C /* mario-run2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32AC27D35674007D4E2C /* mario-run2.png */; };
-		239F32B427D3579C007D4E2C /* mario-idle.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32B327D35796007D4E2C /* mario-idle.png */; };
 		239F32B827D3C487007D4E2C /* background-red-thingy-eyeopenleft.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32B527D3C47E007D4E2C /* background-red-thingy-eyeopenleft.png */; };
 		239F32B927D3C487007D4E2C /* background-red-thingy-eyeopenright.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32B627D3C47E007D4E2C /* background-red-thingy-eyeopenright.png */; };
 		239F32BA27D3C487007D4E2C /* background-red-thingy-eyesclosed.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32B727D3C47E007D4E2C /* background-red-thingy-eyesclosed.png */; };
@@ -177,10 +173,6 @@
 				239F32B827D3C487007D4E2C /* background-red-thingy-eyeopenleft.png in CopyFiles */,
 				239F32B927D3C487007D4E2C /* background-red-thingy-eyeopenright.png in CopyFiles */,
 				239F32BA27D3C487007D4E2C /* background-red-thingy-eyesclosed.png in CopyFiles */,
-				239F32B427D3579C007D4E2C /* mario-idle.png in CopyFiles */,
-				239F32AF27D3567B007D4E2C /* mario-jump.png in CopyFiles */,
-				239F32B027D3567B007D4E2C /* mario-run1.png in CopyFiles */,
-				239F32B127D3567B007D4E2C /* mario-run2.png in CopyFiles */,
 				239F328927D11A75007D4E2C /* floor.png in CopyFiles */,
 				239F328727D0CAC0007D4E2C /* block.png in CopyFiles */,
 				23A4D56A27C102F9006F4220 /* thrust.ogg in CopyFiles */,
@@ -240,10 +232,6 @@
 		239F328827D11A6F007D4E2C /* floor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floor.png; sourceTree = "<group>"; };
 		239F328A27D11A98007D4E2C /* floor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = floor.cpp; sourceTree = "<group>"; };
 		239F328B27D11A98007D4E2C /* floor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = floor.hpp; sourceTree = "<group>"; };
-		239F32A927D35674007D4E2C /* mario-jump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-jump.png"; sourceTree = "<group>"; };
-		239F32AA27D35674007D4E2C /* mario-run1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-run1.png"; sourceTree = "<group>"; };
-		239F32AC27D35674007D4E2C /* mario-run2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-run2.png"; sourceTree = "<group>"; };
-		239F32B327D35796007D4E2C /* mario-idle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mario-idle.png"; sourceTree = "<group>"; };
 		239F32B527D3C47E007D4E2C /* background-red-thingy-eyeopenleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-red-thingy-eyeopenleft.png"; sourceTree = "<group>"; };
 		239F32B627D3C47E007D4E2C /* background-red-thingy-eyeopenright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-red-thingy-eyeopenright.png"; sourceTree = "<group>"; };
 		239F32B727D3C47E007D4E2C /* background-red-thingy-eyesclosed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-red-thingy-eyesclosed.png"; sourceTree = "<group>"; };
@@ -405,10 +393,6 @@
 				239F32B527D3C47E007D4E2C /* background-red-thingy-eyeopenleft.png */,
 				239F32B627D3C47E007D4E2C /* background-red-thingy-eyeopenright.png */,
 				239F32B727D3C47E007D4E2C /* background-red-thingy-eyesclosed.png */,
-				239F32B327D35796007D4E2C /* mario-idle.png */,
-				239F32A927D35674007D4E2C /* mario-jump.png */,
-				239F32AA27D35674007D4E2C /* mario-run1.png */,
-				239F32AC27D35674007D4E2C /* mario-run2.png */,
 				239F328827D11A6F007D4E2C /* floor.png */,
 				239F328527D0CAB5007D4E2C /* block.png */,
 			);
