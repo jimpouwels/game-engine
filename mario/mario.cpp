@@ -6,6 +6,7 @@
 #include "character.hpp"
 #include "platform.hpp"
 #include "floor.hpp"
+#include "plant.hpp"
 #include "scrollingWorld.hpp"
 
 namespace mario {
@@ -23,6 +24,8 @@ public:
         Floor* left = new Floor(jimp::Vector2D { .x = 0, .y = 0 }, "platform-top-left.png", 1);
         Floor* middle = new Floor(jimp::Vector2D { .x = static_cast<float>(left->getWidth()), .y = 0 }, "platform-top-middle.png", 3);
         Floor* right = new Floor(jimp::Vector2D { .x = (middle->getPosition().x + middle->getWidth()), .y = 0 }, "platform-top-right.png", 1);
+        
+        Plant* plant = new Plant(jimp::Vector2D { .x = middle->getPosition().x + (middle->getSingleWidth() * 2), .y = middle->getPosition().y - 128 }, 1);
         
 //        new Platform(jimp::Vector2D { .x = 1200, .y = 2590 }, 5);
 //        new Platform(jimp::Vector2D { .x = 1600, .y = 2430 }, 8);

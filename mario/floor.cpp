@@ -8,11 +8,11 @@ Floor::Floor(jimp::Vector2D position, std::string filePath, uint16_t repeat) : j
     this->repeat = repeat;
     name = filePath;
     addSprite("default", filePath, repeat);
+    getPosition().y = jimp::ScrollingWorld::getInstance()->getHeight() - getHeight();
 }
 
 void Floor::doOnInit() {
     setApplyScrolling(true);
-    getPosition().y = jimp::ScrollingWorld::getInstance()->getHeight() - getHeight();
 }
 
 void Floor::doOnUpdate(float elapsedTime) {
