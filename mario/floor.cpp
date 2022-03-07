@@ -12,7 +12,6 @@ void Floor::doOnInit() {
     setApplyScrolling(true);
     addSprite("default", "block.png", repeat);
     getPosition().y = jimp::ScrollingWorld::getInstance()->getHeight() - getHeight();
-    std::cout << getPosition().y << std::endl;
 }
 
 void Floor::doOnUpdate(float elapsedTime) {

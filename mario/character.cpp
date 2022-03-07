@@ -6,16 +6,20 @@
 
 namespace mario {
 
-Character::Character(jimp::Vector2D position) : jimp::AnimatedGraphic(position, 5.0F, 0.0F, 0.06F, true) {
+Character::Character(jimp::Vector2D position) : jimp::AnimatedGraphic(position, 0.5F, 0.0F, 0.06F, true) {
 }
 
 void Character::doOnInit() {
     setApplyScrolling(true);
-    addSprite("idle", "mario-idle.png", 1);
-    addSprite("run", "mario-run1.png", 1);
-    addSprite("run", "mario-run2.png", 1);
-    addSprite("run", "mario-run3.png", 1);
-    addSprite("jump", "mario-jump.png", 1);
+    for (int i = 0; i < 20; i++) {
+        addSprite("idle", "Chara - BlueIdle" + std::to_string(i) + ".png", 1);
+    }
+    for (int i = 0; i < 20; i++) {
+        addSprite("run", "Chara_BlueWalk" + std::to_string(i) + ".png", 1);
+    }
+    for (int i = 0; i < 8; i++) {
+        addSprite("jump", "CharaWizardJump_" + std::to_string(i) + ".png", 1);
+    }
 }
 
 void Character::doOnUpdate(float elapsedTime) {

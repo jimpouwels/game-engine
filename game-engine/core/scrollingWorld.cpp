@@ -52,8 +52,8 @@ void ScrollingWorld::doOnUpdate() {
         if (offsetY + offsetDeltaY > maxScrollY) {
             offsetDeltaY = maxScrollY - offsetY;
         }
-        mainCharacter->getPosition().y -= offsetDeltaY;
-    } else if (offsetY != 0 && (mainCharacter->getPosition().y <= topSideOfCamera)) {
+        mainCharacter->getPosition().y = bottomSideOfCamera - mainCharacter->getHeight();
+    } else if (offsetY > 0 && (mainCharacter->getPosition().y <= topSideOfCamera)) {
         offsetDeltaY -= topSideOfCamera - mainCharacter->getPosition().y;
         if (offsetY - offsetDeltaY < 0) {
             offsetDeltaY = -offsetY;

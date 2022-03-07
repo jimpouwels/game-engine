@@ -93,7 +93,9 @@ void GameEngine::draw(jimp::Drawable* drawable) {
         for (uint16_t i = 0; i < sprite->getRepeat(); i++) {
             float offsetX = sprite->getPosition().x + i * sprite->getSingleWidth();
             if (!(isPositionWithinScreen(Vector2D { .x = offsetX, .y = sprite->getPosition().y }))
-                && !(isPositionWithinScreen(Vector2D { .x = offsetX + sprite->getSingleWidth(), .y = sprite->getPosition().y }))) {
+                && !(isPositionWithinScreen(Vector2D { .x = offsetX + sprite->getSingleWidth(), .y = sprite->getPosition().y }))
+                && !(isPositionWithinScreen(Vector2D { .x = offsetX, .y = sprite->getPosition().y + sprite->getHeight()}))
+                && !(isPositionWithinScreen(Vector2D { .x = offsetX + sprite->getSingleWidth(), .y = sprite->getPosition().y + sprite->getHeight() }))) {
                 continue;
             }
             sf::Transform transform;
