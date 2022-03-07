@@ -16,7 +16,6 @@ void Floor::doOnInit() {
 }
 
 void Floor::doOnUpdate(float elapsedTime) {
-//    std::cout << "FLOOR TOP Y: " << getPosition().y - getMarginTop() << std::endl;
 }
     
 }

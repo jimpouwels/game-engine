@@ -36,7 +36,6 @@ void Character::doOnUpdate(float elapsedTime) {
 
 void Character::hasCollidedRectBottom(AnimatedGraphic* otherGraphic) {
     isJumping = false;
-    std::cout << "BLAAAAAA" << std::endl;
     stayOnTopOf(otherGraphic);
 }
 

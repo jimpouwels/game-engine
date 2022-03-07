@@ -285,7 +285,6 @@ void AnimatedGraphic::show() {
 }
 
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
-    std::cout << getPosition().y << std::endl;
     getPosition().y = otherGraphic->getPosition().y - getHeight() + getMarginBottom() + otherGraphic->getMarginTop();
     resetGravityVelocity();
     interruptGravity = true;
