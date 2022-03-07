@@ -94,26 +94,20 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
          && (currentGraphicNextPosition.x + getCollisionRectWidth() > otherGraphicNextPosition.x && currentGraphicCurrentPosition.x < otherGraphicNextPosition.x + otherGraphic->getCollisionRectWidth()))) {
         hasCollidedRect(otherGraphic, Geo2D::Side::BOTTOM);
         hasCollidedRectBottom(otherGraphic);
-        otherGraphic->hasCollidedRect(this, Geo2D::Side::TOP);
-        otherGraphic->hasCollidedRectTop(this);
     } else if ((((currentGraphicCurrentPosition.y >= otherGraphicCurrentPosition.y + otherGraphic->getCollisionRectHeight() && currentGraphicNextPosition.y < otherGraphicNextPosition.y + otherGraphic->getCollisionRectHeight())) &&
         (currentGraphicNextPosition.x + getCollisionRectWidth() > otherGraphicNextPosition.x && currentGraphicCurrentPosition.x < otherGraphicNextPosition.x + otherGraphic->getCollisionRectWidth()))) {
         hasCollidedRect(otherGraphic, Geo2D::Side::TOP);
         hasCollidedRectTop(otherGraphic);
-        otherGraphic->hasCollidedRect(this, Geo2D::Side::BOTTOM);
-        otherGraphic->hasCollidedRectBottom(this);
     } else if ((((currentGraphicCurrentPosition.x + getCollisionRectWidth() <= otherGraphicCurrentPosition.x && currentGraphicNextPosition.x + getCollisionRectWidth() > otherGraphicNextPosition.x))
-         && (currentGraphicNextPosition.y + getCollisionRectHeight() > otherGraphicNextPosition.y && currentGraphicCurrentPosition.y < otherGraphicNextPosition.y + otherGraphic->getCollisionRectHeight()))) {
+         && (currentGraphicNextPosition.y + getCollisionRectHeight() > otherGraphicNextPosition.y && currentGraphicCurrentPosition.y < otherGraphicNextPosition.y + otherGraphic->getCollisionRectHeight()))
+               && !(currentGraphicNextPosition.y == otherGraphicNextPosition.y)) {
         hasCollidedRect(otherGraphic, Geo2D::Side::RIGHT);
         hasCollidedRectRight(otherGraphic);
-        otherGraphic->hasCollidedRect(this, Geo2D::Side::LEFT);
-        otherGraphic->hasCollidedRectLeft(this);
     } else if ((((currentGraphicCurrentPosition.x >= otherGraphicCurrentPosition.x + otherGraphic->getCollisionRectWidth() && currentGraphicNextPosition.x < otherGraphicNextPosition.x + otherGraphic->getCollisionRectWidth())) &&
-        (currentGraphicNextPosition.y + getCollisionRectHeight() > otherGraphicNextPosition.y && currentGraphicCurrentPosition.y < otherGraphicNextPosition.y + otherGraphic->getCollisionRectHeight()))) {
+        (currentGraphicNextPosition.y + getCollisionRectHeight() > otherGraphicNextPosition.y && currentGraphicCurrentPosition.y < otherGraphicNextPosition.y + otherGraphic->getCollisionRectHeight()))
+               && !(currentGraphicNextPosition.y == otherGraphicNextPosition.y)) {
         hasCollidedRect(otherGraphic, Geo2D::Side::LEFT);
         hasCollidedRectLeft(otherGraphic);
-        otherGraphic->hasCollidedRect(this, Geo2D::Side::RIGHT);
-        otherGraphic->hasCollidedRectRight(this);
     }
 }
 
@@ -140,6 +134,10 @@ void AnimatedGraphic::updateAnimation(float elapsedTime) {
         elapsedTimeSinceLastSwap = 0;
     }
     updateCurrentDrawableData();
+}
+
+std::string AnimatedGraphic::getName() {
+    return name;
 }
 
 void AnimatedGraphic::drawInversedHorizontally(bool value) {
@@ -323,7 +321,7 @@ void AnimatedGraphic::updateCurrentDrawableData() {
 
 Vector2D AnimatedGraphic::calculateNextPosition(float elapsedTime) {
     Vector2D velocity = getVelocity();
-    if (applyGravity)  {
+    if (applyGravity && !interruptGravity)  {
         velocity.y += GameEngine::getInstance()->getGravityForce();
     }
     return getPosition() + jimp::Timing::toValueForElapsedTime(velocity, elapsedTime);

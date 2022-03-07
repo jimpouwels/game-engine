@@ -6,6 +6,7 @@
 namespace jimp {
 
 bool isWorking = false;
+AnimatedGraphic* ray = nullptr;
 
 void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onSpriteDeletedCallback, std::function<void()> onLoadNewGraphicsCallback, std::vector<AnimatedGraphic*>* registeredSprites, std::list<AnimatedGraphic*>* newGraphics, std::mutex* processingLock, std::mutex* graphicsLock) {
     isWorking = true;
@@ -23,10 +24,49 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
             previousUpdateTime = currentTime;
             if (elapsed.count() < 1) {
                 std::list<AnimatedGraphic*> spritesToDelete = std::list<AnimatedGraphic*>();
+                
                 for (uint16_t i = 0; i < registeredSprites->size(); i++) {
                     AnimatedGraphic* registeredSprite = registeredSprites->at(i);
-                    for (uint16_t j = i + 1; j < registeredSprites->size(); j++) {
-                        registeredSprite->checkCollisionRect(registeredSprites->at(j), elapsed.count());
+                    std::vector<AnimatedGraphic*> graphicsToCheckCollision = std::vector<AnimatedGraphic*>();
+                    for (uint16_t x = 0; x < registeredSprites->size(); x++) {
+                        if (registeredSprites->at(x) != registeredSprite) {
+                            graphicsToCheckCollision.push_back(registeredSprites->at(x));
+                        }
+                    }
+                    ray = registeredSprite;
+                    std::sort(graphicsToCheckCollision.begin(), graphicsToCheckCollision.end(), [](AnimatedGraphic* a, AnimatedGraphic* b) {
+                        Vector2D distanceALeft = Vector2D {.x = 0, .y = 0};
+                        Vector2D distanceARight = Vector2D {.x = 0, .y = 0};
+                        Vector2D distanceBLeft = Vector2D {.x = 0, .y = 0};
+                        Vector2D distanceBRight = Vector2D {.x = 0, .y = 0};
+                        
+                        Vector2D rayRight = Vector2D { .x = ray->getPosition().x + ray->getWidth(), .y = ray->getPosition().y };
+                        distanceALeft = ray->getPosition() - a->getPosition();
+                        distanceARight = rayRight- a->getPosition();
+                        distanceBLeft = ray->getPosition() - b->getPosition();
+                        distanceBRight = rayRight - b->getPosition();
+                        
+                        if (distanceALeft.x < 0) distanceALeft.x = -distanceALeft.x;
+                        if (distanceALeft.y < 0) distanceALeft.y = -distanceALeft.y;
+                        
+                        if (distanceARight.x < 0) distanceARight.x = -distanceARight.x;
+                        if (distanceARight.y < 0) distanceARight.y = -distanceARight.y;
+                        
+                        Vector2D nearestA = (distanceALeft.x + distanceALeft.y) < (distanceARight.x + distanceARight.y) ? distanceALeft : distanceARight;
+                        
+                        if (distanceBLeft.x < 0) distanceBLeft.x = -distanceBLeft.x;
+                        if (distanceBLeft.y < 0) distanceBLeft.y = -distanceBLeft.y;
+                        
+                        if (distanceBRight.x < 0) distanceBRight.x = -distanceBRight.x;
+                        if (distanceBRight.y < 0) distanceBRight.y = -distanceBRight.y;
+                        
+                        Vector2D nearestB = distanceBLeft.x + distanceBLeft.y < distanceBRight.x + distanceBRight.y ? distanceBLeft : distanceBRight;
+                        
+                        return (nearestA.x + nearestA.y) < (nearestB.x + nearestB.y);
+                        
+                    });
+                    for (uint16_t j = 0; j < graphicsToCheckCollision.size(); j++) {
+                        registeredSprite->checkCollisionRect(graphicsToCheckCollision.at(j), elapsed.count());
                     }
                     if (registeredSprite->isMarkedForDeletion()) {
                         spritesToDelete.push_back(registeredSprite);

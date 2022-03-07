@@ -46,6 +46,7 @@ private:
     void addDrawable(std::string animationId, Drawable* drawable);
     
 protected:
+    std::string name = "";
     void setCurrentAnimation(std::string animationId);
     std::string getCurrentAnimationId();
     void accelerate(float angle, uint16_t mass, uint16_t force, float elapsedTime);
@@ -76,6 +77,7 @@ public:
     Vector2D& getPosition();
     Vector2D& getMoveVelocity();
     Vector2D getVelocity();
+    std::string getName();
     float getScale();
     int getWidth();
     int getSingleWidth();

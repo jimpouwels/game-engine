@@ -34,7 +34,6 @@
 		239F32B827D3C487007D4E2C /* background-red-thingy-eyeopenleft.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32B527D3C47E007D4E2C /* background-red-thingy-eyeopenleft.png */; };
 		239F32B927D3C487007D4E2C /* background-red-thingy-eyeopenright.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32B627D3C47E007D4E2C /* background-red-thingy-eyeopenright.png */; };
 		239F32BA27D3C487007D4E2C /* background-red-thingy-eyesclosed.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32B727D3C47E007D4E2C /* background-red-thingy-eyesclosed.png */; };
-		239F32BD27D3C4A0007D4E2C /* backgroundRedCharacter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 239F32BB27D3C4A0007D4E2C /* backgroundRedCharacter.cpp */; };
 		239F335227D5ED36007D4E2C /* Chara_BlueWalk0.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F334527D5ED25007D4E2C /* Chara_BlueWalk0.png */; };
 		239F335327D5ED36007D4E2C /* Chara_BlueWalk1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F334D27D5ED25007D4E2C /* Chara_BlueWalk1.png */; };
 		239F335427D5ED36007D4E2C /* Chara_BlueWalk2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F334A27D5ED25007D4E2C /* Chara_BlueWalk2.png */; };
@@ -235,8 +234,6 @@
 		239F32B527D3C47E007D4E2C /* background-red-thingy-eyeopenleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-red-thingy-eyeopenleft.png"; sourceTree = "<group>"; };
 		239F32B627D3C47E007D4E2C /* background-red-thingy-eyeopenright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-red-thingy-eyeopenright.png"; sourceTree = "<group>"; };
 		239F32B727D3C47E007D4E2C /* background-red-thingy-eyesclosed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-red-thingy-eyesclosed.png"; sourceTree = "<group>"; };
-		239F32BB27D3C4A0007D4E2C /* backgroundRedCharacter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = backgroundRedCharacter.cpp; sourceTree = "<group>"; };
-		239F32BC27D3C4A0007D4E2C /* backgroundRedCharacter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = backgroundRedCharacter.hpp; sourceTree = "<group>"; };
 		239F332227D5ED11007D4E2C /* Chara - BlueIdle19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chara - BlueIdle19.png"; sourceTree = "<group>"; };
 		239F332327D5ED11007D4E2C /* Chara - BlueIdle10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chara - BlueIdle10.png"; sourceTree = "<group>"; };
 		239F332427D5ED12007D4E2C /* Chara - BlueIdle12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chara - BlueIdle12.png"; sourceTree = "<group>"; };
@@ -372,8 +369,6 @@
 			isa = PBXGroup;
 			children = (
 				239F328427D0CA9F007D4E2C /* assets */,
-				239F32BB27D3C4A0007D4E2C /* backgroundRedCharacter.cpp */,
-				239F32BC27D3C4A0007D4E2C /* backgroundRedCharacter.hpp */,
 				235FEC1E27C6E1F6006306C9 /* character.cpp */,
 				235FEC1F27C6E1F6006306C9 /* character.hpp */,
 				239F328A27D11A98007D4E2C /* floor.cpp */,
@@ -669,7 +664,6 @@
 				23B177AA27A3E3160094B178 /* keyboardHandler.hpp in Sources */,
 				235FEC1B27C6DF5B006306C9 /* mario.cpp in Sources */,
 				23E5E30027A302DD00B62583 /* asteroid.cpp in Sources */,
-				239F32BD27D3C4A0007D4E2C /* backgroundRedCharacter.cpp in Sources */,
 				2394CC6327CC0A2300B62AC8 /* rectangle.cpp in Sources */,
 				23A933BE2788B4EC00769F69 /* ship.cpp in Sources */,
 				23E5E2F5279A979100B62583 /* bullet.cpp in Sources */,

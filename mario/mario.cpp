@@ -7,7 +7,6 @@
 #include "platform.hpp"
 #include "floor.hpp"
 #include "scrollingWorld.hpp"
-#include "backgroundRedCharacter.hpp"
 
 namespace mario {
 
@@ -17,9 +16,10 @@ private:
     
 public:
     Mario(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 9, name, 1000) {
-        scrollingWorld = new jimp::ScrollingWorld(new Character(jimp::Vector2D { .x = static_cast<float>(getScreenWidth() / 2), .y = 200 }), 5000, 3000);
+        Character* character = new Character(jimp::Vector2D { .x = static_cast<float>(100), .y = 2700 });
+        scrollingWorld = new jimp::ScrollingWorld(character, 5000, 3000);
         setBackgroundColor(0x79b5af);
-        new BackgroundRedCharacter(jimp::Vector2D { .x = 1670, .y = 2600 });
+
         Floor* left = new Floor(jimp::Vector2D { .x = 0, .y = 0 }, "platform-top-left.png", 1);
         Floor* middle = new Floor(jimp::Vector2D { .x = static_cast<float>(left->getWidth()), .y = 0 }, "platform-top-middle.png", 3);
         Floor* right = new Floor(jimp::Vector2D { .x = (middle->getPosition().x + middle->getWidth()), .y = 0 }, "platform-top-right.png", 1);
@@ -54,7 +54,7 @@ public:
 }
 
 int main() {
-    mario::Mario game(1500, 900, "My First Platform Game");
+    mario::Mario game(2800, 1800, "My First Platform Game");
     game.startGame();
     return 0;
 }

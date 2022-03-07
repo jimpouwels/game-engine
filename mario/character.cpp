@@ -7,6 +7,7 @@
 namespace mario {
 
 Character::Character(jimp::Vector2D position) : jimp::AnimatedGraphic(position, 0.5F, 0.0F, 0.06F, true) {
+    name = "ghosty";
 }
 
 void Character::doOnInit() {
@@ -24,7 +25,6 @@ void Character::doOnInit() {
 
 void Character::doOnUpdate(float elapsedTime) {
     std::string currentAnimationId = getCurrentAnimationId();
-    std::cout << getVelocity().y << std::endl;
     if (isJumping) {
         setCurrentAnimation("jump");
     } else if (getVelocity().x != 0) {
