@@ -11,7 +11,7 @@ private:
     uint16_t repeat = 0;
     
 public:
-    Floor(jimp::Vector2D position, uint16_t repeat);
+    Floor(jimp::Vector2D position, std::string filePath, uint16_t repeat);
     void doOnInit() override;
     void doOnUpdate(float elapsedTime) override;
 };

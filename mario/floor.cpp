@@ -4,13 +4,13 @@
 
 namespace mario {
   
-Floor::Floor(jimp::Vector2D position, uint16_t repeat) : jimp::AnimatedGraphic(position, 1.0F, 0.0F, -1.0F, false) {
+Floor::Floor(jimp::Vector2D position, std::string filePath, uint16_t repeat) : jimp::AnimatedGraphic(position, 0.5F, 0.0F, -1.0F, false) {
     this->repeat = repeat;
+    addSprite("default", filePath, repeat);
 }
 
 void Floor::doOnInit() {
     setApplyScrolling(true);
-    addSprite("default", "block.png", repeat);
     getPosition().y = jimp::ScrollingWorld::getInstance()->getHeight() - getHeight();
 }
 
