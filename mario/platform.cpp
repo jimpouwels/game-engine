@@ -8,6 +8,19 @@ namespace ghosty {
 Platform::Platform(std::string cornerBlockFilePath, std::string innerBlockFilePath, uint16_t rowCount, uint16_t columnCount, float blockSize, float scale, jimp::Vector2D position) {
     this->position = position;
     float size = blockSize * scale;
+    if (rowCount == 1) {
+        for (int x = 0; x < columnCount; x++) {
+            if (x == 0) {
+                PlatformBlock* left = new PlatformBlock(jimp::Vector2D { .x = position.x + (x * size), .y = position.y }, "platform-single-corner.png", 0, scale);
+            } else if (x == columnCount - 1) {
+                PlatformBlock* right = new PlatformBlock(jimp::Vector2D { .x = position.x + (x * size), .y = position.y }, "platform-single-corner.png", 0, scale);
+                right->drawInversedHorizontally(true);
+            } else {
+                PlatformBlock* middle = new PlatformBlock(jimp::Vector2D { .x = position.x + (x * size), .y = position.y }, "platform-single-middle.png", 0, scale);
+            }
+        }
+        return;
+    }
     for (int x = 0; x < columnCount; x++) {
         for (int y = 0; y < rowCount; y++) {
             if (x == 0 && y == 0) {
