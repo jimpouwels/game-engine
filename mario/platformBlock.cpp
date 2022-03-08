@@ -4,11 +4,9 @@
 
 namespace ghosty {
   
-PlatformBlock::PlatformBlock(jimp::Vector2D position, std::string filePath, uint16_t repeat) : jimp::AnimatedGraphic(position, 0.5F, 0.0F, -1.0F, false) {
-    this->repeat = repeat;
+PlatformBlock::PlatformBlock(jimp::Vector2D position, std::string filePath, float angle, float scale) : jimp::AnimatedGraphic(position, scale, angle, -1.0F, false) {
     name = filePath;
-    addSprite("default", filePath, repeat);
-    getPosition().y = jimp::ScrollingWorld::getInstance()->getHeight() - getHeight();
+    addSprite("default", filePath, 1);
 }
 
 void PlatformBlock::doOnInit() {

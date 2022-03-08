@@ -1,5 +1,6 @@
 #include "scrollingWorld.hpp"
 #include "gameEngine.hpp"
+#include "rectangle.hpp"
 #include <math.h>
 
 namespace jimp {

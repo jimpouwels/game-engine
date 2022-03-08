@@ -7,6 +7,7 @@
 #include "platformBlock.hpp"
 #include "decoration.hpp"
 #include "scrollingWorld.hpp"
+#include "platform.hpp"
 
 namespace ghosty {
 
@@ -16,19 +17,15 @@ private:
     
 public:
     Ghosty(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 9, name, 1000) {
-        Character* character = new Character(jimp::Vector2D { .x = static_cast<float>(100), .y = 2700 });
+        Character* character = new Character(jimp::Vector2D { .x = static_cast<float>(100), .y = 500 });
         scrollingWorld = new jimp::ScrollingWorld(character, 5000, 3000);
         setBackgroundColor(0x79b5af);
 
-        PlatformBlock* left = new PlatformBlock(jimp::Vector2D { .x = 0, .y = 0 }, "platform-top-left.png", 1);
-        PlatformBlock* middle = new PlatformBlock(jimp::Vector2D { .x = static_cast<float>(left->getWidth()), .y = 0 }, "platform-top-middle.png", 3);
-        PlatformBlock* right = new PlatformBlock(jimp::Vector2D { .x = (middle->getPosition().x + middle->getWidth()), .y = 0 }, "platform-top-right.png", 1);
+        Platform* platform = new Platform("platform-top-left.png", "platform-top-middle.png", 5, 7, 512, 0.5F, jimp::Vector2D { .x = -256, .y = static_cast<float>(scrollingWorld->getHeight() - (4 * 256)) });
         
-        Decoration* plant = new Decoration(jimp::Vector2D { .x = middle->getPosition().x + (middle->getSingleWidth() * 2), .y = middle->getPosition().y - 175 }, "Plant3_{i}.png", 90, 0);
-        
-        jimp::Vector2D flowerPosition = jimp::Vector2D { .x = right->getPosition().x, .y = right->getPosition().y };
-        flowerPosition.x += 128;
-        flowerPosition.y -= 128;
+        Decoration* plant = new Decoration(jimp::Vector2D { .x = 512, .y = platform->getPosition().y - 175 }, "Plant3_{i}.png", 90, 0);
+  
+        jimp::Vector2D flowerPosition = jimp::Vector2D { .x = platform->getPosition().x + 7 * 256 - 128, .y = platform->getPosition().y + 400 };
         Decoration* flower = new Decoration(flowerPosition, "BlueFlower_{i}.png", 60, 90);
       
         

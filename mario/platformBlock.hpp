@@ -8,10 +8,9 @@ namespace ghosty {
 class PlatformBlock : public jimp::AnimatedGraphic {
   
 private:
-    uint16_t repeat = 0;
     
 public:
-    PlatformBlock(jimp::Vector2D position, std::string filePath, uint16_t repeat);
+    PlatformBlock(jimp::Vector2D position, std::string filePath, float angle, float scale);
     void doOnInit() override;
     void doOnUpdate(float elapsedTime) override;
 };
