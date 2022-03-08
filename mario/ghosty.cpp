@@ -24,14 +24,15 @@ public:
         // LEFT BIG PLATFORM
         Platform* platform = new Platform("platform-top-left.png", "platform-top-middle.png", 5, 7, 512, 0.5F, jimp::Vector2D { .x = -256, .y = static_cast<float>(scrollingWorld->getHeight() - (4 * 256)) });
         
-        Decoration* plant = new Decoration(jimp::Vector2D { .x = 512, .y = platform->getPosition().y - 175 }, "Plant3_{i}.png", 90, 0);
+        Decoration* plant = new Decoration(jimp::Vector2D { .x = 512, .y = platform->getPosition().y - 175 }, "Plant3_{i}.png", 90, 0, 0.5F);
   
         jimp::Vector2D flowerPosition = jimp::Vector2D { .x = platform->getPosition().x + 7 * 256 - 128, .y = platform->getPosition().y + 400 };
-        Decoration* flower = new Decoration(flowerPosition, "BlueFlower_{i}.png", 60, 90);
+        Decoration* flower = new Decoration(flowerPosition, "BlueFlower_{i}.png", 60, 90, 0.5F);
       
         // SECOND SMALL PLATFORM
         Platform* platform2 = new Platform("platform-top-left.png", "platform-top-middle.png", 1, 4, 512, 0.5F, jimp::Vector2D { .x = 1750, .y = 1640 });
-        Decoration* plantPoison1 = new Decoration(jimp::Vector2D { .x = platform2->getPosition().x + 300, .y = platform2->getPosition().y + 100 }, "PlantPosion_{i}.png", 30, 180);
+        Decoration* plantPoison1 = new Decoration(jimp::Vector2D { .x = platform2->getPosition().x + 100, .y = platform2->getPosition().y + 100 }, "PlantPosion_{i}.png", 30, 180, 0.5F);
+        Decoration* rock = new Decoration(jimp::Vector2D { .x = platform2->getPosition().x + 600, .y = platform2->getPosition().y - 100 }, "rock1.png", 1, 0, 0.2F);
     }
     
     void startGame() {

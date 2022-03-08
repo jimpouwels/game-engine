@@ -5,7 +5,7 @@
 
 namespace ghosty {
   
-Decoration::Decoration(jimp::Vector2D position, std::string filePath, int imageCount, float rotationAngle) : jimp::AnimatedGraphic(position, 0.5F, rotationAngle, 0.05F, false) {
+Decoration::Decoration(jimp::Vector2D position, std::string filePath, int imageCount, float rotationAngle, float scale) : jimp::AnimatedGraphic(position, scale, rotationAngle, 0.05F, false) {
     this->setCollidable(false);
     this->repeat = 1;
     for (int i = 0; i < imageCount; i++) {

@@ -212,6 +212,7 @@
 		239865F127D7F366008F38C1 /* PlantPosion_27.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239865D527D7F30C008F38C1 /* PlantPosion_27.png */; };
 		239865F227D7F366008F38C1 /* PlantPosion_28.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239865BD27D7F30B008F38C1 /* PlantPosion_28.png */; };
 		239865F327D7F366008F38C1 /* PlantPosion_29.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239865D127D7F30B008F38C1 /* PlantPosion_29.png */; };
+		239865F627D7F57E008F38C1 /* rock1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239865F527D7F578008F38C1 /* rock1.png */; };
 		239F327B27CF8293007D4E2C /* scrollingWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 239F327927CF8293007D4E2C /* scrollingWorld.cpp */; };
 		239F328C27D11A98007D4E2C /* platformBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 239F328A27D11A98007D4E2C /* platformBlock.cpp */; };
 		239F32B827D3C487007D4E2C /* background-red-thingy-eyeopenleft.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F32B527D3C47E007D4E2C /* background-red-thingy-eyeopenleft.png */; };
@@ -301,6 +302,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				239865F627D7F57E008F38C1 /* rock1.png in CopyFiles */,
 				239865D627D7F366008F38C1 /* PlantPosion_0.png in CopyFiles */,
 				239865D727D7F366008F38C1 /* PlantPosion_1.png in CopyFiles */,
 				239865D827D7F366008F38C1 /* PlantPosion_2.png in CopyFiles */,
@@ -776,6 +778,7 @@
 		239865D327D7F30C008F38C1 /* PlantPosion_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlantPosion_6.png; sourceTree = "<group>"; };
 		239865D427D7F30C008F38C1 /* PlantPosion_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlantPosion_0.png; sourceTree = "<group>"; };
 		239865D527D7F30C008F38C1 /* PlantPosion_27.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlantPosion_27.png; sourceTree = "<group>"; };
+		239865F527D7F578008F38C1 /* rock1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock1.png; sourceTree = "<group>"; };
 		239F327927CF8293007D4E2C /* scrollingWorld.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scrollingWorld.cpp; sourceTree = "<group>"; };
 		239F327A27CF8293007D4E2C /* scrollingWorld.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = scrollingWorld.hpp; sourceTree = "<group>"; };
 		239F328A27D11A98007D4E2C /* platformBlock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = platformBlock.cpp; sourceTree = "<group>"; };
@@ -1136,9 +1139,18 @@
 			path = "plant-poison";
 			sourceTree = "<group>";
 		};
+		239865F427D7F561008F38C1 /* obstacles */ = {
+			isa = PBXGroup;
+			children = (
+				239865F527D7F578008F38C1 /* rock1.png */,
+			);
+			path = obstacles;
+			sourceTree = "<group>";
+		};
 		239F328427D0CA9F007D4E2C /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				239865F427D7F561008F38C1 /* obstacles */,
 				239865B727D7F2EF008F38C1 /* plant-poison */,
 				235FEFB227D6C7E000FC15F0 /* plant1 */,
 				235FEEFA27D69CE700FC15F0 /* plant */,

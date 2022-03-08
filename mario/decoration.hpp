@@ -12,7 +12,7 @@ private:
     uint16_t repeat = 0;
     
 public:
-    Decoration(jimp::Vector2D position, std::string filePath, int imageCount, float rotationAngle);
+    Decoration(jimp::Vector2D position, std::string filePath, int imageCount, float rotationAngle, float scale);
     void doOnInit() override;
     void doOnUpdate(float elapsedTime) override;
     uint16_t getZIndex() override;
