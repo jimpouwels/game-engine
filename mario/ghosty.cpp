@@ -33,6 +33,9 @@ public:
         Decoration* plantPoison1 = new Decoration(jimp::Vector2D { .x = platform2->getPosition().x + 100, .y = platform2->getPosition().y + 100 }, "PlantPosion_{i}.png", 30, 180, 0.5F);
         Decoration* rock = new Decoration(jimp::Vector2D { .x = platform2->getPosition().x + 600, .y = platform2->getPosition().y - 100 }, "rock1.png", 1, 0, 0.2F);
         
+        // THIRD SMALL PLATFORM
+        Platform* platform3 = new Platform("platform-top-left.png", "platform-top-middle.png", 1, 2, 512, 0.5F, jimp::Vector2D { .x = platform2->getPosition().x + 900, .y = platform2->getPosition().y + 600 });
+        
         // BACKGROUND
         Decoration* blackPlant = new Decoration(jimp::Vector2D { .x = platform->getPosition().x + 2000, .y = platform->getPosition().y + 500 }, "Plant3_{i}.png", 90, 0, 1.4F);
         blackPlant->setShowAsBlack(true);
