@@ -95,7 +95,7 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
                 && currentGraphicNextPosition.x + getMarginLeft() < otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight()))
            || (currentGraphicNextPosition.x + getWidth() - getMarginRight() > otherGraphicNextPosition.x + otherGraphic->getMarginLeft()
                && currentGraphicNextPosition.x + getWidth() - getMarginRight() < otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight())
-             || (currentGraphicNextPosition.x + getMarginLeft() < otherGraphicNextPosition.x + getMarginLeft()
+             || (currentGraphicNextPosition.x + getMarginLeft() < otherGraphicNextPosition.x + otherGraphic->getMarginLeft()
              && currentGraphicNextPosition.x + getWidth() - getMarginRight() > otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight())))) {
         hasCollidedRect(otherGraphic, Geo2D::Side::BOTTOM);
         hasCollidedRectBottom(otherGraphic);
@@ -104,7 +104,7 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
                && currentGraphicNextPosition.x + getMarginLeft() < otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight()))
           || (currentGraphicNextPosition.x + getWidth() - getMarginRight() > otherGraphicNextPosition.x + otherGraphic->getMarginLeft()
               && currentGraphicNextPosition.x + getWidth() - getMarginRight() < otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight())
-          || (currentGraphicNextPosition.x + getMarginLeft() < otherGraphicNextPosition.x + getMarginLeft()
+          || (currentGraphicNextPosition.x + getMarginLeft() < otherGraphicNextPosition.x + otherGraphic->getMarginLeft()
           && currentGraphicNextPosition.x + getWidth() - getMarginRight() > otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight())))) {
         hasCollidedRect(otherGraphic, Geo2D::Side::TOP);
         hasCollidedRectTop(otherGraphic);
