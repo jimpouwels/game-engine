@@ -23,7 +23,7 @@ private:
     bool applyScrolling = false;
     bool applyGravity = false;
     bool interruptGravity = false;
-    bool interruptMovement = false;
+    bool interruptMovementX = false;
     bool collidable = true;
     bool inversedHorizontally = false;
     int collisionBoxWidth = 0;

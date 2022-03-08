@@ -300,12 +300,12 @@ void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
 
 void AnimatedGraphic::stayToLeftOf(AnimatedGraphic *otherGraphic) {
     getPosition().x = otherGraphic->getPosition().x + otherGraphic->getMarginLeft() - (getHeight() - getMarginRight());
-    interruptMovement = true;
+    interruptMovementX = true;
 }
 
 void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
     getPosition().x = otherGraphic->getPosition().x + otherGraphic->getWidth() - otherGraphic->getMarginRight() - getMarginLeft();
-    interruptMovement = true;
+    interruptMovementX = true;
 }
 
 bool AnimatedGraphic::isVisible() {
@@ -319,10 +319,12 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
     interruptGravity = false;
     addToPosition(jimp::Timing::toValueForElapsedTime(gravityVelocity, elapsedTime));
     
-    if (!interruptMovement) {
-        addToPosition(jimp::Timing::toValueForElapsedTime(moveVelocity, elapsedTime));
+    Vector2D movementCopy = moveVelocity;
+    if (interruptMovementX) {
+        movementCopy.x = 0;
     }
-    interruptMovement = false;
+    addToPosition(jimp::Timing::toValueForElapsedTime(movementCopy, elapsedTime));
+    interruptMovementX = false;
 }
 
 void AnimatedGraphic::updateCurrentDrawableData() {
@@ -341,6 +343,9 @@ Vector2D AnimatedGraphic::calculateNextPosition(float elapsedTime) {
     Vector2D velocity = getVelocity();
     if (applyGravity && !interruptGravity)  {
         velocity.y += GameEngine::getInstance()->getGravityForce();
+    }
+    if (interruptMovementX) {
+        velocity.x -= moveVelocity.x;
     }
     return getPosition() + jimp::Timing::toValueForElapsedTime(velocity, elapsedTime);
 }
