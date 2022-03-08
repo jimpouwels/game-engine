@@ -21,7 +21,7 @@ public:
         scrollingWorld = new jimp::ScrollingWorld(character, 5000, 3000);
         setBackgroundColor(0x79b5af);
 
-        Platform* platform = new Platform("platform-top-left.png", "platform-top-middle.png", 5, 10, 512, 0.5F, jimp::Vector2D { .x = -256, .y = static_cast<float>(scrollingWorld->getHeight() - (4 * 256)) });
+        Platform* platform = new Platform("platform-top-left.png", "platform-top-middle.png", 3, 7, 512, 0.5F, jimp::Vector2D { .x = 0, .y = static_cast<float>(scrollingWorld->getHeight() - (4 * 256)) });
         
         Decoration* plant = new Decoration(jimp::Vector2D { .x = 512, .y = platform->getPosition().y - 175 }, "Plant3_{i}.png", 90, 0);
   

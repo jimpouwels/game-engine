@@ -73,7 +73,6 @@ void ScrollingWorld::doOnUpdate() {
         mainCharacter->getPosition().y = topSideOfCamera - mainCharacter->getMarginTop();
     }
     
-    std::cout << offsetY << std::endl;
     offsetX += offsetDeltaX;
     offsetY += offsetDeltaY;
     for (const auto& scrollingGraphic: *GameEngine::getInstance()->getAllGraphics()) {

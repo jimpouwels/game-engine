@@ -11,9 +11,10 @@ Platform::Platform(std::string cornerBlockFilePath, std::string innerBlockFilePa
     for (int x = 0; x < columnCount; x++) {
         for (int y = 0; y < rowCount; y++) {
             if (x == 0 && y == 0) {
-                PlatformBlock* leftTop = new PlatformBlock(jimp::Vector2D { .x = position.x + (x * size), .y = position.y + (y * size) }, "platform-top-left.png", 0, scale);
+                PlatformBlock* leftTop = new PlatformBlock(jimp::Vector2D { .x = position.x + (x * size), .y = position.y + (y * size) }, "platform-top-corner.png", 0, scale);
             } else if (x == columnCount - 1 && y == 0) {
-                PlatformBlock* rightTop = new PlatformBlock(jimp::Vector2D { .x = position.x + (x * size), .y = position.y + (y * size) }, "platform-top-right.png", 0, scale);
+                PlatformBlock* rightTop = new PlatformBlock(jimp::Vector2D { .x = position.x + (x * size), .y = position.y + (y * size) }, "platform-top-corner.png", 0, scale);
+                rightTop->drawInversedHorizontally(true);
             } else if (y == 0) {
                 PlatformBlock* topMiddle = new PlatformBlock(jimp::Vector2D { .x = position.x + (x * size), .y = position.y + (y * size) }, "platform-top-middle.png", 0, scale);
             } else if (x == 0 && y < rowCount - 1) {
@@ -21,11 +22,12 @@ Platform::Platform(std::string cornerBlockFilePath, std::string innerBlockFilePa
             } else if (x == columnCount - 1 && y < rowCount - 1) {
                 PlatformBlock* rightMiddle = new PlatformBlock(jimp::Vector2D { .x = position.x + (x * size), .y = position.y + (y * size) }, "platform-top-middle.png", 90, scale);
             } else if (y == rowCount - 1 && x < columnCount - 1 && x > 0) {
-                PlatformBlock* bottomMiddle = new PlatformBlock(jimp::Vector2D { .x = position.x + (x * size), .y = position.y + (y * size) }, "platform-top-middle.png", 180, scale);
+                PlatformBlock* bottomMiddle = new PlatformBlock(jimp::Vector2D { .x = position.x + (x * size), .y = position.y + (y * size) }, "platform-bottom-middle.png", 0, scale);
             } else if (y == rowCount - 1 && x == columnCount - 1) {
-                PlatformBlock* rightBottom = new PlatformBlock(jimp::Vector2D { .x = position.x + (x * size), .y = position.y + (y * size) }, "platform-top-right.png", 90, scale);
+                PlatformBlock* rightBottom = new PlatformBlock(jimp::Vector2D { .x = position.x + (x * size), .y = position.y + (y * size) }, "platform-bottom-corner.png", 0, scale);
+                rightBottom->drawInversedHorizontally(true);
             } else if (y == rowCount - 1 && x == 0) {
-                PlatformBlock* leftBottom = new PlatformBlock(jimp::Vector2D { .x = position.x + (x * size), .y = position.y + (y * size) }, "platform-top-left.png", 270, scale);
+                PlatformBlock* leftBottom = new PlatformBlock(jimp::Vector2D { .x = position.x + (x * size), .y = position.y + (y * size) }, "platform-bottom-corner.png", 0, scale);
             } else {
                 PlatformBlock* center = new PlatformBlock(jimp::Vector2D { .x = position.x + (x * size), .y = position.y + (y * size) }, "platform-center.png", 0, scale);
                 center->setCollidable(false);
