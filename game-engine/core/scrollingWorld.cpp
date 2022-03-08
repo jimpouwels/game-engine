@@ -40,8 +40,8 @@ void ScrollingWorld::doOnUpdate() {
         return;
     }
     GameEngine* gameEngine = GameEngine::getInstance();
-    float rightSideOfCamera = gameEngine->getScreenWidth() / 2 + 125;
-    float leftSideOfCamera = gameEngine->getScreenWidth() / 2 - 125;
+    float rightSideOfCamera = gameEngine->getScreenWidth() / 2 + 250;
+    float leftSideOfCamera = gameEngine->getScreenWidth() / 2 - 250;
     float topSideOfCamera = gameEngine->getScreenHeight() / 2 - 250;
     float bottomSideOfCamera = gameEngine->getScreenHeight() / 2;
     float offsetDeltaX = 0;
@@ -53,7 +53,7 @@ void ScrollingWorld::doOnUpdate() {
         }
         mainCharacter->getPosition().x = rightSideOfCamera - mainCharacter->getWidth() + mainCharacter->getMarginRight();
     } else if (offsetX > 0 && mainCharacter->getPosition().x + mainCharacter->getMarginLeft() <= leftSideOfCamera && mainCharacter->getVelocity().x < 0) {
-        offsetDeltaX -= leftSideOfCamera - mainCharacter->getPosition().x + mainCharacter->getMarginLeft();
+        offsetDeltaX -= (leftSideOfCamera - (mainCharacter->getPosition().x + mainCharacter->getMarginLeft()));
         if (offsetX - offsetDeltaX < 0) {
             offsetDeltaX = -offsetX;
         }
@@ -66,12 +66,14 @@ void ScrollingWorld::doOnUpdate() {
         }
         mainCharacter->getPosition().y = bottomSideOfCamera - mainCharacter->getHeight() + mainCharacter->getMarginBottom();
     } else if (offsetY > 0 && (mainCharacter->getPosition().y + mainCharacter->getMarginTop() <= topSideOfCamera) && mainCharacter->getVelocity().y < 0) {
-        offsetDeltaY -= topSideOfCamera - mainCharacter->getPosition().y + mainCharacter->getMarginTop();
-        if (offsetY - offsetDeltaY < 0) {
+        offsetDeltaY -= topSideOfCamera - (mainCharacter->getPosition().y + mainCharacter->getMarginTop());
+        if ((offsetY - offsetDeltaY) < 0) {
             offsetDeltaY = -offsetY;
         }
         mainCharacter->getPosition().y = topSideOfCamera - mainCharacter->getMarginTop();
     }
+    
+    std::cout << offsetY << std::endl;
     offsetX += offsetDeltaX;
     offsetY += offsetDeltaY;
     for (const auto& scrollingGraphic: *GameEngine::getInstance()->getAllGraphics()) {
@@ -89,6 +91,8 @@ void ScrollingWorld::doOnUpdate() {
 }
 
 void ScrollingWorld::doOnFrame() {
+//    GameEngine::getInstance()->drawRectangle(500, 500, Vector2D { .x = static_cast<float>(GameEngine::getInstance()->getScreenWidth() / 2 - 250), .y = static_cast<float>(GameEngine::getInstance()->getScreenHeight() / 2 - 250) }, 0xFFFFFF);
+
 }
 
 ScrollingWorld* ScrollingWorld::getInstance() {

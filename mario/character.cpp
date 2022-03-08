@@ -24,7 +24,6 @@ void Character::doOnInit() {
 }
 
 void Character::doOnUpdate(float elapsedTime) {
-    std::cout << getPosition().y << std::endl;
     std::string currentAnimationId = getCurrentAnimationId();
     if (isJumping) {
         setCurrentAnimation("jump");
