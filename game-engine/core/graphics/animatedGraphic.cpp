@@ -112,14 +112,18 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
          && (((currentGraphicNextPosition.y + getMarginTop() > otherGraphicNextPosition.y + otherGraphic->marginTop
               && currentGraphicNextPosition.y + getMarginTop() < otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom()))
          || (currentGraphicNextPosition.y + getHeight() - getMarginBottom() > otherGraphicNextPosition.y + otherGraphic->getMarginTop()
-             && currentGraphicNextPosition.y + getHeight() - getMarginBottom() < otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom())))) {
+             && currentGraphicNextPosition.y + getHeight() - getMarginBottom() < otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom())
+             || (currentGraphicNextPosition.y + getMarginTop() < otherGraphicNextPosition.y + otherGraphic->getMarginTop()
+             && currentGraphicNextPosition.y + getHeight() - getMarginBottom() > otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom())))) {
         hasCollidedRect(otherGraphic, Geo2D::Side::RIGHT);
         hasCollidedRectRight(otherGraphic);
     } else if ((((currentGraphicCurrentPosition.x + getMarginLeft() >= otherGraphicCurrentPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight() && currentGraphicNextPosition.x + getMarginLeft() <= otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight()))
          && (((currentGraphicNextPosition.y + getMarginTop() > otherGraphicNextPosition.y + otherGraphic->marginTop
                 && currentGraphicNextPosition.y + getMarginTop() < otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom()))
            || (currentGraphicNextPosition.y + getHeight() - getMarginBottom() > otherGraphicNextPosition.y + otherGraphic->getMarginTop()
-               && currentGraphicNextPosition.y + getHeight() - getMarginBottom() < otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom()))) && currentGraphicNextPosition.y != otherGraphicNextPosition.y) {
+               && currentGraphicNextPosition.y + getHeight() - getMarginBottom() < otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom())
+             || (currentGraphicNextPosition.y + getMarginTop() < otherGraphicNextPosition.y + otherGraphic->getMarginTop()
+             && currentGraphicNextPosition.y + getHeight() - getMarginBottom() > otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom())))) {
         hasCollidedRect(otherGraphic, Geo2D::Side::LEFT);
         hasCollidedRectLeft(otherGraphic);
     }

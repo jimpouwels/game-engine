@@ -38,7 +38,6 @@ void Asteroid::doOnFrame(float elapsedTime) {
 
 void Asteroid::hasCollidedRect(jimp::AnimatedGraphic *otherSprite, jimp::Geo2D::Side side) {
     if (dynamic_cast<Bullet*>(otherSprite) != nullptr) {
-        std::cout << "ASTEROID HIT" << std::endl;
         isAnimatingHit = true;
         hitCount++;
         this->hitSound->play(14);

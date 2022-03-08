@@ -27,7 +27,6 @@ void Bullet::doOnFrame(float elapsedTime) {
 void Bullet::hasCollidedRect(AnimatedGraphic *otherSprite, jimp::Geo2D::Side side) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
-        std::cout << "BULLET HIT" << std::endl;
         markForDeletion();
     }
 }
