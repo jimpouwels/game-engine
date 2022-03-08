@@ -102,6 +102,9 @@ void GameEngine::draw(jimp::Drawable* drawable) {
             transform.rotate(sprite->getRotationAngle(), sprite->getPosition().x + sprite->getRotationPoint().x, sprite->getPosition().y + sprite->getRotationPoint().y);
             cachedSprite->sprite->setPosition(offsetX, sprite->getPosition().y);
             cachedSprite->sprite->setScale(sprite->getScale(), sprite->getScale());
+            if (sprite->isSetShowAsBlack()) {
+                cachedSprite->sprite->setColor(sf::Color(0, 0, 0));
+            }
             if (sprite->drawInversedHorizontally()) {
                 cachedSprite->sprite->setTextureRect(sf::IntRect(cachedSprite->sprite->getTexture()->getSize().x, 0, -(cachedSprite->sprite->getTexture()->getSize().x), cachedSprite->sprite->getTexture()->getSize().y));
             } else {

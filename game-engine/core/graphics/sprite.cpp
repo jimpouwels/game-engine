@@ -24,6 +24,14 @@ int Sprite::getHeight() {
     return (image->getHeight()) * getScale();
 }
 
+void Sprite::setShowAsBlack(bool value) {
+    this->showAsBlack = value;
+}
+
+bool Sprite::isSetShowAsBlack() {
+    return showAsBlack;
+}
+
 void Sprite::setDrawInversedHorizontally(bool inversed) {
     inversedHorizontally = inversed;
 }

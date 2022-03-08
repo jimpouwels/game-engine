@@ -34,6 +34,8 @@ public:
         Decoration* rock = new Decoration(jimp::Vector2D { .x = platform2->getPosition().x + 600, .y = platform2->getPosition().y - 100 }, "rock1.png", 1, 0, 0.2F);
         
         // BACKGROUND
+        Decoration* blackPlant = new Decoration(jimp::Vector2D { .x = platform->getPosition().x + 2000, .y = platform->getPosition().y + 500 }, "Plant3_{i}.png", 90, 0, 1.4F);
+        blackPlant->setShowAsBlack(true);
         Decoration* rock1 = new Decoration(jimp::Vector2D { .x = platform->getPosition().x + 1500, .y = platform->getPosition().y + 100 }, "rock1-background.png", 1, 0, 1.7F);
         Decoration* spikes = new Decoration(jimp::Vector2D { .x = -600, .y = platform->getPosition().y - 800 }, "spikes1.png", 1, 45, 1.4F);
     }

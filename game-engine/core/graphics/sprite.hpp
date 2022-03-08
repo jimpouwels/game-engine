@@ -13,6 +13,7 @@ class Sprite : public Drawable {
     
 private:
     Image* image;
+    bool showAsBlack = false;
     int marginLeft = 0;
     int marginRight = 0;
     int marginTop = 0;
@@ -26,6 +27,8 @@ public:
     jimp::Image& getImage();
     void setDrawInversedHorizontally(bool inversed);
     bool drawInversedHorizontally();
+    void setShowAsBlack(bool value);
+    bool isSetShowAsBlack();
     int getMarginLeft();
     int getMarginRight();
     int getMarginTop();

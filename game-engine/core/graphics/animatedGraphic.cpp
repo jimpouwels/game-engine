@@ -292,6 +292,10 @@ void AnimatedGraphic::show() {
     visible = true;
 }
 
+void AnimatedGraphic::setShowAsBlack(bool value) {
+    showAsBlack = value;
+}
+
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
     getPosition().y = otherGraphic->getPosition().y - getHeight() + getMarginBottom() + otherGraphic->getMarginTop();
     resetGravityVelocity();
@@ -336,6 +340,7 @@ void AnimatedGraphic::updateCurrentDrawableData() {
     Sprite* sprite = dynamic_cast<Sprite*>(activeDrawable);
     if (sprite != nullptr) {
         sprite->setDrawInversedHorizontally(inversedHorizontally);
+        sprite->setShowAsBlack(showAsBlack);
     }
 }
 
