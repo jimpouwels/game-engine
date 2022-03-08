@@ -4,7 +4,7 @@
 #include "decoration.hpp"
 #include "animatedGraphic.hpp"
 
-namespace mario {
+namespace ghosty {
     
 class Decoration : public jimp::AnimatedGraphic {
   

@@ -3,7 +3,7 @@
 #include "scrollingWorld.hpp"
 #include <regex>
 
-namespace mario {
+namespace ghosty {
   
 Decoration::Decoration(jimp::Vector2D position, std::string filePath, int imageCount, float rotationAngle) : jimp::AnimatedGraphic(position, 0.5F, rotationAngle, 0.05F, false) {
     this->setCollidable(false);

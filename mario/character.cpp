@@ -2,9 +2,9 @@
 #include "gameEngine.hpp"
 #include "rectangle.hpp"
 #include "vector2D.hpp"
-#include "floor.hpp"
+#include "platformBlock.hpp"
 
-namespace mario {
+namespace ghosty {
 
 Character::Character(jimp::Vector2D position) : jimp::AnimatedGraphic(position, 0.5F, 0.0F, 0.06F, true) {
     name = "ghosty";

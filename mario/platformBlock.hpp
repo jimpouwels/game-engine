@@ -3,15 +3,15 @@
 
 #include "animatedGraphic.hpp"
 
-namespace mario {
+namespace ghosty {
     
-class Floor : public jimp::AnimatedGraphic {
+class PlatformBlock : public jimp::AnimatedGraphic {
   
 private:
     uint16_t repeat = 0;
     
 public:
-    Floor(jimp::Vector2D position, std::string filePath, uint16_t repeat);
+    PlatformBlock(jimp::Vector2D position, std::string filePath, uint16_t repeat);
     void doOnInit() override;
     void doOnUpdate(float elapsedTime) override;
 };

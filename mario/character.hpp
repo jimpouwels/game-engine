@@ -4,7 +4,7 @@
 #include "animatedGraphic.hpp"
 #include "vector2D.hpp"
 
-namespace mario {
+namespace ghosty {
 
 class Character : public jimp::AnimatedGraphic {
   
