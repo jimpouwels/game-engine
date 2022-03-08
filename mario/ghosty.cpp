@@ -31,7 +31,7 @@ public:
       
         // SECOND SMALL PLATFORM
         Platform* platform2 = new Platform("platform-top-left.png", "platform-top-middle.png", 1, 4, 512, 0.5F, jimp::Vector2D { .x = 1750, .y = 1640 });
-        
+        Decoration* plantPoison1 = new Decoration(jimp::Vector2D { .x = platform2->getPosition().x + 300, .y = platform2->getPosition().y + 100 }, "PlantPosion_{i}.png", 30, 180);
     }
     
     void startGame() {
