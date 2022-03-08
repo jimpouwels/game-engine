@@ -177,7 +177,6 @@
 		236F0BA227C77D340063E19C /* drawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 236F0BA127C77D340063E19C /* drawable.cpp */; };
 		2394CC6127CC09DF00B62AC8 /* shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2394CC6027CC09DF00B62AC8 /* shape.cpp */; };
 		2394CC6327CC0A2300B62AC8 /* rectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2394CC6227CC0A2300B62AC8 /* rectangle.cpp */; };
-		239F327827CE7706007D4E2C /* platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 239F327627CE7706007D4E2C /* platform.cpp */; };
 		239F327B27CF8293007D4E2C /* scrollingWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 239F327927CF8293007D4E2C /* scrollingWorld.cpp */; };
 		239F328727D0CAC0007D4E2C /* block.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F328527D0CAB5007D4E2C /* block.png */; };
 		239F328927D11A75007D4E2C /* floor.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 239F328827D11A6F007D4E2C /* floor.png */; };
@@ -676,8 +675,6 @@
 		236F0BA727C786820063E19C /* rectangle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = rectangle.hpp; sourceTree = "<group>"; };
 		2394CC6027CC09DF00B62AC8 /* shape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shape.cpp; sourceTree = "<group>"; };
 		2394CC6227CC0A2300B62AC8 /* rectangle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = rectangle.cpp; sourceTree = "<group>"; };
-		239F327627CE7706007D4E2C /* platform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = platform.cpp; sourceTree = "<group>"; };
-		239F327727CE7706007D4E2C /* platform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = platform.hpp; sourceTree = "<group>"; };
 		239F327927CF8293007D4E2C /* scrollingWorld.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scrollingWorld.cpp; sourceTree = "<group>"; };
 		239F327A27CF8293007D4E2C /* scrollingWorld.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = scrollingWorld.hpp; sourceTree = "<group>"; };
 		239F328527D0CAB5007D4E2C /* block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block.png; sourceTree = "<group>"; };
@@ -829,8 +826,6 @@
 				235FEFAF27D69E2C00FC15F0 /* decoration.cpp */,
 				235FEFB027D69E2C00FC15F0 /* decoration.hpp */,
 				235FEC1A27C6DF5B006306C9 /* mario.cpp */,
-				239F327627CE7706007D4E2C /* platform.cpp */,
-				239F327727CE7706007D4E2C /* platform.hpp */,
 			);
 			path = mario;
 			sourceTree = "<group>";
@@ -1275,7 +1270,6 @@
 				235FEFB127D69E2C00FC15F0 /* decoration.cpp in Sources */,
 				23B177A627A3E3160094B178 /* animatedGraphic.hpp in Sources */,
 				239F328C27D11A98007D4E2C /* floor.cpp in Sources */,
-				239F327827CE7706007D4E2C /* platform.cpp in Sources */,
 				23B177A727A3E3160094B178 /* animation.hpp in Sources */,
 				23B177A827A3E3160094B178 /* sprite.hpp in Sources */,
 				23B177A927A3E3160094B178 /* keyListener.hpp in Sources */,

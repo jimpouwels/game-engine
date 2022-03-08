@@ -4,7 +4,6 @@
 #include "gameEngine.hpp"
 #include "vector2D.hpp"
 #include "character.hpp"
-#include "platform.hpp"
 #include "floor.hpp"
 #include "decoration.hpp"
 #include "scrollingWorld.hpp"
