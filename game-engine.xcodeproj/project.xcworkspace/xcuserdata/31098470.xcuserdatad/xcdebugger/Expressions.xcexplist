@@ -50,6 +50,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "jimp::AnimatedGraphic::checkCollisionRect(jimp::AnimatedGraphic*, float):animatedGraphic.cpp">
+      </ContextState>
+      <ContextState
          contextName = "Game::onSpriteDeleted(jimp::AnimatedSprite*):game.cpp">
          <PersistentStrings>
             <PersistentString
@@ -65,6 +68,14 @@
             </PersistentString>
             <PersistentString
                value = "(nearB.x + nearB.y)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "mario::Decoration::Decoration(jimp::Vector2D, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, int):decoration.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "std::regex_replace(filePath, std::regex(&quot;$1&quot;), std::to_string(i))">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

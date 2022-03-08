@@ -6,7 +6,7 @@
 #include "character.hpp"
 #include "platform.hpp"
 #include "floor.hpp"
-#include "plant.hpp"
+#include "decoration.hpp"
 #include "scrollingWorld.hpp"
 
 namespace mario {
@@ -25,21 +25,13 @@ public:
         Floor* middle = new Floor(jimp::Vector2D { .x = static_cast<float>(left->getWidth()), .y = 0 }, "platform-top-middle.png", 3);
         Floor* right = new Floor(jimp::Vector2D { .x = (middle->getPosition().x + middle->getWidth()), .y = 0 }, "platform-top-right.png", 1);
         
-        Plant* plant = new Plant(jimp::Vector2D { .x = middle->getPosition().x + (middle->getSingleWidth() * 2), .y = middle->getPosition().y - 175 }, 1);
+        Decoration* plant = new Decoration(jimp::Vector2D { .x = middle->getPosition().x + (middle->getSingleWidth() * 2), .y = middle->getPosition().y - 175 }, "Plant3_{i}.png", 90, 0);
         
-//        new Platform(jimp::Vector2D { .x = (middle->getPosition().x + middle->getSingleWidth()), .y = middle->getPosition().y - 300 }, 5);
-//        new Platform(jimp::Vector2D { .x = 1600, .y = 2430 }, 8);
-//        new Platform(jimp::Vector2D { .x = 1800, .y = 2230 }, 2);
-//        new Platform(jimp::Vector2D { .x = 2000, .y = 2030 }, 2);
-//        new Platform(jimp::Vector2D { .x = 2200, .y = 1830 }, 2);
-//        new Platform(jimp::Vector2D { .x = 2400, .y = 1630 }, 2);
-//        new Platform(jimp::Vector2D { .x = 2600, .y = 1430 }, 2);
-//        new Platform(jimp::Vector2D { .x = 2800, .y = 1230 }, 2);
-//        new Platform(jimp::Vector2D { .x = 3000, .y = 1030 }, 2);
-//        new Platform(jimp::Vector2D { .x = 3200, .y = 830 }, 2);
-//        new Platform(jimp::Vector2D { .x = 3400, .y = 630 }, 2);
-//        new Platform(jimp::Vector2D { .x = 3600, .y = 430 }, 2);
-//        new Platform(jimp::Vector2D { .x = 3800, .y = 230 }, 2);
+        jimp::Vector2D flowerPosition = jimp::Vector2D { .x = right->getPosition().x, .y = right->getPosition().y };
+        flowerPosition.x += 128;
+        flowerPosition.y -= 128;
+        Decoration* flower = new Decoration(flowerPosition, "BlueFlower_{i}.png", 60, 90);
+      
         
     }
     
