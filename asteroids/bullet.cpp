@@ -18,8 +18,7 @@ void Bullet::doOnInit() {
 }
 
 void Bullet::doOnUpdate(float elapsedTime) {
-    jimp::Vector2D deltaVector = jimp::Geo2D::vectorFrom(getRotationAngle(), FORCE, elapsedTime);
-    addToPosition(deltaVector);
+    move(getRotationAngle(), FORCE);
 }
 
 void Bullet::doOnFrame(float elapsedTime) {
@@ -28,6 +27,7 @@ void Bullet::doOnFrame(float elapsedTime) {
 void Bullet::hasCollidedRect(AnimatedGraphic *otherSprite, jimp::Geo2D::Side side) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {
+        std::cout << "BULLET HIT" << std::endl;
         markForDeletion();
     }
 }

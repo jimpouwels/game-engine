@@ -48,8 +48,8 @@ public:
 
 }
 
-int main() {
-    mario::Mario game(2800, 1800, "My First Platform Game");
-    game.startGame();
-    return 0;
-}
+//int main() {
+//    mario::Mario game(2800, 1800, "My First Platform Game");
+//    game.startGame();
+//    return 0;
+//}

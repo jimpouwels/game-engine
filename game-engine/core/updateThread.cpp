@@ -165,7 +165,7 @@ void UpdateThread::loadNewGraphicsIntoUpdateLoop() {
             newGraphic->onInit();
             registeredGraphics->push_back(newGraphic);
             loadedGraphics.push_back(newGraphic);
-            if (newGraphic == ScrollingWorld::getInstance()->getMainCharacter()) {
+            if (ScrollingWorld::getInstance() != nullptr && newGraphic == ScrollingWorld::getInstance()->getMainCharacter()) {
                 ScrollingWorld::getInstance()->setMainCharacterLoaded(true);
             }
         }
