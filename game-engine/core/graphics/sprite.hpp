@@ -6,6 +6,7 @@
 #include "vector2D.hpp"
 #include "image.hpp"
 #include "drawable.hpp"
+#include "color.hpp"
 
 namespace jimp {
 
@@ -13,12 +14,12 @@ class Sprite : public Drawable {
     
 private:
     Image* image;
-    bool showAsBlack = false;
     int marginLeft = 0;
     int marginRight = 0;
     int marginTop = 0;
     int marginBottom = 0;
     bool inversedHorizontally = false;
+    Color rgb = Color::full();
     void crop();
     
 public:
@@ -27,8 +28,6 @@ public:
     jimp::Image& getImage();
     void setDrawInversedHorizontally(bool inversed);
     bool drawInversedHorizontally();
-    void setShowAsBlack(bool value);
-    bool isSetShowAsBlack();
     int getMarginLeft();
     int getMarginRight();
     int getMarginTop();
@@ -36,6 +35,8 @@ public:
     int getSingleWidth() override;
     int getWidth() override;
     int getHeight() override;
+    void setRgbLevels(Color rgb);
+    Color getRgbLevels();
 };
 }
 

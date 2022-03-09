@@ -292,8 +292,12 @@ void AnimatedGraphic::show() {
     visible = true;
 }
 
-void AnimatedGraphic::setShowAsBlack(bool value) {
-    showAsBlack = value;
+void AnimatedGraphic::setRgbLevels(Color rgb) {
+    this->rgb = rgb;
+}
+
+Color AnimatedGraphic::getRgbLevels() {
+    return rgb;
 }
 
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
@@ -340,7 +344,7 @@ void AnimatedGraphic::updateCurrentDrawableData() {
     Sprite* sprite = dynamic_cast<Sprite*>(activeDrawable);
     if (sprite != nullptr) {
         sprite->setDrawInversedHorizontally(inversedHorizontally);
-        sprite->setShowAsBlack(showAsBlack);
+        sprite->setRgbLevels(rgb);
     }
 }
 

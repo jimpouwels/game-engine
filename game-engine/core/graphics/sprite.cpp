@@ -24,12 +24,12 @@ int Sprite::getHeight() {
     return (image->getHeight()) * getScale();
 }
 
-void Sprite::setShowAsBlack(bool value) {
-    this->showAsBlack = value;
+void Sprite::setRgbLevels(Color rgb) {
+    this->rgb = rgb;
 }
 
-bool Sprite::isSetShowAsBlack() {
-    return showAsBlack;
+Color Sprite::getRgbLevels() {
+    return rgb;
 }
 
 void Sprite::setDrawInversedHorizontally(bool inversed) {

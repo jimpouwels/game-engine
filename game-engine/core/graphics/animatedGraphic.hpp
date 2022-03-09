@@ -10,6 +10,7 @@
 #include "geo2D.hpp"
 #include "keyListener.hpp"
 #include "shape.hpp"
+#include "color.hpp"
 
 namespace jimp {
 
@@ -28,11 +29,11 @@ private:
     bool inversedHorizontally = false;
     int collisionBoxWidth = 0;
     int collisionBoxHeight = 0;
-    bool showAsBlack = false;
     int marginLeft = 0;
     int marginRight = 0;
     int marginTop = 0;
     int marginBottom = 0;
+    Color rgb = Color::full();
     std::map<std::string, Animation*>* animationMap;
     Animation* activeAnimation = nullptr;
     bool markedForDeletion = false;
@@ -99,7 +100,8 @@ public:
     bool drawInversedHorizontally();
     bool isMarkedForDeletion();
     bool isApplyScrolling();
-    void setShowAsBlack(bool value);
+    void setRgbLevels(Color rgb);
+    Color getRgbLevels();
     void setApplyScrolling(bool applyScrolling);
     void checkCollisionRect(AnimatedGraphic* otherGraphicp, float elapsedTime);
     Drawable* getActiveDrawable();

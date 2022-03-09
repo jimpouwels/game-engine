@@ -788,6 +788,7 @@
 		239865F727D7F699008F38C1 /* plant-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plant-small.png"; sourceTree = "<group>"; };
 		239865FA27D7F78B008F38C1 /* rock1-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rock1-background.png"; sourceTree = "<group>"; };
 		239865FC27D7FB92008F38C1 /* spikes1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spikes1.png; sourceTree = "<group>"; };
+		239865FE27D88F80008F38C1 /* color.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = color.hpp; sourceTree = "<group>"; };
 		239F327927CF8293007D4E2C /* scrollingWorld.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scrollingWorld.cpp; sourceTree = "<group>"; };
 		239F327A27CF8293007D4E2C /* scrollingWorld.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = scrollingWorld.hpp; sourceTree = "<group>"; };
 		239F328A27D11A98007D4E2C /* platformBlock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = platformBlock.cpp; sourceTree = "<group>"; };
@@ -1280,6 +1281,7 @@
 				23A933AD27864EA700769F69 /* sprite.cpp */,
 				23D5C7E827847B6200C6C916 /* sprite.hpp */,
 				235A526327A959790008A8A0 /* vector2D.hpp */,
+				239865FE27D88F80008F38C1 /* color.hpp */,
 			);
 			path = graphics;
 			sourceTree = "<group>";
