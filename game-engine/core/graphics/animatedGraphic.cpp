@@ -67,46 +67,16 @@ void AnimatedGraphic::animateRgb(float elapsedTime) {
         remainingSeconds = requestedRgbAnimationTime;
     }
     
-    float remainingDifferenceR = abs(targetRgb.r - rgb.r);
-    float remainingDifferenceG = abs(targetRgb.g - rgb.g);
-    float remainingDifferenceB = abs(targetRgb.b - rgb.b);
+    float remainingDifferenceR = targetRgb.r - rgb.r;
+    float remainingDifferenceG = targetRgb.g - rgb.g;
+    float remainingDifferenceB = targetRgb.b - rgb.b;
     float rDelta = jimp::Timing::toValueForElapsedTime(remainingDifferenceR / remainingSeconds, elapsedTime);
     float gDelta = jimp::Timing::toValueForElapsedTime(remainingDifferenceG / remainingSeconds, elapsedTime);
     float bDelta = jimp::Timing::toValueForElapsedTime(remainingDifferenceB / remainingSeconds, elapsedTime);
     
-    if (targetRgb.r < rgb.r) {
-        rDelta = -rDelta;
-    }
-    if (targetRgb.g < rgb.g) {
-        gDelta = -gDelta;
-    }
-    if (targetRgb.b < rgb.b) {
-        bDelta = -bDelta;
-    }
-    
-    if (rgb.r + rDelta > 255) {
-        rgb.r = 255;
-    } else if (rgb.r + rDelta < 0) {
-        rgb.r = 0;
-    } else {
-        rgb.r += rDelta;
-    }
-    
-    if (rgb.g + gDelta > 255) {
-        rgb.g = 255;
-    } else if (rgb.g + gDelta < 0) {
-        rgb.g = 0;
-    } else {
-        rgb.g += gDelta;
-    }
-    
-    if (rgb.b + bDelta > 255) {
-        rgb.b = 255;
-    } else if (rgb.b + bDelta < 0) {
-        rgb.b = 0;
-    } else {
-        rgb.b += bDelta;
-    }
+    rgb.r = fmax(0, (fmin(255, (rgb.r + rDelta))));
+    rgb.g = fmax(0, (fmin(255, (rgb.g + gDelta))));
+    rgb.b = fmax(0, (fmin(255, (rgb.b + bDelta))));
 }
 
 void AnimatedGraphic::markForDeletion() {
