@@ -276,6 +276,7 @@
 		23A933BB2788407F00769F69 /* keyboardHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933B92788407F00769F69 /* keyboardHandler.cpp */; };
 		23A933BE2788B4EC00769F69 /* ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933BC2788B4EC00769F69 /* ship.cpp */; };
 		23A933F42790187300769F69 /* animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933F22790187300769F69 /* animation.cpp */; };
+		23B091BC27D9184500CD1A75 /* hill.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23B091BB27D9183E00CD1A75 /* hill.png */; };
 		23B177A127A3E3160094B178 /* ship.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23A933BD2788B4EC00769F69 /* ship.hpp */; };
 		23B177A327A3E3160094B178 /* bullet.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23E5E2F4279A979100B62583 /* bullet.hpp */; };
 		23B177A527A3E3160094B178 /* asteroid.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 23E5E2FF27A302DD00B62583 /* asteroid.hpp */; };
@@ -305,6 +306,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				23B091BC27D9184500CD1A75 /* hill.png in CopyFiles */,
 				239865FD27D7FB98008F38C1 /* spikes1.png in CopyFiles */,
 				239865FB27D7F817008F38C1 /* rock1-background.png in CopyFiles */,
 				239865F827D7F6A1008F38C1 /* plant-small.png in CopyFiles */,
@@ -856,6 +858,7 @@
 		23A933BD2788B4EC00769F69 /* ship.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ship.hpp; sourceTree = "<group>"; };
 		23A933F22790187300769F69 /* animation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animation.cpp; sourceTree = "<group>"; };
 		23A933F32790187300769F69 /* animation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animation.hpp; sourceTree = "<group>"; };
+		23B091BB27D9183E00CD1A75 /* hill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hill.png; sourceTree = "<group>"; };
 		23D5C7C127832B5600C6C916 /* game-engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "game-engine"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23D5C7C427832B5600C6C916 /* gameEngine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameEngine.hpp; sourceTree = "<group>"; };
 		23D5C7D827833CFD00C6C916 /* libsfml-audio.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.5.1.dylib"; path = "External Libraries/SFML/lib/libsfml-audio.2.5.1.dylib"; sourceTree = "<group>"; };
@@ -1161,6 +1164,7 @@
 		239865F927D7F77A008F38C1 /* backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				23B091BB27D9183E00CD1A75 /* hill.png */,
 				239865FC27D7FB92008F38C1 /* spikes1.png */,
 				239865FA27D7F78B008F38C1 /* rock1-background.png */,
 			);

@@ -5,7 +5,8 @@
 
 namespace ghosty {
   
-Decoration::Decoration(jimp::Vector2D position, std::string filePath, int imageCount, float rotationAngle, float scale) : jimp::AnimatedGraphic(position, scale, rotationAngle, 0.05F, false) {
+Decoration::Decoration(jimp::Vector2D position, std::string filePath, int imageCount, float rotationAngle, float scale, int zIndex) : jimp::AnimatedGraphic(position, scale, rotationAngle, 0.05F, false) {
+    this->zIndex = zIndex;
     this->name = filePath;
     this->setCollidable(false);
     this->repeat = 1;
@@ -22,7 +23,7 @@ void Decoration::doOnUpdate(float elapsedTime) {
 }
 
 uint16_t Decoration::getZIndex() {
-    return 50;
+    return zIndex;
 }
     
 }

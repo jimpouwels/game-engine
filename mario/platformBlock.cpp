@@ -15,5 +15,9 @@ void PlatformBlock::doOnInit() {
 
 void PlatformBlock::doOnUpdate(float elapsedTime) {
 }
+
+uint16_t PlatformBlock::getZIndex() {
+    return 3;
+}
     
 }
