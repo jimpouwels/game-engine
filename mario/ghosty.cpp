@@ -16,7 +16,7 @@ class Ghosty : public jimp::GameEngine {
 private:
     
 public:
-    Ghosty(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 3500, name, 1000) {
+    Ghosty(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000) {
         Character* character = new Character(jimp::Vector2D { .x = static_cast<float>(100), .y = 1400 });
         scrollingWorld = new jimp::ScrollingWorld(character, 10000, 3000);
         setBackgroundColor(0x3ba7b3);
