@@ -1,5 +1,6 @@
 #include "drawable.hpp"
 #include "vector2D.hpp"
+#include "gameEngine.hpp"
 
 namespace jimp {
 
@@ -41,6 +42,22 @@ void Drawable::setRotationAngle(float angle) {
 
 void Drawable::setRotationPoint(Vector2D rotationPoint) {
     this->rotationPoint = rotationPoint;
+}
+
+bool Drawable::isPositionedWithinScreen() {
+    if (getPosition().x + getWidth() < 0) {
+        return false;
+    }
+    if (getPosition().x > GameEngine::getInstance()->getScreenWidth()) {
+        return false;
+    }
+    if (getPosition().y + getHeight() < 0) {
+        return false;
+    }
+    if (getPosition().y > GameEngine::getInstance()->getScreenHeight()) {
+        return false;
+    }
+    return true;
 }
 
 Vector2D Drawable::getRotationPoint() {

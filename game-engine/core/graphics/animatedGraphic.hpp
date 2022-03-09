@@ -115,10 +115,7 @@ public:
     void markForDeletion();
     void setX(float x);
     void setY(float y);
-    void hide();
-    void show();
     bool isPositionedWithinScreen();
-    bool isVisible();
     void setPosition(Vector2D position);
     void addToPosition(Vector2D delta);
     void onInit();

@@ -81,11 +81,6 @@ void ScrollingWorld::doOnUpdate() {
         }
         scrollingGraphic->getPosition().x -= offsetDeltaX;
         scrollingGraphic->getPosition().y -= offsetDeltaY;
-        if (scrollingGraphic->isPositionedWithinScreen()) {
-            scrollingGraphic->show();
-        } else {
-            scrollingGraphic->hide();
-        }
     }
 }
 

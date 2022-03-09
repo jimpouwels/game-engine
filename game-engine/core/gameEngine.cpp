@@ -76,6 +76,9 @@ void GameEngine::start() {
 }
 
 void GameEngine::draw(jimp::Drawable* drawable) {
+    if (!drawable->isPositionedWithinScreen()) {
+        return;
+    }
     if (dynamic_cast<Sprite*>(drawable) != nullptr) {
         Sprite* sprite = dynamic_cast<Sprite*>(drawable);
         SpriteCache::CachedSprite* cachedSprite = nullptr;
@@ -93,12 +96,6 @@ void GameEngine::draw(jimp::Drawable* drawable) {
 
         for (uint16_t i = 0; i < sprite->getRepeat(); i++) {
             float offsetX = sprite->getPosition().x + i * sprite->getSingleWidth();
-            if (!(isPositionWithinScreen(Vector2D { .x = offsetX, .y = sprite->getPosition().y }))
-                && !(isPositionWithinScreen(Vector2D { .x = offsetX + sprite->getSingleWidth(), .y = sprite->getPosition().y }))
-                && !(isPositionWithinScreen(Vector2D { .x = offsetX, .y = sprite->getPosition().y + sprite->getHeight()}))
-                && !(isPositionWithinScreen(Vector2D { .x = offsetX + sprite->getSingleWidth(), .y = sprite->getPosition().y + sprite->getHeight() }))) {
-                continue;
-            }
             sf::Transform transform;
             transform.rotate(sprite->getRotationAngle(), sprite->getPosition().x + sprite->getRotationPoint().x, sprite->getPosition().y + sprite->getRotationPoint().y);
             cachedSprite->sprite->setPosition(offsetX, sprite->getPosition().y);
@@ -196,10 +193,6 @@ bool GameEngine::isOutsideScreenRight(AnimatedGraphic* sprite) {
     return sprite->getPosition().x > getScreenWidth();
 }
 
-bool GameEngine::isPositionWithinScreen(Vector2D position) {
-    return position.x <= getScreenWidth() && position.x >= 0 && position.y <= getScreenHeight() && position.y > 0;
-}
-
 std::vector<AnimatedGraphic*>* GameEngine::getAllGraphics() {
     return updateThread->getAllGraphics();
 }
@@ -215,7 +208,7 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     scrollingWorld->doOnFrame();
     updateThread->lockGraphics();
     for (const auto& graphic: *updateThread->getAllGraphics()) {
-        if (!graphic->isMarkedForDeletion() && graphic->isVisible()) {
+        if (!graphic->isMarkedForDeletion()) {
             graphic->onFrame(elapsedTimeSincePreviousFrame);
             draw(graphic->getActiveDrawable());
         }

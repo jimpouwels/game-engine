@@ -67,7 +67,6 @@ public:
     bool isOutsideScreenBottom(AnimatedGraphic* graphic);
     bool isOutsideScreenLeft(AnimatedGraphic* graphic);
     bool isOutsideScreenRight(AnimatedGraphic* graphic);
-    bool isPositionWithinScreen(Vector2D position);
     void addKeyListener(KeyListener* keyListener);
     void draw(Drawable* drawable);
     void registerGraphic(AnimatedGraphic* graphic);

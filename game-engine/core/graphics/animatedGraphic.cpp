@@ -42,7 +42,7 @@ void AnimatedGraphic::onFrame(float elapsedTime) {
 
 void AnimatedGraphic::onUpdate(float elapsedTime) {
     lock->lock();
-    if (deleteOnLeaveScreen && !GameEngine::getInstance()->isPositionWithinScreen(getPosition())) {
+    if (deleteOnLeaveScreen && !isPositionedWithinScreen()) {
         markForDeletion();
     } else {
         doOnUpdate(elapsedTime);
@@ -157,19 +157,7 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
 }
 
 bool AnimatedGraphic::isPositionedWithinScreen() {
-    if (getPosition().x + getWidth() < 0) {
-        return false;
-    }
-    if (getPosition().x > GameEngine::getInstance()->getScreenWidth()) {
-        return false;
-    }
-    if (getPosition().y + getHeight() < 0) {
-        return false;
-    }
-    if (getPosition().y > GameEngine::getInstance()->getScreenHeight()) {
-        return false;
-    }
-    return true;
+    return getActiveDrawable()->isPositionedWithinScreen();
 }
 
 void AnimatedGraphic::updateAnimation(float elapsedTime) {
@@ -311,14 +299,6 @@ bool AnimatedGraphic::isMarkedForDeletion() {
     return markedForDeletion;
 }
 
-void AnimatedGraphic::hide() {
-    visible = false;
-}
-
-void AnimatedGraphic::show() {
-    visible = true;
-}
-
 void AnimatedGraphic::setRgbLevels(Color rgb) {
     this->rgb = rgb;
 }
@@ -350,18 +330,12 @@ void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
     interruptMovementX = true;
 }
 
-bool AnimatedGraphic::isVisible() {
-    return visible;
-}
-
 void AnimatedGraphic::updateMovement(float elapsedTime) {
     if (applyGravity && !interruptGravity)  {
         gravityVelocity.y += jimp::Timing::toValueForElapsedTime(GameEngine::getInstance()->getGravityForce(), elapsedTime);
     }
     interruptGravity = false;
     
-    if (name == "ghosty")
-        std::cout << gravityVelocity.y << std::endl;
     addToPosition(jimp::Timing::toValueForElapsedTime(gravityVelocity, elapsedTime));
     
     Vector2D movementCopy = moveVelocity;
