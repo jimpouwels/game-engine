@@ -4,9 +4,9 @@
 namespace jimp {
 
 struct Color {
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
+    float r;
+    float g;
+    float b;
     
     void reset() {
         r = 0;
@@ -22,7 +22,7 @@ struct Color {
         return Color { .r = 255, .g = 255, .b = 255 };
     }
     
-    static Color custom(uint8_t r, uint8_t g, uint8_t b) {
+    static Color custom(float r, float g, float b) {
         return Color { .r = r, .g = g, .b = b };
     }
 };

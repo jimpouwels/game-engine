@@ -37,8 +37,10 @@ public:
         Platform* platform3 = new Platform("platform-top-left.png", "platform-top-middle.png", 1, 2, 512, 0.5F, jimp::Vector2D { .x = platform2->getPosition().x + 900, .y = platform2->getPosition().y + 600 });
         
         // BACKGROUND
-        Decoration* blackPlant = new Decoration(jimp::Vector2D { .x = platform->getPosition().x + 2000, .y = platform->getPosition().y + 500 }, "Plant3_{i}.png", 90, 0, 1.4F);
+        Decoration* blackPlant = new Decoration(jimp::Vector2D { .x = platform->getPosition().x + 2000, .y = platform->getPosition().y + 550 }, "Plant3_{i}.png", 90, 0, 1.4F);
         blackPlant->setRgbLevels(jimp::Color::black());
+        blackPlant->animateRgbLevels(jimp::Color::custom(90, 90, 90), 1);
+        
         Decoration* rock1 = new Decoration(jimp::Vector2D { .x = platform->getPosition().x + 1500, .y = platform->getPosition().y + 100 }, "rock1-background.png", 1, 0, 1.7F);
         Decoration* spikes = new Decoration(jimp::Vector2D { .x = -600, .y = platform->getPosition().y - 800 }, "spikes1.png", 1, 45, 1.4F);
     }

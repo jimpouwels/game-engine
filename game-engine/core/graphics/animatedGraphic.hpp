@@ -33,7 +33,11 @@ private:
     int marginRight = 0;
     int marginTop = 0;
     int marginBottom = 0;
+    float totalRgbAnimationTime = 0;
+    int requestedRgbAnimationTime = -1;
     Color rgb = Color::full();
+    Color originalRgb = Color::full();
+    Color targetRgb = Color::black();
     std::map<std::string, Animation*>* animationMap;
     Animation* activeAnimation = nullptr;
     bool markedForDeletion = false;
@@ -43,6 +47,7 @@ private:
     std::mutex* lock = new std::mutex();
     float elapsedTimeSinceLastSwap;
     float drawableSwapIntervalInSeconds;
+    void animateRgb(float elapsedTime);
     Vector2D calculateNextPosition(float elapsedTime);
     void resetGravityVelocity();
     void updateCurrentDrawableData();
@@ -100,6 +105,7 @@ public:
     bool drawInversedHorizontally();
     bool isMarkedForDeletion();
     bool isApplyScrolling();
+    void animateRgbLevels(Color to, int seconds);
     void setRgbLevels(Color rgb);
     Color getRgbLevels();
     void setApplyScrolling(bool applyScrolling);

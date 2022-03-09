@@ -49,7 +49,64 @@ void AnimatedGraphic::onUpdate(float elapsedTime) {
         updateMovement(elapsedTime);
         this->updateAnimation(elapsedTime);
     }
+    animateRgb(elapsedTime);
     lock->unlock();
+}
+
+void AnimatedGraphic::animateRgb(float elapsedTime) {
+    if (requestedRgbAnimationTime == -1) {
+        return;
+    }
+    totalRgbAnimationTime += elapsedTime;
+    float remainingSeconds = requestedRgbAnimationTime - totalRgbAnimationTime;
+    if ((targetRgb.r > originalRgb.r && rgb.r >= targetRgb.r)
+        || (originalRgb.r > targetRgb.r && rgb.r <= targetRgb.r)
+        || remainingSeconds <= 0.0F) {
+        std::swap(targetRgb, originalRgb);
+        totalRgbAnimationTime = 0;
+        remainingSeconds = requestedRgbAnimationTime;
+    }
+    
+    float remainingDifferenceR = abs(targetRgb.r - rgb.r);
+    float remainingDifferenceG = abs(targetRgb.g - rgb.g);
+    float remainingDifferenceB = abs(targetRgb.b - rgb.b);
+    float rDelta = jimp::Timing::toValueForElapsedTime(remainingDifferenceR / remainingSeconds, elapsedTime);
+    float gDelta = jimp::Timing::toValueForElapsedTime(remainingDifferenceG / remainingSeconds, elapsedTime);
+    float bDelta = jimp::Timing::toValueForElapsedTime(remainingDifferenceB / remainingSeconds, elapsedTime);
+    
+    if (targetRgb.r < rgb.r) {
+        rDelta = -rDelta;
+    }
+    if (targetRgb.g < rgb.g) {
+        gDelta = -gDelta;
+    }
+    if (targetRgb.b < rgb.b) {
+        bDelta = -bDelta;
+    }
+    
+    if (rgb.r + rDelta > 255) {
+        rgb.r = 255;
+    } else if (rgb.r + rDelta < 0) {
+        rgb.r = 0;
+    } else {
+        rgb.r += rDelta;
+    }
+    
+    if (rgb.g + gDelta > 255) {
+        rgb.g = 255;
+    } else if (rgb.g + gDelta < 0) {
+        rgb.g = 0;
+    } else {
+        rgb.g += gDelta;
+    }
+    
+    if (rgb.b + bDelta > 255) {
+        rgb.b = 255;
+    } else if (rgb.b + bDelta < 0) {
+        rgb.b = 0;
+    } else {
+        rgb.b += bDelta;
+    }
 }
 
 void AnimatedGraphic::markForDeletion() {
@@ -298,6 +355,13 @@ void AnimatedGraphic::setRgbLevels(Color rgb) {
 
 Color AnimatedGraphic::getRgbLevels() {
     return rgb;
+}
+
+void AnimatedGraphic::animateRgbLevels(Color to, int seconds) {
+    this->requestedRgbAnimationTime = seconds;
+    targetRgb = to;
+    originalRgb = rgb;
+    totalRgbAnimationTime = 0;
 }
 
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
