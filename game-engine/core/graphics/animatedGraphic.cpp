@@ -356,9 +356,12 @@ bool AnimatedGraphic::isVisible() {
 
 void AnimatedGraphic::updateMovement(float elapsedTime) {
     if (applyGravity && !interruptGravity)  {
-        gravityVelocity.y += GameEngine::getInstance()->getGravityForce();
+        gravityVelocity.y += jimp::Timing::toValueForElapsedTime(GameEngine::getInstance()->getGravityForce(), elapsedTime);
     }
     interruptGravity = false;
+    
+    if (name == "ghosty")
+        std::cout << gravityVelocity.y << std::endl;
     addToPosition(jimp::Timing::toValueForElapsedTime(gravityVelocity, elapsedTime));
     
     Vector2D movementCopy = moveVelocity;
@@ -385,7 +388,7 @@ void AnimatedGraphic::updateCurrentDrawableData() {
 Vector2D AnimatedGraphic::calculateNextPosition(float elapsedTime) {
     Vector2D velocity = getVelocity();
     if (applyGravity && !interruptGravity)  {
-        velocity.y += GameEngine::getInstance()->getGravityForce();
+        velocity.y += jimp::Timing::toValueForElapsedTime(GameEngine::getInstance()->getGravityForce(), elapsedTime);
     }
     if (interruptMovementX) {
         velocity.x -= moveVelocity.x;
