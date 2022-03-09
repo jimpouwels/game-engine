@@ -6,6 +6,10 @@
 namespace ghosty {
 
 Platform::Platform(std::string cornerBlockFilePath, std::string innerBlockFilePath, uint16_t rowCount, uint16_t columnCount, float blockSize, float scale, jimp::Vector2D position) {
+    this->rowCount = rowCount;
+    this->columnCount = columnCount;
+    this->blockSize = blockSize;
+    this->scale = scale;
     this->position = position;
     float size = blockSize * scale;
     if (rowCount == 1) {
@@ -47,6 +51,14 @@ Platform::Platform(std::string cornerBlockFilePath, std::string innerBlockFilePa
             }
         }
     }
+}
+
+float Platform::getWidth() {
+    return columnCount * (blockSize * scale);
+}
+
+float Platform::getHeight() {
+    return rowCount * (blockSize * scale);
 }
 
 jimp::Vector2D Platform::getPosition() {
