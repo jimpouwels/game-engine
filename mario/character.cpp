@@ -73,7 +73,7 @@ void Character::onKeyboardUp(jimp::KeyState keyState) {
     if (keyState == jimp::KeyState::PRESSED) {
         if (!isJumping) {
             isJumping = true;
-            jump(1500);
+            jump(2000);
         }
     }
 }
