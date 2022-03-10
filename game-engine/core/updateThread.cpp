@@ -46,19 +46,17 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                         distanceBLeft = ray->getPosition() - b->getPosition();
                         distanceBRight = rayRight - b->getPosition();
                         
-                        if (distanceALeft.x < 0) distanceALeft.x = -distanceALeft.x;
-                        if (distanceALeft.y < 0) distanceALeft.y = -distanceALeft.y;
-                        
-                        if (distanceARight.x < 0) distanceARight.x = -distanceARight.x;
-                        if (distanceARight.y < 0) distanceARight.y = -distanceARight.y;
+                        distanceALeft.x = fmax(distanceALeft.x, -distanceALeft.x);
+                        distanceALeft.y = fmax(distanceALeft.y, -distanceALeft.y);
+                        distanceARight.x = fmax(distanceARight.x, -distanceARight.x);
+                        distanceARight.y = fmax(distanceARight.y, -distanceARight.y);
                         
                         Vector2D nearestA = (distanceALeft.x + distanceALeft.y) < (distanceARight.x + distanceARight.y) ? distanceALeft : distanceARight;
                         
-                        if (distanceBLeft.x < 0) distanceBLeft.x = -distanceBLeft.x;
-                        if (distanceBLeft.y < 0) distanceBLeft.y = -distanceBLeft.y;
-                        
-                        if (distanceBRight.x < 0) distanceBRight.x = -distanceBRight.x;
-                        if (distanceBRight.y < 0) distanceBRight.y = -distanceBRight.y;
+                        distanceBLeft.x = fmax(distanceBLeft.x, -distanceBLeft.x);
+                        distanceBLeft.y = fmax(distanceBLeft.y, -distanceBLeft.y);
+                        distanceBRight.x = fmax(distanceBRight.x, -distanceBRight.x);
+                        distanceBRight.y = fmax(distanceBRight.y, -distanceBRight.y);
                         
                         Vector2D nearestB = distanceBLeft.x + distanceBLeft.y < distanceBRight.x + distanceBRight.y ? distanceBLeft : distanceBRight;
                         
