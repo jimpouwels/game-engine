@@ -6,7 +6,7 @@
 namespace jimp {
 
 bool isWorking = false;
-AnimatedGraphic* ray = nullptr;
+AnimatedGraphic* sourceGraphic = nullptr;
 
 void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onSpriteDeletedCallback, std::function<void()> onLoadNewGraphicsCallback, std::vector<AnimatedGraphic*>* registeredSprites, std::list<AnimatedGraphic*>* newGraphics, std::mutex* processingLock, std::mutex* graphicsLock) {
     isWorking = true;
@@ -33,23 +33,23 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                             graphicsToCheckCollision.push_back(registeredSprites->at(x));
                         }
                     }
-                    ray = registeredSprite;
+                    sourceGraphic = registeredSprite;
                     std::sort(graphicsToCheckCollision.begin(), graphicsToCheckCollision.end(), [](AnimatedGraphic* a, AnimatedGraphic* b) {
+                        Vector2D sourceGraphicLeft = Vector2D { .x = sourceGraphic->getPosition().x + sourceGraphic->getMarginLeft(), .y = sourceGraphic->getPosition().y + sourceGraphic->getMarginTop() };
+                        Vector2D sourceGraphicRight = Vector2D { .x = sourceGraphic->getPosition().x + sourceGraphic->getWidth() - sourceGraphic->getMarginRight(), .y = sourceGraphic->getPosition().y + sourceGraphic->getMarginTop() };
+                        
                         Vector2D distanceALeft = Vector2D {.x = 0, .y = 0};
                         Vector2D distanceARight = Vector2D {.x = 0, .y = 0};
                         Vector2D distanceBLeft = Vector2D {.x = 0, .y = 0};
                         Vector2D distanceBRight = Vector2D {.x = 0, .y = 0};
                         
-                        Vector2D rayLeft = Vector2D { .x = ray->getPosition().x + ray->getMarginLeft(), .y = ray->getPosition().y + ray->getMarginTop() };
-                        Vector2D rayRight = Vector2D { .x = ray->getPosition().x + ray->getWidth() - ray->getMarginRight(), .y = ray->getPosition().y + ray->getMarginTop() };
-                        
                         Vector2D positionA = Vector2D { .x = a->getPosition().x + a->getMarginLeft(), .y = a->getPosition().y + a->getMarginTop() };
                         Vector2D positionB = Vector2D { .x = b->getPosition().x + b->getMarginLeft(), .y = b->getPosition().y + b->getMarginTop() };
         
-                        distanceALeft = rayLeft - positionA;
-                        distanceARight = rayRight - positionA;
-                        distanceBLeft = rayLeft - positionB;
-                        distanceBRight = rayRight - positionB;
+                        distanceALeft = sourceGraphicLeft - positionA;
+                        distanceARight = sourceGraphicRight - positionA;
+                        distanceBLeft = sourceGraphicLeft - positionB;
+                        distanceBRight = sourceGraphicRight - positionB;
                         
                         distanceALeft.x = fmax(distanceALeft.x, -distanceALeft.x);
                         distanceALeft.y = fmax(distanceALeft.y, -distanceALeft.y);

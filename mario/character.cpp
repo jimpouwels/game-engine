@@ -23,6 +23,10 @@ void Character::doOnInit() {
     }
 }
 
+void Character::doOnFrame(float elapsedTime) {
+//    jimp::GameEngine::getInstance()->drawRectangle(getCollisionRectWidth(), getCollisionRectHeight(), jimp::Vector2D { .x = getPosition().x + getMarginLeft(), .y = getPosition().y + getMarginTop() }, 0xFFFFFF);
+}
+
 void Character::doOnUpdate(float elapsedTime) {
     std::string currentAnimationId = getCurrentAnimationId();
     if (isJumping) {

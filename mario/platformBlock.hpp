@@ -13,6 +13,7 @@ public:
     PlatformBlock(jimp::Vector2D position, std::string filePath, float angle, float scale);
     void doOnInit() override;
     void doOnUpdate(float elapsedTime) override;
+    void doOnFrame(float elapsedTime) override;
     uint16_t getZIndex() override;
 };
 

@@ -19,6 +19,10 @@ struct Vector2D {
     Vector2D operator-(Vector2D other) {
         return Vector2D { .x = x - other.x, .y = y - other.y };
     }
+    
+    static Vector2D empty() {
+        return Vector2D { .x = 0, .y = 0 };
+    }
 };
 
 }

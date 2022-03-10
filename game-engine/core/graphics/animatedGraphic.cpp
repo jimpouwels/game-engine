@@ -341,10 +341,10 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
     
     Vector2D movementCopy = moveVelocity;
     if (interruptMovementX) {
+        interruptMovementX = false;
         movementCopy.x = 0;
     }
     addToPosition(jimp::Timing::toValueForElapsedTime(movementCopy, elapsedTime));
-    interruptMovementX = false;
 }
 
 void AnimatedGraphic::updateCurrentDrawableData() {
@@ -361,13 +361,15 @@ void AnimatedGraphic::updateCurrentDrawableData() {
 }
 
 Vector2D AnimatedGraphic::calculateNextPosition(float elapsedTime) {
-    Vector2D velocity = getVelocity();
+    Vector2D velocity = Vector2D::empty();
     if (applyGravity && !interruptGravity)  {
+        velocity.y = gravityVelocity.y;
         velocity.y += jimp::Timing::toValueForElapsedTime(GameEngine::getInstance()->getGravityForce(), elapsedTime);
     }
-    if (interruptMovementX) {
-        velocity.x -= moveVelocity.x;
+    if (!interruptMovementX) {
+        velocity.x += moveVelocity.x;
     }
+    velocity.y += moveVelocity.y;
     return getPosition() + jimp::Timing::toValueForElapsedTime(velocity, elapsedTime);
 }
 
@@ -412,8 +414,6 @@ void AnimatedGraphic::addDrawable(std::string animationId, Drawable* drawable) {
     if (activeAnimation == nullptr) {
         activeAnimation = animation;
         updateAnimation(0);
-        collisionBoxWidth = getActiveDrawable()->getWidth() - getMarginLeft() - getMarginRight();
-        collisionBoxHeight = getActiveDrawable()->getHeight() - getMarginTop() - getMarginBottom();
         Sprite* sprite = dynamic_cast<Sprite*>(drawable);
         if (sprite != nullptr) {
             marginLeft = sprite->getMarginLeft();
@@ -421,6 +421,8 @@ void AnimatedGraphic::addDrawable(std::string animationId, Drawable* drawable) {
             marginTop = sprite->getMarginTop();
             marginBottom = sprite->getMarginBottom();
         }
+        collisionBoxWidth = getActiveDrawable()->getWidth() - getMarginLeft() - getMarginRight();
+        collisionBoxHeight = getActiveDrawable()->getHeight() - getMarginTop() - getMarginBottom();
     }
 }
 

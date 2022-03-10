@@ -1,6 +1,7 @@
 #include "platformBlock.hpp"
 #include "gameEngine.hpp"
 #include "scrollingWorld.hpp"
+#include "vector2D.hpp"
 
 namespace ghosty {
   
@@ -14,6 +15,10 @@ void PlatformBlock::doOnInit() {
 }
 
 void PlatformBlock::doOnUpdate(float elapsedTime) {
+}
+
+void PlatformBlock::doOnFrame(float elapsedTime) {
+//    jimp::GameEngine::getInstance()->drawRectangle(getCollisionRectWidth(), getCollisionRectHeight(), jimp::Vector2D { .x = getPosition().x + getMarginLeft(), .y = getPosition().y + getMarginTop() }, 0xFFFFFF);
 }
 
 uint16_t PlatformBlock::getZIndex() {
