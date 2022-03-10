@@ -63,7 +63,7 @@ public:
 }
 
 int main() {
-    ghosty::Ghosty game(2000, 1200, "My First Platform Game");
+    ghosty::Ghosty game(1800, 1000, "My First Platform Game");
     game.startGame();
     return 0;
 }
