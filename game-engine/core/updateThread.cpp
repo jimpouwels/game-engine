@@ -40,18 +40,23 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                         Vector2D distanceBLeft = Vector2D {.x = 0, .y = 0};
                         Vector2D distanceBRight = Vector2D {.x = 0, .y = 0};
                         
-                        Vector2D rayRight = Vector2D { .x = ray->getPosition().x + ray->getWidth(), .y = ray->getPosition().y };
-                        distanceALeft = ray->getPosition() - a->getPosition();
-                        distanceARight = rayRight- a->getPosition();
-                        distanceBLeft = ray->getPosition() - b->getPosition();
-                        distanceBRight = rayRight - b->getPosition();
+                        Vector2D rayLeft = Vector2D { .x = ray->getPosition().x + ray->getMarginLeft(), .y = ray->getPosition().y + ray->getMarginTop() };
+                        Vector2D rayRight = Vector2D { .x = ray->getPosition().x + ray->getWidth() - ray->getMarginRight(), .y = ray->getPosition().y + ray->getMarginTop() };
+                        
+                        Vector2D positionA = Vector2D { .x = a->getPosition().x + a->getMarginLeft(), .y = a->getPosition().y + a->getMarginTop() };
+                        Vector2D positionB = Vector2D { .x = b->getPosition().x + b->getMarginLeft(), .y = b->getPosition().y + b->getMarginTop() };
+        
+                        distanceALeft = rayLeft - positionA;
+                        distanceARight = rayRight - positionA;
+                        distanceBLeft = rayLeft - positionB;
+                        distanceBRight = rayRight - positionB;
                         
                         distanceALeft.x = fmax(distanceALeft.x, -distanceALeft.x);
                         distanceALeft.y = fmax(distanceALeft.y, -distanceALeft.y);
                         distanceARight.x = fmax(distanceARight.x, -distanceARight.x);
                         distanceARight.y = fmax(distanceARight.y, -distanceARight.y);
                         
-                        Vector2D nearestA = (distanceALeft.x + distanceALeft.y) < (distanceARight.x + distanceARight.y) ? distanceALeft : distanceARight;
+                        Vector2D nearestARight = (distanceALeft.x + distanceALeft.y) < (distanceARight.x + distanceARight.y) ? distanceALeft : distanceARight;
                         
                         distanceBLeft.x = fmax(distanceBLeft.x, -distanceBLeft.x);
                         distanceBLeft.y = fmax(distanceBLeft.y, -distanceBLeft.y);
@@ -60,7 +65,7 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                         
                         Vector2D nearestB = distanceBLeft.x + distanceBLeft.y < distanceBRight.x + distanceBRight.y ? distanceBLeft : distanceBRight;
                         
-                        return (nearestA.x + nearestA.y) < (nearestB.x + nearestB.y);
+                        return (nearestARight.x + nearestARight.y) < (nearestB.x + nearestB.y);
                         
                     });
                     for (uint16_t j = 0; j < graphicsToCheckCollision.size(); j++) {
