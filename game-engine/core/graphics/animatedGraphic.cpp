@@ -195,6 +195,10 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
         }
         hasCollidedRect(otherGraphic, Geo2D::Side::LEFT);
         hasCollidedRectLeft(otherGraphic);
+    } else {
+        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
+            std::cout << rand() << "   END" << std::endl;
+        }
     }
 }
 
@@ -374,9 +378,6 @@ void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
     getPosition().y = otherGraphic->getPosition().y - getHeight() + getMarginBottom() + otherGraphic->getMarginTop();
     resetGravityVelocity();
     interruptGravity = true;
-    if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
-        std::cout << "reset position::: ghosty.x: " << getPosition().y + getMarginLeft() << ", platform.y: " << otherGraphic->getPosition().x + otherGraphic->getWidth() - otherGraphic->getMarginRight() << std::endl;
-    }
     lock->unlock();
 }
 
@@ -389,7 +390,10 @@ void AnimatedGraphic::stayToLeftOf(AnimatedGraphic *otherGraphic) {
 
 void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
     lock->lock();
-    getPosition().x = otherGraphic->getPosition().x + (otherGraphic->getWidth() - otherGraphic->getMarginRight()) - getMarginLeft();
+    getPosition().x = otherGraphic->getPosition().x + otherGraphic->getWidth() - otherGraphic->getMarginRight() - getMarginLeft();
+    if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
+        std::cout << "reset position::: ghosty.x: " << getPosition().x + getMarginLeft() << ", platform.x: " << otherGraphic->getPosition().x + otherGraphic->getWidth() - otherGraphic->getMarginRight() << std::endl;
+    }
     interruptMovementX = true;
     lock->unlock();
 }
@@ -405,8 +409,9 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
     if (interruptMovementX) {
         interruptMovementX = false;
         addToPosition(jimp::Timing::toValueForElapsedTime(Vector2D { .x = 0, .y = moveVelocity.y }, elapsedTime));
+    } else {
+        addToPosition(jimp::Timing::toValueForElapsedTime(moveVelocity, elapsedTime));
     }
-    addToPosition(jimp::Timing::toValueForElapsedTime(moveVelocity, elapsedTime));
 }
 
 void AnimatedGraphic::updateCurrentDrawableData() {
