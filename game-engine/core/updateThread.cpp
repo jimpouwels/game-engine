@@ -39,16 +39,16 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                     }
                     sourceGraphic = registeredSprite;
                     std::sort(graphicsToCheckCollision.begin(), graphicsToCheckCollision.end(), [](AnimatedGraphic* a, AnimatedGraphic* b) {
-                        Vector2D sourceGraphicLeft = Vector2D::from(sourceGraphic->getPosition().x + sourceGraphic->getMarginLeft(), sourceGraphic->getPosition().y + sourceGraphic->getMarginTop());
-                        Vector2D sourceGraphicRight = Vector2D::from(sourceGraphic->getPosition().x + sourceGraphic->getWidth() - sourceGraphic->getMarginRight(), sourceGraphic->getPosition().y + sourceGraphic->getMarginTop());
+                        Vector2D sourceGraphicLeftTop = Vector2D::from(sourceGraphic->getLeft(), sourceGraphic->getTop());
+                        Vector2D sourceGraphicRightTop = Vector2D::from(sourceGraphic->getRight(), sourceGraphic->getTop());
                         
-                        Vector2D positionA = Vector2D::from(a->getPosition().x + a->getMarginLeft(), a->getPosition().y + a->getMarginTop());
-                        Vector2D positionB = Vector2D::from(b->getPosition().x + b->getMarginLeft(), b->getPosition().y + b->getMarginTop());
+                        Vector2D positionA = Vector2D::from(a->getLeft(), a->getTop());
+                        Vector2D positionB = Vector2D::from(b->getLeft(), b->getTop());
         
-                        Vector2D distanceALeft = sourceGraphicLeft - positionA;
-                        Vector2D distanceARight = sourceGraphicRight - positionA;
-                        Vector2D distanceBLeft = sourceGraphicLeft - positionB;
-                        Vector2D distanceBRight = sourceGraphicRight - positionB;
+                        Vector2D distanceALeft = sourceGraphicLeftTop - positionA;
+                        Vector2D distanceARight = sourceGraphicRightTop - positionA;
+                        Vector2D distanceBLeft = sourceGraphicLeftTop - positionB;
+                        Vector2D distanceBRight = sourceGraphicRightTop - positionB;
                         
                         distanceALeft.x = fmax(distanceALeft.x, -distanceALeft.x);
                         distanceALeft.y = fmax(distanceALeft.y, -distanceALeft.y);
