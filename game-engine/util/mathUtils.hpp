@@ -16,6 +16,10 @@ public:
         return value >= value1 && value <= value2;
     }
     
+    static bool floatEquals(float first, float second) {
+        return fabs(first - second) < 0.0001;
+    }
+    
 };
 
 }

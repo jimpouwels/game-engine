@@ -116,44 +116,87 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
     
     Vector2D otherGraphicCurrentPosition = otherGraphic->getPosition();
     Vector2D otherGraphicNextPosition = otherGraphic->calculateNextPosition(elapsedTime);
-    
+    if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
+        std::cout << "velocity before collision check: " << getVelocity().y << std::endl;
+    }
     if (currentGraphicCurrentPosition.x + getWidth() - getMarginRight() < otherGraphicCurrentPosition.x + otherGraphic->getMarginLeft()
         && currentGraphicNextPosition.x + getWidth() - getMarginRight() < otherGraphicNextPosition.x + otherGraphic->getMarginLeft()) {
+        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
+            std::cout << rand() << "   LINKS ERVAN" << std::endl;
+        }
         return;
     }
     if (currentGraphicCurrentPosition.x + getMarginLeft() > otherGraphicCurrentPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight()
         && currentGraphicNextPosition.x + getMarginLeft() > otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight()) {
+        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
+            std::cout << rand() << "   RECHTS ERVAN" << std::endl;
+        }
         return;
     }
     if (currentGraphicCurrentPosition.y + getHeight() - getMarginBottom() < otherGraphicCurrentPosition.y + otherGraphic->getMarginTop()
         && currentGraphicNextPosition.y + getHeight() - getMarginBottom() < otherGraphicNextPosition.y + otherGraphic->getMarginTop()) {
+        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
+            std::cout << rand() << "   ERBOVEN" << std::endl;
+        }
         return;
     }
     if (currentGraphicCurrentPosition.y + getMarginTop() > otherGraphicCurrentPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom()
         && currentGraphicNextPosition.y + getMarginTop() > otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom()) {
+        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
+            std::cout << rand() << "   ERONDER" << std::endl;
+        }
         return;
     }
-     
-    if ((((currentGraphicCurrentPosition.y + getHeight() - getMarginBottom() <= otherGraphicCurrentPosition.y + otherGraphic->getMarginTop() && currentGraphicNextPosition.y + getHeight() - getMarginBottom() > otherGraphicNextPosition.y + otherGraphic->getMarginTop())))
+//    if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
+//        std::cout << "ghosty current: " << currentGraphicCurrentPosition.y + getHeight() - getMarginBottom() << ", otherGraphicCurrent: " << otherGraphicCurrentPosition.y + otherGraphic->getMarginTop() << ", currentGraphicNext: " << currentGraphicNextPosition.y + getHeight() - getMarginBottom() << ", otherGraphicNext: " << otherGraphicNextPosition.y + otherGraphic->getMarginTop() << ", resultFirstPart: " << (currentGraphicCurrentPosition.y + getHeight() - getMarginBottom() <= otherGraphicCurrentPosition.y + otherGraphic->getMarginTop() && currentGraphicNextPosition.y + getHeight() - getMarginBottom() > otherGraphicNextPosition.y + otherGraphic->getMarginTop()) << ", result second part: " << (currentGraphicNextPosition.x + getWidth() - getMarginRight() != otherGraphicNextPosition.x + otherGraphic->getMarginLeft()
+//        && currentGraphicNextPosition.x + getMarginLeft() != otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight()) << std::endl;
+//    }
+    if (((currentGraphicCurrentPosition.y + getHeight() - getMarginBottom() < otherGraphicCurrentPosition.y + otherGraphic->getMarginTop()
+          || MathUtils::floatEquals(currentGraphicCurrentPosition.y + getHeight() - getMarginBottom(), otherGraphicCurrentPosition.y + otherGraphic->getMarginTop()))
+         && currentGraphicNextPosition.y + getHeight() - getMarginBottom() > otherGraphicNextPosition.y + otherGraphic->getMarginTop())
                 && currentGraphicNextPosition.x + getWidth() - getMarginRight() != otherGraphicNextPosition.x + otherGraphic->getMarginLeft()
                 && currentGraphicNextPosition.x + getMarginLeft() != otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight()) {
+        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
+            std::cout << rand() << "   BOTTOM HIT" << std::endl;
+            std::cout << "ghosty.y: " << getPosition().y + getHeight() - getMarginBottom() << " block.y: " << otherGraphic->getPosition().y + otherGraphic->getMarginTop() << ", ghostvel.y: " << getVelocity().y << std::endl;
+        }
         hasCollidedRect(otherGraphic, Geo2D::Side::BOTTOM);
         hasCollidedRectBottom(otherGraphic);
-    } else if ((((currentGraphicCurrentPosition.y + getMarginTop() >= otherGraphicCurrentPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom() && currentGraphicNextPosition.y + getMarginTop() < otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom())))
+    } else if (((currentGraphicCurrentPosition.y + getMarginTop() > otherGraphicCurrentPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom()
+                 || MathUtils::floatEquals(currentGraphicCurrentPosition.y + getMarginTop(), otherGraphicCurrentPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom()))
+                  && currentGraphicNextPosition.y + getMarginTop() < otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom())
                && currentGraphicNextPosition.x + getWidth() - getMarginRight() != otherGraphicNextPosition.x + otherGraphic->getMarginLeft()
                && currentGraphicNextPosition.x + getMarginLeft() != otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight()) {
+        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
+            std::cout << rand() << "   TOP HIT" << std::endl;
+        }
         hasCollidedRect(otherGraphic, Geo2D::Side::TOP);
         hasCollidedRectTop(otherGraphic);
-    } else if ((((currentGraphicCurrentPosition.x + getWidth() - getMarginRight() <= otherGraphicCurrentPosition.x + otherGraphic->getMarginLeft() && currentGraphicNextPosition.x + getWidth() - getMarginRight() > otherGraphicNextPosition.x + otherGraphic->getMarginLeft())))
+    } else if (((currentGraphicCurrentPosition.x + getWidth() - getMarginRight() < otherGraphicCurrentPosition.x + otherGraphic->getMarginLeft()
+                || MathUtils::floatEquals(currentGraphicCurrentPosition.x + getWidth() - getMarginRight(), otherGraphicCurrentPosition.x + otherGraphic->getMarginLeft()))
+               && currentGraphicNextPosition.x + getWidth() - getMarginRight() > otherGraphicNextPosition.x + otherGraphic->getMarginLeft())
                && currentGraphicNextPosition.y + getHeight() - getMarginBottom() != otherGraphicNextPosition.y + otherGraphic->getMarginTop()
                && currentGraphicNextPosition.y + getMarginTop() != otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom()) {
+        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
+            std::cout << rand() << "   RIGHT HIT" << std::endl;
+        }
         hasCollidedRect(otherGraphic, Geo2D::Side::RIGHT);
         hasCollidedRectRight(otherGraphic);
-    } else if ((((currentGraphicCurrentPosition.x + getMarginLeft() >= otherGraphicCurrentPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight() && currentGraphicNextPosition.x + getMarginLeft() < otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight())))
+    } else if (((currentGraphicCurrentPosition.x + getMarginLeft() > otherGraphicCurrentPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight()
+                 || MathUtils::floatEquals(currentGraphicCurrentPosition.x + getMarginLeft(), otherGraphicCurrentPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight()))
+                  && currentGraphicNextPosition.x + getMarginLeft() < otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight())
                && currentGraphicNextPosition.y + getHeight() - getMarginBottom() != otherGraphicNextPosition.y + otherGraphic->getMarginTop()
                && currentGraphicNextPosition.y + getMarginTop() != otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom()) {
+        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
+            std::cout << rand() << "   LEFT HIT" << std::endl;
+        }
         hasCollidedRect(otherGraphic, Geo2D::Side::LEFT);
         hasCollidedRectLeft(otherGraphic);
+    } else {
+        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
+            std::cout << "END" << std::endl;
+            std::cout << "ghosty.y: " << getPosition().y + getHeight() - getMarginBottom() << " block.y: " << otherGraphic->getPosition().y + otherGraphic->getMarginTop() << ", ghostvel.y: " << getVelocity().y << std::endl;;
+        }
     }
 }
 
@@ -172,6 +215,10 @@ void AnimatedGraphic::updateAnimation(float elapsedTime) {
 
 std::string AnimatedGraphic::getName() {
     return name;
+}
+
+void AnimatedGraphic::setName(std::string name) {
+    this->name = name;
 }
 
 void AnimatedGraphic::drawInversedHorizontally(bool value) {
@@ -271,25 +318,34 @@ void AnimatedGraphic::accelerate(float angle, uint16_t mass, uint16_t force, flo
 }
 
 void AnimatedGraphic::move(float angle, float pixelsPerSecond) {
+    lock->lock();
     moveVelocity = jimp::Geo2D::vectorFrom(angle, pixelsPerSecond);
+    lock->unlock();
 }
 
 void AnimatedGraphic::stopMoving() {
-    moveVelocity.reset();
+    lock->lock();
+    moveVelocity.x = 0;
+    moveVelocity.y = 0;
+    lock->unlock();
 }
 
 void AnimatedGraphic::jump(float force) {
+    lock->lock();
     gravityVelocity.y = -force;
+    lock->unlock();
 }
 
 void AnimatedGraphic::interruptJump() {
+    lock->lock();
     if (gravityVelocity.y < 0) {
         gravityVelocity.y = -gravityVelocity.y;
     }
+    lock->unlock();
 }
 
 void AnimatedGraphic::resetGravityVelocity() {
-    gravityVelocity.y = 0;
+    gravityVelocity.y = 0.0F;
 }
 
 void AnimatedGraphic::setRotationAngle(float angle) {
@@ -316,19 +372,28 @@ void AnimatedGraphic::animateRgbLevels(Color to, int seconds) {
 }
 
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
+    lock->lock();
     getPosition().y = otherGraphic->getPosition().y - getHeight() + getMarginBottom() + otherGraphic->getMarginTop();
     resetGravityVelocity();
     interruptGravity = true;
+    if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
+        std::cout << "reset position::: ghosty.y: " << getPosition().y + getHeight() - getMarginBottom() << ", platform.y: " << otherGraphic->getPosition().y + otherGraphic->getMarginTop() << std::endl;
+    }
+    lock->unlock();
 }
 
 void AnimatedGraphic::stayToLeftOf(AnimatedGraphic *otherGraphic) {
+    lock->lock();
     getPosition().x = otherGraphic->getPosition().x + otherGraphic->getMarginLeft() - (getHeight() - getMarginRight());
     interruptMovementX = true;
+    lock->unlock();
 }
 
 void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
+    lock->lock();
     getPosition().x = otherGraphic->getPosition().x + otherGraphic->getWidth() - otherGraphic->getMarginRight() - getMarginLeft();
     interruptMovementX = true;
+    lock->unlock();
 }
 
 void AnimatedGraphic::updateMovement(float elapsedTime) {
@@ -339,12 +404,11 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
     
     addToPosition(jimp::Timing::toValueForElapsedTime(gravityVelocity, elapsedTime));
     
-    Vector2D movementCopy = moveVelocity;
     if (interruptMovementX) {
         interruptMovementX = false;
-        movementCopy.x = 0;
+        addToPosition(jimp::Timing::toValueForElapsedTime(Vector2D { .x = 0, .y = moveVelocity.y }, elapsedTime));
     }
-    addToPosition(jimp::Timing::toValueForElapsedTime(movementCopy, elapsedTime));
+    addToPosition(jimp::Timing::toValueForElapsedTime(moveVelocity, elapsedTime));
 }
 
 void AnimatedGraphic::updateCurrentDrawableData() {

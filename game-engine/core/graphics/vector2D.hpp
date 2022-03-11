@@ -8,8 +8,8 @@ struct Vector2D {
     float y;
     
     void reset() {
-        x = 0;
-        y = 0;
+        x = 0.0F;
+        y = 0.0F;
     }
     
     Vector2D operator+(Vector2D other) {

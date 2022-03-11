@@ -87,6 +87,7 @@ public:
     Vector2D& getMoveVelocity();
     Vector2D getVelocity();
     std::string getName();
+    void setName(std::string name);
     float getScale();
     int getWidth();
     int getSingleWidth();
