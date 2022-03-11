@@ -1,5 +1,6 @@
 #include "updateThread.hpp"
 #include "scrollingWorld.hpp"
+#include "timer.hpp"
 #include <iostream>
 #include <chrono>
 
@@ -23,6 +24,8 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
             std::chrono::duration<float> elapsed = currentTime - previousUpdateTime;
             previousUpdateTime = currentTime;
             if (elapsed.count() < 1) {
+                Timer::getInstance()->onUpdate(elapsed.count());
+                
                 std::list<AnimatedGraphic*> spritesToDelete = std::list<AnimatedGraphic*>();
                 
                 for (uint16_t i = 0; i < registeredSprites->size(); i++) {
