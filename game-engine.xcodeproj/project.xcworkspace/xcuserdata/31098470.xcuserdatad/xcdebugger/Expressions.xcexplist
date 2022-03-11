@@ -61,6 +61,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "jimp::doLoop(std::__1::function&lt;void (float)&gt;, std::__1::function&lt;void (jimp::AnimatedGraphic*)&gt;, std::__1::function&lt;void ()&gt;, std::__1::vector&lt;jimp::AnimatedGraphic*, std::__1::allocator&lt;jimp::AnimatedGraphic*&gt; &gt;*, std::__1::list&lt;jimp::AnimatedGraphic*, std::__1::allocator&lt;jimp::AnimatedGraphic*&gt; &gt;*, std::__1::mutex*, std::__1::mutex*):updateThread.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "registeredSprites-&gt;at(x)-&gt;getName() == &quot;DEZE&quot; || registeredSprites-&gt;at(x)-&gt;getName() == &quot;block&quot;">
+            </PersistentString>
+            <PersistentString
+               value = "(!found &amp;&amp; registeredSprite-&gt;getName() == &quot;ghosty&quot; &amp;&amp; (registeredSprites-&gt;at(x)-&gt;getName() == &quot;DEZE&quot; || registeredSprites-&gt;at(x)-&gt;getName() == &quot;block&quot;))">
+            </PersistentString>
+            <PersistentString
+               value = "!found &amp;&amp; registeredSprite-&gt;getName() == &quot;ghosty&quot; &amp;&amp; (registeredSprites-&gt;at(x)-&gt;getName() == &quot;DEZE&quot; || registeredSprites-&gt;at(x)-&gt;getName() == &quot;block&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "registeredSprite-&gt;getName()">
+            </PersistentString>
+            <PersistentString
+               value = "registeredSprites-&gt;at(x)-&gt;getName()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "jimp::doLoop(std::__1::function&lt;void (float)&gt;, std::__1::function&lt;void (jimp::AnimatedGraphic*)&gt;, std::__1::function&lt;void ()&gt;, std::__1::vector&lt;jimp::AnimatedGraphic*, std::__1::allocator&lt;jimp::AnimatedGraphic*&gt; &gt;*, std::__1::list&lt;jimp::AnimatedGraphic*, std::__1::allocator&lt;jimp::AnimatedGraphic*&gt; &gt;*, std::__1::mutex*, std::__1::mutex*)::$_0::operator()(jimp::AnimatedGraphic*, jimp::AnimatedGraphic*) const:updateThread.cpp">
          <PersistentStrings>
             <PersistentString
