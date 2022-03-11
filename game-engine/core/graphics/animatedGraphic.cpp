@@ -67,12 +67,9 @@ void AnimatedGraphic::animateRgb(float elapsedTime) {
         remainingSeconds = requestedRgbAnimationTime;
     }
     
-    float remainingDifferenceR = targetRgb.r - rgb.r;
-    float remainingDifferenceG = targetRgb.g - rgb.g;
-    float remainingDifferenceB = targetRgb.b - rgb.b;
-    float rDelta = jimp::Timing::toValueForElapsedTime(remainingDifferenceR / remainingSeconds, elapsedTime);
-    float gDelta = jimp::Timing::toValueForElapsedTime(remainingDifferenceG / remainingSeconds, elapsedTime);
-    float bDelta = jimp::Timing::toValueForElapsedTime(remainingDifferenceB / remainingSeconds, elapsedTime);
+    float rDelta = jimp::Timing::toValueForElapsedTime((targetRgb.r - rgb.r) / remainingSeconds, elapsedTime);
+    float gDelta = jimp::Timing::toValueForElapsedTime((targetRgb.g - rgb.g) / remainingSeconds, elapsedTime);
+    float bDelta = jimp::Timing::toValueForElapsedTime((targetRgb.b - rgb.b) / remainingSeconds, elapsedTime);
     
     rgb.r = fmax(0, (fmin(255, (rgb.r + rDelta))));
     rgb.g = fmax(0, (fmin(255, (rgb.g + gDelta))));

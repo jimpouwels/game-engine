@@ -9,6 +9,38 @@ namespace jimp {
 bool isWorking = false;
 AnimatedGraphic* sourceGraphic = nullptr;
 
+static void sortByDistance(std::vector<AnimatedGraphic *> &graphicsToCheckCollision) {
+    std::sort(graphicsToCheckCollision.begin(), graphicsToCheckCollision.end(), [](AnimatedGraphic* a, AnimatedGraphic* b) {
+        Vector2D sourceGraphicLeftTop = Vector2D::from(sourceGraphic->getLeft(), sourceGraphic->getTop());
+        Vector2D sourceGraphicRightTop = Vector2D::from(sourceGraphic->getRight(), sourceGraphic->getTop());
+        
+        Vector2D positionA = Vector2D::from(a->getLeft(), a->getTop());
+        Vector2D positionB = Vector2D::from(b->getLeft(), b->getTop());
+        
+        Vector2D distanceALeft = sourceGraphicLeftTop - positionA;
+        Vector2D distanceARight = sourceGraphicRightTop - positionA;
+        Vector2D distanceBLeft = sourceGraphicLeftTop - positionB;
+        Vector2D distanceBRight = sourceGraphicRightTop - positionB;
+        
+        distanceALeft.x = fmax(distanceALeft.x, -distanceALeft.x);
+        distanceALeft.y = fmax(distanceALeft.y, -distanceALeft.y);
+        distanceARight.x = fmax(distanceARight.x, -distanceARight.x);
+        distanceARight.y = fmax(distanceARight.y, -distanceARight.y);
+        
+        Vector2D nearestA = distanceALeft < distanceARight ? distanceALeft : distanceARight;
+        
+        distanceBLeft.x = fmax(distanceBLeft.x, -distanceBLeft.x);
+        distanceBLeft.y = fmax(distanceBLeft.y, -distanceBLeft.y);
+        distanceBRight.x = fmax(distanceBRight.x, -distanceBRight.x);
+        distanceBRight.y = fmax(distanceBRight.y, -distanceBRight.y);
+        
+        Vector2D nearestB = distanceBLeft < distanceBRight ? distanceBLeft : distanceBRight;
+        
+        return nearestA < nearestB;
+        
+    });
+}
+
 void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onSpriteDeletedCallback, std::function<void()> onLoadNewGraphicsCallback, std::vector<AnimatedGraphic*>* registeredSprites, std::list<AnimatedGraphic*>* newGraphics, std::mutex* processingLock, std::mutex* graphicsLock) {
     isWorking = true;
     std::chrono::time_point<std::chrono::system_clock> previousUpdateTime;
@@ -41,35 +73,7 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                         }
                     }
                     sourceGraphic = registeredSprite;
-                    std::sort(graphicsToCheckCollision.begin(), graphicsToCheckCollision.end(), [](AnimatedGraphic* a, AnimatedGraphic* b) {
-                        Vector2D sourceGraphicLeftTop = Vector2D::from(sourceGraphic->getLeft(), sourceGraphic->getTop());
-                        Vector2D sourceGraphicRightTop = Vector2D::from(sourceGraphic->getRight(), sourceGraphic->getTop());
-                        
-                        Vector2D positionA = Vector2D::from(a->getLeft(), a->getTop());
-                        Vector2D positionB = Vector2D::from(b->getLeft(), b->getTop());
-        
-                        Vector2D distanceALeft = sourceGraphicLeftTop - positionA;
-                        Vector2D distanceARight = sourceGraphicRightTop - positionA;
-                        Vector2D distanceBLeft = sourceGraphicLeftTop - positionB;
-                        Vector2D distanceBRight = sourceGraphicRightTop - positionB;
-                        
-                        distanceALeft.x = fmax(distanceALeft.x, -distanceALeft.x);
-                        distanceALeft.y = fmax(distanceALeft.y, -distanceALeft.y);
-                        distanceARight.x = fmax(distanceARight.x, -distanceARight.x);
-                        distanceARight.y = fmax(distanceARight.y, -distanceARight.y);
-                        
-                        Vector2D nearestA = distanceALeft < distanceARight ? distanceALeft : distanceARight;
-                        
-                        distanceBLeft.x = fmax(distanceBLeft.x, -distanceBLeft.x);
-                        distanceBLeft.y = fmax(distanceBLeft.y, -distanceBLeft.y);
-                        distanceBRight.x = fmax(distanceBRight.x, -distanceBRight.x);
-                        distanceBRight.y = fmax(distanceBRight.y, -distanceBRight.y);
-                        
-                        Vector2D nearestB = distanceBLeft < distanceBRight ? distanceBLeft : distanceBRight;
-                        
-                        return nearestA < nearestB;
-                        
-                    });
+                    sortByDistance(graphicsToCheckCollision);
                     for (uint16_t j = 0; j < graphicsToCheckCollision.size(); j++) {
                         registeredSprite->checkCollisionRect(graphicsToCheckCollision.at(j), elapsed.count());
                     }

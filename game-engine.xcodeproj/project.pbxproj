@@ -905,11 +905,11 @@
 		2338646B27D6349800DC54B4 /* floors */ = {
 			isa = PBXGroup;
 			children = (
-				234F96A027DA1A5200DA63DC /* platform-single-corner-right.png */,
 				234F969D27DA19C500DA63DC /* platform-bottom-corner-right.png */,
 				234F969C27DA197C00DA63DC /* platform-left-middle.png */,
 				234F969A27DA194B00DA63DC /* platform-right-middle.png */,
 				234F969827DA186600DA63DC /* platform-top-corner-right.png */,
+				234F96A027DA1A5200DA63DC /* platform-single-corner-right.png */,
 				239865B327D7F0B2008F38C1 /* platform-single-corner-left.png */,
 				239865B427D7F0B2008F38C1 /* platform-single-middle.png */,
 				239865B027D7D849008F38C1 /* platform-bottom-corner-left.png */,

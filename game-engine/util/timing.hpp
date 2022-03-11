@@ -9,7 +9,7 @@ class Timing {
     
 public:
     static float toValueForElapsedTime(float valuePerSecond, float elapsedTime) {
-        return valuePerSecond / (1.0F / elapsedTime);
+        return valuePerSecond * elapsedTime;
     }
     
     static Vector2D toValueForElapsedTime(Vector2D vector2D, float elapsedTime) {
