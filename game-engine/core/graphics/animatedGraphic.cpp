@@ -106,7 +106,7 @@ std::string AnimatedGraphic::getCurrentAnimationId() {
     return activeAnimation->getId();
 }
 
-void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float elapsedTime) {
+bool AnimatedGraphic::canCollideWith(AnimatedGraphic *otherGraphic, float elapsedTime) {
     Vector2D currentGraphicNextPosition = calculateNextPosition(elapsedTime);
     float currentGraphicNextTop = currentGraphicNextPosition.y + getMarginTop();
     float currentGraphicNextBottom = currentGraphicNextPosition.y + getHeight() - getMarginBottom();
@@ -123,8 +123,24 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
         (getLeft() > otherGraphic->getRight() && currentGraphicNextLeft > otherGraphicNextRight) ||
         (getBottom() < otherGraphic->getTop() && currentGraphicNextBottom < otherGraphicNextTop) ||
         (getTop() > otherGraphic->getBottom() && currentGraphicNextTop > otherGraphicNextBottom)) {
-        return;
+        return false;
     }
+    return true;
+}
+
+void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float elapsedTime) {
+    Vector2D currentGraphicNextPosition = calculateNextPosition(elapsedTime);
+    float currentGraphicNextTop = currentGraphicNextPosition.y + getMarginTop();
+    float currentGraphicNextBottom = currentGraphicNextPosition.y + getHeight() - getMarginBottom();
+    float currentGraphicNextLeft = currentGraphicNextPosition.x + getMarginLeft();
+    float currentGraphicNextRight = currentGraphicNextPosition.x + getWidth() - getMarginRight();
+    
+    Vector2D otherGraphicNextPosition = otherGraphic->calculateNextPosition(elapsedTime);
+    float otherGraphicNextTop = otherGraphicNextPosition.y + otherGraphic->getMarginTop();
+    float otherGraphicNextBottom = otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom();
+    float otherGraphicNextLeft = otherGraphicNextPosition.x + otherGraphic->getMarginLeft();
+    float otherGraphicNextRight = otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight();
+    
     if ((MathUtils::smallerOrEquals(getBottom(), otherGraphic->getTop()) && currentGraphicNextBottom > otherGraphicNextTop)
             && currentGraphicNextRight != otherGraphicNextLeft && currentGraphicNextLeft != otherGraphicNextRight) {
         hasCollidedRect(otherGraphic, Geo2D::Side::BOTTOM);

@@ -22,7 +22,7 @@ struct Color {
         return Color { .r = 255, .g = 255, .b = 255 };
     }
     
-    static Color custom(float r, float g, float b) {
+    static Color from(float r, float g, float b) {
         return Color { .r = r, .g = g, .b = b };
     }
 };

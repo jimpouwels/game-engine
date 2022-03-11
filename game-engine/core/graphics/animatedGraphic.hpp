@@ -103,6 +103,7 @@ public:
     float getRight();
     float getRotationAngle();
     bool isCollidable();
+    bool canCollideWith(AnimatedGraphic* otherGraphic, float elapsedTime);
     void drawInversedHorizontally(bool inverse);
     void setCollidable(bool collidable);
     void setRotationAngle(float angle);

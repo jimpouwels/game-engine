@@ -42,7 +42,7 @@ public:
         // BACKGROUND
         Decoration* blackPlant = new Decoration(jimp::Vector2D { .x = platform->getPosition().x + platform->getWidth() + 375, .y = platform->getPosition().y + platform->getHeight() - 520 }, "Plant3_{i}.png", 90, 0, 1.0F, 4);
         blackPlant->setRgbLevels(jimp::Color::black());
-        blackPlant->animateRgbLevels(jimp::Color::custom(90, 90, 90), 1);
+        blackPlant->animateRgbLevels(jimp::Color::from(90, 90, 90), 1);
         
         Decoration* rock1 = new Decoration(jimp::Vector2D { .x = platform->getPosition().x + 700, .y = platform->getPosition().y - 200 }, "rock1-background.png", 1, 0, 1.7F, 4);
         Decoration* spikes = new Decoration(jimp::Vector2D { .x = -300, .y = platform->getPosition().y - 300 }, "spikes1.png", 1, 45, 0.8F, 5);
