@@ -13,11 +13,11 @@ struct Vector2D {
     }
     
     Vector2D operator+(Vector2D other) {
-        return Vector2D { .x = x + other.x, .y = y + other.y };
+        return Vector2D::from(x + other.x, y + other.y);
     }
     
     Vector2D operator-(Vector2D other) {
-        return Vector2D { .x = x - other.x, .y = y - other.y };
+        return Vector2D::from(x - other.x, y - other.y);
     }
     
     bool operator<(Vector2D other) {
@@ -29,7 +29,7 @@ struct Vector2D {
     }
     
     static Vector2D empty() {
-        return Vector2D { .x = 0, .y = 0 };
+        return Vector2D::from(0, 0);
     }
     
     static Vector2D from(float x, float y) {

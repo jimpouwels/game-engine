@@ -25,6 +25,6 @@ void AsteroidSpawner::onUpdate(float elapsedTime) {
             x = jimp::GameEngine::getInstance()->getScreenWidth() + 100;
             angle = jimp::MathUtils::randomNumberBetween(225, 315);
         }
-        new Asteroid(jimp::Vector2D { .x = x, .y = y }, angle);
+        new Asteroid(jimp::Vector2D::from(x, y), angle);
     }
 }

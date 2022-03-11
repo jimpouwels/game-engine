@@ -14,7 +14,7 @@ const uint8_t Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.15F;
 const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 
-Ship::Ship() : jimp::AnimatedGraphic(jimp::Vector2D { .x = 400, .y = 400 }, SCALE, 0, 0.05F, false) {
+Ship::Ship() : jimp::AnimatedGraphic(jimp::Vector2D::from(400, 400), SCALE, 0, 0.05F, false) {
 }
 
 void Ship::doOnInit() {
@@ -77,7 +77,7 @@ void Ship::hasCollidedRectBottom(jimp::AnimatedGraphic* otherSprite) {
 }
 
 jimp::Vector2D Ship::getRotationPoint() {
-    return jimp::Vector2D { .x = getWidth() / 2.0F, .y = (getHeight() - (ROTATION_POINT_Y_OFFSET * getScale())) / 2.0F };
+    return jimp::Vector2D::from(getWidth() / 2.0F, (getHeight() - (ROTATION_POINT_Y_OFFSET * getScale())) / 2.0F);
 }
 
 void Ship::onKeyboardLeft(jimp::KeyState keyState) {

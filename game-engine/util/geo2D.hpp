@@ -36,7 +36,7 @@ public:
         if (angle != 90 && angle != 270) {
             deltaY = -(force * cos(M_PI * 2 * angle / 360));
         }
-        return Vector2D { .x = deltaX, .y = deltaY };
+        return Vector2D::from(deltaX, deltaY);
     }
     
     static float inverseAngleVertically(float angle) {

@@ -88,7 +88,7 @@ void AnimatedGraphic::setDeleteOnLeaveScreen(bool deleteOnLeaveScreen) {
 }
 
 Vector2D AnimatedGraphic::getRotationPoint() {
-    return Vector2D { getWidth() / 2.0F, .y = getHeight() / 2.0F };
+    return Vector2D::from(getWidth() / 2.0F, getHeight() / 2.0F);
 }
 
 Drawable* AnimatedGraphic::getActiveDrawable() {
@@ -365,7 +365,7 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
     
     if (interruptMovementX) {
         interruptMovementX = false;
-        addToPosition(jimp::Timing::toValueForElapsedTime(Vector2D { .x = 0, .y = moveVelocity.y }, elapsedTime));
+        addToPosition(jimp::Timing::toValueForElapsedTime(Vector2D::from(0, moveVelocity.y), elapsedTime));
     } else {
         addToPosition(jimp::Timing::toValueForElapsedTime(moveVelocity, elapsedTime));
     }

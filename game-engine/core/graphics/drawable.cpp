@@ -5,7 +5,7 @@
 namespace jimp {
 
 Drawable::Drawable(float x, float y, float scale, float angle, uint16_t repeat) {
-    this->position = Vector2D { .x = x, .y = y };
+    this->position = Vector2D::from(x, y);
     this->repeat = repeat;
 }
 
@@ -61,7 +61,7 @@ bool Drawable::isPositionedWithinScreen() {
 }
 
 Vector2D Drawable::getRotationPoint() {
-    return Vector2D { .x = getWidth() / 2.0F, .y = getHeight() / 2.0F };
+    return Vector2D::from(getWidth() / 2.0F, getHeight() / 2.0F);
 }
 
 float Drawable::getScale() {

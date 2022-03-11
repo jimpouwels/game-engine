@@ -12,7 +12,7 @@ class Asteroid : public jimp::AnimatedGraphic {
 private:
     static const uint16_t SPEED_IN_PIXELS_PER_SECOND;
     static const float HIT_ANIMATION_DURATION_IN_SECONDS;
-    jimp::Vector2D velocity = jimp::Vector2D { .x = 0, .y = 0 };
+    jimp::Vector2D velocity = jimp::Vector2D::empty();
     float totalHitAnimationDuration = 0.0F;
     uint16_t rotationDegreesPerSecond = 0;
     bool rotatingDirection = false;

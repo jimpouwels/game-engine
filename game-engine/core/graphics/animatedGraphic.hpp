@@ -17,7 +17,7 @@ namespace jimp {
 class AnimatedGraphic : public KeyListener {
     
 private:
-    Vector2D position = { .x = 0, .y = 0 };
+    Vector2D position = Vector2D::empty();
     float scale;
     float angle;
     bool visible = true;
@@ -42,8 +42,8 @@ private:
     Animation* activeAnimation = nullptr;
     bool markedForDeletion = false;
     bool deleteOnLeaveScreen = false;
-    Vector2D moveVelocity = Vector2D { .x = 0, .y = 0 };
-    Vector2D gravityVelocity = Vector2D { .x = 0, .y = 0 };
+    Vector2D moveVelocity = Vector2D::empty();
+    Vector2D gravityVelocity = Vector2D::empty();
     std::mutex* lock = new std::mutex();
     float elapsedTimeSinceLastSwap;
     float drawableSwapIntervalInSeconds;

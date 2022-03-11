@@ -17,36 +17,36 @@ private:
     
 public:
     Ghosty(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000) {
-        Character* character = new Character(jimp::Vector2D { .x = static_cast<float>(100), .y = 1400 });
+        Character* character = new Character(jimp::Vector2D::from(static_cast<float>(100), 1400 ));
         scrollingWorld = new jimp::ScrollingWorld(character, 10000, 3000);
         setBackgroundColor(0x3ba7b3);
 
         // LEFT BIG PLATFORM
-        Platform* platform = new Platform("platform-top-left.png", "platform-top-middle.png", 5, 7, 512, 0.3F, jimp::Vector2D { .x = -153, .y = static_cast<float>(scrollingWorld->getHeight() - (4 * 153)) });
-        Decoration* plant = new Decoration(jimp::Vector2D { .x = platform->getPosition().x + 200, .y = platform->getPosition().y - 95 }, "Plant3_{i}.png", 90, 0, 0.3F, 4);
+        Platform* platform = new Platform("platform-top-left.png", "platform-top-middle.png", 5, 7, 512, 0.3F, jimp::Vector2D::from(-153, static_cast<float>(scrollingWorld->getHeight() - (4 * 153))));
+        Decoration* plant = new Decoration(jimp::Vector2D::from(platform->getPosition().x + 200, platform->getPosition().y - 95 ), "Plant3_{i}.png", 90, 0, 0.3F, 4);
         
-        jimp::Vector2D flowerPosition = jimp::Vector2D { .x = platform->getPosition().x + platform->getWidth() - 40, .y = platform->getPosition().y + platform->getHeight() / 2 - 256 };
+        jimp::Vector2D flowerPosition = jimp::Vector2D::from(platform->getPosition().x + platform->getWidth() - 40, platform->getPosition().y + platform->getHeight() / 2 - 256);
         Decoration* flower = new Decoration(flowerPosition, "BlueFlower_{i}.png", 60, 90, 0.5F, 4);
         
-        Decoration* plantSmall = new Decoration(jimp::Vector2D { .x = platform->getPosition().x + platform->getWidth() - 130, .y = platform->getPosition().y - 55 }, "plant-small.png", 1, 0, 0.2F, 4);
+        Decoration* plantSmall = new Decoration(jimp::Vector2D::from(platform->getPosition().x + platform->getWidth() - 130, platform->getPosition().y - 55 ), "plant-small.png", 1, 0, 0.2F, 4);
       
         // SECOND SMALL PLATFORM
-        Platform* platform2 = new Platform("platform-top-left.png", "platform-top-middle.png", 1, 4, 512, 0.3F, jimp::Vector2D { .x = platform->getPosition().x + platform->getWidth() + 300, .y = 2100 });
+        Platform* platform2 = new Platform("platform-top-left.png", "platform-top-middle.png", 1, 4, 512, 0.3F, jimp::Vector2D::from(platform->getPosition().x + platform->getWidth() + 300, 2100));
 
-        Decoration* plantPoison1 = new Decoration(jimp::Vector2D { .x = platform2->getPosition().x + 100, .y = platform2->getPosition().y + 75 }, "PlantPosion_{i}.png", 30, 180, 0.3F, 4);
-        Decoration* rock = new Decoration(jimp::Vector2D { .x = platform2->getPosition().x + 200, .y = platform2->getPosition().y - 110 }, "rock1.png", 1, 0, 0.25F, 4);
+        Decoration* plantPoison1 = new Decoration(jimp::Vector2D::from(platform2->getPosition().x + 100, platform2->getPosition().y + 75), "PlantPosion_{i}.png", 30, 180, 0.3F, 4);
+        Decoration* rock = new Decoration(jimp::Vector2D::from(platform2->getPosition().x + 200, platform2->getPosition().y - 110), "rock1.png", 1, 0, 0.25F, 4);
         
         // THIRD SMALL PLATFORM
-        Platform* platform3 = new Platform("platform-top-left.png", "platform-top-middle.png", 1, 2, 512, 0.3F, jimp::Vector2D { .x = platform2->getPosition().x + 820, .y = platform2->getPosition().y + platform2->getHeight() + 200 });
+        Platform* platform3 = new Platform("platform-top-left.png", "platform-top-middle.png", 1, 2, 512, 0.3F, jimp::Vector2D::from(platform2->getPosition().x + 820, platform2->getPosition().y + platform2->getHeight() + 200 ));
         
         // BACKGROUND
-        Decoration* blackPlant = new Decoration(jimp::Vector2D { .x = platform->getPosition().x + platform->getWidth() + 375, .y = platform->getPosition().y + platform->getHeight() - 520 }, "Plant3_{i}.png", 90, 0, 1.0F, 4);
+        Decoration* blackPlant = new Decoration(jimp::Vector2D::from(platform->getPosition().x + platform->getWidth() + 375, platform->getPosition().y + platform->getHeight() - 520), "Plant3_{i}.png", 90, 0, 1.0F, 4);
         blackPlant->setRgbLevels(jimp::Color::black());
         blackPlant->animateRgbLevels(jimp::Color::from(90, 90, 90), 1);
         
-        Decoration* rock1 = new Decoration(jimp::Vector2D { .x = platform->getPosition().x + 700, .y = platform->getPosition().y - 200 }, "rock1-background.png", 1, 0, 1.7F, 4);
-        Decoration* spikes = new Decoration(jimp::Vector2D { .x = -300, .y = platform->getPosition().y - 300 }, "spikes1.png", 1, 45, 0.8F, 5);
-        Decoration* hill = new Decoration(jimp::Vector2D { .x = -250, .y = platform->getPosition().y + 300 }, "hill.png", 1, 0, 0.8F, 1);
+        Decoration* rock1 = new Decoration(jimp::Vector2D::from(platform->getPosition().x + 700, platform->getPosition().y - 200), "rock1-background.png", 1, 0, 1.7F, 4);
+        Decoration* spikes = new Decoration(jimp::Vector2D::from(-300, platform->getPosition().y - 300), "spikes1.png", 1, 45, 0.8F, 5);
+        Decoration* hill = new Decoration(jimp::Vector2D::from(-250, platform->getPosition().y + 300), "hill.png", 1, 0, 0.8F, 1);
     }
     
     void startGame() {
