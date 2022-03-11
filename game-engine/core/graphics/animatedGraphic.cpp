@@ -133,8 +133,7 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
         && currentGraphicNextPosition.y + getMarginTop() > otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom()) {
         return;
     }
-    if (((currentGraphicCurrentPosition.y + getHeight() - getMarginBottom() < otherGraphicCurrentPosition.y + otherGraphic->getMarginTop()
-          || MathUtils::floatEquals(currentGraphicCurrentPosition.y + getHeight() - getMarginBottom(), otherGraphicCurrentPosition.y + otherGraphic->getMarginTop()))
+    if (((getBottom() < otherGraphic->getTop() || MathUtils::floatEquals(getBottom(), otherGraphic->getTop()))
          && currentGraphicNextPosition.y + getHeight() - getMarginBottom() > otherGraphicNextPosition.y + otherGraphic->getMarginTop())
         && currentGraphicNextPosition.x + getWidth() - getMarginRight() != otherGraphicNextPosition.x + otherGraphic->getMarginLeft()
         && currentGraphicNextPosition.x + getMarginLeft() != otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight()) {
@@ -248,6 +247,22 @@ int AnimatedGraphic::getCollisionRectWidth() {
 
 int AnimatedGraphic::getCollisionRectHeight() {
     return collisionBoxHeight;
+}
+
+float AnimatedGraphic::getTop() {
+    return getPosition().y + getMarginTop();
+}
+
+float AnimatedGraphic::getBottom() {
+    return getPosition().y + getHeight() - getMarginBottom();
+}
+
+float AnimatedGraphic::right() {
+    return getPosition().x + getWidth() - getMarginRight();
+}
+
+float AnimatedGraphic::left() {
+    return getPosition().x + getMarginLeft();
 }
 
 float AnimatedGraphic::getScale() {

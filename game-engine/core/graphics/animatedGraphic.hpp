@@ -98,6 +98,10 @@ public:
     int getMarginRight();
     int getMarginTop();
     int getMarginBottom();
+    float getBottom();
+    float getTop();
+    float left();
+    float right();
     float getRotationAngle();
     void drawInversedHorizontally(bool inverse);
     void setCollidable(bool collidable);
