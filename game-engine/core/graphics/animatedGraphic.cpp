@@ -111,17 +111,13 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
         return;
     }
     
-    Vector2D currentGraphicCurrentPosition = getPosition();
     Vector2D currentGraphicNextPosition = calculateNextPosition(elapsedTime);
-    
-    Vector2D otherGraphicCurrentPosition = otherGraphic->getPosition();
-    Vector2D otherGraphicNextPosition = otherGraphic->calculateNextPosition(elapsedTime);
-    
     float currentGraphicNextTop = currentGraphicNextPosition.y + getMarginTop();
     float currentGraphicNextBottom = currentGraphicNextPosition.y + getHeight() - getMarginBottom();
     float currentGraphicNextLeft = currentGraphicNextPosition.x + getMarginLeft();
     float currentGraphicNextRight = currentGraphicNextPosition.x + getWidth() - getMarginRight();
     
+    Vector2D otherGraphicNextPosition = otherGraphic->calculateNextPosition(elapsedTime);
     float otherGraphicNextTop = otherGraphicNextPosition.y + otherGraphic->getMarginTop();
     float otherGraphicNextBottom = otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom();
     float otherGraphicNextLeft = otherGraphicNextPosition.x + otherGraphic->getMarginLeft();
@@ -133,28 +129,20 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
         (getTop() > otherGraphic->getBottom() && currentGraphicNextTop > otherGraphicNextBottom)) {
         return;
     }
-    if (((getBottom() < otherGraphic->getTop() || MathUtils::floatEquals(getBottom(), otherGraphic->getTop()))
-            && currentGraphicNextBottom > otherGraphicNextTop)
-            && currentGraphicNextRight != otherGraphicNextLeft
-            && currentGraphicNextLeft != otherGraphicNextRight) {
+    if ((MathUtils::smallerOrEquals(getBottom(), otherGraphic->getTop()) && currentGraphicNextBottom > otherGraphicNextTop)
+            && currentGraphicNextRight != otherGraphicNextLeft && currentGraphicNextLeft != otherGraphicNextRight) {
         hasCollidedRect(otherGraphic, Geo2D::Side::BOTTOM);
         hasCollidedRectBottom(otherGraphic);
-    } else if (((getTop() > otherGraphic->getBottom() || MathUtils::floatEquals(getTop(), otherGraphic->getBottom()))
-            && currentGraphicNextTop < otherGraphicNextBottom)
-            && currentGraphicNextRight != otherGraphicNextLeft
-            && currentGraphicNextLeft != otherGraphicNextRight) {
+    } else if ((MathUtils::largerOrEquals(getTop(), otherGraphic->getBottom()) && currentGraphicNextTop < otherGraphicNextBottom)
+            && currentGraphicNextRight != otherGraphicNextLeft && currentGraphicNextLeft != otherGraphicNextRight) {
         hasCollidedRect(otherGraphic, Geo2D::Side::TOP);
         hasCollidedRectTop(otherGraphic);
-    } else if (((getLeft() > otherGraphic->getRight() || MathUtils::floatEquals(getLeft(), otherGraphic->getRight()))
-            && currentGraphicNextLeft < otherGraphicNextRight)
-            && currentGraphicNextBottom != otherGraphicNextTop
-            && currentGraphicNextTop != otherGraphicNextBottom) {
+    } else if ((MathUtils::largerOrEquals(getLeft(), otherGraphic->getRight()) && currentGraphicNextLeft < otherGraphicNextRight)
+            && currentGraphicNextBottom != otherGraphicNextTop && currentGraphicNextTop != otherGraphicNextBottom) {
         hasCollidedRect(otherGraphic, Geo2D::Side::LEFT);
         hasCollidedRectLeft(otherGraphic);
-    } else if (((getRight() < otherGraphic->getLeft() || MathUtils::floatEquals(getRight(), otherGraphic->getLeft()))
-            && currentGraphicNextRight > otherGraphicNextLeft)
-            && currentGraphicNextBottom != otherGraphicNextTop
-            && currentGraphicNextTop != otherGraphicNextBottom) {
+    } else if ((MathUtils::smallerOrEquals(getRight(), otherGraphic->getLeft()) && currentGraphicNextRight > otherGraphicNextLeft)
+            && currentGraphicNextBottom != otherGraphicNextTop && currentGraphicNextTop != otherGraphicNextBottom) {
         hasCollidedRect(otherGraphic, Geo2D::Side::RIGHT);
         hasCollidedRectRight(otherGraphic);
     }

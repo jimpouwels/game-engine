@@ -20,6 +20,13 @@ public:
         return fabs(first - second) < 0.0001;
     }
     
+    static bool smallerOrEquals(float first, float second) {
+        return first < second || floatEquals(first, second);
+    }
+    
+    static bool largerOrEquals(float first, float second) {
+        return first > second || floatEquals(first, second);
+    }
 };
 
 }
