@@ -27,10 +27,14 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                 
                 for (uint16_t i = 0; i < registeredSprites->size(); i++) {
                     AnimatedGraphic* registeredSprite = registeredSprites->at(i);
+                    if (!registeredSprite->isCollidable()) {
+                        continue;
+                    }
                     std::vector<AnimatedGraphic*> graphicsToCheckCollision = std::vector<AnimatedGraphic*>();
                     for (uint16_t x = 0; x < registeredSprites->size(); x++) {
-                        if (registeredSprites->at(x) != registeredSprite) {
-                            graphicsToCheckCollision.push_back(registeredSprites->at(x));
+                        AnimatedGraphic* graphicToCheckCollision = registeredSprites->at(x);
+                        if (graphicToCheckCollision->isCollidable() && graphicToCheckCollision != registeredSprite) {
+                            graphicsToCheckCollision.push_back(graphicToCheckCollision);
                         }
                     }
                     sourceGraphic = registeredSprite;

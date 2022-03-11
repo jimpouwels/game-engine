@@ -107,10 +107,6 @@ std::string AnimatedGraphic::getCurrentAnimationId() {
 }
 
 void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float elapsedTime) {
-    if (!isCollidable() || !otherGraphic->isCollidable()) {
-        return;
-    }
-    
     Vector2D currentGraphicNextPosition = calculateNextPosition(elapsedTime);
     float currentGraphicNextTop = currentGraphicNextPosition.y + getMarginTop();
     float currentGraphicNextBottom = currentGraphicNextPosition.y + getHeight() - getMarginBottom();

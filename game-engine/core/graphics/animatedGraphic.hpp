@@ -68,7 +68,6 @@ protected:
     void stayToRightOf(AnimatedGraphic* otherGraphic);
     void jump(float force);
     void interruptJump();
-    bool isCollidable();
     void addSprite(std::string animationId, std::string filePath, uint16_t repeat);
     void addSprite(std::string animationId, std::string filePath);
     virtual void doOnInit() {};
@@ -103,6 +102,7 @@ public:
     float getLeft();
     float getRight();
     float getRotationAngle();
+    bool isCollidable();
     void drawInversedHorizontally(bool inverse);
     void setCollidable(bool collidable);
     void setRotationAngle(float angle);
