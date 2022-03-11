@@ -21,7 +21,6 @@ public:
         scrollingWorld = new jimp::ScrollingWorld(character, 10000, 3000);
         setBackgroundColor(0x3ba7b3);
 
-        Platform* platformLeft = new Platform("platform-top-left.png", "platform-top-middle.png", 1, 4, 512, 0.3F, jimp::Vector2D { .x = 0, .y = static_cast<float>(scrollingWorld->getHeight() - (4 * 153)) - 150 });
         // LEFT BIG PLATFORM
         Platform* platform = new Platform("platform-top-left.png", "platform-top-middle.png", 5, 7, 512, 0.3F, jimp::Vector2D { .x = -153, .y = static_cast<float>(scrollingWorld->getHeight() - (4 * 153)) });
         Decoration* plant = new Decoration(jimp::Vector2D { .x = platform->getPosition().x + 200, .y = platform->getPosition().y - 95 }, "Plant3_{i}.png", 90, 0, 0.3F, 4);
@@ -32,13 +31,13 @@ public:
         Decoration* plantSmall = new Decoration(jimp::Vector2D { .x = platform->getPosition().x + platform->getWidth() - 130, .y = platform->getPosition().y - 55 }, "plant-small.png", 1, 0, 0.2F, 4);
       
         // SECOND SMALL PLATFORM
-//        Platform* platform2 = new Platform("platform-top-left.png", "platform-top-middle.png", 1, 4, 512, 0.3F, jimp::Vector2D { .x = platform->getPosition().x + platform->getWidth() + 300, .y = 2100 });
-//
-//        Decoration* plantPoison1 = new Decoration(jimp::Vector2D { .x = platform2->getPosition().x + 100, .y = platform2->getPosition().y + 75 }, "PlantPosion_{i}.png", 30, 180, 0.3F, 4);
-//        Decoration* rock = new Decoration(jimp::Vector2D { .x = platform2->getPosition().x + 200, .y = platform2->getPosition().y - 110 }, "rock1.png", 1, 0, 0.25F, 4);
+        Platform* platform2 = new Platform("platform-top-left.png", "platform-top-middle.png", 1, 4, 512, 0.3F, jimp::Vector2D { .x = platform->getPosition().x + platform->getWidth() + 300, .y = 2100 });
+
+        Decoration* plantPoison1 = new Decoration(jimp::Vector2D { .x = platform2->getPosition().x + 100, .y = platform2->getPosition().y + 75 }, "PlantPosion_{i}.png", 30, 180, 0.3F, 4);
+        Decoration* rock = new Decoration(jimp::Vector2D { .x = platform2->getPosition().x + 200, .y = platform2->getPosition().y - 110 }, "rock1.png", 1, 0, 0.25F, 4);
         
         // THIRD SMALL PLATFORM
-//        Platform* platform3 = new Platform("platform-top-left.png", "platform-top-middle.png", 1, 2, 512, 0.3F, jimp::Vector2D { .x = platform2->getPosition().x + 820, .y = platform2->getPosition().y + platform2->getHeight() + 200 });
+        Platform* platform3 = new Platform("platform-top-left.png", "platform-top-middle.png", 1, 2, 512, 0.3F, jimp::Vector2D { .x = platform2->getPosition().x + 820, .y = platform2->getPosition().y + platform2->getHeight() + 200 });
         
         // BACKGROUND
         Decoration* blackPlant = new Decoration(jimp::Vector2D { .x = platform->getPosition().x + platform->getWidth() + 375, .y = platform->getPosition().y + platform->getHeight() - 520 }, "Plant3_{i}.png", 90, 0, 1.0F, 4);

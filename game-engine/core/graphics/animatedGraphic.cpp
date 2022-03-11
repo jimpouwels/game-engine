@@ -116,50 +116,28 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
     
     Vector2D otherGraphicCurrentPosition = otherGraphic->getPosition();
     Vector2D otherGraphicNextPosition = otherGraphic->calculateNextPosition(elapsedTime);
-    if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
-        std::cout << "velocity before collision check: " << getVelocity().y << std::endl;
-    }
+    
     if (currentGraphicCurrentPosition.x + getWidth() - getMarginRight() < otherGraphicCurrentPosition.x + otherGraphic->getMarginLeft()
         && currentGraphicNextPosition.x + getWidth() - getMarginRight() < otherGraphicNextPosition.x + otherGraphic->getMarginLeft()) {
-        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
-            std::cout << rand() << "   LINKS ERVAN" << std::endl;
-        }
         return;
     }
     if (currentGraphicCurrentPosition.x + getMarginLeft() > otherGraphicCurrentPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight()
         && currentGraphicNextPosition.x + getMarginLeft() > otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight()) {
-        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
-            std::cout << rand() << "   RECHTS ERVAN" << std::endl;
-        }
         return;
     }
     if (currentGraphicCurrentPosition.y + getHeight() - getMarginBottom() < otherGraphicCurrentPosition.y + otherGraphic->getMarginTop()
         && currentGraphicNextPosition.y + getHeight() - getMarginBottom() < otherGraphicNextPosition.y + otherGraphic->getMarginTop()) {
-        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
-            std::cout << rand() << "   ERBOVEN" << std::endl;
-        }
         return;
     }
     if (currentGraphicCurrentPosition.y + getMarginTop() > otherGraphicCurrentPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom()
         && currentGraphicNextPosition.y + getMarginTop() > otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom()) {
-        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
-            std::cout << rand() << "   ERONDER" << std::endl;
-        }
         return;
-    }
-    if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
-        std::cout << "ghosty current: " << currentGraphicCurrentPosition.x + getMarginLeft() << ", otherGraphicCurrent: " << otherGraphicCurrentPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight() << ", currentGraphicNext: " << currentGraphicNextPosition.x + getMarginLeft() << ", otherGraphicNext: " << otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginTop() << std::endl;
     }
     if (((currentGraphicCurrentPosition.y + getHeight() - getMarginBottom() < otherGraphicCurrentPosition.y + otherGraphic->getMarginTop()
           || MathUtils::floatEquals(currentGraphicCurrentPosition.y + getHeight() - getMarginBottom(), otherGraphicCurrentPosition.y + otherGraphic->getMarginTop()))
          && currentGraphicNextPosition.y + getHeight() - getMarginBottom() > otherGraphicNextPosition.y + otherGraphic->getMarginTop())
         && currentGraphicNextPosition.x + getWidth() - getMarginRight() != otherGraphicNextPosition.x + otherGraphic->getMarginLeft()
         && currentGraphicNextPosition.x + getMarginLeft() != otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight()) {
-        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
-            otherGraphic->setRgbLevels(Color::custom(255, 0, 0));
-            std::cout << rand() << "   BOTTOM HIT" << std::endl;
-            std::cout << "ghosty.x: " << getPosition().x + getMarginLeft() << " block.x: " << otherGraphic->getPosition().x + otherGraphic->getWidth() - otherGraphic->getMarginRight() << ", ghostvel.x: " << getVelocity().x << std::endl;
-        }
         hasCollidedRect(otherGraphic, Geo2D::Side::BOTTOM);
         hasCollidedRectBottom(otherGraphic);
     } else if (((currentGraphicCurrentPosition.y + getMarginTop() > otherGraphicCurrentPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom()
@@ -167,10 +145,6 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
                   && currentGraphicNextPosition.y + getMarginTop() < otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom())
                && currentGraphicNextPosition.x + getWidth() - getMarginRight() != otherGraphicNextPosition.x + otherGraphic->getMarginLeft()
                                && currentGraphicNextPosition.x + getMarginLeft() != otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight()) {
-        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
-            std::cout << rand() << "   TOP HIT" << std::endl;
-            std::cout << "ghosty.x: " << getPosition().x + getMarginLeft() << " block.x: " << otherGraphic->getPosition().x + otherGraphic->getWidth() - otherGraphic->getMarginRight() << ", ghostvel.x: " << getVelocity().x << std::endl;
-        }
         hasCollidedRect(otherGraphic, Geo2D::Side::TOP);
         hasCollidedRectTop(otherGraphic);
     } else if (((currentGraphicCurrentPosition.x + getWidth() - getMarginRight() < otherGraphicCurrentPosition.x + otherGraphic->getMarginLeft()
@@ -178,10 +152,6 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
                && currentGraphicNextPosition.x + getWidth() - getMarginRight() > otherGraphicNextPosition.x + otherGraphic->getMarginLeft())
                && currentGraphicNextPosition.y + getHeight() - getMarginBottom() != otherGraphicNextPosition.y + otherGraphic->getMarginTop()
                               && currentGraphicNextPosition.y + getMarginTop() != otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom()) {
-        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
-            std::cout << rand() << "   RIGHT HIT" << std::endl;
-            std::cout << "ghosty.x: " << getPosition().x + getMarginLeft() << " block.x: " << otherGraphic->getPosition().x + otherGraphic->getWidth() - otherGraphic->getMarginRight() << ", ghostvel.x: " << getVelocity().x << std::endl;
-        }
         hasCollidedRect(otherGraphic, Geo2D::Side::RIGHT);
         hasCollidedRectRight(otherGraphic);
     } else if (((currentGraphicCurrentPosition.x + getMarginLeft() > otherGraphicCurrentPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight()
@@ -189,16 +159,8 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
                   && currentGraphicNextPosition.x + getMarginLeft() < otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight())
                && currentGraphicNextPosition.y + getHeight() - getMarginBottom() != otherGraphicNextPosition.y + otherGraphic->getMarginTop()
                               && currentGraphicNextPosition.y + getMarginTop() != otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom()) {
-        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
-            std::cout << rand() << "   LEFT HIT" << std::endl;
-            std::cout << "ghosty.x: " << getPosition().x + getMarginLeft() << " block.x: " << otherGraphic->getPosition().x + otherGraphic->getWidth() - otherGraphic->getMarginRight() << ", ghostvel.x: " << getVelocity().x << std::endl;
-        }
         hasCollidedRect(otherGraphic, Geo2D::Side::LEFT);
         hasCollidedRectLeft(otherGraphic);
-    } else {
-        if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
-            std::cout << rand() << "   END" << std::endl;
-        }
     }
 }
 
@@ -391,9 +353,6 @@ void AnimatedGraphic::stayToLeftOf(AnimatedGraphic *otherGraphic) {
 void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
     lock->lock();
     getPosition().x = otherGraphic->getPosition().x + otherGraphic->getWidth() - otherGraphic->getMarginRight() - getMarginLeft();
-    if (getName() == "ghosty" && otherGraphic->getName() == "DEZE") {
-        std::cout << "reset position::: ghosty.x: " << getPosition().x + getMarginLeft() << ", platform.x: " << otherGraphic->getPosition().x + otherGraphic->getWidth() - otherGraphic->getMarginRight() << std::endl;
-    }
     interruptMovementX = true;
     lock->unlock();
 }
