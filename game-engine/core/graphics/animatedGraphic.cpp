@@ -337,18 +337,18 @@ void AnimatedGraphic::animateRgbLevels(Color to, int seconds) {
 }
 
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
-    getPosition().y = otherGraphic->getPosition().y - getHeight() + getMarginBottom() + otherGraphic->getMarginTop();
+    getPosition().y = otherGraphic->getTop() - (getHeight() - getMarginBottom());
     resetGravityVelocity();
     interruptGravity = true;
 }
 
 void AnimatedGraphic::stayToLeftOf(AnimatedGraphic *otherGraphic) {
-    getPosition().x = otherGraphic->getPosition().x + otherGraphic->getMarginLeft() - (getHeight() - getMarginRight());
+    getPosition().x = otherGraphic->getRight() + (getWidth() - getMarginRight());
     interruptMovementX = true;
 }
 
 void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
-    getPosition().x = otherGraphic->getPosition().x + otherGraphic->getWidth() - otherGraphic->getMarginRight() - getMarginLeft();
+    getPosition().x = otherGraphic->getRight() - getMarginLeft();
     interruptMovementX = true;
 }
 
