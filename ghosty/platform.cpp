@@ -18,9 +18,6 @@ Platform::Platform(std::string cornerBlockFilePath, std::string innerBlockFilePa
                 PlatformBlock* left = new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y), "platform-single-corner-left.png", 0, scale);
             } else if (x == columnCount - 1) {
                 PlatformBlock* right = new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y), "platform-single-corner-right.png", 0, scale);
-                if (columnCount == 4) {
-                    right->setName("DEZE");
-                }
             } else {
                 PlatformBlock* middle = new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y), "platform-single-middle.png", 0, scale);
             }

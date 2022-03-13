@@ -300,6 +300,7 @@
 		23E5E2FD27A302C700B62583 /* asteroid.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 23E5E2FC27A302C000B62583 /* asteroid.png */; };
 		23E5E30027A302DD00B62583 /* asteroid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23E5E2FE27A302DD00B62583 /* asteroid.cpp */; };
 		23EF8D1827DB8D0300AD67B7 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23EF8D1627DB8D0300AD67B7 /* timer.cpp */; };
+		23EF8D1D27DE797700AD67B7 /* mapLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23EF8D1B27DE797700AD67B7 /* mapLoader.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -884,6 +885,10 @@
 		23E5E2FF27A302DD00B62583 /* asteroid.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = asteroid.hpp; sourceTree = "<group>"; };
 		23EF8D1627DB8D0300AD67B7 /* timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = timer.cpp; sourceTree = "<group>"; };
 		23EF8D1727DB8D0300AD67B7 /* timer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = timer.hpp; sourceTree = "<group>"; };
+		23EF8D1A27DE5E5B00AD67B7 /* level1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = level1.json; sourceTree = "<group>"; };
+		23EF8D1B27DE797700AD67B7 /* mapLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mapLoader.cpp; sourceTree = "<group>"; };
+		23EF8D1C27DE797700AD67B7 /* mapLoader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mapLoader.hpp; sourceTree = "<group>"; };
+		23EF8D1F27DE7B0C00AD67B7 /* json.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -950,7 +955,7 @@
 			path = core;
 			sourceTree = "<group>";
 		};
-		235FEC1927C6DF38006306C9 /* mario */ = {
+		235FEC1927C6DF38006306C9 /* ghosty */ = {
 			isa = PBXGroup;
 			children = (
 				239F328427D0CA9F007D4E2C /* assets */,
@@ -964,7 +969,7 @@
 				235FF02B27D75C1100FC15F0 /* platform.cpp */,
 				235FF02C27D75C1100FC15F0 /* platform.hpp */,
 			);
-			path = mario;
+			path = ghosty;
 			sourceTree = "<group>";
 		};
 		235FEEFA27D69CE700FC15F0 /* plant */ = {
@@ -1190,6 +1195,7 @@
 		239F328427D0CA9F007D4E2C /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				23EF8D1A27DE5E5B00AD67B7 /* level1.json */,
 				239865F927D7F77A008F38C1 /* backgrounds */,
 				239865F427D7F561008F38C1 /* obstacles */,
 				239865B727D7F2EF008F38C1 /* plant-poison */,
@@ -1325,7 +1331,7 @@
 		23D5C7B827832B5600C6C916 = {
 			isa = PBXGroup;
 			children = (
-				235FEC1927C6DF38006306C9 /* mario */,
+				235FEC1927C6DF38006306C9 /* ghosty */,
 				23D5C7E727847B3000C6C916 /* asteroids */,
 				23D5C7C327832B5600C6C916 /* game-engine */,
 				23D5C7C227832B5600C6C916 /* Products */,
@@ -1344,8 +1350,11 @@
 		23D5C7C327832B5600C6C916 /* game-engine */ = {
 			isa = PBXGroup;
 			children = (
+				23EF8D1E27DE7AF000AD67B7 /* json */,
 				235A527A27B0FC900008A8A0 /* core */,
 				235A527927B0FC7B0008A8A0 /* util */,
+				23EF8D1B27DE797700AD67B7 /* mapLoader.cpp */,
+				23EF8D1C27DE797700AD67B7 /* mapLoader.hpp */,
 			);
 			path = "game-engine";
 			sourceTree = "<group>";
@@ -1395,6 +1404,14 @@
 				23A933BD2788B4EC00769F69 /* ship.hpp */,
 			);
 			path = asteroids;
+			sourceTree = "<group>";
+		};
+		23EF8D1E27DE7AF000AD67B7 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				23EF8D1F27DE7B0C00AD67B7 /* json.hpp */,
+			);
+			path = json;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1468,6 +1485,7 @@
 				2394CC6127CC09DF00B62AC8 /* shape.cpp in Sources */,
 				239F327B27CF8293007D4E2C /* scrollingWorld.cpp in Sources */,
 				235A526727AAB2A00008A8A0 /* asteroidSpawner.cpp in Sources */,
+				23EF8D1D27DE797700AD67B7 /* mapLoader.cpp in Sources */,
 				235FEC2027C6E1F6006306C9 /* character.cpp in Sources */,
 				23B177AA27A3E3160094B178 /* keyboardHandler.hpp in Sources */,
 				235FEC1B27C6DF5B006306C9 /* ghosty.cpp in Sources */,
