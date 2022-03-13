@@ -889,6 +889,7 @@
 		23EF8D1B27DE797700AD67B7 /* mapLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mapLoader.cpp; sourceTree = "<group>"; };
 		23EF8D1C27DE797700AD67B7 /* mapLoader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mapLoader.hpp; sourceTree = "<group>"; };
 		23EF8D1F27DE7B0C00AD67B7 /* json.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
+		23EF8D2027DE7CBE00AD67B7 /* types.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = types.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1195,6 +1196,7 @@
 		239F328427D0CA9F007D4E2C /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				23EF8D2027DE7CBE00AD67B7 /* types.json */,
 				23EF8D1A27DE5E5B00AD67B7 /* level1.json */,
 				239865F927D7F77A008F38C1 /* backgrounds */,
 				239865F427D7F561008F38C1 /* obstacles */,

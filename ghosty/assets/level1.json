@@ -40,42 +40,5 @@
             "scale": 0.5,
             "collidable": false
         }
-	],
-    "types": [
-        {
-            "name": "ghosty-platform-multi-layer",
-            "base": "platform-multi-layer",
-            "sprites": {
-                "cornerLeftTop": "platform-top-corner-left.png",
-                "cornerRightTop": "platform-top-corner-right.png",
-                "cornerLeftBottom": "platform-bottom-corner-left.png",
-                "cornerRightBottom": "platform-bottom-corner-right.png",
-                "middleBottom": "platform-bottom-middle.png",
-                "middleTop": "platform-top-middle.png",
-                "middleRight": "platform-right-middle.png",
-                "middleLeft": "platform-left-middle.png"
-            }
-        },
-        {
-            "name": "ghosty-platform-single-layer",
-            "base": "platform-single-layer",
-            "sprites": {
-                "cornerRight": "platform-single-corner-right.png",
-                "cornerLeft": "platform-single-corner-left.png",
-                "center": "platform-single-middle.png"
-            }
-        },
-        {
-            "name": "ghosty-plant-waving1",
-            "base": "simple-animation",
-            "spriteArray": {
-                "name": "Plant3_{i}.png",
-                "count": 90
-            }
-        },
-        {
-            "name": "ghosty",
-            "base": "custom"
-        }
-    ]
+	]
 }
