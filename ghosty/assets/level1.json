@@ -10,7 +10,8 @@
             "scale": 0.5,
             "applyGravity": true,
             "rotationAngle": 0.0,
-            "applyScrolling": true
+            "applyScrolling": true,
+            "isMainCharacter": true
         },
 		{
             "description": "big platform on left",
@@ -18,8 +19,8 @@
 			"rows": 5,
 			"cols": 5,
 			"position": {
-				"x": 100,
-				"y": 100
+				"x": 0,
+				"y": 2500
 			},
 			"scale": 0.5,
             "applyGravity": false,

@@ -11,9 +11,10 @@
                 "middleBottom": "platform-bottom-middle.png",
                 "middleTop": "platform-top-middle.png",
                 "middleRight": "platform-right-middle.png",
-                "middleLeft": "platform-left-middle.png"
+                "middleLeft": "platform-left-middle.png",
+                "center": "platform-center.png"
             },
-            "spriteSwapInterval": 0.06
+            "spriteSize": 512
         },
         {
             "name": "ghosty-platform-single-layer",
@@ -23,7 +24,7 @@
                 "cornerRight": "platform-single-corner-right.png",
                 "center": "platform-single-middle.png"
             },
-            "spriteSwapInterval": 0.06
+            "spriteSize": 512
         },
         {
             "name": "ghosty-plant-waving1",

@@ -15,9 +15,7 @@ private:
     
 public:
     GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000) {
-//        scrollingWorld = new jimp::ScrollingWorld(character, 10000, 3000);
-//        setBackgroundColor(0x3ba7b3);
-
+        setBackgroundColor(0x3ba7b3);
         // LEFT BIG PLATFORM
 //        Platform* platform = new Platform("platform-top-left.png", "platform-top-middle.png", 5, 7, 512, 0.3F, jimp::Vector2D::from(-153, static_cast<float>(scrollingWorld->getHeight() - (4 * 153))));
 //        Decoration* plant = new Decoration(jimp::Vector2D::from(platform->getPosition().x + 200, platform->getPosition().y - 95 ), "Plant3_{i}.png", 90, 0, 0.3F, 4);

@@ -1,0 +1,34 @@
+#ifndef platformSingleBuilder_hpp
+#define platformSingleBuilder_hpp
+
+#include <string>
+#include "vector2D.hpp"
+
+namespace jimp {
+
+class PlatformSingleBuilder {
+    
+private:
+    jimp::Vector2D position;
+    int rowCount = 0;
+    int columnCount = 0;
+    float blockSize = 0.0F;
+    float scale = 1.0F;
+    std::string cornerLeftFilePath;
+    std::string cornerRightFilePath;
+    std::string middleFilePath;
+    
+public:
+    PlatformSingleBuilder(uint16_t columnCount, float blockSize, float scale, jimp::Vector2D position);
+    jimp::Vector2D getPosition();
+    void render();
+    float getWidth();
+    float getHeight();
+    void setCornerLeft(std::string cornerLeftFilePath);
+    void setCornerRight(std::string cornerRightFilePath);
+    void setMiddle(std::string middleFilePath);
+};
+
+}
+
+#endif

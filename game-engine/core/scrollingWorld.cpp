@@ -7,13 +7,12 @@ namespace jimp {
 
 static ScrollingWorld* scrollingWorldInstance = nullptr;
 
-ScrollingWorld::ScrollingWorld(AnimatedGraphic* mainCharacter, int width, int height) {
+ScrollingWorld::ScrollingWorld(int width, int height) {
     scrollingWorldInstance = this;
     this->width = width;
     this->height = height;
     this->maxScrollX = width - GameEngine::getInstance()->getScreenWidth();
     this->maxScrollY = height - GameEngine::getInstance()->getScreenHeight();
-    this->mainCharacter = mainCharacter;
 }
 
 ScrollingWorld::~ScrollingWorld() {
@@ -33,6 +32,10 @@ AnimatedGraphic* ScrollingWorld::getMainCharacter() {
 
 void ScrollingWorld::setMainCharacterLoaded(bool loaded) {
     mainCharacterLoaded = loaded;
+}
+
+void ScrollingWorld::setMainCharacter(AnimatedGraphic* animatedGraphic) {
+    mainCharacter = animatedGraphic;
 }
 
 void ScrollingWorld::doOnUpdate() {

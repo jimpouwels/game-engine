@@ -20,7 +20,7 @@ private:
     int height = 0;
     
 public:
-    ScrollingWorld(AnimatedGraphic* mainCharacter, int width, int height);
+    ScrollingWorld(int width, int height);
     ~ScrollingWorld();
     int getWidth();
     int getHeight();
@@ -28,6 +28,7 @@ public:
     void doOnFrame();
     AnimatedGraphic* getMainCharacter();
     void setMainCharacterLoaded(bool loaded);
+    void setMainCharacter(AnimatedGraphic* animatedGraphic);
     static ScrollingWorld* getInstance();
 };
 

@@ -9,6 +9,7 @@ struct PlatformSingleLayerType : Type {
     std::string cornerLeftFilePath;
     std::string cornerRightFilePath;
     std::string centerFilePath;
+    int spriteSize;
 };
 
 }

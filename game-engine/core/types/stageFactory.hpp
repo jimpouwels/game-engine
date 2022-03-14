@@ -12,7 +12,7 @@ class StageFactory {
 private:
     std::list<Type*>* types = nullptr;
     DataLoader* dataLoader = nullptr;
-    AnimatedGraphic* createAnimatedGraphicFrom(Graphic graphic);
+    void createAnimatedGraphicFrom(Graphic graphic);
     Type* getTypeFor(std::string typeName);
     
 protected:

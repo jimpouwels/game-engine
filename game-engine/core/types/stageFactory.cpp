@@ -1,7 +1,11 @@
 #include "stageFactory.hpp"
 #include "animationType.hpp"
+#include "platformMultiLayerType.hpp"
+#include "platformSingleLayerType.hpp"
 #include "gameEngine.hpp"
 #include "simpleAnimation.hpp"
+#include "platformMultiBuilder.hpp"
+#include "platformSingleBuilder.hpp"
 
 #include <string>
 #include <regex>
@@ -22,13 +26,15 @@ StageFactory::~StageFactory() {
 }
 
 void StageFactory::loadStage(std::string filePath) {
+    new jimp::ScrollingWorld(10000, 3000);
+    
     std::list<Graphic> graphics = dataLoader->loadGraphics(filePath);
     for (const auto& graphic : graphics) {
         createAnimatedGraphicFrom(graphic);
     }
 }
 
-AnimatedGraphic* StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
+void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
     AnimatedGraphic* animatedGraphic = nullptr;
     Type* type = getTypeFor(graphic.type);
     if (dynamic_cast<AnimationType*>(type)) {
@@ -43,21 +49,37 @@ AnimatedGraphic* StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
                 animatedGraphic->addSprite(subAnimation->name, std::regex_replace(subAnimation->filePath, std::regex("\\{i\\}"), std::to_string(i)));
             }
         }
-    }
-    
-    // set all stuff!! (sprites, rotation, gravity, etc)
-    if (animatedGraphic != nullptr) {
         animatedGraphic->setPosition(graphic.position);
         animatedGraphic->setScale(graphic.scale);
         animatedGraphic->setRotationAngle(graphic.rotationAngle);
         animatedGraphic->setApplyScrolling(graphic.applyScrolling);
         animatedGraphic->setApplyGravity(graphic.applyGravity);
-    
         animatedGraphic->setSpriteSwapInterval(type->spriteSwapInterval);
-        
+        if (type->isMainCharacter) {
+            ScrollingWorld::getInstance()->setMainCharacter(animatedGraphic);
+        }
         GameEngine::getInstance()->registerGraphic(animatedGraphic);
+    } else if (dynamic_cast<PlatformMultiLayerType*>(type)) {
+        PlatformMultiLayerType* animationType = dynamic_cast<PlatformMultiLayerType*>(type);
+        PlatformMultiBuilder* builder = new PlatformMultiBuilder(graphic.rows, graphic.cols, animationType->spriteSize, graphic.scale, graphic.position);
+        builder->setCornerTopLeft(animationType->cornerLeftTopFilePath);
+        builder->setCornerTopRight(animationType->cornerRightTopFilePath);
+        builder->setCornerBottomLeft(animationType->cornerLeftBottomFilePath);
+        builder->setCornerBottomRight(animationType->cornerRightBottomFilePath);
+        builder->setMiddleTop(animationType->middleTopFilePath);
+        builder->setBottomMiddle(animationType->middleBottomFilePath);
+        builder->setRightMiddle(animationType->middleRightFilePath);
+        builder->setLeftMiddle(animationType->middleLeftFilePath);
+        builder->setCenter(animationType->centerFilePath);
+        builder->render();
+    } else if (dynamic_cast<PlatformSingleLayerType*>(type)) {
+        PlatformSingleLayerType* animationType = dynamic_cast<PlatformSingleLayerType*>(type);
+        PlatformSingleBuilder* builder = new PlatformSingleBuilder(graphic.cols, animationType->spriteSize, graphic.scale, graphic.position);
+        builder->setCornerLeft(animationType->cornerLeftFilePath);
+        builder->setCornerRight(animationType->cornerRightFilePath);
+        builder->setMiddle(animationType->centerFilePath);
+        builder->render();
     }
-    return animatedGraphic;
 }
 
 Type* StageFactory::getTypeFor(std::string typeName) {

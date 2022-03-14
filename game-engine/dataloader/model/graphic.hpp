@@ -13,6 +13,8 @@ struct Graphic {
     bool applyGravity = false;
     bool applyScrolling = false;
     float rotationAngle = 0.0f;
+    int rows = 0;
+    int cols = 0;
 };
 
 }

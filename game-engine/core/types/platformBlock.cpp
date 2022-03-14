@@ -6,6 +6,7 @@
 namespace jimp {
   
 PlatformBlock::PlatformBlock(jimp::Vector2D position, std::string filePath, float angle, float scale) : jimp::AnimatedGraphic() {
+    addSprite("default", filePath);
 }
 
 void PlatformBlock::doOnUpdate(float elapsedTime) {

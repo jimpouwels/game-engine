@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		230D483E27B9177A001F6494 /* updateThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 230D483C27B9177A001F6494 /* updateThread.cpp */; };
+		2332412227DFBA0C0077F5BB /* platformSingleBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2332412027DFBA0B0077F5BB /* platformSingleBuilder.cpp */; };
 		2338646F27D634ED00DC54B4 /* platform-top-corner-left.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2338646E27D634E900DC54B4 /* platform-top-corner-left.png */; };
 		2338647027D634ED00DC54B4 /* platform-top-middle.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2338646D27D634E900DC54B4 /* platform-top-middle.png */; };
 		234F969927DA186E00DA63DC /* platform-top-corner-right.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 234F969827DA186600DA63DC /* platform-top-corner-right.png */; };
@@ -172,7 +173,7 @@
 		235FF02827D6C8D500FC15F0 /* BlueFlower_57.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235FEFBC27D6C8CA00FC15F0 /* BlueFlower_57.png */; };
 		235FF02927D6C8D500FC15F0 /* BlueFlower_58.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235FEFC027D6C8CA00FC15F0 /* BlueFlower_58.png */; };
 		235FF02A27D6C8D500FC15F0 /* BlueFlower_59.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235FEFBA27D6C8CA00FC15F0 /* BlueFlower_59.png */; };
-		235FF02D27D75C1100FC15F0 /* platformBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235FF02B27D75C1100FC15F0 /* platformBuilder.cpp */; };
+		235FF02D27D75C1100FC15F0 /* platformMultiBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235FF02B27D75C1100FC15F0 /* platformMultiBuilder.cpp */; };
 		236D5A2027B2C5D4005183C5 /* spaceship-thrust1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 236D5A1F27B2C5CC005183C5 /* spaceship-thrust1.png */; };
 		236D5A2127B2C5D4005183C5 /* spaceship-thrust2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 236D5A1E27B2C5CC005183C5 /* spaceship-thrust2.png */; };
 		236D5A2727B565A7005183C5 /* sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 236D5A2527B565A7005183C5 /* sound.cpp */; };
@@ -576,6 +577,8 @@
 /* Begin PBXFileReference section */
 		230D483C27B9177A001F6494 /* updateThread.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = updateThread.cpp; sourceTree = "<group>"; };
 		230D483D27B9177A001F6494 /* updateThread.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = updateThread.hpp; sourceTree = "<group>"; };
+		2332412027DFBA0B0077F5BB /* platformSingleBuilder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = platformSingleBuilder.cpp; sourceTree = "<group>"; };
+		2332412127DFBA0C0077F5BB /* platformSingleBuilder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = platformSingleBuilder.hpp; sourceTree = "<group>"; };
 		2338646D27D634E900DC54B4 /* platform-top-middle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "platform-top-middle.png"; sourceTree = "<group>"; };
 		2338646E27D634E900DC54B4 /* platform-top-corner-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "platform-top-corner-left.png"; sourceTree = "<group>"; };
 		234F969827DA186600DA63DC /* platform-top-corner-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "platform-top-corner-right.png"; sourceTree = "<group>"; };
@@ -750,8 +753,8 @@
 		235FEFEC27D6C8CC00FC15F0 /* BlueFlower_25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueFlower_25.png; sourceTree = "<group>"; };
 		235FEFED27D6C8CC00FC15F0 /* BlueFlower_19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueFlower_19.png; sourceTree = "<group>"; };
 		235FEFEE27D6C8CC00FC15F0 /* BlueFlower_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueFlower_32.png; sourceTree = "<group>"; };
-		235FF02B27D75C1100FC15F0 /* platformBuilder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = platformBuilder.cpp; sourceTree = "<group>"; };
-		235FF02C27D75C1100FC15F0 /* platformBuilder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = platformBuilder.hpp; sourceTree = "<group>"; };
+		235FF02B27D75C1100FC15F0 /* platformMultiBuilder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = platformMultiBuilder.cpp; sourceTree = "<group>"; };
+		235FF02C27D75C1100FC15F0 /* platformMultiBuilder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = platformMultiBuilder.hpp; sourceTree = "<group>"; };
 		236D5A1E27B2C5CC005183C5 /* spaceship-thrust2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spaceship-thrust2.png"; sourceTree = "<group>"; };
 		236D5A1F27B2C5CC005183C5 /* spaceship-thrust1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spaceship-thrust1.png"; sourceTree = "<group>"; };
 		236D5A2527B565A7005183C5 /* sound.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sound.cpp; sourceTree = "<group>"; };
@@ -1452,8 +1455,10 @@
 				239F328B27D11A98007D4E2C /* platformBlock.hpp */,
 				235FEFAF27D69E2C00FC15F0 /* simpleAnimation.cpp */,
 				235FEFB027D69E2C00FC15F0 /* simpleAnimation.hpp */,
-				235FF02B27D75C1100FC15F0 /* platformBuilder.cpp */,
-				235FF02C27D75C1100FC15F0 /* platformBuilder.hpp */,
+				235FF02B27D75C1100FC15F0 /* platformMultiBuilder.cpp */,
+				235FF02C27D75C1100FC15F0 /* platformMultiBuilder.hpp */,
+				2332412027DFBA0B0077F5BB /* platformSingleBuilder.cpp */,
+				2332412127DFBA0C0077F5BB /* platformSingleBuilder.hpp */,
 				23EF8D2D27DF26E600AD67B7 /* stageFactory.cpp */,
 				23EF8D2E27DF26E600AD67B7 /* stageFactory.hpp */,
 			);
@@ -1536,7 +1541,8 @@
 				235FEC2027C6E1F6006306C9 /* ghosty.cpp in Sources */,
 				23B177AA27A3E3160094B178 /* keyboardHandler.hpp in Sources */,
 				235FEC1B27C6DF5B006306C9 /* game.cpp in Sources */,
-				235FF02D27D75C1100FC15F0 /* platformBuilder.cpp in Sources */,
+				235FF02D27D75C1100FC15F0 /* platformMultiBuilder.cpp in Sources */,
+				2332412227DFBA0C0077F5BB /* platformSingleBuilder.cpp in Sources */,
 				23E5E30027A302DD00B62583 /* asteroid.cpp in Sources */,
 				2394CC6327CC0A2300B62AC8 /* rectangle.cpp in Sources */,
 				23A933BE2788B4EC00769F69 /* ship.cpp in Sources */,

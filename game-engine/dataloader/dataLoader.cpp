@@ -25,7 +25,12 @@ std::list<Type*>* DataLoader::loadTypes() {
         Type* type = createType(typeJson);
         type->name = typeJson.at("name");
         type->base = typeJson.at("base");
-        type->spriteSwapInterval = typeJson.at("spriteSwapInterval");
+        if (typeJson.contains("spriteSwapInterval")) {
+            type->spriteSwapInterval = typeJson.at("spriteSwapInterval");
+        }
+        if (typeJson.contains("isMainCharacter")) {
+            type->isMainCharacter = typeJson.at("isMainCharacter");
+        }
         types->push_back(type);
     }
     return types;
@@ -55,6 +60,12 @@ std::list<Graphic> DataLoader::loadGraphics(std::string filePath) {
         if (graphicJson.contains("applyScrolling")) {
             graphic.applyScrolling = graphicJson.at("applyScrolling");
         }
+        if (graphicJson.contains("rows")) {
+            graphic.rows = graphicJson.at("rows");
+        }
+        if (graphicJson.contains("cols")) {
+            graphic.cols= graphicJson.at("cols");
+        }
         graphics.push_back(graphic);
     }
     
@@ -79,6 +90,8 @@ Type* DataLoader::createType(nlohmann::json typeJson) {
         type->middleBottomFilePath = sprites.at("middleBottom");
         type->middleRightFilePath = sprites.at("middleRight");
         type->middleLeftFilePath = sprites.at("middleLeft");
+        type->centerFilePath = sprites.at("center");
+        type->spriteSize = typeJson.at("spriteSize");
         return type;
     } else if (typeJson.at("base") == "platform-single-layer") {
         PlatformSingleLayerType* type = new PlatformSingleLayerType();
@@ -86,6 +99,7 @@ Type* DataLoader::createType(nlohmann::json typeJson) {
         type->cornerLeftFilePath = sprites.at("cornerLeft");
         type->cornerRightFilePath = sprites.at("cornerRight");
         type->centerFilePath = sprites.at("center");
+        type->spriteSize = typeJson.at("spriteSize");
         return type;
     } else if (typeJson.at("base") == "animation") {
         AnimationType* type = new AnimationType();

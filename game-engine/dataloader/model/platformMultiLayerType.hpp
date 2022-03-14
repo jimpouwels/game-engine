@@ -14,6 +14,8 @@ struct PlatformMultiLayerType : Type {
     std::string middleTopFilePath;
     std::string middleRightFilePath;
     std::string middleLeftFilePath;
+    std::string centerFilePath;
+    int spriteSize;
 };
 
 }

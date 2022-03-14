@@ -9,6 +9,7 @@ struct Type {
     std::string name;
     std::string base;
     float spriteSwapInterval = -1.0f;
+    bool isMainCharacter = false;
     virtual ~Type() { };
 };
 
