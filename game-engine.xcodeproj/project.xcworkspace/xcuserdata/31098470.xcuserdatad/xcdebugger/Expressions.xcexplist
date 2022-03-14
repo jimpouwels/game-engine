@@ -143,13 +143,21 @@
                value = "getMarginLeft()">
             </PersistentString>
             <PersistentString
-               value = "otherGraphic-&gt;getPosition().x + (otherGraphic-&gt;getWidth() - otherGraphic-&gt;getMarginRight()) - getMarginLeft()">
+               value = "otherGraphic-&gt;getRight()">
             </PersistentString>
             <PersistentString
-               value = "otherGraphic-&gt;getPosition().x + (otherGraphic-&gt;getWidth() - otherGraphic-&gt;getMarginRight())">
+               value = "getLeft()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "jimp::AnimatedGraphic::stayOnTopOf(jimp::AnimatedGraphic*):animatedGraphic.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "otherGraphic-&gt;getRight()">
             </PersistentString>
             <PersistentString
-               value = "otherGraphic-&gt;getPosition().x + (otherGraphic-&gt;getWidth() - otherGraphic-&gt;getMarginRight()">
+               value = "getLeft()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

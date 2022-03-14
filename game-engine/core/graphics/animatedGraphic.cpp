@@ -137,19 +137,19 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
     float otherGraphicNextRight = otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight();
     
     if ((MathUtils::smallerOrEquals(getBottom(), otherGraphic->getTop()) && currentGraphicNextBottom > otherGraphicNextTop)
-            && currentGraphicNextRight != otherGraphicNextLeft && currentGraphicNextLeft != otherGraphicNextRight) {
+            && !MathUtils::floatEquals(currentGraphicNextRight, otherGraphicNextLeft) && !MathUtils::floatEquals(currentGraphicNextLeft, otherGraphicNextRight)) {
         hasCollidedRect(otherGraphic, Geo2D::Side::BOTTOM);
         hasCollidedRectBottom(otherGraphic);
     } else if ((MathUtils::largerOrEquals(getTop(), otherGraphic->getBottom()) && currentGraphicNextTop < otherGraphicNextBottom)
-            && currentGraphicNextRight != otherGraphicNextLeft && currentGraphicNextLeft != otherGraphicNextRight) {
+            && !MathUtils::floatEquals(currentGraphicNextRight, otherGraphicNextLeft) && !MathUtils::floatEquals(currentGraphicNextLeft, otherGraphicNextRight)) {
         hasCollidedRect(otherGraphic, Geo2D::Side::TOP);
         hasCollidedRectTop(otherGraphic);
     } else if ((MathUtils::largerOrEquals(getLeft(), otherGraphic->getRight()) && currentGraphicNextLeft < otherGraphicNextRight)
-            && currentGraphicNextBottom != otherGraphicNextTop && currentGraphicNextTop != otherGraphicNextBottom) {
+               && !MathUtils::floatEquals(currentGraphicNextBottom, otherGraphicNextTop) && !MathUtils::floatEquals(currentGraphicNextTop, otherGraphicNextBottom)) {
         hasCollidedRect(otherGraphic, Geo2D::Side::LEFT);
         hasCollidedRectLeft(otherGraphic);
     } else if ((MathUtils::smallerOrEquals(getRight(), otherGraphic->getLeft()) && currentGraphicNextRight > otherGraphicNextLeft)
-            && currentGraphicNextBottom != otherGraphicNextTop && currentGraphicNextTop != otherGraphicNextBottom) {
+            && !MathUtils::floatEquals(currentGraphicNextBottom, otherGraphicNextTop) && !MathUtils::floatEquals(currentGraphicNextTop, otherGraphicNextBottom)) {
         hasCollidedRect(otherGraphic, Geo2D::Side::RIGHT);
         hasCollidedRectRight(otherGraphic);
     }
