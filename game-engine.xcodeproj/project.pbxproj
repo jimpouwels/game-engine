@@ -301,12 +301,8 @@
 		23E5E30027A302DD00B62583 /* asteroid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23E5E2FE27A302DD00B62583 /* asteroid.cpp */; };
 		23EF8D1827DB8D0300AD67B7 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23EF8D1627DB8D0300AD67B7 /* timer.cpp */; };
 		23EF8D1D27DE797700AD67B7 /* dataLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23EF8D1B27DE797700AD67B7 /* dataLoader.cpp */; };
-		23EF8D2527DF23F600AD67B7 /* type.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23EF8D2327DF23F600AD67B7 /* type.cpp */; };
-		23EF8D2827DF24CA00AD67B7 /* platformMultiLayerType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23EF8D2627DF24CA00AD67B7 /* platformMultiLayerType.cpp */; };
-		23EF8D2B27DF24E000AD67B7 /* platformSingleLayerType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23EF8D2927DF24E000AD67B7 /* platformSingleLayerType.cpp */; };
 		23EF8D2F27DF26E600AD67B7 /* stageFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23EF8D2D27DF26E600AD67B7 /* stageFactory.cpp */; };
 		23EF8D3227DF279600AD67B7 /* ghostyStageFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23EF8D3027DF279600AD67B7 /* ghostyStageFactory.cpp */; };
-		23EF8D3527DF2BAA00AD67B7 /* graphic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23EF8D3327DF2BAA00AD67B7 /* graphic.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -896,17 +892,13 @@
 		23EF8D1C27DE797700AD67B7 /* dataLoader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = dataLoader.hpp; sourceTree = "<group>"; };
 		23EF8D1F27DE7B0C00AD67B7 /* json.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
 		23EF8D2027DE7CBE00AD67B7 /* types.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = types.json; sourceTree = "<group>"; };
-		23EF8D2327DF23F600AD67B7 /* type.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = type.cpp; sourceTree = "<group>"; };
 		23EF8D2427DF23F600AD67B7 /* type.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = type.hpp; sourceTree = "<group>"; };
-		23EF8D2627DF24CA00AD67B7 /* platformMultiLayerType.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = platformMultiLayerType.cpp; sourceTree = "<group>"; };
 		23EF8D2727DF24CA00AD67B7 /* platformMultiLayerType.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = platformMultiLayerType.hpp; sourceTree = "<group>"; };
-		23EF8D2927DF24E000AD67B7 /* platformSingleLayerType.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = platformSingleLayerType.cpp; sourceTree = "<group>"; };
 		23EF8D2A27DF24E000AD67B7 /* platformSingleLayerType.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = platformSingleLayerType.hpp; sourceTree = "<group>"; };
 		23EF8D2D27DF26E600AD67B7 /* stageFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = stageFactory.cpp; sourceTree = "<group>"; };
 		23EF8D2E27DF26E600AD67B7 /* stageFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = stageFactory.hpp; sourceTree = "<group>"; };
 		23EF8D3027DF279600AD67B7 /* ghostyStageFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ghostyStageFactory.cpp; sourceTree = "<group>"; };
 		23EF8D3127DF279600AD67B7 /* ghostyStageFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ghostyStageFactory.hpp; sourceTree = "<group>"; };
-		23EF8D3327DF2BAA00AD67B7 /* graphic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = graphic.cpp; sourceTree = "<group>"; };
 		23EF8D3427DF2BAA00AD67B7 /* graphic.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = graphic.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1443,13 +1435,9 @@
 		23EF8D2227DF23E300AD67B7 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				23EF8D2327DF23F600AD67B7 /* type.cpp */,
 				23EF8D2427DF23F600AD67B7 /* type.hpp */,
-				23EF8D2627DF24CA00AD67B7 /* platformMultiLayerType.cpp */,
 				23EF8D2727DF24CA00AD67B7 /* platformMultiLayerType.hpp */,
-				23EF8D2927DF24E000AD67B7 /* platformSingleLayerType.cpp */,
 				23EF8D2A27DF24E000AD67B7 /* platformSingleLayerType.hpp */,
-				23EF8D3327DF2BAA00AD67B7 /* graphic.cpp */,
 				23EF8D3427DF2BAA00AD67B7 /* graphic.hpp */,
 			);
 			path = model;
@@ -1552,16 +1540,12 @@
 				23A933BE2788B4EC00769F69 /* ship.cpp in Sources */,
 				23EF8D3227DF279600AD67B7 /* ghostyStageFactory.cpp in Sources */,
 				23E5E2F5279A979100B62583 /* bullet.cpp in Sources */,
-				23EF8D2827DF24CA00AD67B7 /* platformMultiLayerType.cpp in Sources */,
-				23EF8D2527DF23F600AD67B7 /* type.cpp in Sources */,
 				23D5C7C527832B5600C6C916 /* gameEngine.hpp in Sources */,
 				236D5A2727B565A7005183C5 /* sound.cpp in Sources */,
 				23A933B527864EA800769F69 /* gameEngine.cpp in Sources */,
 				23D5C7E32783432F00C6C916 /* asteroids.cpp in Sources */,
 				230D483E27B9177A001F6494 /* updateThread.cpp in Sources */,
-				23EF8D2B27DF24E000AD67B7 /* platformSingleLayerType.cpp in Sources */,
 				23EF8D1827DB8D0300AD67B7 /* timer.cpp in Sources */,
-				23EF8D3527DF2BAA00AD67B7 /* graphic.cpp in Sources */,
 				23A933B327864EA800769F69 /* animatedGraphic.cpp in Sources */,
 				23A933BB2788407F00769F69 /* keyboardHandler.cpp in Sources */,
 				23A933B227864EA800769F69 /* sprite.cpp in Sources */,

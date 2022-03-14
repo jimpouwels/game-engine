@@ -5,9 +5,7 @@
 
 namespace jimp {
 
-class Type {
-  
-private:
+struct Type {
     std::string name;
     std::string base;
     

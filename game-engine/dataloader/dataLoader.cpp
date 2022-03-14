@@ -17,7 +17,14 @@ std::list<Type*>* DataLoader::loadTypes() {
     std::list<Type*>* types = new std::list<Type*>;
     std::string typesJsonString = loadFileContents(typesFilePath);
     json typesJson = json::parse(typesJsonString);
-    std::cout << typesJson.at("types").at(0).at("name");
+    json t = typesJson.at("types");
+    for (int i = 0; i < t.size(); i++) {
+        json typeJson = t.at(i);
+        Type* type = new Type();
+        type->name = typeJson.at("name");
+        type->base = typeJson.at("base");
+        types->push_back(type);
+    }
     return types;
 }
 
