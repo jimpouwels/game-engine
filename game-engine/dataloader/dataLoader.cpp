@@ -29,9 +29,11 @@ std::list<Type*>* DataLoader::loadTypes() {
     return types;
 }
 
-std::list<Graphic*>* DataLoader::loadGraphics(std::string filePath) {
-    std::list<Graphic*>* graphics = new std::list<Graphic*>;
-    
+std::list<Graphic*> DataLoader::loadGraphics(std::string filePath) {
+    std::list<Graphic*> graphics = std::list<Graphic*>();
+    std::string graphicsJsonString = loadFileContents(filePath);
+    nlohmann::json graphicsJson = nlohmann::json::parse(graphicsJsonString);
+    nlohmann::json g = graphicsJson.at("graphics");
     return graphics;
 }
 

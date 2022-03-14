@@ -51,8 +51,8 @@ public:
     }
     
     void startGame() {
-        start();
         loadStage("/Users/31098470/Projects/Personal/game-engine/ghosty/assets/level1.json");
+        start();
     }
     
     void onUpdate(float elapsedTime) {

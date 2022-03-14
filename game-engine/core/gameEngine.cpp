@@ -51,7 +51,6 @@ GameEngine* GameEngine::getInstance() {
 }
 
 void GameEngine::start() {
-    this->stageFactory = getStageFactory();
     
     updateThread->start();
     while (window->isOpen()) {
@@ -78,6 +77,9 @@ void GameEngine::start() {
 }
 
 void GameEngine::loadStage(std::string filePath) {
+    if (stageFactory == nullptr) {
+        stageFactory = getStageFactory();
+    }
     stageFactory->loadStage(filePath);
 }
 
