@@ -16,7 +16,8 @@ StageFactory::~StageFactory() {
 }
 
 void StageFactory::loadStage(std::string filePath) {
-    std::list<Graphic*> graphics = dataLoader->loadGraphics(filePath);
+    std::list<Graphic> graphics = dataLoader->loadGraphics(filePath);
+    std::cout << "Graphic count: " << graphics.size() << std::endl;
 }
 
 AnimatedGraphic* StageFactory::createGraphic(std::string type) {

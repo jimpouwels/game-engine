@@ -19,6 +19,7 @@ std::list<Type*>* DataLoader::loadTypes() {
     std::string typesJsonString = loadFileContents(typesFilePath);
     nlohmann::json typesJson = nlohmann::json::parse(typesJsonString);
     nlohmann::json t = typesJson.at("types");
+    
     for (int i = 0; i < t.size(); i++) {
         nlohmann::json typeJson = t.at(i);
         Type* type = createType(typeJson);
@@ -29,11 +30,30 @@ std::list<Type*>* DataLoader::loadTypes() {
     return types;
 }
 
-std::list<Graphic*> DataLoader::loadGraphics(std::string filePath) {
-    std::list<Graphic*> graphics = std::list<Graphic*>();
+std::list<Graphic> DataLoader::loadGraphics(std::string filePath) {
+    std::list<Graphic> graphics = std::list<Graphic>();
     std::string graphicsJsonString = loadFileContents(filePath);
     nlohmann::json graphicsJson = nlohmann::json::parse(graphicsJsonString);
     nlohmann::json g = graphicsJson.at("graphics");
+    
+    for (int i = 0; i < g.size(); i++) {
+        nlohmann::json graphicJson = g.at(i);
+        Graphic graphic = Graphic();
+        graphic.description = graphicJson.at("description");
+        graphic.type = graphicJson.at("type");
+        graphic.position = Vector2D::from(graphicJson.at("position").at("x"), graphicJson.at("position").at("y"));
+        if (graphicJson.contains("scale")) {
+            graphic.scale = graphicJson.at("scale");
+        }
+        if (graphicJson.contains("applyGravity")) {
+            graphic.applyGravity = graphicJson.at("applyGravity");
+        }
+        if (graphicJson.contains("rotationAngle")) {
+            graphic.rotationAngle = graphicJson.at("rotationAngle");
+        }
+        graphics.push_back(graphic);
+    }
+    
     return graphics;
 }
 

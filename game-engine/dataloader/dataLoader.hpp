@@ -19,7 +19,7 @@ private:
 public:
     DataLoader(std::string typesFilePath);
     std::list<Type*>* loadTypes();
-    std::list<Graphic*> loadGraphics(std::string filePath);
+    std::list<Graphic> loadGraphics(std::string filePath);
 };
 
 }
