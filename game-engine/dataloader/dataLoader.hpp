@@ -14,14 +14,12 @@ class DataLoader {
 private:
     std::string typesFilePath;
     std::string loadFileContents(std::string filePath);
-    Type* loadType(nlohmann::json typeJson);
-    void enrichtWithTypeBase(Type* type, nlohmann::json typeJson);
+    Type* createType(nlohmann::json typeJson);
     
 public:
     DataLoader(std::string typesFilePath);
     std::list<Type*>* loadTypes();
     std::list<Graphic*>* loadGraphics(std::string filePath);
-    
 };
 
 }

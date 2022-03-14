@@ -6,7 +6,9 @@
 namespace jimp {
 
 struct PlatformSingleLayerType : Type {
-    
+    std::string cornerLeftFilePath;
+    std::string cornerRightFilePath;
+    std::string centerFilePath;
 };
 
 }

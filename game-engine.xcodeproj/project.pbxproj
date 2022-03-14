@@ -900,6 +900,7 @@
 		23EF8D3027DF279600AD67B7 /* ghostyStageFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ghostyStageFactory.cpp; sourceTree = "<group>"; };
 		23EF8D3127DF279600AD67B7 /* ghostyStageFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ghostyStageFactory.hpp; sourceTree = "<group>"; };
 		23EF8D3427DF2BAA00AD67B7 /* graphic.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = graphic.hpp; sourceTree = "<group>"; };
+		23EF8D3627DF511700AD67B7 /* animationType.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animationType.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1438,6 +1439,7 @@
 				23EF8D2427DF23F600AD67B7 /* type.hpp */,
 				23EF8D2727DF24CA00AD67B7 /* platformMultiLayerType.hpp */,
 				23EF8D2A27DF24E000AD67B7 /* platformSingleLayerType.hpp */,
+				23EF8D3627DF511700AD67B7 /* animationType.hpp */,
 				23EF8D3427DF2BAA00AD67B7 /* graphic.hpp */,
 			);
 			path = model;

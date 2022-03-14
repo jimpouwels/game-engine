@@ -3,7 +3,7 @@
 
 namespace jimp {
 
-class Graphic {
+struct Graphic {
     
     
 };
