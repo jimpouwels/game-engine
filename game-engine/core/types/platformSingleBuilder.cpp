@@ -15,17 +15,14 @@ PlatformSingleBuilder::PlatformSingleBuilder(uint16_t columnCount, float blockSi
 
 void PlatformSingleBuilder::render() {
     float size = blockSize * scale;
-    if (rowCount == 1) {
-        for (int x = 0; x < columnCount; x++) {
-            if (x == 0) {
-                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y), cornerLeftFilePath, 0, scale));
-            } else if (x == columnCount - 1) {
-                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y), cornerRightFilePath, 0, scale));
-            } else {
-                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y), middleFilePath, 0, scale));
-            }
+    for (int x = 0; x < columnCount; x++) {
+        if (x == 0) {
+            GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y), cornerLeftFilePath, 0, scale, zIndex));
+        } else if (x == columnCount - 1) {
+            GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y), cornerRightFilePath, 0, scale, zIndex));
+        } else {
+            GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y), middleFilePath, 0, scale, zIndex));
         }
-        return;
     }
 }
 
@@ -46,11 +43,15 @@ float PlatformSingleBuilder::getWidth() {
 }
 
 float PlatformSingleBuilder::getHeight() {
-    return rowCount * (blockSize * scale);
+    return blockSize * scale;
 }
 
 jimp::Vector2D PlatformSingleBuilder::getPosition() {
     return position;
+}
+
+void PlatformSingleBuilder::setZIndex(int zIndex) {
+    this->zIndex = zIndex;
 }
 
 }

@@ -55,6 +55,8 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         animatedGraphic->setApplyScrolling(graphic.applyScrolling);
         animatedGraphic->setApplyGravity(graphic.applyGravity);
         animatedGraphic->setSpriteSwapInterval(type->spriteSwapInterval);
+        animatedGraphic->setZIndex(graphic.zIndex);
+        animatedGraphic->setCollidable(graphic.collidable);
         if (graphic.isMainCharacter) {
             ScrollingWorld::getInstance()->setMainCharacter(animatedGraphic);
         }
@@ -71,6 +73,7 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         builder->setRightMiddle(animationType->middleRightFilePath);
         builder->setLeftMiddle(animationType->middleLeftFilePath);
         builder->setCenter(animationType->centerFilePath);
+        builder->setZIndex(graphic.zIndex);
         builder->render();
     } else if (dynamic_cast<PlatformSingleLayerType*>(type)) {
         PlatformSingleLayerType* animationType = dynamic_cast<PlatformSingleLayerType*>(type);
@@ -78,6 +81,7 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         builder->setCornerLeft(animationType->cornerLeftFilePath);
         builder->setCornerRight(animationType->cornerRightFilePath);
         builder->setMiddle(animationType->centerFilePath);
+        builder->setZIndex(graphic.zIndex);
         builder->render();
     }
 }

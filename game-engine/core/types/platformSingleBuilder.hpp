@@ -10,10 +10,10 @@ class PlatformSingleBuilder {
     
 private:
     jimp::Vector2D position;
-    int rowCount = 0;
     int columnCount = 0;
     float blockSize = 0.0F;
     float scale = 1.0F;
+    int zIndex = 0;
     std::string cornerLeftFilePath;
     std::string cornerRightFilePath;
     std::string middleFilePath;
@@ -27,6 +27,7 @@ public:
     void setCornerLeft(std::string cornerLeftFilePath);
     void setCornerRight(std::string cornerRightFilePath);
     void setMiddle(std::string middleFilePath);
+    void setZIndex(int zIndex);
 };
 
 }

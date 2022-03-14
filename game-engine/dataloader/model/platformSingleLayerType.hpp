@@ -10,6 +10,7 @@ struct PlatformSingleLayerType : Type {
     std::string cornerRightFilePath;
     std::string centerFilePath;
     int spriteSize;
+    bool collidable = false;
 };
 
 }

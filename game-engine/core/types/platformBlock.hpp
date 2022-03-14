@@ -10,7 +10,7 @@ class PlatformBlock : public jimp::AnimatedGraphic {
 private:
     
 public:
-    PlatformBlock(jimp::Vector2D position, std::string filePath, float angle, float scale);
+    PlatformBlock(jimp::Vector2D position, std::string filePath, float angle, float scale, int zIndex);
     void doOnUpdate(float elapsedTime) override;
     void doOnFrame(float elapsedTime) override;
 };

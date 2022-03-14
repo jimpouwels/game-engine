@@ -5,9 +5,14 @@
 
 namespace jimp {
   
-PlatformBlock::PlatformBlock(jimp::Vector2D position, std::string filePath, float angle, float scale) : jimp::AnimatedGraphic() {
+PlatformBlock::PlatformBlock(jimp::Vector2D position, std::string filePath, float angle, float scale, int zIndex) : jimp::AnimatedGraphic() {
+    setPosition(position);
     setApplyScrolling(true);
+    setRotationAngle(angle);
+    setCollidable(true);
+    setScale(scale);
     setApplyGravity(false);
+    setZIndex(zIndex);
     addSprite("default", filePath);
 }
 

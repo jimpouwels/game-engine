@@ -40,10 +40,6 @@ void Ship::doOnUpdate(float elapsedTime) {
 void Ship::doOnFrame(float elapsedTime) {
 }
 
-uint16_t Ship::getZIndex() {
-    return 1;
-}
-
 void Ship::hasCollidedRect(jimp::AnimatedGraphic *otherSprite, jimp::Geo2D::Side side) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {

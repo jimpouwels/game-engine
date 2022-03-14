@@ -37,7 +37,6 @@ public:
     void hasCollidedRectTop(jimp::AnimatedGraphic* otherSprite) override;
     void hasCollidedRectBottom(jimp::AnimatedGraphic* otherSprite) override;
     void hasCollidedRect(jimp::AnimatedGraphic* otherSprite, jimp::Geo2D::Side side) override;
-    uint16_t getZIndex() override;
 };
 
 #endif

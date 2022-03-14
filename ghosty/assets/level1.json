@@ -11,7 +11,9 @@
             "applyGravity": true,
             "rotationAngle": 0.0,
             "applyScrolling": true,
-            "isMainCharacter": true
+            "isMainCharacter": true,
+            "zIndex": 0,
+            "collidable": true
         },
 		{
             "description": "big platform on left",
@@ -19,37 +21,40 @@
 			"rows": 5,
 			"cols": 5,
 			"position": {
-				"x": 0,
-				"y": 0
+				"x": -256,
+				"y": 2000
 			},
 			"scale": 0.5,
             "applyGravity": false,
-            "applyScrolling": true
+            "applyScrolling": true,
+            "zIndex": 1
 		},
         {
             "description": "single layer platform right of first big platform",
             "type": "ghosty-platform-single-layer",
             "cols": 4,
             "position": {
-                "x": 100,
-                "y": 100
+                "x": 1150,
+                "y": 1600
             },
             "scale": 0.5,
             "applyGravity": false,
-            "applyScrolling": true
+            "applyScrolling": true,
+            "zIndex": 1
         },
         {
             "description": "plant on top of first big platform",
             "type": "ghosty-plant-waving1",
             "position": {
-                "x": 100,
-                "y": 2000
+                "x": 270,
+                "y": 1820
             },
             "scale": 0.5,
             "collidable": false,
             "applyGravity": false,
             "rotationAngle": 0.0,
-            "applyScrolling": true
+            "applyScrolling": true,
+            "zIndex": 2
         }
 	]
 }

@@ -17,9 +17,5 @@ SimpleAnimation::SimpleAnimation() : jimp::AnimatedGraphic() {
 
 void SimpleAnimation::doOnUpdate(float elapsedTime) {
 }
-
-uint16_t SimpleAnimation::getZIndex() {
-    return zIndex;
-}
     
 }

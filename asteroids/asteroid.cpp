@@ -49,10 +49,6 @@ void Asteroid::hasCollidedRect(jimp::AnimatedGraphic *otherSprite, jimp::Geo2D::
     } 
 }
 
-uint16_t Asteroid::getZIndex() {
-    return 2;
-}
-
 void Asteroid::hasCollidedRectLeft(jimp::AnimatedGraphic* otherSprite) {
     Asteroid* asteroid = dynamic_cast<Asteroid*>(otherSprite);
     if (asteroid != nullptr) {

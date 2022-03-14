@@ -14,6 +14,7 @@ private:
     int columnCount = 0;
     float blockSize = 0.0F;
     float scale = 1.0F;
+    int zIndex = 0;
     std::string cornerLeftTopFilePath;
     std::string cornerRightTopFilePath;
     std::string cornerLeftBottomFilePath;
@@ -39,6 +40,7 @@ public:
     void setRightMiddle(std::string middleRightFilePath);
     void setLeftMiddle(std::string middleLeftFilePath);
     void setCenter(std::string centerFilePath);
+    void setZIndex(int zIndex);
 };
 
 }

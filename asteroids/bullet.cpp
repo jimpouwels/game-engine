@@ -35,7 +35,3 @@ void Bullet::hasCollidedRect(AnimatedGraphic *otherSprite, jimp::Geo2D::Side sid
         markForDeletion();
     }
 }
-
-uint16_t Bullet::getZIndex() {
-    return 999;
-}

@@ -66,6 +66,12 @@ std::list<Graphic> DataLoader::loadGraphics(std::string filePath) {
         if (graphicJson.contains("isMainCharacter")) {
             graphic.isMainCharacter = graphicJson.at("isMainCharacter");
         }
+        if (graphicJson.contains("zIndex")) {
+            graphic.zIndex = graphicJson.at("zIndex");
+        }
+        if (graphicJson.contains("collidable")) {
+            graphic.collidable = graphicJson.at("collidable");
+        }
         graphics.push_back(graphic);
     }
     

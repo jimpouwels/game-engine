@@ -14,7 +14,6 @@ public:
     void doOnUpdate(float elapsedTime) override;
     void doOnFrame(float elapsedTime) override;
     void hasCollidedRect(AnimatedGraphic *otherSprite, jimp::Geo2D::Side side) override;
-    uint16_t getZIndex() override;
 };
 
 #endif

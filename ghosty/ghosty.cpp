@@ -19,7 +19,7 @@ void Ghosty::doOnUpdate(float elapsedTime) {
     if (isJumping) {
         setCurrentAnimation("jump");
     } else if (getVelocity().x != 0) {
-        setCurrentAnimation("run");
+        setCurrentAnimation("walk");
     } else {
         setCurrentAnimation("idle");
     }

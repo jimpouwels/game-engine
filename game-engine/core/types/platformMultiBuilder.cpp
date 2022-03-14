@@ -19,25 +19,25 @@ void PlatformMultiBuilder::render() {
     for (int x = 0; x < columnCount; x++) {
         for (int y = 0; y < rowCount; y++) {
             if (x == 0 && y == 0) {
-                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), cornerLeftTopFilePath, 0, scale));
+                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), cornerLeftTopFilePath, 0, scale, zIndex));
             } else if (x == columnCount - 1 && y == 0) {
-                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), cornerRightTopFilePath, 0, scale));
+                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), cornerRightTopFilePath, 0, scale, zIndex));
             } else if (y == 0) {
-                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), middleTopFilePath, 0, scale));
+                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), middleTopFilePath, 0, scale, zIndex));
             } else if (x == 0 && y < rowCount - 1) {
-                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), middleLeftFilePath, 0, scale));
+                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), middleLeftFilePath, 0, scale, zIndex));
             } else if (x == columnCount - 1 && y < rowCount - 1) {
-                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), middleRightFilePath, 0, scale));
+                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), middleRightFilePath, 0, scale, zIndex));
             } else if (y == rowCount - 1 && x < columnCount - 1 && x > 0) {
-                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), middleBottomFilePath, 0, scale));
+                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), middleBottomFilePath, 0, scale, zIndex));
             } else if (y == rowCount - 1 && x == columnCount - 1) {
-                PlatformBlock* rightBottom = new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), cornerRightBottomFilePath, 0, scale);
+                PlatformBlock* rightBottom = new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), cornerRightBottomFilePath, 0, scale, zIndex);
                 GameEngine::getInstance()->registerGraphic(rightBottom);
                 rightBottom->drawInversedHorizontally(true);
             } else if (y == rowCount - 1 && x == 0) {
-                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), cornerLeftBottomFilePath, 0, scale));
+                GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), cornerLeftBottomFilePath, 0, scale, zIndex));
             } else {
-                PlatformBlock* center = new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), centerFilePath, 0, scale);
+                PlatformBlock* center = new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), centerFilePath, 0, scale, zIndex);
                 GameEngine::getInstance()->registerGraphic(center);
                 center->setCollidable(false);
             }
@@ -91,6 +91,10 @@ float PlatformMultiBuilder::getHeight() {
 
 jimp::Vector2D PlatformMultiBuilder::getPosition() {
     return position;
+}
+
+void PlatformMultiBuilder::setZIndex(int zIndex) {
+    this->zIndex = zIndex;
 }
 
 }

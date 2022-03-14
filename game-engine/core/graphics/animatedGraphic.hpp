@@ -18,8 +18,9 @@ class AnimatedGraphic : public KeyListener {
     
 private:
     Vector2D position = Vector2D::empty();
-    float scale;
+    float scale = 1.0f;
     float angle;
+    uint16_t zIndex;
     bool visible = true;
     bool applyScrolling = false;
     bool applyGravity = false;
@@ -128,9 +129,8 @@ public:
     void onFrame(float elapsedTime);
     void onUpdate(float elapsedTime);
     virtual Vector2D getRotationPoint();
-    virtual uint16_t getZIndex() {
-        return 0;
-    }
+    uint16_t getZIndex();
+    void setZIndex(uint16_t zIndex);
     void addShape(std::string animationId, Shape* shape);
     void addSprite(std::string animationId, std::string filePath, uint16_t repeat);
     void addSprite(std::string animationId, std::string filePath);

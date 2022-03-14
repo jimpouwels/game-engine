@@ -16,6 +16,7 @@ struct PlatformMultiLayerType : Type {
     std::string middleLeftFilePath;
     std::string centerFilePath;
     int spriteSize;
+    bool collidable = false;
 };
 
 }

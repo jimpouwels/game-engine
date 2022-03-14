@@ -93,6 +93,14 @@ std::string AnimatedGraphic::getCurrentAnimationId() {
     return activeAnimation->getId();
 }
 
+void AnimatedGraphic::setZIndex(uint16_t zIndex) {
+    this->zIndex = zIndex;
+}
+
+uint16_t AnimatedGraphic::getZIndex() {
+    return zIndex;
+}
+
 bool AnimatedGraphic::canCollideWith(AnimatedGraphic *otherGraphic, float elapsedTime) {
     Vector2D currentGraphicNextPosition = calculateNextPosition(elapsedTime);
     float currentGraphicNextTop = currentGraphicNextPosition.y + getMarginTop();
@@ -345,7 +353,7 @@ void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
 }
 
 void AnimatedGraphic::stayToLeftOf(AnimatedGraphic *otherGraphic) {
-    getPosition().x = otherGraphic->getRight() + (getWidth() - getMarginRight());
+    getPosition().x = otherGraphic->getLeft() - (getWidth() - getMarginRight());
     interruptMovementX = true;
 }
 

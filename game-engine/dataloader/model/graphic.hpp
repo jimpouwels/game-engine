@@ -16,6 +16,8 @@ struct Graphic {
     int rows = 0;
     int cols = 0;
     bool isMainCharacter = false;
+    int zIndex = 0;
+    bool collidable = false;
 };
 
 }

@@ -15,7 +15,6 @@ private:
 public:
     SimpleAnimation();
     void doOnUpdate(float elapsedTime) override;
-    uint16_t getZIndex() override;
 };
 
 }

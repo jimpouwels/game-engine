@@ -48,7 +48,6 @@ public:
     void hasCollidedRectLeft(jimp::AnimatedGraphic* otherSprite) override;
     void hasCollidedRectTop(jimp::AnimatedGraphic* otherSprite) override;
     void hasCollidedRectBottom(jimp::AnimatedGraphic* otherSprite) override;
-    uint16_t getZIndex() override;
 };
 
 #endif
