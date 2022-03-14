@@ -8,7 +8,7 @@ namespace jimp {
 struct Type {
     std::string name;
     std::string base;
-    
+    virtual ~Type() { };
 };
 
 }

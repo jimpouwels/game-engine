@@ -3,6 +3,7 @@
 
 #include "animatedGraphic.hpp"
 #include "dataLoader.hpp"
+#include "type.hpp"
 
 namespace jimp {
 
@@ -11,7 +12,8 @@ class StageFactory {
 private:
     std::list<Type*>* types = nullptr;
     DataLoader* dataLoader = nullptr;
-    AnimatedGraphic* createGraphic(std::string type);
+    AnimatedGraphic* createAnimatedGraphicFrom(Graphic graphic);
+    Type* getTypeFor(std::string typeName);
     
 protected:
     virtual AnimatedGraphic* createCustomGraphic(std::string type) = 0;
