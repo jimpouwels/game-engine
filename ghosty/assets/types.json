@@ -26,7 +26,7 @@
         {
             "name": "ghosty-plant-waving1",
             "base": "animation",
-            "animations" [
+            "animations": [
                 {
                     "name": "default",
                     "sprites": {
@@ -39,7 +39,7 @@
         {
             "name": "ghosty",
             "base": "custom",
-            "animations" [
+            "animations": [
                 {
                     "name": "idle",
                     "sprites": {

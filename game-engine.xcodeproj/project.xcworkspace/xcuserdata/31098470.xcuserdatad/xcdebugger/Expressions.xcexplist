@@ -3,19 +3,21 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "mario::TileMap::getTileAt(unsigned short, unsigned short):tileMap.cpp">
+         contextName = "mario::Decoration::Decoration(jimp::Vector2D, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, int):decoration.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "rowCount * x + y">
+               value = "std::regex_replace(filePath, std::regex(&quot;$1&quot;), std::to_string(i))">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "jimp::doLoop(std::__1::function&lt;void (float)&gt;, std::__1::function&lt;void (jimp::AnimatedGraphic*)&gt;, std::__1::function&lt;void ()&gt;, std::__1::vector&lt;jimp::AnimatedGraphic*, std::__1::allocator&lt;jimp::AnimatedGraphic*&gt; &gt;*, std::__1::list&lt;jimp::AnimatedGraphic*, std::__1::allocator&lt;jimp::AnimatedGraphic*&gt; &gt;*, std::__1::mutex*, std::__1::mutex*)::$_0::operator()(jimp::AnimatedGraphic*, jimp::AnimatedGraphic*) const:updateThread.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "(nearA.x + nearA.y)">
             </PersistentString>
             <PersistentString
-               value = "tiles-&gt;size()">
-            </PersistentString>
-            <PersistentString
-               value = "rowCount * columnCount">
-            </PersistentString>
-            <PersistentString
-               value = "tiles-&gt;at(columnCount * x + y)">
+               value = "(nearB.x + nearB.y)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -24,28 +26,6 @@
          <PersistentStrings>
             <PersistentString
                value = "tileMap-&gt;getTileAt(x, y)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "Asteroid::updateDirection(float):asteroid.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "isAtRightEdgeOfScreen()">
-            </PersistentString>
-            <PersistentString
-               value = "isAtLeftEdgeOfScreen()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "mario::ScrollingWorld::doOnUpdate():scrollingWorld.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "tileMap-&gt;getRowCount()">
-            </PersistentString>
-            <PersistentString
-               value = "tileMap-&gt;getColumnCount()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -70,10 +50,30 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Game::onSpriteDeleted(jimp::AnimatedSprite*):game.cpp">
+         contextName = "jimp::Sprite::crop():sprite.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "animatedSprite-&gt;getActiveSprite()">
+               value = "getImage().getImage()">
+            </PersistentString>
+            <PersistentString
+               value = "getImage().getImage().getPixel(256, 256)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "mario::TileMap::getTileAt(unsigned short, unsigned short):tileMap.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "rowCount * x + y">
+            </PersistentString>
+            <PersistentString
+               value = "tiles-&gt;size()">
+            </PersistentString>
+            <PersistentString
+               value = "rowCount * columnCount">
+            </PersistentString>
+            <PersistentString
+               value = "tiles-&gt;at(columnCount * x + y)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -81,13 +81,32 @@
          contextName = "jimp::AnimatedGraphic::checkCollisionRect(jimp::AnimatedGraphic*, float):animatedGraphic.cpp">
       </ContextState>
       <ContextState
-         contextName = "jimp::doLoop(std::__1::function&lt;void (float)&gt;, std::__1::function&lt;void (jimp::AnimatedGraphic*)&gt;, std::__1::function&lt;void ()&gt;, std::__1::vector&lt;jimp::AnimatedGraphic*, std::__1::allocator&lt;jimp::AnimatedGraphic*&gt; &gt;*, std::__1::list&lt;jimp::AnimatedGraphic*, std::__1::allocator&lt;jimp::AnimatedGraphic*&gt; &gt;*, std::__1::mutex*, std::__1::mutex*)::$_0::operator()(jimp::AnimatedGraphic*, jimp::AnimatedGraphic*) const:updateThread.cpp">
+         contextName = "Asteroid::updateDirection(float):asteroid.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "(nearA.x + nearA.y)">
+               value = "isAtRightEdgeOfScreen()">
             </PersistentString>
             <PersistentString
-               value = "(nearB.x + nearB.y)">
+               value = "isAtLeftEdgeOfScreen()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "mario::ScrollingWorld::doOnUpdate():scrollingWorld.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "tileMap-&gt;getRowCount()">
+            </PersistentString>
+            <PersistentString
+               value = "tileMap-&gt;getColumnCount()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Game::onSpriteDeleted(jimp::AnimatedSprite*):game.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "animatedSprite-&gt;getActiveSprite()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -105,25 +124,6 @@
             </PersistentString>
             <PersistentString
                value = "otherGraphic-&gt;getPosition().x + (otherGraphic-&gt;getWidth() - otherGraphic-&gt;getMarginRight()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "mario::Decoration::Decoration(jimp::Vector2D, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, int):decoration.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "std::regex_replace(filePath, std::regex(&quot;$1&quot;), std::to_string(i))">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "jimp::Sprite::crop():sprite.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "getImage().getImage()">
-            </PersistentString>
-            <PersistentString
-               value = "getImage().getImage().getPixel(256, 256)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

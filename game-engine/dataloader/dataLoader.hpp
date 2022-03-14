@@ -12,6 +12,7 @@ class DataLoader {
 
 private:
     std::string typesFilePath;
+    std::string loadFileContents(std::string filePath);
     
 public:
     DataLoader(std::string typesFilePath);
