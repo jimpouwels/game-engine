@@ -1,6 +1,7 @@
 #ifndef dataLoader_hpp
 #define dataLoader_hpp
 
+#include "json.hpp"
 #include "animatedGraphic.hpp"
 #include "type.hpp"
 #include "graphic.hpp"
@@ -13,6 +14,8 @@ class DataLoader {
 private:
     std::string typesFilePath;
     std::string loadFileContents(std::string filePath);
+    Type* loadType(nlohmann::json typeJson);
+    void enrichtWithTypeBase(Type* type, nlohmann::json typeJson);
     
 public:
     DataLoader(std::string typesFilePath);

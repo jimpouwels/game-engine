@@ -38,7 +38,8 @@
         },
         {
             "name": "ghosty",
-            "base": "custom",
+            "base": "animation",
+            "custom": true,
             "animations": [
                 {
                     "name": "idle",

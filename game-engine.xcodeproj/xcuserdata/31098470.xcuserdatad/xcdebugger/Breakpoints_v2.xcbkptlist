@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F8F8F639-ED94-4434-9D8C-BD9F296057A7"
+            uuid = "E656729A-1628-4AA8-A4C5-62D3B2155AD6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "game-engine/dataloader/dataLoader.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "DataLoader::loadTypes()"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "DataLoader::loadType(typeJson)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

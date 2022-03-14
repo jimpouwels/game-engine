@@ -1,13 +1,21 @@
-//
-//  platformMultiLayerType.hpp
-//  game-engine
-//
-//  Created by jim.pouwels@philips.com on 14/03/2022.
-//
-
 #ifndef platformMultiLayerType_hpp
 #define platformMultiLayerType_hpp
 
-#include <stdio.h>
+#include "type.hpp"
 
-#endif /* platformMultiLayerType_hpp */
+namespace jimp {
+
+struct PlatformMultiLayerType : Type {
+    std::string cornerLeftTopFilePath;
+    std::string cornerRightTopFilePath;
+    std::string cornerLeftBottomFilePath;
+    std::string cornerRightBottomFilePath;
+    std::string middleBottomFilePath;
+    std::string middleTopFilePath;
+    std::string middleRightFilePath;
+    std::string middleLeftFilePath;
+};
+
+}
+
+#endif

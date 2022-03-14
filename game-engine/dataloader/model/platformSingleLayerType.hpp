@@ -1,13 +1,14 @@
-//
-//  platformSingleLayerType.hpp
-//  game-engine
-//
-//  Created by jim.pouwels@philips.com on 14/03/2022.
-//
-
 #ifndef platformSingleLayerType_hpp
 #define platformSingleLayerType_hpp
 
-#include <stdio.h>
+#include "type.hpp"
 
-#endif /* platformSingleLayerType_hpp */
+namespace jimp {
+
+struct PlatformSingleLayerType : Type {
+    
+};
+
+}
+
+#endif
