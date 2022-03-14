@@ -13,8 +13,7 @@ private:
     int zIndex = 0;
     
 public:
-    SimpleAnimation(jimp::Vector2D position, std::string filePath, int imageCount, float rotationAngle, float scale, int zIndex);
-    void doOnInit() override;
+    SimpleAnimation();
     void doOnUpdate(float elapsedTime) override;
     uint16_t getZIndex() override;
 };

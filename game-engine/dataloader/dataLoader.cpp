@@ -25,6 +25,7 @@ std::list<Type*>* DataLoader::loadTypes() {
         Type* type = createType(typeJson);
         type->name = typeJson.at("name");
         type->base = typeJson.at("base");
+        type->spriteSwapInterval = typeJson.at("spriteSwapInterval");
         types->push_back(type);
     }
     return types;
@@ -50,6 +51,9 @@ std::list<Graphic> DataLoader::loadGraphics(std::string filePath) {
         }
         if (graphicJson.contains("rotationAngle")) {
             graphic.rotationAngle = graphicJson.at("rotationAngle");
+        }
+        if (graphicJson.contains("applyScrolling")) {
+            graphic.applyScrolling = graphicJson.at("applyScrolling");
         }
         graphics.push_back(graphic);
     }
@@ -92,9 +96,9 @@ Type* DataLoader::createType(nlohmann::json typeJson) {
         for (int i = 0; i < subAnimationsJson.size(); i++) {
             nlohmann::json subAnimationJson = subAnimationsJson.at(i);
             SubAnimation* subAnimation = new SubAnimation();
-            subAnimation->filePath = subAnimationJson.at("name");
-            nlohmann::json spritesJson = subAnimationJson.at("sprites");
-            subAnimation->spriteCount = spritesJson.at("count");
+            subAnimation->name = subAnimationJson.at("name");
+            subAnimation->filePath = subAnimationJson.at("filePath");
+            subAnimation->spriteCount = subAnimationJson.at("count");
             type->subAnimations.push_back(subAnimation);
         }
         return type;

@@ -12,8 +12,7 @@ private:
     bool isJumping;
     
 public:
-    Ghosty(jimp::Vector2D position);
-    void doOnInit() override;
+    Ghosty();
     void doOnUpdate(float elapsedTime) override;
     void doOnFrame(float elapsedTime) override;
     void onKeyboardUp(jimp::KeyState keyState) override;

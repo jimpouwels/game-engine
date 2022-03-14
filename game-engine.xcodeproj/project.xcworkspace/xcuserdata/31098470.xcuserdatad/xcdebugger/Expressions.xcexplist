@@ -6,6 +6,12 @@
          contextName = "jimp::DataLoader::loadTypes():dataLoader.cpp">
       </ContextState>
       <ContextState
+         contextName = "jimp::AnimatedGraphic::addDrawable(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, jimp::Drawable*):animatedGraphic.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "jimp::Animation::getActiveDrawable():animation.cpp">
+      </ContextState>
+      <ContextState
          contextName = "jimp::doLoop(std::__1::function&lt;void (float)&gt;, std::__1::function&lt;void (jimp::AnimatedGraphic*)&gt;, std::__1::function&lt;void ()&gt;, std::__1::vector&lt;jimp::AnimatedGraphic*, std::__1::allocator&lt;jimp::AnimatedGraphic*&gt; &gt;*, std::__1::list&lt;jimp::AnimatedGraphic*, std::__1::allocator&lt;jimp::AnimatedGraphic*&gt; &gt;*, std::__1::mutex*, std::__1::mutex*)::$_0::operator()(jimp::AnimatedGraphic*, jimp::AnimatedGraphic*) const:updateThread.cpp">
          <PersistentStrings>
             <PersistentString
@@ -50,6 +56,9 @@
             <PersistentString
                value = "typeid(*type)">
             </PersistentString>
+            <PersistentString
+               value = "animatedGraphic-&gt;getActiveDrawable()">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
@@ -82,6 +91,9 @@
       </ContextState>
       <ContextState
          contextName = "jimp::AnimatedGraphic::checkCollisionRect(jimp::AnimatedGraphic*, float):animatedGraphic.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "jimp::AnimatedGraphic::getActiveDrawable():animatedGraphic.cpp">
       </ContextState>
       <ContextState
          contextName = "Asteroid::updateDirection(float):asteroid.cpp">

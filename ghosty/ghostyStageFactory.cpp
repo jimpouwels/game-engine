@@ -8,7 +8,7 @@ GhostyStageFactory::GhostyStageFactory(std::string typesFilePath) : jimp::StageF
 
 jimp::AnimatedGraphic* GhostyStageFactory::createCustomGraphic(std::string name) {
     if (name == "ghosty") {
-        return new Ghosty(jimp::Vector2D::empty());
+        return new Ghosty();
     }
     return nullptr;
 }

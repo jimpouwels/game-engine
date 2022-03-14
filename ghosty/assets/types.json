@@ -12,7 +12,8 @@
                 "middleTop": "platform-top-middle.png",
                 "middleRight": "platform-right-middle.png",
                 "middleLeft": "platform-left-middle.png"
-            }
+            },
+            "spriteSwapInterval": 0.06
         },
         {
             "name": "ghosty-platform-single-layer",
@@ -21,18 +22,18 @@
                 "cornerLeft": "platform-single-corner-left.png",
                 "cornerRight": "platform-single-corner-right.png",
                 "center": "platform-single-middle.png"
-            }
+            },
+            "spriteSwapInterval": 0.06
         },
         {
             "name": "ghosty-plant-waving1",
             "base": "animation",
+            "spriteSwapInterval": 0.06,
             "subAnimations": [
                 {
                     "name": "default",
-                    "sprites": {
-                        "name": "Plant3_{i}.png",
-                        "count": 90
-                    }
+                    "filePath": "Plant3_{i}.png",
+                    "count": 90
                 }
             ]
         },
@@ -40,27 +41,22 @@
             "name": "ghosty",
             "base": "animation",
             "custom": true,
+            "spriteSwapInterval": 0.06,
             "subAnimations": [
                 {
                     "name": "idle",
-                    "sprites": {
-                        "name": "Chara - BlueIdle{i}.png",
-                        "count": 20
-                    }
+                    "filePath": "Chara - BlueIdle{i}.png",
+                    "count": 20
                 },
                 {
                     "name": "walk",
-                    "sprites": {
-                        "name": "Chara - BlueWalk{i}.png",
-                        "count": 20
-                    }
+                    "filePath": "Chara_BlueWalk{i}.png",
+                    "count": 20
                 },
                 {
                     "name": "jump",
-                    "sprites": {
-                        "name": "CharaWizardJump_{i}.png",
-                        "count": 8
-                    }
+                    "filePath": "CharaWizardJump_{i}.png",
+                    "count": 8
                 }
             ]
         }

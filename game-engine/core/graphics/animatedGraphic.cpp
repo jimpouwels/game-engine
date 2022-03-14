@@ -12,14 +12,8 @@
 
 namespace jimp {
 
-AnimatedGraphic::AnimatedGraphic(Vector2D position, float scale, int rotationAngle, float spriteSwapIntervalInSeconds, bool applyGravity) {
-    this->position = position;
-    this->scale = scale;
-    this->applyGravity = applyGravity;
+AnimatedGraphic::AnimatedGraphic() {
     animationMap = new std::map<std::string, Animation*>;
-    this->drawableSwapIntervalInSeconds = spriteSwapIntervalInSeconds;
-    GameEngine::getInstance()->registerGraphic(this);
-    this->angle = rotationAngle;
 }
 
 AnimatedGraphic::~AnimatedGraphic() {
@@ -28,10 +22,6 @@ AnimatedGraphic::~AnimatedGraphic() {
     }
     delete animationMap;
     delete lock;
-}
-
-void AnimatedGraphic::onInit() {
-    doOnInit();
 }
 
 void AnimatedGraphic::onFrame(float elapsedTime) {
@@ -186,6 +176,10 @@ bool AnimatedGraphic::drawInversedHorizontally() {
     return inversedHorizontally;
 }
 
+void AnimatedGraphic::setSpriteSwapInterval(float swapInterval) {
+    this->drawableSwapIntervalInSeconds = swapInterval;
+}
+
 void AnimatedGraphic::setX(float x) {
     position.x = x;
 }
@@ -263,12 +257,20 @@ float AnimatedGraphic::getScale() {
     return scale;
 }
 
+void AnimatedGraphic::setScale(float scale) {
+    this->scale = scale;
+}
+
 float AnimatedGraphic::getRotationAngle() {
     return angle;
 }
 
 bool AnimatedGraphic::isApplyScrolling() {
     return applyScrolling;
+}
+
+void AnimatedGraphic::setApplyGravity(bool gravity) {
+    this->applyGravity = gravity;
 }
 
 void AnimatedGraphic::setApplyScrolling(bool applyScrolling) {

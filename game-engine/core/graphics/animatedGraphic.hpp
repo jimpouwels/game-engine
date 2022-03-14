@@ -68,9 +68,6 @@ protected:
     void stayToRightOf(AnimatedGraphic* otherGraphic);
     void jump(float force);
     void interruptJump();
-    void addSprite(std::string animationId, std::string filePath, uint16_t repeat);
-    void addSprite(std::string animationId, std::string filePath);
-    virtual void doOnInit() {};
     virtual void doOnUpdate(float elapsedTime) {};
     virtual void doOnFrame(float elapsedTime) {};
     virtual void hasCollidedRectLeft(AnimatedGraphic* otherGraphic) {};
@@ -80,7 +77,7 @@ protected:
     virtual void hasCollidedRect(AnimatedGraphic* otherGraphic, Geo2D::Side side) {};
     
 public:
-    AnimatedGraphic(Vector2D position, float scale, int rotationAngle, float imageSwapIntervalInSeconds, bool applyGravity);
+    AnimatedGraphic();
     ~AnimatedGraphic();
     Vector2D& getPosition();
     Vector2D& getMoveVelocity();
@@ -88,6 +85,7 @@ public:
     std::string getName();
     void setName(std::string name);
     float getScale();
+    void setScale(float scale);
     int getWidth();
     int getSingleWidth();
     int getHeight();
@@ -106,6 +104,7 @@ public:
     bool canCollideWith(AnimatedGraphic* otherGraphic, float elapsedTime);
     void drawInversedHorizontally(bool inverse);
     void setCollidable(bool collidable);
+    void setSpriteSwapInterval(float swapInterval);
     void setRotationAngle(float angle);
     void setDeleteOnLeaveScreen(bool deleteOnLeaveScreen);
     bool drawInversedHorizontally();
@@ -115,6 +114,7 @@ public:
     void setRgbLevels(Color rgb);
     Color getRgbLevels();
     void setApplyScrolling(bool applyScrolling);
+    void setApplyGravity(bool gravity);
     void checkCollisionRect(AnimatedGraphic* otherGraphicp, float elapsedTime);
     Drawable* getActiveDrawable();
     std::list<Drawable*> getAllDrawables();
@@ -132,6 +132,8 @@ public:
         return 0;
     }
     void addShape(std::string animationId, Shape* shape);
+    void addSprite(std::string animationId, std::string filePath, uint16_t repeat);
+    void addSprite(std::string animationId, std::string filePath);
     void onKeyboardLeft(jimp::KeyState keyState) {};
     void onKeyboardRight(jimp::KeyState keyState) {};
     void onKeyboardUp(jimp::KeyState keyState) {};

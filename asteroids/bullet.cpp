@@ -8,14 +8,19 @@
 const uint16_t Bullet::FORCE = 1200;
 const float Bullet::SCALE = 0.3F;
 
-Bullet::Bullet(jimp::Vector2D position, float angle) : jimp::AnimatedGraphic(position, SCALE, 0, -1, false) {
+Bullet::Bullet(jimp::Vector2D position, float angle) : jimp::AnimatedGraphic() {
     setRotationAngle(angle);
+    setPosition(position);
 }
 
-void Bullet::doOnInit() {
-    addSprite("default", "bullet.png");
-    setDeleteOnLeaveScreen(true);    
-}
+//Bullet::Bullet(jimp::Vector2D position, float angle) : jimp::AnimatedGraphic(position, SCALE, 0, -1, false) {
+//    setRotationAngle(angle);
+//}
+
+//void Bullet::doOnInit() {
+//    addSprite("default", "bullet.png");
+//    setDeleteOnLeaveScreen(true);
+//}
 
 void Bullet::doOnUpdate(float elapsedTime) {
     move(getRotationAngle(), FORCE);

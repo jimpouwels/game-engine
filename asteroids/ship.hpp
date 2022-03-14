@@ -36,7 +36,6 @@ private:
 
 public:
     Ship();
-    void doOnInit() override;
     void doOnUpdate(float elapsedTime) override;
     void doOnFrame(float elapsedTime) override;
     void onKeyboardLeft(jimp::KeyState keyState) override;

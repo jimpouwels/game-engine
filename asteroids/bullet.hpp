@@ -11,7 +11,6 @@ private:
 public:
     static const float SCALE;
     Bullet(jimp::Vector2D position, float angle);
-    void doOnInit() override;
     void doOnUpdate(float elapsedTime) override;
     void doOnFrame(float elapsedTime) override;
     void hasCollidedRect(AnimatedGraphic *otherSprite, jimp::Geo2D::Side side) override;

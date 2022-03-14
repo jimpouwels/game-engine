@@ -14,16 +14,19 @@ const uint8_t Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.15F;
 const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 
-Ship::Ship() : jimp::AnimatedGraphic(jimp::Vector2D::from(400, 400), SCALE, 0, 0.05F, false) {
+//Ship::Ship() : jimp::AnimatedGraphic(jimp::Vector2D::from(400, 400), SCALE, 0, 0.05F, false) {
+//}
+
+Ship::Ship() : jimp::AnimatedGraphic() {
 }
 
-void Ship::doOnInit() {
-    this->firingSound = new jimp::Sound("laser.ogg");
-    this->thrustSound = new jimp::Sound("thrust.ogg");
-    addSprite("default", "spaceship.png");
-    addSprite("throttling", "spaceship-thrust1.png");
-    addSprite("throttling", "spaceship-thrust2.png");
-}
+//void Ship::doOnInit() {
+//    this->firingSound = new jimp::Sound("laser.ogg");
+//    this->thrustSound = new jimp::Sound("thrust.ogg");
+//    addSprite("default", "spaceship.png");
+//    addSprite("throttling", "spaceship-thrust1.png");
+//    addSprite("throttling", "spaceship-thrust2.png");
+//}
 
 void Ship::doOnUpdate(float elapsedTime) {
     if (isThrothling) {

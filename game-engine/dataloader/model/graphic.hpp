@@ -10,7 +10,8 @@ struct Graphic {
     std::string type;
     Vector2D position = Vector2D::empty();
     float scale = 1.0f;
-    bool applyGravity;
+    bool applyGravity = false;
+    bool applyScrolling = false;
     float rotationAngle = 0.0f;
 };
 

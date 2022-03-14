@@ -6,6 +6,7 @@
 namespace jimp {
 
 struct SubAnimation {
+    std::string name;
     std::string filePath;
     int spriteCount;
 };
