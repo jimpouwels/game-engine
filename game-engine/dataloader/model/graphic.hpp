@@ -15,6 +15,7 @@ struct Graphic {
     float rotationAngle = 0.0f;
     int rows = 0;
     int cols = 0;
+    bool isMainCharacter = false;
 };
 
 }

@@ -6,6 +6,8 @@
 namespace jimp {
   
 PlatformBlock::PlatformBlock(jimp::Vector2D position, std::string filePath, float angle, float scale) : jimp::AnimatedGraphic() {
+    setApplyScrolling(true);
+    setApplyGravity(false);
     addSprite("default", filePath);
 }
 

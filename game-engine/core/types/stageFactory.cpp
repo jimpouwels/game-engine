@@ -55,7 +55,7 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         animatedGraphic->setApplyScrolling(graphic.applyScrolling);
         animatedGraphic->setApplyGravity(graphic.applyGravity);
         animatedGraphic->setSpriteSwapInterval(type->spriteSwapInterval);
-        if (type->isMainCharacter) {
+        if (graphic.isMainCharacter) {
             ScrollingWorld::getInstance()->setMainCharacter(animatedGraphic);
         }
         GameEngine::getInstance()->registerGraphic(animatedGraphic);

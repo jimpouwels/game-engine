@@ -28,9 +28,6 @@ std::list<Type*>* DataLoader::loadTypes() {
         if (typeJson.contains("spriteSwapInterval")) {
             type->spriteSwapInterval = typeJson.at("spriteSwapInterval");
         }
-        if (typeJson.contains("isMainCharacter")) {
-            type->isMainCharacter = typeJson.at("isMainCharacter");
-        }
         types->push_back(type);
     }
     return types;
@@ -65,6 +62,9 @@ std::list<Graphic> DataLoader::loadGraphics(std::string filePath) {
         }
         if (graphicJson.contains("cols")) {
             graphic.cols= graphicJson.at("cols");
+        }
+        if (graphicJson.contains("isMainCharacter")) {
+            graphic.isMainCharacter = graphicJson.at("isMainCharacter");
         }
         graphics.push_back(graphic);
     }

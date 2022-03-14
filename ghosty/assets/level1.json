@@ -4,7 +4,7 @@
             "description": "main character",
             "type": "ghosty",
             "position": {
-                "x": 100,
+                "x": 500,
                 "y": 100
             },
             "scale": 0.5,
@@ -20,7 +20,7 @@
 			"cols": 5,
 			"position": {
 				"x": 0,
-				"y": 2500
+				"y": 0
 			},
 			"scale": 0.5,
             "applyGravity": false,
@@ -43,7 +43,7 @@
             "type": "ghosty-plant-waving1",
             "position": {
                 "x": 100,
-                "y": 100
+                "y": 2000
             },
             "scale": 0.5,
             "collidable": false,
