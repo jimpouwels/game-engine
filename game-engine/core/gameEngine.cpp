@@ -51,6 +51,8 @@ GameEngine* GameEngine::getInstance() {
 }
 
 void GameEngine::start() {
+    this->stageFactory = getStageFactory();
+    
     updateThread->start();
     while (window->isOpen()) {
         handleEvents();
@@ -73,6 +75,10 @@ void GameEngine::start() {
         window->setTitle(windowTitle + " FPS: " + std::to_string(measureFps(currentTime)));
     }
     window->close();
+}
+
+void GameEngine::loadStage(std::string filePath) {
+    stageFactory->loadStage(filePath);
 }
 
 void GameEngine::draw(jimp::Drawable* drawable) {

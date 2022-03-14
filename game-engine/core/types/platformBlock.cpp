@@ -3,7 +3,7 @@
 #include "scrollingWorld.hpp"
 #include "vector2D.hpp"
 
-namespace ghosty {
+namespace jimp {
   
 PlatformBlock::PlatformBlock(jimp::Vector2D position, std::string filePath, float angle, float scale) : jimp::AnimatedGraphic(position, scale, angle, -1.0F, false) {
     name = "block";

@@ -6,13 +6,13 @@
 
 namespace ghosty {
 
-class Character : public jimp::AnimatedGraphic {
+class Ghosty : public jimp::AnimatedGraphic {
   
 private:
     bool isJumping;
     
 public:
-    Character(jimp::Vector2D position);
+    Ghosty(jimp::Vector2D position);
     void doOnInit() override;
     void doOnUpdate(float elapsedTime) override;
     void doOnFrame(float elapsedTime) override;

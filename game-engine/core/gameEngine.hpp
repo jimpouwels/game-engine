@@ -12,6 +12,7 @@
 #include "keyboardHandler.hpp"
 #include "updateThread.hpp"
 #include "scrollingWorld.hpp"
+#include "stageFactory.hpp"
 
 namespace jimp {
 
@@ -24,6 +25,7 @@ private:
     uint16_t screenHeight;
     uint32_t backgroundColor;
     int16_t frameRate;
+    StageFactory* stageFactory = nullptr;
     GameEngine* gameEngine = nullptr;
     std::string windowTitle;
     bool isWindowClosed = false;
@@ -50,6 +52,7 @@ protected:
     ScrollingWorld* scrollingWorld = nullptr;
     void start();
     void setBackgroundColor(uint32_t color);
+    virtual StageFactory* getStageFactory() = 0;
     virtual void onFrame(float elapsedTime) {};
     virtual void onUpdate(float elapsedTime) {};
     virtual void onGraphicDeleted(AnimatedGraphic* graphic) {};
@@ -72,6 +75,7 @@ public:
     void registerGraphic(AnimatedGraphic* graphic);
     void drawRectangle(float width, float height, Vector2D position, uint32_t color);
     float getGravityForce();
+    void loadStage(std::string filePath);
     std::vector<AnimatedGraphic*>* getAllGraphics();
     Image* registerImage(Image* image);
     Sound* registerSound(Sound* sound);

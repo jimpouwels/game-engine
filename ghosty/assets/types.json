@@ -18,22 +18,50 @@
             "name": "ghosty-platform-single-layer",
             "base": "platform-single-layer",
             "sprites": {
-                "cornerRight": "platform-single-corner-right.png",
                 "cornerLeft": "platform-single-corner-left.png",
+                "cornerRight": "platform-single-corner-right.png",
                 "center": "platform-single-middle.png"
             }
         },
         {
             "name": "ghosty-plant-waving1",
-            "base": "simple-animation",
-            "spriteArray": {
-                "name": "Plant3_{i}.png",
-                "count": 90
-            }
+            "base": "animation",
+            "animations" [
+                {
+                    "name": "default",
+                    "sprites": {
+                        "name": "Plant3_{i}.png",
+                        "count": 90
+                    }
+                }
+            ]
         },
         {
             "name": "ghosty",
-            "base": "custom"
+            "base": "custom",
+            "animations" [
+                {
+                    "name": "idle",
+                    "sprites": {
+                        "name": "Chara - BlueIdle{i}.png",
+                        "count": 20
+                    }
+                },
+                {
+                    "name": "walk",
+                    "sprites": {
+                        "name": "Chara - BlueWalk{i}.png",
+                        "count": 20
+                    }
+                },
+                {
+                    "name": "jump",
+                    "sprites": {
+                        "name": "CharaWizardJump_{i}.png",
+                        "count": 8
+                    }
+                }
+            ]
         }
     ]
 }

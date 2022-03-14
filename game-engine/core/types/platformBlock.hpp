@@ -3,7 +3,7 @@
 
 #include "animatedGraphic.hpp"
 
-namespace ghosty {
+namespace jimp {
     
 class PlatformBlock : public jimp::AnimatedGraphic {
   

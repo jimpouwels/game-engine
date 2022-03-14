@@ -4,9 +4,9 @@
 #include <string>
 #include "vector2D.hpp"
 
-namespace ghosty {
+namespace jimp {
 
-class Platform {
+class PlatformBuilder {
     
 private:
     jimp::Vector2D position;
@@ -16,7 +16,7 @@ private:
     float scale = 1.0F;
     
 public:
-    Platform(std::string cornerBlockFilePath, std::string innerBlockFilePath, uint16_t rowCount, uint16_t columnCount, float blockSize, float scale, jimp::Vector2D position);
+    PlatformBuilder(std::string cornerBlockFilePath, std::string innerBlockFilePath, uint16_t rowCount, uint16_t columnCount, float blockSize, float scale, jimp::Vector2D position);
     jimp::Vector2D getPosition();
     float getWidth();
     float getHeight();

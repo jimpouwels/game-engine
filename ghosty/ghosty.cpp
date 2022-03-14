@@ -1,69 +1,85 @@
+#include "ghosty.hpp"
 #include "gameEngine.hpp"
-#include "sprite.hpp"
-#include "animatedGraphic.hpp"
-#include "gameEngine.hpp"
+#include "rectangle.hpp"
 #include "vector2D.hpp"
-#include "character.hpp"
 #include "platformBlock.hpp"
-#include "decoration.hpp"
-#include "scrollingWorld.hpp"
-#include "platform.hpp"
 
 namespace ghosty {
 
-class Ghosty : public jimp::GameEngine {
-    
-private:
-    
-public:
-    Ghosty(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000) {
-        Character* character = new Character(jimp::Vector2D::from(static_cast<float>(100), 1400 ));
-        scrollingWorld = new jimp::ScrollingWorld(character, 10000, 3000);
-        setBackgroundColor(0x3ba7b3);
-
-        // LEFT BIG PLATFORM
-//        Platform* platform = new Platform("platform-top-left.png", "platform-top-middle.png", 5, 7, 512, 0.3F, jimp::Vector2D::from(-153, static_cast<float>(scrollingWorld->getHeight() - (4 * 153))));
-//        Decoration* plant = new Decoration(jimp::Vector2D::from(platform->getPosition().x + 200, platform->getPosition().y - 95 ), "Plant3_{i}.png", 90, 0, 0.3F, 4);
-//
-//        jimp::Vector2D flowerPosition = jimp::Vector2D::from(platform->getPosition().x + platform->getWidth() - 40, platform->getPosition().y + platform->getHeight() / 2 - 256);
-//        Decoration* flower = new Decoration(flowerPosition, "BlueFlower_{i}.png", 60, 90, 0.5F, 4);
-//
-//        Decoration* plantSmall = new Decoration(jimp::Vector2D::from(platform->getPosition().x + platform->getWidth() - 130, platform->getPosition().y - 55 ), "plant-small.png", 1, 0, 0.2F, 4);
-      
-        // SECOND SMALL PLATFORM
-//        Platform* platform2 = new Platform("platform-top-left.png", "platform-top-middle.png", 1, 4, 512, 0.3F, jimp::Vector2D::from(platform->getPosition().x + platform->getWidth() + 300, 2100));
-//
-//        Decoration* plantPoison1 = new Decoration(jimp::Vector2D::from(platform2->getPosition().x + 100, platform2->getPosition().y + 75), "PlantPosion_{i}.png", 30, 180, 0.3F, 4);
-//        Decoration* rock = new Decoration(jimp::Vector2D::from(platform2->getPosition().x + 200, platform2->getPosition().y - 110), "rock1.png", 1, 0, 0.25F, 4);
-        
-        // THIRD SMALL PLATFORM
-//        Platform* platform3 = new Platform("platform-top-left.png", "platform-top-middle.png", 1, 2, 512, 0.3F, jimp::Vector2D::from(platform2->getPosition().x + 820, platform2->getPosition().y + platform2->getHeight() + 200 ));
-        
-        // BACKGROUND
-//        Decoration* blackPlant = new Decoration(jimp::Vector2D::from(platform->getPosition().x + platform->getWidth() + 375, platform->getPosition().y + platform->getHeight() - 520), "Plant3_{i}.png", 90, 0, 1.0F, 4);
-//        blackPlant->setRgbLevels(jimp::Color::black());
-//        blackPlant->animateRgbLevels(jimp::Color::from(90, 90, 90), 1);
-//
-//        Decoration* rock1 = new Decoration(jimp::Vector2D::from(platform->getPosition().x + 700, platform->getPosition().y - 200), "rock1-background.png", 1, 0, 1.7F, 4);
-//        Decoration* spikes = new Decoration(jimp::Vector2D::from(-300, platform->getPosition().y - 300), "spikes1.png", 1, 45, 0.8F, 5);
-//        Decoration* hill = new Decoration(jimp::Vector2D::from(-250, platform->getPosition().y + 300), "hill.png", 1, 0, 0.8F, 1);
-    }
-    
-    void startGame() {
-        this->start();
-    }
-    
-    void onUpdate(float elapsedTime) {
-    }
-    
-    void onFrame(float elapsedTime) {
-    }
-};
-
+Ghosty::Ghosty(jimp::Vector2D position) : jimp::AnimatedGraphic(position, 0.5F, 0.0F, 0.06F, true) {
+    name = "ghosty";
 }
 
-int main() {
-    ghosty::Ghosty game(1800, 1000, "My First Platform Game");
-    game.startGame();
-    return 0;
+void Ghosty::doOnInit() {
+    setApplyScrolling(true);
+    for (int i = 0; i < 20; i++) {
+        addSprite("idle", "Chara - BlueIdle" + std::to_string(i) + ".png", 1);
+    }
+    for (int i = 0; i < 20; i++) {
+        addSprite("run", "Chara_BlueWalk" + std::to_string(i) + ".png", 1);
+    }
+    for (int i = 0; i < 8; i++) {
+        addSprite("jump", "CharaWizardJump_" + std::to_string(i) + ".png", 1);
+    }
+}
+
+void Ghosty::doOnFrame(float elapsedTime) {
+//    jimp::GameEngine::getInstance()->drawRectangle(getCollisionRectWidth(), getCollisionRectHeight(), jimp::Vector2D { .x = getPosition().x + getMarginLeft(), .y = getPosition().y + getMarginTop() }, 0xFFFFFF);
+}
+
+void Ghosty::doOnUpdate(float elapsedTime) {
+    std::string currentAnimationId = getCurrentAnimationId();
+    if (isJumping) {
+        setCurrentAnimation("jump");
+    } else if (getVelocity().x != 0) {
+        setCurrentAnimation("run");
+    } else {
+        setCurrentAnimation("idle");
+    }
+}
+
+void Ghosty::hasCollidedRectBottom(AnimatedGraphic* otherGraphic) {
+    isJumping = false;
+    stayOnTopOf(otherGraphic);
+}
+
+void Ghosty::hasCollidedRectTop(AnimatedGraphic* otherGraphic) {
+    interruptJump();
+}
+
+void Ghosty::hasCollidedRectRight(AnimatedGraphic* otherGraphic) {
+    stayToLeftOf(otherGraphic);
+}
+
+void Ghosty::hasCollidedRectLeft(AnimatedGraphic* otherGraphic) {
+    stayToRightOf(otherGraphic);
+}
+
+void Ghosty::onKeyboardLeft(jimp::KeyState keyState) {
+    if (keyState == jimp::KeyState::PRESSED) {
+        move(270, 500);
+        drawInversedHorizontally(true);
+    } else {
+        stopMoving();
+    }
+}
+
+void Ghosty::onKeyboardRight(jimp::KeyState keyState) {
+    if (keyState == jimp::KeyState::PRESSED) {
+        move(90, 500);
+        drawInversedHorizontally(false);
+    } else {
+        stopMoving();
+    }
+}
+
+void Ghosty::onKeyboardUp(jimp::KeyState keyState) {
+    if (keyState == jimp::KeyState::PRESSED) {
+        if (!isJumping) {
+            isJumping = true;
+            jump(2100);
+        }
+    }
+}
+
 }

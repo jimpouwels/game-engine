@@ -1,11 +1,11 @@
-#include "decoration.hpp"
+#include "simpleAnimation.hpp"
 #include "gameEngine.hpp"
 #include "scrollingWorld.hpp"
 #include <regex>
 
-namespace ghosty {
+namespace jimp {
   
-Decoration::Decoration(jimp::Vector2D position, std::string filePath, int imageCount, float rotationAngle, float scale, int zIndex) : jimp::AnimatedGraphic(position, scale, rotationAngle, 0.05F, false) {
+SimpleAnimation::SimpleAnimation(jimp::Vector2D position, std::string filePath, int imageCount, float rotationAngle, float scale, int zIndex) : jimp::AnimatedGraphic(position, scale, rotationAngle, 0.05F, false) {
     this->zIndex = zIndex;
     this->name = filePath;
     this->setCollidable(false);
@@ -15,14 +15,14 @@ Decoration::Decoration(jimp::Vector2D position, std::string filePath, int imageC
     }
 }
 
-void Decoration::doOnInit() {
+void SimpleAnimation::doOnInit() {
     setApplyScrolling(true);
 }
 
-void Decoration::doOnUpdate(float elapsedTime) {
+void SimpleAnimation::doOnUpdate(float elapsedTime) {
 }
 
-uint16_t Decoration::getZIndex() {
+uint16_t SimpleAnimation::getZIndex() {
     return zIndex;
 }
     

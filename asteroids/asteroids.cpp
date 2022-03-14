@@ -32,7 +32,7 @@ public:
     }
     
     void startGame() {
-        this->start();
+        start();
     }
     
     void onFrame(float elapsedTime) {

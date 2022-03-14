@@ -7,7 +7,9 @@
                 "x": 100,
                 "y": 100
             },
-            "scale": 0.5
+            "scale": 0.5,
+            "applyGravity": true,
+            "rotationAngle": 0.0
         },
 		{
             "description": "big platform on left",
@@ -18,7 +20,8 @@
 				"x": 100,
 				"y": 100
 			},
-			"scale": 0.5
+			"scale": 0.5,
+            "applyGravity": false
 		},
         {
             "description": "single layer platform right of first big platform",
@@ -28,7 +31,8 @@
                 "x": 100,
                 "y": 100
             },
-            "scale": 0.5
+            "scale": 0.5,
+            "applyGravity": false
         },
         {
             "description": "plant on top of first big platform",
@@ -38,7 +42,9 @@
                 "y": 100
             },
             "scale": 0.5,
-            "collidable": false
+            "collidable": false,
+            "applyGravity": false,
+            "rotationAngle": 0.0
         }
 	]
 }

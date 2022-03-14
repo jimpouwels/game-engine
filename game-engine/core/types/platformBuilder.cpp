@@ -1,11 +1,11 @@
-#include "platform.hpp"
+#include "platformBuilder.hpp"
 #include "platformBlock.hpp"
 #include <vector>
 #include <iostream>
 
-namespace ghosty {
+namespace jimp {
 
-Platform::Platform(std::string cornerBlockFilePath, std::string innerBlockFilePath, uint16_t rowCount, uint16_t columnCount, float blockSize, float scale, jimp::Vector2D position) {
+PlatformBuilder::PlatformBuilder(std::string cornerBlockFilePath, std::string innerBlockFilePath, uint16_t rowCount, uint16_t columnCount, float blockSize, float scale, jimp::Vector2D position) {
     this->rowCount = rowCount;
     this->columnCount = columnCount;
     this->blockSize = blockSize;
@@ -51,15 +51,15 @@ Platform::Platform(std::string cornerBlockFilePath, std::string innerBlockFilePa
     }
 }
 
-float Platform::getWidth() {
+float PlatformBuilder::getWidth() {
     return columnCount * (blockSize * scale);
 }
 
-float Platform::getHeight() {
+float PlatformBuilder::getHeight() {
     return rowCount * (blockSize * scale);
 }
 
-jimp::Vector2D Platform::getPosition() {
+jimp::Vector2D PlatformBuilder::getPosition() {
     return position;
 }
 
