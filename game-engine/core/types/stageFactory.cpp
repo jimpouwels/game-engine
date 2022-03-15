@@ -13,6 +13,7 @@
 namespace jimp {
 
 StageFactory::StageFactory(std::string typesFilePath) {
+    new ScrollingWorld(10000, 3000);
     dataLoader = new DataLoader(typesFilePath);
     this->types = dataLoader->loadTypes();
 }
@@ -26,8 +27,6 @@ StageFactory::~StageFactory() {
 }
 
 void StageFactory::loadStage(std::string filePath) {
-    new ScrollingWorld(10000, 3000);
-    
     std::list<Graphic> graphics = dataLoader->loadGraphics(filePath);
     for (const auto& graphic : graphics) {
         createAnimatedGraphicFrom(graphic);

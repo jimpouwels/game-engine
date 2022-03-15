@@ -25,6 +25,7 @@ private:
     uint16_t screenHeight;
     uint32_t backgroundColor;
     int16_t frameRate;
+    std::string currentStage = "";
     StageFactory* stageFactory = nullptr;
     GameEngine* gameEngine = nullptr;
     std::string windowTitle;
@@ -40,6 +41,7 @@ private:
     std::chrono::time_point<std::chrono::system_clock> previousFpsMeasurementTime;
     int totalFrames;
     sf::RenderWindow* window;
+    void reloadCurrentStage();
     float measureFps(std::chrono::time_point<std::chrono::system_clock>& currentTime);
     void drawFrame(float elapsedTimeSincePreviousFrame);
     void handleEvents();

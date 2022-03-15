@@ -162,6 +162,19 @@ void UpdateThread::onUpdate(float elapsedTime) {
     this->onUpdateCallback(elapsedTime);
 }
 
+void UpdateThread::removeAllGraphics() {
+    processingLock->lock();
+    std::list<AnimatedGraphic*> graphicsToDelete = std::list<AnimatedGraphic*>();
+    for (const auto& sprite: *registeredGraphics) {
+        graphicsToDelete.push_back(sprite);
+    }
+    for (const auto& spriteToDelete: graphicsToDelete) {
+        onGraphicDeleted(spriteToDelete);
+    }
+    registeredGraphics->clear();
+    processingLock->unlock();
+}
+
 void UpdateThread::onGraphicDeleted(AnimatedGraphic* graphic) {
     onGraphicDeletedCallback(graphic);
     registeredGraphics->erase(std::remove(registeredGraphics->begin(), registeredGraphics->end(), graphic), registeredGraphics->end());

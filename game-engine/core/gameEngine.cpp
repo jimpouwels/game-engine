@@ -11,6 +11,13 @@
 
 namespace jimp {
 
+void doReloadStage(std::function<void()> reloadStageCallback) {
+    while (true) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+        reloadStageCallback();
+    }
+}
+
 GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravityForce, std::string windowTitle, uint16_t desiredFrameRate) {
     instance = this;
     this->screenWidth = screenWidth;
@@ -28,6 +35,9 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravit
     window = new sf::RenderWindow(sf::VideoMode(this->getScreenWidth(), this->getScreenHeight()), windowTitle);
     this->previousFrameTime = std::chrono::system_clock::now();
     keyboardHandler = new jimp::KeyboardHandler();
+    
+    auto loadStageCallback = std::bind(&GameEngine::reloadCurrentStage, this);
+    new std::thread(doReloadStage, loadStageCallback);
 }
 
 GameEngine::~GameEngine() {
@@ -44,6 +54,13 @@ GameEngine::~GameEngine() {
         delete sound;
     }
     delete soundCache;
+}
+
+void GameEngine::reloadCurrentStage() {
+    if (currentStage != "") {
+        updateThread->removeAllGraphics();
+        loadStage(currentStage);
+    }
 }
 
 GameEngine* GameEngine::getInstance() {
@@ -83,6 +100,7 @@ void GameEngine::loadStage(std::string filePath) {
         stageFactory = getStageFactory();
     }
     stageFactory->loadStage(filePath);
+    currentStage = filePath;
 }
 
 void GameEngine::draw(jimp::Drawable* drawable) {
