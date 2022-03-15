@@ -246,19 +246,35 @@ int AnimatedGraphic::getCollisionRectHeight() {
 }
 
 float AnimatedGraphic::getTop() {
-    return offset.y + getPosition().y + getMarginTop();
+    float top = getPosition().y + getMarginTop();
+    if (!GameEngine::getInstance()->isEditMode() && ScrollingWorld::getInstance()->getMainCharacter() != this) {
+        top += offset.y;
+    }
+    return top;
 }
 
 float AnimatedGraphic::getBottom() {
-    return offset.y + getPosition().y + getHeight() - getMarginBottom();
+    float bottom = getPosition().y + getHeight() - getMarginBottom();
+    if (!GameEngine::getInstance()->isEditMode() && ScrollingWorld::getInstance()->getMainCharacter() != this) {
+        bottom += offset.y;
+    }
+    return bottom;
 }
 
 float AnimatedGraphic::getRight() {
-    return offset.x + getPosition().x + getWidth() - getMarginRight();
+    float right = getPosition().x + getWidth() - getMarginRight();
+    if (!GameEngine::getInstance()->isEditMode() && ScrollingWorld::getInstance()->getMainCharacter() != this) {
+        right += offset.x;
+    }
+    return right;
 }
 
 float AnimatedGraphic::getLeft() {
-    return offset.x + getPosition().x + getMarginLeft();
+    float left = getPosition().x + getMarginLeft();
+    if (!GameEngine::getInstance()->isEditMode() && ScrollingWorld::getInstance()->getMainCharacter() != this) {
+        left += offset.x;
+    }
+    return left;
 }
 
 float AnimatedGraphic::getScale() {
@@ -347,30 +363,18 @@ void AnimatedGraphic::animateRgbLevels(Color to, int seconds) {
 }
 
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
-    if (GameEngine::getInstance()->isEditMode() && ScrollingWorld::getInstance()->getMainCharacter() == this) {
-        getPosition().y = otherGraphic->getPosition().y + otherGraphic->getMarginTop() - (getHeight() - getMarginBottom());
-    } else {
-        getPosition().y = otherGraphic->getTop() - (getHeight() - getMarginBottom());
-    }
+    getPosition().y = otherGraphic->getTop() - (getHeight() - getMarginBottom());
     resetGravityVelocity();
     interruptGravity = true;
 }
 
 void AnimatedGraphic::stayToLeftOf(AnimatedGraphic *otherGraphic) {
-    if (GameEngine::getInstance()->isEditMode() && ScrollingWorld::getInstance()->getMainCharacter() == this) {
-        getPosition().x = otherGraphic->getPosition().x + otherGraphic->getMarginLeft() - (getWidth() - getMarginRight());
-    } else {
-        getPosition().x = otherGraphic->getLeft() - (getWidth() - getMarginRight());
-    }
+    getPosition().x = otherGraphic->getLeft() - (getWidth() - getMarginRight());
     interruptMovementX = true;
 }
 
 void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
-    if (GameEngine::getInstance()->isEditMode() && ScrollingWorld::getInstance()->getMainCharacter() == this) {
-        getPosition().x = otherGraphic->getRight() - getMarginLeft();
-    } else {
-        getPosition().x = otherGraphic->getPosition().x + otherGraphic->getWidth() - otherGraphic->getMarginRight() - getMarginLeft();
-    }
+    getPosition().x = otherGraphic->getRight() - getMarginLeft();
     interruptMovementX = true;
 }
 
