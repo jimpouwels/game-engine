@@ -17,7 +17,7 @@ private:
     jimp::Sound* music = nullptr;
     
 public:
-    Asteroids(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 0, name, 60) {
+    Asteroids(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 0, name, 60, false) {
         new Ship();
         music = new jimp::Sound("music.ogg");
         registerSound(music);
