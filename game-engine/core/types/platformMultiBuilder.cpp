@@ -33,7 +33,6 @@ void PlatformMultiBuilder::render() {
             } else if (y == rowCount - 1 && x == columnCount - 1) {
                 PlatformBlock* rightBottom = new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), cornerRightBottomFilePath, 0, scale, zIndex);
                 GameEngine::getInstance()->registerGraphic(rightBottom);
-                rightBottom->drawInversedHorizontally(true);
             } else if (y == rowCount - 1 && x == 0) {
                 GameEngine::getInstance()->registerGraphic(new PlatformBlock(jimp::Vector2D::from(position.x + (x * size), position.y + (y * size)), cornerLeftBottomFilePath, 0, scale, zIndex));
             } else {

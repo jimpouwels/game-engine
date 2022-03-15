@@ -81,8 +81,8 @@ void ScrollingWorld::doOnUpdate(float elapsedTime) {
     } else {
         if (editCameraRight) {
             offsetDeltaX -= Timing::toValueForElapsedTime(1000, elapsedTime);
-            if (offsetX + offsetDeltaX > maxScrollX) {
-                offsetDeltaX = maxScrollX - offsetX;
+            if (offsetX + offsetDeltaX < -maxScrollX) {
+                offsetDeltaX = -maxScrollX - offsetX;
             }
         } else if (editCameraLeft) {
             offsetDeltaX += Timing::toValueForElapsedTime(1000, elapsedTime);
@@ -91,8 +91,8 @@ void ScrollingWorld::doOnUpdate(float elapsedTime) {
             }
         } else if (editCameraDown) {
             offsetDeltaY -= Timing::toValueForElapsedTime(1000, elapsedTime);
-            if (offsetY + offsetDeltaY > maxScrollY) {
-                offsetDeltaY = maxScrollY - offsetY ;
+            if (offsetY + offsetDeltaY < -maxScrollY) {
+                offsetDeltaY = -maxScrollY - offsetY;
             }
         } else if (editCameraUp) {
             offsetDeltaY += Timing::toValueForElapsedTime(1000, elapsedTime);
@@ -105,7 +105,7 @@ void ScrollingWorld::doOnUpdate(float elapsedTime) {
     offsetX += offsetDeltaX;
     offsetY += offsetDeltaY;
     
-//    std::cout << "x: " << offsetX << ", y: " << offsetY << std::endl;
+    std::cout << "x: " << offsetX << ", y: " << offsetY << std::endl;
     for (const auto& scrollingGraphic: *GameEngine::getInstance()->getAllGraphics()) {
         if ((scrollingGraphic == mainCharacter && !editMode) || !scrollingGraphic->isApplyScrolling()) {
             continue;

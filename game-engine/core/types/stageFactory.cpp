@@ -26,7 +26,7 @@ StageFactory::~StageFactory() {
 }
 
 void StageFactory::loadStage(std::string filePath) {
-    new jimp::ScrollingWorld(10000, 3000);
+    new ScrollingWorld(10000, 3000);
     
     std::list<Graphic> graphics = dataLoader->loadGraphics(filePath);
     for (const auto& graphic : graphics) {
