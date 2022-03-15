@@ -57,7 +57,7 @@ GameEngine::~GameEngine() {
 }
 
 void GameEngine::reloadCurrentStage() {
-    if (currentStage != "") {
+    if (currentStage != "" && isEditMode()) {
         updateThread->removeAllGraphics();
         loadStage(currentStage);
     }

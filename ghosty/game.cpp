@@ -54,7 +54,7 @@ public:
     }
     
     bool isEditMode() override {
-        return true;
+        return false;
     }
 };
 

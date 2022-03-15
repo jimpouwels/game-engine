@@ -51,30 +51,32 @@ void ScrollingWorld::doOnUpdate(float elapsedTime) {
         float leftSideOfCamera = gameEngine->getScreenWidth() / 2 - 250;
         float topSideOfCamera = gameEngine->getScreenHeight() / 2 - 250;
         float bottomSideOfCamera = gameEngine->getScreenHeight() / 2;
-        if (offsetX < maxScrollX && (mainCharacter->getPosition().x + mainCharacter->getWidth() - mainCharacter->getMarginRight()) >= rightSideOfCamera && mainCharacter->getVelocity().x > 0) {
-            offsetDeltaX += (mainCharacter->getPosition().x + mainCharacter->getWidth() - mainCharacter->getMarginRight()) - rightSideOfCamera;
-            if (offsetX + offsetDeltaX > maxScrollX) {
-                offsetDeltaX = maxScrollX - offsetX;
+        if (offsetX < maxScrollX && (mainCharacter->getRight()) >= rightSideOfCamera && mainCharacter->getVelocity().x > 0) {
+            std::cout << "hitting right" << std::endl;
+            offsetDeltaX -= (mainCharacter->getPosition().x + mainCharacter->getWidth() - mainCharacter->getMarginRight()) - rightSideOfCamera;
+            if (offsetX + offsetDeltaX < -maxScrollX) {
+                offsetDeltaX = -maxScrollX - offsetX;
             }
             mainCharacter->getPosition().x = rightSideOfCamera - mainCharacter->getWidth() + mainCharacter->getMarginRight();
-        } else if (offsetX > 0 && mainCharacter->getPosition().x + mainCharacter->getMarginLeft() <= leftSideOfCamera && mainCharacter->getVelocity().x < 0) {
-            offsetDeltaX -= (leftSideOfCamera - (mainCharacter->getPosition().x + mainCharacter->getMarginLeft()));
-            if (offsetX - offsetDeltaX < 0) {
+        } else if (offsetX < 0 && mainCharacter->getLeft() <= leftSideOfCamera && mainCharacter->getVelocity().x < 0) {
+            std::cout << "hitting left" << std::endl;
+            offsetDeltaX += leftSideOfCamera - (mainCharacter->getPosition().x + mainCharacter->getMarginLeft());
+            if (offsetX + offsetDeltaX > 0) {
                offsetDeltaX = -offsetX;
             }
             mainCharacter->getPosition().x = leftSideOfCamera - mainCharacter->getMarginLeft();
         }
         if (offsetY < maxScrollY && (mainCharacter->getPosition().y + mainCharacter->getHeight() - mainCharacter->getMarginBottom()) >= bottomSideOfCamera && mainCharacter->getVelocity().y > 0) {
-            offsetDeltaY += (mainCharacter->getPosition().y + mainCharacter->getHeight() - mainCharacter->getMarginBottom()) - bottomSideOfCamera;
-            if (offsetY + offsetDeltaY > maxScrollY) {
-                offsetDeltaY = maxScrollY - offsetY;
+            offsetDeltaY -= (mainCharacter->getPosition().y + mainCharacter->getHeight() - mainCharacter->getMarginBottom()) - bottomSideOfCamera;
+            if (offsetY + offsetDeltaY < -maxScrollY) {
+                offsetDeltaY = -maxScrollY - offsetY;
             }
             mainCharacter->getPosition().y = bottomSideOfCamera - mainCharacter->getHeight() + mainCharacter->getMarginBottom();
             
-        } else if (offsetY > 0 && (mainCharacter->getPosition().y + mainCharacter->getMarginTop() <= topSideOfCamera) && mainCharacter->getVelocity().y < 0) {
-            offsetDeltaY -= topSideOfCamera - (mainCharacter->getPosition().y + mainCharacter->getMarginTop());
-            if ((offsetY - offsetDeltaY) < 0) {
-               offsetDeltaY = -offsetY;
+        } else if (offsetY < 0 && (mainCharacter->getPosition().y + mainCharacter->getMarginTop() <= topSideOfCamera) && mainCharacter->getVelocity().y < 0) {
+            offsetDeltaY += topSideOfCamera - (mainCharacter->getPosition().y + mainCharacter->getMarginTop());
+            if (offsetY + offsetDeltaY > 0) {
+                offsetDeltaY = -offsetY;
             }
             mainCharacter->getPosition().y = topSideOfCamera - mainCharacter->getMarginTop();
         }
@@ -105,17 +107,13 @@ void ScrollingWorld::doOnUpdate(float elapsedTime) {
     offsetX += offsetDeltaX;
     offsetY += offsetDeltaY;
     
+    std::cout << "x: " << offsetX << ", y: " << offsetY << std::endl;
     for (const auto& scrollingGraphic: *GameEngine::getInstance()->getAllGraphics()) {
         if ((scrollingGraphic == mainCharacter && !editMode) || !scrollingGraphic->isApplyScrolling()) {
             continue;
         }
-        if (!editMode) {
-            scrollingGraphic->getPosition().x -= offsetDeltaX;
-            scrollingGraphic->getPosition().y -= offsetDeltaY;
-        } else {
-            scrollingGraphic->getPosition().x += offsetDeltaX;
-            scrollingGraphic->getPosition().y += offsetDeltaY;
-        }
+        scrollingGraphic->getPosition().x += offsetDeltaX;
+        scrollingGraphic->getPosition().y += offsetDeltaY;
     }
 }
 

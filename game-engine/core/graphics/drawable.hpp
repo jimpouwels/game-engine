@@ -9,8 +9,8 @@ namespace jimp {
 class Drawable {
       
 private:
-    Vector2D position = { .x = 0, .y = 0};
-    Vector2D rotationPoint = { .x = 0, .y = 0 };
+    Vector2D position = Vector2D::empty();
+    Vector2D rotationPoint = Vector2D::empty();
     float scale = 1.0F;
     float angle = 0.0F;
     uint16_t repeat;

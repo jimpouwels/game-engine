@@ -6,6 +6,7 @@ namespace jimp {
 
 Sprite::Sprite(float x, float y, float scale, uint16_t angle, uint16_t repeat, std::string filePath) : Drawable(x, y, scale, angle, repeat) {
     this->image = new Image(filePath);
+    this->filePath = filePath;
     crop();
 }
 
@@ -22,6 +23,10 @@ int Sprite::getSingleWidth() {
 
 int Sprite::getHeight() {
     return (image->getHeight()) * getScale();
+}
+
+std::string Sprite::getFilePath() {
+    return filePath;
 }
 
 void Sprite::setRgbLevels(Color rgb) {

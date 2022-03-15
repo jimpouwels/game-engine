@@ -19,6 +19,7 @@ private:
     int marginTop = 0;
     int marginBottom = 0;
     bool inversedHorizontally = false;
+    std::string filePath;
     Color rgb = Color::full();
     void crop();
     
@@ -37,6 +38,7 @@ public:
     int getHeight() override;
     void setRgbLevels(Color rgb);
     Color getRgbLevels();
+    std::string getFilePath();
 };
 }
 

@@ -22,7 +22,7 @@
 			"cols": 5,
 			"position": {
 				"x": -256,
-				"y": 400
+				"y": 2000
 			},
 			"scale": 0.5,
             "applyGravity": false,
