@@ -105,7 +105,6 @@ void ScrollingWorld::doOnUpdate(float elapsedTime) {
     offsetX += offsetDeltaX;
     offsetY += offsetDeltaY;
     
-//    std::cout << "x: " << offsetX << ", y: " << offsetY << std::endl;
     for (const auto& scrollingGraphic: *GameEngine::getInstance()->getAllGraphics()) {
         if ((scrollingGraphic == mainCharacter && !editMode) || !scrollingGraphic->isApplyScrolling()) {
             continue;

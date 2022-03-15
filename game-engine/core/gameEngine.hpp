@@ -25,6 +25,8 @@ private:
     uint16_t screenHeight;
     uint32_t backgroundColor;
     int16_t frameRate;
+    bool editMode = false;
+    std::thread* reloadThread = nullptr;
     std::string currentStage = "";
     StageFactory* stageFactory = nullptr;
     GameEngine* gameEngine = nullptr;
@@ -50,11 +52,10 @@ private:
     void handleDrawableDeleted(AnimatedGraphic* graphic);
     
 protected:
-    GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravityForce, std::string windowTitle, uint16_t desiredFrameRate);
+    GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravityForce, std::string windowTitle, uint16_t desiredFrameRate, bool editMode);
     ScrollingWorld* scrollingWorld = nullptr;
     void start();
     void setBackgroundColor(uint32_t color);
-    virtual bool isEditMode() = 0;
     virtual StageFactory* getStageFactory() = 0;
     virtual void onFrame(float elapsedTime) {};
     virtual void onUpdate(float elapsedTime) {};
@@ -78,6 +79,7 @@ public:
     void registerGraphic(AnimatedGraphic* graphic);
     void drawRectangle(float width, float height, Vector2D position, uint32_t color);
     float getGravityForce();
+    bool isEditMode();
     void loadStage(std::string filePath);
     std::vector<AnimatedGraphic*>* getAllGraphics();
     Image* registerImage(Image* image);

@@ -19,9 +19,6 @@ PlatformBlock::PlatformBlock(jimp::Vector2D position, std::string filePath, floa
 }
 
 void PlatformBlock::doOnUpdate(float elapsedTime) {
-    if (name == "platform-top-corner-right.png") {
-        std::cout << "x: " << getPosition().x + getOffset().x << ", y: " << getPosition().y +  getOffset().y << std::endl;
-    }
 }
 
 void PlatformBlock::doOnFrame(float elapsedTime) {

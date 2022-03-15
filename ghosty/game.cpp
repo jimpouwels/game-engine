@@ -14,7 +14,7 @@ class GhostyGame : public jimp::GameEngine {
 private:
     
 public:
-    GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000) {
+    GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000, false) {
         setBackgroundColor(0x3ba7b3);
         // LEFT BIG PLATFORM
 //        Platform* platform = new Platform("platform-top-left.png", "platform-top-middle.png", 5, 7, 512, 0.3F, jimp::Vector2D::from(-153, static_cast<float>(scrollingWorld->getHeight() - (4 * 153))));
@@ -51,10 +51,6 @@ public:
     void startGame() {
         loadStage("/Users/31098470/Projects/Personal/game-engine/ghosty/assets/level1.json");
         start();
-    }
-    
-    bool isEditMode() override {
-        return false;
     }
 };
 

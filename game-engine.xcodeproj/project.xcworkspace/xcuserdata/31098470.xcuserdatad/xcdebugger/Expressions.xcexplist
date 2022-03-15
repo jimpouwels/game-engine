@@ -176,7 +176,13 @@
                value = "otherGraphic-&gt;getRight()">
             </PersistentString>
             <PersistentString
+               value = "GameEngine::getInstance()">
+            </PersistentString>
+            <PersistentString
                value = "getLeft()">
+            </PersistentString>
+            <PersistentString
+               value = "GameEngine::getInstance()-&gt;isEditMode()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
