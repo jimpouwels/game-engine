@@ -15,6 +15,7 @@ void Ghosty::doOnFrame(float elapsedTime) {
 }
 
 void Ghosty::doOnUpdate(float elapsedTime) {
+    std::cout << getPosition().y << std::endl;
     std::string currentAnimationId = getCurrentAnimationId();
     if (isJumping) {
         setCurrentAnimation("jump");
