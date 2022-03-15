@@ -14,6 +14,7 @@ private:
     float scale = 1.0F;
     float angle = 0.0F;
     uint16_t repeat;
+    Vector2D offset = Vector2D::empty();
         
 public:
     Drawable(float x, float y, float scale, float angle, uint16_t repeat);
@@ -23,6 +24,8 @@ public:
     void setX(float x);
     void setY(float y);
     uint16_t getRepeat();
+    void setOffset(Vector2D offset);
+    Vector2D getOffset();
     float getScale();
     void setScale(float scale);
     float getRotationAngle();

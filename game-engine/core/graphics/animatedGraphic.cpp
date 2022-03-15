@@ -246,19 +246,19 @@ int AnimatedGraphic::getCollisionRectHeight() {
 }
 
 float AnimatedGraphic::getTop() {
-    return getPosition().y + getMarginTop();
+    return offset.y + getPosition().y + getMarginTop();
 }
 
 float AnimatedGraphic::getBottom() {
-    return getPosition().y + getHeight() - getMarginBottom();
+    return offset.y + getPosition().y + getHeight() - getMarginBottom();
 }
 
 float AnimatedGraphic::getRight() {
-    return getPosition().x + getWidth() - getMarginRight();
+    return offset.x + getPosition().x + getWidth() - getMarginRight();
 }
 
 float AnimatedGraphic::getLeft() {
-    return getPosition().x + getMarginLeft();
+    return offset.x + getPosition().x + getMarginLeft();
 }
 
 float AnimatedGraphic::getScale() {
@@ -382,6 +382,7 @@ void AnimatedGraphic::updateCurrentDrawableData() {
     Drawable* activeDrawable = getActiveDrawable();
     activeDrawable->setPosition(position);
     activeDrawable->setScale(scale);
+    activeDrawable->setOffset(offset);
     activeDrawable->setRotationAngle(angle);
     activeDrawable->setRotationPoint(getRotationPoint());
     Sprite* sprite = dynamic_cast<Sprite*>(activeDrawable);
@@ -401,7 +402,7 @@ Vector2D AnimatedGraphic::calculateNextPosition(float elapsedTime) {
         velocity.x += moveVelocity.x;
     }
     velocity.y += moveVelocity.y;
-    return getPosition() + jimp::Timing::toValueForElapsedTime(velocity, elapsedTime);
+    return getPosition() + jimp::Timing::toValueForElapsedTime(velocity, elapsedTime) + offset;
 }
 
 void AnimatedGraphic::addSprite(std::string animationId, std::string filePath) {
@@ -431,6 +432,14 @@ int AnimatedGraphic::getMarginTop() {
 
 int AnimatedGraphic::getMarginBottom() {
     return marginBottom * getScale();
+}
+
+void AnimatedGraphic::setOffset(Vector2D offset) {
+    this->offset = offset;
+}
+
+Vector2D AnimatedGraphic::getOffset() {
+    return this->offset;
 }
 
 void AnimatedGraphic::addDrawable(std::string animationId, Drawable* drawable) {

@@ -44,17 +44,25 @@ void Drawable::setRotationPoint(Vector2D rotationPoint) {
     this->rotationPoint = rotationPoint;
 }
 
+void Drawable::setOffset(Vector2D offset) {
+    this->offset = offset;
+}
+
+Vector2D Drawable::getOffset() {
+    return this->offset;
+}
+
 bool Drawable::isPositionedWithinScreen() {
-    if (getPosition().x + getWidth() < 0) {
+    if (getPosition().x + offset.x + getWidth() < 0) {
         return false;
     }
-    if (getPosition().x > GameEngine::getInstance()->getScreenWidth()) {
+    if (getPosition().x + offset.x > GameEngine::getInstance()->getScreenWidth()) {
         return false;
     }
-    if (getPosition().y + getHeight() < 0) {
+    if (getPosition().y + offset.y + getHeight() < 0) {
         return false;
     }
-    if (getPosition().y > GameEngine::getInstance()->getScreenHeight()) {
+    if (getPosition().y + offset.y > GameEngine::getInstance()->getScreenHeight()) {
         return false;
     }
     return true;

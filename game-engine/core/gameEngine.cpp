@@ -123,10 +123,10 @@ void GameEngine::draw(jimp::Drawable* drawable) {
         }
 
         for (uint16_t i = 0; i < sprite->getRepeat(); i++) {
-            float offsetX = sprite->getPosition().x + i * sprite->getSingleWidth();
+            float offsetX = (sprite->getPosition().x + sprite->getOffset().x) + i * sprite->getSingleWidth();
             sf::Transform transform;
             transform.rotate(sprite->getRotationAngle(), sprite->getPosition().x + sprite->getRotationPoint().x, sprite->getPosition().y + sprite->getRotationPoint().y);
-            cachedSprite->sprite->setPosition(offsetX, sprite->getPosition().y);
+            cachedSprite->sprite->setPosition(offsetX, sprite->getPosition().y + sprite->getOffset().y);
             cachedSprite->sprite->setScale(sprite->getScale(), sprite->getScale());
             cachedSprite->sprite->setColor(sf::Color(fmin(255.0, floor(sprite->getRgbLevels().r)), fmin(255.0, floor(sprite->getRgbLevels().g)), fmin(255.0, floor(sprite->getRgbLevels().b))));
             if (sprite->drawInversedHorizontally()) {

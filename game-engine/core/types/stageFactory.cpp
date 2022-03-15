@@ -34,10 +34,10 @@ void StageFactory::loadStage(std::string filePath) {
 }
 
 void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
-    AnimatedGraphic* animatedGraphic = nullptr;
     Type* type = getTypeFor(graphic.type);
     if (dynamic_cast<AnimationType*>(type)) {
         AnimationType* animationType = dynamic_cast<AnimationType*>(type);
+        AnimatedGraphic* animatedGraphic = nullptr;
         if (animationType->custom) {
             animatedGraphic = createCustomGraphic(type->name);
         } else {
@@ -59,6 +59,7 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         if (graphic.isMainCharacter) {
             ScrollingWorld::getInstance()->setMainCharacter(animatedGraphic);
         }
+        animatedGraphic->setOffset(ScrollingWorld::getInstance()->getOffset());
         GameEngine::getInstance()->registerGraphic(animatedGraphic);
     } else if (dynamic_cast<PlatformMultiLayerType*>(type)) {
         PlatformMultiLayerType* animationType = dynamic_cast<PlatformMultiLayerType*>(type);

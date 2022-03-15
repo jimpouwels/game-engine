@@ -52,14 +52,12 @@ void ScrollingWorld::doOnUpdate(float elapsedTime) {
         float topSideOfCamera = gameEngine->getScreenHeight() / 2 - 250;
         float bottomSideOfCamera = gameEngine->getScreenHeight() / 2;
         if (offsetX < maxScrollX && (mainCharacter->getRight()) >= rightSideOfCamera && mainCharacter->getVelocity().x > 0) {
-            std::cout << "hitting right" << std::endl;
             offsetDeltaX -= (mainCharacter->getPosition().x + mainCharacter->getWidth() - mainCharacter->getMarginRight()) - rightSideOfCamera;
             if (offsetX + offsetDeltaX < -maxScrollX) {
                 offsetDeltaX = -maxScrollX - offsetX;
             }
             mainCharacter->getPosition().x = rightSideOfCamera - mainCharacter->getWidth() + mainCharacter->getMarginRight();
         } else if (offsetX < 0 && mainCharacter->getLeft() <= leftSideOfCamera && mainCharacter->getVelocity().x < 0) {
-            std::cout << "hitting left" << std::endl;
             offsetDeltaX += leftSideOfCamera - (mainCharacter->getPosition().x + mainCharacter->getMarginLeft());
             if (offsetX + offsetDeltaX > 0) {
                offsetDeltaX = -offsetX;
@@ -107,14 +105,17 @@ void ScrollingWorld::doOnUpdate(float elapsedTime) {
     offsetX += offsetDeltaX;
     offsetY += offsetDeltaY;
     
-    std::cout << "x: " << offsetX << ", y: " << offsetY << std::endl;
+//    std::cout << "x: " << offsetX << ", y: " << offsetY << std::endl;
     for (const auto& scrollingGraphic: *GameEngine::getInstance()->getAllGraphics()) {
         if ((scrollingGraphic == mainCharacter && !editMode) || !scrollingGraphic->isApplyScrolling()) {
             continue;
         }
-        scrollingGraphic->getPosition().x += offsetDeltaX;
-        scrollingGraphic->getPosition().y += offsetDeltaY;
+        scrollingGraphic->setOffset(Vector2D::from(offsetX, offsetY));
     }
+}
+
+Vector2D ScrollingWorld::getOffset() {
+    return Vector2D::from(offsetX, offsetY);
 }
 
 void ScrollingWorld::onKeyboardLeft(jimp::KeyState keyState) {

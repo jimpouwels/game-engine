@@ -30,6 +30,7 @@ public:
     ~ScrollingWorld();
     int getWidth();
     int getHeight();
+    Vector2D getOffset();
     void doOnUpdate(float elapsedTime);
     void doOnFrame();
     void setEditMode(bool editMode);

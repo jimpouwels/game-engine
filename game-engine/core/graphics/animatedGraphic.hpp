@@ -20,6 +20,7 @@ private:
     Vector2D position = Vector2D::empty();
     float scale = 1.0f;
     float angle;
+    Vector2D offset = Vector2D::empty();
     uint16_t zIndex;
     bool visible = true;
     bool applyScrolling = false;
@@ -122,6 +123,8 @@ public:
     void markForDeletion();
     void setX(float x);
     void setY(float y);
+    void setOffset(Vector2D offset);
+    Vector2D getOffset();
     bool isPositionedWithinScreen();
     void setPosition(Vector2D position);
     void addToPosition(Vector2D delta);
