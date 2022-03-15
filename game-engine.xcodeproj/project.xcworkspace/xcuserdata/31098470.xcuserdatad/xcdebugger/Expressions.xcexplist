@@ -14,6 +14,17 @@
          contextName = "jimp::GameEngine::draw(jimp::Drawable*):gameEngine.cpp">
       </ContextState>
       <ContextState
+         contextName = "jimp::KeyboardHandler::handleKeyEvent(sf::Keyboard::Key, jimp::KeyState):keyboardHandler.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "typeinfo(keyListener)">
+            </PersistentString>
+            <PersistentString
+               value = "dynamic_cast&lt;ScrollingWorld*&gt;(keyListener)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "jimp::doLoop(std::__1::function&lt;void (float)&gt;, std::__1::function&lt;void (jimp::AnimatedGraphic*)&gt;, std::__1::function&lt;void ()&gt;, std::__1::vector&lt;jimp::AnimatedGraphic*, std::__1::allocator&lt;jimp::AnimatedGraphic*&gt; &gt;*, std::__1::list&lt;jimp::AnimatedGraphic*, std::__1::allocator&lt;jimp::AnimatedGraphic*&gt; &gt;*, std::__1::mutex*, std::__1::mutex*)::$_0::operator()(jimp::AnimatedGraphic*, jimp::AnimatedGraphic*) const:updateThread.cpp">
          <PersistentStrings>
             <PersistentString

@@ -26,8 +26,8 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravit
     this->imageCache = new std::map<std::string, Image*>;
     this->soundCache = new std::map<std::string, Sound*>;
     window = new sf::RenderWindow(sf::VideoMode(this->getScreenWidth(), this->getScreenHeight()), windowTitle);
-    keyboardHandler = new jimp::KeyboardHandler();
     this->previousFrameTime = std::chrono::system_clock::now();
+    keyboardHandler = new jimp::KeyboardHandler();
 }
 
 GameEngine::~GameEngine() {
@@ -51,6 +51,8 @@ GameEngine* GameEngine::getInstance() {
 }
 
 void GameEngine::start() {
+    keyboardHandler->setEditMode(isEditMode());
+    ScrollingWorld::getInstance()->setEditMode(isEditMode());
     
     updateThread->start();
     while (window->isOpen()) {

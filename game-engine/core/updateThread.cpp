@@ -97,7 +97,7 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                     graphicsLock->unlock();
                 }
                 if (ScrollingWorld::getInstance() != nullptr) {
-                    ScrollingWorld::getInstance()->doOnUpdate();
+                    ScrollingWorld::getInstance()->doOnUpdate(elapsed.count());
                 }
                 onUpdateCallback(elapsed.count());
             }

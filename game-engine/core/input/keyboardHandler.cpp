@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "keyboardHandler.hpp"
 #include "keyListener.hpp"
+#include "scrollingWorld.hpp"
 
 namespace jimp {
 
@@ -33,42 +34,16 @@ void KeyboardHandler::handleEvent(sf::Event event) {
     }
 }
 
+void KeyboardHandler::setEditMode(bool editMode) {
+    this->isEditMode = editMode;
+}
+
 void KeyboardHandler::addKeyListener(jimp::KeyListener* keyListener) {
     keyListeners->push_back(keyListener);
 }
 
 void KeyboardHandler::removeKeyListener(jimp::KeyListener* keyListener) {
     keyListeners->remove(keyListener);
-}
-
-void KeyboardHandler::handleKeyboardLeft(KeyState keyState) {
-    for (auto const& keyListener : *keyListeners) {
-        keyListener->onKeyboardLeft(keyState);
-    }
-}
-
-void KeyboardHandler::handleKeyboardRight(KeyState keyState) {
-    for (auto const& keyListener : *keyListeners) {
-        keyListener->onKeyboardRight(keyState);
-    }
-}
-
-void KeyboardHandler::handleKeyboardUp(KeyState keyState) {
-    for (auto const& keyListener : *keyListeners) {
-        keyListener->onKeyboardUp(keyState);
-    }
-}
-
-void KeyboardHandler::handleKeyboardDown(KeyState keyState) {
-    for (auto const& keyListener : *keyListeners) {
-        keyListener->onKeyboardDown(keyState);
-    }
-}
-
-void KeyboardHandler::handleKeyboardSpaceBar(KeyState keyState) {
-    for (auto const& keyListener : *keyListeners) {
-        keyListener->onKeyboardSpaceBar(keyState);
-    }
 }
 
 KeyState KeyboardHandler::keyStateFor(sf::Event event) {
@@ -80,22 +55,27 @@ KeyState KeyboardHandler::keyStateFor(sf::Event event) {
 }
 
 void KeyboardHandler::handleKeyEvent(sf::Keyboard::Key key, KeyState keyState) {
-    switch (key) {
-        case sf::Keyboard::Left:
-            handleKeyboardLeft(keyState);
-            break;
-        case sf::Keyboard::Right:
-            handleKeyboardRight(keyState);
-            break;
-        case sf::Keyboard::Up:
-            handleKeyboardUp(keyState);
-            break;
-        case sf::Keyboard::Down:
-            handleKeyboardDown(keyState);
-            break;
-        case sf::Keyboard::Space:
-            handleKeyboardSpaceBar(keyState);
-            break;
+    for (KeyListener* keyListener : *keyListeners) {
+        if (isEditMode && !(dynamic_cast<ScrollingWorld*>(keyListener))) {
+            continue;
+        }
+        switch (key) {
+            case sf::Keyboard::Left:
+                keyListener->onKeyboardLeft(keyState);
+                break;
+            case sf::Keyboard::Right:
+                keyListener->onKeyboardRight(keyState);
+                break;
+            case sf::Keyboard::Up:
+                keyListener->onKeyboardUp(keyState);
+                break;
+            case sf::Keyboard::Down:
+                keyListener->onKeyboardDown(keyState);
+                break;
+            case sf::Keyboard::Space:
+                keyListener->onKeyboardSpaceBar(keyState);
+                break;
+        }
     }
 }
 

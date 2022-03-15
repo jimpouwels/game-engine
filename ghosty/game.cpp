@@ -52,6 +52,10 @@ public:
         loadStage("/Users/31098470/Projects/Personal/game-engine/ghosty/assets/level1.json");
         start();
     }
+    
+    bool isEditMode() override {
+        return true;
+    }
 };
 
 }

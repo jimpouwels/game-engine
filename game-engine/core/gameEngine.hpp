@@ -52,6 +52,7 @@ protected:
     ScrollingWorld* scrollingWorld = nullptr;
     void start();
     void setBackgroundColor(uint32_t color);
+    virtual bool isEditMode() = 0;
     virtual StageFactory* getStageFactory() = 0;
     virtual void onFrame(float elapsedTime) {};
     virtual void onUpdate(float elapsedTime) {};
