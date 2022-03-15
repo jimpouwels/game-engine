@@ -26,7 +26,6 @@ private:
     uint32_t backgroundColor;
     int16_t frameRate;
     bool editMode = false;
-    std::thread* reloadThread = nullptr;
     std::string currentStage = "";
     StageFactory* stageFactory = nullptr;
     GameEngine* gameEngine = nullptr;
@@ -43,7 +42,6 @@ private:
     std::chrono::time_point<std::chrono::system_clock> previousFpsMeasurementTime;
     int totalFrames;
     sf::RenderWindow* window;
-    void reloadCurrentStage();
     float measureFps(std::chrono::time_point<std::chrono::system_clock>& currentTime);
     void drawFrame(float elapsedTimeSincePreviousFrame);
     void handleEvents();
@@ -66,6 +64,7 @@ public:
     static GameEngine* getInstance();
     int getScreenWidth();
     int getScreenHeight();
+    void reloadCurrentStage();
     bool isAtLeftEdgeOfScreen(AnimatedGraphic* graphic);
     bool isAtRightEdgeOfScreen(AnimatedGraphic* graphic);
     bool isAtTopEdgeOfScreen(AnimatedGraphic* graphic);

@@ -3,6 +3,7 @@
 #include "keyboardHandler.hpp"
 #include "keyListener.hpp"
 #include "scrollingWorld.hpp"
+#include "gameEngine.hpp"
 
 namespace jimp {
 
@@ -55,6 +56,9 @@ KeyState KeyboardHandler::keyStateFor(sf::Event event) {
 }
 
 void KeyboardHandler::handleKeyEvent(sf::Keyboard::Key key, KeyState keyState) {
+    if (isEditMode && key == sf::Keyboard::Space) {
+        GameEngine::getInstance()->reloadCurrentStage();
+    }
     for (KeyListener* keyListener : *keyListeners) {
         if (isEditMode && !(dynamic_cast<ScrollingWorld*>(keyListener))) {
             continue;

@@ -11,19 +11,6 @@
 
 namespace jimp {
 
-bool stopReloading = false;
-
-void doReloadStage(std::function<void()> reloadStageCallback) {
-    while (true) {
-        if (!stopReloading) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-            reloadStageCallback();
-        } else {
-            break;
-        }
-    }
-}
-
 GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravityForce, std::string windowTitle, uint16_t desiredFrameRate, bool editMode) {
     this->editMode = editMode;
     instance = this;
@@ -42,14 +29,9 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravit
     window = new sf::RenderWindow(sf::VideoMode(this->getScreenWidth(), this->getScreenHeight()), windowTitle);
     this->previousFrameTime = std::chrono::system_clock::now();
     keyboardHandler = new jimp::KeyboardHandler();
-    
-    auto loadStageCallback = std::bind(&GameEngine::reloadCurrentStage, this);
-    reloadThread = new std::thread(doReloadStage, loadStageCallback);
 }
 
 GameEngine::~GameEngine() {
-    stopReloading = true;
-    reloadThread->join();
     delete updateThread;
     delete window;
     delete keyboardHandler;
