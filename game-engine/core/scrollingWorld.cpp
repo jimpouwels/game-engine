@@ -65,7 +65,8 @@ void ScrollingWorld::doOnUpdate(float elapsedTime) {
             offsetDeltaX += Timing::toValueForElapsedTime(1000, elapsedTime);
         } else if (editCameraLeft) {
             offsetDeltaX -= Timing::toValueForElapsedTime(1000, elapsedTime);
-        } else if (editCameraDown) {
+        }
+        if (editCameraDown) {
             offsetDeltaY += Timing::toValueForElapsedTime(1000, elapsedTime);
         } else if (editCameraUp) {
             offsetDeltaY -= Timing::toValueForElapsedTime(1000, elapsedTime);
