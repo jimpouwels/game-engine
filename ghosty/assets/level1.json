@@ -45,13 +45,41 @@
             "description": "plant on top of small second platform",
             "type": "ghosty-plant-poison",
             "position": {
-                "x": 300,
-                "y": 2150
+                "x": 1300,
+                "y": 2050
             },
             "scale": 0.5,
             "collidable": false,
             "applyGravity": false,
             "rotationAngle": 180,
+            "applyScrolling": true,
+            "zIndex": 2
+        },
+        {
+            "description": "small plant on first big platform",
+            "type": "ghosty-plant-small",
+            "position": {
+                "x": 700,
+                "y": 2150
+            },
+            "scale": 0.5,
+            "collidable": false,
+            "applyGravity": false,
+            "rotationAngle": 0,
+            "applyScrolling": true,
+            "zIndex": 2
+        },
+        {
+            "description": "small rock on second platform",
+            "type": "ghosty-rock",
+            "position": {
+                "x": 1600,
+                "y": 1800
+            },
+            "scale": 0.3,
+            "collidable": false,
+            "applyGravity": false,
+            "rotationAngle": 0,
             "applyScrolling": true,
             "zIndex": 2
         },

@@ -51,6 +51,42 @@
             ]
         },
         {
+            "name": "ghosty-blue-flower",
+            "base": "animation",
+            "spriteSwapInterval": 0.06,
+            "subAnimations": [
+                {
+                    "name": "default",
+                    "filePath": "BlueFlower_{i}.png",
+                    "count": 60
+                }
+            ]
+        },
+        {
+            "name": "ghosty-plant-small",
+            "base": "animation",
+            "spriteSwapInterval": -1,
+            "subAnimations": [
+                {
+                    "name": "default",
+                    "filePath": "plant-small.png",
+                    "count": 1
+                }
+            ]
+        },
+        {
+            "name": "ghosty-rock",
+            "base": "animation",
+            "spriteSwapInterval": -1,
+            "subAnimations": [
+                {
+                    "name": "default",
+                    "filePath": "rock1.png",
+                    "count": 1
+                }
+            ]
+        },
+        {
             "name": "ghosty",
             "base": "animation",
             "custom": true,
