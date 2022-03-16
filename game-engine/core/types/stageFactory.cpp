@@ -41,11 +41,6 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         } else {
             animatedGraphic = new AnimatedGraphic();
         }
-        for (const auto& subAnimation : animationType->subAnimations) {
-            for (int i = 0; i < subAnimation->spriteCount; i++) {
-                animatedGraphic->addSprite(subAnimation->name, std::regex_replace(subAnimation->filePath, std::regex("\\{i\\}"), std::to_string(i)));
-            }
-        }
         animatedGraphic->setPosition(graphic.position);
         animatedGraphic->setScale(graphic.scale);
         animatedGraphic->setRotationAngle(graphic.rotationAngle);
@@ -57,6 +52,11 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         if (graphic.isMainCharacter) {
             ScrollingWorld::getInstance()->setMainCharacter(animatedGraphic);
             animatedGraphic->setApplyScrolling(false);
+        }
+        for (const auto& subAnimation : animationType->subAnimations) {
+            for (int i = 0; i < subAnimation->spriteCount; i++) {
+                animatedGraphic->addSprite(subAnimation->name, std::regex_replace(subAnimation->filePath, std::regex("\\{i\\}"), std::to_string(i)));
+            }
         }
         GameEngine::getInstance()->registerGraphic(animatedGraphic);
     } else if (dynamic_cast<PlatformMultiLayerType*>(type)) {
