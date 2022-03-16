@@ -106,7 +106,7 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
 
 UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback) {
     this->processingLock = new std::recursive_mutex();
-    this->graphicsLock = new std::mutex();
+    this->graphicsDeletionLock = new std::mutex();
     this->onUpdateCallback = onUpdateCallback;
     this->onGraphicDeletedCallback = onGraphicDeletedCallback;
     this->registeredGraphics = new std::vector<AnimatedGraphic*>;
@@ -127,7 +127,7 @@ UpdateThread::~UpdateThread() {
 void UpdateThread::start() {
     auto onGraphicDeletedLambda = std::bind(&UpdateThread::onGraphicDeleted, this, std::placeholders::_1);
     auto onGraphicUpdateLambda = std::bind(&UpdateThread::onUpdate, this, std::placeholders::_1);
-    this->updateThread = new std::thread(doLoop, onGraphicUpdateLambda, onGraphicDeletedLambda, registeredGraphics, newGraphics, processingLock, graphicsLock);
+    this->updateThread = new std::thread(doLoop, onGraphicUpdateLambda, onGraphicDeletedLambda, registeredGraphics, newGraphics, processingLock, graphicsDeletionLock);
 }
 
 void UpdateThread::stop() {
@@ -137,11 +137,11 @@ void UpdateThread::stop() {
 }
 
 void UpdateThread::lockDeletionOfGraphics() {
-    graphicsLock->lock();
+    graphicsDeletionLock->lock();
 }
 
-void UpdateThread::unlockGraphics() {
-    graphicsLock->unlock();
+void UpdateThread::unlockDeletionOfGraphics() {
+    graphicsDeletionLock->unlock();
 }
 
 std::vector<AnimatedGraphic*>* UpdateThread::getAllGraphics() {
@@ -170,6 +170,7 @@ void UpdateThread::onUpdate(float elapsedTime) {
 }
 
 void UpdateThread::removeAllGraphics() {
+    graphicsDeletionLock->lock();
     std::list<AnimatedGraphic*> graphicsToDelete = std::list<AnimatedGraphic*>();
     for (const auto& sprite: *registeredGraphics) {
         graphicsToDelete.push_back(sprite);
@@ -178,6 +179,7 @@ void UpdateThread::removeAllGraphics() {
         onGraphicDeleted(spriteToDelete);
     }
     registeredGraphics->clear();
+    graphicsDeletionLock->unlock();
 }
 
 void UpdateThread::onGraphicDeleted(AnimatedGraphic* graphic) {

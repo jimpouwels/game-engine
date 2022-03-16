@@ -51,7 +51,6 @@ GameEngine::~GameEngine() {
 
 void GameEngine::reloadCurrentStage() {
     if (reloadThread != nullptr) {
-        std::cout << "already reloading" << std::endl;
         return;
     }
     reloadLock->lock();
@@ -244,7 +243,7 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
             draw(graphic->getActiveDrawable());
         }
     }
-    updateThread->unlockGraphics();
+    updateThread->unlockDeletionOfGraphics();
     window->display();
 }
 

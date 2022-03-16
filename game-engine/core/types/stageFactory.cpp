@@ -3,7 +3,6 @@
 #include "platformMultiLayerType.hpp"
 #include "platformSingleLayerType.hpp"
 #include "gameEngine.hpp"
-#include "simpleAnimation.hpp"
 #include "platformMultiBuilder.hpp"
 #include "platformSingleBuilder.hpp"
 
@@ -40,7 +39,7 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         if (animationType->custom) {
             animatedGraphic = createCustomGraphic(type->name);
         } else {
-            animatedGraphic = new SimpleAnimation();
+            animatedGraphic = new AnimatedGraphic();
         }
         for (const auto& subAnimation : animationType->subAnimations) {
             for (int i = 0; i < subAnimation->spriteCount; i++) {

@@ -112,7 +112,6 @@
 		235FEFAC27D69E0B00FC15F0 /* Plant3_72.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235FEF0527D69CF900FC15F0 /* Plant3_72.png */; };
 		235FEFAD27D69E0B00FC15F0 /* Plant3_73.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235FEF0127D69CF900FC15F0 /* Plant3_73.png */; };
 		235FEFAE27D69E0B00FC15F0 /* Plant3_74.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235FEF1127D69CF900FC15F0 /* Plant3_74.png */; };
-		235FEFB127D69E2C00FC15F0 /* simpleAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235FEFAF27D69E2C00FC15F0 /* simpleAnimation.cpp */; };
 		235FEFEF27D6C8D500FC15F0 /* BlueFlower_0.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235FEFE527D6C8CB00FC15F0 /* BlueFlower_0.png */; };
 		235FEFF027D6C8D500FC15F0 /* BlueFlower_1.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235FEFC827D6C8CA00FC15F0 /* BlueFlower_1.png */; };
 		235FEFF127D6C8D500FC15F0 /* BlueFlower_2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235FEFEA27D6C8CB00FC15F0 /* BlueFlower_2.png */; };
@@ -691,8 +690,6 @@
 		235FEF5227D69E0400FC15F0 /* Plant3_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Plant3_24.png; sourceTree = "<group>"; };
 		235FEF5327D69E0400FC15F0 /* Plant3_45.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Plant3_45.png; sourceTree = "<group>"; };
 		235FEF5427D69E0400FC15F0 /* Plant3_20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Plant3_20.png; sourceTree = "<group>"; };
-		235FEFAF27D69E2C00FC15F0 /* simpleAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = simpleAnimation.cpp; sourceTree = "<group>"; };
-		235FEFB027D69E2C00FC15F0 /* simpleAnimation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = simpleAnimation.hpp; sourceTree = "<group>"; };
 		235FEFB327D6C8CA00FC15F0 /* BlueFlower_38.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueFlower_38.png; sourceTree = "<group>"; };
 		235FEFB427D6C8CA00FC15F0 /* BlueFlower_39.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueFlower_39.png; sourceTree = "<group>"; };
 		235FEFB527D6C8CA00FC15F0 /* BlueFlower_51.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueFlower_51.png; sourceTree = "<group>"; };
@@ -1453,8 +1450,6 @@
 			children = (
 				239F328A27D11A98007D4E2C /* platformBlock.cpp */,
 				239F328B27D11A98007D4E2C /* platformBlock.hpp */,
-				235FEFAF27D69E2C00FC15F0 /* simpleAnimation.cpp */,
-				235FEFB027D69E2C00FC15F0 /* simpleAnimation.hpp */,
 				235FF02B27D75C1100FC15F0 /* platformMultiBuilder.cpp */,
 				235FF02C27D75C1100FC15F0 /* platformMultiBuilder.hpp */,
 				2332412027DFBA0B0077F5BB /* platformSingleBuilder.cpp */,
@@ -1527,7 +1522,6 @@
 				23B177A327A3E3160094B178 /* bullet.hpp in Sources */,
 				236F0BA227C77D340063E19C /* drawable.cpp in Sources */,
 				23B177A527A3E3160094B178 /* asteroid.hpp in Sources */,
-				235FEFB127D69E2C00FC15F0 /* simpleAnimation.cpp in Sources */,
 				23B177A627A3E3160094B178 /* animatedGraphic.hpp in Sources */,
 				239F328C27D11A98007D4E2C /* platformBlock.cpp in Sources */,
 				23B177A727A3E3160094B178 /* animation.hpp in Sources */,
