@@ -7,7 +7,6 @@
 namespace jimp {
 
 bool isWorking = false;
-bool isPaused = false;
 AnimatedGraphic* sourceGraphic = nullptr;
 
 static void sortByDistance(std::vector<AnimatedGraphic *> &graphicsToCheckCollision) {
@@ -42,12 +41,12 @@ static void sortByDistance(std::vector<AnimatedGraphic *> &graphicsToCheckCollis
     });
 }
 
-void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onSpriteDeletedCallback, std::vector<AnimatedGraphic*>* registeredSprites, std::list<AnimatedGraphic*>* newGraphics, std::mutex* processingLock, std::mutex* graphicsLock) {
+void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onSpriteDeletedCallback, std::vector<AnimatedGraphic*>* registeredSprites, std::list<AnimatedGraphic*>* newGraphics, std::recursive_mutex* processingLock, std::mutex* graphicsDeleteLock) {
     isWorking = true;
     std::chrono::time_point<std::chrono::system_clock> previousUpdateTime;
     while (true) {
         processingLock->lock();
-        if (isWorking && !isPaused) {
+        if (isWorking) {
             std::this_thread::sleep_for(std::chrono::milliseconds(2));
             std::chrono::time_point<std::chrono::system_clock> currentTime = std::chrono::system_clock::now();
             std::chrono::duration<float> elapsed = currentTime - previousUpdateTime;
@@ -89,9 +88,9 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                     }
                 }
                 for (const auto& spriteToDelete: spritesToDelete) {
-                    graphicsLock->lock();
+                    graphicsDeleteLock->lock();
                     onSpriteDeletedCallback(spriteToDelete);
-                    graphicsLock->unlock();
+                    graphicsDeleteLock->unlock();
                 }
                 if (ScrollingWorld::getInstance() != nullptr) {
                     ScrollingWorld::getInstance()->doOnUpdate(elapsed.count());
@@ -106,7 +105,7 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
 }
 
 UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback) {
-    this->processingLock = new std::mutex();
+    this->processingLock = new std::recursive_mutex();
     this->graphicsLock = new std::mutex();
     this->onUpdateCallback = onUpdateCallback;
     this->onGraphicDeletedCallback = onGraphicDeletedCallback;
@@ -137,7 +136,7 @@ void UpdateThread::stop() {
     processingLock->unlock();
 }
 
-void UpdateThread::lockGraphics() {
+void UpdateThread::lockDeletionOfGraphics() {
     graphicsLock->lock();
 }
 
@@ -151,13 +150,9 @@ std::vector<AnimatedGraphic*>* UpdateThread::getAllGraphics() {
 
 void UpdateThread::pause() {
     processingLock->lock();
-    isPaused = true;
-    processingLock->unlock();
 }
 
 void UpdateThread::unpause() {
-    processingLock->lock();
-    isPaused = false;
     processingLock->unlock();
 }
 
@@ -175,7 +170,6 @@ void UpdateThread::onUpdate(float elapsedTime) {
 }
 
 void UpdateThread::removeAllGraphics() {
-    processingLock->lock();
     std::list<AnimatedGraphic*> graphicsToDelete = std::list<AnimatedGraphic*>();
     for (const auto& sprite: *registeredGraphics) {
         graphicsToDelete.push_back(sprite);
@@ -184,7 +178,6 @@ void UpdateThread::removeAllGraphics() {
         onGraphicDeleted(spriteToDelete);
     }
     registeredGraphics->clear();
-    processingLock->unlock();
 }
 
 void UpdateThread::onGraphicDeleted(AnimatedGraphic* graphic) {

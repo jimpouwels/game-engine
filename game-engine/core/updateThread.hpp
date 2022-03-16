@@ -10,7 +10,7 @@ class UpdateThread {
     
 private:
     std::thread* updateThread = nullptr;
-    std::mutex* processingLock = nullptr;
+    std::recursive_mutex* processingLock = nullptr;
     std::mutex* graphicsLock = nullptr;
     std::function<void(float)> onUpdateCallback;
     std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback;
@@ -27,7 +27,7 @@ public:
     void pause();
     void unpause();
     void registerGraphic(AnimatedGraphic* graphic);
-    void lockGraphics();
+    void lockDeletionOfGraphics();
     void unlockGraphics();
     std::vector<AnimatedGraphic*>* getAllGraphics();
     void removeAllGraphics();

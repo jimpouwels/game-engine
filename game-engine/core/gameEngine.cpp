@@ -50,7 +50,6 @@ GameEngine::~GameEngine() {
 
 void GameEngine::reloadCurrentStage() {
     if (currentStage != "" && isEditMode()) {
-        updateThread->removeAllGraphics();
         loadStage(currentStage);
     }
 }
@@ -86,6 +85,7 @@ void GameEngine::start() {
 
 void GameEngine::loadStage(std::string filePath) {
     updateThread->pause();
+    updateThread->removeAllGraphics();
     if (stageFactory == nullptr) {
         stageFactory = getStageFactory();
     }
@@ -229,7 +229,7 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     onFrame(elapsedTimeSincePreviousFrame);
     
     scrollingWorld->doOnFrame();
-    updateThread->lockGraphics();
+    updateThread->lockDeletionOfGraphics();
     for (const auto& graphic: *updateThread->getAllGraphics()) {
         if (!graphic->isMarkedForDeletion()) {
             graphic->onFrame(elapsedTimeSincePreviousFrame);
