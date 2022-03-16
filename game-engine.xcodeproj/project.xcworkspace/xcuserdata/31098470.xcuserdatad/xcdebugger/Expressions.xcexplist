@@ -11,10 +11,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "jimp::GameEngine::drawFrame(float):gameEngine.cpp">
+         contextName = "jimp::StageFactory::createAnimatedGraphicFrom(jimp::Graphic):stageFactory.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "graphic-&gt;getScale()">
+               value = "typeid(*type)">
+            </PersistentString>
+            <PersistentString
+               value = "animatedGraphic-&gt;getActiveDrawable()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -55,10 +58,19 @@
          contextName = "jimp::AnimatedGraphic::stayToLeftOf(jimp::AnimatedGraphic*):animatedGraphic.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "otherGraphic-&gt;getScreenPosition().y">
+               value = "isApplyScrolling()">
+            </PersistentString>
+            <PersistentString
+               value = "otherGraphic-&gt;getName()">
             </PersistentString>
             <PersistentString
                value = "getScreenPosition().y">
+            </PersistentString>
+            <PersistentString
+               value = "otherGraphic-&gt;getScreenPosition().y">
+            </PersistentString>
+            <PersistentString
+               value = "otherGraphic-&gt;">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -122,6 +134,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "jimp::AnimatedGraphic::addDrawable(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, jimp::Drawable*):animatedGraphic.cpp">
+      </ContextState>
+      <ContextState
          contextName = "mario::TileMap::getTileAt(unsigned short, unsigned short):tileMap.cpp">
          <PersistentStrings>
             <PersistentString
@@ -139,29 +154,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Game::onSpriteDeleted(jimp::AnimatedSprite*):game.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "animatedSprite-&gt;getActiveSprite()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "jimp::PlatformBlock::PlatformBlock(jimp::Vector2D, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, float, float):platformBlock.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "jimp::AnimatedGraphic::addDrawable(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, jimp::Drawable*):animatedGraphic.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "Asteroid::updateDirection(float):asteroid.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "isAtRightEdgeOfScreen()">
-            </PersistentString>
-            <PersistentString
-               value = "isAtLeftEdgeOfScreen()">
-            </PersistentString>
-         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "jimp::AnimatedGraphic::canCollideWith(jimp::AnimatedGraphic*, float):animatedGraphic.cpp">
@@ -177,6 +170,25 @@
             </PersistentString>
             <PersistentString
                value = "otherGraphicNextTop">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Asteroid::updateDirection(float):asteroid.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "isAtRightEdgeOfScreen()">
+            </PersistentString>
+            <PersistentString
+               value = "isAtLeftEdgeOfScreen()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Game::onSpriteDeleted(jimp::AnimatedSprite*):game.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "animatedSprite-&gt;getActiveSprite()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -226,13 +238,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "jimp::StageFactory::createAnimatedGraphicFrom(jimp::Graphic):stageFactory.cpp">
+         contextName = "jimp::GameEngine::drawFrame(float):gameEngine.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "typeid(*type)">
-            </PersistentString>
-            <PersistentString
-               value = "animatedGraphic-&gt;getActiveDrawable()">
+               value = "graphic-&gt;getScale()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

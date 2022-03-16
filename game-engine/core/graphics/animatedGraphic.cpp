@@ -262,7 +262,7 @@ float AnimatedGraphic::getScreenPositionRight() {
 }
 
 float AnimatedGraphic::getScreenPositionLeft() {
-    return getPosition().x + getMarginLeft();
+    return getScreenPosition().x + getMarginLeft();
 }
 
 float AnimatedGraphic::getWorldPositionTop() {
