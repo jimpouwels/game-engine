@@ -11,7 +11,6 @@ namespace jimp {
 class KeyboardHandler {
     
 private:
-    bool isEditMode = false;
     std::list<jimp::KeyListener*>* keyListeners;
     std::list<sf::Keyboard::Key>* pressedKeys;
     void handleKeyboardLeft(KeyState keyState);
@@ -28,7 +27,6 @@ public:
     void addKeyListener(jimp::KeyListener* keyListener);
     void removeKeyListener(jimp::KeyListener* keyListener);
     void handleEvent(sf::Event event);
-    void setEditMode(bool editMode);
     
 };
 

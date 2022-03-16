@@ -19,7 +19,6 @@ private:
     float maxScrollY = 0.0f;
     int width = 0;
     int height = 0;
-    bool editMode = false;
     bool editCameraLeft = false;
     bool editCameraRight = false;
     bool editCameraUp = false;
@@ -33,7 +32,6 @@ public:
     Vector2D getOffset();
     void doOnUpdate(float elapsedTime);
     void doOnFrame();
-    void setEditMode(bool editMode);
     AnimatedGraphic* getMainCharacter();
     void setMainCharacterLoaded(bool loaded);
     void setMainCharacter(AnimatedGraphic* animatedGraphic);

@@ -60,9 +60,6 @@ GameEngine* GameEngine::getInstance() {
 }
 
 void GameEngine::start() {
-    keyboardHandler->setEditMode(isEditMode());
-    ScrollingWorld::getInstance()->setEditMode(isEditMode());
-    
     updateThread->start();
     while (window->isOpen()) {
         handleEvents();

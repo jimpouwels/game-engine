@@ -46,7 +46,7 @@ void ScrollingWorld::doOnUpdate(float elapsedTime) {
     std::cout << "WORLD" << std::endl;
     float offsetDeltaX = 0;
     float offsetDeltaY = 0;
-    if (!editMode) {
+    if (!GameEngine::getInstance()->isEditMode()) {
         GameEngine* gameEngine = GameEngine::getInstance();
         float rightSideOfCamera = gameEngine->getScreenWidth() / 2 + 250;
         float leftSideOfCamera = gameEngine->getScreenWidth() / 2 - 250;
@@ -129,11 +129,6 @@ void ScrollingWorld::onKeyboardDown(jimp::KeyState keyState) {
 
 void ScrollingWorld::doOnFrame() {
 //    GameEngine::getInstance()->drawRectangle(500, 500, Vector2D { .x = static_cast<float>(GameEngine::getInstance()->getScreenWidth() / 2 - 250), .y = static_cast<float>(GameEngine::getInstance()->getScreenHeight() / 2 - 250) }, 0xFFFFFF);
-
-}
-
-void ScrollingWorld::setEditMode(bool editMode) {
-    this->editMode = editMode;
 }
 
 ScrollingWorld* ScrollingWorld::getInstance() {

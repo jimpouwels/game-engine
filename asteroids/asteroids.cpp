@@ -48,8 +48,8 @@ public:
     }
 };
 
-int main() {
-    Asteroids game(1500, 900, "Asteroids");
-    game.startGame();
-    return 0;
-}
+//int main() {
+//    Asteroids game(1500, 900, "Asteroids");
+//    game.startGame();
+//    return 0;
+//}

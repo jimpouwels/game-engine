@@ -35,10 +35,6 @@ void KeyboardHandler::handleEvent(sf::Event event) {
     }
 }
 
-void KeyboardHandler::setEditMode(bool editMode) {
-    this->isEditMode = editMode;
-}
-
 void KeyboardHandler::addKeyListener(jimp::KeyListener* keyListener) {
     keyListeners->push_back(keyListener);
 }
@@ -56,11 +52,11 @@ KeyState KeyboardHandler::keyStateFor(sf::Event event) {
 }
 
 void KeyboardHandler::handleKeyEvent(sf::Keyboard::Key key, KeyState keyState) {
-    if (isEditMode && key == sf::Keyboard::Space) {
+    if (GameEngine::getInstance()->isEditMode() && key == sf::Keyboard::Space) {
         GameEngine::getInstance()->reloadCurrentStage();
     }
     for (KeyListener* keyListener : *keyListeners) {
-        if (isEditMode && !(dynamic_cast<ScrollingWorld*>(keyListener))) {
+        if (GameEngine::getInstance()->isEditMode() && !(dynamic_cast<ScrollingWorld*>(keyListener))) {
             continue;
         }
         switch (key) {
