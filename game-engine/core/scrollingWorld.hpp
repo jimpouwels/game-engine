@@ -22,6 +22,10 @@ private:
     bool editCameraRight = false;
     bool editCameraUp = false;
     bool editCameraDown = false;
+    float rightSideOfCamera = 0.0f;
+    float leftSideOfCamera = 0.0f;
+    float topSideOfCamera = 0.0f;
+    float bottomSideOfCamera = 0.0f;
     
 public:
     ScrollingWorld(int width, int height);

@@ -11,9 +11,16 @@ ScrollingWorld::ScrollingWorld(int width, int height) {
     scrollingWorldInstance = this;
     this->width = width;
     this->height = height;
-    this->maxScrollX = abs(width - GameEngine::getInstance()->getScreenWidth());
-    this->maxScrollY = abs(height - GameEngine::getInstance()->getScreenHeight());
-    GameEngine::getInstance()->addKeyListener(this);
+    
+    GameEngine* gameEngine = GameEngine::getInstance();
+    this->maxScrollX = abs(width - gameEngine->getScreenWidth());
+    this->maxScrollY = abs(height - gameEngine->getScreenHeight());
+    
+    gameEngine->addKeyListener(this);
+    rightSideOfCamera = gameEngine->getScreenWidth() / 2 + 250;
+    leftSideOfCamera = gameEngine->getScreenWidth() / 2 - 250;
+    topSideOfCamera = gameEngine->getScreenHeight() / 2 - 250;
+    bottomSideOfCamera = gameEngine->getScreenHeight() / 2;
 }
 
 ScrollingWorld::~ScrollingWorld() {
@@ -39,11 +46,6 @@ void ScrollingWorld::doOnUpdate(float elapsedTime) {
     float offsetDeltaX = 0;
     float offsetDeltaY = 0;
     if (!GameEngine::getInstance()->isEditMode()) {
-        GameEngine* gameEngine = GameEngine::getInstance();
-        float rightSideOfCamera = gameEngine->getScreenWidth() / 2 + 250;
-        float leftSideOfCamera = gameEngine->getScreenWidth() / 2 - 250;
-        float topSideOfCamera = gameEngine->getScreenHeight() / 2 - 250;
-        float bottomSideOfCamera = gameEngine->getScreenHeight() / 2;
         if (offsetX < maxScrollX && (mainCharacter->getScreenPositionRight()) >= rightSideOfCamera && mainCharacter->getVelocity().x > 0) {
             offsetDeltaX += (mainCharacter->getPosition().x + mainCharacter->getWidth() - mainCharacter->getMarginRight()) - rightSideOfCamera;
             mainCharacter->getPosition().x = rightSideOfCamera - mainCharacter->getWidth() + mainCharacter->getMarginRight();
