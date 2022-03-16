@@ -43,6 +43,7 @@ void ScrollingWorld::doOnUpdate(float elapsedTime) {
     if (!mainCharacterLoaded) {
         return;
     }
+    std::cout << "WORLD" << std::endl;
     float offsetDeltaX = 0;
     float offsetDeltaY = 0;
     if (!editMode) {

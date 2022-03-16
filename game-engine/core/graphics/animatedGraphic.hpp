@@ -26,7 +26,7 @@ private:
     bool applyGravity = false;
     bool interruptGravity = false;
     bool interruptMovementX = false;
-    bool collidable = true;
+    bool collidable = false;
     bool inversedHorizontally = false;
     int collisionBoxWidth = 0;
     int collisionBoxHeight = 0;

@@ -29,6 +29,7 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravit
     window = new sf::RenderWindow(sf::VideoMode(this->getScreenWidth(), this->getScreenHeight()), windowTitle);
     this->previousFrameTime = std::chrono::system_clock::now();
     keyboardHandler = new jimp::KeyboardHandler();
+    new ScrollingWorld(10000, 3000);
 }
 
 GameEngine::~GameEngine() {

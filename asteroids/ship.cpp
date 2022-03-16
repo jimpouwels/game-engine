@@ -14,19 +14,16 @@ const uint8_t Ship::SHOTS_PER_SECOND = 10;
 const float Ship::SCALE = 0.15F;
 const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 
-//Ship::Ship() : jimp::AnimatedGraphic(jimp::Vector2D::from(400, 400), SCALE, 0, 0.05F, false) {
-//}
-
 Ship::Ship() : jimp::AnimatedGraphic() {
+    setScale(0.2);
+    setZIndex(0);
+    this->firingSound = new jimp::Sound("laser.ogg");
+    this->thrustSound = new jimp::Sound("thrust.ogg");
+    addSprite("default", "spaceship.png");
+    addSprite("throttling", "spaceship-thrust1.png");
+    addSprite("throttling", "spaceship-thrust2.png");
+    name = "ship";
 }
-
-//void Ship::doOnInit() {
-//    this->firingSound = new jimp::Sound("laser.ogg");
-//    this->thrustSound = new jimp::Sound("thrust.ogg");
-//    addSprite("default", "spaceship.png");
-//    addSprite("throttling", "spaceship-thrust1.png");
-//    addSprite("throttling", "spaceship-thrust2.png");
-//}
 
 void Ship::doOnUpdate(float elapsedTime) {
     if (isThrothling) {
@@ -114,7 +111,7 @@ void Ship::updateFiring(float elapsedTime) {
         jimp::Vector2D rotationPoint = getRotationPoint();
         rotationPoint.x += getPosition().x - (10 * getScale());
         rotationPoint.y += getPosition().y + (45 * getScale());
-        new Bullet(rotationPoint, getRotationAngle());
+        jimp::GameEngine::getInstance()->registerGraphic(new Bullet(rotationPoint, getRotationAngle()));
         firingSound->playTillEnd(30);
         elapsedTimeSinceLastShot = 0;
     }

@@ -56,8 +56,8 @@ public:
 
 }
 
-int main() {
-    ghosty::GhostyGame game(1800, 1000, "My First Platform Game");
-    game.startGame();
-    return 0;
-}
+//int main() {
+//    ghosty::GhostyGame game(1800, 1000, "My First Platform Game");
+//    game.startGame();
+//    return 0;
+//}

@@ -13,10 +13,10 @@ class ScrollingWorld : public KeyListener {
 private:
     AnimatedGraphic* mainCharacter = nullptr;
     bool mainCharacterLoaded = false;
-    float offsetX = 0;
-    float offsetY = 0;
-    float maxScrollX = 0;
-    float maxScrollY = 0;
+    float offsetX = 0.0f;
+    float offsetY = 0.0f;
+    float maxScrollX = 0.0f;
+    float maxScrollY = 0.0f;
     int width = 0;
     int height = 0;
     bool editMode = false;

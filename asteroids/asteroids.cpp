@@ -18,7 +18,7 @@ private:
     
 public:
     Asteroids(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 0, name, 60, false) {
-        new Ship();
+        registerGraphic(new Ship());
         music = new jimp::Sound("music.ogg");
         registerSound(music);
         music->loop(25);
@@ -35,17 +35,21 @@ public:
         start();
     }
     
-    void onFrame(float elapsedTime) {
+    jimp::StageFactory* getStageFactory() override {
+        return nullptr;
+    }
+    
+    void onFrame(float elapsedTime) override {
         draw(background);
     }
     
-    void onUpdate(float elapsedTime) {
+    void onUpdate(float elapsedTime) override {
         asteroidSpawner->onUpdate(elapsedTime);
     }
 };
 
-//int main() {
-//    Asteroids game(1500, 900, "Asteroids");
-//    game.startGame();
-//    return 0;
-//}
+int main() {
+    Asteroids game(1500, 900, "Asteroids");
+    game.startGame();
+    return 0;
+}

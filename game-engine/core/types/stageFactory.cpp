@@ -13,7 +13,6 @@
 namespace jimp {
 
 StageFactory::StageFactory(std::string typesFilePath) {
-    new ScrollingWorld(10000, 3000);
     dataLoader = new DataLoader(typesFilePath);
     this->types = dataLoader->loadTypes();
 }
