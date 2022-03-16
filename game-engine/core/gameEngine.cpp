@@ -85,11 +85,13 @@ void GameEngine::start() {
 }
 
 void GameEngine::loadStage(std::string filePath) {
+    updateThread->pause();
     if (stageFactory == nullptr) {
         stageFactory = getStageFactory();
     }
     stageFactory->loadStage(filePath);
     currentStage = filePath;
+    updateThread->unpause();
 }
 
 bool GameEngine::isEditMode() {

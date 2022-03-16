@@ -31,19 +31,11 @@ AnimatedGraphic* ScrollingWorld::getMainCharacter() {
     return mainCharacter;
 }
 
-void ScrollingWorld::setMainCharacterLoaded(bool loaded) {
-    mainCharacterLoaded = loaded;
-}
-
 void ScrollingWorld::setMainCharacter(AnimatedGraphic* animatedGraphic) {
     mainCharacter = animatedGraphic;
 }
 
 void ScrollingWorld::doOnUpdate(float elapsedTime) {
-    if (!mainCharacterLoaded) {
-        return;
-    }
-    std::cout << "WORLD" << std::endl;
     float offsetDeltaX = 0;
     float offsetDeltaY = 0;
     if (!GameEngine::getInstance()->isEditMode()) {

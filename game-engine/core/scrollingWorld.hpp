@@ -12,7 +12,6 @@ class ScrollingWorld : public KeyListener {
     
 private:
     AnimatedGraphic* mainCharacter = nullptr;
-    bool mainCharacterLoaded = false;
     float offsetX = 0.0f;
     float offsetY = 0.0f;
     float maxScrollX = 0.0f;
@@ -33,7 +32,6 @@ public:
     void doOnUpdate(float elapsedTime);
     void doOnFrame();
     AnimatedGraphic* getMainCharacter();
-    void setMainCharacterLoaded(bool loaded);
     void setMainCharacter(AnimatedGraphic* animatedGraphic);
     static ScrollingWorld* getInstance();
     void onKeyboardLeft(jimp::KeyState keyState) override;

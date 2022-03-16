@@ -7,6 +7,7 @@
 namespace jimp {
 
 bool isWorking = false;
+bool isPaused = false;
 AnimatedGraphic* sourceGraphic = nullptr;
 
 static void sortByDistance(std::vector<AnimatedGraphic *> &graphicsToCheckCollision) {
@@ -41,16 +42,12 @@ static void sortByDistance(std::vector<AnimatedGraphic *> &graphicsToCheckCollis
     });
 }
 
-void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onSpriteDeletedCallback, std::function<void()> onLoadNewGraphicsCallback, std::vector<AnimatedGraphic*>* registeredSprites, std::list<AnimatedGraphic*>* newGraphics, std::mutex* processingLock, std::mutex* graphicsLock) {
+void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onSpriteDeletedCallback, std::vector<AnimatedGraphic*>* registeredSprites, std::list<AnimatedGraphic*>* newGraphics, std::mutex* processingLock, std::mutex* graphicsLock) {
     isWorking = true;
     std::chrono::time_point<std::chrono::system_clock> previousUpdateTime;
     while (true) {
-        onLoadNewGraphicsCallback();
-        if (newGraphics->size() > 0) {
-            continue;
-        }
         processingLock->lock();
-        if (isWorking) {
+        if (isWorking && !isPaused) {
             std::this_thread::sleep_for(std::chrono::milliseconds(2));
             std::chrono::time_point<std::chrono::system_clock> currentTime = std::chrono::system_clock::now();
             std::chrono::duration<float> elapsed = currentTime - previousUpdateTime;
@@ -132,8 +129,7 @@ UpdateThread::~UpdateThread() {
 void UpdateThread::start() {
     auto onGraphicDeletedLambda = std::bind(&UpdateThread::onGraphicDeleted, this, std::placeholders::_1);
     auto onGraphicUpdateLambda = std::bind(&UpdateThread::onUpdate, this, std::placeholders::_1);
-    auto onLoadNewGraphicsLambda = std::bind(&UpdateThread::loadNewGraphicsIntoUpdateLoop, this);
-    this->updateThread = new std::thread(doLoop, onGraphicUpdateLambda, onGraphicDeletedLambda, onLoadNewGraphicsLambda, registeredGraphics, newGraphics, processingLock, graphicsLock);
+    this->updateThread = new std::thread(doLoop, onGraphicUpdateLambda, onGraphicDeletedLambda, registeredGraphics, newGraphics, processingLock, graphicsLock);
 }
 
 void UpdateThread::stop() {
@@ -154,8 +150,25 @@ std::vector<AnimatedGraphic*>* UpdateThread::getAllGraphics() {
     return registeredGraphics;
 }
 
+void UpdateThread::pause() {
+    processingLock->lock();
+    isPaused = true;
+    processingLock->unlock();
+}
+
+void UpdateThread::unpause() {
+    processingLock->lock();
+    isPaused = false;
+    processingLock->unlock();
+}
+
 void UpdateThread::registerGraphic(AnimatedGraphic* graphic) {
-    newGraphics->push_back(graphic);
+    processingLock->lock();
+    registeredGraphics->push_back(graphic);
+    std::sort(registeredGraphics->begin(), registeredGraphics->end(), [](AnimatedGraphic* a, AnimatedGraphic* b) {
+        return a->getZIndex() > b->getZIndex();
+    });
+    processingLock->unlock();
 }
 
 void UpdateThread::onUpdate(float elapsedTime) {
@@ -179,27 +192,6 @@ void UpdateThread::onGraphicDeleted(AnimatedGraphic* graphic) {
     onGraphicDeletedCallback(graphic);
     registeredGraphics->erase(std::remove(registeredGraphics->begin(), registeredGraphics->end(), graphic), registeredGraphics->end());
     delete graphic;
-}
-
-void UpdateThread::loadNewGraphicsIntoUpdateLoop() {
-    if (newGraphics->size() > 0) {
-        std::list<AnimatedGraphic*> loadedGraphics = std::list<AnimatedGraphic*>();
-        for (const auto& newGraphic: *newGraphics) {
-            registeredGraphics->push_back(newGraphic);
-            loadedGraphics.push_back(newGraphic);
-            if (ScrollingWorld::getInstance() != nullptr && ScrollingWorld::getInstance()->getMainCharacter() != nullptr && newGraphic == ScrollingWorld::getInstance()->getMainCharacter()) {
-                ScrollingWorld::getInstance()->setMainCharacterLoaded(true);
-            }
-        }
-        if (loadedGraphics.size() > 0) {
-            for (const auto& loadedGraphic: loadedGraphics) {
-                newGraphics->remove(loadedGraphic);
-            }
-            std::sort(registeredGraphics->begin(), registeredGraphics->end(), [](AnimatedGraphic* a, AnimatedGraphic* b) {
-                return a->getZIndex() > b->getZIndex();
-            });
-        }
-    }
 }
 
 }
