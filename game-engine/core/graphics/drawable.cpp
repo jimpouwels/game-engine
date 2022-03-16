@@ -72,12 +72,4 @@ void Drawable::setScale(float scale) {
     this->scale = scale;
 }
 
-void Drawable::setApplyScrolling(bool applyScrolling) {
-    this->applyScrolling = applyScrolling;
-}
-
-bool Drawable::getApplyScrolling() {
-    return applyScrolling;
-}
-
 }

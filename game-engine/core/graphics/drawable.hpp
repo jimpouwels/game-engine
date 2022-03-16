@@ -14,7 +14,6 @@ private:
     float scale = 1.0F;
     float angle = 0.0F;
     uint16_t repeat;
-    bool applyScrolling = false;
         
 public:
     Drawable(float x, float y, float scale, float angle, uint16_t repeat);
@@ -29,8 +28,6 @@ public:
     float getRotationAngle();
     void setRotationAngle(float angle);
     Vector2D getRotationPoint();
-    void setApplyScrolling(bool applyScrolling);
-    bool getApplyScrolling();
     void setRotationPoint(Vector2D rotationPoint);
     bool isPositionedWithinScreen();
     virtual int getSingleWidth() = 0;

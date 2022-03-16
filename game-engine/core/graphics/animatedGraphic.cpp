@@ -405,7 +405,6 @@ void AnimatedGraphic::updateCurrentDrawableData() {
     Drawable* activeDrawable = getActiveDrawable();
     activeDrawable->setPosition(getScreenPosition());
     activeDrawable->setScale(scale);
-    activeDrawable->setApplyScrolling(applyScrolling);
     activeDrawable->setRotationAngle(angle);
     activeDrawable->setRotationPoint(getRotationPoint());
     Sprite* sprite = dynamic_cast<Sprite*>(activeDrawable);
