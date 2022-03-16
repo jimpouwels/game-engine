@@ -7,7 +7,6 @@ namespace jimp {
   
 PlatformBlock::PlatformBlock(jimp::Vector2D position, std::string filePath, float angle, float scale, int zIndex) : jimp::AnimatedGraphic() {
     setPosition(position);
-    setOffset(ScrollingWorld::getInstance()->getOffset());
     setApplyScrolling(true);
     setRotationAngle(angle);
     setCollidable(true);

@@ -11,11 +11,11 @@ AnimatedGraphic* sourceGraphic = nullptr;
 
 static void sortByDistance(std::vector<AnimatedGraphic *> &graphicsToCheckCollision) {
     std::sort(graphicsToCheckCollision.begin(), graphicsToCheckCollision.end(), [](AnimatedGraphic* a, AnimatedGraphic* b) {
-        Vector2D sourceGraphicLeftTop = Vector2D::from(sourceGraphic->getLeft(), sourceGraphic->getTop());
-        Vector2D sourceGraphicRightTop = Vector2D::from(sourceGraphic->getRight(), sourceGraphic->getTop());
+        Vector2D sourceGraphicLeftTop = Vector2D::from(sourceGraphic->getScreenPositionLeft(), sourceGraphic->getScreenPositionTop());
+        Vector2D sourceGraphicRightTop = Vector2D::from(sourceGraphic->getScreenPositionRight(), sourceGraphic->getScreenPositionTop());
         
-        Vector2D positionA = Vector2D::from(a->getLeft(), a->getTop());
-        Vector2D positionB = Vector2D::from(b->getLeft(), b->getTop());
+        Vector2D positionA = Vector2D::from(a->getScreenPositionLeft(), a->getScreenPositionTop());
+        Vector2D positionB = Vector2D::from(b->getScreenPositionLeft(), b->getScreenPositionTop());
         
         Vector2D distanceALeft = sourceGraphicLeftTop - positionA;
         Vector2D distanceARight = sourceGraphicRightTop - positionA;

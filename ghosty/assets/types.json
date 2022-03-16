@@ -39,6 +39,18 @@
             ]
         },
         {
+            "name": "ghosty-plant-poison",
+            "base": "animation",
+            "spriteSwapInterval": 0.06,
+            "subAnimations": [
+                {
+                    "name": "default",
+                    "filePath": "PlantPosion_{i}.png",
+                    "count": 30
+                }
+            ]
+        },
+        {
             "name": "ghosty",
             "base": "animation",
             "custom": true,

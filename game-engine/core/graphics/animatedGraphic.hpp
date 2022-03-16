@@ -20,7 +20,6 @@ private:
     Vector2D position = Vector2D::empty();
     float scale = 1.0f;
     float angle;
-    Vector2D offset = Vector2D::empty();
     uint16_t zIndex;
     bool visible = true;
     bool applyScrolling = false;
@@ -82,6 +81,7 @@ public:
     AnimatedGraphic();
     ~AnimatedGraphic();
     Vector2D& getPosition();
+    Vector2D getScreenPosition();
     Vector2D& getMoveVelocity();
     Vector2D getVelocity();
     std::string getName();
@@ -97,10 +97,14 @@ public:
     int getMarginRight();
     int getMarginTop();
     int getMarginBottom();
-    float getBottom();
-    float getTop();
-    float getLeft();
-    float getRight();
+    float getScreenPositionBottom();
+    float getScreenPositionTop();
+    float getScreenPositionLeft();
+    float getScreenPositionRight();
+    float getWorldPositionBottom();
+    float getWorldPositionTop();
+    float getWorldPositionLeft();
+    float getWorldPositionRight();
     float getRotationAngle();
     bool isCollidable();
     bool canCollideWith(AnimatedGraphic* otherGraphic, float elapsedTime);
@@ -123,8 +127,6 @@ public:
     void markForDeletion();
     void setX(float x);
     void setY(float y);
-    void setOffset(Vector2D offset);
-    Vector2D getOffset();
     bool isPositionedWithinScreen();
     void setPosition(Vector2D position);
     void addToPosition(Vector2D delta);

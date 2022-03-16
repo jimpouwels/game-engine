@@ -114,10 +114,10 @@ bool AnimatedGraphic::canCollideWith(AnimatedGraphic *otherGraphic, float elapse
     float otherGraphicNextLeft = otherGraphicNextPosition.x + otherGraphic->getMarginLeft();
     float otherGraphicNextRight = otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight();
     
-    if ((getRight() < otherGraphic->getLeft() && currentGraphicNextRight < otherGraphicNextLeft) ||
-        (getLeft() > otherGraphic->getRight() && currentGraphicNextLeft > otherGraphicNextRight) ||
-        (getBottom() < otherGraphic->getTop() && currentGraphicNextBottom < otherGraphicNextTop) ||
-        (getTop() > otherGraphic->getBottom() && currentGraphicNextTop > otherGraphicNextBottom)) {
+    if ((getScreenPositionRight() < otherGraphic->getScreenPositionLeft() && currentGraphicNextRight < otherGraphicNextLeft) ||
+        (getScreenPositionLeft() > otherGraphic->getScreenPositionRight() && currentGraphicNextLeft > otherGraphicNextRight) ||
+        (getScreenPositionBottom() < otherGraphic->getScreenPositionTop() && currentGraphicNextBottom < otherGraphicNextTop) ||
+        (getScreenPositionTop() > otherGraphic->getScreenPositionBottom() && currentGraphicNextTop > otherGraphicNextBottom)) {
         return false;
     }
     return true;
@@ -136,19 +136,19 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
     float otherGraphicNextLeft = otherGraphicNextPosition.x + otherGraphic->getMarginLeft();
     float otherGraphicNextRight = otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight();
     
-    if ((MathUtils::smallerOrEquals(getBottom(), otherGraphic->getTop()) && currentGraphicNextBottom > otherGraphicNextTop)
+    if ((MathUtils::smallerOrEquals(getScreenPositionBottom(), otherGraphic->getScreenPositionTop()) && currentGraphicNextBottom > otherGraphicNextTop)
             && !MathUtils::floatEquals(currentGraphicNextRight, otherGraphicNextLeft) && !MathUtils::floatEquals(currentGraphicNextLeft, otherGraphicNextRight)) {
         hasCollidedRect(otherGraphic, Geo2D::Side::BOTTOM);
         hasCollidedRectBottom(otherGraphic);
-    } else if ((MathUtils::largerOrEquals(getTop(), otherGraphic->getBottom()) && currentGraphicNextTop < otherGraphicNextBottom)
+    } else if ((MathUtils::largerOrEquals(getScreenPositionTop(), otherGraphic->getScreenPositionBottom()) && currentGraphicNextTop < otherGraphicNextBottom)
             && !MathUtils::floatEquals(currentGraphicNextRight, otherGraphicNextLeft) && !MathUtils::floatEquals(currentGraphicNextLeft, otherGraphicNextRight)) {
         hasCollidedRect(otherGraphic, Geo2D::Side::TOP);
         hasCollidedRectTop(otherGraphic);
-    } else if ((MathUtils::largerOrEquals(getLeft(), otherGraphic->getRight()) && currentGraphicNextLeft < otherGraphicNextRight)
+    } else if ((MathUtils::largerOrEquals(getScreenPositionLeft(), otherGraphic->getScreenPositionRight()) && currentGraphicNextLeft < otherGraphicNextRight)
                && !MathUtils::floatEquals(currentGraphicNextBottom, otherGraphicNextTop) && !MathUtils::floatEquals(currentGraphicNextTop, otherGraphicNextBottom)) {
         hasCollidedRect(otherGraphic, Geo2D::Side::LEFT);
         hasCollidedRectLeft(otherGraphic);
-    } else if ((MathUtils::smallerOrEquals(getRight(), otherGraphic->getLeft()) && currentGraphicNextRight > otherGraphicNextLeft)
+    } else if ((MathUtils::smallerOrEquals(getScreenPositionRight(), otherGraphic->getScreenPositionLeft()) && currentGraphicNextRight > otherGraphicNextLeft)
             && !MathUtils::floatEquals(currentGraphicNextBottom, otherGraphicNextTop) && !MathUtils::floatEquals(currentGraphicNextTop, otherGraphicNextBottom)) {
         hasCollidedRect(otherGraphic, Geo2D::Side::RIGHT);
         hasCollidedRectRight(otherGraphic);
@@ -200,6 +200,10 @@ Vector2D& AnimatedGraphic::getPosition() {
     return position;
 }
 
+Vector2D AnimatedGraphic::getScreenPosition() {
+    return position + (isApplyScrolling() ? ScrollingWorld::getInstance()->getOffset() : Vector2D::empty());
+}
+
 Vector2D& AnimatedGraphic::getMoveVelocity() {
     return moveVelocity;
 }
@@ -245,36 +249,36 @@ int AnimatedGraphic::getCollisionRectHeight() {
     return collisionBoxHeight;
 }
 
-float AnimatedGraphic::getTop() {
-    float top = getPosition().y + getMarginTop();
-    if (!GameEngine::getInstance()->isEditMode() && ScrollingWorld::getInstance()->getMainCharacter() != this) {
-        top += offset.y;
-    }
-    return top;
+float AnimatedGraphic::getScreenPositionTop() {
+    return getScreenPosition().y + getMarginTop();
 }
 
-float AnimatedGraphic::getBottom() {
-    float bottom = getPosition().y + getHeight() - getMarginBottom();
-    if (!GameEngine::getInstance()->isEditMode() && ScrollingWorld::getInstance()->getMainCharacter() != this) {
-        bottom += offset.y;
-    }
-    return bottom;
+float AnimatedGraphic::getScreenPositionBottom() {
+    return getScreenPosition().y + getHeight() - getMarginBottom();
 }
 
-float AnimatedGraphic::getRight() {
-    float right = getPosition().x + getWidth() - getMarginRight();
-    if (!GameEngine::getInstance()->isEditMode() && ScrollingWorld::getInstance()->getMainCharacter() != this) {
-        right += offset.x;
-    }
-    return right;
+float AnimatedGraphic::getScreenPositionRight() {
+    return getScreenPosition().x + getWidth() - getMarginRight();
 }
 
-float AnimatedGraphic::getLeft() {
-    float left = getPosition().x + getMarginLeft();
-    if (!GameEngine::getInstance()->isEditMode() && ScrollingWorld::getInstance()->getMainCharacter() != this) {
-        left += offset.x;
-    }
-    return left;
+float AnimatedGraphic::getScreenPositionLeft() {
+    return getPosition().x + getMarginLeft();
+}
+
+float AnimatedGraphic::getWorldPositionTop() {
+    return getPosition().y + getMarginTop();
+}
+
+float AnimatedGraphic::getWorldPositionBottom() {
+    return getPosition().y + getHeight() - getMarginBottom();
+}
+
+float AnimatedGraphic::getWorldPositionRight() {
+    return getPosition().x + getWidth() - getMarginRight();
+}
+
+float AnimatedGraphic::getWorldPositionLeft() {
+    return getPosition().x + getMarginLeft();
 }
 
 float AnimatedGraphic::getScale() {
@@ -290,7 +294,7 @@ float AnimatedGraphic::getRotationAngle() {
 }
 
 bool AnimatedGraphic::isApplyScrolling() {
-    return applyScrolling;
+    return applyScrolling || (ScrollingWorld::getInstance()->getMainCharacter() == this && GameEngine::getInstance()->isEditMode());
 }
 
 void AnimatedGraphic::setApplyGravity(bool gravity) {
@@ -363,18 +367,21 @@ void AnimatedGraphic::animateRgbLevels(Color to, int seconds) {
 }
 
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
-    getPosition().y = otherGraphic->getTop() - (getHeight() - getMarginBottom());
+    float otherGraphicPositionTop = isApplyScrolling() ? otherGraphic->getWorldPositionTop() : otherGraphic->getScreenPositionTop();
+    getPosition().y = otherGraphicPositionTop - (getHeight() - getMarginBottom());
     resetGravityVelocity();
     interruptGravity = true;
 }
 
 void AnimatedGraphic::stayToLeftOf(AnimatedGraphic *otherGraphic) {
-    getPosition().x = otherGraphic->getLeft() - (getWidth() - getMarginRight());
+    float otherGraphicPositionLeft = isApplyScrolling() ? otherGraphic->getWorldPositionLeft() : otherGraphic->getScreenPositionLeft();
+    getPosition().x = otherGraphicPositionLeft - (getWidth() - getMarginRight());
     interruptMovementX = true;
 }
 
 void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
-    getPosition().x = otherGraphic->getRight() - getMarginLeft();
+    float otherGraphicPositionRight = isApplyScrolling() ? otherGraphic->getWorldPositionRight() : otherGraphic->getScreenPositionRight();
+    getPosition().x = otherGraphicPositionRight - getMarginLeft();
     interruptMovementX = true;
 }
 
@@ -396,9 +403,9 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
 
 void AnimatedGraphic::updateCurrentDrawableData() {
     Drawable* activeDrawable = getActiveDrawable();
-    activeDrawable->setPosition(position);
+    activeDrawable->setPosition(getScreenPosition());
     activeDrawable->setScale(scale);
-    activeDrawable->setOffset(offset);
+    activeDrawable->setApplyScrolling(applyScrolling);
     activeDrawable->setRotationAngle(angle);
     activeDrawable->setRotationPoint(getRotationPoint());
     Sprite* sprite = dynamic_cast<Sprite*>(activeDrawable);
@@ -418,7 +425,7 @@ Vector2D AnimatedGraphic::calculateNextPosition(float elapsedTime) {
         velocity.x += moveVelocity.x;
     }
     velocity.y += moveVelocity.y;
-    return getPosition() + jimp::Timing::toValueForElapsedTime(velocity, elapsedTime) + offset;
+    return getScreenPosition() + jimp::Timing::toValueForElapsedTime(velocity, elapsedTime);
 }
 
 void AnimatedGraphic::addSprite(std::string animationId, std::string filePath) {
@@ -448,14 +455,6 @@ int AnimatedGraphic::getMarginTop() {
 
 int AnimatedGraphic::getMarginBottom() {
     return marginBottom * getScale();
-}
-
-void AnimatedGraphic::setOffset(Vector2D offset) {
-    this->offset = offset;
-}
-
-Vector2D AnimatedGraphic::getOffset() {
-    return this->offset;
 }
 
 void AnimatedGraphic::addDrawable(std::string animationId, Drawable* drawable) {

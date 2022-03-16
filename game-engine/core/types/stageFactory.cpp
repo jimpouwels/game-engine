@@ -58,8 +58,8 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         animatedGraphic->setCollidable(graphic.collidable);
         if (graphic.isMainCharacter) {
             ScrollingWorld::getInstance()->setMainCharacter(animatedGraphic);
+            animatedGraphic->setApplyScrolling(false);
         }
-        animatedGraphic->setOffset(ScrollingWorld::getInstance()->getOffset());
         GameEngine::getInstance()->registerGraphic(animatedGraphic);
     } else if (dynamic_cast<PlatformMultiLayerType*>(type)) {
         PlatformMultiLayerType* animationType = dynamic_cast<PlatformMultiLayerType*>(type);
