@@ -46,53 +46,38 @@ void ScrollingWorld::doOnUpdate(float elapsedTime) {
         float bottomSideOfCamera = gameEngine->getScreenHeight() / 2;
         if (offsetX < maxScrollX && (mainCharacter->getScreenPositionRight()) >= rightSideOfCamera && mainCharacter->getVelocity().x > 0) {
             offsetDeltaX += (mainCharacter->getPosition().x + mainCharacter->getWidth() - mainCharacter->getMarginRight()) - rightSideOfCamera;
-            if (offsetX + offsetDeltaX > maxScrollX) {
-                offsetDeltaX = maxScrollX - offsetX;
-            }
             mainCharacter->getPosition().x = rightSideOfCamera - mainCharacter->getWidth() + mainCharacter->getMarginRight();
         } else if (offsetX > 0 && mainCharacter->getScreenPositionLeft() <= leftSideOfCamera && mainCharacter->getVelocity().x < 0) {
             offsetDeltaX -= leftSideOfCamera - (mainCharacter->getPosition().x + mainCharacter->getMarginLeft());
-            if (offsetX + offsetDeltaX < 0) {
-               offsetDeltaX = -offsetX;
-            }
             mainCharacter->getPosition().x = leftSideOfCamera - mainCharacter->getMarginLeft();
         }
         if (offsetY < maxScrollY && (mainCharacter->getPosition().y + mainCharacter->getHeight() - mainCharacter->getMarginBottom()) >= bottomSideOfCamera && mainCharacter->getVelocity().y > 0) {
             offsetDeltaY += (mainCharacter->getPosition().y + mainCharacter->getHeight() - mainCharacter->getMarginBottom()) - bottomSideOfCamera;
-            if (offsetY + offsetDeltaY > maxScrollY) {
-                offsetDeltaY = maxScrollY - offsetY;
-            }
             mainCharacter->getPosition().y = bottomSideOfCamera - mainCharacter->getHeight() + mainCharacter->getMarginBottom();
-            
         } else if (offsetY > 0 && (mainCharacter->getPosition().y + mainCharacter->getMarginTop() <= topSideOfCamera) && mainCharacter->getVelocity().y < 0) {
             offsetDeltaY -= topSideOfCamera - (mainCharacter->getPosition().y + mainCharacter->getMarginTop());
-            if (offsetY + offsetDeltaY < 0) {
-                offsetDeltaY = -offsetY;
-            }
             mainCharacter->getPosition().y = topSideOfCamera - mainCharacter->getMarginTop();
         }
     } else {
         if (editCameraRight) {
             offsetDeltaX += Timing::toValueForElapsedTime(1000, elapsedTime);
-            if (offsetX + offsetDeltaX > maxScrollX) {
-                offsetDeltaX = maxScrollX - offsetX;
-            }
         } else if (editCameraLeft) {
             offsetDeltaX -= Timing::toValueForElapsedTime(1000, elapsedTime);
-            if (offsetX + offsetDeltaX < 0) {
-               offsetDeltaX = -offsetX;
-            }
         } else if (editCameraDown) {
             offsetDeltaY += Timing::toValueForElapsedTime(1000, elapsedTime);
-            if (offsetY + offsetDeltaY > maxScrollY) {
-                offsetDeltaY = maxScrollY - offsetY;
-            }
         } else if (editCameraUp) {
             offsetDeltaY -= Timing::toValueForElapsedTime(1000, elapsedTime);
-            if (offsetY + offsetDeltaY < 0) {
-                offsetDeltaY = -offsetY;
-            }
         }
+    }
+    
+    if (offsetX + offsetDeltaX > maxScrollX) {
+        offsetDeltaX = maxScrollX - offsetX;
+    } else if (offsetX + offsetDeltaX < 0) {
+        offsetDeltaX = -offsetX;
+    } else if (offsetY + offsetDeltaY > maxScrollY) {
+        offsetDeltaY = maxScrollY - offsetY;
+    } else if (offsetY + offsetDeltaY < 0) {
+        offsetDeltaY = -offsetY;
     }
     
     offsetX = abs(offsetX + offsetDeltaX);
