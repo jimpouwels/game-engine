@@ -114,10 +114,10 @@ bool AnimatedGraphic::canCollideWith(AnimatedGraphic *otherGraphic, float elapse
     float otherGraphicNextLeft = otherGraphicNextPosition.x + otherGraphic->getMarginLeft();
     float otherGraphicNextRight = otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight();
     
-    if ((getScreenPositionRight() < otherGraphic->getScreenPositionLeft() && currentGraphicNextRight < otherGraphicNextLeft) ||
-        (getScreenPositionLeft() > otherGraphic->getScreenPositionRight() && currentGraphicNextLeft > otherGraphicNextRight) ||
-        (getScreenPositionBottom() < otherGraphic->getScreenPositionTop() && currentGraphicNextBottom < otherGraphicNextTop) ||
-        (getScreenPositionTop() > otherGraphic->getScreenPositionBottom() && currentGraphicNextTop > otherGraphicNextBottom)) {
+    if (MathUtils::smallerOrEquals(getScreenPositionRight(), otherGraphic->getScreenPositionLeft() && currentGraphicNextRight < otherGraphicNextLeft) ||
+        MathUtils::largerOrEquals(getScreenPositionLeft(), otherGraphic->getScreenPositionRight() && currentGraphicNextLeft > otherGraphicNextRight) ||
+        MathUtils::smallerOrEquals(getScreenPositionBottom(), otherGraphic->getScreenPositionTop() && currentGraphicNextBottom < otherGraphicNextTop) ||
+        MathUtils::largerOrEquals(getScreenPositionTop(), otherGraphic->getScreenPositionBottom() && currentGraphicNextTop > otherGraphicNextBottom)) {
         return false;
     }
     return true;

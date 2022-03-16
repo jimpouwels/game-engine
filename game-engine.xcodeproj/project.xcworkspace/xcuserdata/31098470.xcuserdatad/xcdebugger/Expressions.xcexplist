@@ -52,6 +52,17 @@
          contextName = "jimp::AnimatedGraphic::getActiveDrawable():animatedGraphic.cpp">
       </ContextState>
       <ContextState
+         contextName = "jimp::AnimatedGraphic::stayToLeftOf(jimp::AnimatedGraphic*):animatedGraphic.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "otherGraphic-&gt;getScreenPosition().y">
+            </PersistentString>
+            <PersistentString
+               value = "getScreenPosition().y">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "mario::ScrollingWorld::doOnUpdate():scrollingWorld.cpp">
          <PersistentStrings>
             <PersistentString
@@ -149,6 +160,23 @@
             </PersistentString>
             <PersistentString
                value = "isAtLeftEdgeOfScreen()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "jimp::AnimatedGraphic::canCollideWith(jimp::AnimatedGraphic*, float):animatedGraphic.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "otherGraphic-&gt;getScreenPositionTop()">
+            </PersistentString>
+            <PersistentString
+               value = "currentGraphicNextBottom">
+            </PersistentString>
+            <PersistentString
+               value = "getScreenPositionBottom()">
+            </PersistentString>
+            <PersistentString
+               value = "otherGraphicNextTop">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

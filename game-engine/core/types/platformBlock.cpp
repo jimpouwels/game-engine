@@ -21,7 +21,7 @@ void PlatformBlock::doOnUpdate(float elapsedTime) {
 }
 
 void PlatformBlock::doOnFrame(float elapsedTime) {
-//    jimp::GameEngine::getInstance()->drawRectangle(getCollisionRectWidth(), getCollisionRectHeight(), jimp::Vector2D { .x = getPosition().x + getMarginLeft(), .y = getPosition().y + getMarginTop() }, 0xFFFFFF);
+//    jimp::GameEngine::getInstance()->drawRectangle(getCollisionRectWidth(), getCollisionRectHeight(), jimp::Vector2D { .x = getScreenPosition().x + getMarginLeft(), .y = getScreenPosition().y + getMarginTop() }, 0xFFFFFF);
 }
     
 }
