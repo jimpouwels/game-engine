@@ -96,6 +96,21 @@ bool GameEngine::isEditMode() {
 
 void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     window->clear(sf::Color((backgroundColor << 8) + 0xFF));
+    
+    std::string statusText = "";
+    if (isEditMode() && reloadThread != nullptr) {
+        statusText = "Reloading...";
+    } else if (isEditMode()) {
+        statusText = "[Edit Mode]";
+    }
+    sf::Font font;
+    font.loadFromFile("arial.ttf");
+    sf::Text text = sf::Text();
+    text.setFont(font);
+    text.setString(statusText);
+    text.setPosition(10, 10);
+    window->draw(text);
+    
     onFrame(elapsedTimeSincePreviousFrame);
     
     scrollingWorld->doOnFrame();
