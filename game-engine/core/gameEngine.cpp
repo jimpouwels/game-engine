@@ -29,6 +29,7 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravit
     window = new sf::RenderWindow(sf::VideoMode(this->getScreenWidth(), this->getScreenHeight()), windowTitle);
     this->previousFrameTime = std::chrono::system_clock::now();
     keyboardHandler = new jimp::KeyboardHandler();
+    reloadLock = new std::mutex();
     new ScrollingWorld(10000, 3000);
 }
 
@@ -49,9 +50,15 @@ GameEngine::~GameEngine() {
 }
 
 void GameEngine::reloadCurrentStage() {
-    if (currentStage != "" && isEditMode()) {
-        loadStage(currentStage);
+    if (reloadThread != nullptr) {
+        std::cout << "already reloading" << std::endl;
+        return;
     }
+    reloadLock->lock();
+    if (currentStage != "" && isEditMode()) {
+        reloadThread = new std::thread(&GameEngine::loadStage, this, currentStage);
+    }
+    reloadLock->unlock();
 }
 
 GameEngine* GameEngine::getInstance() {
@@ -92,6 +99,7 @@ void GameEngine::loadStage(std::string filePath) {
     stageFactory->loadStage(filePath);
     currentStage = filePath;
     updateThread->unpause();
+    reloadThread = nullptr;
 }
 
 bool GameEngine::isEditMode() {

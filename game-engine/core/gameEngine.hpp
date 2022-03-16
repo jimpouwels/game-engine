@@ -26,6 +26,8 @@ private:
     uint32_t backgroundColor;
     int16_t frameRate;
     bool editMode = false;
+    std::thread* reloadThread = nullptr;
+    std::mutex* reloadLock = nullptr;
     std::string currentStage = "";
     StageFactory* stageFactory = nullptr;
     GameEngine* gameEngine = nullptr;
