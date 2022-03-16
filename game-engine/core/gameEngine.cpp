@@ -94,6 +94,22 @@ bool GameEngine::isEditMode() {
     return editMode;
 }
 
+void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
+    window->clear(sf::Color((backgroundColor << 8) + 0xFF));
+    onFrame(elapsedTimeSincePreviousFrame);
+    
+    scrollingWorld->doOnFrame();
+    updateThread->lockDeletionOfGraphics();
+    for (const auto& graphic: *updateThread->getAllGraphics()) {
+        if (!graphic->isMarkedForDeletion()) {
+            graphic->onFrame(elapsedTimeSincePreviousFrame);
+            draw(graphic->getActiveDrawable());
+        }
+    }
+    updateThread->unlockDeletionOfGraphics();
+    window->display();
+}
+
 void GameEngine::draw(Drawable* drawable) {
     if (!drawable->isPositionedWithinScreen()) {
         return;
@@ -229,22 +245,6 @@ void GameEngine::reloadCurrentStage() {
         reloadThread = new std::thread(&GameEngine::loadStage, this, currentStage);
     }
     reloadLock->unlock();
-}
-
-void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
-    window->clear(sf::Color((backgroundColor << 8) + 0xFF));
-    onFrame(elapsedTimeSincePreviousFrame);
-    
-    scrollingWorld->doOnFrame();
-    updateThread->lockDeletionOfGraphics();
-    for (const auto& graphic: *updateThread->getAllGraphics()) {
-        if (!graphic->isMarkedForDeletion()) {
-            graphic->onFrame(elapsedTimeSincePreviousFrame);
-            draw(graphic->getActiveDrawable());
-        }
-    }
-    updateThread->unlockDeletionOfGraphics();
-    window->display();
 }
 
 float GameEngine::measureFps(std::chrono::time_point<std::chrono::system_clock>& currentTime) {
