@@ -49,17 +49,6 @@ GameEngine::~GameEngine() {
     delete soundCache;
 }
 
-void GameEngine::reloadCurrentStage() {
-    if (reloadThread != nullptr) {
-        return;
-    }
-    reloadLock->lock();
-    if (currentStage != "" && isEditMode()) {
-        reloadThread = new std::thread(&GameEngine::loadStage, this, currentStage);
-    }
-    reloadLock->unlock();
-}
-
 GameEngine* GameEngine::getInstance() {
     return instance;
 }
@@ -229,6 +218,17 @@ std::vector<AnimatedGraphic*>* GameEngine::getAllGraphics() {
 
 void GameEngine::setBackgroundColor(uint32_t color) {
     backgroundColor = color;
+}
+
+void GameEngine::reloadCurrentStage() {
+    if (reloadThread != nullptr) {
+        return;
+    }
+    reloadLock->lock();
+    if (currentStage != "" && isEditMode()) {
+        reloadThread = new std::thread(&GameEngine::loadStage, this, currentStage);
+    }
+    reloadLock->unlock();
 }
 
 void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
