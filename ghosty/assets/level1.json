@@ -1,5 +1,20 @@
 {
 	"graphics": [
+        {
+            "description": "main character",
+            "type": "ghosty",
+            "position": {
+                "x": 500,
+                "y": 200
+            },
+            "scale": 0.5,
+            "applyGravity": true,
+            "rotationAngle": 0.0,
+            "applyScrolling": false,
+            "isMainCharacter": true,
+            "zIndex": 0,
+            "collidable": true
+        },
 		{
             "description": "big platform on left",
 			"type": "ghosty-platform-multi-layer",
@@ -70,6 +85,20 @@
             "zIndex": 2
         },
         {
+            "description": "blue flower on first big platform",
+            "type": "ghosty-blue-flower",
+            "position": {
+                "x": 965,
+                "y": 2350
+            },
+            "scale": 0.5,
+            "collidable": false,
+            "applyGravity": false,
+            "rotationAngle": 90,
+            "applyScrolling": true,
+            "zIndex": 2
+        },
+        {
             "description": "small rock on second platform",
             "type": "ghosty-rock",
             "position": {
@@ -82,21 +111,6 @@
             "rotationAngle": 0,
             "applyScrolling": true,
             "zIndex": 2
-        },
-        {
-            "description": "main character",
-            "type": "ghosty",
-            "position": {
-                "x": 500,
-                "y": 200
-            },
-            "scale": 0.5,
-            "applyGravity": true,
-            "rotationAngle": 0.0,
-            "applyScrolling": false,
-            "isMainCharacter": true,
-            "zIndex": 0,
-            "collidable": true
         }
 	]
 }
