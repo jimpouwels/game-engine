@@ -123,10 +123,6 @@ void StageFactory::manageThreads() {
     }
     threadManagerStopped = true;
 }
-     
-bool StageFactory::isLoadingSprites() {
-    return loadingSprites;
-}
 
 Type* StageFactory::getTypeFor(std::string typeName) {
     for (const auto& type : *types) {

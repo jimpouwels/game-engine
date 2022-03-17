@@ -32,7 +32,6 @@ public:
     ~StageFactory();
     void loadStage(std::string filePath);
     void manageThreads();
-    bool isLoadingSprites();
     void stopProcessing();
     
 };
