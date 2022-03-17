@@ -45,7 +45,8 @@ private:
     bool deleteOnLeaveScreen = false;
     Vector2D moveVelocity = Vector2D::empty();
     Vector2D gravityVelocity = Vector2D::empty();
-    std::mutex* lock = new std::mutex();
+    std::mutex* processingLock = new std::mutex();
+    std::mutex* deleteLock = new std::mutex();
     float elapsedTimeSinceLastSwap;
     float drawableSwapIntervalInSeconds;
     void animateRgb(float elapsedTime);
@@ -107,6 +108,8 @@ public:
     float getWorldPositionRight();
     float getRotationAngle();
     bool isCollidable();
+    void lockForDeletion();
+    void unlockForDeletion();
     bool canCollideWith(AnimatedGraphic* otherGraphic, float elapsedTime);
     void drawInversedHorizontally(bool inverse);
     void setCollidable(bool collidable);

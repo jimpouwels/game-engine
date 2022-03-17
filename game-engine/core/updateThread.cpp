@@ -185,6 +185,7 @@ void UpdateThread::removeAllGraphics() {
 void UpdateThread::onGraphicDeleted(AnimatedGraphic* graphic) {
     onGraphicDeletedCallback(graphic);
     registeredGraphics->erase(std::remove(registeredGraphics->begin(), registeredGraphics->end(), graphic), registeredGraphics->end());
+    graphic->lockForDeletion();
     delete graphic;
 }
 

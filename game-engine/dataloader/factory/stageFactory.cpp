@@ -14,9 +14,16 @@ namespace jimp {
 StageFactory::StageFactory(std::string typesFilePath) {
     dataLoader = new DataLoader(typesFilePath);
     this->types = dataLoader->loadTypes();
+    this->loadThreads = new std::list<std::thread*>();
+    this->threadManager = new std::thread(&StageFactory::manageThreads, this);
 }
 
 StageFactory::~StageFactory() {
+    lockForDeletion();
+    stopProcessing();
+    unlockForDeletion();
+    threadManager->join();
+    delete threadManager;
     delete dataLoader;
     for (const auto& type : *types) {
         delete type;
@@ -24,9 +31,18 @@ StageFactory::~StageFactory() {
     delete types;
 }
 
+void StageFactory::stopProcessing() {
+    stop = true;
+    while (!manageThreadsStopped) {
+    }
+}
+
 void StageFactory::loadStage(std::string filePath) {
     std::list<Graphic> graphics = dataLoader->loadGraphics(filePath);
     for (const auto& graphic : graphics) {
+        if (stop) {
+            return;
+        }
         createAnimatedGraphicFrom(graphic);
     }
 }
@@ -53,11 +69,7 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
             ScrollingWorld::getInstance()->setMainCharacter(animatedGraphic);
             animatedGraphic->setApplyScrolling(false);
         }
-        for (const auto& subAnimation : animationType->subAnimations) {
-            for (int i = 0; i < subAnimation->spriteCount; i++) {
-                animatedGraphic->addSprite(subAnimation->name, std::regex_replace(subAnimation->filePath, std::regex("\\{i\\}"), std::to_string(i)));
-            }
-        }
+        loadThreads->push_back(new std::thread(&StageFactory::addSpritesToGraphic, this, animatedGraphic, animationType));
         GameEngine::getInstance()->registerGraphic(animatedGraphic);
     } else if (dynamic_cast<PlatformMultiLayerType*>(type)) {
         PlatformMultiLayerType* animationType = dynamic_cast<PlatformMultiLayerType*>(type);
@@ -82,6 +94,48 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         builder.setZIndex(graphic.zIndex);
         builder.render();
     }
+}
+
+void StageFactory::addSpritesToGraphic(jimp::AnimatedGraphic *animatedGraphic, jimp::AnimationType *animationType) {
+    animatedGraphic->lockForDeletion();
+    for (const auto& subAnimation : animationType->subAnimations) {
+        for (int i = 0; i < subAnimation->spriteCount; i++) {
+            if (stop) {
+                return;
+            }
+            animatedGraphic->addSprite(subAnimation->name, std::regex_replace(subAnimation->filePath, std::regex("\\{i\\}"), std::to_string(i)));
+        }
+    }
+    animatedGraphic->unlockForDeletion();
+}
+
+void StageFactory::manageThreads() {
+    while (!stop || loadThreads->size() > 0) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+        loadingSprites = loadThreads->size() > 0;
+        std::list<std::thread*> threadsToDelete = std::list<std::thread*>();
+        for (const auto& thread : *loadThreads) {
+            thread->join();
+            threadsToDelete.push_back(thread);
+        }
+        for (const auto& threadToDelete : threadsToDelete) {
+            loadThreads->remove(threadToDelete);
+            delete threadToDelete;
+        }
+    }
+    manageThreadsStopped = true;
+}
+
+void StageFactory::lockForDeletion() {
+    deleteMutex->lock();
+}
+
+void StageFactory::unlockForDeletion() {
+    deleteMutex->unlock();
+}
+     
+bool StageFactory::isLoadingSprites() {
+    return loadingSprites;
 }
 
 Type* StageFactory::getTypeFor(std::string typeName) {

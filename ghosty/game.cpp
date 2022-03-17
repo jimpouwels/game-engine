@@ -11,9 +11,10 @@ namespace ghosty {
 class GhostyGame : public jimp::GameEngine {
     
 private:
+    GhostyStageFactory* stageFactory = nullptr;
     
 public:
-    GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000, false) {
+    GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000, true) {
         setBackgroundColor(0x3ba7b3);
  
 //        jimp::Vector2D flowerPosition = jimp::Vector2D::from(platform->getPosition().x + platform->getWidth() - 40, platform->getPosition().y + platform->getHeight() / 2 - 256);
@@ -40,8 +41,13 @@ public:
 //        Decoration* hill = new Decoration(jimp::Vector2D::from(-250, platform->getPosition().y + 300), "hill.png", 1, 0, 0.8F, 1);
     }
     
+    ~GhostyGame() {
+        delete stageFactory;
+    }
+    
     jimp::StageFactory* getStageFactory() override {
-        return new GhostyStageFactory("/Users/31098470/Projects/Personal/game-engine/ghosty/assets/types.json");
+        stageFactory = new GhostyStageFactory("/Users/31098470/Projects/Personal/game-engine/ghosty/assets/types.json");
+        return stageFactory;
     }
     
     void startGame() {

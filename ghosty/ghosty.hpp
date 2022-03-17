@@ -9,7 +9,7 @@ namespace ghosty {
 class Ghosty : public jimp::AnimatedGraphic {
   
 private:
-    bool isJumping;
+    bool isJumping = false;
     
 public:
     Ghosty();

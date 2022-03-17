@@ -954,8 +954,8 @@
 			isa = PBXGroup;
 			children = (
 				23A933B127864EA700769F69 /* gameEngine.cpp */,
-				239F327927CF8293007D4E2C /* scrollingWorld.cpp */,
 				23D5C7C427832B5600C6C916 /* gameEngine.hpp */,
+				239F327927CF8293007D4E2C /* scrollingWorld.cpp */,
 				239F327A27CF8293007D4E2C /* scrollingWorld.hpp */,
 				235A527827B00C760008A8A0 /* spriteCache.hpp */,
 				230D483C27B9177A001F6494 /* updateThread.cpp */,

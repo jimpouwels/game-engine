@@ -30,10 +30,13 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravit
     this->previousFrameTime = std::chrono::system_clock::now();
     keyboardHandler = new jimp::KeyboardHandler();
     reloadLock = new std::mutex();
+    reloadThread = new std::thread(&GameEngine::handleReloadStageRequest, this);
     new ScrollingWorld(10000, 3000);
 }
 
 GameEngine::~GameEngine() {
+    reloadThread->join();
+    delete reloadThread;
     delete updateThread;
     delete window;
     delete keyboardHandler;
@@ -87,7 +90,6 @@ void GameEngine::loadStage(std::string filePath) {
     stageFactory->loadStage(filePath);
     currentStage = filePath;
     updateThread->unpause();
-    reloadThread = nullptr;
 }
 
 bool GameEngine::isEditMode() {
@@ -98,7 +100,7 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     window->clear(sf::Color((backgroundColor << 8) + 0xFF));
     
     std::string statusText = "";
-    if (isEditMode() && reloadThread != nullptr) {
+    if (isEditMode() && reloadingStage) {
         statusText = "Reloading...";
     } else if (isEditMode()) {
         statusText = "[Edit Mode]";
@@ -126,7 +128,7 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
 }
 
 void GameEngine::draw(Drawable* drawable) {
-    if (!drawable->isPositionedWithinScreen()) {
+    if (drawable == nullptr || !drawable->isPositionedWithinScreen()) {
         return;
     }
     if (dynamic_cast<Sprite*>(drawable) != nullptr) {
@@ -251,15 +253,28 @@ void GameEngine::setBackgroundColor(uint32_t color) {
     backgroundColor = color;
 }
 
+bool GameEngine::isReloadingStage() {
+    return reloadingStage || stageFactory->isLoadingSprites();
+}
+
 void GameEngine::reloadCurrentStage() {
-    if (reloadThread != nullptr) {
-        return;
+    reloadRequested = true;
+}
+
+void GameEngine::handleReloadStageRequest() {
+    while (window->isOpen()) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+        reloadLock->lock();
+        if (reloadRequested && !reloadingStage) {
+            stageFactory->lockForDeletion();
+            reloadingStage = true;
+            loadStage(currentStage);
+            reloadingStage = false;
+            stageFactory->unlockForDeletion();
+        }
+        reloadLock->unlock();
+        reloadRequested = false;
     }
-    reloadLock->lock();
-    if (currentStage != "" && isEditMode()) {
-        reloadThread = new std::thread(&GameEngine::loadStage, this, currentStage);
-    }
-    reloadLock->unlock();
 }
 
 float GameEngine::measureFps(std::chrono::time_point<std::chrono::system_clock>& currentTime) {

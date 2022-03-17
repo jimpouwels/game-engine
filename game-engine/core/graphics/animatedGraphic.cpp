@@ -21,17 +21,17 @@ AnimatedGraphic::~AnimatedGraphic() {
         delete animation;
     }
     delete animationMap;
-    delete lock;
+    delete processingLock;
 }
 
 void AnimatedGraphic::onFrame(float elapsedTime) {
-    lock->lock();
+    processingLock->lock();
     doOnFrame(elapsedTime);
-    lock->unlock();
+    processingLock->unlock();
 }
 
 void AnimatedGraphic::onUpdate(float elapsedTime) {
-    lock->lock();
+    processingLock->lock();
     if (deleteOnLeaveScreen && !isPositionedWithinScreen()) {
         markForDeletion();
     } else {
@@ -40,7 +40,7 @@ void AnimatedGraphic::onUpdate(float elapsedTime) {
         this->updateAnimation(elapsedTime);
     }
     animateRgb(elapsedTime);
-    lock->unlock();
+    processingLock->unlock();
 }
 
 void AnimatedGraphic::animateRgb(float elapsedTime) {
@@ -79,6 +79,9 @@ Vector2D AnimatedGraphic::getRotationPoint() {
 }
 
 Drawable* AnimatedGraphic::getActiveDrawable() {
+    if (activeAnimation == nullptr) {
+        return nullptr;
+    }
     return activeAnimation->getActiveDrawable();
 }
 
@@ -102,6 +105,9 @@ uint16_t AnimatedGraphic::getZIndex() {
 }
 
 bool AnimatedGraphic::canCollideWith(AnimatedGraphic *otherGraphic, float elapsedTime) {
+    if (getActiveDrawable() == nullptr || otherGraphic->getActiveDrawable() == nullptr) {
+        return false;
+    }
     Vector2D currentGraphicNextPosition = calculateNextPosition(elapsedTime);
     float currentGraphicNextTop = currentGraphicNextPosition.y + getMarginTop();
     float currentGraphicNextBottom = currentGraphicNextPosition.y + getHeight() - getMarginBottom();
@@ -162,7 +168,9 @@ bool AnimatedGraphic::isPositionedWithinScreen() {
 void AnimatedGraphic::updateAnimation(float elapsedTime) {
     elapsedTimeSinceLastSwap += elapsedTime;
     if (drawableSwapIntervalInSeconds >= 0 && elapsedTimeSinceLastSwap >= drawableSwapIntervalInSeconds) {
-        activeAnimation->switchToNextDrawable();
+        if (activeAnimation != nullptr) {
+            activeAnimation->switchToNextDrawable();
+        }
         elapsedTimeSinceLastSwap = 0;
     }
     updateCurrentDrawableData();
@@ -403,6 +411,9 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
 
 void AnimatedGraphic::updateCurrentDrawableData() {
     Drawable* activeDrawable = getActiveDrawable();
+    if (activeDrawable == nullptr) {
+        return;
+    }
     activeDrawable->setPosition(getScreenPosition());
     activeDrawable->setScale(scale);
     activeDrawable->setRotationAngle(angle);
@@ -454,6 +465,14 @@ int AnimatedGraphic::getMarginTop() {
 
 int AnimatedGraphic::getMarginBottom() {
     return marginBottom * getScale();
+}
+
+void AnimatedGraphic::lockForDeletion() {
+    deleteLock->lock();
+}
+
+void AnimatedGraphic::unlockForDeletion() {
+    deleteLock->unlock();
 }
 
 void AnimatedGraphic::addDrawable(std::string animationId, Drawable* drawable) {
