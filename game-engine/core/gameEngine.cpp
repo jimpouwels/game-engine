@@ -259,7 +259,7 @@ void GameEngine::reloadCurrentStage() {
 }
 
 void GameEngine::handleReloadStageRequest() {
-    while (window->isOpen()) {
+    while (window->isOpen() && isEditMode()) {
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
         if (reloadLock->try_lock()) {
             if (reloadRequested && !reloadingStage) {
