@@ -13,7 +13,7 @@ class StageFactory {
 private:
     bool stageLoadInterrupted = false;
     bool threadManagerStopped = false;
-    std::list<std::thread*>* loadThreads;
+    std::list<std::thread*>* spriteLoaderThreads;
     std::thread* threadManager;
     std::list<Type*>* types = nullptr;
     DataLoader* dataLoader = nullptr;
@@ -30,7 +30,7 @@ public:
     StageFactory(std::string typesFilePath);
     ~StageFactory();
     void loadStage(std::string filePath);
-    void manageThreads();
+    void manageSpriteLoaderThreads();
     void stopProcessing();
     
 };

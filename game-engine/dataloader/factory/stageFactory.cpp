@@ -14,8 +14,8 @@ namespace jimp {
 StageFactory::StageFactory(std::string typesFilePath) {
     dataLoader = new DataLoader(typesFilePath);
     this->types = dataLoader->loadTypes();
-    this->loadThreads = new std::list<std::thread*>();
-    this->threadManager = new std::thread(&StageFactory::manageThreads, this);
+    this->spriteLoaderThreads = new std::list<std::thread*>();
+    this->threadManager = new std::thread(&StageFactory::manageSpriteLoaderThreads, this);
 }
 
 StageFactory::~StageFactory() {
@@ -26,7 +26,7 @@ StageFactory::~StageFactory() {
         delete type;
     }
     delete types;
-    delete loadThreads;
+    delete spriteLoaderThreads;
 }
 
 void StageFactory::stopProcessing() {
@@ -67,7 +67,7 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
             ScrollingWorld::getInstance()->setMainCharacter(animatedGraphic);
             animatedGraphic->setApplyScrolling(false);
         }
-        loadThreads->push_back(new std::thread(&StageFactory::addSpritesToGraphic, this, animatedGraphic, animationType));
+        spriteLoaderThreads->push_back(new std::thread(&StageFactory::addSpritesToGraphic, this, animatedGraphic, animationType));
         GameEngine::getInstance()->registerGraphic(animatedGraphic);
     } else if (dynamic_cast<PlatformMultiLayerType*>(type)) {
         PlatformMultiLayerType* animationType = dynamic_cast<PlatformMultiLayerType*>(type);
@@ -107,16 +107,16 @@ void StageFactory::addSpritesToGraphic(jimp::AnimatedGraphic *animatedGraphic, j
     animatedGraphic->unlockForDeletion();
 }
 
-void StageFactory::manageThreads() {
-    while (!stageLoadInterrupted || loadThreads->size() > 0) {
+void StageFactory::manageSpriteLoaderThreads() {
+    while (!stageLoadInterrupted || spriteLoaderThreads->size() > 0) {
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
         std::list<std::thread*> threadsToDelete = std::list<std::thread*>();
-        for (const auto& thread : *loadThreads) {
+        for (const auto& thread : *spriteLoaderThreads) {
             thread->join();
             threadsToDelete.push_back(thread);
         }
         for (const auto& threadToDelete : threadsToDelete) {
-            loadThreads->remove(threadToDelete);
+            spriteLoaderThreads->remove(threadToDelete);
             delete threadToDelete;
         }
     }
