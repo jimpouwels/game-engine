@@ -114,14 +114,12 @@ UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::fun
 }
 
 UpdateThread::~UpdateThread() {
-    stop();
-    for (const auto& sprite: *registeredGraphics) {
-        delete sprite;
-    }
+    removeAllGraphics();
     delete registeredGraphics;
     updateThread->join();
     delete updateThread;
     delete processingLock;
+    delete graphicsDeletionLock;
 }
 
 void UpdateThread::start() {

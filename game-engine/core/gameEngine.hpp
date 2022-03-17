@@ -25,6 +25,7 @@ private:
     uint16_t screenHeight;
     uint32_t backgroundColor;
     int16_t frameRate;
+    bool stopped = false;
     bool editMode = false;
     bool reloadRequested = false;
     bool reloadingStage = false;
@@ -85,6 +86,7 @@ public:
     void drawRectangle(float width, float height, Vector2D position, uint32_t color);
     float getGravityForce();
     bool isEditMode();
+    bool isStopped();
     void loadStage(std::string filePath);
     std::vector<AnimatedGraphic*>* getAllGraphics();
     Image* registerImage(Image* image);

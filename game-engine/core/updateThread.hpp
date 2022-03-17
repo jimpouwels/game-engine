@@ -16,13 +16,13 @@ private:
     std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback;
     std::vector<AnimatedGraphic*>* registeredGraphics = nullptr;
     std::list<AnimatedGraphic*>* newGraphics = nullptr;
-    void stop();
     void onUpdate(float elapsedTime);
     void onGraphicDeleted(AnimatedGraphic* graphic);
     
 public:
     UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback);
     ~UpdateThread();
+    void stop();
     void start();
     void pause();
     void unpause();

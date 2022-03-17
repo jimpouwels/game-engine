@@ -22,6 +22,7 @@ AnimatedGraphic::~AnimatedGraphic() {
     }
     delete animationMap;
     delete processingLock;
+    delete deleteLock;
 }
 
 void AnimatedGraphic::onFrame(float elapsedTime) {
@@ -86,6 +87,10 @@ Drawable* AnimatedGraphic::getActiveDrawable() {
 }
 
 void AnimatedGraphic::setCurrentAnimation(std::string animationId) {
+    if (activeAnimation != nullptr) {
+        std::cout << "Cannot switch to animation '" << animationId << "' because there is no active animation yet" << std::endl;
+        return;
+    }
     if (activeAnimation->getId().compare(animationId) != 0) {
         activeAnimation = animationMap->find(animationId)->second;
         updateCurrentDrawableData();
@@ -93,6 +98,9 @@ void AnimatedGraphic::setCurrentAnimation(std::string animationId) {
 }
 
 std::string AnimatedGraphic::getCurrentAnimationId() {
+    if (activeAnimation == nullptr) {
+        return "";
+    }
     return activeAnimation->getId();
 }
 

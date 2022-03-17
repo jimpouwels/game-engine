@@ -37,6 +37,7 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravit
 GameEngine::~GameEngine() {
     reloadThread->join();
     delete reloadThread;
+    updateThread->stop();
     delete updateThread;
     delete window;
     delete keyboardHandler;
@@ -78,9 +79,14 @@ void GameEngine::start() {
         
         window->setTitle(windowTitle + " FPS: " + std::to_string(measureFps(currentTime)));
     }
+    stopped = true;
     stageFactory->stopProcessing();
     reloadLock->lock();
     window->close();
+}
+
+bool GameEngine::isStopped() {
+    return stopped;
 }
 
 void GameEngine::loadStage(std::string filePath) {

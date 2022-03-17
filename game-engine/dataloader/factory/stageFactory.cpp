@@ -106,13 +106,15 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
 
 void StageFactory::addSpritesToGraphic(jimp::AnimatedGraphic *animatedGraphic, jimp::AnimationType *animationType) {
     animatedGraphic->lockForDeletion();
-    for (const auto& subAnimation : animationType->subAnimations) {
-        for (int i = 0; i < subAnimation->spriteCount; i++) {
-            if (stageLoadInterrupted) {
-                animatedGraphic->unlockForDeletion();
-                return;
+    if (!GameEngine::getInstance()->isStopped()) {
+        for (const auto& subAnimation : animationType->subAnimations) {
+            for (int i = 0; i < subAnimation->spriteCount; i++) {
+                if (stageLoadInterrupted) {
+                    animatedGraphic->unlockForDeletion();
+                    return;
+                }
+                animatedGraphic->addSprite(subAnimation->name, std::regex_replace(subAnimation->filePath, std::regex("\\{i\\}"), std::to_string(i)));
             }
-            animatedGraphic->addSprite(subAnimation->name, std::regex_replace(subAnimation->filePath, std::regex("\\{i\\}"), std::to_string(i)));
         }
     }
     animatedGraphic->unlockForDeletion();
