@@ -264,6 +264,7 @@ void GameEngine::handleReloadStageRequest() {
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
         if (reloadLock->try_lock()) {
             if (reloadRequested && !reloadingStage) {
+                stageFactory->stopCurrentLoadingAction();
                 reloadingStage = true;
                 loadStage(currentStage);
                 reloadingStage = false;

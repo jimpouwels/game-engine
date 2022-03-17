@@ -30,12 +30,21 @@ StageFactory::~StageFactory() {
 }
 
 void StageFactory::stopProcessing() {
-    stageLoadInterrupted = true;
+    stageLoadStopped = true;
+    stopCurrentLoadingAction();
     while (!threadManagerStopped) {
     }
 }
 
+void StageFactory::stopCurrentLoadingAction() {
+    stageLoadInterrupted = true;
+    while (spriteLoaderThreads->size() > 0) {
+    }
+    stageLoadInterrupted = false;
+}
+
 void StageFactory::loadStage(std::string filePath) {
+    stopCurrentLoadingAction();
     std::list<Graphic> graphics = dataLoader->loadGraphics(filePath);
     for (const auto& graphic : graphics) {
         if (stageLoadInterrupted) {
@@ -63,6 +72,7 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         animatedGraphic->setSpriteSwapInterval(type->spriteSwapInterval);
         animatedGraphic->setZIndex(graphic.zIndex);
         animatedGraphic->setCollidable(graphic.collidable);
+        animatedGraphic->setName(graphic.description);
         if (graphic.isMainCharacter) {
             ScrollingWorld::getInstance()->setMainCharacter(animatedGraphic);
             animatedGraphic->setApplyScrolling(false);
@@ -99,6 +109,7 @@ void StageFactory::addSpritesToGraphic(jimp::AnimatedGraphic *animatedGraphic, j
     for (const auto& subAnimation : animationType->subAnimations) {
         for (int i = 0; i < subAnimation->spriteCount; i++) {
             if (stageLoadInterrupted) {
+                animatedGraphic->unlockForDeletion();
                 return;
             }
             animatedGraphic->addSprite(subAnimation->name, std::regex_replace(subAnimation->filePath, std::regex("\\{i\\}"), std::to_string(i)));
@@ -108,7 +119,7 @@ void StageFactory::addSpritesToGraphic(jimp::AnimatedGraphic *animatedGraphic, j
 }
 
 void StageFactory::manageSpriteLoaderThreads() {
-    while (!stageLoadInterrupted || spriteLoaderThreads->size() > 0) {
+    while (!stageLoadStopped || spriteLoaderThreads->size() > 0) {
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
         std::list<std::thread*> threadsToDelete = std::list<std::thread*>();
         for (const auto& thread : *spriteLoaderThreads) {

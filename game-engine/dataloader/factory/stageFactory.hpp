@@ -12,6 +12,7 @@ class StageFactory {
   
 private:
     bool stageLoadInterrupted = false;
+    bool stageLoadStopped = false;
     bool threadManagerStopped = false;
     std::list<std::thread*>* spriteLoaderThreads;
     std::thread* threadManager;
@@ -32,6 +33,7 @@ public:
     void loadStage(std::string filePath);
     void manageSpriteLoaderThreads();
     void stopProcessing();
+    void stopCurrentLoadingAction();
     
 };
 

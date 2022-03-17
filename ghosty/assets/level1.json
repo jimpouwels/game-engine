@@ -1,7 +1,7 @@
 {
 	"graphics": [
         {
-            "description": "main character",
+            "description": "ghosty",
             "type": "ghosty",
             "position": {
                 "x": 500,
@@ -57,7 +57,7 @@
             "zIndex": 2
         },
         {
-            "description": "plant on top of small second platform",
+            "description": "plant poison on top of small second platform",
             "type": "ghosty-plant-poison",
             "position": {
                 "x": 1300,
