@@ -14,7 +14,7 @@ private:
     GhostyStageFactory* stageFactory = nullptr;
     
 public:
-    GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000, true) {
+    GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000, false) {
         setBackgroundColor(0x3ba7b3);
  
 //        jimp::Vector2D flowerPosition = jimp::Vector2D::from(platform->getPosition().x + platform->getWidth() - 40, platform->getPosition().y + platform->getHeight() / 2 - 256);

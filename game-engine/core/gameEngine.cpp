@@ -78,6 +78,7 @@ void GameEngine::start() {
         
         window->setTitle(windowTitle + " FPS: " + std::to_string(measureFps(currentTime)));
     }
+    reloadLock->lock();
     window->close();
 }
 
@@ -253,10 +254,6 @@ void GameEngine::setBackgroundColor(uint32_t color) {
     backgroundColor = color;
 }
 
-bool GameEngine::isReloadingStage() {
-    return reloadingStage || stageFactory->isLoadingSprites();
-}
-
 void GameEngine::reloadCurrentStage() {
     reloadRequested = true;
 }
@@ -264,14 +261,15 @@ void GameEngine::reloadCurrentStage() {
 void GameEngine::handleReloadStageRequest() {
     while (window->isOpen()) {
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
-        reloadLock->lock();
-        if (reloadRequested && !reloadingStage) {
-            reloadingStage = true;
-            loadStage(currentStage);
-            reloadingStage = false;
+        if (reloadLock->try_lock()) {
+            if (reloadRequested && !reloadingStage) {
+                reloadingStage = true;
+                loadStage(currentStage);
+                reloadingStage = false;
+            }
+            reloadRequested = false;
         }
         reloadLock->unlock();
-        reloadRequested = false;
     }
 }
 

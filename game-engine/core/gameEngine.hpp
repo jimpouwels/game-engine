@@ -85,7 +85,6 @@ public:
     void drawRectangle(float width, float height, Vector2D position, uint32_t color);
     float getGravityForce();
     bool isEditMode();
-    bool isReloadingStage();
     void loadStage(std::string filePath);
     std::vector<AnimatedGraphic*>* getAllGraphics();
     Image* registerImage(Image* image);
