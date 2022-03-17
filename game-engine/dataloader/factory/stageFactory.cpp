@@ -19,9 +19,8 @@ StageFactory::StageFactory(std::string typesFilePath) {
 }
 
 StageFactory::~StageFactory() {
-    lockForDeletion();
+    deleteMutex->lock();
     stopProcessing();
-    unlockForDeletion();
     threadManager->join();
     delete threadManager;
     delete dataLoader;
@@ -29,22 +28,26 @@ StageFactory::~StageFactory() {
         delete type;
     }
     delete types;
+    delete deleteMutex;
+    delete loadThreads;
 }
 
 void StageFactory::stopProcessing() {
-    stop = true;
-    while (!manageThreadsStopped) {
+    stageLoadInterrupted = true;
+    while (!threadManagerStopped) {
     }
 }
 
 void StageFactory::loadStage(std::string filePath) {
+    deleteMutex->lock();
     std::list<Graphic> graphics = dataLoader->loadGraphics(filePath);
     for (const auto& graphic : graphics) {
-        if (stop) {
+        if (stageLoadInterrupted) {
             return;
         }
         createAnimatedGraphicFrom(graphic);
     }
+    deleteMutex->unlock();
 }
 
 void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
@@ -100,7 +103,7 @@ void StageFactory::addSpritesToGraphic(jimp::AnimatedGraphic *animatedGraphic, j
     animatedGraphic->lockForDeletion();
     for (const auto& subAnimation : animationType->subAnimations) {
         for (int i = 0; i < subAnimation->spriteCount; i++) {
-            if (stop) {
+            if (stageLoadInterrupted) {
                 return;
             }
             animatedGraphic->addSprite(subAnimation->name, std::regex_replace(subAnimation->filePath, std::regex("\\{i\\}"), std::to_string(i)));
@@ -110,7 +113,7 @@ void StageFactory::addSpritesToGraphic(jimp::AnimatedGraphic *animatedGraphic, j
 }
 
 void StageFactory::manageThreads() {
-    while (!stop || loadThreads->size() > 0) {
+    while (!stageLoadInterrupted || loadThreads->size() > 0) {
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
         loadingSprites = loadThreads->size() > 0;
         std::list<std::thread*> threadsToDelete = std::list<std::thread*>();
@@ -123,15 +126,7 @@ void StageFactory::manageThreads() {
             delete threadToDelete;
         }
     }
-    manageThreadsStopped = true;
-}
-
-void StageFactory::lockForDeletion() {
-    deleteMutex->lock();
-}
-
-void StageFactory::unlockForDeletion() {
-    deleteMutex->unlock();
+    threadManagerStopped = true;
 }
      
 bool StageFactory::isLoadingSprites() {

@@ -11,8 +11,8 @@ namespace jimp {
 class StageFactory {
   
 private:
-    bool stop = false;
-    bool manageThreadsStopped = false;
+    bool stageLoadInterrupted = false;
+    bool threadManagerStopped = false;
     std::list<std::thread*>* loadThreads;
     std::mutex* deleteMutex = new std::mutex();
     std::thread* threadManager;
@@ -35,8 +35,6 @@ public:
     void manageThreads();
     bool isLoadingSprites();
     void stopProcessing();
-    void lockForDeletion();
-    void unlockForDeletion();
     
 };
 
