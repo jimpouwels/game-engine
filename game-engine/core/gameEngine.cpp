@@ -79,14 +79,13 @@ void GameEngine::start() {
         
         window->setTitle(windowTitle + " FPS: " + std::to_string(measureFps(currentTime)));
     }
-    stopped = true;
+    window->close();
     stageFactory->stopProcessing();
     reloadLock->lock();
-    window->close();
 }
 
-bool GameEngine::isStopped() {
-    return stopped;
+bool GameEngine::isRunning() {
+    return window->isOpen();
 }
 
 void GameEngine::loadStage(std::string filePath) {

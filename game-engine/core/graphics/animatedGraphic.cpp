@@ -87,7 +87,7 @@ Drawable* AnimatedGraphic::getActiveDrawable() {
 }
 
 void AnimatedGraphic::setCurrentAnimation(std::string animationId) {
-    if (activeAnimation != nullptr) {
+    if (activeAnimation == nullptr) {
         std::cout << "Cannot switch to animation '" << animationId << "' because there is no active animation yet" << std::endl;
         return;
     }

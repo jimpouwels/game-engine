@@ -106,7 +106,7 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
 
 void StageFactory::addSpritesToGraphic(jimp::AnimatedGraphic *animatedGraphic, jimp::AnimationType *animationType) {
     animatedGraphic->lockForDeletion();
-    if (!GameEngine::getInstance()->isStopped()) {
+    if (GameEngine::getInstance()->isRunning()) {
         for (const auto& subAnimation : animationType->subAnimations) {
             for (int i = 0; i < subAnimation->spriteCount; i++) {
                 if (stageLoadInterrupted) {
