@@ -110,7 +110,6 @@ void StageFactory::addSpritesToGraphic(jimp::AnimatedGraphic *animatedGraphic, j
 void StageFactory::manageThreads() {
     while (!stageLoadInterrupted || loadThreads->size() > 0) {
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
-        loadingSprites = loadThreads->size() > 0;
         std::list<std::thread*> threadsToDelete = std::list<std::thread*>();
         for (const auto& thread : *loadThreads) {
             thread->join();

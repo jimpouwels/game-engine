@@ -17,7 +17,6 @@ private:
     std::thread* threadManager;
     std::list<Type*>* types = nullptr;
     DataLoader* dataLoader = nullptr;
-    bool loadingSprites = false;
     void addSpritesToGraphic(AnimatedGraphic* animatedGraphic, AnimationType* animationType);
     void createAnimatedGraphicFrom(Graphic graphic);
     Type* getTypeFor(std::string typeName);
