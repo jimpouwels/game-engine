@@ -1,5 +1,5 @@
-#ifndef graphicFactory_hpp
-#define graphicFactory_hpp
+#ifndef stageFactory_hpp
+#define stageFactory_hpp
 
 #include "animatedGraphic.hpp"
 #include "dataLoader.hpp"

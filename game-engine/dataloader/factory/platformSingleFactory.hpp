@@ -1,12 +1,12 @@
-#ifndef platformSingleBuilder_hpp
-#define platformSingleBuilder_hpp
+#ifndef platformSingleFactory_hpp
+#define platformSingleFactory_hpp
 
 #include <string>
 #include "vector2D.hpp"
 
 namespace jimp {
 
-class PlatformSingleBuilder {
+class PlatformSingleFactory {
     
 private:
     jimp::Vector2D position;
@@ -19,7 +19,7 @@ private:
     std::string middleFilePath;
     
 public:
-    PlatformSingleBuilder(uint16_t columnCount, float blockSize, float scale, jimp::Vector2D position);
+    PlatformSingleFactory(uint16_t columnCount, float blockSize, float scale, jimp::Vector2D position);
     jimp::Vector2D getPosition();
     void render();
     float getWidth();

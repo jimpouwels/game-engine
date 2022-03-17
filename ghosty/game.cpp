@@ -3,7 +3,6 @@
 #include "animatedGraphic.hpp"
 #include "gameEngine.hpp"
 #include "vector2D.hpp"
-#include "platformBlock.hpp"
 #include "scrollingWorld.hpp"
 #include "ghostyStageFactory.hpp"
 
@@ -16,10 +15,7 @@ private:
 public:
     GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000, false) {
         setBackgroundColor(0x3ba7b3);
-        // LEFT BIG PLATFORM
-//        Platform* platform = new Platform("platform-top-left.png", "platform-top-middle.png", 5, 7, 512, 0.3F, jimp::Vector2D::from(-153, static_cast<float>(scrollingWorld->getHeight() - (4 * 153))));
-//        Decoration* plant = new Decoration(jimp::Vector2D::from(platform->getPosition().x + 200, platform->getPosition().y - 95 ), "Plant3_{i}.png", 90, 0, 0.3F, 4);
-//
+ 
 //        jimp::Vector2D flowerPosition = jimp::Vector2D::from(platform->getPosition().x + platform->getWidth() - 40, platform->getPosition().y + platform->getHeight() / 2 - 256);
 //        Decoration* flower = new Decoration(flowerPosition, "BlueFlower_{i}.png", 60, 90, 0.5F, 4);
 //

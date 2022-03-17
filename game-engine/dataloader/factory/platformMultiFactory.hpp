@@ -1,12 +1,12 @@
-#ifndef platformMultiBuilder_hpp
-#define platformMultiBuilder_hpp
+#ifndef platformMultiFactory_hpp
+#define platformMultiFactory_hpp
 
 #include <string>
 #include "vector2D.hpp"
 
 namespace jimp {
 
-class PlatformMultiBuilder {
+class PlatformMultiFactory {
     
 private:
     jimp::Vector2D position;
@@ -26,7 +26,7 @@ private:
     std::string centerFilePath;
     
 public:
-    PlatformMultiBuilder(uint16_t rowCount, uint16_t columnCount, float blockSize, float scale, jimp::Vector2D position);
+    PlatformMultiFactory(uint16_t rowCount, uint16_t columnCount, float blockSize, float scale, jimp::Vector2D position);
     jimp::Vector2D getPosition();
     void render();
     float getWidth();

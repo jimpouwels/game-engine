@@ -3,8 +3,8 @@
 #include "platformMultiLayerType.hpp"
 #include "platformSingleLayerType.hpp"
 #include "gameEngine.hpp"
-#include "platformMultiBuilder.hpp"
-#include "platformSingleBuilder.hpp"
+#include "platformMultiFactory.hpp"
+#include "platformSingleFactory.hpp"
 
 #include <string>
 #include <regex>
@@ -61,26 +61,26 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         GameEngine::getInstance()->registerGraphic(animatedGraphic);
     } else if (dynamic_cast<PlatformMultiLayerType*>(type)) {
         PlatformMultiLayerType* animationType = dynamic_cast<PlatformMultiLayerType*>(type);
-        PlatformMultiBuilder* builder = new PlatformMultiBuilder(graphic.rows, graphic.cols, animationType->spriteSize, graphic.scale, graphic.position);
-        builder->setCornerTopLeft(animationType->cornerLeftTopFilePath);
-        builder->setCornerTopRight(animationType->cornerRightTopFilePath);
-        builder->setCornerBottomLeft(animationType->cornerLeftBottomFilePath);
-        builder->setCornerBottomRight(animationType->cornerRightBottomFilePath);
-        builder->setMiddleTop(animationType->middleTopFilePath);
-        builder->setBottomMiddle(animationType->middleBottomFilePath);
-        builder->setRightMiddle(animationType->middleRightFilePath);
-        builder->setLeftMiddle(animationType->middleLeftFilePath);
-        builder->setCenter(animationType->centerFilePath);
-        builder->setZIndex(graphic.zIndex);
-        builder->render();
+        PlatformMultiFactory builder = PlatformMultiFactory(graphic.rows, graphic.cols, animationType->spriteSize, graphic.scale, graphic.position);
+        builder.setCornerTopLeft(animationType->cornerLeftTopFilePath);
+        builder.setCornerTopRight(animationType->cornerRightTopFilePath);
+        builder.setCornerBottomLeft(animationType->cornerLeftBottomFilePath);
+        builder.setCornerBottomRight(animationType->cornerRightBottomFilePath);
+        builder.setMiddleTop(animationType->middleTopFilePath);
+        builder.setBottomMiddle(animationType->middleBottomFilePath);
+        builder.setRightMiddle(animationType->middleRightFilePath);
+        builder.setLeftMiddle(animationType->middleLeftFilePath);
+        builder.setCenter(animationType->centerFilePath);
+        builder.setZIndex(graphic.zIndex);
+        builder.render();
     } else if (dynamic_cast<PlatformSingleLayerType*>(type)) {
         PlatformSingleLayerType* animationType = dynamic_cast<PlatformSingleLayerType*>(type);
-        PlatformSingleBuilder* builder = new PlatformSingleBuilder(graphic.cols, animationType->spriteSize, graphic.scale, graphic.position);
-        builder->setCornerLeft(animationType->cornerLeftFilePath);
-        builder->setCornerRight(animationType->cornerRightFilePath);
-        builder->setMiddle(animationType->centerFilePath);
-        builder->setZIndex(graphic.zIndex);
-        builder->render();
+        PlatformSingleFactory builder = PlatformSingleFactory(graphic.cols, animationType->spriteSize, graphic.scale, graphic.position);
+        builder.setCornerLeft(animationType->cornerLeftFilePath);
+        builder.setCornerRight(animationType->cornerRightFilePath);
+        builder.setMiddle(animationType->centerFilePath);
+        builder.setZIndex(graphic.zIndex);
+        builder.render();
     }
 }
 
