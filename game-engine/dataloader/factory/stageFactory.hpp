@@ -14,7 +14,6 @@ private:
     bool stageLoadInterrupted = false;
     bool threadManagerStopped = false;
     std::list<std::thread*>* loadThreads;
-    std::mutex* deleteMutex = new std::mutex();
     std::thread* threadManager;
     std::list<Type*>* types = nullptr;
     DataLoader* dataLoader = nullptr;

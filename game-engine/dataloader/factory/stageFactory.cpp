@@ -19,8 +19,6 @@ StageFactory::StageFactory(std::string typesFilePath) {
 }
 
 StageFactory::~StageFactory() {
-    deleteMutex->lock();
-    stopProcessing();
     threadManager->join();
     delete threadManager;
     delete dataLoader;
@@ -28,7 +26,6 @@ StageFactory::~StageFactory() {
         delete type;
     }
     delete types;
-    delete deleteMutex;
     delete loadThreads;
 }
 
@@ -39,7 +36,6 @@ void StageFactory::stopProcessing() {
 }
 
 void StageFactory::loadStage(std::string filePath) {
-    deleteMutex->lock();
     std::list<Graphic> graphics = dataLoader->loadGraphics(filePath);
     for (const auto& graphic : graphics) {
         if (stageLoadInterrupted) {
@@ -47,7 +43,6 @@ void StageFactory::loadStage(std::string filePath) {
         }
         createAnimatedGraphicFrom(graphic);
     }
-    deleteMutex->unlock();
 }
 
 void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
