@@ -53,6 +53,9 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
             previousUpdateTime = currentTime;
             if (elapsed.count() < 1) {
                 Timer::getInstance()->onUpdate(elapsed.count());
+                if (ScrollingWorld::getInstance() != nullptr) {
+                    ScrollingWorld::getInstance()->doOnUpdate(elapsed.count());
+                }
                 
                 std::list<AnimatedGraphic*> spritesToDelete = std::list<AnimatedGraphic*>();
                 
@@ -91,9 +94,6 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                     graphicsDeleteLock->lock();
                     onSpriteDeletedCallback(spriteToDelete);
                     graphicsDeleteLock->unlock();
-                }
-                if (ScrollingWorld::getInstance() != nullptr) {
-                    ScrollingWorld::getInstance()->doOnUpdate(elapsed.count());
                 }
                 onUpdateCallback(elapsed.count());
             }

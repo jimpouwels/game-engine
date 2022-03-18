@@ -17,7 +17,7 @@ public:
     }
     
     static bool floatEquals(float first, float second) {
-        return fabs(first - second) < 0.0001;
+        return fabs(first - second) < 0.001;
     }
     
     static bool smallerOrEquals(float first, float second) {
