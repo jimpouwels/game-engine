@@ -2,6 +2,7 @@
 #define graphic_hpp
 
 #include "vector2D.hpp"
+#include "color.hpp"
 
 namespace jimp {
 
@@ -18,6 +19,11 @@ struct Graphic {
     bool isMainCharacter = false;
     int zIndex = 0;
     bool collidable = false;
+    Color rgb = Color::full();
+    bool animateRgb = false;
+    Color animateRgbFrom = Color::full();
+    Color animateRgbTo = Color::full();
+    float animateRgbSeconds = 0.0f;
 };
 
 }

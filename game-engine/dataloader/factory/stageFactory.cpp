@@ -73,6 +73,12 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         animatedGraphic->setZIndex(graphic.zIndex);
         animatedGraphic->setCollidable(graphic.collidable);
         animatedGraphic->setName(graphic.description);
+        if (graphic.animateRgb) {
+            animatedGraphic->setRgbLevels(graphic.animateRgbFrom);
+            animatedGraphic->animateRgbLevels(graphic.animateRgbTo, graphic.animateRgbSeconds);
+        } else {
+            animatedGraphic->setRgbLevels(graphic.rgb);
+        }
         if (graphic.isMainCharacter) {
             ScrollingWorld::getInstance()->setMainCharacter(animatedGraphic);
             animatedGraphic->setApplyScrolling(false);

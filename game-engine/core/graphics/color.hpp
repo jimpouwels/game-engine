@@ -1,6 +1,8 @@
 #ifndef color_hpp
 #define color_hpp
 
+#include <sstream>
+
 namespace jimp {
 
 struct Color {
@@ -24,6 +26,14 @@ struct Color {
     
     static Color from(float r, float g, float b) {
         return Color { .r = r, .g = g, .b = b };
+    }
+    
+    static Color from(std::string hexString) {
+        unsigned int x;
+        std::stringstream ss;
+        ss << std::hex << hexString.substr(1);
+        ss >> x;
+        return from(x >> 16 & 0xff, x >> 8 & 0xff, x & 0xff);
     }
 };
 

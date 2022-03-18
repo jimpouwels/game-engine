@@ -3,6 +3,7 @@
 #include "platformMultiLayerType.hpp"
 #include "platformSingleLayerType.hpp"
 #include "animationType.hpp"
+#include "color.hpp"
 
 #include <string>
 #include <fstream>
@@ -71,6 +72,18 @@ std::list<Graphic> DataLoader::loadGraphics(std::string filePath) {
         }
         if (graphicJson.contains("collidable")) {
             graphic.collidable = graphicJson.at("collidable");
+        }
+        if (graphicJson.contains("rgb")) {
+            graphic.rgb = Color::from(graphicJson.at("rgb"));
+        }
+        if (graphicJson.contains("animateRgb")) {
+            nlohmann::json rgbJson = graphicJson.at("animateRgb");
+            if (rgbJson.contains("from") && rgbJson.contains("to") && rgbJson.contains("seconds")) {
+                graphic.animateRgb = true;
+                graphic.animateRgbFrom = Color::from(rgbJson.at("from"));
+                graphic.animateRgbTo = Color::from(rgbJson.at("to"));
+                graphic.animateRgbSeconds = rgbJson.at("seconds");
+            }
         }
         graphics.push_back(graphic);
     }

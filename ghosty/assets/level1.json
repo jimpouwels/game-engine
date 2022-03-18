@@ -43,13 +43,32 @@
             "zIndex": 1
         },
         {
-            "description": "plant on top of first big platform",
+            "description": "waving plant on top of first big platform",
             "type": "ghosty-plant-waving1",
             "position": {
                 "x": 170,
                 "y": 2150
             },
             "scale": 0.5,
+            "collidable": false,
+            "applyGravity": false,
+            "rotationAngle": 0.0,
+            "applyScrolling": true,
+            "zIndex": 2
+        },
+        {
+            "description": "big waving plant on bottom of screen",
+            "type": "ghosty-plant-waving1",
+            "position": {
+                "x": 1170,
+                "y": 2450
+            },
+            "scale": 1.6,
+            "animateRgb": {
+                "from": "#555555",
+                "to": "#000000",
+                "seconds": 1.0
+            },
             "collidable": false,
             "applyGravity": false,
             "rotationAngle": 0.0,
