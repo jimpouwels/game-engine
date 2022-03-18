@@ -104,6 +104,18 @@ bool GameEngine::isEditMode() {
 void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     window->clear(sf::Color((backgroundColor << 8) + 0xFF));
     
+    onFrame(elapsedTimeSincePreviousFrame);
+    
+    scrollingWorld->doOnFrame();
+    updateThread->lockDeletionOfGraphics();
+    for (const auto& graphic: *updateThread->getAllGraphics()) {
+        if (!graphic->isMarkedForDeletion()) {
+            graphic->onFrame(elapsedTimeSincePreviousFrame);
+            draw(graphic->getActiveDrawable());
+        }
+    }
+    updateThread->unlockDeletionOfGraphics();
+    
     std::string statusText = "";
     if (isEditMode() && reloadingStage) {
         statusText = "Reloading...";
@@ -118,17 +130,6 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     text.setPosition(10, 10);
     window->draw(text);
     
-    onFrame(elapsedTimeSincePreviousFrame);
-    
-    scrollingWorld->doOnFrame();
-    updateThread->lockDeletionOfGraphics();
-    for (const auto& graphic: *updateThread->getAllGraphics()) {
-        if (!graphic->isMarkedForDeletion()) {
-            graphic->onFrame(elapsedTimeSincePreviousFrame);
-            draw(graphic->getActiveDrawable());
-        }
-    }
-    updateThread->unlockDeletionOfGraphics();
     window->display();
 }
 
