@@ -596,7 +596,7 @@
 		235A526C27AD72E00008A8A0 /* mathUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mathUtils.hpp; sourceTree = "<group>"; };
 		235A526D27AFD7090008A8A0 /* image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = image.cpp; sourceTree = "<group>"; };
 		235A526E27AFD7090008A8A0 /* image.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = image.hpp; sourceTree = "<group>"; };
-		235A527827B00C760008A8A0 /* spriteCache.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = spriteCache.hpp; sourceTree = "<group>"; };
+		235A527827B00C760008A8A0 /* renderingCache.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = renderingCache.hpp; sourceTree = "<group>"; };
 		235FEC1A27C6DF5B006306C9 /* game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
 		235FEC1E27C6E1F6006306C9 /* ghosty.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ghosty.cpp; sourceTree = "<group>"; };
 		235FEC1F27C6E1F6006306C9 /* ghosty.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ghosty.hpp; sourceTree = "<group>"; };
@@ -957,7 +957,7 @@
 				23D5C7C427832B5600C6C916 /* gameEngine.hpp */,
 				239F327927CF8293007D4E2C /* scrollingWorld.cpp */,
 				239F327A27CF8293007D4E2C /* scrollingWorld.hpp */,
-				235A527827B00C760008A8A0 /* spriteCache.hpp */,
+				235A527827B00C760008A8A0 /* renderingCache.hpp */,
 				230D483C27B9177A001F6494 /* updateThread.cpp */,
 				230D483D27B9177A001F6494 /* updateThread.hpp */,
 				23A4D56527BFA928006F4220 /* audio */,

@@ -12,7 +12,6 @@ Sound::Sound(std::string filePath) {
     this->buffer->loadFromFile(filePath);
     this->sound = new sf::Sound();
     this->sound->setBuffer(*buffer);
-    GameEngine::getInstance()->registerSound(this);
 }
 
 Sound::~Sound() {
@@ -20,7 +19,7 @@ Sound::~Sound() {
     delete sound;
 }
 
-void Sound::onFrame(float elapsedTime) {
+void Sound::doOnUpdate(float elapsedTime) {
     updateFadeOut(elapsedTime);
 }
 

@@ -43,6 +43,9 @@ void ScrollingWorld::setMainCharacter(AnimatedGraphic* animatedGraphic) {
 }
 
 void ScrollingWorld::doOnUpdate(float elapsedTime) {
+    if (mainCharacter == nullptr) {
+        return;
+    }
     float offsetDeltaX = 0;
     float offsetDeltaY = 0;
     if (!GameEngine::getInstance()->isEditMode()) {

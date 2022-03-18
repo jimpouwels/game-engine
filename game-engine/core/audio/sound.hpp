@@ -24,7 +24,7 @@ private:
 public:
     Sound(std::string filePath);
     ~Sound();
-    void onFrame(float elapsedTime);
+    void doOnUpdate(float elapsedTime);
     void play(uint16_t volume);
     void playTillEnd(uint16_t volume);
     void fadeOut(uint16_t durationInSeconds);

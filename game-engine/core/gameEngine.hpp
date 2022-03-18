@@ -7,7 +7,7 @@
 #include "drawable.hpp"
 #include "image.hpp"
 #include "sound.hpp"
-#include "spriteCache.hpp"
+#include "renderingCache.hpp"
 #include "keyListener.hpp"
 #include "keyboardHandler.hpp"
 #include "updateThread.hpp"
@@ -38,7 +38,7 @@ private:
     std::map<std::string, Image*>* imageCache = nullptr;
     std::map<std::string, Sound*>* soundCache = nullptr;
     UpdateThread* updateThread = nullptr;
-    SpriteCache* spriteCache = nullptr;
+    RenderingCache* renderCache = nullptr;
     float timePerFrame;
     float gravityForce;
     jimp::KeyboardHandler* keyboardHandler = nullptr;
@@ -88,8 +88,8 @@ public:
     bool isRunning();
     void loadStage(std::string filePath);
     std::vector<AnimatedGraphic*>* getAllGraphics();
-    Image* registerImage(Image* image);
-    Sound* registerSound(Sound* sound);
+    Image* createNewImage(std::string filePath);
+    Sound* createNewSound(std::string filePath);
     
 };
 }

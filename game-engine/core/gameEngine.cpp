@@ -4,7 +4,7 @@
 
 #include "gameEngine.hpp"
 #include "sprite.hpp"
-#include "spriteCache.hpp"
+#include "renderingCache.hpp"
 #include "animatedGraphic.hpp"
 #include "rectangle.hpp"
 #include "keyboardHandler.hpp"
@@ -23,7 +23,7 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravit
     auto fp1 = std::bind(&GameEngine::triggerUpdate, this, std::placeholders::_1);
     auto fp2 = std::bind(&GameEngine::handleDrawableDeleted, this, std::placeholders::_1);
     this->updateThread = new UpdateThread(fp1, fp2);
-    this->spriteCache = new SpriteCache();
+    this->renderCache = new RenderingCache();
     this->imageCache = new std::map<std::string, Image*>;
     this->soundCache = new std::map<std::string, Sound*>;
     window = new sf::RenderWindow(sf::VideoMode(this->getScreenWidth(), this->getScreenHeight()), windowTitle);
@@ -41,8 +41,7 @@ GameEngine::~GameEngine() {
     delete updateThread;
     delete window;
     delete keyboardHandler;
-    spriteCache->erase();
-    delete spriteCache;
+    delete renderCache;
     for (const auto& [filePath, image]: *imageCache) {
         delete image;
     }
@@ -139,17 +138,17 @@ void GameEngine::draw(Drawable* drawable) {
     }
     if (dynamic_cast<Sprite*>(drawable) != nullptr) {
         Sprite* sprite = dynamic_cast<Sprite*>(drawable);
-        SpriteCache::CachedSprite* cachedSprite = nullptr;
-        if (!spriteCache->hasSprite(sprite)) {
+        RenderingCache::CachedSprite* cachedSprite = nullptr;
+        if (!renderCache->hasSprite(sprite->getFilePath())) {
             sf::Sprite* sfmlSprite = new sf::Sprite();
             sf::Texture* sfmlTexture = new sf::Texture();
             sfmlTexture->loadFromImage(sprite->getImage().getImage());
             sfmlSprite->setTexture(*sfmlTexture);
             
-            cachedSprite = new SpriteCache::CachedSprite{ .texture = sfmlTexture, .sprite = sfmlSprite };
-            spriteCache->add(sprite, cachedSprite);
+            cachedSprite = new RenderingCache::CachedSprite{ .texture = sfmlTexture, .sprite = sfmlSprite };
+            renderCache->add(sprite->getFilePath(), cachedSprite);
         } else {
-            cachedSprite = spriteCache->getSprite(sprite);
+            cachedSprite = renderCache->getSprite(sprite->getFilePath());
         }
 
         for (uint16_t i = 0; i < sprite->getRepeat(); i++) {
@@ -185,20 +184,24 @@ void GameEngine::registerGraphic(AnimatedGraphic *graphic) {
     updateThread->registerGraphic(graphic);
 }
 
-Image* GameEngine::registerImage(Image* image) {
-    if (imageCache->find(image->getFilePath()) == imageCache->end()) {
-        imageCache->insert({image->getFilePath(), image});
+Image* GameEngine::createNewImage(std::string filePath) {
+    Image* image = nullptr;
+    if (imageCache->find(filePath) == imageCache->end()) {
+        image = new Image(filePath);
+        imageCache->insert({filePath, image});
     } else {
-        image = imageCache->find(image->getFilePath())->second;
+        image = imageCache->find(filePath)->second;
     }
     return image;
 }
 
-Sound* GameEngine::registerSound(Sound* sound) {
-    if (soundCache->find(sound->getFilePath()) == soundCache->end()) {
-        soundCache->insert({sound->getFilePath(), sound});
+Sound* GameEngine::createNewSound(std::string filePath) {
+    Sound* sound = nullptr;
+    if (soundCache->find(filePath) == soundCache->end()) {
+        sound = new Sound(filePath);
+        soundCache->insert({filePath, sound});
     } else {
-        sound = soundCache->find(sound->getFilePath())->second;
+        sound = soundCache->find(filePath)->second;
     }
     return sound;
 }
@@ -293,19 +296,13 @@ void GameEngine::triggerUpdate(float elapsedTime) {
 }
 
 void GameEngine::handleDrawableDeleted(AnimatedGraphic* graphic) {
-    for (const auto& drawable: graphic->getAllDrawables()) {
-        Sprite* sprite = dynamic_cast<Sprite*>(drawable);
-        if (sprite != nullptr) {
-            spriteCache->remove(sprite);
-        }
-    }
     onGraphicDeleted(graphic);
     keyboardHandler->removeKeyListener(graphic);
 }
 
 void GameEngine::handleSounds(float elapsedTime) {
     for (auto const& sound : *soundCache) {
-        sound.second->onFrame(elapsedTime);
+        sound.second->doOnUpdate(elapsedTime);
         sound.second->cleanupCompletedFullRunRuns();
     }
 }

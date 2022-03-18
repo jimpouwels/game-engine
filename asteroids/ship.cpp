@@ -32,6 +32,7 @@ void Ship::doOnUpdate(float elapsedTime) {
     updateFiring(elapsedTime);
     updateMovement(elapsedTime);
     updateRotation(elapsedTime);
+    thrustSound->doOnUpdate(elapsedTime);
 }
 
 void Ship::doOnFrame(float elapsedTime) {

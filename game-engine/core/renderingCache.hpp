@@ -3,13 +3,10 @@
 
 #include <map>
 #include <SFML/Graphics.hpp>
-#include "animatedGraphic.hpp"
 
 namespace jimp {
 
-class Sprite;
-
-class SpriteCache {
+class RenderingCache {
     
 public:
     struct CachedSprite {
@@ -22,36 +19,36 @@ public:
         }
     };
     
-    SpriteCache() {
-        spriteCache = new std::map<Sprite*, CachedSprite*>;
+    RenderingCache() {
+        spriteCache = new std::map<std::string, CachedSprite*>;
     }
     
-    bool hasSprite(Sprite* sprite) {
-        return !(spriteCache->find(sprite) == spriteCache->end());
-    }
-    
-    void add(Sprite* sprite, CachedSprite* cachedSprite) {
-        spriteCache->insert({sprite, cachedSprite});
-    }
-    
-    void remove(Sprite* sprite) {
-        if (hasSprite(sprite)) {
-            spriteCache->erase(sprite);
-        }
-    }
-    
-    void erase() {
+    ~RenderingCache() {
         for (const auto& [sprite, cachedSprite]: *spriteCache) {
             delete cachedSprite;
         }
     }
+    
+    bool hasSprite(std::string sprite) {
+        return !(spriteCache->find(sprite) == spriteCache->end());
+    }
+    
+    void add(std::string sprite, CachedSprite* cachedSprite) {
+        spriteCache->insert({sprite, cachedSprite});
+    }
+    
+    void remove(std::string sprite) {
+        if (hasSprite(sprite)) {
+            spriteCache->erase(sprite);
+        }
+    }
 
-    CachedSprite* getSprite(Sprite* sprite) {
+    CachedSprite* getSprite(std::string sprite) {
         return spriteCache->find(sprite)->second;
     }
     
 private:
-    std::map<Sprite*, CachedSprite*>* spriteCache = nullptr;
+    std::map<std::string, CachedSprite*>* spriteCache = nullptr;
     
 };
 

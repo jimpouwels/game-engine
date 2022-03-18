@@ -1,11 +1,11 @@
 #include "sprite.hpp"
 #include "drawable.hpp"
-#include <iostream>
+#include "gameEngine.hpp"
 
 namespace jimp {
 
 Sprite::Sprite(float x, float y, float scale, uint16_t angle, uint16_t repeat, std::string filePath) : Drawable(x, y, scale, angle, repeat) {
-    this->image = new Image(filePath);
+    this->image = GameEngine::getInstance()->createNewImage(filePath);
     this->filePath = filePath;
     crop();
 }

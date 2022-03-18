@@ -1,5 +1,7 @@
 #include "image.hpp"
 
+#include <iostream>
+
 namespace jimp {
 
 Image::Image(std::string filePath) {

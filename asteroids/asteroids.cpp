@@ -19,8 +19,7 @@ private:
 public:
     Asteroids(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 0, name, 60, false) {
         registerGraphic(new Ship());
-        music = new jimp::Sound("music.ogg");
-        registerSound(music);
+        music = createNewSound("music.ogg");
         music->loop(25);
         asteroidSpawner = new AsteroidSpawner();
         background = new jimp::Sprite(0, 0, 1.0F, 0, 1, "background.jpeg");

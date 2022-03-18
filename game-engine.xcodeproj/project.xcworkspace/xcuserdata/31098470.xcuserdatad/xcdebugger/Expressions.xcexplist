@@ -11,13 +11,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "jimp::StageFactory::createAnimatedGraphicFrom(jimp::Graphic):stageFactory.cpp">
+         contextName = "jimp::GameEngine::drawFrame(float):gameEngine.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "typeid(*type)">
-            </PersistentString>
-            <PersistentString
-               value = "animatedGraphic-&gt;getActiveDrawable()">
+               value = "graphic-&gt;getScale()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -134,7 +131,12 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "jimp::AnimatedGraphic::addDrawable(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, jimp::Drawable*):animatedGraphic.cpp">
+         contextName = "Game::onSpriteDeleted(jimp::AnimatedSprite*):game.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "animatedSprite-&gt;getActiveSprite()">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "mario::TileMap::getTileAt(unsigned short, unsigned short):tileMap.cpp">
@@ -185,12 +187,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Game::onSpriteDeleted(jimp::AnimatedSprite*):game.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "animatedSprite-&gt;getActiveSprite()">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "jimp::AnimatedGraphic::addDrawable(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, jimp::Drawable*):animatedGraphic.cpp">
       </ContextState>
       <ContextState
          contextName = "jimp::AnimatedGraphic::stayToRightOf(jimp::AnimatedGraphic*):animatedGraphic.cpp">
@@ -203,6 +200,20 @@
             </PersistentString>
             <PersistentString
                value = "getLeft()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "jimp::AnimatedGraphic::isApplyScrolling():animatedGraphic.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "GameEngine::getInstance()">
+            </PersistentString>
+            <PersistentString
+               value = "ScrollingWorld::getInstance()-&gt;getMainCharacter()">
+            </PersistentString>
+            <PersistentString
+               value = "ScrollingWorld::getInstance()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -238,10 +249,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "jimp::GameEngine::drawFrame(float):gameEngine.cpp">
+         contextName = "jimp::StageFactory::createAnimatedGraphicFrom(jimp::Graphic):stageFactory.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "graphic-&gt;getScale()">
+               value = "typeid(*type)">
+            </PersistentString>
+            <PersistentString
+               value = "animatedGraphic-&gt;getActiveDrawable()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
