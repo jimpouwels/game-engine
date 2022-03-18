@@ -19,6 +19,10 @@ StageFactory::StageFactory(std::string typesFilePath) {
 }
 
 StageFactory::~StageFactory() {
+    stageLoadStopped = true;
+    stopCurrentLoadingAction();
+    while (!threadManagerStopped) {
+    }
     threadManager->join();
     delete threadManager;
     delete dataLoader;
@@ -27,13 +31,6 @@ StageFactory::~StageFactory() {
     }
     delete types;
     delete spriteLoaderThreads;
-}
-
-void StageFactory::stopProcessing() {
-    stageLoadStopped = true;
-    stopCurrentLoadingAction();
-    while (!threadManagerStopped) {
-    }
 }
 
 void StageFactory::stopCurrentLoadingAction() {

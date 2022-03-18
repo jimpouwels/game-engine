@@ -80,7 +80,6 @@ void GameEngine::start() {
         window->setTitle(windowTitle + " FPS: " + std::to_string(measureFps(currentTime)));
     }
     window->close();
-    stageFactory->stopProcessing();
     reloadLock->lock();
 }
 
