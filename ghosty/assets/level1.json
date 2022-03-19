@@ -106,8 +106,8 @@
             },
             "scale": 1.6,
             "animateRgb": {
-                "from": "#FFFFFF",
-                "to": "#000000",
+                "from": "#000000",
+                "to": "#FFFFFF",
                 "seconds": 1.0
             },
             "collidable": false,

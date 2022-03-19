@@ -1233,7 +1233,6 @@
 				23A4D56527BFA928006F4220 /* audio */,
 				23A4D56427BFA913006F4220 /* graphics */,
 				23A4D56627BFA939006F4220 /* input */,
-				23EF8D2C27DF261A00AD67B7 /* platformBuilders */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -1669,6 +1668,7 @@
 			children = (
 				23A933F22790187300769F69 /* animation.cpp */,
 				23A933F32790187300769F69 /* animation.hpp */,
+				239865FE27D88F80008F38C1 /* color.hpp */,
 				236F0BA127C77D340063E19C /* drawable.cpp */,
 				235FEC2227C7767B006306C9 /* drawable.hpp */,
 				23A933AE27864EA700769F69 /* animatedGraphic.cpp */,
@@ -1682,7 +1682,6 @@
 				23A933AD27864EA700769F69 /* sprite.cpp */,
 				23D5C7E827847B6200C6C916 /* sprite.hpp */,
 				235A526327A959790008A8A0 /* vector2D.hpp */,
-				239865FE27D88F80008F38C1 /* color.hpp */,
 			);
 			path = graphics;
 			sourceTree = "<group>";
@@ -1834,13 +1833,6 @@
 				23EF8D3427DF2BAA00AD67B7 /* graphic.hpp */,
 			);
 			path = model;
-			sourceTree = "<group>";
-		};
-		23EF8D2C27DF261A00AD67B7 /* platformBuilders */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = platformBuilders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

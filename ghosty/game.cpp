@@ -14,12 +14,9 @@ private:
     GhostyStageFactory* stageFactory = nullptr;
     
 public:
-    GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000, true) {
+    GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000, false) {
         setBackgroundColor(0x3ba7b3);
 
-        // THIRD SMALL PLATFORM
-//        Platform* platform3 = new Platform("platform-top-left.png", "platform-top-middle.png", 1, 2, 512, 0.3F, jimp::Vector2D::from(platform2->getPosition().x + 820, platform2->getPosition().y + platform2->getHeight() + 200 ));
-        
         // BACKGROUND
 //        Decoration* rock1 = new Decoration(jimp::Vector2D::from(platform->getPosition().x + 700, platform->getPosition().y - 200), "rock1-background.png", 1, 0, 1.7F, 4);
 //        Decoration* spikes = new Decoration(jimp::Vector2D::from(-300, platform->getPosition().y - 300), "spikes1.png", 1, 45, 0.8F, 5);
