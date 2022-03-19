@@ -28,6 +28,14 @@ void Drawable::setY(float y) {
     position.y = y;
 }
 
+float Drawable::getTransparency() {
+    return transparancy;
+}
+
+void Drawable::setTransparency(float transparency) {
+    this->transparancy = transparency;
+}
+
 uint16_t Drawable::getRepeat() {
     return repeat;
 }

@@ -13,6 +13,7 @@ private:
     Vector2D rotationPoint = Vector2D::empty();
     float scale = 1.0F;
     float angle = 0.0F;
+    float transparancy = 100.0f;
     uint16_t repeat;
         
 public:
@@ -30,6 +31,8 @@ public:
     Vector2D getRotationPoint();
     void setRotationPoint(Vector2D rotationPoint);
     bool isPositionedWithinScreen();
+    float getTransparency();
+    void setTransparency(float transparency);
     virtual int getSingleWidth() = 0;
     virtual int getWidth() = 0;
     virtual int getHeight() = 0;

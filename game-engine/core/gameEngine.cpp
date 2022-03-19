@@ -158,7 +158,7 @@ void GameEngine::draw(Drawable* drawable) {
             transform.rotate(sprite->getRotationAngle(), sprite->getPosition().x + sprite->getRotationPoint().x, sprite->getPosition().y + sprite->getRotationPoint().y);
             cachedSprite->sprite->setPosition(offsetX, sprite->getPosition().y);
             cachedSprite->sprite->setScale(sprite->getScale(), sprite->getScale());
-            cachedSprite->sprite->setColor(sf::Color(fmin(255.0, floor(sprite->getRgbLevels().r)), fmin(255.0, floor(sprite->getRgbLevels().g)), fmin(255.0, floor(sprite->getRgbLevels().b))));
+            cachedSprite->sprite->setColor(sf::Color(fmin(255.0, floor(sprite->getRgbLevels().r)), fmin(255.0, floor(sprite->getRgbLevels().g)), fmin(255.0, floor(sprite->getRgbLevels().b)), fmin(100, sprite->getTransparency()) * (255.0f / 100.0f)));
             if (sprite->drawInversedHorizontally()) {
                 cachedSprite->sprite->setTextureRect(sf::IntRect(cachedSprite->sprite->getTexture()->getSize().x, 0, -(cachedSprite->sprite->getTexture()->getSize().x), cachedSprite->sprite->getTexture()->getSize().y));
             } else {

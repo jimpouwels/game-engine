@@ -24,6 +24,7 @@ struct Graphic {
     Color animateRgbFrom = Color::full();
     Color animateRgbTo = Color::full();
     float animateRgbSeconds = 0.0f;
+    float transparency = 100.0f;
 };
 
 }

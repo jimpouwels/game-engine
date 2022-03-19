@@ -70,6 +70,7 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         animatedGraphic->setZIndex(graphic.zIndex);
         animatedGraphic->setCollidable(graphic.collidable);
         animatedGraphic->setName(graphic.description);
+        animatedGraphic->setTransparency(graphic.transparency);
         if (graphic.animateRgb) {
             animatedGraphic->setRgbLevels(graphic.animateRgbFrom);
             animatedGraphic->animateRgbLevels(graphic.animateRgbTo, graphic.animateRgbSeconds);
@@ -84,7 +85,7 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         GameEngine::getInstance()->registerGraphic(animatedGraphic);
     } else if (dynamic_cast<PlatformMultiLayerType*>(type)) {
         PlatformMultiLayerType* animationType = dynamic_cast<PlatformMultiLayerType*>(type);
-        PlatformMultiFactory builder = PlatformMultiFactory(graphic.rows, graphic.cols, animationType->spriteSize, graphic.scale, graphic.position);
+        PlatformMultiFactory builder = PlatformMultiFactory(graphic.rows, graphic.cols, animationType->spriteSize, graphic.scale, graphic.transparency, graphic.position);
         builder.setCornerTopLeft(animationType->cornerLeftTopFilePath);
         builder.setCornerTopRight(animationType->cornerRightTopFilePath);
         builder.setCornerBottomLeft(animationType->cornerLeftBottomFilePath);
@@ -98,7 +99,7 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         builder.render();
     } else if (dynamic_cast<PlatformSingleLayerType*>(type)) {
         PlatformSingleLayerType* animationType = dynamic_cast<PlatformSingleLayerType*>(type);
-        PlatformSingleFactory builder = PlatformSingleFactory(graphic.cols, animationType->spriteSize, graphic.scale, graphic.position);
+        PlatformSingleFactory builder = PlatformSingleFactory(graphic.cols, animationType->spriteSize, graphic.scale, graphic.transparency, graphic.position);
         builder.setCornerLeft(animationType->cornerLeftFilePath);
         builder.setCornerRight(animationType->cornerRightFilePath);
         builder.setMiddle(animationType->centerFilePath);

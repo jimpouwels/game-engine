@@ -27,6 +27,7 @@ private:
     bool interruptGravity = false;
     bool interruptMovementX = false;
     bool collidable = false;
+    float transparency = 100.0f;
     bool inversedHorizontally = false;
     int collisionBoxWidth = 0;
     int collisionBoxHeight = 0;
@@ -110,6 +111,8 @@ public:
     bool isCollidable();
     void lockForDeletion();
     void unlockForDeletion();
+    float getTransparency();
+    void setTransparency(float transparency);
     bool canCollideWith(AnimatedGraphic* otherGraphic, float elapsedTime);
     void drawInversedHorizontally(bool inverse);
     void setCollidable(bool collidable);

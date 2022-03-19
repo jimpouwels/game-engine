@@ -6,7 +6,7 @@
          contextName = "jimp::GameEngine::draw(jimp::Drawable*):gameEngine.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "updateThread-&gt;getAllGraphics()">
+               value = "100 * (255.0f / 100.0f)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -84,6 +84,14 @@
       </ContextState>
       <ContextState
          contextName = "jimp::AnimatedGraphic::checkCollisionRect(jimp::AnimatedGraphic*, float):animatedGraphic.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "jimp::PlatformMultiFactory::render():platformMultiFactory.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "transparency">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "jimp::PlatformMultiBuilder::render():platformMultiBuilder.cpp">

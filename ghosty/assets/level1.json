@@ -171,6 +171,22 @@
             "rotationAngle": 0,
             "applyScrolling": true,
             "zIndex": 2
+        },
+        {
+            "description": "big spikes background",
+            "type": "ghosty-spikes",
+            "position": {
+                "x": -200,
+                "y": 1800
+            },
+            "scale": 1.5,
+            "rgb": "#555555",
+            "collidable": false,
+            "applyGravity": false,
+            "rotationAngle": 45,
+            "applyScrolling": true,
+            "transparency": 50,
+            "zIndex": 3
         }
 	]
 }

@@ -5,12 +5,13 @@
 
 namespace jimp {
 
-PlatformMultiFactory::PlatformMultiFactory(uint16_t rowCount, uint16_t columnCount, float blockSize, float scale, jimp::Vector2D position) {
+PlatformMultiFactory::PlatformMultiFactory(uint16_t rowCount, uint16_t columnCount, float blockSize, float scale, float transparency, jimp::Vector2D position) {
     this->rowCount = rowCount;
     this->columnCount = columnCount;
     this->blockSize = blockSize;
     this->scale = scale;
     this->position = position;
+    this->transparency = transparency;
 }
 
 void PlatformMultiFactory::render() {
@@ -50,6 +51,7 @@ void PlatformMultiFactory::render() {
             block->setPosition(Vector2D::from(position.x + (x * size), position.y + (y * size)));
             block->setApplyScrolling(true);
             block->setRotationAngle(0.0f);
+            block->setTransparency(transparency);
             block->setScale(scale);
             block->setApplyGravity(false);
             block->setZIndex(zIndex);

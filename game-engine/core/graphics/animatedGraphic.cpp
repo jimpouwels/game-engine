@@ -212,6 +212,14 @@ void AnimatedGraphic::setY(float y) {
     position.y = y;
 }
 
+float AnimatedGraphic::getTransparency() {
+    return transparency;
+}
+
+void AnimatedGraphic::setTransparency(float transparency) {
+    this->transparency = transparency;
+}
+
 Vector2D& AnimatedGraphic::getPosition() {
     return position;
 }
@@ -425,6 +433,7 @@ void AnimatedGraphic::updateCurrentDrawableData() {
     activeDrawable->setPosition(getScreenPosition());
     activeDrawable->setScale(scale);
     activeDrawable->setRotationAngle(angle);
+    activeDrawable->setTransparency(transparency);
     activeDrawable->setRotationPoint(getRotationPoint());
     Sprite* sprite = dynamic_cast<Sprite*>(activeDrawable);
     if (sprite != nullptr) {

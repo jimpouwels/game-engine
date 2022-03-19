@@ -63,6 +63,18 @@
             ]
         },
         {
+            "name": "ghosty-spikes",
+            "base": "animation",
+            "spriteSwapInterval": -1,
+            "subAnimations": [
+                {
+                    "name": "default",
+                    "filePath": "spikes1.png",
+                    "count": 1
+                }
+            ]
+        },
+        {
             "name": "plant-3-branches",
             "base": "animation",
             "spriteSwapInterval": 0.06,

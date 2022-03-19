@@ -5,11 +5,12 @@
 
 namespace jimp {
 
-PlatformSingleFactory::PlatformSingleFactory(uint16_t columnCount, float blockSize, float scale, jimp::Vector2D position) {
+PlatformSingleFactory::PlatformSingleFactory(uint16_t columnCount, float blockSize, float scale, float transparency, jimp::Vector2D position) {
     this->columnCount = columnCount;
     this->blockSize = blockSize;
     this->scale = scale;
     this->position = position;
+    this->transparency = transparency;
 }
 
 void PlatformSingleFactory::render() {
@@ -30,6 +31,7 @@ void PlatformSingleFactory::render() {
         block->setScale(scale);
         block->setApplyGravity(false);
         block->setZIndex(zIndex);
+        block->setTransparency(transparency);
         block->setCollidable(true);
         block->addSprite("default", filePath);
         GameEngine::getInstance()->registerGraphic(block);

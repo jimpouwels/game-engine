@@ -14,12 +14,13 @@ private:
     float blockSize = 0.0F;
     float scale = 1.0F;
     int zIndex = 0;
+    float transparency = 100.0f;
     std::string cornerLeftFilePath;
     std::string cornerRightFilePath;
     std::string middleFilePath;
     
 public:
-    PlatformSingleFactory(uint16_t columnCount, float blockSize, float scale, jimp::Vector2D position);
+    PlatformSingleFactory(uint16_t columnCount, float blockSize, float scale, float transparency, jimp::Vector2D position);
     jimp::Vector2D getPosition();
     void render();
     float getWidth();

@@ -15,6 +15,7 @@ private:
     float blockSize = 0.0F;
     float scale = 1.0F;
     int zIndex = 0;
+    float transparency = 100.0f;
     std::string cornerLeftTopFilePath;
     std::string cornerRightTopFilePath;
     std::string cornerLeftBottomFilePath;
@@ -26,7 +27,7 @@ private:
     std::string centerFilePath;
     
 public:
-    PlatformMultiFactory(uint16_t rowCount, uint16_t columnCount, float blockSize, float scale, jimp::Vector2D position);
+    PlatformMultiFactory(uint16_t rowCount, uint16_t columnCount, float blockSize, float scale, float transparency, jimp::Vector2D position);
     jimp::Vector2D getPosition();
     void render();
     float getWidth();

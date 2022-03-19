@@ -76,6 +76,9 @@ std::list<Graphic> DataLoader::loadGraphics(std::string filePath) {
         if (graphicJson.contains("rgb")) {
             graphic.rgb = Color::from(graphicJson.at("rgb"));
         }
+        if (graphicJson.contains("transparency")) {
+            graphic.transparency = graphicJson.at("transparency");
+        }
         if (graphicJson.contains("animateRgb")) {
             nlohmann::json rgbJson = graphicJson.at("animateRgb");
             if (rgbJson.contains("from") && rgbJson.contains("to") && rgbJson.contains("seconds")) {
