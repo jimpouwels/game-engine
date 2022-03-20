@@ -60,24 +60,24 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                 std::list<AnimatedGraphic*> spritesToDelete = std::list<AnimatedGraphic*>();
                 
                 for (uint16_t i = 0; i < registeredSprites->size(); i++) {
-                    AnimatedGraphic* registeredSprite = registeredSprites->at(i);
-                    if (!registeredSprite->isCollidable()) {
+                    AnimatedGraphic* registeredGraphic = registeredSprites->at(i);
+                    if (!registeredGraphic->isCollidable()) {
                         continue;
                     }
                     std::vector<AnimatedGraphic*> graphicsToCheckCollision = std::vector<AnimatedGraphic*>();
                     for (uint16_t x = 0; x < registeredSprites->size(); x++) {
                         AnimatedGraphic* graphicToCheckCollision = registeredSprites->at(x);
-                        if (graphicToCheckCollision->isCollidable() && graphicToCheckCollision != registeredSprite && registeredSprite->canCollideWith(graphicToCheckCollision, elapsed.count())) {
+                        if (graphicToCheckCollision->isCollidable() && graphicToCheckCollision != registeredGraphic && registeredGraphic->canCollideWith(graphicToCheckCollision, elapsed.count())) {
                             graphicsToCheckCollision.push_back(graphicToCheckCollision);
                         }
                     }
-                    sourceGraphic = registeredSprite;
+                    sourceGraphic = registeredGraphic;
                     sortByDistance(graphicsToCheckCollision);
                     for (uint16_t j = 0; j < graphicsToCheckCollision.size(); j++) {
-                        registeredSprite->checkCollisionRect(graphicsToCheckCollision.at(j), elapsed.count());
+                        registeredGraphic->checkCollisionRect(graphicsToCheckCollision.at(j), elapsed.count());
                     }
-                    if (registeredSprite->isMarkedForDeletion()) {
-                        spritesToDelete.push_back(registeredSprite);
+                    if (registeredGraphic->isMarkedForDeletion()) {
+                        spritesToDelete.push_back(registeredGraphic);
                     }
                 }
                 for (uint16_t i = 0; i < registeredSprites->size(); i++) {
