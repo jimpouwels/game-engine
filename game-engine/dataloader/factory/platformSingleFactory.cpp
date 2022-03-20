@@ -18,6 +18,7 @@ void PlatformSingleFactory::render() {
     for (int x = 0; x < columnCount; x++) {
         std::string filePath = "";
         AnimatedGraphic* block = new AnimatedGraphic();
+        block->setName("single-block");
         if (x == 0) {
             filePath = cornerLeftFilePath;
         } else if (x == columnCount - 1) {

@@ -5,6 +5,7 @@
 #include "vector2D.hpp"
 #include "scrollingWorld.hpp"
 #include "ghostyStageFactory.hpp"
+#include "raindrop.hpp"
 
 namespace ghosty {
 
@@ -14,13 +15,8 @@ private:
     GhostyStageFactory* stageFactory = nullptr;
     
 public:
-    GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000, true) {
+    GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000, false) {
         setBackgroundColor(0x3ba7b3);
-
-        // BACKGROUND
-//        Decoration* rock1 = new Decoration(jimp::Vector2D::from(platform->getPosition().x + 700, platform->getPosition().y - 200), "rock1-background.png", 1, 0, 1.7F, 4);
-//        Decoration* spikes = new Decoration(jimp::Vector2D::from(-300, platform->getPosition().y - 300), "spikes1.png", 1, 45, 0.8F, 5);
-//        Decoration* hill = new Decoration(jimp::Vector2D::from(-250, platform->getPosition().y + 300), "hill.png", 1, 0, 0.8F, 1);
     }
     
     ~GhostyGame() {
@@ -34,6 +30,16 @@ public:
     
     void startGame() {
         loadStage("/Users/31098470/Projects/Personal/game-engine/ghosty/assets/level1.json");
+        
+        for (int i = 0; i < 5000; i++) {
+            Raindrop* raindrop = new Raindrop();
+            if (i % 4 == 0) {
+                raindrop->setTransparency(50);
+                raindrop->setScale(0.08f);
+            }
+            registerGraphic(raindrop);
+        }
+        
         start();
     }
 };

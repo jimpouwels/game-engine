@@ -20,6 +20,7 @@ void PlatformMultiFactory::render() {
         for (int y = 0; y < rowCount; y++) {
             std::string filePath = "";
             AnimatedGraphic* block = new AnimatedGraphic();
+            block->setName("multi-block");
             if (x == 0 && y == 0) {
                 filePath = cornerLeftTopFilePath;
                 block->setCollidable(true);

@@ -3,18 +3,19 @@
 
 #include <SFML/Graphics.hpp>
 #include "drawable.hpp"
+#include "color.hpp"
 
 namespace jimp {
 
 class Shape : public Drawable {
     
 private:
-    uint32_t color;
+    Color color;
     
 public:
-    Shape(uint32_t color, float scale, uint16_t repeat);
+    Shape(Color color, float scale, uint16_t repeat);
     ~Shape();
-    uint32_t getColor();
+    Color getColor();
     int getWidth() override;
 };
 

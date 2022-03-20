@@ -172,11 +172,11 @@ void GameEngine::draw(Drawable* drawable) {
     }
 }
 
-void GameEngine::drawRectangle(float width, float height, Vector2D position, uint32_t color) {
+void GameEngine::drawRectangle(float width, float height, Vector2D position, Color color) {
     sf::RectangleShape shape;
     shape.setSize(sf::Vector2f(width, height));
     shape.setPosition(position.x, position.y);
-    shape.setFillColor(sf::Color((color << 8) | 0xFF));
+    shape.setFillColor(sf::Color(color.r, color.g , color.b, 255));
     window->draw(shape);
 }
 

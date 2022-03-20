@@ -2,14 +2,14 @@
 
 namespace jimp {
 
-Shape::Shape(uint32_t color, float scale, uint16_t repeat) : Drawable(0, 0, scale, 0, repeat) {
+Shape::Shape(Color color, float scale, uint16_t repeat) : Drawable(0, 0, scale, 0, repeat) {
     this->color = color;
 }
 
 Shape::~Shape() {
 }
 
-uint32_t Shape::getColor() {
+Color Shape::getColor() {
     return color;
 }
 
