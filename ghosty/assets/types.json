@@ -41,12 +41,12 @@
         {
             "name": "ghosty-plant-poison",
             "base": "animation",
-            "spriteSwapInterval": 0.06,
             "subAnimations": [
                 {
                     "name": "default",
                     "filePath": "PlantPosion_{i}.png",
-                    "count": 30
+                    "count": 30,
+                    "spriteSwapInterval": 0.06
                 }
             ]
         },
@@ -125,7 +125,7 @@
                     "name": "walk",
                     "filePath": "Chara_BlueWalk{i}.png",
                     "count": 20,
-                    "spriteSwapInterval": 0.03
+                    "spriteSwapInterval": 0.05
                 },
                 {
                     "name": "jump",

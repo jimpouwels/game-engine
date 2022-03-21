@@ -8,6 +8,7 @@ namespace ghosty {
 Ghosty::Ghosty() : jimp::AnimatedGraphic() {
     name = "ghosty";
     footstepSound = jimp::GameEngine::getInstance()->createNewSound("footstep.wav");
+    jumpSound = jimp::GameEngine::getInstance()->createNewSound("jump.wav");
 }
 
 void Ghosty::doOnFrame(float elapsedTime) {
@@ -68,6 +69,7 @@ void Ghosty::onKeyboardRight(jimp::KeyState keyState) {
 void Ghosty::onKeyboardUp(jimp::KeyState keyState) {
     if (keyState == jimp::KeyState::PRESSED) {
         if (!isJumping) {
+            jumpSound->play(20);
             isJumping = true;
             jump(2100);
         }

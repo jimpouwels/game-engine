@@ -12,6 +12,7 @@ class Ghosty : public jimp::AnimatedGraphic {
 private:
     bool isJumping = false;
     jimp::Sound* footstepSound = nullptr;
+    jimp::Sound* jumpSound = nullptr;
     
 public:
     Ghosty();
