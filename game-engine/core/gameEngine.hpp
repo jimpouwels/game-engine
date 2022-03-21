@@ -60,6 +60,7 @@ protected:
     void start();
     void setBackgroundColor(uint32_t color);
     virtual StageFactory* getStageFactory() = 0;
+    virtual void onStageLoad(std::string stageFilePath) {};
     virtual void onFrame(float elapsedTime) {};
     virtual void onUpdate(float elapsedTime) {};
     virtual void onGraphicDeleted(AnimatedGraphic* graphic) {};

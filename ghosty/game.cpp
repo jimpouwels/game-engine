@@ -15,8 +15,13 @@ private:
     GhostyStageFactory* stageFactory = nullptr;
     
 public:
-    GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000, false) {
+    GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000, true) {
         setBackgroundColor(0x3ba7b3);
+        
+        jimp::Sound* rain = createNewSound("rain.wav");
+        jimp::Sound* background = createNewSound("background.ogg");
+        rain->loop(20);
+        background->loop(20);
     }
     
     ~GhostyGame() {
@@ -29,16 +34,9 @@ public:
     }
     
     void onUpdate(float elapsedTime) override {
-        
     }
     
-    void startGame() {
-        loadStage("/Users/31098470/Projects/Personal/game-engine/ghosty/assets/level1.json");
-        jimp::Sound* rain = createNewSound("rain.wav");
-        rain->loop(20);
-        jimp::Sound* background = createNewSound("background.ogg");
-        background->loop(20);
-        
+    void onStageLoad(std::string stageFilePath) override {
         for (int i = 0; i < 200; i++) {
             Raindrop* raindrop = new Raindrop();
             if (i % 4 == 0) {
@@ -47,7 +45,10 @@ public:
             }
             registerGraphic(raindrop);
         }
-        
+    }
+    
+    void startGame() {
+        loadStage("/Users/31098470/Projects/Personal/game-engine/ghosty/assets/level1.json");
         start();
     }
 };

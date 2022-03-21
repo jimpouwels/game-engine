@@ -93,6 +93,7 @@ void GameEngine::loadStage(std::string filePath) {
         stageFactory = getStageFactory();
     }
     stageFactory->loadStage(filePath);
+    onStageLoad(filePath);
     currentStage = filePath;
     updateThread->unpause();
 }
