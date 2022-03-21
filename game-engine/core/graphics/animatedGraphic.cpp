@@ -410,6 +410,9 @@ void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
 }
 
 void AnimatedGraphic::updateMovement(float elapsedTime) {
+    if (!applyGravity && getVelocity().x == 0 && getVelocity().y == 0) {
+        return;
+    }
     if (applyGravity && !interruptGravity)  {
         gravityVelocity.y += jimp::Timing::toValueForElapsedTime(GameEngine::getInstance()->getGravityForce(), elapsedTime);
     }

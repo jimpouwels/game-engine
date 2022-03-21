@@ -17,7 +17,7 @@ Raindrop::Raindrop() {
     getPosition().x = initialX;
     getPosition().y = jimp::MathUtils::randomNumberBetween(0, jimp::ScrollingWorld::getInstance()->getHeight());;
     speedX = jimp::MathUtils::randomNumberBetween(-170, -240);
-    speedY = jimp::MathUtils::randomNumberBetween(500, 600);
+    speedY = jimp::MathUtils::randomNumberBetween(800, 900);
 }
 
 void Raindrop::doOnUpdate(float elapsedTime) {
