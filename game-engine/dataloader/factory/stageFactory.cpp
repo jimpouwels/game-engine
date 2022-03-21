@@ -132,7 +132,6 @@ void StageFactory::manageSpriteLoaderThreads() {
             threadToCheck->join();
             delete threadToCheck;
             return true;
-            
         }), spriteLoaderThreads->end());
     }
     threadManagerStopped = true;

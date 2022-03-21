@@ -68,16 +68,14 @@ void Sound::loop(uint16_t volume) {
 }
 
 void Sound::cleanupCompletedFullRunRuns() {
-    std::list<sf::Sound*> toDelete = std::list<sf::Sound*>();
-    for (const auto& fullRun: *fullRuns) {
+    fullRuns->erase(std::remove_if(fullRuns->begin(), fullRuns->end(),
+                           [](sf::Sound* fullRun) {
         if (fullRun->getStatus() == 0) {
-            toDelete.push_back(fullRun);
+            delete fullRun;
+            return true;
         }
-    }
-    for (const auto& fullRun: toDelete) {
-        fullRuns->remove(fullRun);
-        delete fullRun;
-    }
+        return false;
+    }), fullRuns->end());
 }
 
 void Sound::updateFadeOut(float elapsedTime) {
