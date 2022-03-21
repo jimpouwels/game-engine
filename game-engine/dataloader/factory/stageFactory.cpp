@@ -125,16 +125,16 @@ void StageFactory::addSpritesToGraphic(jimp::AnimatedGraphic *animatedGraphic, j
 
 void StageFactory::manageSpriteLoaderThreads() {
     while (!stageLoadStopped || spriteLoaderThreads->size() > 0) {
+        std::cout << rand() << "    " << spriteLoaderThreads->size() << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
-        std::list<std::thread*> threadsToDelete = std::list<std::thread*>();
-        for (const auto& thread : *spriteLoaderThreads) {
-            thread->join();
-            threadsToDelete.push_back(thread);
-        }
-        for (const auto& threadToDelete : threadsToDelete) {
-            spriteLoaderThreads->remove(threadToDelete);
-            delete threadToDelete;
-        }
+        
+        spriteLoaderThreads->erase(std::remove_if(spriteLoaderThreads->begin(), spriteLoaderThreads->end(),
+                               [](std::thread* threadToCheck) {
+            threadToCheck->join();
+            delete threadToCheck;
+            return true;
+            
+        }), spriteLoaderThreads->end());
     }
     threadManagerStopped = true;
 }
