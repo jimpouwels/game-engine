@@ -49,7 +49,6 @@ private:
     std::mutex* processingLock = new std::mutex();
     std::mutex* deleteLock = new std::mutex();
     float elapsedTimeSinceLastSwap;
-    float drawableSwapIntervalInSeconds;
     void animateRgb(float elapsedTime);
     Vector2D calculateNextPosition(float elapsedTime);
     void resetGravityVelocity();
@@ -116,7 +115,7 @@ public:
     bool canCollideWith(AnimatedGraphic* otherGraphic, float elapsedTime);
     void drawInversedHorizontally(bool inverse);
     void setCollidable(bool collidable);
-    void setSpriteSwapInterval(float swapInterval);
+    void setSpriteSwapInterval(std::string animationId, float swapInterval);
     void setRotationAngle(float angle);
     void setDeleteOnLeaveScreen(bool deleteOnLeaveScreen);
     bool drawInversedHorizontally();

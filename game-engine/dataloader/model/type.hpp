@@ -8,7 +8,6 @@ namespace jimp {
 struct Type {
     std::string name;
     std::string base;
-    float spriteSwapInterval = -1.0f;
     virtual ~Type() { };
 };
 

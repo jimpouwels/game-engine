@@ -22,6 +22,14 @@ std::string Animation::getId() {
     return id;
 }
 
+void Animation::setSpriteSwapInterval(float swapInterval) {
+    this->spriteSwapIntervalInSeconds = swapInterval;
+}
+
+float Animation::getSpriteSwapInterval() {
+    return spriteSwapIntervalInSeconds;
+}
+
 long Animation::getNumberOfDrawables() {
     return drawables->size();
 }

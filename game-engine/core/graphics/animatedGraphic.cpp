@@ -175,11 +175,11 @@ bool AnimatedGraphic::isPositionedWithinScreen() {
 
 void AnimatedGraphic::updateAnimation(float elapsedTime) {
     elapsedTimeSinceLastSwap += elapsedTime;
-    if (drawableSwapIntervalInSeconds >= 0 && elapsedTimeSinceLastSwap >= drawableSwapIntervalInSeconds) {
-        if (activeAnimation != nullptr) {
+    if (activeAnimation != nullptr) {
+        if (activeAnimation->getSpriteSwapInterval() >= 0 && elapsedTimeSinceLastSwap >= activeAnimation->getSpriteSwapInterval()) {
             activeAnimation->switchToNextDrawable();
+            elapsedTimeSinceLastSwap = 0;
         }
-        elapsedTimeSinceLastSwap = 0;
     }
     updateCurrentDrawableData();
 }
@@ -198,10 +198,6 @@ void AnimatedGraphic::drawInversedHorizontally(bool value) {
 
 bool AnimatedGraphic::drawInversedHorizontally() {
     return inversedHorizontally;
-}
-
-void AnimatedGraphic::setSpriteSwapInterval(float swapInterval) {
-    this->drawableSwapIntervalInSeconds = swapInterval;
 }
 
 void AnimatedGraphic::setX(float x) {
@@ -489,6 +485,17 @@ void AnimatedGraphic::lockForDeletion() {
 
 void AnimatedGraphic::unlockForDeletion() {
     deleteLock->unlock();
+}
+
+void AnimatedGraphic::setSpriteSwapInterval(std::string animationId, float swapInterval) {
+    Animation* animation = nullptr;
+    if (animationMap->find(animationId) != animationMap->end()) {
+        animation = animationMap->find(animationId)->second;
+    } else {
+        animation = new Animation(animationId);
+        animationMap->insert({ animationId, animation });
+    }
+    animation->setSpriteSwapInterval(swapInterval);
 }
 
 void AnimatedGraphic::addDrawable(std::string animationId, Drawable* drawable) {

@@ -11,6 +11,7 @@ Raindrop::Raindrop() {
     setApplyScrolling(true);
     setCollidable(false);
     addSprite("default", "raindrop.png");
+    setSpriteSwapInterval("default", -1);
     setScale(0.1f);
     setRotationAngle(20.0f);
     getPosition().y = jimp::MathUtils::randomNumberBetween(0, jimp::GameEngine::getInstance()->getScreenHeight());

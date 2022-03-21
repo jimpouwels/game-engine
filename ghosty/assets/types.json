@@ -29,12 +29,12 @@
         {
             "name": "ghosty-plant-waving1",
             "base": "animation",
-            "spriteSwapInterval": 0.06,
             "subAnimations": [
                 {
                     "name": "default",
                     "filePath": "Plant3_{i}.png",
-                    "count": 90
+                    "count": 90,
+                    "spriteSwapInterval": 0.06
                 }
             ]
         },
@@ -53,12 +53,12 @@
         {
             "name": "ghosty-blue-flower",
             "base": "animation",
-            "spriteSwapInterval": 0.06,
             "subAnimations": [
                 {
                     "name": "default",
                     "filePath": "BlueFlower_{i}.png",
-                    "count": 60
+                    "count": 60,
+                    "spriteSwapInterval": 0.06
                 }
             ]
         },
@@ -77,36 +77,36 @@
         {
             "name": "plant-3-branches",
             "base": "animation",
-            "spriteSwapInterval": 0.06,
             "subAnimations": [
                 {
                     "name": "default",
                     "filePath": "Plant1_000{i}.png",
-                    "count": 90
+                    "count": 90,
+                    "spriteSwapInterval": 0.06
                 }
             ]
         },
         {
             "name": "ghosty-plant-small",
             "base": "animation",
-            "spriteSwapInterval": -1,
             "subAnimations": [
                 {
                     "name": "default",
                     "filePath": "plant-small.png",
-                    "count": 1
+                    "count": 1,
+                    "spriteSwapInterval": -1
                 }
             ]
         },
         {
             "name": "ghosty-rock",
             "base": "animation",
-            "spriteSwapInterval": -1,
             "subAnimations": [
                 {
                     "name": "default",
                     "filePath": "rock1.png",
-                    "count": 1
+                    "count": 1,
+                    "spriteSwapInterval": -1
                 }
             ]
         },
@@ -114,22 +114,24 @@
             "name": "ghosty",
             "base": "animation",
             "custom": true,
-            "spriteSwapInterval": 0.06,
             "subAnimations": [
                 {
                     "name": "idle",
                     "filePath": "Chara - BlueIdle{i}.png",
-                    "count": 20
+                    "count": 20,
+                    "spriteSwapInterval": 0.06
                 },
                 {
                     "name": "walk",
                     "filePath": "Chara_BlueWalk{i}.png",
-                    "count": 20
+                    "count": 20,
+                    "spriteSwapInterval": 0.03
                 },
                 {
                     "name": "jump",
                     "filePath": "CharaWizardJump_{i}.png",
-                    "count": 8
+                    "count": 8,
+                    "spriteSwapInterval": 0.06
                 }
             ]
         }

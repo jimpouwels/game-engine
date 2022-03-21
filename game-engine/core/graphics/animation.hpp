@@ -14,6 +14,7 @@ private:
     std::string id;
     std::vector<Drawable*>* drawables;
     uint16_t activeDrawableIndex = 0;
+    float spriteSwapIntervalInSeconds = -1;
     
 public:
     Animation(std::string id);
@@ -24,6 +25,8 @@ public:
     Drawable* getActiveDrawable();
     std::list<Drawable*> getAllDrawables();
     void switchToNextDrawable();
+    void setSpriteSwapInterval(float swapInterval);
+    float getSpriteSwapInterval();
     
 };
 

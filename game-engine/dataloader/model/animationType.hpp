@@ -9,6 +9,7 @@ struct SubAnimation {
     std::string name;
     std::string filePath;
     int spriteCount;
+    float spriteSwapInterval = -1.0f;
 };
 
 struct AnimationType : Type {

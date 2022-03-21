@@ -65,7 +65,6 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         animatedGraphic->setScale(graphic.scale);
         animatedGraphic->setRotationAngle(graphic.rotationAngle);
         animatedGraphic->setApplyGravity(graphic.applyGravity);
-        animatedGraphic->setSpriteSwapInterval(type->spriteSwapInterval);
         animatedGraphic->setZIndex(graphic.zIndex);
         animatedGraphic->setCollidable(graphic.collidable);
         animatedGraphic->setName(graphic.description);
@@ -118,6 +117,7 @@ void StageFactory::addSpritesToGraphic(jimp::AnimatedGraphic *animatedGraphic, j
                 }
                 animatedGraphic->addSprite(subAnimation->name, std::regex_replace(subAnimation->filePath, std::regex("\\{i\\}"), std::to_string(i)));
             }
+            animatedGraphic->setSpriteSwapInterval(subAnimation->name, subAnimation->spriteSwapInterval);
         }
     }
     animatedGraphic->unlockForDeletion();

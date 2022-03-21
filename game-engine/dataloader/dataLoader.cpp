@@ -26,9 +26,6 @@ std::list<Type*>* DataLoader::loadTypes() {
         Type* type = createType(typeJson);
         type->name = typeJson.at("name");
         type->base = typeJson.at("base");
-        if (typeJson.contains("spriteSwapInterval")) {
-            type->spriteSwapInterval = typeJson.at("spriteSwapInterval");
-        }
         types->push_back(type);
     }
     return types;
@@ -135,6 +132,9 @@ Type* DataLoader::createType(nlohmann::json typeJson) {
             subAnimation->name = subAnimationJson.at("name");
             subAnimation->filePath = subAnimationJson.at("filePath");
             subAnimation->spriteCount = subAnimationJson.at("count");
+            if (subAnimationJson.contains("spriteSwapInterval")) {
+                subAnimation->spriteSwapInterval = subAnimationJson.at("spriteSwapInterval");
+            }
             type->subAnimations.push_back(subAnimation);
         }
         return type;
