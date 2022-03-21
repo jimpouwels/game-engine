@@ -34,6 +34,10 @@ public:
     
     void startGame() {
         loadStage("/Users/31098470/Projects/Personal/game-engine/ghosty/assets/level1.json");
+        jimp::Sound* rain = createNewSound("rain.wav");
+        rain->loop(20);
+        jimp::Sound* background = createNewSound("background.ogg");
+        background->loop(20);
         
         for (int i = 0; i < 200; i++) {
             Raindrop* raindrop = new Raindrop();

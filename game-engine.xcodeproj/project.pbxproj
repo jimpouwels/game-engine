@@ -112,6 +112,8 @@
 		235CC75E27E4E33E00FAFE5A /* Plant1_00089.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235CC6CB27E4E32C00FAFE5A /* Plant1_00089.png */; };
 		235CC76127E7C3D100FAFE5A /* raindrop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235CC75F27E7C3D100FAFE5A /* raindrop.cpp */; };
 		235CC76327E7CDDD00FAFE5A /* raindrop.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235CC76227E7CDD400FAFE5A /* raindrop.png */; };
+		235CC76727E8CCBA00FAFE5A /* rain.wav in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235CC76627E8CCB200FAFE5A /* rain.wav */; };
+		235CC76B27E8CF3900FAFE5A /* background.ogg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235CC76A27E8CF3300FAFE5A /* background.ogg */; };
 		235FEC1B27C6DF5B006306C9 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235FEC1A27C6DF5B006306C9 /* game.cpp */; };
 		235FEC2027C6E1F6006306C9 /* ghosty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 235FEC1E27C6E1F6006306C9 /* ghosty.cpp */; };
 		235FEF5527D69E0B00FC15F0 /* Plant3_0.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 235FEF2927D69E0100FC15F0 /* Plant3_0.png */; };
@@ -404,6 +406,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				235CC76B27E8CF3900FAFE5A /* background.ogg in CopyFiles */,
+				235CC76727E8CCBA00FAFE5A /* rain.wav in CopyFiles */,
 				235CC76327E7CDDD00FAFE5A /* raindrop.png in CopyFiles */,
 				235CC70527E4E33D00FAFE5A /* Plant1_0000.png in CopyFiles */,
 				235CC70627E4E33D00FAFE5A /* Plant1_0001.png in CopyFiles */,
@@ -873,6 +877,8 @@
 		235CC75F27E7C3D100FAFE5A /* raindrop.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = raindrop.cpp; sourceTree = "<group>"; };
 		235CC76027E7C3D100FAFE5A /* raindrop.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = raindrop.hpp; sourceTree = "<group>"; };
 		235CC76227E7CDD400FAFE5A /* raindrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = raindrop.png; sourceTree = "<group>"; };
+		235CC76627E8CCB200FAFE5A /* rain.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = rain.wav; sourceTree = "<group>"; };
+		235CC76A27E8CF3300FAFE5A /* background.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = background.ogg; sourceTree = "<group>"; };
 		235FEC1A27C6DF5B006306C9 /* game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
 		235FEC1E27C6E1F6006306C9 /* ghosty.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ghosty.cpp; sourceTree = "<group>"; };
 		235FEC1F27C6E1F6006306C9 /* ghosty.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ghosty.hpp; sourceTree = "<group>"; };
@@ -1340,6 +1346,31 @@
 			path = plant4;
 			sourceTree = "<group>";
 		};
+		235CC76427E8CC8B00FAFE5A /* sound */ = {
+			isa = PBXGroup;
+			children = (
+				235CC76A27E8CF3300FAFE5A /* background.ogg */,
+				235CC76627E8CCB200FAFE5A /* rain.wav */,
+			);
+			path = sound;
+			sourceTree = "<group>";
+		};
+		235CC76527E8CC9100FAFE5A /* images */ = {
+			isa = PBXGroup;
+			children = (
+				235CC6AA27E4E2FD00FAFE5A /* plant4 */,
+				239865F927D7F77A008F38C1 /* backgrounds */,
+				239865F427D7F561008F38C1 /* obstacles */,
+				239865B727D7F2EF008F38C1 /* plant-poison */,
+				235FEFB227D6C7E000FC15F0 /* plant1 */,
+				235FEEFA27D69CE700FC15F0 /* plant */,
+				2338646B27D6349800DC54B4 /* floors */,
+				239F32BE27D5E8D7007D4E2C /* wizzard */,
+				235CC76227E7CDD400FAFE5A /* raindrop.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		235FEC1927C6DF38006306C9 /* ghosty */ = {
 			isa = PBXGroup;
 			children = (
@@ -1578,17 +1609,10 @@
 		239F328427D0CA9F007D4E2C /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				235CC76227E7CDD400FAFE5A /* raindrop.png */,
-				235CC6AA27E4E2FD00FAFE5A /* plant4 */,
+				235CC76527E8CC9100FAFE5A /* images */,
+				235CC76427E8CC8B00FAFE5A /* sound */,
 				23EF8D2027DE7CBE00AD67B7 /* types.json */,
 				23EF8D1A27DE5E5B00AD67B7 /* level1.json */,
-				239865F927D7F77A008F38C1 /* backgrounds */,
-				239865F427D7F561008F38C1 /* obstacles */,
-				239865B727D7F2EF008F38C1 /* plant-poison */,
-				235FEFB227D6C7E000FC15F0 /* plant1 */,
-				235FEEFA27D69CE700FC15F0 /* plant */,
-				2338646B27D6349800DC54B4 /* floors */,
-				239F32BE27D5E8D7007D4E2C /* wizzard */,
 			);
 			path = assets;
 			sourceTree = "<group>";
