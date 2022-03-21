@@ -3,6 +3,7 @@
 
 #include "animatedGraphic.hpp"
 #include "vector2D.hpp"
+#include "sound.hpp"
 
 namespace ghosty {
 
@@ -10,6 +11,7 @@ class Ghosty : public jimp::AnimatedGraphic {
   
 private:
     bool isJumping = false;
+    jimp::Sound* footstepSound = nullptr;
     
 public:
     Ghosty();

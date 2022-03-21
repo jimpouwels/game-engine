@@ -7,6 +7,7 @@ namespace ghosty {
 
 Ghosty::Ghosty() : jimp::AnimatedGraphic() {
     name = "ghosty";
+    footstepSound = jimp::GameEngine::getInstance()->createNewSound("footstep.wav");
 }
 
 void Ghosty::doOnFrame(float elapsedTime) {
@@ -44,8 +45,10 @@ void Ghosty::hasCollidedRectLeft(AnimatedGraphic* otherGraphic) {
 void Ghosty::onKeyboardLeft(jimp::KeyState keyState) {
     if (keyState == jimp::KeyState::PRESSED) {
         move(270, 500);
+        footstepSound->loop(60);
         drawInversedHorizontally(true);
     } else {
+        footstepSound->stop();
         stopMoving();
     }
 }
@@ -53,8 +56,10 @@ void Ghosty::onKeyboardLeft(jimp::KeyState keyState) {
 void Ghosty::onKeyboardRight(jimp::KeyState keyState) {
     if (keyState == jimp::KeyState::PRESSED) {
         move(90, 500);
+        footstepSound->loop(60);
         drawInversedHorizontally(false);
     } else {
+        footstepSound->stop();
         stopMoving();
     }
 }
