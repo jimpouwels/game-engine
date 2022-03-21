@@ -62,7 +62,9 @@ std::string Sound::getFilePath() {
 }
 
 void Sound::loop(uint16_t volume) {
-    this->sound->stop();
+    if (sound->getStatus() != sf::SoundSource::Status::Stopped) {
+        return;
+    }
     this->sound->setLoop(true);
     play(volume);
 }

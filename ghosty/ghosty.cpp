@@ -17,10 +17,13 @@ void Ghosty::doOnFrame(float elapsedTime) {
 void Ghosty::doOnUpdate(float elapsedTime) {
     std::string currentAnimationId = getCurrentAnimationId();
     if (isJumping) {
+        footstepSound->stop();
         setCurrentAnimation("jump");
     } else if (getVelocity().x != 0) {
+        footstepSound->loop(60);
         setCurrentAnimation("walk");
     } else {
+        footstepSound->stop();
         setCurrentAnimation("idle");
     }
 }
@@ -45,7 +48,6 @@ void Ghosty::hasCollidedRectLeft(AnimatedGraphic* otherGraphic) {
 void Ghosty::onKeyboardLeft(jimp::KeyState keyState) {
     if (keyState == jimp::KeyState::PRESSED) {
         move(270, 500);
-        footstepSound->loop(60);
         drawInversedHorizontally(true);
     } else {
         footstepSound->stop();
@@ -56,7 +58,6 @@ void Ghosty::onKeyboardLeft(jimp::KeyState keyState) {
 void Ghosty::onKeyboardRight(jimp::KeyState keyState) {
     if (keyState == jimp::KeyState::PRESSED) {
         move(90, 500);
-        footstepSound->loop(60);
         drawInversedHorizontally(false);
     } else {
         footstepSound->stop();
