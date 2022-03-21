@@ -19,6 +19,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "jimp::doLoop(std::__1::function&lt;void (float)&gt;, std::__1::function&lt;void (jimp::AnimatedGraphic*)&gt;, std::__1::vector&lt;jimp::AnimatedGraphic*, std::__1::allocator&lt;jimp::AnimatedGraphic*&gt; &gt;*, std::__1::list&lt;jimp::AnimatedGraphic*, std::__1::allocator&lt;jimp::AnimatedGraphic*&gt; &gt;*, std::__1::recursive_mutex*, std::__1::mutex*):updateThread.cpp">
+      </ContextState>
+      <ContextState
          contextName = "jimp::KeyboardHandler::handleKeyEvent(sf::Keyboard::Key, jimp::KeyState):keyboardHandler.cpp">
          <PersistentStrings>
             <PersistentString
@@ -226,6 +229,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "jimp::UpdateThread::registerGraphic(jimp::AnimatedGraphic*):updateThread.cpp">
+      </ContextState>
+      <ContextState
          contextName = "jimp::AnimatedGraphic::stayOnTopOf(jimp::AnimatedGraphic*):animatedGraphic.cpp">
          <PersistentStrings>
             <PersistentString
@@ -260,10 +266,7 @@
          contextName = "jimp::StageFactory::createAnimatedGraphicFrom(jimp::Graphic):stageFactory.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "typeid(*type)">
-            </PersistentString>
-            <PersistentString
-               value = "animatedGraphic-&gt;getActiveDrawable()">
+               value = "graphic.applyScrolling">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

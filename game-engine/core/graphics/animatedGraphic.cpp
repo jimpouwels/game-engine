@@ -225,7 +225,7 @@ Vector2D& AnimatedGraphic::getPosition() {
 }
 
 Vector2D AnimatedGraphic::getScreenPosition() {
-    return position + (isApplyScrolling() ? ScrollingWorld::getInstance()->getOffset() : Vector2D::empty());
+    return position + (applyScrolling ? ScrollingWorld::getInstance()->getOffset() : Vector2D::empty());
 }
 
 Vector2D& AnimatedGraphic::getMoveVelocity() {
@@ -317,10 +317,6 @@ float AnimatedGraphic::getRotationAngle() {
     return angle;
 }
 
-bool AnimatedGraphic::isApplyScrolling() {
-    return applyScrolling || (ScrollingWorld::getInstance()->getMainCharacter() == this && GameEngine::getInstance()->isEditMode());
-}
-
 void AnimatedGraphic::setApplyGravity(bool gravity) {
     this->applyGravity = gravity;
 }
@@ -391,20 +387,20 @@ void AnimatedGraphic::animateRgbLevels(Color to, int seconds) {
 }
 
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
-    float otherGraphicPositionTop = isApplyScrolling() ? otherGraphic->getWorldPositionTop() : otherGraphic->getScreenPositionTop();
+    float otherGraphicPositionTop = applyScrolling ? otherGraphic->getWorldPositionTop() : otherGraphic->getScreenPositionTop();
     getPosition().y = otherGraphicPositionTop - (getHeight() - getMarginBottom());
     resetGravityVelocity();
     interruptGravity = true;
 }
 
 void AnimatedGraphic::stayToLeftOf(AnimatedGraphic *otherGraphic) {
-    float otherGraphicPositionLeft = isApplyScrolling() ? otherGraphic->getWorldPositionLeft() : otherGraphic->getScreenPositionLeft();
+    float otherGraphicPositionLeft = applyScrolling ? otherGraphic->getWorldPositionLeft() : otherGraphic->getScreenPositionLeft();
     getPosition().x = otherGraphicPositionLeft - (getWidth() - getMarginRight());
     interruptMovementX = true;
 }
 
 void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
-    float otherGraphicPositionRight = isApplyScrolling() ? otherGraphic->getWorldPositionRight() : otherGraphic->getScreenPositionRight();
+    float otherGraphicPositionRight = applyScrolling ? otherGraphic->getWorldPositionRight() : otherGraphic->getScreenPositionRight();
     getPosition().x = otherGraphicPositionRight - getMarginLeft();
     interruptMovementX = true;
 }

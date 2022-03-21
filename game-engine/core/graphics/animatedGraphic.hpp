@@ -121,7 +121,6 @@ public:
     void setDeleteOnLeaveScreen(bool deleteOnLeaveScreen);
     bool drawInversedHorizontally();
     bool isMarkedForDeletion();
-    bool isApplyScrolling();
     void animateRgbLevels(Color to, int seconds);
     void setRgbLevels(Color rgb);
     Color getRgbLevels();

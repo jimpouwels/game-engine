@@ -64,7 +64,6 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         animatedGraphic->setPosition(graphic.position);
         animatedGraphic->setScale(graphic.scale);
         animatedGraphic->setRotationAngle(graphic.rotationAngle);
-        animatedGraphic->setApplyScrolling(graphic.applyScrolling);
         animatedGraphic->setApplyGravity(graphic.applyGravity);
         animatedGraphic->setSpriteSwapInterval(type->spriteSwapInterval);
         animatedGraphic->setZIndex(graphic.zIndex);
@@ -77,9 +76,9 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         } else {
             animatedGraphic->setRgbLevels(graphic.rgb);
         }
+        animatedGraphic->setApplyScrolling(graphic.applyScrolling || (graphic.isMainCharacter && GameEngine::getInstance()->isEditMode()));
         if (graphic.isMainCharacter) {
             ScrollingWorld::getInstance()->setMainCharacter(animatedGraphic);
-            animatedGraphic->setApplyScrolling(false);
         }
         spriteLoaderThreads->push_back(new std::thread(&StageFactory::addSpritesToGraphic, this, animatedGraphic, animationType));
         GameEngine::getInstance()->registerGraphic(animatedGraphic);
