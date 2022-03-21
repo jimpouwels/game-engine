@@ -7,10 +7,6 @@ namespace ghosty {
 
 class Raindrop : public jimp::AnimatedGraphic {
     
-private:
-    int speedY = 0;
-    int speedX = 0;
-    
 public:
     Raindrop();
     ~Raindrop();
