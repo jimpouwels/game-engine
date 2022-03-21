@@ -35,7 +35,7 @@ public:
     void startGame() {
         loadStage("/Users/31098470/Projects/Personal/game-engine/ghosty/assets/level1.json");
         
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 200; i++) {
             Raindrop* raindrop = new Raindrop();
             if (i % 4 == 0) {
                 raindrop->setTransparency(50);
