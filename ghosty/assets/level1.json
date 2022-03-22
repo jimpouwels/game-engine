@@ -63,6 +63,7 @@
                 "x": 2200,
                 "y": 1950
             },
+            "collidable": true,
             "scale": 0.5,
             "applyGravity": false,
             "applyScrolling": true,
