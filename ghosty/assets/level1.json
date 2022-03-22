@@ -57,6 +57,18 @@
             "zIndex": 1
         },
         {
+            "description": "moving-platform",
+            "type": "ghosty-moving-platform",
+            "position": {
+                "x": 2200,
+                "y": 1950
+            },
+            "scale": 0.5,
+            "applyGravity": false,
+            "applyScrolling": true,
+            "zIndex": 1
+        },
+        {
             "description": "single layer platform2 right of first big platform",
             "type": "ghosty-platform-single-layer",
             "cols": 2,

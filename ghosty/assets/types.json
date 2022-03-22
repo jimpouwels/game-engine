@@ -63,6 +63,19 @@
             ]
         },
         {
+            "name": "ghosty-moving-platform",
+            "base": "animation",
+            "custom": true,
+            "subAnimations": [
+                {
+                    "name": "default",
+                    "filePath": "small-platform.png",
+                    "count": 1,
+                    "spriteSwapInterval": -1
+                }
+            ]
+        },
+        {
             "name": "ghosty-spikes",
             "base": "animation",
             "spriteSwapInterval": -1,
