@@ -17,6 +17,7 @@ namespace jimp {
 class AnimatedGraphic : public KeyListener {
     
 private:
+    AnimatedGraphic* stayOnTopOfGraphic = nullptr;
     Vector2D position = Vector2D::empty();
     float scale = 1.0f;
     float angle;
@@ -65,7 +66,8 @@ protected:
     void accelerate(float angle, uint16_t mass, uint16_t force, float elapsedTime);
     void move(float angle, float pixelsPerSecond);
     void stopMoving();
-    void stayOnTopOf(AnimatedGraphic* otherGraphic);
+    void stayOnTopOf(AnimatedGraphic *otherGraphic);
+    void stopStayOnTopOf(AnimatedGraphic* otherGraphic);
     void stayToLeftOf(AnimatedGraphic* otherGraphic);
     void stayToRightOf(AnimatedGraphic* otherGraphic);
     void jump(float force);
@@ -77,6 +79,7 @@ protected:
     virtual void hasCollidedRectTop(AnimatedGraphic* otherGraphic) {};
     virtual void hasCollidedRectBottom(AnimatedGraphic* otherGraphic) {};
     virtual void hasCollidedRect(AnimatedGraphic* otherGraphic, Geo2D::Side side) {};
+    virtual void hasNoCollisionWith(AnimatedGraphic* otherGraphic) {};
     
 public:
     AnimatedGraphic();

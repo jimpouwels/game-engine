@@ -46,6 +46,10 @@ void Ghosty::hasCollidedRectLeft(AnimatedGraphic* otherGraphic) {
     stayToRightOf(otherGraphic);
 }
 
+void Ghosty::hasNoCollisionWith(AnimatedGraphic *otherGraphic) {
+    stopStayOnTopOf(otherGraphic);
+}
+
 void Ghosty::onKeyboardLeft(jimp::KeyState keyState) {
     if (keyState == jimp::KeyState::PRESSED) {
         move(270, 500);

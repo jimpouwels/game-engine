@@ -132,6 +132,8 @@ bool AnimatedGraphic::canCollideWith(AnimatedGraphic *otherGraphic, float elapse
         (getScreenPositionLeft() > otherGraphic->getScreenPositionRight() && currentGraphicNextLeft > otherGraphicNextRight) ||
         (getScreenPositionBottom() < otherGraphic->getScreenPositionTop() && currentGraphicNextBottom < otherGraphicNextTop) ||
         (getScreenPositionTop() > otherGraphic->getScreenPositionBottom() && currentGraphicNextTop > otherGraphicNextBottom)) {
+        hasNoCollisionWith(otherGraphic);
+        otherGraphic->hasNoCollisionWith(this);
         return false;
     }
     return true;
@@ -166,6 +168,9 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
             && !MathUtils::floatEquals(currentGraphicNextBottom, otherGraphicNextTop) && !MathUtils::floatEquals(currentGraphicNextTop, otherGraphicNextBottom)) {
         hasCollidedRect(otherGraphic, Geo2D::Side::RIGHT);
         hasCollidedRectRight(otherGraphic);
+    } else {
+        hasNoCollisionWith(otherGraphic);
+        otherGraphic->hasNoCollisionWith(this);
     }
 }
 
@@ -383,10 +388,13 @@ void AnimatedGraphic::animateRgbLevels(Color to, int seconds) {
 }
 
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
-    float otherGraphicPositionTop = applyScrolling ? otherGraphic->getWorldPositionTop() : otherGraphic->getScreenPositionTop();
-    getPosition().y = otherGraphicPositionTop - (getHeight() - getMarginBottom());
-    resetGravityVelocity();
-    interruptGravity = true;
+    stayOnTopOfGraphic = otherGraphic;
+}
+
+void AnimatedGraphic::stopStayOnTopOf(AnimatedGraphic *otherGraphic) {
+    if (stayOnTopOfGraphic == otherGraphic) {
+        stayOnTopOfGraphic = nullptr;
+    }
 }
 
 void AnimatedGraphic::stayToLeftOf(AnimatedGraphic *otherGraphic) {
@@ -402,13 +410,19 @@ void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
 }
 
 void AnimatedGraphic::updateMovement(float elapsedTime) {
+    if (stayOnTopOfGraphic != nullptr) {
+        float otherGraphicPositionTop = applyScrolling ? stayOnTopOfGraphic->getWorldPositionTop() : stayOnTopOfGraphic->getScreenPositionTop();
+        getPosition().y = otherGraphicPositionTop - (getHeight() - getMarginBottom());
+        getPosition().x += jimp::Timing::toValueForElapsedTime(moveVelocity.x, elapsedTime);;
+        return;
+    }
     if (!applyGravity && getVelocity().x == 0 && getVelocity().y == 0) {
         return;
     }
-    if (applyGravity && !interruptGravity)  {
+    if (applyGravity)  {
         gravityVelocity.y += jimp::Timing::toValueForElapsedTime(GameEngine::getInstance()->getGravityForce(), elapsedTime);
     }
-    interruptGravity = false;
+//    interruptGravity = false;
     
     addToPosition(jimp::Timing::toValueForElapsedTime(gravityVelocity, elapsedTime));
     
