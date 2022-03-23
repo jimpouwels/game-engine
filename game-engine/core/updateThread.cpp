@@ -7,10 +7,9 @@
 namespace jimp {
 
 bool isWorking = false;
-AnimatedGraphic* sourceGraphic = nullptr;
 
-static void sortByDistance(std::vector<AnimatedGraphic *> &graphicsToCheckCollision) {
-    std::sort(graphicsToCheckCollision.begin(), graphicsToCheckCollision.end(), [](AnimatedGraphic* a, AnimatedGraphic* b) {
+static void sortByDistance(AnimatedGraphic* sourceGraphic, std::vector<AnimatedGraphic *> &graphicsToCheckCollision) {
+    std::sort(graphicsToCheckCollision.begin(), graphicsToCheckCollision.end(), [&sourceGraphic](AnimatedGraphic* a, AnimatedGraphic* b) {
         Vector2D sourceGraphicLeftTop = Vector2D::from(sourceGraphic->getScreenPositionLeft(), sourceGraphic->getScreenPositionTop());
         Vector2D sourceGraphicRightTop = Vector2D::from(sourceGraphic->getScreenPositionRight(), sourceGraphic->getScreenPositionTop());
         
@@ -83,8 +82,7 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                             graphicsToCheckCollision.push_back(graphicToCheckCollision);
                         }
                     }
-                    sourceGraphic = registeredGraphic;
-                    sortByDistance(graphicsToCheckCollision);
+                    sortByDistance(registeredGraphic, graphicsToCheckCollision);
                     for (uint16_t j = 0; j < graphicsToCheckCollision.size(); j++) {
                         registeredGraphic->checkCollisionRect(graphicsToCheckCollision.at(j), elapsed.count());
                     }
