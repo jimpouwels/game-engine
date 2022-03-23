@@ -427,12 +427,16 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
 }
 
 Vector2D AnimatedGraphic::calculateNextPosition(float elapsedTime) {
-    Vector2D velocity = jimp::Timing::toValueForElapsedTime(moveVelocity + gravityVelocity, elapsedTime);
-    if (applyGravity) {
+    Vector2D velocity = Vector2D::empty();
+    if (applyGravity && !interruptGravity)  {
+        velocity.y = gravityVelocity.y;
         velocity.y += jimp::Timing::toValueForElapsedTime(GameEngine::getInstance()->getGravityForce(), elapsedTime);
     }
-    Vector2D nextPosition = getScreenPosition() + velocity;
-    return nextPosition;
+    if (!interruptMovementX) {
+        velocity.x += moveVelocity.x;
+    }
+    velocity.y += moveVelocity.y;
+    return getScreenPosition() + jimp::Timing::toValueForElapsedTime(velocity, elapsedTime);
 }
 
 void AnimatedGraphic::updateCurrentDrawableData() {
