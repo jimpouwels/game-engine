@@ -18,6 +18,11 @@ class AnimatedGraphic : public KeyListener {
     
 private:
     Vector2D position = Vector2D::empty();
+    Vector2D previousScreenPosition = Vector2D::empty();
+    float previousScreenPositionLeft = 0.0f;
+    float previousScreenPositionRight = 0.0f;
+    float previousScreenPositionTop = 0.0f;
+    float previousScreenPositionBottom = 0.0f;
     float scale = 1.0f;
     float angle;
     bool hasJumped = false;
@@ -51,8 +56,6 @@ private:
     std::mutex* deleteLock = new std::mutex();
     float elapsedTimeSinceLastSwap;
     void animateRgb(float elapsedTime);
-    Vector2D calculateNextPosition(float elapsedTime);
-    Vector2D calculateVelocity(float elapsedTime);
     void resetGravityVelocity();
     void updateCurrentDrawableData();
     void updateAnimation(float elapsedTime);
@@ -86,6 +89,7 @@ public:
     AnimatedGraphic();
     ~AnimatedGraphic();
     Vector2D& getPosition();
+    Vector2D getPreviousScreenPosition();
     Vector2D getScreenPosition();
     Vector2D& getMoveVelocity();
     Vector2D getVelocity();
@@ -106,6 +110,10 @@ public:
     float getScreenPositionTop();
     float getScreenPositionLeft();
     float getScreenPositionRight();
+    float getPreviousScreenPositionRight();
+    float getPreviousScreenPositionBottom();
+    float getPreviousScreenPositionTop();
+    float getPreviousScreenPositionLeft();
     float getWorldPositionBottom();
     float getWorldPositionTop();
     float getWorldPositionLeft();

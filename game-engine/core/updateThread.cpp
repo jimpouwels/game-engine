@@ -60,6 +60,16 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                 std::list<AnimatedGraphic*> spritesToDelete = std::list<AnimatedGraphic*>();
                 
                 for (uint16_t i = 0; i < registeredSprites->size(); i++) {
+                    AnimatedGraphic* registeredSprite = registeredSprites->at(i);
+                    if (registeredSprite->isMarkedForDeletion()) {
+                        continue;
+                    }
+                    registeredSprite->onUpdate(elapsed.count());
+                    if (registeredSprite->isMarkedForDeletion()) {
+                        spritesToDelete.push_back(registeredSprite);
+                    }
+                }
+                for (uint16_t i = 0; i < registeredSprites->size(); i++) {
                     AnimatedGraphic* registeredGraphic = registeredSprites->at(i);
                     if (!registeredGraphic->isCollidable()) {
                         continue;
@@ -78,16 +88,6 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                     }
                     if (registeredGraphic->isMarkedForDeletion()) {
                         spritesToDelete.push_back(registeredGraphic);
-                    }
-                }
-                for (uint16_t i = 0; i < registeredSprites->size(); i++) {
-                    AnimatedGraphic* registeredSprite = registeredSprites->at(i);
-                    if (registeredSprite->isMarkedForDeletion()) {
-                        continue;
-                    }
-                    registeredSprite->onUpdate(elapsed.count());
-                    if (registeredSprite->isMarkedForDeletion()) {
-                        spritesToDelete.push_back(registeredSprite);
                     }
                 }
                 for (const auto& spriteToDelete: spritesToDelete) {

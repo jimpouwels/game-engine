@@ -33,6 +33,11 @@ void AnimatedGraphic::onFrame(float elapsedTime) {
 
 void AnimatedGraphic::onUpdate(float elapsedTime) {
     processingLock->lock();
+    previousScreenPosition = Vector2D::from(getScreenPosition().x, getScreenPosition().y);
+    previousScreenPositionLeft = getScreenPositionLeft();
+    previousScreenPositionRight = getScreenPositionRight();
+    previousScreenPositionTop = getScreenPositionTop();
+    previousScreenPositionBottom = getScreenPositionBottom();
     if (deleteOnLeaveScreen && !isPositionedWithinScreen()) {
         markForDeletion();
     } else {
@@ -116,22 +121,11 @@ bool AnimatedGraphic::canCollideWith(AnimatedGraphic *otherGraphic, float elapse
     if (getActiveDrawable() == nullptr || otherGraphic->getActiveDrawable() == nullptr) {
         return false;
     }
-    Vector2D currentGraphicNextPosition = calculateNextPosition(elapsedTime);
-    float currentGraphicNextTop = currentGraphicNextPosition.y + getMarginTop();
-    float currentGraphicNextBottom = currentGraphicNextPosition.y + getHeight() - getMarginBottom();
-    float currentGraphicNextLeft = currentGraphicNextPosition.x + getMarginLeft();
-    float currentGraphicNextRight = currentGraphicNextPosition.x + getWidth() - getMarginRight();
     
-    Vector2D otherGraphicNextPosition = otherGraphic->calculateNextPosition(elapsedTime);
-    float otherGraphicNextTop = otherGraphicNextPosition.y + otherGraphic->getMarginTop();
-    float otherGraphicNextBottom = otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom();
-    float otherGraphicNextLeft = otherGraphicNextPosition.x + otherGraphic->getMarginLeft();
-    float otherGraphicNextRight = otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight();
-    
-    if ((getScreenPositionRight() < otherGraphic->getScreenPositionLeft() && currentGraphicNextRight < otherGraphicNextLeft) ||
-        (getScreenPositionLeft() > otherGraphic->getScreenPositionRight() && currentGraphicNextLeft > otherGraphicNextRight) ||
-        (getScreenPositionBottom() < otherGraphic->getScreenPositionTop() && currentGraphicNextBottom < otherGraphicNextTop) ||
-        (getScreenPositionTop() > otherGraphic->getScreenPositionBottom() && currentGraphicNextTop > otherGraphicNextBottom)) {
+    if ((previousScreenPositionRight < otherGraphic->getPreviousScreenPositionLeft() && getScreenPositionRight() < otherGraphic->getScreenPositionLeft()) ||
+        (previousScreenPositionLeft > otherGraphic->getPreviousScreenPositionRight() && getScreenPositionLeft() > otherGraphic->getScreenPositionRight()) ||
+        (previousScreenPositionBottom < otherGraphic->getPreviousScreenPositionTop() && getScreenPositionBottom() < otherGraphic->getScreenPositionTop()) ||
+        (previousScreenPositionTop > otherGraphic->getPreviousScreenPositionBottom() && getScreenPositionTop() > otherGraphic->getScreenPositionBottom())) {
         hasNoCollisionWith(otherGraphic);
         otherGraphic->hasNoCollisionWith(this);
         return false;
@@ -140,32 +134,20 @@ bool AnimatedGraphic::canCollideWith(AnimatedGraphic *otherGraphic, float elapse
 }
 
 void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float elapsedTime) {
-    Vector2D currentGraphicNextPosition = calculateNextPosition(elapsedTime);
-    float currentGraphicNextTop = currentGraphicNextPosition.y + getMarginTop();
-    float currentGraphicNextBottom = currentGraphicNextPosition.y + getHeight() - getMarginBottom();
-    float currentGraphicNextLeft = currentGraphicNextPosition.x + getMarginLeft();
-    float currentGraphicNextRight = currentGraphicNextPosition.x + getWidth() - getMarginRight();
-    
-    Vector2D otherGraphicNextPosition = otherGraphic->calculateNextPosition(elapsedTime);
-    float otherGraphicNextTop = otherGraphicNextPosition.y + otherGraphic->getMarginTop();
-    float otherGraphicNextBottom = otherGraphicNextPosition.y + otherGraphic->getHeight() - otherGraphic->getMarginBottom();
-    float otherGraphicNextLeft = otherGraphicNextPosition.x + otherGraphic->getMarginLeft();
-    float otherGraphicNextRight = otherGraphicNextPosition.x + otherGraphic->getWidth() - otherGraphic->getMarginRight();
-    
-    if ((MathUtils::smallerOrEquals(getScreenPositionBottom(), otherGraphic->getScreenPositionTop()) && currentGraphicNextBottom > otherGraphicNextTop)
-            && !MathUtils::floatEquals(currentGraphicNextRight, otherGraphicNextLeft) && !MathUtils::floatEquals(currentGraphicNextLeft, otherGraphicNextRight)) {
+    if ((MathUtils::smallerOrEquals(getPreviousScreenPositionBottom(), otherGraphic->getPreviousScreenPositionTop()) && getScreenPositionBottom() > otherGraphic->getScreenPositionTop())
+            && !MathUtils::floatEquals(getScreenPositionRight(), otherGraphic->getScreenPositionLeft()) && !MathUtils::floatEquals(getScreenPositionLeft(), otherGraphic->getScreenPositionRight())) {
         hasCollidedRect(otherGraphic, Geo2D::Side::BOTTOM);
         hasCollidedRectBottom(otherGraphic);
-    } else if ((MathUtils::largerOrEquals(getScreenPositionTop(), otherGraphic->getScreenPositionBottom()) && currentGraphicNextTop < otherGraphicNextBottom)
-            && !MathUtils::floatEquals(currentGraphicNextRight, otherGraphicNextLeft) && !MathUtils::floatEquals(currentGraphicNextLeft, otherGraphicNextRight)) {
+    } else if ((MathUtils::largerOrEquals(getPreviousScreenPositionTop(), otherGraphic->getPreviousScreenPositionBottom()) && getScreenPositionTop() < otherGraphic->getScreenPositionBottom())
+            && !MathUtils::floatEquals(getScreenPositionRight(), otherGraphic->getScreenPositionLeft()) && !MathUtils::floatEquals(getScreenPositionLeft(), otherGraphic->getScreenPositionRight())) {
         hasCollidedRect(otherGraphic, Geo2D::Side::TOP);
         hasCollidedRectTop(otherGraphic);
-    } else if ((MathUtils::largerOrEquals(getScreenPositionLeft(), otherGraphic->getScreenPositionRight()) && currentGraphicNextLeft < otherGraphicNextRight)
-               && !MathUtils::floatEquals(currentGraphicNextBottom, otherGraphicNextTop) && !MathUtils::floatEquals(currentGraphicNextTop, otherGraphicNextBottom)) {
+    } else if ((MathUtils::largerOrEquals(getPreviousScreenPositionLeft(), otherGraphic->getPreviousScreenPositionRight()) && getScreenPositionLeft() < otherGraphic->getScreenPositionRight())
+               && !MathUtils::floatEquals(getScreenPositionBottom(), otherGraphic->getScreenPositionTop()) && !MathUtils::floatEquals(getScreenPositionTop(), otherGraphic->getScreenPositionBottom())) {
         hasCollidedRect(otherGraphic, Geo2D::Side::LEFT);
         hasCollidedRectLeft(otherGraphic);
-    } else if ((MathUtils::smallerOrEquals(getScreenPositionRight(), otherGraphic->getScreenPositionLeft()) && currentGraphicNextRight > otherGraphicNextLeft)
-            && !MathUtils::floatEquals(currentGraphicNextBottom, otherGraphicNextTop) && !MathUtils::floatEquals(currentGraphicNextTop, otherGraphicNextBottom)) {
+    } else if ((MathUtils::smallerOrEquals(getPreviousScreenPositionRight(), otherGraphic->getPreviousScreenPositionLeft()) && getScreenPositionRight() > otherGraphic->getScreenPositionLeft())
+            && !MathUtils::floatEquals(getScreenPositionBottom(), otherGraphic->getScreenPositionTop()) && !MathUtils::floatEquals(getScreenPositionTop(), otherGraphic->getScreenPositionBottom())) {
         hasCollidedRect(otherGraphic, Geo2D::Side::RIGHT);
         hasCollidedRectRight(otherGraphic);
     } else {
@@ -223,6 +205,10 @@ void AnimatedGraphic::setTransparency(float transparency) {
 
 Vector2D& AnimatedGraphic::getPosition() {
     return position;
+}
+
+Vector2D AnimatedGraphic::getPreviousScreenPosition() {
+    return previousScreenPosition;
 }
 
 Vector2D AnimatedGraphic::getScreenPosition() {
@@ -288,6 +274,22 @@ float AnimatedGraphic::getScreenPositionRight() {
 
 float AnimatedGraphic::getScreenPositionLeft() {
     return getScreenPosition().x + getMarginLeft();
+}
+
+float AnimatedGraphic::getPreviousScreenPositionTop() {
+    return previousScreenPositionTop;
+}
+
+float AnimatedGraphic::getPreviousScreenPositionBottom() {
+    return previousScreenPositionBottom;
+}
+
+float AnimatedGraphic::getPreviousScreenPositionRight() {
+    return previousScreenPositionRight;
+}
+
+float AnimatedGraphic::getPreviousScreenPositionLeft() {
+    return previousScreenPositionLeft;
 }
 
 float AnimatedGraphic::getWorldPositionTop() {
@@ -423,19 +425,6 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
     } else {
         addToPosition(jimp::Timing::toValueForElapsedTime(moveVelocity, elapsedTime));
     }
-}
-
-Vector2D AnimatedGraphic::calculateNextPosition(float elapsedTime) {
-    Vector2D velocity = Vector2D::empty();
-    if (applyGravity && !interruptGravity)  {
-        velocity.y = gravityVelocity.y;
-        velocity.y += jimp::Timing::toValueForElapsedTime(GameEngine::getInstance()->getGravityForce(), elapsedTime);
-    }
-    if (!interruptMovementX) {
-        velocity.x += moveVelocity.x;
-    }
-    velocity.y += moveVelocity.y;
-    return getScreenPosition() + jimp::Timing::toValueForElapsedTime(velocity, elapsedTime);
 }
 
 void AnimatedGraphic::updateCurrentDrawableData() {
