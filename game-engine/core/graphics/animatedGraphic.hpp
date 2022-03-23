@@ -70,7 +70,7 @@ protected:
     void move(float angle, float pixelsPerSecond);
     void stopMoving();
     void stayOnTopOf(AnimatedGraphic* otherGraphic);
-    void releaseFrom(AnimatedGraphic* otherGraphic);
+    void releaseFromOtherGraphics();
     void stopStayOnTopOf();
     void stayToLeftOf(AnimatedGraphic* otherGraphic);
     void stayToRightOf(AnimatedGraphic* otherGraphic);
@@ -83,7 +83,8 @@ protected:
     virtual void hasCollidedRectTop(AnimatedGraphic* otherGraphic) {};
     virtual void hasCollidedRectBottom(AnimatedGraphic* otherGraphic) {};
     virtual void hasCollidedRect(AnimatedGraphic* otherGraphic, Geo2D::Side side) {};
-    virtual void hasNoCollisionWith(AnimatedGraphic* otherGraphic) {};
+    virtual void hasNoCollisionWith(AnimatedGraphic* otherGraphic);;
+    virtual void onHasNoCollisionWith(AnimatedGraphic* otherGraphic) {};
     
 public:
     AnimatedGraphic();

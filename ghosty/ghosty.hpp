@@ -25,7 +25,6 @@ public:
     void hasCollidedRectRight(AnimatedGraphic* otherGraphic) override;
     void hasCollidedRectBottom(AnimatedGraphic* otherGraphic) override;
     void hasCollidedRectTop(AnimatedGraphic* otherGraphic) override;
-    void hasNoCollisionWith(AnimatedGraphic* otherGraphic) override;
 };
 
 }

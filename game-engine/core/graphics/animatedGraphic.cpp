@@ -156,11 +156,12 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
     }
 }
 
-void AnimatedGraphic::releaseFrom(AnimatedGraphic *otherGraphic) {
+void AnimatedGraphic::hasNoCollisionWith(AnimatedGraphic* otherGraphic) {
     if (stayOnTopOfGraphic == otherGraphic) {
         stayOnTopOfGraphic = nullptr;
-        moveVelocity.y = 0;
+        moveVelocity.y -= otherGraphic->moveVelocity.y;
     }
+    onHasNoCollisionWith(otherGraphic);
 }
 
 bool AnimatedGraphic::isPositionedWithinScreen() {
