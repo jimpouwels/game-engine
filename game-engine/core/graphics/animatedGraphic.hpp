@@ -17,7 +17,6 @@ namespace jimp {
 class AnimatedGraphic : public KeyListener {
     
 private:
-    AnimatedGraphic* stayOnTopOfGraphic = nullptr;
     Vector2D position = Vector2D::empty();
     float scale = 1.0f;
     float angle;
@@ -26,6 +25,7 @@ private:
     bool visible = true;
     bool applyScrolling = false;
     bool applyGravity = false;
+    bool interruptGravity = false;
     bool interruptMovementX = false;
     bool collidable = false;
     float transparency = 100.0f;

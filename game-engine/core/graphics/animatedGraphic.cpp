@@ -402,12 +402,6 @@ void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
     interruptMovementX = true;
 }
 
-void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
-    float otherGraphicPositionRight = applyScrolling ? otherGraphic->getWorldPositionRight() : otherGraphic->getScreenPositionRight();
-    getPosition().x = otherGraphicPositionRight - getMarginLeft();
-    interruptMovementX = true;
-}
-
 void AnimatedGraphic::updateMovement(float elapsedTime) {
     if (!applyGravity && getVelocity().x == 0 && getVelocity().y == 0) {
           return;
