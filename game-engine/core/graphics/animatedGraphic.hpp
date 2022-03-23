@@ -30,8 +30,6 @@ private:
     bool visible = true;
     bool applyScrolling = false;
     bool applyGravity = false;
-    bool interruptGravity = false;
-    bool interruptMovementX = false;
     bool collidable = false;
     float transparency = 100.0f;
     bool inversedHorizontally = false;
