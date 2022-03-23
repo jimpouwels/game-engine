@@ -356,7 +356,6 @@ void AnimatedGraphic::move(float angle, float pixelsPerSecond) {
 
 void AnimatedGraphic::jump(float force) {
     gravityVelocity.y = -force;
-    stayOnTopOfGraphic = nullptr;
 }
 
 void AnimatedGraphic::stopMoving() {
