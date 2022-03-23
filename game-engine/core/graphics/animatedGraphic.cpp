@@ -345,6 +345,10 @@ void AnimatedGraphic::move(float angle, float pixelsPerSecond) {
     moveVelocity = jimp::Geo2D::vectorFrom(angle, pixelsPerSecond);
 }
 
+void AnimatedGraphic::jump(float force) {
+    gravityVelocity.y = -force;
+}
+
 void AnimatedGraphic::stopMoving() {
     moveVelocity.x = 0;
     moveVelocity.y = 0;
