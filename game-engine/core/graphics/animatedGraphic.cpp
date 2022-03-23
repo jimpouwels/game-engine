@@ -392,7 +392,6 @@ void AnimatedGraphic::animateRgbLevels(Color to, int seconds) {
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
     float otherGraphicPositionTop = applyScrolling ? otherGraphic->getWorldPositionTop() : otherGraphic->getScreenPositionTop();
     getPosition().y = otherGraphicPositionTop - (getHeight() - getMarginBottom());
-    resetGravityVelocity();
     interruptGravity = true;
 }
 

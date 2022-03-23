@@ -49,17 +49,17 @@ void ScrollingWorld::doOnUpdate(float elapsedTime) {
     float offsetDeltaX = 0;
     float offsetDeltaY = 0;
     if (!GameEngine::getInstance()->isEditMode()) {
-        if (offsetX < maxScrollX && (mainCharacter->getScreenPositionRight()) >= rightSideOfCamera && mainCharacter->getVelocity().x > 0) {
+        if (offsetX < maxScrollX && (mainCharacter->getScreenPositionRight()) >= rightSideOfCamera && mainCharacter->getMoveVelocity().x >= 0) {
             offsetDeltaX += (mainCharacter->getPosition().x + mainCharacter->getWidth() - mainCharacter->getMarginRight()) - rightSideOfCamera;
             mainCharacter->getPosition().x = rightSideOfCamera - mainCharacter->getWidth() + mainCharacter->getMarginRight();
-        } else if (offsetX > 0 && mainCharacter->getScreenPositionLeft() <= leftSideOfCamera && mainCharacter->getVelocity().x < 0) {
+        } else if (offsetX > 0 && mainCharacter->getScreenPositionLeft() <= leftSideOfCamera && mainCharacter->getMoveVelocity().x <= 0) {
             offsetDeltaX -= leftSideOfCamera - (mainCharacter->getPosition().x + mainCharacter->getMarginLeft());
             mainCharacter->getPosition().x = leftSideOfCamera - mainCharacter->getMarginLeft();
         }
-        if (offsetY < maxScrollY && (mainCharacter->getPosition().y + mainCharacter->getHeight() - mainCharacter->getMarginBottom()) >= bottomSideOfCamera && mainCharacter->getVelocity().y > 0) {
+        if (offsetY < maxScrollY && (mainCharacter->getPosition().y + mainCharacter->getHeight() - mainCharacter->getMarginBottom()) >= bottomSideOfCamera && mainCharacter->getMoveVelocity().y >= 0) {
             offsetDeltaY += (mainCharacter->getPosition().y + mainCharacter->getHeight() - mainCharacter->getMarginBottom()) - bottomSideOfCamera;
             mainCharacter->getPosition().y = bottomSideOfCamera - mainCharacter->getHeight() + mainCharacter->getMarginBottom();
-        } else if (offsetY > 0 && (mainCharacter->getPosition().y + mainCharacter->getMarginTop() <= topSideOfCamera) && mainCharacter->getVelocity().y < 0) {
+        } else if (offsetY > 0 && (mainCharacter->getPosition().y + mainCharacter->getMarginTop() <= topSideOfCamera) && mainCharacter->getMoveVelocity().y <= 0) {
             offsetDeltaY -= topSideOfCamera - (mainCharacter->getPosition().y + mainCharacter->getMarginTop());
             mainCharacter->getPosition().y = topSideOfCamera - mainCharacter->getMarginTop();
         }
