@@ -412,8 +412,6 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
     if (applyGravity)  {
         gravityVelocity.y += jimp::Timing::toValueForElapsedTime(GameEngine::getInstance()->getGravityForce(), elapsedTime);
     }
-    interruptGravity = false;
-    
     addToPosition(jimp::Timing::toValueForElapsedTime(gravityVelocity, elapsedTime));
     
     addToPosition(jimp::Timing::toValueForElapsedTime(moveVelocity, elapsedTime));
