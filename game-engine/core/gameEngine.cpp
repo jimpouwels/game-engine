@@ -134,6 +134,16 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     window->display();
 }
 
+void GameEngine::draw(std::string text, Vector2D position) {
+    sf::Font font;
+    font.loadFromFile("arial.ttf");
+    sf::Text textObject = sf::Text();
+    textObject.setFont(font);
+    textObject.setString(text);
+    textObject.setPosition(position.x, position.y);
+    window->draw(textObject);
+}
+
 void GameEngine::draw(Drawable* drawable) {
     if (drawable == nullptr || !drawable->isPositionedWithinScreen()) {
         return;

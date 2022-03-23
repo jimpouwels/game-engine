@@ -12,7 +12,12 @@ Ghosty::Ghosty() : jimp::AnimatedGraphic() {
 }
 
 void Ghosty::doOnFrame(float elapsedTime) {
-//    jimp::GameEngine::getInstance()->drawRectangle(getCollisionRectWidth(), getCollisionRectHeight(), jimp::Vector2D { .x = getPosition().x + getMarginLeft(), .y = getPosition().y + getMarginTop() }, 0xFFFFFF);
+    jimp::Vector2D posTextPosition = jimp::Vector2D::from(getPosition().x, getPosition().y);
+    posTextPosition.y -= 10;
+    std::string text = "Pos: " + std::to_string(getPosition().x) + ", " + std::to_string(getPosition().y);
+    text += "\n";
+    text += "Velocity: " + std::to_string(getVelocity().x) + ", " + std::to_string(getVelocity().y);
+    jimp::GameEngine::getInstance()->draw(text , posTextPosition);
 }
 
 void Ghosty::doOnUpdate(float elapsedTime) {
@@ -47,7 +52,7 @@ void Ghosty::hasCollidedRectLeft(AnimatedGraphic* otherGraphic) {
 }
 
 void Ghosty::hasNoCollisionWith(AnimatedGraphic *otherGraphic) {
-    stopStayOnTopOf(otherGraphic);
+    stopStayOnTopOf();
 }
 
 void Ghosty::onKeyboardLeft(jimp::KeyState keyState) {

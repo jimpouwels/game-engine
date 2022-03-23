@@ -82,6 +82,7 @@ public:
     bool isOutsideScreenRight(AnimatedGraphic* graphic);
     void addKeyListener(KeyListener* keyListener);
     void draw(Drawable* drawable);
+    void draw(std::string text, Vector2D position);
     void registerGraphic(AnimatedGraphic* graphic);
     void drawRectangle(float width, float height, Vector2D position, Color color);
     float getGravityForce();

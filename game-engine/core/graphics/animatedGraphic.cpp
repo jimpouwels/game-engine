@@ -234,7 +234,7 @@ Vector2D& AnimatedGraphic::getMoveVelocity() {
 }
 
 Vector2D AnimatedGraphic::getVelocity() {
-    return gravityVelocity + moveVelocity;
+    return moveVelocity + gravityVelocity;
 }
 
 void AnimatedGraphic::setPosition(Vector2D position) {
@@ -355,13 +355,13 @@ void AnimatedGraphic::jump(float force) {
 }
 
 void AnimatedGraphic::interruptJump() {
-    if (gravityVelocity.y < 0) {
-        gravityVelocity.y = 0;
+    if (moveVelocity.y < 0) {
+        moveVelocity.y = 0;
     }
 }
 
 void AnimatedGraphic::resetGravityVelocity() {
-    gravityVelocity.y = 0.0f;
+//    gravityVelocity.y = 0.0f;
 }
 
 void AnimatedGraphic::setRotationAngle(float angle) {
@@ -391,10 +391,8 @@ void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
     stayOnTopOfGraphic = otherGraphic;
 }
 
-void AnimatedGraphic::stopStayOnTopOf(AnimatedGraphic *otherGraphic) {
-    if (stayOnTopOfGraphic == otherGraphic) {
-        stayOnTopOfGraphic = nullptr;
-    }
+void AnimatedGraphic::stopStayOnTopOf() {
+    stayOnTopOfGraphic = nullptr;
 }
 
 void AnimatedGraphic::stayToLeftOf(AnimatedGraphic *otherGraphic) {
@@ -410,28 +408,35 @@ void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
 }
 
 void AnimatedGraphic::updateMovement(float elapsedTime) {
-    if (stayOnTopOfGraphic != nullptr) {
-        float otherGraphicPositionTop = applyScrolling ? stayOnTopOfGraphic->getWorldPositionTop() : stayOnTopOfGraphic->getScreenPositionTop();
-        getPosition().y = otherGraphicPositionTop - (getHeight() - getMarginBottom());
-        getPosition().x += jimp::Timing::toValueForElapsedTime(moveVelocity.x, elapsedTime);;
-        return;
+    if (getVelocity().y < 0) {
+        stopStayOnTopOf();
     }
-    if (!applyGravity && getVelocity().x == 0 && getVelocity().y == 0) {
-        return;
-    }
-    if (applyGravity)  {
+    if (applyGravity && stayOnTopOfGraphic == nullptr)  {
         gravityVelocity.y += jimp::Timing::toValueForElapsedTime(GameEngine::getInstance()->getGravityForce(), elapsedTime);
     }
-//    interruptGravity = false;
-    
-    addToPosition(jimp::Timing::toValueForElapsedTime(gravityVelocity, elapsedTime));
-    
-    if (interruptMovementX) {
-        interruptMovementX = false;
-        addToPosition(jimp::Timing::toValueForElapsedTime(Vector2D::from(0, moveVelocity.y), elapsedTime));
-    } else {
-        addToPosition(jimp::Timing::toValueForElapsedTime(moveVelocity, elapsedTime));
+    if (!interruptMovementX) {
+        getPosition().x += jimp::Timing::toValueForElapsedTime(moveVelocity.x, elapsedTime);
     }
+    interruptMovementX = false;
+    if (stayOnTopOfGraphic != nullptr) {
+        std::cout << rand() << "Stay on top of" << std::endl;
+        float otherGraphicPositionTop = applyScrolling ? stayOnTopOfGraphic->getWorldPositionTop() : stayOnTopOfGraphic->getScreenPositionTop();
+        getPosition().y = otherGraphicPositionTop - (getHeight() - getMarginBottom());
+        gravityVelocity.y = 0;
+        moveVelocity.y = stayOnTopOfGraphic->getVelocity().y;
+    } else {
+        getPosition().y += jimp::Timing::toValueForElapsedTime(moveVelocity.y, elapsedTime);
+        getPosition().y += jimp::Timing::toValueForElapsedTime(gravityVelocity.y, elapsedTime);
+    }
+}
+
+Vector2D AnimatedGraphic::calculateNextPosition(float elapsedTime) {
+    Vector2D velocity = jimp::Timing::toValueForElapsedTime(moveVelocity + gravityVelocity, elapsedTime);
+    if (applyGravity) {
+        velocity.y += jimp::Timing::toValueForElapsedTime(GameEngine::getInstance()->getGravityForce(), elapsedTime);
+    }
+    Vector2D nextPosition = getScreenPosition() + velocity;
+    return nextPosition;
 }
 
 void AnimatedGraphic::updateCurrentDrawableData() {
@@ -449,19 +454,6 @@ void AnimatedGraphic::updateCurrentDrawableData() {
         sprite->setDrawInversedHorizontally(inversedHorizontally);
         sprite->setRgbLevels(rgb);
     }
-}
-
-Vector2D AnimatedGraphic::calculateNextPosition(float elapsedTime) {
-    Vector2D velocity = Vector2D::empty();
-    if (applyGravity && !interruptGravity)  {
-        velocity.y = gravityVelocity.y;
-        velocity.y += jimp::Timing::toValueForElapsedTime(GameEngine::getInstance()->getGravityForce(), elapsedTime);
-    }
-    if (!interruptMovementX) {
-        velocity.x += moveVelocity.x;
-    }
-    velocity.y += moveVelocity.y;
-    return getScreenPosition() + jimp::Timing::toValueForElapsedTime(velocity, elapsedTime);
 }
 
 void AnimatedGraphic::addSprite(std::string animationId, std::string filePath) {

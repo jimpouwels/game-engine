@@ -21,11 +21,11 @@ private:
     Vector2D position = Vector2D::empty();
     float scale = 1.0f;
     float angle;
+    bool hasJumped = false;
     uint16_t zIndex;
     bool visible = true;
     bool applyScrolling = false;
     bool applyGravity = false;
-    bool interruptGravity = false;
     bool interruptMovementX = false;
     bool collidable = false;
     float transparency = 100.0f;
@@ -52,6 +52,7 @@ private:
     float elapsedTimeSinceLastSwap;
     void animateRgb(float elapsedTime);
     Vector2D calculateNextPosition(float elapsedTime);
+    Vector2D calculateVelocity(float elapsedTime);
     void resetGravityVelocity();
     void updateCurrentDrawableData();
     void updateAnimation(float elapsedTime);
@@ -67,7 +68,7 @@ protected:
     void move(float angle, float pixelsPerSecond);
     void stopMoving();
     void stayOnTopOf(AnimatedGraphic *otherGraphic);
-    void stopStayOnTopOf(AnimatedGraphic* otherGraphic);
+    void stopStayOnTopOf();
     void stayToLeftOf(AnimatedGraphic* otherGraphic);
     void stayToRightOf(AnimatedGraphic* otherGraphic);
     void jump(float force);
