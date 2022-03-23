@@ -392,6 +392,7 @@ void AnimatedGraphic::animateRgbLevels(Color to, int seconds) {
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
     float otherGraphicPositionTop = applyScrolling ? otherGraphic->getWorldPositionTop() : otherGraphic->getScreenPositionTop();
     getPosition().y = otherGraphicPositionTop - (getHeight() - getMarginBottom());
+    moveVelocity.y = otherGraphic->moveVelocity.y;
     resetGravityVelocity();
 }
 
@@ -413,7 +414,6 @@ void AnimatedGraphic::updateMovement(float elapsedTime) {
         gravityVelocity.y += jimp::Timing::toValueForElapsedTime(GameEngine::getInstance()->getGravityForce(), elapsedTime);
     }
     addToPosition(jimp::Timing::toValueForElapsedTime(gravityVelocity, elapsedTime));
-    
     addToPosition(jimp::Timing::toValueForElapsedTime(moveVelocity, elapsedTime));
     
 }
