@@ -22,13 +22,13 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravit
     this->windowTitle = windowTitle;
     auto fp1 = std::bind(&GameEngine::triggerUpdate, this, std::placeholders::_1);
     auto fp2 = std::bind(&GameEngine::handleDrawableDeleted, this, std::placeholders::_1);
-    this->updateThread = new UpdateThread(fp1, fp2);
+    keyboardHandler = new KeyboardHandler();
+    this->updateThread = new UpdateThread(fp1, fp2, keyboardHandler);
     this->renderCache = new RenderingCache();
     this->imageCache = new std::map<std::string, Image*>;
     this->soundCache = new std::map<std::string, Sound*>;
     window = new sf::RenderWindow(sf::VideoMode(this->getScreenWidth(), this->getScreenHeight()), windowTitle);
     this->previousFrameTime = std::chrono::system_clock::now();
-    keyboardHandler = new jimp::KeyboardHandler();
     reloadLock = new std::mutex();
     reloadThread = new std::thread(&GameEngine::handleReloadStageRequest, this);
     new ScrollingWorld(10000, 3000);
@@ -328,10 +328,10 @@ void GameEngine::handleEvents() {
                 isWindowClosed = true;
                 break;
             case sf::Event::KeyPressed:
-                keyboardHandler->handleEvent(event);
+                keyboardHandler->addEvent(event);
                 break;
             case sf::Event::KeyReleased:
-                keyboardHandler->handleEvent(event);
+                keyboardHandler->addEvent(event);
                 break;
         }
     }

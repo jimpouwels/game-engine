@@ -3,6 +3,7 @@
 
 #include <thread>
 #include "animatedGraphic.hpp"
+#include "keyboardHandler.hpp"
 
 namespace jimp {
 
@@ -16,11 +17,12 @@ private:
     std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback;
     std::vector<AnimatedGraphic*>* registeredGraphics = nullptr;
     std::list<AnimatedGraphic*>* newGraphics = nullptr;
+    KeyboardHandler* keyboardHandler = nullptr;
     void onUpdate(float elapsedTime);
     void onGraphicDeleted(AnimatedGraphic* graphic);
     
 public:
-    UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback);
+    UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback, KeyboardHandler* keyboardHandler);
     ~UpdateThread();
     void stop();
     void start();

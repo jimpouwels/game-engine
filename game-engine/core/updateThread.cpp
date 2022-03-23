@@ -41,7 +41,7 @@ static void sortByDistance(std::vector<AnimatedGraphic *> &graphicsToCheckCollis
     });
 }
 
-void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onSpriteDeletedCallback, std::vector<AnimatedGraphic*>* registeredSprites, std::list<AnimatedGraphic*>* newGraphics, std::recursive_mutex* processingLock, std::mutex* graphicsDeleteLock) {
+void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onSpriteDeletedCallback, std::vector<AnimatedGraphic*>* registeredSprites, std::list<AnimatedGraphic*>* newGraphics, std::recursive_mutex* processingLock, std::mutex* graphicsDeleteLock, KeyboardHandler* keyboardHandler) {
     isWorking = true;
     std::chrono::time_point<std::chrono::system_clock> previousUpdateTime;
     while (true) {
@@ -56,6 +56,8 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                 if (ScrollingWorld::getInstance() != nullptr) {
                     ScrollingWorld::getInstance()->doOnUpdate(elapsed.count());
                 }
+                
+                keyboardHandler->handleAllEvents();
                 
                 std::list<AnimatedGraphic*> spritesToDelete = std::list<AnimatedGraphic*>();
                 
@@ -104,13 +106,14 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
     }
 }
 
-UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback) {
+UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback, KeyboardHandler* keyboardHandler) {
     this->processingLock = new std::recursive_mutex();
     this->graphicsDeletionLock = new std::mutex();
     this->onUpdateCallback = onUpdateCallback;
     this->onGraphicDeletedCallback = onGraphicDeletedCallback;
     this->registeredGraphics = new std::vector<AnimatedGraphic*>;
     this->newGraphics = new std::list<AnimatedGraphic*>;
+    this->keyboardHandler = keyboardHandler;
 }
 
 UpdateThread::~UpdateThread() {
@@ -125,7 +128,7 @@ UpdateThread::~UpdateThread() {
 void UpdateThread::start() {
     auto onGraphicDeletedLambda = std::bind(&UpdateThread::onGraphicDeleted, this, std::placeholders::_1);
     auto onGraphicUpdateLambda = std::bind(&UpdateThread::onUpdate, this, std::placeholders::_1);
-    this->updateThread = new std::thread(doLoop, onGraphicUpdateLambda, onGraphicDeletedLambda, registeredGraphics, newGraphics, processingLock, graphicsDeletionLock);
+    this->updateThread = new std::thread(doLoop, onGraphicUpdateLambda, onGraphicDeletedLambda, registeredGraphics, newGraphics, processingLock, graphicsDeletionLock, keyboardHandler);
 }
 
 void UpdateThread::stop() {

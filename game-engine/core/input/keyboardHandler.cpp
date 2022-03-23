@@ -10,6 +10,8 @@ namespace jimp {
 KeyboardHandler::KeyboardHandler() {
     keyListeners = new std::list<jimp::KeyListener*>();
     pressedKeys = new std::list<sf::Keyboard::Key>();
+    events = new std::list<sf::Event>();
+    mutex = new std::mutex();
 }
 
 KeyboardHandler::~KeyboardHandler() {
@@ -17,22 +19,32 @@ KeyboardHandler::~KeyboardHandler() {
     delete pressedKeys;
 }
 
-void KeyboardHandler::handleEvent(sf::Event event) {
-    KeyState keyState = keyStateFor(event);
-    
-    if (keyState == KeyState::PRESSED) {
-        if (pressedKeys->front() == event.key.code) {
-            return;
-        }
-        pressedKeys->push_front(event.key.code);
-        handleKeyEvent(event.key.code, KeyState::PRESSED);
-    } else {
-        pressedKeys->remove(event.key.code);
-        handleKeyEvent(event.key.code, KeyState::RELEASED);
-        if (!pressedKeys->empty()) {
-            handleKeyEvent(pressedKeys->front(), KeyState::PRESSED);
+void KeyboardHandler::addEvent(sf::Event event) {
+    if (keyStateFor(event) == KeyState::PRESSED && pressedKeys->front() == event.key.code) {
+        return;
+    }
+    mutex->lock();
+    events->push_back(event);
+    mutex->unlock();
+}
+
+void KeyboardHandler::handleAllEvents() {
+    mutex->lock();
+    for (const auto& event : *events) {
+        KeyState keyState = keyStateFor(event);
+        if (keyState == KeyState::PRESSED) {
+            pressedKeys->push_front(event.key.code);
+            handleKeyEvent(event.key.code, KeyState::PRESSED);
+        } else {
+            pressedKeys->remove(event.key.code);
+            handleKeyEvent(event.key.code, KeyState::RELEASED);
+            if (!pressedKeys->empty()) {
+                handleKeyEvent(pressedKeys->front(), KeyState::PRESSED);
+            }
         }
     }
+    events->clear();
+    mutex->unlock();
 }
 
 void KeyboardHandler::addKeyListener(jimp::KeyListener* keyListener) {
