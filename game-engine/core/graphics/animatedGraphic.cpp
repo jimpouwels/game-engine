@@ -350,18 +350,18 @@ void AnimatedGraphic::stopMoving() {
     moveVelocity.y = 0;
 }
 
-void AnimatedGraphic::jump(float force) {
-    gravityVelocity.y = -force;
-}
-
 void AnimatedGraphic::interruptJump() {
-    if (moveVelocity.y < 0) {
-        moveVelocity.y = 0;
+    if (gravityVelocity.y < 0) {
+        gravityVelocity.y = 0;
     }
 }
 
 void AnimatedGraphic::resetGravityVelocity() {
-//    gravityVelocity.y = 0.0f;
+    gravityVelocity.y = 0.0f;
+}
+
+void AnimatedGraphic::setRotationAngle(float angle) {
+    this->angle = angle;
 }
 
 void AnimatedGraphic::setRotationAngle(float angle) {
