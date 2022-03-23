@@ -364,10 +364,6 @@ void AnimatedGraphic::setRotationAngle(float angle) {
     this->angle = angle;
 }
 
-void AnimatedGraphic::setRotationAngle(float angle) {
-    this->angle = angle;
-}
-
 bool AnimatedGraphic::isMarkedForDeletion() {
     return markedForDeletion;
 }
@@ -388,16 +384,21 @@ void AnimatedGraphic::animateRgbLevels(Color to, int seconds) {
 }
 
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
-    stayOnTopOfGraphic = otherGraphic;
-}
-
-void AnimatedGraphic::stopStayOnTopOf() {
-    stayOnTopOfGraphic = nullptr;
+    float otherGraphicPositionTop = applyScrolling ? otherGraphic->getWorldPositionTop() : otherGraphic->getScreenPositionTop();
+    getPosition().y = otherGraphicPositionTop - (getHeight() - getMarginBottom());
+    resetGravityVelocity();
+    interruptGravity = true;
 }
 
 void AnimatedGraphic::stayToLeftOf(AnimatedGraphic *otherGraphic) {
     float otherGraphicPositionLeft = applyScrolling ? otherGraphic->getWorldPositionLeft() : otherGraphic->getScreenPositionLeft();
     getPosition().x = otherGraphicPositionLeft - (getWidth() - getMarginRight());
+    interruptMovementX = true;
+}
+
+void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
+    float otherGraphicPositionRight = applyScrolling ? otherGraphic->getWorldPositionRight() : otherGraphic->getScreenPositionRight();
+    getPosition().x = otherGraphicPositionRight - getMarginLeft();
     interruptMovementX = true;
 }
 
