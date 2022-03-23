@@ -17,13 +17,8 @@ namespace jimp {
 class AnimatedGraphic : public KeyListener {
     
 private:
-    AnimatedGraphic* stayOnTopOfGraphic = nullptr;
     Vector2D position = Vector2D::empty();
     Vector2D previousScreenPosition = Vector2D::empty();
-    float previousScreenPositionLeft = 0.0f;
-    float previousScreenPositionRight = 0.0f;
-    float previousScreenPositionTop = 0.0f;
-    float previousScreenPositionBottom = 0.0f;
     float scale = 1.0f;
     float angle;
     bool hasJumped = false;
@@ -42,6 +37,7 @@ private:
     int marginBottom = 0;
     float totalRgbAnimationTime = 0;
     int requestedRgbAnimationTime = -1;
+    AnimatedGraphic* stayOnTopOfGraphic = nullptr;
     Color rgb = Color::full();
     Color originalRgb = Color::full();
     Color targetRgb = Color::black();

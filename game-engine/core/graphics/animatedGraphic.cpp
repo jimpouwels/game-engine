@@ -34,10 +34,7 @@ void AnimatedGraphic::onFrame(float elapsedTime) {
 void AnimatedGraphic::onUpdate(float elapsedTime) {
     processingLock->lock();
     previousScreenPosition = Vector2D::from(getScreenPosition().x, getScreenPosition().y);
-    previousScreenPositionLeft = getScreenPositionLeft();
-    previousScreenPositionRight = getScreenPositionRight();
-    previousScreenPositionTop = getScreenPositionTop();
-    previousScreenPositionBottom = getScreenPositionBottom();
+    previousScreenPosition = getScreenPosition();
     if (deleteOnLeaveScreen && !isPositionedWithinScreen()) {
         markForDeletion();
     } else {
@@ -122,10 +119,10 @@ bool AnimatedGraphic::canCollideWith(AnimatedGraphic *otherGraphic, float elapse
         return false;
     }
     
-    if ((previousScreenPositionRight < otherGraphic->getPreviousScreenPositionLeft() && getScreenPositionRight() < otherGraphic->getScreenPositionLeft()) ||
-        (previousScreenPositionLeft > otherGraphic->getPreviousScreenPositionRight() && getScreenPositionLeft() > otherGraphic->getScreenPositionRight()) ||
-        (previousScreenPositionBottom < otherGraphic->getPreviousScreenPositionTop() && getScreenPositionBottom() < otherGraphic->getScreenPositionTop()) ||
-        (previousScreenPositionTop > otherGraphic->getPreviousScreenPositionBottom() && getScreenPositionTop() > otherGraphic->getScreenPositionBottom())) {
+    if ((getPreviousScreenPositionRight() < otherGraphic->getPreviousScreenPositionLeft() && getScreenPositionRight() < otherGraphic->getScreenPositionLeft()) ||
+        (getPreviousScreenPositionLeft() > otherGraphic->getPreviousScreenPositionRight() && getScreenPositionLeft() > otherGraphic->getScreenPositionRight()) ||
+        (getPreviousScreenPositionBottom() < otherGraphic->getPreviousScreenPositionTop() && getScreenPositionBottom() < otherGraphic->getScreenPositionTop()) ||
+        (getPreviousScreenPositionTop() > otherGraphic->getPreviousScreenPositionBottom() && getScreenPositionTop() > otherGraphic->getScreenPositionBottom())) {
         hasNoCollisionWith(otherGraphic);
         otherGraphic->hasNoCollisionWith(this);
         return false;
@@ -285,19 +282,19 @@ float AnimatedGraphic::getScreenPositionLeft() {
 }
 
 float AnimatedGraphic::getPreviousScreenPositionTop() {
-    return previousScreenPositionTop;
+    return previousScreenPosition.y + getMarginTop();
 }
 
 float AnimatedGraphic::getPreviousScreenPositionBottom() {
-    return previousScreenPositionBottom;
+    return previousScreenPosition.y + getHeight() - getMarginBottom();
 }
 
 float AnimatedGraphic::getPreviousScreenPositionRight() {
-    return previousScreenPositionRight;
+    return previousScreenPosition.x + getWidth() - getMarginRight();
 }
 
 float AnimatedGraphic::getPreviousScreenPositionLeft() {
-    return previousScreenPositionLeft;
+    return previousScreenPosition.x + getMarginLeft();
 }
 
 float AnimatedGraphic::getWorldPositionTop() {
