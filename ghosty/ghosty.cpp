@@ -52,6 +52,7 @@ void Ghosty::hasCollidedRectLeft(AnimatedGraphic* otherGraphic) {
 }
 
 void Ghosty::hasNoCollisionWith(AnimatedGraphic *otherGraphic) {
+    releaseFrom(otherGraphic);
 }
 
 void Ghosty::onKeyboardLeft(jimp::KeyState keyState) {

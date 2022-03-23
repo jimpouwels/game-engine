@@ -1,21 +1,6 @@
 {
 	"graphics": [
         {
-            "description": "ghosty",
-            "type": "ghosty",
-            "position": {
-                "x": 300,
-                "y": 2000
-            },
-            "scale": 0.5,
-            "applyGravity": true,
-            "rotationAngle": 0.0,
-            "applyScrolling": false,
-            "isMainCharacter": true,
-            "zIndex": 0,
-            "collidable": true
-        },
-        {
             "description": "big platform on left",
             "type": "ghosty-platform-multi-layer",
             "rows": 4,
@@ -200,6 +185,21 @@
             "applyScrolling": true,
             "transparency": 50,
             "zIndex": 3
+        },
+        {
+            "description": "ghosty",
+            "type": "ghosty",
+            "position": {
+                "x": 300,
+                "y": 2000
+            },
+            "scale": 0.5,
+            "applyGravity": true,
+            "rotationAngle": 0.0,
+            "applyScrolling": false,
+            "isMainCharacter": true,
+            "zIndex": 0,
+            "collidable": true
         }
 	]
 }

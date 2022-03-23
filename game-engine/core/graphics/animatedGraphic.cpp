@@ -156,6 +156,13 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
     }
 }
 
+void AnimatedGraphic::releaseFrom(AnimatedGraphic *otherGraphic) {
+    if (stayOnTopOfGraphic == otherGraphic) {
+        stayOnTopOfGraphic = nullptr;
+        moveVelocity.y = 0;
+    }
+}
+
 bool AnimatedGraphic::isPositionedWithinScreen() {
     return getActiveDrawable()->isPositionedWithinScreen();
 }
@@ -349,6 +356,7 @@ void AnimatedGraphic::move(float angle, float pixelsPerSecond) {
 
 void AnimatedGraphic::jump(float force) {
     gravityVelocity.y = -force;
+    stayOnTopOfGraphic = nullptr;
 }
 
 void AnimatedGraphic::stopMoving() {
@@ -392,7 +400,7 @@ void AnimatedGraphic::animateRgbLevels(Color to, int seconds) {
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
     float otherGraphicPositionTop = applyScrolling ? otherGraphic->getWorldPositionTop() : otherGraphic->getScreenPositionTop();
     getPosition().y = otherGraphicPositionTop - (getHeight() - getMarginBottom());
-    moveVelocity.y = otherGraphic->moveVelocity.y;
+    stayOnTopOfGraphic = otherGraphic;
     resetGravityVelocity();
 }
 
@@ -407,6 +415,9 @@ void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
 }
 
 void AnimatedGraphic::updateMovement(float elapsedTime) {
+    if (stayOnTopOfGraphic != nullptr) {
+        moveVelocity.y = stayOnTopOfGraphic->moveVelocity.y;
+    }
     if (!applyGravity && getVelocity().x == 0 && getVelocity().y == 0) {
           return;
     }
