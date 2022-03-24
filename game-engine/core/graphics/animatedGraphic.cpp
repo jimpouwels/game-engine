@@ -2,7 +2,6 @@
 #include <map>
 #include <list>
 #include <iostream>
-#include <SFML/Graphics.hpp>
 #include "animatedGraphic.hpp"
 #include "animation.hpp"
 #include "mathUtils.hpp"
