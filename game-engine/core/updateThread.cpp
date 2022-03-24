@@ -59,9 +59,6 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                 keyboardHandler->handleAllEvents();
                 
                 for (const auto& graphic : *allGraphics) {
-                    if (graphic->isMarkedForDeletion()) {
-                        continue;
-                    }
                     graphic->onUpdate(elapsed.count());
                 }
                 for (const auto& graphic : *allGraphics) {
