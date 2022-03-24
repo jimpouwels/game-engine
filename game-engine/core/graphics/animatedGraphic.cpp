@@ -246,15 +246,27 @@ void AnimatedGraphic::setCollidable(bool collidable) {
 }
 
 int AnimatedGraphic::getSingleWidth() {
-    return getActiveDrawable()->getSingleWidth();
+    Drawable* drawable = getActiveDrawable();
+    if (drawable == nullptr) {
+        return 0.0f;
+    }
+    return drawable->getSingleWidth();
 }
 
 int AnimatedGraphic::getWidth() {
-    return getActiveDrawable()->getWidth();
+    Drawable* drawable = getActiveDrawable();
+    if (drawable == nullptr) {
+        return 0.0f;
+    }
+    return drawable->getWidth();
 }
 
 int AnimatedGraphic::getHeight() {
-    return getActiveDrawable()->getHeight();
+    Drawable* drawable = getActiveDrawable();
+    if (drawable == nullptr) {
+        return 0.0f;
+    }
+    return drawable->getHeight();
 }
 
 int AnimatedGraphic::getCollisionRectWidth() {
