@@ -64,7 +64,7 @@ KeyState KeyboardHandler::keyStateFor(sf::Event event) {
 }
 
 void KeyboardHandler::handleKeyEvent(sf::Keyboard::Key key, KeyState keyState) {
-    if (GameEngine::getInstance()->isEditMode() && key == sf::Keyboard::Space) {
+    if (GameEngine::getInstance()->isEditMode() && key == sf::Keyboard::Space && keyState == KeyState::PRESSED) {
         GameEngine::getInstance()->reloadCurrentStage();
     }
     for (KeyListener* keyListener : *keyListeners) {

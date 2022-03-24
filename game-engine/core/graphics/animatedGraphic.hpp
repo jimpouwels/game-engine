@@ -33,7 +33,7 @@ private:
     int marginTop = 0;
     int marginBottom = 0;
     float totalRgbAnimationTime = 0;
-    int requestedRgbAnimationTime = -1;
+    float requestedRgbAnimationTime = -1.0f;
     AnimatedGraphic* stayOnTopOfGraphic = nullptr;
     Color rgb = Color::full();
     Color originalRgb = Color::full();
@@ -124,7 +124,7 @@ public:
     void setDeleteOnLeaveScreen(bool deleteOnLeaveScreen);
     bool drawInversedHorizontally();
     bool isMarkedForDeletion();
-    void animateRgbLevels(Color to, int seconds);
+    void animateRgbLevels(Color to, float seconds);
     void setRgbLevels(Color rgb);
     Color getRgbLevels();
     void setApplyScrolling(bool applyScrolling);

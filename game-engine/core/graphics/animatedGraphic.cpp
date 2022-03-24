@@ -46,16 +46,16 @@ void AnimatedGraphic::onUpdate(float elapsedTime) {
 }
 
 void AnimatedGraphic::animateRgb(float elapsedTime) {
-    if (requestedRgbAnimationTime == -1) {
+    if (MathUtils::floatEquals(requestedRgbAnimationTime, -1.0f)) {
         return;
     }
     totalRgbAnimationTime += elapsedTime;
     float remainingSeconds = requestedRgbAnimationTime - totalRgbAnimationTime;
     if ((targetRgb.r > originalRgb.r && rgb.r >= targetRgb.r)
         || (originalRgb.r > targetRgb.r && rgb.r <= targetRgb.r)
-        || remainingSeconds <= 0.0F) {
+        || remainingSeconds <= 0.0f) {
         std::swap(targetRgb, originalRgb);
-        totalRgbAnimationTime = 0;
+        totalRgbAnimationTime = 0.0f;
         remainingSeconds = requestedRgbAnimationTime;
     }
     
@@ -390,11 +390,11 @@ Color AnimatedGraphic::getRgbLevels() {
     return rgb;
 }
 
-void AnimatedGraphic::animateRgbLevels(Color to, int seconds) {
+void AnimatedGraphic::animateRgbLevels(Color to, float seconds) {
     this->requestedRgbAnimationTime = seconds;
     targetRgb = to;
     originalRgb = rgb;
-    totalRgbAnimationTime = 0;
+    totalRgbAnimationTime = 0.0f;
 }
 
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
