@@ -21,7 +21,6 @@ private:
     Vector2D previousScreenPosition = Vector2D::empty();
     float scale = 1.0f;
     float angle;
-    bool hasJumped = false;
     uint16_t zIndex;
     bool visible = true;
     bool applyScrolling = false;
@@ -29,8 +28,6 @@ private:
     bool collidable = false;
     float transparency = 100.0f;
     bool inversedHorizontally = false;
-    int collisionBoxWidth = 0;
-    int collisionBoxHeight = 0;
     int marginLeft = 0;
     int marginRight = 0;
     int marginTop = 0;
@@ -97,8 +94,6 @@ public:
     int getWidth();
     int getSingleWidth();
     int getHeight();
-    int getCollisionRectWidth();
-    int getCollisionRectHeight();
     int getMarginLeft();
     int getMarginRight();
     int getMarginTop();

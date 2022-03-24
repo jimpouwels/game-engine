@@ -269,14 +269,6 @@ int AnimatedGraphic::getHeight() {
     return drawable->getHeight();
 }
 
-int AnimatedGraphic::getCollisionRectWidth() {
-    return collisionBoxWidth;
-}
-
-int AnimatedGraphic::getCollisionRectHeight() {
-    return collisionBoxHeight;
-}
-
 float AnimatedGraphic::getScreenPositionTop() {
     return getScreenPosition().y + getMarginTop();
 }
@@ -522,8 +514,6 @@ void AnimatedGraphic::addDrawable(std::string animationId, Drawable* drawable) {
             marginTop = sprite->getMarginTop();
             marginBottom = sprite->getMarginBottom();
         }
-        collisionBoxWidth = getActiveDrawable()->getWidth() - getMarginLeft() - getMarginRight();
-        collisionBoxHeight = getActiveDrawable()->getHeight() - getMarginTop() - getMarginBottom();
     }
 }
 
