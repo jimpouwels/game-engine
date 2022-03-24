@@ -15,7 +15,7 @@ private:
     std::mutex* graphicsDeletionLock = nullptr;
     std::function<void(float)> onUpdateCallback;
     std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback;
-    std::vector<AnimatedGraphic*>* registeredGraphics = nullptr;
+    std::vector<AnimatedGraphic*>* allGraphics = nullptr;
     std::list<AnimatedGraphic*>* newGraphics = nullptr;
     KeyboardHandler* keyboardHandler = nullptr;
     void onUpdate(float elapsedTime);

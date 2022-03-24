@@ -40,7 +40,7 @@ static void sortByDistance(AnimatedGraphic* sourceGraphic, std::vector<AnimatedG
     });
 }
 
-void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onSpriteDeletedCallback, std::vector<AnimatedGraphic*>* registeredSprites, std::list<AnimatedGraphic*>* newGraphics, std::recursive_mutex* processingLock, std::mutex* graphicsDeleteLock, KeyboardHandler* keyboardHandler) {
+void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onGraphicDeletedCallBack, std::vector<AnimatedGraphic*>* allGraphics, std::list<AnimatedGraphic*>* newGraphics, std::recursive_mutex* processingLock, std::mutex* graphicsDeleteLock, KeyboardHandler* keyboardHandler) {
     isWorking = true;
     std::chrono::time_point<std::chrono::system_clock> previousUpdateTime;
     while (true) {
@@ -58,41 +58,40 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                 
                 keyboardHandler->handleAllEvents();
                 
-                std::list<AnimatedGraphic*> spritesToDelete = std::list<AnimatedGraphic*>();
-                
-                for (uint16_t i = 0; i < registeredSprites->size(); i++) {
-                    AnimatedGraphic* registeredSprite = registeredSprites->at(i);
-                    if (registeredSprite->isMarkedForDeletion()) {
+                for (const auto& graphic : *allGraphics) {
+                    if (graphic->isMarkedForDeletion()) {
                         continue;
                     }
-                    registeredSprite->onUpdate(elapsed.count());
-                    if (registeredSprite->isMarkedForDeletion()) {
-                        spritesToDelete.push_back(registeredSprite);
-                    }
+                    graphic->onUpdate(elapsed.count());
                 }
-                for (uint16_t i = 0; i < registeredSprites->size(); i++) {
-                    AnimatedGraphic* registeredGraphic = registeredSprites->at(i);
-                    if (!registeredGraphic->isCollidable()) {
+                for (const auto& graphic : *allGraphics) {
+                    if (!graphic->isCollidable() || graphic->isMarkedForDeletion()) {
                         continue;
                     }
                     std::vector<AnimatedGraphic*> graphicsToCheckCollision = std::vector<AnimatedGraphic*>();
-                    for (uint16_t x = 0; x < registeredSprites->size(); x++) {
-                        AnimatedGraphic* graphicToCheckCollision = registeredSprites->at(x);
-                        if (graphicToCheckCollision->isCollidable() && graphicToCheckCollision != registeredGraphic && registeredGraphic->canCollideWith(graphicToCheckCollision, elapsed.count())) {
+                    for (const auto& graphicToCheckCollision : *allGraphics) {
+                        if (graphicToCheckCollision->isCollidable() &&
+                            graphicToCheckCollision != graphic &&
+                            graphic->canCollideWith(graphicToCheckCollision, elapsed.count()) &&
+                            !graphic->isMarkedForDeletion()) {
                             graphicsToCheckCollision.push_back(graphicToCheckCollision);
                         }
                     }
-                    sortByDistance(registeredGraphic, graphicsToCheckCollision);
-                    for (uint16_t j = 0; j < graphicsToCheckCollision.size(); j++) {
-                        registeredGraphic->checkCollisionRect(graphicsToCheckCollision.at(j), elapsed.count());
-                    }
-                    if (registeredGraphic->isMarkedForDeletion()) {
-                        spritesToDelete.push_back(registeredGraphic);
+                    sortByDistance(graphic, graphicsToCheckCollision);
+                    for (const auto& graphicToCheckCollision : graphicsToCheckCollision) {
+                        graphic->checkCollisionRect(graphicToCheckCollision, elapsed.count());
                     }
                 }
-                for (const auto& spriteToDelete: spritesToDelete) {
+                
+                std::list<AnimatedGraphic*> graphicsToDelete = std::list<AnimatedGraphic*>();
+                for (const auto& graphic : *allGraphics) {
+                    if (graphic->isMarkedForDeletion()) {
+                        graphicsToDelete.push_back(graphic);
+                    }
+                }
+                for (const auto& graphicToDelete: graphicsToDelete) {
                     graphicsDeleteLock->lock();
-                    onSpriteDeletedCallback(spriteToDelete);
+                    onGraphicDeletedCallBack(graphicToDelete);
                     graphicsDeleteLock->unlock();
                 }
                 onUpdateCallback(elapsed.count());
@@ -109,14 +108,14 @@ UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::fun
     this->graphicsDeletionLock = new std::mutex();
     this->onUpdateCallback = onUpdateCallback;
     this->onGraphicDeletedCallback = onGraphicDeletedCallback;
-    this->registeredGraphics = new std::vector<AnimatedGraphic*>;
+    this->allGraphics = new std::vector<AnimatedGraphic*>;
     this->newGraphics = new std::list<AnimatedGraphic*>;
     this->keyboardHandler = keyboardHandler;
 }
 
 UpdateThread::~UpdateThread() {
     removeAllGraphics();
-    delete registeredGraphics;
+    delete allGraphics;
     updateThread->join();
     delete updateThread;
     delete processingLock;
@@ -126,7 +125,7 @@ UpdateThread::~UpdateThread() {
 void UpdateThread::start() {
     auto onGraphicDeletedLambda = std::bind(&UpdateThread::onGraphicDeleted, this, std::placeholders::_1);
     auto onGraphicUpdateLambda = std::bind(&UpdateThread::onUpdate, this, std::placeholders::_1);
-    this->updateThread = new std::thread(doLoop, onGraphicUpdateLambda, onGraphicDeletedLambda, registeredGraphics, newGraphics, processingLock, graphicsDeletionLock, keyboardHandler);
+    this->updateThread = new std::thread(doLoop, onGraphicUpdateLambda, onGraphicDeletedLambda, allGraphics, newGraphics, processingLock, graphicsDeletionLock, keyboardHandler);
 }
 
 void UpdateThread::stop() {
@@ -144,7 +143,7 @@ void UpdateThread::unlockDeletionOfGraphics() {
 }
 
 std::vector<AnimatedGraphic*>* UpdateThread::getAllGraphics() {
-    return registeredGraphics;
+    return allGraphics;
 }
 
 void UpdateThread::pause() {
@@ -157,8 +156,8 @@ void UpdateThread::unpause() {
 
 void UpdateThread::registerGraphic(AnimatedGraphic* graphic) {
     processingLock->lock();
-    registeredGraphics->push_back(graphic);
-    std::sort(registeredGraphics->begin(), registeredGraphics->end(), [](AnimatedGraphic* a, AnimatedGraphic* b) {
+    allGraphics->push_back(graphic);
+    std::sort(allGraphics->begin(), allGraphics->end(), [](AnimatedGraphic* a, AnimatedGraphic* b) {
         return a->getZIndex() > b->getZIndex();
     });
     processingLock->unlock();
@@ -171,19 +170,19 @@ void UpdateThread::onUpdate(float elapsedTime) {
 void UpdateThread::removeAllGraphics() {
     graphicsDeletionLock->lock();
     std::list<AnimatedGraphic*> graphicsToDelete = std::list<AnimatedGraphic*>();
-    for (const auto& sprite: *registeredGraphics) {
+    for (const auto& sprite: *allGraphics) {
         graphicsToDelete.push_back(sprite);
     }
     for (const auto& spriteToDelete: graphicsToDelete) {
         onGraphicDeleted(spriteToDelete);
     }
-    registeredGraphics->clear();
+    allGraphics->clear();
     graphicsDeletionLock->unlock();
 }
 
 void UpdateThread::onGraphicDeleted(AnimatedGraphic* graphic) {
     onGraphicDeletedCallback(graphic);
-    registeredGraphics->erase(std::remove(registeredGraphics->begin(), registeredGraphics->end(), graphic), registeredGraphics->end());
+    allGraphics->erase(std::remove(allGraphics->begin(), allGraphics->end(), graphic), allGraphics->end());
     graphic->lockForDeletion();
     delete graphic;
 }

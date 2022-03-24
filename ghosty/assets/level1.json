@@ -106,7 +106,7 @@
             "animateRgb": {
                 "from": "#000000",
                 "to": "#FFFFFF",
-                "seconds": 0.3
+                "seconds": 1.2
             },
             "collidable": false,
             "applyGravity": false,
