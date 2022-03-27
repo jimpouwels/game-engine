@@ -1,6 +1,8 @@
 #ifndef vector2D_hpp
 #define vector2D_hpp
 
+#include "mathUtils.hpp"
+
 namespace jimp {
 
 struct Vector2D {
@@ -26,6 +28,10 @@ struct Vector2D {
     
     bool operator>(Vector2D other) {
         return (x + y) > (other.x + other.y);
+    }
+    
+    bool isEmpty() {
+        return MathUtils::floatEquals(0.0f, x) && MathUtils::floatEquals(0.0f, y);
     }
     
     static Vector2D empty() {

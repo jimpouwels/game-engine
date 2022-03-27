@@ -44,7 +44,6 @@ private:
     bool deleteOnLeaveScreen = false;
     Vector2D moveVelocity = Vector2D::empty();
     Vector2D gravityVelocity = Vector2D::empty();
-    std::mutex* processingLock = new std::mutex();
     std::mutex* deleteLock = new std::mutex();
     float elapsedTimeSinceLastSwap;
     void animateRgb(float elapsedTime);

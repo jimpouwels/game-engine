@@ -17,6 +17,7 @@ const uint16_t Ship::ROTATION_POINT_Y_OFFSET = 125;
 Ship::Ship() : jimp::AnimatedGraphic() {
     setScale(0.2);
     setZIndex(0);
+    setSpriteSwapInterval("throttling", 0.04f);
     this->firingSound = new jimp::Sound("laser.ogg");
     this->thrustSound = new jimp::Sound("thrust.ogg");
     addSprite("default", "spaceship.png");

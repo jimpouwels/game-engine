@@ -20,19 +20,14 @@ AnimatedGraphic::~AnimatedGraphic() {
         delete animation;
     }
     delete animationMap;
-    delete processingLock;
     delete deleteLock;
 }
 
 void AnimatedGraphic::onFrame(float elapsedTime) {
-    processingLock->lock();
     doOnFrame(elapsedTime);
-    processingLock->unlock();
 }
 
 void AnimatedGraphic::onUpdate(float elapsedTime) {
-    processingLock->lock();
-    previousScreenPosition = Vector2D::from(getScreenPosition().x, getScreenPosition().y);
     previousScreenPosition = getScreenPosition();
     if (deleteOnLeaveScreen && !isPositionedWithinScreen()) {
         markForDeletion();
@@ -42,7 +37,6 @@ void AnimatedGraphic::onUpdate(float elapsedTime) {
         this->updateAnimation(elapsedTime);
     }
     animateRgb(elapsedTime);
-    processingLock->unlock();
 }
 
 void AnimatedGraphic::animateRgb(float elapsedTime) {
@@ -118,7 +112,7 @@ bool AnimatedGraphic::canCollideWith(AnimatedGraphic *otherGraphic, float elapse
         return false;
     }
     
-    if ((getPreviousScreenPositionRight() < otherGraphic->getPreviousScreenPositionLeft() && getScreenPositionRight() < otherGraphic->getScreenPositionLeft()) ||
+    if ((getPreviousScreenPositionRight() < otherGraphic->getPreviousScreenPositionLeft() && getScreenPositionRight() < otherGraphic->getScreenPositionLeft())     ||
         (getPreviousScreenPositionLeft() > otherGraphic->getPreviousScreenPositionRight() && getScreenPositionLeft() > otherGraphic->getScreenPositionRight()) ||
         (getPreviousScreenPositionBottom() < otherGraphic->getPreviousScreenPositionTop() && getScreenPositionBottom() < otherGraphic->getScreenPositionTop()) ||
         (getPreviousScreenPositionTop() > otherGraphic->getPreviousScreenPositionBottom() && getScreenPositionTop() > otherGraphic->getScreenPositionBottom())) {
@@ -212,6 +206,9 @@ Vector2D& AnimatedGraphic::getPosition() {
 }
 
 Vector2D AnimatedGraphic::getPreviousScreenPosition() {
+    if (previousScreenPosition.isEmpty()) {
+        previousScreenPosition = getScreenPosition();
+    }
     return previousScreenPosition;
 }
 
@@ -285,19 +282,19 @@ float AnimatedGraphic::getScreenPositionLeft() {
 }
 
 float AnimatedGraphic::getPreviousScreenPositionTop() {
-    return previousScreenPosition.y + getMarginTop();
+    return getPreviousScreenPosition().y + getMarginTop();
 }
 
 float AnimatedGraphic::getPreviousScreenPositionBottom() {
-    return previousScreenPosition.y + getHeight() - getMarginBottom();
+    return getPreviousScreenPosition().y + getHeight() - getMarginBottom();
 }
 
 float AnimatedGraphic::getPreviousScreenPositionRight() {
-    return previousScreenPosition.x + getWidth() - getMarginRight();
+    return getPreviousScreenPosition().x + getWidth() - getMarginRight();
 }
 
 float AnimatedGraphic::getPreviousScreenPositionLeft() {
-    return previousScreenPosition.x + getMarginLeft();
+    return getPreviousScreenPosition().x + getMarginLeft();
 }
 
 float AnimatedGraphic::getWorldPositionTop() {
