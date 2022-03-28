@@ -57,7 +57,7 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         AnimationType* animationType = dynamic_cast<AnimationType*>(type);
         AnimatedGraphic* animatedGraphic = nullptr;
         if (animationType->custom) {
-            animatedGraphic = createCustomGraphic(type->name);
+            animatedGraphic = createCustomGraphic(type->name, graphic);
         } else {
             animatedGraphic = new AnimatedGraphic();
         }

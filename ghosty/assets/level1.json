@@ -48,6 +48,10 @@
                 "x": 2200,
                 "y": 1950
             },
+            "targetPosition": {
+                "x": 2600,
+                "y": 1550
+            },
             "collidable": true,
             "scale": 0.5,
             "applyGravity": false,

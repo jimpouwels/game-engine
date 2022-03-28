@@ -352,6 +352,14 @@ void AnimatedGraphic::move(float angle, float pixelsPerSecond) {
     moveVelocity = jimp::Geo2D::vectorFrom(angle, pixelsPerSecond);
 }
 
+void AnimatedGraphic::move(Vector2D targetPoint, float pixelsPerSecond) {
+    moveVelocity = jimp::Geo2D::vectorFrom(getPosition(), targetPoint, pixelsPerSecond);
+}
+
+void AnimatedGraphic::moveBetweenPoints(Vector2D startPoint, Vector2D targetPoint, float pixelsPerSecond) {
+    moveVelocity = jimp::Geo2D::vectorFrom(getPosition(), targetPoint, pixelsPerSecond); 
+}
+
 void AnimatedGraphic::jump(float force) {
     gravityVelocity.y = -force;
 }

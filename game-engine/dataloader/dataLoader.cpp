@@ -85,6 +85,7 @@ std::list<Graphic> DataLoader::loadGraphics(std::string filePath) {
                 graphic.animateRgbSeconds = rgbJson.at("seconds");
             }
         }
+        graphic.config = graphicJson;
         graphics.push_back(graphic);
     }
     

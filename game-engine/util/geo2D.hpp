@@ -39,6 +39,13 @@ public:
         return Vector2D::from(deltaX, deltaY);
     }
     
+    static Vector2D vectorFrom(Vector2D startPoint, Vector2D targetPoint, float force) {
+        float x = startPoint.x - targetPoint.x;
+        float y = startPoint.y - targetPoint.y;
+        float rad = atan2(y, x);
+        return vectorFrom(rad * (180/M_PI) - 90, force);
+    }
+    
     static float inverseAngleVertically(float angle) {
         float invertedAngle = angle;
         if (angle == 0 || angle == 180) {

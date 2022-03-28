@@ -12,7 +12,7 @@ Ghosty::Ghosty() : jimp::AnimatedGraphic() {
 }
 
 void Ghosty::doOnFrame(float elapsedTime) {
-    jimp::Vector2D posTextPosition = jimp::Vector2D::from(getPosition().x, getPosition().y);
+    jimp::Vector2D posTextPosition = jimp::Vector2D::from(getScreenPosition().x, getScreenPosition().y);
     posTextPosition.y -= 10;
     std::string text = "Pos: " + std::to_string(getPosition().x) + ", " + std::to_string(getPosition().y);
     text += "\n";

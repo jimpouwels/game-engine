@@ -22,6 +22,10 @@ struct Vector2D {
         return Vector2D::from(x - other.x, y - other.y);
     }
     
+    bool equals(Vector2D otherPoint, float margin) {
+        return sqrt(pow((otherPoint.x - x), 2.0f) + pow(otherPoint.y - y, 2.0f)) < margin;
+    }
+    
     bool operator<(Vector2D other) {
         return (x + y) < (other.x + other.y);
     }
@@ -32,6 +36,10 @@ struct Vector2D {
     
     bool isEmpty() {
         return MathUtils::floatEquals(0.0f, x) && MathUtils::floatEquals(0.0f, y);
+    }
+    
+    float distanceTo(Vector2D otherPoint) {
+        return sqrt(pow(otherPoint.x - x, 2.0f) + pow(otherPoint.y - y, 2.0f));
     }
     
     static Vector2D empty() {

@@ -10,7 +10,7 @@ namespace ghosty {
 class GhostyStageFactory : public jimp::StageFactory {
   
 protected:
-    jimp::AnimatedGraphic* createCustomGraphic(std::string name) override;
+    jimp::AnimatedGraphic* createCustomGraphic(std::string name, jimp::Graphic graphic) override;
     
 public:
     GhostyStageFactory(std::string typesFilePath);

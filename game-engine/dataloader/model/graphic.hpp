@@ -25,6 +25,7 @@ struct Graphic {
     Color animateRgbTo = Color::full();
     float animateRgbSeconds = 0.0f;
     float transparency = 100.0f;
+    nlohmann::json config;
 };
 
 }

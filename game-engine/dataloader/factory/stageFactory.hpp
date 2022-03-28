@@ -23,7 +23,7 @@ private:
     Type* getTypeFor(std::string typeName);
     
 protected:
-    virtual AnimatedGraphic* createCustomGraphic(std::string type) {
+    virtual AnimatedGraphic* createCustomGraphic(std::string type, Graphic graphic) {
         return nullptr;
     };
     

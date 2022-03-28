@@ -60,6 +60,8 @@ protected:
     std::string getCurrentAnimationId();
     void accelerate(float angle, uint16_t mass, uint16_t force, float elapsedTime);
     void move(float angle, float pixelsPerSecond);
+    void move(Vector2D point, float pixelsPerSecond);
+    void moveBetweenPoints(Vector2D startPoint, Vector2D targetPoint, float pixelsPerSecond);
     void stopMoving();
     void stayOnTopOf(AnimatedGraphic* otherGraphic);
     void releaseFromOtherGraphics();
