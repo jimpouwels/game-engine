@@ -13,7 +13,8 @@ MovingPlatform::MovingPlatform(jimp::Vector2D startPosition, jimp::Vector2D targ
 void MovingPlatform::doOnFrame(float elapsedTime) {
     jimp::Vector2D posTextPosition = jimp::Vector2D::from(getScreenPosition().x, getScreenPosition().y);
     posTextPosition.y -= 100;
-    std::string text = "Pos: " + std::to_string(getPosition().x) + ", " + std::to_string(getPosition().y);
+    std::string text = "WorldPosition: " + std::to_string(getPosition().x) + ", " + std::to_string(getPosition().y);
+    text += ("\nScreenPosition: " + std::to_string(getScreenPosition().x) + ", " + std::to_string(getScreenPosition().y));
     text += "\n";
     text += "Velocity: " + std::to_string(getVelocity().x) + ", " + std::to_string(getVelocity().y);
     jimp::GameEngine::getInstance()->draw(text , posTextPosition);
