@@ -15,7 +15,7 @@ private:
     GhostyStageFactory* stageFactory = nullptr;
     
 public:
-    GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000, true) {
+    GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000, false) {
         setBackgroundColor(0x3ba7b3);
         
         jimp::Sound* rain = createNewSound("rain.wav");

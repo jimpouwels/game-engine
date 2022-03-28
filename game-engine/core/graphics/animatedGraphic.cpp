@@ -149,7 +149,6 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
 void AnimatedGraphic::hasNoCollisionWith(AnimatedGraphic* otherGraphic) {
     if (stayOnTopOfGraphic == otherGraphic) {
         stayOnTopOfGraphic = nullptr;
-        moveVelocity.y -= otherGraphic->moveVelocity.y;
     }
     onHasNoCollisionWith(otherGraphic);
 }
@@ -421,7 +420,7 @@ void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
 
 void AnimatedGraphic::updateMovement(float elapsedTime) {
     if (stayOnTopOfGraphic != nullptr) {
-        moveVelocity.y = stayOnTopOfGraphic->moveVelocity.y;
+        addToPosition(jimp::Timing::toValueForElapsedTime(stayOnTopOfGraphic->moveVelocity, elapsedTime));
     }
     if (!applyGravity && getVelocity().x == 0 && getVelocity().y == 0) {
           return;

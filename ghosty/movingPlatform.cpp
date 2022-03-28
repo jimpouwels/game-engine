@@ -7,7 +7,7 @@ MovingPlatform::MovingPlatform(jimp::Vector2D startPosition, jimp::Vector2D targ
     this->startPosition = startPosition;
     this->targetPosition = targetPosition;
     this->setPosition(startPosition);
-    moveBetweenPoints(startPosition, targetPosition, 500);
+    moveBetweenPoints(startPosition, targetPosition, 200);
 }
 
 void MovingPlatform::doOnFrame(float elapsedTime) {
@@ -19,12 +19,11 @@ void MovingPlatform::doOnFrame(float elapsedTime) {
     jimp::GameEngine::getInstance()->draw(text , posTextPosition);
 }
 
-
 void MovingPlatform::doOnUpdate(float elapsedTime) {
     if (getPosition().distanceTo(startPosition) > targetPosition.distanceTo(startPosition)) {
-        move(startPosition, 500);
+        move(startPosition, 200);
     } else if (getPosition().distanceTo(targetPosition) > startPosition.distanceTo(targetPosition)) {
-        move(targetPosition, 500);
+        move(targetPosition, 200);
     }
 }
 
