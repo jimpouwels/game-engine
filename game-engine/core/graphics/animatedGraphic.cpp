@@ -147,8 +147,8 @@ void AnimatedGraphic::checkCollisionRect(AnimatedGraphic* otherGraphic, float el
 }
 
 void AnimatedGraphic::hasNoCollisionWith(AnimatedGraphic* otherGraphic) {
-    if (stayOnTopOfGraphic == otherGraphic) {
-        stayOnTopOfGraphic = nullptr;
+    if (otherGraphicToFollow == otherGraphic) {
+        otherGraphicToFollow = nullptr;
     }
     onHasNoCollisionWith(otherGraphic);
 }
@@ -404,7 +404,7 @@ void AnimatedGraphic::animateRgbLevels(Color to, float seconds) {
 void AnimatedGraphic::stayOnTopOf(AnimatedGraphic *otherGraphic) {
     float otherGraphicPositionTop = applyScrolling ? otherGraphic->getWorldPositionTop() : otherGraphic->getScreenPositionTop();
     getPosition().y = otherGraphicPositionTop - (getHeight() - getMarginBottom());
-    stayOnTopOfGraphic = otherGraphic;
+    otherGraphicToFollow = otherGraphic;
     resetGravityVelocity();
 }
 
@@ -419,8 +419,8 @@ void AnimatedGraphic::stayToRightOf(AnimatedGraphic *otherGraphic) {
 }
 
 void AnimatedGraphic::updateMovement(float elapsedTime) {
-    if (stayOnTopOfGraphic != nullptr) {
-        addToPosition(jimp::Timing::toValueForElapsedTime(stayOnTopOfGraphic->moveVelocity, elapsedTime));
+    if (otherGraphicToFollow != nullptr) {
+        addToPosition(jimp::Timing::toValueForElapsedTime(otherGraphicToFollow->moveVelocity, elapsedTime));
     }
     if (!applyGravity && getVelocity().x == 0 && getVelocity().y == 0) {
           return;

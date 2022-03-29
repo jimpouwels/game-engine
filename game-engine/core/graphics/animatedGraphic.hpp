@@ -34,7 +34,7 @@ private:
     int marginBottom = 0;
     float totalRgbAnimationTime = 0;
     float requestedRgbAnimationTime = -1.0f;
-    AnimatedGraphic* stayOnTopOfGraphic = nullptr;
+    AnimatedGraphic* otherGraphicToFollow = nullptr;
     Color rgb = Color::full();
     Color originalRgb = Color::full();
     Color targetRgb = Color::black();
