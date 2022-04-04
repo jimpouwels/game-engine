@@ -29,7 +29,7 @@ public:
     }
     
     jimp::StageFactory* getStageFactory() override {
-        stageFactory = new GhostyStageFactory("/Users/31098470/Projects/Personal/game-engine/ghosty/assets/types.json");
+        stageFactory = new GhostyStageFactory("/Users/a310098470/projects/personal/game-engine/ghosty/assets/types.json");
         return stageFactory;
     }
     
@@ -48,7 +48,7 @@ public:
     }
     
     void startGame() {
-        loadStage("/Users/31098470/Projects/Personal/game-engine/ghosty/assets/level1.json");
+        loadStage("/Users/a310098470/projects/personal/game-engine/ghosty/assets/level1.json");
         start();
     }
 };
