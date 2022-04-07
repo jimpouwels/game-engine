@@ -1,5 +1,5 @@
-#ifndef scrollingWorld_hpp
-#define scrollingWorld_hpp
+#ifndef scroller_hpp
+#define scroller_hpp
 
 #include "animatedGraphic.hpp"
 #include "keyListener.hpp"
