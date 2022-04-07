@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "keyboardHandler.hpp"
 #include "keyListener.hpp"
-#include "scrollingWorld.hpp"
+#include "scroller.hpp"
 #include "gameEngine.hpp"
 
 namespace jimp {
@@ -68,7 +68,7 @@ void KeyboardHandler::handleKeyEvent(sf::Keyboard::Key key, KeyState keyState) {
         GameEngine::getInstance()->reloadCurrentStage();
     }
     for (KeyListener* keyListener : *keyListeners) {
-        if (GameEngine::getInstance()->isEditMode() && !(dynamic_cast<ScrollingWorld*>(keyListener))) {
+        if (GameEngine::getInstance()->isEditMode() && !(dynamic_cast<Scroller*>(keyListener))) {
             continue;
         }
         switch (key) {

@@ -1,5 +1,5 @@
 #include "updateThread.hpp"
-#include "scrollingWorld.hpp"
+#include "scroller.hpp"
 #include "timer.hpp"
 #include <iostream>
 #include <chrono>
@@ -52,8 +52,8 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
             previousUpdateTime = currentTime;
             if (elapsed.count() < 1) {
                 Timer::getInstance()->onUpdate(elapsed.count());
-                if (ScrollingWorld::getInstance() != nullptr) {
-                    ScrollingWorld::getInstance()->doOnUpdate(elapsed.count());
+                if (Scroller::getInstance() != nullptr) {
+                    Scroller::getInstance()->doOnUpdate(elapsed.count());
                 }
                 
                 keyboardHandler->handleAllEvents();

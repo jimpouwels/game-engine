@@ -8,7 +8,7 @@ namespace jimp {
 
 class GameEngine;
 
-class ScrollingWorld : public KeyListener {
+class Scroller : public KeyListener {
     
 private:
     AnimatedGraphic* mainCharacter = nullptr;
@@ -28,8 +28,8 @@ private:
     float bottomSideOfCamera = 0.0f;
     
 public:
-    ScrollingWorld(int width, int height);
-    ~ScrollingWorld();
+    Scroller(int width, int height);
+    ~Scroller();
     int getWidth();
     int getHeight();
     Vector2D getOffset();
@@ -37,7 +37,7 @@ public:
     void doOnFrame();
     AnimatedGraphic* getMainCharacter();
     void setMainCharacter(AnimatedGraphic* animatedGraphic);
-    static ScrollingWorld* getInstance();
+    static Scroller* getInstance();
     void onKeyboardLeft(jimp::KeyState keyState) override;
     void onKeyboardRight(jimp::KeyState keyState) override;
     void onKeyboardUp(jimp::KeyState keyState) override;

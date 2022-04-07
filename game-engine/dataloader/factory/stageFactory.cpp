@@ -77,7 +77,7 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
         }
         animatedGraphic->setApplyScrolling(graphic.applyScrolling || (graphic.isMainCharacter && GameEngine::getInstance()->isEditMode()));
         if (graphic.isMainCharacter) {
-            ScrollingWorld::getInstance()->setMainCharacter(animatedGraphic);
+            Scroller::getInstance()->setMainCharacter(animatedGraphic);
         }
         spriteLoaderThreads->push_back(new std::thread(&StageFactory::addSpritesToGraphic, this, animatedGraphic, animationType));
         GameEngine::getInstance()->registerGraphic(animatedGraphic);

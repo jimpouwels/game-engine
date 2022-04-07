@@ -212,7 +212,7 @@ Vector2D AnimatedGraphic::getPreviousScreenPosition() {
 }
 
 Vector2D AnimatedGraphic::getScreenPosition() {
-    return position + (applyScrolling ? ScrollingWorld::getInstance()->getOffset() : Vector2D::empty());
+    return position + (applyScrolling ? Scroller::getInstance()->getOffset() : Vector2D::empty());
 }
 
 Vector2D& AnimatedGraphic::getMoveVelocity() {

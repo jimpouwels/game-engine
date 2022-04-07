@@ -1,14 +1,14 @@
-#include "scrollingWorld.hpp"
+#include "scroller.hpp"
 #include "gameEngine.hpp"
 #include "rectangle.hpp"
 #include <math.h>
 
 namespace jimp {
 
-static ScrollingWorld* scrollingWorldInstance = nullptr;
+static Scroller* scrollerInstance = nullptr;
 
-ScrollingWorld::ScrollingWorld(int width, int height) {
-    scrollingWorldInstance = this;
+Scroller::Scroller(int width, int height) {
+    scrollerInstance = this;
     this->width = width;
     this->height = height;
     
@@ -23,26 +23,26 @@ ScrollingWorld::ScrollingWorld(int width, int height) {
     bottomSideOfCamera = gameEngine->getScreenHeight() / 2;
 }
 
-ScrollingWorld::~ScrollingWorld() {
+Scroller::~Scroller() {
 }
 
-int ScrollingWorld::getWidth() {
+int Scroller::getWidth() {
     return width;
 }
 
-int ScrollingWorld::getHeight() {
+int Scroller::getHeight() {
     return height;
 }
 
-AnimatedGraphic* ScrollingWorld::getMainCharacter() {
+AnimatedGraphic* Scroller::getMainCharacter() {
     return mainCharacter;
 }
 
-void ScrollingWorld::setMainCharacter(AnimatedGraphic* animatedGraphic) {
+void Scroller::setMainCharacter(AnimatedGraphic* animatedGraphic) {
     mainCharacter = animatedGraphic;
 }
 
-void ScrollingWorld::doOnUpdate(float elapsedTime) {
+void Scroller::doOnUpdate(float elapsedTime) {
     if (mainCharacter == nullptr) {
         return;
     }
@@ -90,32 +90,32 @@ void ScrollingWorld::doOnUpdate(float elapsedTime) {
     offsetY = abs(offsetY + offsetDeltaY);
 }
 
-Vector2D ScrollingWorld::getOffset() {
+Vector2D Scroller::getOffset() {
     return Vector2D::from(-offsetX, -offsetY);
 }
 
-void ScrollingWorld::onKeyboardLeft(jimp::KeyState keyState) {
+void Scroller::onKeyboardLeft(jimp::KeyState keyState) {
     editCameraLeft = keyState == KeyState::PRESSED;
 }
 
-void ScrollingWorld::onKeyboardRight(jimp::KeyState keyState) {
+void Scroller::onKeyboardRight(jimp::KeyState keyState) {
     editCameraRight = keyState == KeyState::PRESSED;
 }
 
-void ScrollingWorld::onKeyboardUp(jimp::KeyState keyState) {
+void Scroller::onKeyboardUp(jimp::KeyState keyState) {
     editCameraUp = keyState == KeyState::PRESSED;
 }
 
-void ScrollingWorld::onKeyboardDown(jimp::KeyState keyState) {
+void Scroller::onKeyboardDown(jimp::KeyState keyState) {
     editCameraDown = keyState == KeyState::PRESSED;
 }
 
-void ScrollingWorld::doOnFrame() {
+void Scroller::doOnFrame() {
 //    GameEngine::getInstance()->drawRectangle(500, 500, Vector2D { .x = static_cast<float>(GameEngine::getInstance()->getScreenWidth() / 2 - 250), .y = static_cast<float>(GameEngine::getInstance()->getScreenHeight() / 2 - 250) }, 0xFFFFFF);
 }
 
-ScrollingWorld* ScrollingWorld::getInstance() {
-    return scrollingWorldInstance;
+Scroller* Scroller::getInstance() {
+    return scrollerInstance;
 }
 
 }

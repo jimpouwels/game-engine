@@ -31,7 +31,7 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravit
     this->previousFrameTime = std::chrono::system_clock::now();
     reloadLock = new std::mutex();
     reloadThread = new std::thread(&GameEngine::handleReloadStageRequest, this);
-    new ScrollingWorld(10000, 3000);
+    new Scroller(10000, 3000);
 }
 
 GameEngine::~GameEngine() {
@@ -107,7 +107,7 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     
     onFrame(elapsedTimeSincePreviousFrame);
     
-    scrollingWorld->doOnFrame();
+    scroller->doOnFrame();
     updateThread->lockDeletionOfGraphics();
     for (const auto& graphic: *updateThread->getAllGraphics()) {
         if (!graphic->isMarkedForDeletion()) {

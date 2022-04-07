@@ -3,7 +3,7 @@
 #include "animatedGraphic.hpp"
 #include "gameEngine.hpp"
 #include "vector2D.hpp"
-#include "scrollingWorld.hpp"
+#include "scroller.hpp"
 #include "ghostyStageFactory.hpp"
 #include "raindrop.hpp"
 

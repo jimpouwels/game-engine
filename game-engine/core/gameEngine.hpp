@@ -11,7 +11,7 @@
 #include "keyListener.hpp"
 #include "keyboardHandler.hpp"
 #include "updateThread.hpp"
-#include "scrollingWorld.hpp"
+#include "scroller.hpp"
 #include "stageFactory.hpp"
 
 namespace jimp {
@@ -56,7 +56,7 @@ private:
     
 protected:
     GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravityForce, std::string windowTitle, uint16_t desiredFrameRate, bool editMode);
-    ScrollingWorld* scrollingWorld = nullptr;
+    Scroller* scroller = nullptr;
     void start();
     void setBackgroundColor(uint32_t color);
     virtual StageFactory* getStageFactory() = 0;
