@@ -18,7 +18,7 @@ void Ghosty::doOnFrame(float elapsedTime) {
 //    text += ("\nScreenPosition: " + std::to_string(getScreenPosition().x) + ", " + std::to_string(getScreenPosition().y));
 //    text += "\n";
 //    text += "Velocity: " + std::to_string(getVelocity().x) + ", " + std::to_string(getVelocity().y);
-//    jimp::GameEngine::getInstance()->draw(text , posTextPosition);
+//    jimp::GameEngine::getInstance()->draw(text, posTextPosition);
 }
 
 void Ghosty::doOnUpdate(float elapsedTime) {
