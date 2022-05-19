@@ -396,16 +396,16 @@
 		23EF8D1D27DE797700AD67B7 /* dataLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23EF8D1B27DE797700AD67B7 /* dataLoader.cpp */; };
 		23EF8D2F27DF26E600AD67B7 /* stageFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23EF8D2D27DF26E600AD67B7 /* stageFactory.cpp */; };
 		23EF8D3227DF279600AD67B7 /* ghostyStageFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23EF8D3027DF279600AD67B7 /* ghostyStageFactory.cpp */; };
-		B7ED758A27FB24C4009A66AF /* libsfml-audio.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7D827833CFD00C6C916 /* libsfml-audio.2.5.1.dylib */; };
-		B7ED758B27FB24C4009A66AF /* libsfml-audio.2.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 23D5C7D827833CFD00C6C916 /* libsfml-audio.2.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		B7ED758C27FB24C4009A66AF /* libsfml-graphics.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7D927833CFD00C6C916 /* libsfml-graphics.2.5.1.dylib */; };
-		B7ED758D27FB24C4009A66AF /* libsfml-graphics.2.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 23D5C7D927833CFD00C6C916 /* libsfml-graphics.2.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		B7ED758E27FB24C4009A66AF /* libsfml-network.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7DA27833CFD00C6C916 /* libsfml-network.2.5.1.dylib */; };
-		B7ED758F27FB24C4009A66AF /* libsfml-network.2.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 23D5C7DA27833CFD00C6C916 /* libsfml-network.2.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		B7ED759027FB24C4009A66AF /* libsfml-system.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7DB27833CFD00C6C916 /* libsfml-system.2.5.1.dylib */; };
-		B7ED759127FB24C4009A66AF /* libsfml-system.2.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 23D5C7DB27833CFD00C6C916 /* libsfml-system.2.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		B7ED759227FB24C4009A66AF /* libsfml-window.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7DC27833CFD00C6C916 /* libsfml-window.2.5.1.dylib */; };
-		B7ED759327FB24C4009A66AF /* libsfml-window.2.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 23D5C7DC27833CFD00C6C916 /* libsfml-window.2.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		857E48EF2833B41100E681E0 /* libsfml-audio.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7D827833CFD00C6C916 /* libsfml-audio.2.5.1.dylib */; };
+		857E48F02833B41100E681E0 /* libsfml-audio.2.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 23D5C7D827833CFD00C6C916 /* libsfml-audio.2.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		857E48F12833B41100E681E0 /* libsfml-graphics.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7D927833CFD00C6C916 /* libsfml-graphics.2.5.1.dylib */; };
+		857E48F22833B41100E681E0 /* libsfml-graphics.2.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 23D5C7D927833CFD00C6C916 /* libsfml-graphics.2.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		857E48F32833B41100E681E0 /* libsfml-network.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7DA27833CFD00C6C916 /* libsfml-network.2.5.1.dylib */; };
+		857E48F42833B41100E681E0 /* libsfml-network.2.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 23D5C7DA27833CFD00C6C916 /* libsfml-network.2.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		857E48F52833B41100E681E0 /* libsfml-system.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7DB27833CFD00C6C916 /* libsfml-system.2.5.1.dylib */; };
+		857E48F62833B41100E681E0 /* libsfml-system.2.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 23D5C7DB27833CFD00C6C916 /* libsfml-system.2.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		857E48F72833B41100E681E0 /* libsfml-window.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 23D5C7DC27833CFD00C6C916 /* libsfml-window.2.5.1.dylib */; };
+		857E48F82833B41100E681E0 /* libsfml-window.2.5.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 23D5C7DC27833CFD00C6C916 /* libsfml-window.2.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -771,17 +771,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B7ED759427FB24C4009A66AF /* Embed Libraries */ = {
+		857E48F92833B41100E681E0 /* Embed Libraries */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B7ED758F27FB24C4009A66AF /* libsfml-network.2.5.1.dylib in Embed Libraries */,
-				B7ED759127FB24C4009A66AF /* libsfml-system.2.5.1.dylib in Embed Libraries */,
-				B7ED759327FB24C4009A66AF /* libsfml-window.2.5.1.dylib in Embed Libraries */,
-				B7ED758B27FB24C4009A66AF /* libsfml-audio.2.5.1.dylib in Embed Libraries */,
-				B7ED758D27FB24C4009A66AF /* libsfml-graphics.2.5.1.dylib in Embed Libraries */,
+				857E48F42833B41100E681E0 /* libsfml-network.2.5.1.dylib in Embed Libraries */,
+				857E48F62833B41100E681E0 /* libsfml-system.2.5.1.dylib in Embed Libraries */,
+				857E48F82833B41100E681E0 /* libsfml-window.2.5.1.dylib in Embed Libraries */,
+				857E48F02833B41100E681E0 /* libsfml-audio.2.5.1.dylib in Embed Libraries */,
+				857E48F22833B41100E681E0 /* libsfml-graphics.2.5.1.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1222,11 +1222,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7ED758E27FB24C4009A66AF /* libsfml-network.2.5.1.dylib in Frameworks */,
-				B7ED759027FB24C4009A66AF /* libsfml-system.2.5.1.dylib in Frameworks */,
-				B7ED759227FB24C4009A66AF /* libsfml-window.2.5.1.dylib in Frameworks */,
-				B7ED758A27FB24C4009A66AF /* libsfml-audio.2.5.1.dylib in Frameworks */,
-				B7ED758C27FB24C4009A66AF /* libsfml-graphics.2.5.1.dylib in Frameworks */,
+				857E48F32833B41100E681E0 /* libsfml-network.2.5.1.dylib in Frameworks */,
+				857E48F52833B41100E681E0 /* libsfml-system.2.5.1.dylib in Frameworks */,
+				857E48F72833B41100E681E0 /* libsfml-window.2.5.1.dylib in Frameworks */,
+				857E48EF2833B41100E681E0 /* libsfml-audio.2.5.1.dylib in Frameworks */,
+				857E48F12833B41100E681E0 /* libsfml-graphics.2.5.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1915,7 +1915,7 @@
 				23D5C7BD27832B5600C6C916 /* Sources */,
 				23D5C7BE27832B5600C6C916 /* Frameworks */,
 				23D5C7BF27832B5600C6C916 /* CopyFiles */,
-				B7ED759427FB24C4009A66AF /* Embed Libraries */,
+				857E48F92833B41100E681E0 /* Embed Libraries */,
 			);
 			buildRules = (
 			);
@@ -2149,6 +2149,11 @@
 					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
 					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
 					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2182,6 +2187,11 @@
 					"$(PROJECT_DIR)/External\\ Libraries/SFML-2.5.1-macos-clang/lib",
 					"$(PROJECT_DIR)/External\\ Libraries/SFML-2.5.1-macos-clang/lib",
 					"$(PROJECT_DIR)/External\\ Libraries/SFML-2.5.1-macos-clang/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
+					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
 					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
 					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
 					"$(PROJECT_DIR)/External\\ Libraries/SFML/lib",
