@@ -1,6 +1,8 @@
 #ifndef stageFactory_hpp
 #define stageFactory_hpp
 
+#include <thread>
+#include <list>
 #include "animatedGraphic.hpp"
 #include "dataLoader.hpp"
 #include "type.hpp"

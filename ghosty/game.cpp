@@ -11,26 +11,18 @@ namespace ghosty {
 
 class GhostyGame : public jimp::GameEngine {
     
-private:
-    GhostyStageFactory* stageFactory = nullptr;
-    
 public:
     GhostyGame(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 5000, name, 1000, false) {
         setBackgroundColor(0x3ba7b3);
         
-        jimp::Sound* rain = createNewSound("rain.wav");
-        jimp::Sound* background = createNewSound("background.ogg");
+        jimp::Sound* rain = createNewSound("/Users/jimpouwels/Projects/game-engine/ghosty/assets/sound/rain.wav");
+        jimp::Sound* background = createNewSound("/Users/jimpouwels/Projects/game-engine/ghosty/assets/sound/background.ogg");
         rain->loop(20);
         background->loop(20);
     }
     
-    ~GhostyGame() {
-        delete stageFactory;
-    }
-    
-    jimp::StageFactory* getStageFactory() override {
-        stageFactory = new GhostyStageFactory("/Users/phnl310098470/projects/personal/game-engine/ghosty/assets/types.json");
-        return stageFactory;
+    std::unique_ptr<jimp::StageFactory> getStageFactory() override {
+        return std::make_unique<GhostyStageFactory>("/Users/jimpouwels/Projects/game-engine/ghosty/assets/types.json");
     }
     
     void onUpdate(float elapsedTime) override {
@@ -48,7 +40,7 @@ public:
     }
     
     void startGame() {
-        loadStage("/Users/phnl310098470/projects/personal/game-engine/ghosty/assets/level1.json");
+        loadStage("/Users/jimpouwels/Projects/game-engine/ghosty/assets/level1.json");
         start();
     }
 };

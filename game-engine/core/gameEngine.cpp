@@ -333,6 +333,8 @@ void GameEngine::handleEvents() {
             case sf::Event::KeyReleased:
                 keyboardHandler->addEvent(event);
                 break;
+            default:
+                break;
         }
     }
 }

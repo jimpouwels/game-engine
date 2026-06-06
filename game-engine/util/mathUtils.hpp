@@ -2,6 +2,7 @@
 #define mathUtils_h
 
 #include <math.h>
+#include <cstdlib>
 
 namespace jimp {
 

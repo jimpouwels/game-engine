@@ -31,7 +31,7 @@ private:
     std::thread* reloadThread = nullptr;
     std::mutex* reloadLock = nullptr;
     std::string currentStage = "";
-    StageFactory* stageFactory = nullptr;
+    std::unique_ptr<StageFactory> stageFactory = nullptr;
     GameEngine* gameEngine = nullptr;
     std::string windowTitle;
     bool isWindowClosed = false;
@@ -59,7 +59,7 @@ protected:
     Scroller* scroller = nullptr;
     void start();
     void setBackgroundColor(uint32_t color);
-    virtual StageFactory* getStageFactory() = 0;
+    virtual std::unique_ptr<StageFactory> getStageFactory() = 0;
     virtual void onStageLoad(std::string stageFilePath) {};
     virtual void onFrame(float elapsedTime) {};
     virtual void onUpdate(float elapsedTime) {};

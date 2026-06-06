@@ -87,6 +87,8 @@ void KeyboardHandler::handleKeyEvent(sf::Keyboard::Key key, KeyState keyState) {
             case sf::Keyboard::Space:
                 keyListener->onKeyboardSpaceBar(keyState);
                 break;
+            default:
+                break;
         }
     }
 }

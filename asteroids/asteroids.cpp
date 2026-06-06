@@ -34,7 +34,7 @@ public:
         start();
     }
     
-    jimp::StageFactory* getStageFactory() override {
+    std::unique_ptr<jimp::StageFactory> getStageFactory() override {
         return nullptr;
     }
     
