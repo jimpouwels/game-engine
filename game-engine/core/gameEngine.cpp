@@ -312,14 +312,14 @@ void GameEngine::triggerUpdate(float elapsedTime) {
     onUpdate(elapsedTime);
 }
 
-void GameEngine::handleDrawableDeleted(AnimatedGraphic* graphic) {
-    onGraphicDeleted(graphic);
-    keyboardHandler->removeKeyListener(*graphic);
-    graphic->lockForDeletion();
+void GameEngine::handleDrawableDeleted(AnimatedGraphic& graphic) {
+    onGraphicDeleted(&graphic);
+    keyboardHandler->removeKeyListener(graphic);
+    graphic.lockForDeletion();
     std::lock_guard<std::recursive_mutex> lk(graphicsLock);
     allGraphics.erase(
         std::remove_if(allGraphics.begin(), allGraphics.end(),
-            [graphic](const std::unique_ptr<AnimatedGraphic>& p) { return p.get() == graphic; }),
+            [&graphic](const std::unique_ptr<AnimatedGraphic>& p) { return p.get() == &graphic; }),
         allGraphics.end());
 }
 

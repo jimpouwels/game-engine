@@ -16,14 +16,14 @@ private:
     std::thread* updateThread = nullptr;
     std::recursive_mutex* processingLock = nullptr;
     std::function<void(float)> onUpdateCallback;
-    std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback;
+    std::function<void(AnimatedGraphic&)> onGraphicDeletedCallback;
     GameEngine* gameEngine = nullptr;
     KeyboardHandler* keyboardHandler = nullptr;
     void onUpdate(float elapsedTime);
-    void onGraphicDeleted(AnimatedGraphic* graphic);
+    void onGraphicDeleted(AnimatedGraphic& graphic);
     
 public:
-    UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback, GameEngine* gameEngine, KeyboardHandler* keyboardHandler);
+    UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic&)> onGraphicDeletedCallback, GameEngine* gameEngine, KeyboardHandler* keyboardHandler);
     ~UpdateThread();
     void stop();
     void start();

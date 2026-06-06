@@ -41,7 +41,7 @@ static void sortByDistance(AnimatedGraphic* sourceGraphic, std::vector<AnimatedG
     });
 }
 
-void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onGraphicDeletedCallBack, GameEngine* gameEngine, std::recursive_mutex* processingLock, KeyboardHandler* keyboardHandler) {
+void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic&)> onGraphicDeletedCallBack, GameEngine* gameEngine, std::recursive_mutex* processingLock, KeyboardHandler* keyboardHandler) {
     isWorking = true;
     std::chrono::time_point<std::chrono::system_clock> previousUpdateTime;
     while (true) {
@@ -90,7 +90,7 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                     }
                 }
                 for (AnimatedGraphic* graphicToDelete : graphicsToDelete) {
-                    onGraphicDeletedCallBack(graphicToDelete);
+                    onGraphicDeletedCallBack(*graphicToDelete);
                 }
                 onUpdateCallback(elapsed.count());
             }
@@ -101,7 +101,7 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
     }
 }
 
-UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback, GameEngine* gameEngine, KeyboardHandler* keyboardHandler) {
+UpdateThread::UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic&)> onGraphicDeletedCallback, GameEngine* gameEngine, KeyboardHandler* keyboardHandler) {
     this->processingLock = new std::recursive_mutex();
     this->onUpdateCallback = onUpdateCallback;
     this->onGraphicDeletedCallback = onGraphicDeletedCallback;
@@ -149,11 +149,11 @@ void UpdateThread::removeAllGraphics() {
         }
     }
     for (AnimatedGraphic* spriteToDelete : graphicsToDelete) {
-        onGraphicDeleted(spriteToDelete);
+        onGraphicDeleted(*spriteToDelete);
     }
 }
 
-void UpdateThread::onGraphicDeleted(AnimatedGraphic* graphic) {
+void UpdateThread::onGraphicDeleted(AnimatedGraphic& graphic) {
     onGraphicDeletedCallback(graphic);
 }
 

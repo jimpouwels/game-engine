@@ -56,7 +56,7 @@ private:
     void handleEvents();
     void triggerUpdate(float elapsedTime);
     void handleSounds(float elapsedTime);
-    void handleDrawableDeleted(AnimatedGraphic* graphic);
+    void handleDrawableDeleted(AnimatedGraphic& graphic);
     
 protected:
     GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravityForce, std::string windowTitle, uint16_t desiredFrameRate, bool editMode);
