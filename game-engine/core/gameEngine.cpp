@@ -23,7 +23,7 @@ GameEngine::GameEngine(uint16_t screenWidth, uint16_t screenHeight, float gravit
     auto fp1 = std::bind(&GameEngine::triggerUpdate, this, std::placeholders::_1);
     auto fp2 = std::bind(&GameEngine::handleDrawableDeleted, this, std::placeholders::_1);
     keyboardHandler = new KeyboardHandler();
-    this->updateThread = new UpdateThread(fp1, fp2, keyboardHandler);
+    this->updateThread = new UpdateThread(fp1, fp2, this, keyboardHandler);
     this->renderCache = new RenderingCache();
     this->imageCache = new std::map<std::string, Image*>;
     this->soundCache = new std::map<std::string, Sound*>;
@@ -108,14 +108,15 @@ void GameEngine::drawFrame(float elapsedTimeSincePreviousFrame) {
     onFrame(elapsedTimeSincePreviousFrame);
     
     scroller->doOnFrame();
-    updateThread->lockDeletionOfGraphics();
-    for (const auto& graphic: *updateThread->getAllGraphics()) {
-        if (!graphic->isMarkedForDeletion()) {
-            graphic->onFrame(elapsedTimeSincePreviousFrame);
-            draw(graphic->getActiveDrawable());
+    {
+        std::lock_guard<std::recursive_mutex> lk(graphicsLock);
+        for (const auto& graphic: allGraphics) {
+            if (!graphic->isMarkedForDeletion()) {
+                graphic->onFrame(elapsedTimeSincePreviousFrame);
+                draw(graphic->getActiveDrawable());
+            }
         }
     }
-    updateThread->unlockDeletionOfGraphics();
     
     std::string statusText = "";
     if (isEditMode() && reloadingStage) {
@@ -191,9 +192,13 @@ void GameEngine::drawRectangle(float width, float height, Vector2D position, Col
     window->draw(shape);
 }
 
-void GameEngine::registerGraphic(AnimatedGraphic *graphic) {
-    addKeyListener(graphic);
-    updateThread->registerGraphic(graphic);
+void GameEngine::registerGraphic(std::unique_ptr<AnimatedGraphic> graphic) {
+    addKeyListener(*graphic);
+    std::lock_guard<std::recursive_mutex> lk(graphicsLock);
+    allGraphics.push_back(std::move(graphic));
+    std::sort(allGraphics.begin(), allGraphics.end(), [](const std::unique_ptr<AnimatedGraphic>& a, const std::unique_ptr<AnimatedGraphic>& b) {
+        return a->getZIndex() > b->getZIndex();
+    });
 }
 
 Image* GameEngine::createNewImage(std::string filePath) {
@@ -218,7 +223,7 @@ Sound* GameEngine::createNewSound(std::string filePath) {
     return sound;
 }
 
-void GameEngine::addKeyListener(KeyListener* keyListener) {
+void GameEngine::addKeyListener(KeyListener& keyListener) {
     keyboardHandler->addKeyListener(keyListener);
 }
 
@@ -266,8 +271,8 @@ bool GameEngine::isOutsideScreenRight(AnimatedGraphic* sprite) {
     return sprite->getPosition().x > getScreenWidth();
 }
 
-std::vector<AnimatedGraphic*>* GameEngine::getAllGraphics() {
-    return updateThread->getAllGraphics();
+GameEngine::LockedGraphics GameEngine::getAllGraphics() {
+    return { allGraphics, std::unique_lock<std::recursive_mutex>(graphicsLock) };
 }
 
 void GameEngine::setBackgroundColor(uint32_t color) {
@@ -309,7 +314,13 @@ void GameEngine::triggerUpdate(float elapsedTime) {
 
 void GameEngine::handleDrawableDeleted(AnimatedGraphic* graphic) {
     onGraphicDeleted(graphic);
-    keyboardHandler->removeKeyListener(graphic);
+    keyboardHandler->removeKeyListener(*graphic);
+    graphic->lockForDeletion();
+    std::lock_guard<std::recursive_mutex> lk(graphicsLock);
+    allGraphics.erase(
+        std::remove_if(allGraphics.begin(), allGraphics.end(),
+            [graphic](const std::unique_ptr<AnimatedGraphic>& p) { return p.get() == graphic; }),
+        allGraphics.end());
 }
 
 void GameEngine::handleSounds(float elapsedTime) {

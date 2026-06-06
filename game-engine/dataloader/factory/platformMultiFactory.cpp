@@ -19,7 +19,7 @@ void PlatformMultiFactory::render() {
     for (int x = 0; x < columnCount; x++) {
         for (int y = 0; y < rowCount; y++) {
             std::string filePath = "";
-            AnimatedGraphic* block = new AnimatedGraphic();
+            auto block = std::make_unique<AnimatedGraphic>();
             block->setName("multi-block");
             if (x == 0 && y == 0) {
                 filePath = cornerLeftTopFilePath;
@@ -57,7 +57,7 @@ void PlatformMultiFactory::render() {
             block->setApplyGravity(false);
             block->setZIndex(zIndex);
             block->addSprite("default", filePath);
-            GameEngine::getInstance()->registerGraphic(block);
+            GameEngine::getInstance()->registerGraphic(std::move(block));
         }
     }
 }

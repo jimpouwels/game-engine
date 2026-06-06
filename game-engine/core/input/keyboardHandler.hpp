@@ -11,9 +11,9 @@ namespace jimp {
 class KeyboardHandler {
     
 private:
-    std::list<jimp::KeyListener*>* keyListeners;
-    std::list<sf::Keyboard::Key>* pressedKeys;
-    std::list<sf::Event>* events;
+    std::list<jimp::KeyListener*> keyListeners;
+    std::list<sf::Keyboard::Key> pressedKeys;
+    std::list<sf::Event> events;
     void handleKeyboardLeft(KeyState keyState);
     void handleKeyboardRight(KeyState keyState);
     void handleKeyboardUp(KeyState keyState);
@@ -25,10 +25,9 @@ private:
     
 public:
     KeyboardHandler();
-    ~KeyboardHandler();
     void addEvent(sf::Event event);
-    void addKeyListener(jimp::KeyListener* keyListener);
-    void removeKeyListener(jimp::KeyListener* keyListener);
+    void addKeyListener(jimp::KeyListener& keyListener);
+    void removeKeyListener(jimp::KeyListener& keyListener);
     void handleAllEvents();
     
 };

@@ -30,12 +30,12 @@ public:
     
     void onStageLoad(std::string stageFilePath) override {
         for (int i = 0; i < 200; i++) {
-            Raindrop* raindrop = new Raindrop();
+            auto raindrop = std::make_unique<Raindrop>();
             if (i % 4 == 0) {
                 raindrop->setTransparency(50);
                 raindrop->setScale(0.08f);
             }
-            registerGraphic(raindrop);
+            registerGraphic(std::move(raindrop));
         }
     }
     

@@ -18,7 +18,7 @@ private:
     
 public:
     Asteroids(int screenWidth, int screenHeight, std::string name) : GameEngine(screenWidth, screenHeight, 0, name, 60, false) {
-        registerGraphic(new Ship());
+        registerGraphic(std::make_unique<Ship>());
         music = createNewSound("music.ogg");
         music->loop(25);
         asteroidSpawner = new AsteroidSpawner();

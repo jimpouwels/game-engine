@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <map>
+#include <memory>
+#include <mutex>
 #include <SFML/Graphics.hpp>
 #include "drawable.hpp"
 #include "image.hpp"
@@ -37,6 +39,8 @@ private:
     bool isWindowClosed = false;
     std::map<std::string, Image*>* imageCache = nullptr;
     std::map<std::string, Sound*>* soundCache = nullptr;
+    std::vector<std::unique_ptr<AnimatedGraphic>> allGraphics;
+    std::recursive_mutex graphicsLock;
     UpdateThread* updateThread = nullptr;
     RenderingCache* renderCache = nullptr;
     float timePerFrame;
@@ -80,16 +84,20 @@ public:
     bool isOutsideScreenBottom(AnimatedGraphic* graphic);
     bool isOutsideScreenLeft(AnimatedGraphic* graphic);
     bool isOutsideScreenRight(AnimatedGraphic* graphic);
-    void addKeyListener(KeyListener* keyListener);
+    void addKeyListener(KeyListener& keyListener);
     void draw(Drawable* drawable);
     void draw(std::string text, Vector2D position);
-    void registerGraphic(AnimatedGraphic* graphic);
+    void registerGraphic(std::unique_ptr<AnimatedGraphic> graphic);
     void drawRectangle(float width, float height, Vector2D position, Color color);
     float getGravityForce();
     bool isEditMode();
     bool isRunning();
     void loadStage(std::string filePath);
-    std::vector<AnimatedGraphic*>* getAllGraphics();
+    struct LockedGraphics {
+        std::vector<std::unique_ptr<AnimatedGraphic>>& graphics;
+        std::unique_lock<std::recursive_mutex> lock;
+    };
+    LockedGraphics getAllGraphics();
     Image* createNewImage(std::string filePath);
     Sound* createNewSound(std::string filePath);
     

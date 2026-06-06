@@ -17,7 +17,7 @@ void PlatformSingleFactory::render() {
     float size = blockSize * scale;
     for (int x = 0; x < columnCount; x++) {
         std::string filePath = "";
-        AnimatedGraphic* block = new AnimatedGraphic();
+        auto block = std::make_unique<AnimatedGraphic>();
         block->setName("single-block");
         if (x == 0) {
             filePath = cornerLeftFilePath;
@@ -35,7 +35,7 @@ void PlatformSingleFactory::render() {
         block->setTransparency(transparency);
         block->setCollidable(true);
         block->addSprite("default", filePath);
-        GameEngine::getInstance()->registerGraphic(block);
+        GameEngine::getInstance()->registerGraphic(std::move(block));
     }
 }
 

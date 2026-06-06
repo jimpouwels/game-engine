@@ -113,7 +113,7 @@ void Ship::updateFiring(float elapsedTime) {
         jimp::Vector2D rotationPoint = getRotationPoint();
         rotationPoint.x += getPosition().x - (10 * getScale());
         rotationPoint.y += getPosition().y + (45 * getScale());
-        jimp::GameEngine::getInstance()->registerGraphic(new Bullet(rotationPoint, getRotationAngle()));
+        jimp::GameEngine::getInstance()->registerGraphic(std::make_unique<Bullet>(rotationPoint, getRotationAngle()));
         firingSound->playTillEnd(30);
         elapsedTimeSinceLastShot = 0;
     }

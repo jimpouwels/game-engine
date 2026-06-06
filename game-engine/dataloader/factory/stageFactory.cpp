@@ -55,12 +55,13 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
     Type* type = getTypeFor(graphic.type);
     if (dynamic_cast<AnimationType*>(type)) {
         AnimationType* animationType = dynamic_cast<AnimationType*>(type);
-        AnimatedGraphic* animatedGraphic = nullptr;
+        std::unique_ptr<AnimatedGraphic> animatedGraphicPtr;
         if (animationType->custom) {
-            animatedGraphic = createCustomGraphic(type->name, graphic);
+            animatedGraphicPtr = std::unique_ptr<AnimatedGraphic>(createCustomGraphic(type->name, graphic));
         } else {
-            animatedGraphic = new AnimatedGraphic();
+            animatedGraphicPtr = std::make_unique<AnimatedGraphic>();
         }
+        AnimatedGraphic* animatedGraphic = animatedGraphicPtr.get();
         animatedGraphic->setPosition(graphic.position);
         animatedGraphic->setScale(graphic.scale);
         animatedGraphic->setRotationAngle(graphic.rotationAngle);
@@ -80,7 +81,7 @@ void StageFactory::createAnimatedGraphicFrom(Graphic graphic) {
             Scroller::getInstance()->setMainCharacter(animatedGraphic);
         }
         spriteLoaderThreads->push_back(new std::thread(&StageFactory::addSpritesToGraphic, this, animatedGraphic, animationType));
-        GameEngine::getInstance()->registerGraphic(animatedGraphic);
+        GameEngine::getInstance()->registerGraphic(std::move(animatedGraphicPtr));
     } else if (dynamic_cast<PlatformMultiLayerType*>(type)) {
         PlatformMultiLayerType* animationType = dynamic_cast<PlatformMultiLayerType*>(type);
         PlatformMultiFactory builder = PlatformMultiFactory(graphic.rows, graphic.cols, animationType->spriteSize, graphic.scale, graphic.transparency, graphic.position);

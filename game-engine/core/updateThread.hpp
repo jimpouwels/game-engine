@@ -2,36 +2,33 @@
 #define updateThread_hpp
 
 #include <thread>
+#include <memory>
 #include "animatedGraphic.hpp"
 #include "keyboardHandler.hpp"
 
 namespace jimp {
+
+class GameEngine;
 
 class UpdateThread {
     
 private:
     std::thread* updateThread = nullptr;
     std::recursive_mutex* processingLock = nullptr;
-    std::mutex* graphicsDeletionLock = nullptr;
     std::function<void(float)> onUpdateCallback;
     std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback;
-    std::vector<AnimatedGraphic*>* allGraphics = nullptr;
-    std::list<AnimatedGraphic*>* newGraphics = nullptr;
+    GameEngine* gameEngine = nullptr;
     KeyboardHandler* keyboardHandler = nullptr;
     void onUpdate(float elapsedTime);
     void onGraphicDeleted(AnimatedGraphic* graphic);
     
 public:
-    UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback, KeyboardHandler* keyboardHandler);
+    UpdateThread(std::function<void(float)> onUpdateCallback, std::function<void(AnimatedGraphic*)> onGraphicDeletedCallback, GameEngine* gameEngine, KeyboardHandler* keyboardHandler);
     ~UpdateThread();
     void stop();
     void start();
     void pause();
     void unpause();
-    void registerGraphic(AnimatedGraphic* graphic);
-    void lockDeletionOfGraphics();
-    void unlockDeletionOfGraphics();
-    std::vector<AnimatedGraphic*>* getAllGraphics();
     void removeAllGraphics();
     
 };

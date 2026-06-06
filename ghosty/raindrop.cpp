@@ -20,6 +20,8 @@ Raindrop::Raindrop() {
     move(200.0f, jimp::MathUtils::randomNumberBetween(800, 900));
 }
 
+Raindrop::~Raindrop() = default;
+
 void Raindrop::doOnUpdate(float elapsedTime) {
     if (getScreenPosition().y < 0) {
         getPosition().y += jimp::GameEngine::getInstance()->getScreenHeight();

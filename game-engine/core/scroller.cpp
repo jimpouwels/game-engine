@@ -16,7 +16,7 @@ Scroller::Scroller(int width, int height) {
     this->maxScrollX = abs(width - gameEngine->getScreenWidth());
     this->maxScrollY = abs(height - gameEngine->getScreenHeight());
     
-    gameEngine->addKeyListener(this);
+    gameEngine->addKeyListener(*this);
     rightSideOfCamera = gameEngine->getScreenWidth() / 2 + 250;
     leftSideOfCamera = gameEngine->getScreenWidth() / 2 - 250;
     topSideOfCamera = gameEngine->getScreenHeight() / 2 - 250;
