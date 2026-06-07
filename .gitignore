@@ -1,2 +1,4 @@
 game-engine.xcodeproj/project.xcworkspace/xcuserdata/31098470.xcuserdatad/*
-/build
+game-engine/build
+ghosty/build
+asteroids/build

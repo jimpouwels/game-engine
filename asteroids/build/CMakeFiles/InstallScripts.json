@@ -1,8 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/Users/jimpouwels/Projects/game-engine/asteroids/build/cmake_install.cmake",
-		"/Users/jimpouwels/Projects/game-engine/asteroids/build/game-engine/cmake_install.cmake"
-	],
-	"Parallel" : false
-}

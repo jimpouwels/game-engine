@@ -1,6 +1,0 @@
-/Users/jimpouwels/Projects/game-engine/asteroids/build/CMakeFiles/asteroids.dir
-/Users/jimpouwels/Projects/game-engine/asteroids/build/CMakeFiles/edit_cache.dir
-/Users/jimpouwels/Projects/game-engine/asteroids/build/CMakeFiles/rebuild_cache.dir
-/Users/jimpouwels/Projects/game-engine/asteroids/build/game-engine/CMakeFiles/game-engine.dir
-/Users/jimpouwels/Projects/game-engine/asteroids/build/game-engine/CMakeFiles/edit_cache.dir
-/Users/jimpouwels/Projects/game-engine/asteroids/build/game-engine/CMakeFiles/rebuild_cache.dir
