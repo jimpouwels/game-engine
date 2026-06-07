@@ -59,34 +59,44 @@ void doLoop(std::function<void(float)> onUpdateCallback, std::function<void(Anim
                 
                 keyboardHandler->handleAllEvents();
                 
-                std::list<AnimatedGraphic*> graphicsToDelete;
+                // Take a snapshot of raw pointers so that registerGraphic calls
+                // from within onUpdate (e.g. firing bullets) can safely mutate
+                // allGraphics without invalidating the iteration.
+                std::vector<AnimatedGraphic*> snapshot;
                 {
                     auto locked = gameEngine->getAllGraphics();
-                    for (const auto& graphic : locked.graphics) {
-                        graphic->onUpdate(elapsed.count());
+                    snapshot.reserve(locked.graphics.size());
+                    for (const auto& g : locked.graphics) {
+                        snapshot.push_back(g.get());
                     }
-                    for (const auto& graphic : locked.graphics) {
-                        if (!graphic->isCollidable() || graphic->isMarkedForDeletion()) {
-                            continue;
-                        }
-                        std::vector<AnimatedGraphic*> graphicsToCheckCollision;
-                        for (const auto& graphicToCheckCollision : locked.graphics) {
-                            if (graphicToCheckCollision->isCollidable() &&
-                                graphicToCheckCollision.get() != graphic.get() &&
-                                graphic->canCollideWith(graphicToCheckCollision.get(), elapsed.count()) &&
-                                !graphic->isMarkedForDeletion()) {
-                                graphicsToCheckCollision.push_back(graphicToCheckCollision.get());
-                            }
-                        }
-                        sortByDistance(graphic.get(), graphicsToCheckCollision);
-                        for (AnimatedGraphic* graphicToCheckCollision : graphicsToCheckCollision) {
-                            graphic->checkCollisionRect(graphicToCheckCollision, elapsed.count());
+                }
+
+                for (AnimatedGraphic* graphic : snapshot) {
+                    graphic->onUpdate(elapsed.count());
+                }
+                for (AnimatedGraphic* graphic : snapshot) {
+                    if (!graphic->isCollidable() || graphic->isMarkedForDeletion()) {
+                        continue;
+                    }
+                    std::vector<AnimatedGraphic*> graphicsToCheckCollision;
+                    for (AnimatedGraphic* other : snapshot) {
+                        if (other->isCollidable() &&
+                            other != graphic &&
+                            graphic->canCollideWith(other, elapsed.count()) &&
+                            !graphic->isMarkedForDeletion()) {
+                            graphicsToCheckCollision.push_back(other);
                         }
                     }
-                    for (const auto& graphic : locked.graphics) {
-                        if (graphic->isMarkedForDeletion()) {
-                            graphicsToDelete.push_back(graphic.get());
-                        }
+                    sortByDistance(graphic, graphicsToCheckCollision);
+                    for (AnimatedGraphic* graphicToCheckCollision : graphicsToCheckCollision) {
+                        graphic->checkCollisionRect(graphicToCheckCollision, elapsed.count());
+                    }
+                }
+
+                std::list<AnimatedGraphic*> graphicsToDelete;
+                for (AnimatedGraphic* graphic : snapshot) {
+                    if (graphic->isMarkedForDeletion()) {
+                        graphicsToDelete.push_back(graphic);
                     }
                 }
                 for (AnimatedGraphic* graphicToDelete : graphicsToDelete) {
