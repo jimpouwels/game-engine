@@ -18,7 +18,8 @@ Asteroid::Asteroid(jimp::Vector2D position, float directionAngle) : jimp::Animat
     setScale(0.1f);
     setCollidable(true);
     addSprite("default", "asteroid.png");
-    addSprite("hit", "asteroid-hit.png");setRotationAngle(90);
+    addSprite("hit", "asteroid-hit.png");
+    setRotationAngle(90);
     this->hitSound = new jimp::Sound("hit.ogg");
     name = "asteroid";
 }
